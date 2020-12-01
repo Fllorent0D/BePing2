@@ -1,0 +1,7 @@
+{
+  "name": "BePingIonic4",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
