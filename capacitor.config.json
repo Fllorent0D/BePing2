@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "BePingIonic4",
+  "appId": "be.floca.beping2",
+  "appName": "BePing",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
