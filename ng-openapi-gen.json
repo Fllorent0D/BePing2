@@ -1,0 +1,6 @@
+{
+  "$schema": "node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
+  "input": "http://juc.floca.be:3000/api-json",
+  "output": "src/app/api",
+  "ignoreUnusedModels": false
+}

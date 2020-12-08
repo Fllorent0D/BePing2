@@ -1,4 +1,54 @@
-<div id="container">
-  <strong>{{ name }}</strong>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-</div>
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Club</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-segment>
+            <ion-segment-button value="camera">
+                <ion-label>Journée</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="bookmark">
+                <ion-label>Classement</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="team">
+                <ion-label>Equipes</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-list style="margin-bottom: 10px">
+    <ion-item lines="full">
+        <ion-select placeholder="Select One" interface="popover">
+            <ion-select-option value="1">Journée 1</ion-select-option>
+            <ion-select-option value="2">Journée 2</ion-select-option>
+            <ion-select-option value="3">Journée 3</ion-select-option>
+            <ion-select-option value="4">Journée 4</ion-select-option>
+            <ion-select-option value="5">Journée 5</ion-select-option>
+        </ion-select>
+    </ion-item>
+</ion-list>
+<ion-button (click)="crashTheApp()">
+    Crash
+</ion-button>
+<ion-button (click)="sendEvent()">
+    Send event
+</ion-button>
+<ion-button [routerLink]="['../club']">
+    Test
+</ion-button>
+<ion-list style="margin-bottom: 10px">
+    <ion-item-group>
+        <ion-item lines="full">
+            <ion-label>
+                <b>Vendredi</b>
+                <p>2 octobre</p>
+            </ion-label>
+        </ion-item>
+        <beping-ion-item-team-match></beping-ion-item-team-match>
+        <beping-ion-item-team-match></beping-ion-item-team-match>
+        <beping-ion-item-team-match></beping-ion-item-team-match>
+    </ion-item-group>
+</ion-list>
+
+<beping-ranking></beping-ranking>
+<beping-info-team-match></beping-info-team-match>
