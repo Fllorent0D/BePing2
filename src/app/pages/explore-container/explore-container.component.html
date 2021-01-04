@@ -1,0 +1,50 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>BePing</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom">
+    <!--
+    <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+  -->
+    <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry">
+        <beping-member-name-ranking-info
+                [member]="currentMemberEntry">
+        </beping-member-name-ranking-info>
+        <button (click)="test()"> test</button>
+        <beping-member-victory-chart
+                [memberResultEntries]="currentMemberEntry.ResultEntries">
+        </beping-member-victory-chart>
+        <beping-tie-break-played
+                [memberResultEntries]="currentMemberEntry.ResultEntries">
+        </beping-tie-break-played>
+        <beping-member-latest-matches
+                [matches]="latestMatches$| async">
+        </beping-member-latest-matches>
+        <beping-member-summary-per-ranking
+                [memberResultEntries]="currentMemberEntry.ResultEntries">
+        </beping-member-summary-per-ranking>
+    </ng-container>
+
+    <ng-container *ngIf="categoriesAvailable$ |async as playercategories">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="playercategories.length > 1">
+            <ion-fab-button>
+                <ion-icon [name]="getIcon(currentCategory$ | async)"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="top">
+                <ion-fab-button
+                        [attr.data-desc]="category | titlecase"
+                        [disabled]="category === (currentCategory$|async)"
+                        *ngFor="let category of playercategories"
+                        (click)="categoryClicked(category)">
+                    <ion-icon [name]="getIcon(category)"></ion-icon>
+                </ion-fab-button>
+            </ion-fab-list>
+        </ion-fab>
+
+    </ng-container>
+
+</ion-content>

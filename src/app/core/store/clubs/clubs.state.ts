@@ -1,10 +1,22 @@
 import {Injectable} from '@angular/core';
-import {Action, NgxsOnInit, State, StateContext} from '@ngxs/store';
+import {Action, createSelector, NgxsOnInit, SelectorOptions, State, StateContext} from '@ngxs/store';
 
 import {ClubEntry} from '../../api/models/club-entry';
 import {GetClubs} from './clubs.actions';
 import {ClubsService} from '../../api/services/clubs.service';
-import {tap} from 'rxjs/operators';
+import {catchError, finalize, map} from 'rxjs/operators';
+import {
+    CreateOrReplace,
+    defaultEntityState,
+    EntityState,
+    EntityStateModel,
+    IdStrategy,
+    SetError,
+    SetLoading
+} from '@ngxs-labs/entity-state';
+import {of} from 'rxjs';
+import {sub} from 'date-fns';
+import {CurrentSeasonChanged} from '../season';
 
 export interface ClubsStateModel {
     clubs: ClubEntry[];
@@ -14,30 +26,52 @@ const defaultState: ClubsStateModel = {
     clubs: []
 };
 
-@State<ClubsStateModel>({
-    name: 'clubState',
-    defaults: defaultState
+@State<EntityStateModel<ClubEntry>>({
+    name: 'clubs',
+    defaults: defaultEntityState()
+})
+@SelectorOptions({
+    injectContainerState: false
 })
 @Injectable()
-export class ClubsState implements NgxsOnInit {
+export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
+
+    static searchClub(terms: string) {
+        const termsLowerCased = terms.toLowerCase();
+        return createSelector([ClubsState.entities], (clubs: ClubEntry[]) => {
+            return clubs
+                .filter((club) => `${club.LongName}${club.UniqueIndex}`.toLowerCase().indexOf(termsLowerCased) > -1)
+                .sort((a, b) => b.Category - a.Category);
+        });
+    }
+
+    static getClubByUniqueIndex(uniqueIndex: string) {
+        return createSelector([ClubsState.entities], (clubs: ClubEntry[]) => {
+            return clubs.find((club) => club.UniqueIndex === uniqueIndex);
+        });
+    }
 
     constructor(private readonly clubsService: ClubsService) {
+        super(ClubsState, 'UniqueIndex', IdStrategy.EntityIdGenerator);
     }
 
-    ngxsOnInit(ctx?: StateContext<ClubsStateModel>): void {
-        ctx.dispatch(new GetClubs());
-    }
+    ngxsOnInit(ctx?: StateContext<EntityStateModel<ClubEntry>>): void {
+        const state = ctx.getState();
+        const timeThreshold = sub(Date.now(), {months: 1});
 
-
-    @Action(GetClubs)
-    getClubs({getState, patchState}: StateContext<ClubsStateModel>) {
-        const state = getState();
-        if (state.clubs && state.clubs.length > 0) {
-            return;
+        if (!state.ids.length || state.lastUpdated < timeThreshold.getTime()) {
+            ctx.dispatch(new GetClubs());
         }
+    }
+
+    @Action([GetClubs, CurrentSeasonChanged])
+    getClubs(ctx: StateContext<EntityStateModel<ClubEntry>>) {
+        ctx.dispatch(new SetLoading(ClubsState, true));
 
         return this.clubsService.findAllClubs().pipe(
-            tap((clubs: ClubEntry[]) => patchState({clubs}))
+            map((clubs: ClubEntry[]) => ctx.dispatch(new CreateOrReplace(ClubsState, clubs))),
+            catchError((err: Error) => of(ctx.dispatch(new SetError(ClubsState, err)))),
+            finalize(() => ctx.dispatch(new SetLoading(ClubsState, false)))
         );
     }
 

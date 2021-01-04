@@ -1,0 +1,28 @@
+:root {
+  .essential-theme.essential-theme--awesome {
+    --ion-text-color-theme: #333;
+
+    --ion-color-primary-theme: #1F4BA5;
+
+    --ion-color-light-contrast-theme: #000;
+    --ion-color-light-contrast-rgb-theme: 0,0,0;
+
+    --ion-color-medium-contrast-theme: #fff;
+    --ion-color-medium-contrast-rgb-theme: 255,255,255;
+
+    --ion-color-dark-theme: #232323;
+
+    --is-segment-color-theme: #333333;
+    --is-segment-checked-color-theme: #1F4BA5;
+
+    --ion-color-is-mute-light-theme: #f8f8f8;
+    --ion-color-is-mute-light-rgb-theme: 248,248,248;
+    --ion-color-is-mute-light-contrast-theme: #000000;
+    --ion-color-is-mute-light-contrast-rgb-theme: 0,0,0;
+    --ion-color-is-mute-light-shade-theme: #dadada;
+    --ion-color-is-mute-light-tint-theme: #f9f9f9;
+
+    --ion-color-is-text-dark-theme: #232323;
+    --is-link-color-theme: #1F4BA5;
+  }
+}

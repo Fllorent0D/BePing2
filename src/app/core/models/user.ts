@@ -1,0 +1,7 @@
+export enum PLAYER_CATEGORY {
+    MEN = 'MEN',
+    WOMEN = 'WOMEN',
+    VETERANS = 'VETERANS',
+    VETERANS_WOMEN = 'VETERANS_WOMEN',
+    YOUTH = 'YOUTH',
+}

@@ -1,0 +1,45 @@
+<beping-card>
+    <ion-grid>
+        <ion-row class="ion-text-center" *ngIf="match.Score">
+            <ion-col class="ion-no-padding">
+                <ion-text color="grey">{{match.Date | date:'dd MMMM YYYY'}}</ion-text>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-align-items-center ion-no-padding"  [class.no-score]="!match.Score">
+            <ion-col class="text-highlight ion-no-padding"
+                     [class.is-color-danger]="isHomeFF">
+                <ion-text>{{match.HomeTeam}}</ion-text>
+            </ion-col>
+            <ion-col class="ion-text-center ion-no-padding" *ngIf="match.Score">
+                <ion-text *ngIf="!match.IsAwayForfeited && !match.IsHomeForfeited">
+                    <h1 class="ion-no-margin is-color-primary score">{{match.Score}}</h1>
+                </ion-text>
+                <ng-container *ngIf="isAwayFF || isHomeFF">
+                    <ion-text *ngIf="isHomeFG || isAwayFG">
+                        <h1 class="ion-no-margin">FG</h1>
+                    </ion-text>
+                    <ion-text *ngIf="(isAwayFF || isHomeFF) && (!isAwayFG && !isHomeFG)">
+                        <h1 class="ion-no-margin">FF</h1>
+                    </ion-text>
+                </ng-container>
+
+            </ion-col>
+            <ion-col class="ion-text-center ion-no-padding " *ngIf="!match.Score">
+                <ion-text class="is-color-pink">
+                    <h1 class="ion-no-margin date">{{match.Date | date:'dd'}}</h1>
+                    <ion-text class="ion-no-margin">{{match.Date | date:'MMM'}}</ion-text>
+                </ion-text>
+            </ion-col>
+            <ion-col class="ion-text-end text-highlight ion-no-padding" [class.is-color-danger]="isAwayFF">
+                <ion-text>{{match.AwayTeam}}</ion-text>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center" *ngIf="match.Score">
+            <ion-col class="ion-no-padding">
+                <ion-text color="grey">
+                    Score
+                </ion-text>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</beping-card>

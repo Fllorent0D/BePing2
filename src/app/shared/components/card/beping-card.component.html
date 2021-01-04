@@ -1,0 +1,6 @@
+<ion-card mode="md" class="ion-activatable ripple-parent" [color]="highlighted? 'primary': 'light' ">
+    <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+    <ion-card-content class="ion-no-padding {{padding ? 'ion-padding-start ion-padding-end' : ''}}">
+        <ng-content></ng-content>
+    </ion-card-content>
+</ion-card>

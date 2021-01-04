@@ -1,0 +1,128 @@
+ion-list-header{
+  text-align: center;
+}
+
+ion-toolbar{
+  ion-icon{
+    color: var(--ion-text-color);
+  }
+}
+
+.is-background-primary {
+  background-color: var(--ion-color-primary);
+}
+
+.is-background-success {
+  background-color: var(--ion-color-success);
+  color: var(--ion-color-success-contrast);
+}
+
+.is-background-secondary {
+  background-color: var(--ion-color-secondary);
+  color: var(--ion-color-secondary-contrast);
+}
+
+.is-background-dark {
+  background-color: var(--ion-color-dark);
+  color: var(--ion-color-dark-contrast);
+}
+
+.is-background-light {
+  background-color: var(--ion-color-light);
+  color: var(--ion-color-light-contrast);
+}
+
+.is-background-danger {
+  background-color: var(--ion-color-danger);
+}
+
+.is-color-primary {
+  color: var(--ion-color-primary) !important;
+}
+
+.is-color-light {
+  color: var(--ion-color-light) !important;
+}
+
+.is-color-secondary {
+  color: var(--ion-color-secondary) !important;
+}
+
+.is-color-success {
+  color: var(--ion-color-success) !important;
+}
+
+.is-color-danger {
+  color: var(--ion-color-danger) !important;
+}
+
+.is-color-pink{
+  color: var(--ion-color-pink) !important;
+}
+
+.is-login-element-dark-contrast {
+  color: var(--is-login-element-dark-contrast);
+}
+@media (prefers-color-scheme: light) {
+  .border-right{
+    border-right: 1px solid var(--border-color)
+  }
+  .border-bottom{
+    border-bottom: 1px solid var(--border-color)
+  }
+
+}
+@media (prefers-color-scheme: dark) {
+  .border-right{
+    border-right: 1px solid var(--border-color)
+  }
+  .border-bottom{
+    border-bottom: 1px solid var(--border-color)
+  }
+}
+ion-fab-button[data-desc] {
+  position: relative;
+}
+
+ion-fab-button[data-desc]::after {
+  position: absolute;
+  content: attr(data-desc);
+  z-index: 1;
+  right: 55px;
+  bottom: 4px;
+  background-color: var(--ion-color-light);
+  padding: 9px;
+  border-radius: 15px;
+  color: var(--ion-color-light-contrast);
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+}
+.scrollmenu {
+  overflow: auto;
+  background-color: var(--ion-background-color);
+  white-space: nowrap;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left:0.5rem;
+  ion-chip{
+    display: inline-block;
+    font-size: 1rem;
+    padding-top: 10px;
+    padding-bottom: 25px;
+    margin-right: 8px;
+  }
+  ion-chip.act{
+    background-color: #4A8DFF;
+    color: white;
+    transition: background-color 0.2s;
+  }
+}
+.scrollmenu::-webkit-scrollbar {
+  display: none;
+}
+.text-highlight {
+  font-size: 1.1em;
+  letter-spacing: 0.7px;
+}
+.text-bold{
+  font-weight: 800;
+}

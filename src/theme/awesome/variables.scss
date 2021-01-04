@@ -1,0 +1,91 @@
+/*
+* Default Ionic colors overridden by Awesome's color scheme. New colors
+* added into the Awesome theme such as "mute" shades.
+*/
+:root {
+  .essential-theme.essential-theme--awesome {
+    /** primary **/
+    --ion-color-primary: var(--ion-color-primary-theme);
+    --ion-color-primary-rgb: 31, 75, 165;
+    --ion-color-primary-contrast: var(--ion-color-primary-contrast-theme);
+    --ion-color-primary-contrast-rgb: var(--ion-color-primary-contrast-rgb-theme);
+    --ion-color-primary-shade: #1b4291;
+    --ion-color-primary-tint: #355dae;
+
+    /** secondary **/
+    --ion-color-secondary: #FE4F20;
+    --ion-color-secondary-rgb: 254, 79, 32;
+    --ion-color-secondary-contrast: var(--ion-color-secondary-contrast-theme);
+    --ion-color-secondary-contrast-rgb: var(--ion-color-secondary-contrast-rgb-theme);
+    --ion-color-secondary-shade: #e0461c;
+    --ion-color-secondary-tint: #fe6136;
+
+    /** success **/
+    --ion-color-success: #40BE65;
+    --ion-color-success-rgb: 64, 190, 101;
+    --ion-color-success-contrast: var(--ion-color-success-contrast-theme);
+    --ion-color-success-contrast-rgb: var(--ion-color-success-contrast-rgb-theme);
+    --ion-color-success-shade: #38a759;
+    --ion-color-success-tint: #53c574;
+
+    /** danger **/
+    --ion-color-danger: #E23E57;
+    --ion-color-danger-rgb: 226, 62, 87;
+    --ion-color-danger-contrast: var(--ion-color-danger-contrast-theme);
+    --ion-color-danger-contrast-rgb: var(--ion-color-danger-contrast-rgb-theme);
+    --ion-color-danger-shade: #c7374d;
+    --ion-color-danger-tint: #e55168;
+
+    /** warning **/
+    --ion-color-warning: #FFCB3C;
+    --ion-color-warning-rgb: 255, 203, 60;
+    --ion-color-warning-contrast: var(--ion-color-warning-contrast-theme);
+    --ion-color-warning-contrast-rgb: var(--ion-color-warning-contrast-rgb-theme);
+    --ion-color-warning-shade: #e0b335;
+    --ion-color-warning-tint: #ffd050;
+
+    /** dark **/
+    --ion-color-dark: var(--ion-color-dark-theme);
+    --ion-color-dark-rgb: 35,35,35;
+    --ion-color-dark-contrast: var(--ion-color-dark-contrast-theme);
+    --ion-color-dark-contrast-rgb: var(--ion-color-dark-contrast-rgb-theme);
+    --ion-color-dark-shade: #1f1f1f;
+    --ion-color-dark-tint: #393939;
+
+    /** medium **/
+    --ion-color-medium: #707070;
+    --ion-color-medium-rgb: 112,112,112;
+    --ion-color-medium-contrast: var(--ion-color-medium-contrast-theme);
+    --ion-color-medium-contrast-rgb: var(--ion-color-medium-contrast-rgb-theme);
+    --ion-color-medium-shade: #636363;
+    --ion-color-medium-tint: #7e7e7e;
+
+    /** light **/
+    --ion-color-light: #e4e4e4;
+    --ion-color-light-rgb: 228,228,228;
+    --ion-color-light-contrast: var(--ion-color-light-contrast-theme);
+    --ion-color-light-contrast-rgb: var(--ion-color-light-contrast-rgb-theme);
+    --ion-color-light-shade: #c9c9c9;
+    --ion-color-light-tint: #e7e7e7;
+
+    /** mute light **/
+    --ion-color-is-mute-light: var(--ion-color-is-mute-light-theme);
+    --ion-color-is-mute-light-rgb: var(--ion-color-is-mute-light-rgb-theme);
+    --ion-color-is-mute-light-contrast: var(--ion-color-is-mute-light-contrast-theme);
+    --ion-color-is-mute-light-contrast-rgb: var(--ion-color-is-mute-light-contrast-rgb-theme);
+    --ion-color-is-mute-light-shade: var(--ion-color-is-mute-light-shade-theme);
+    --ion-color-is-mute-light-tint: var(--ion-color-is-mute-light-tint-theme);
+
+    --ion-background-color: var(--ion-background-color-theme);
+    --ion-toolbar-background: var(--ion-toolbar-background-theme);
+
+    --ion-color-is-text-dark: var(--ion-color-is-text-dark-theme);
+    --is-link-color: var(--is-link-color-theme);
+    --is-segment-color: var(--is-segment-color-theme);
+    --is-segment-checked-color: var(--is-segment-checked-color-theme);
+    --ion-text-color: var(--ion-text-color-theme);
+
+    // Fonts used by the app for Android and iOS platforms
+    --ion-font-family: Helvetica Neue, Arial, Sans-serif;
+  }
+}

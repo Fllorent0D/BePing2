@@ -1,0 +1,28 @@
+<svg style="max-height: 200px" viewBox="0 0 42 42" class="donut">
+    <circle class="donut-hole" cx="21" cy="22" r="15.91549430918954" fill="transparent"></circle>
+    <circle class="donut-ring" cx="21" cy="22" r="15.91549430918954" fill="transparent" stroke="transparent"
+            stroke-width="2"></circle>
+
+
+    <circle *ngIf="redPct > 0" class="donut-segment path" cx="21" cy="22" r="15.91549430918954" fill="transparent"
+            stroke="#F09694" stroke-width="3" id="redCircle"
+            stroke-linecap="round" [attr.stroke-dasharray]="redDashArray" stroke-dashoffset="23" #redCircle
+            [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 23,strokeOffset:23}}">
+        >
+    </circle>
+    <circle *ngIf="bluePct > 0" class="donut-segment" cx="21" cy="22" r="15.91549430918954" fill="transparent"
+            stroke="#5B8BF7" stroke-width="3" [attr.stroke-dasharray]="blueDashArray"
+            [attr.stroke-dashoffset]="100 - redPct + 23"
+            [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 23), strokeOffsetStart: 27}}"
+            stroke-linecap="round" #blueCircle></circle>
+
+
+    <g class="chart-text">
+        <text x="50%" [attr.y]="subtitle ? '55%' : '68%'" class="chart-number" [class.only-number]="!subtitle">
+            {{title}}
+        </text>
+        <text x="50%" y="50%" class="chart-label">
+            {{subtitle}}
+        </text>
+    </g>
+</svg>

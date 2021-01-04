@@ -1,0 +1,21 @@
+.progress-bar {
+  border: none;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  span{
+    height: 9px;
+    transition: width 5s;
+    border-radius: 50px;
+    background: #5B8BF7;
+    color: #2a3137;
+    display: inline-block;
+  }
+
+  span:last-child{
+    background: #F09694;
+  }
+
+}

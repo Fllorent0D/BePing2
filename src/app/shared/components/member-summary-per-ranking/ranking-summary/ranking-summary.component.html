@@ -1,0 +1,35 @@
+<ion-grid>
+    <ion-row>
+        <ion-col>
+            <beping-victory-chart redPct="{{defeatsPct}}" bluePct="{{victoriesPct}}"
+                                  [title]="ranking"></beping-victory-chart>
+        </ion-col>
+        <ion-col>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <ion-text>{{victories}} ({{victoriesPct}}%)</ion-text>
+                        <br>
+                        <ion-text color="grey">Victoires</ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-text>{{defeats}} ({{defeatsPct}}%)</ion-text>
+                        <br>
+                        <ion-text color="grey">Défaites</ion-text>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-align-items-end">
+                    <ion-col>
+                        <ion-button fill="clear" size="small" (click)="isOpen = !isOpen">Afficher détails
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+<ng-container *ngIf="isOpen">
+    <beping-individual-match *ngFor="let result of completeResults" [result]="result"></beping-individual-match>
+</ng-container>

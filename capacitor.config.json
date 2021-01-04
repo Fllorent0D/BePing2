@@ -1,5 +1,5 @@
 {
-  "appId": "be.floca.beping2",
+  "appId": "be.floca.beping",
   "appName": "BePing",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -7,6 +7,10 @@
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
+    },
+    "Keyboard": {
+      "resize": "body",
+      "style": "dark"
     }
   },
   "cordova": {}

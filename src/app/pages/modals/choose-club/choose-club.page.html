@@ -1,0 +1,33 @@
+<ion-header translucent="true">
+    <ion-toolbar>
+        <ion-title>Choisir son club</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">
+                <ion-icon icon="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar
+                [formControl]="searchBox"
+                (search)="searchClicked()"
+                enterkeyhint="search"
+                debounce="500"
+                type="search"
+                placeholder="Rechercher"
+        ></ion-searchbar>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content fullscreen="true">
+    <ion-virtual-scroll [items]="clubsFound$ | async" [headerFn]="categoryHeader">
+        <ion-item-divider *virtualHeader="let header" sticky>
+            {{ header }}
+        </ion-item-divider>
+        <ion-item *virtualItem="let club" (click)="clubClicked(club)">
+            <ion-label>{{club.UniqueIndex}} - {{club.LongName}}</ion-label>
+        </ion-item>
+    </ion-virtual-scroll>
+
+</ion-content>

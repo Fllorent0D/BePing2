@@ -1,0 +1,159 @@
+<ion-header translucent="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{(clubIndex$ | async)}} {{(team$ | async)?.Team}}</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+        <div class="scrollmenu" #scrollMenu>
+            <ion-chip color="primary" id="tab1" [class.act]="tabIndex === 0" (click)="selectTab(0)">
+                <ion-label>Classement</ion-label>
+            </ion-chip>
+            <ion-chip color="primary" id="tab2" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
+                <ion-label>Joueurs</ion-label>
+            </ion-chip>
+            <ion-chip color="primary" id="tab3" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
+                <ion-label>Calendrier</ion-label>
+            </ion-chip>
+        </div>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <super-tabs #superTabs>
+        <super-tabs-container>
+            <super-tab>
+                <ion-content>
+                    <ion-grid class="ion-no-padding">
+                        <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
+                            <ion-col size="1">
+                                <ion-text class="ion-text-wrap">NO.</ion-text>
+                            </ion-col>
+                            <ion-col size="5">
+                                <ion-text class="ion-text-wrap">Equipe</ion-text>
+                            </ion-col>
+                            <ion-col class="ion-text-center" size="1">
+                                <ion-text class="ion-text-wrap">J</ion-text>
+                            </ion-col>
+                            <ion-col class="ion-text-center" size="1">
+                                <ion-text class="ion-text-wrap">G</ion-text>
+                            </ion-col>
+                            <ion-col class="ion-text-center" size="1">
+                                <ion-text class="ion-text-wrap">P</ion-text>
+                            </ion-col>
+                            <ion-col class="ion-text-center" size="1">
+                                <ion-text class="ion-text-wrap">N</ion-text>
+                            </ion-col>
+                            <ion-col class="ion-text-center" size="2">
+                                <ion-text class="ion-text-wrap">Pts</ion-text>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <ng-container *ngIf="team$ | async as team">
+                        <beping-card *ngFor="let rankingEntry of ranking$ | async; let index = index"
+                                     [highlighted]="isSameTeam(rankingEntry, team, club$|async)">
+                            <ion-grid style="padding-top: 7px; padding-bottom: 7px">
+                                <ion-row class="ion-align-items-center">
+                                    <ion-col class="ion-text-nowrap" size="1">
+                                        <span>{{rankingEntry.Position}}</span>
+                                    </ion-col>
+                                    <ion-col size="5">
+                                        {{rankingEntry.Team}}
+                                    </ion-col>
+                                    <ion-col class="border-right ion-text-center" size="1">
+                                        <ion-label>
+                                            {{rankingEntry.GamesPlayed}}
+                                        </ion-label>
+                                    </ion-col>
+                                    <ion-col class="border-right ion-text-center" size="1">
+                                        <ion-label>
+                                            {{rankingEntry.GamesWon}}
+                                        </ion-label>
+                                    </ion-col>
+                                    <ion-col class="border-right ion-text-center" size="1">
+                                        <ion-label>
+                                            {{rankingEntry.GamesLost}}
+                                        </ion-label>
+                                    </ion-col>
+                                    <ion-col class="border-right ion-text-center" size="1">
+                                        <ion-label>
+                                            {{rankingEntry.GamesDraw}}
+                                        </ion-label>
+                                    </ion-col>
+                                    <ion-col class="ion-text-center text-bold" size="2">
+                                        <ion-label>
+                                            {{rankingEntry.Points}}
+                                        </ion-label>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </beping-card>
+                    </ng-container>
+
+                </ion-content>
+            </super-tab>
+            <super-tab>
+                <ion-content>
+                    <ion-grid class="ion-no-padding">
+                        <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
+                            <ion-col size="5">
+                                <ion-text class="ion-text-wrap">Nom</ion-text>
+                            </ion-col>
+                            <ion-col class="" size="2">
+                                <ion-text class="ion-text-nowrap">Cla.</ion-text>
+                            </ion-col>
+                            <ion-col class="" size="2">
+                                <ion-text class="ion-text-nowrap">J.</ion-text>
+                            </ion-col>
+                            <ion-col class="ion-text-center" size="2">
+                                <ion-text class="ion-text-nowrap">%</ion-text>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+
+                    <beping-card [padding]="true">
+                        <ion-grid>
+                            <ion-row class="ion-align-items-center">
+                                <ion-col class="" size="5">
+                                    <ion-label>
+                                        Florent Cardoen
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="" size="2">
+                                    <ion-label class="ion-text-nowrap">
+                                        D2
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="" size="2">
+                                    <ion-label class="ion-text-wrap">
+                                        10
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="ion-text-center ion-no-padding" size="2">
+                                    <beping-victory-chart
+                                            style="max-height: 40px"
+                                            [bluePct]="71"
+                                            [redPct]="29"
+                                            [title]="'71%'">
+                                    </beping-victory-chart>
+                                </ion-col>
+                                <ion-col class="ion-text-end ion-no-padding" size="1">
+                                    <ion-icon name="chevron-forward-outline" size="large" class="ion"
+                                              color="grey"></ion-icon>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </beping-card>
+                </ion-content>
+            </super-tab>
+            <super-tab>
+                <ion-content>
+                    <beping-team-match-result [match]="match"
+                                              *ngFor="let match of calendar$ | async"></beping-team-match-result>
+                </ion-content>
+            </super-tab>
+        </super-tabs-container>
+    </super-tabs>
+</ion-content>
+
+

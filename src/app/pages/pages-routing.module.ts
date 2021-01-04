@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ExploreContainerComponent} from '../explore-container/explore-container.component';
+import {ExploreContainerComponent} from './explore-container/explore-container.component';
 
 const routes: Routes = [
     {
@@ -10,11 +10,16 @@ const routes: Routes = [
     {
         path: 'club',
         loadChildren: () => import('./club/club.module').then(m => m.ClubPageModule)
+    },
+    {
+        path: 'player',
+        loadChildren: () => import('./player/player.module').then(m => m.PlayerPageModule)
+    },
+    {
+        path: 'matches',
+        loadChildren: () => import('./matches/matches.module').then(m => m.MatchesPageModule)
     }
 ];
-
-// children: SubRoutes
-
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

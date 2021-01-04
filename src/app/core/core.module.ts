@@ -5,7 +5,10 @@ import {environment} from '../../environments/environment';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
-import {listState} from './store';
+import {states} from './store';
+import {NgxsAsyncStoragePluginModule} from '@ngxs-labs/async-storage-plugin';
+import {NgxsStorageService} from './services/store/ngxs-storage.service';
+import {SuperTabsModule} from '@ionic-super-tabs/angular';
 
 
 @NgModule({
@@ -15,10 +18,14 @@ import {listState} from './store';
         ApiModule.forRoot({
             rootUrl: environment.tabtUrl
         }),
+        SuperTabsModule.forRoot(),
         NgxsModule.forRoot(
-            listState,
+            states,
             {
-                developmentMode: !environment.production
+                developmentMode: !environment.production,
+                selectorOptions: {
+                    injectContainerState: false
+                }
             }
         ),
         NgxsLoggerPluginModule.forRoot({
@@ -26,7 +33,8 @@ import {listState} from './store';
         }),
         NgxsReduxDevtoolsPluginModule.forRoot({
             disabled: environment.production
-        })
+        }),
+        NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService)
     ]
 })
 export class CoreModule {

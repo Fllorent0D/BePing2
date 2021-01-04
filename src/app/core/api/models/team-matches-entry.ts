@@ -11,9 +11,9 @@ export interface TeamMatchesEntry {
   HomeClub: string;
   HomeTeam: string;
   IsAwayForfeited: boolean;
-  IsAwayWithdrawn: boolean;
+  IsAwayWithdrawn: string;
   IsHomeForfeited: boolean;
-  IsHomeWithdrawn: boolean;
+  IsHomeWithdrawn: string;
   IsLocked: boolean;
   IsValidated: boolean;
   MatchDetails?: MatchDetails;

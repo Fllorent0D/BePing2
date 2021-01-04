@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <beping-favorite-btn></beping-favorite-btn>
+            <beping-loading-btn [loading]="isloading"></beping-loading-btn>
+        </ion-buttons>
+        <ion-title>Matches</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <super-tabs>
+        <super-tabs-container>
+            <super-tab>
+                <ion-content>
+                    <ion-button (click)="navigateToClub('L360')">Go to club L360</ion-button>
+                    <ion-button (click)="navigateToClub('N051')">Go to club N051</ion-button>
+
+                </ion-content>
+            </super-tab>
+            <super-tab>
+                <ion-content>
+                    Page #2
+                </ion-content>
+            </super-tab>
+            <super-tab>
+                <ion-content>
+                    Page #3
+                </ion-content>
+            </super-tab>
+        </super-tabs-container>
+    </super-tabs>
+</ion-content>
+
+    <!--
+    <ion-list>
+      <beping-list-header-dates></beping-list-header-dates>
+      <ion-item-group>
+        <ion-item lines="full">
+          <ion-label>
+            <b>Division 4C</b>
+            <p>Hommes</p>
+          </ion-label>
+        </ion-item>
+        <beping-ion-item-team-match></beping-ion-item-team-match>
+        <beping-ion-item-team-match></beping-ion-item-team-match>
+        <beping-ion-item-team-match [lines]="'none'"></beping-ion-item-team-match>
+      </ion-item-group>
+      <beping-list-header-dates></beping-list-header-dates>
+      <ion-item-group>
+        <ion-item lines="full">
+          <ion-label>
+            <b>Division 4C</b>
+            <p>Hommes</p>
+          </ion-label>
+        </ion-item>
+        <beping-ion-item-team-match></beping-ion-item-team-match>
+        <beping-ion-item-team-match></beping-ion-item-team-match>
+        <beping-ion-item-team-match [lines]="'none'"></beping-ion-item-team-match>
+      </ion-item-group>
+    </ion-list>-->

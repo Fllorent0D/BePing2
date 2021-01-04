@@ -1,0 +1,31 @@
+<ion-grid>
+    <ion-row class="ion-text-center">
+        <ion-col>
+            <ion-text>
+                <h2 class="ion-no-margin">{{member.LastName |titlecase}} {{member.FirstName |titlecase}}</h2>
+            </ion-text>
+        </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+        <ion-col>
+            <ion-chip color="green">
+                <ion-label>
+                    <ion-row>
+                        <ion-col>
+                            {{member.Ranking}}
+                        </ion-col>
+                        <ion-col>
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                        </ion-col>
+                        <ion-col>
+                            D0
+                        </ion-col>
+                    </ion-row>
+                </ion-label>
+            </ion-chip>
+            <ion-chip color="danger">
+                <ion-label>ELO 1900</ion-label>
+            </ion-chip>
+        </ion-col>
+    </ion-row>
+</ion-grid>

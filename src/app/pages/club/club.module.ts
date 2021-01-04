@@ -1,20 +1,29 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { ClubPageRoutingModule } from './club-routing.module';
+import {ClubPageRoutingModule} from './club-routing.module';
 
-import { ClubPage } from './club.page';
+import {ClubPage} from './containers/club/club.page';
+import {SuperTabsModule} from '@ionic-super-tabs/angular';
+import {SharedModule} from '../../shared/shared.module';
+import {TeamPage} from './containers/team/team-page.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ClubPageRoutingModule
-  ],
-  declarations: [ClubPage]
+    imports: [
+        CommonModule,
+        SuperTabsModule,
+        FormsModule,
+        IonicModule,
+        ClubPageRoutingModule,
+        SharedModule
+    ],
+    declarations: [
+        ClubPage,
+        TeamPage
+    ]
 })
-export class ClubPageModule {}
+export class ClubPageModule {
+}

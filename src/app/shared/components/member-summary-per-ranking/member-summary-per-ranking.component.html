@@ -1,0 +1,11 @@
+<beping-section-title title="Résumé par classement"></beping-section-title>
+<ng-container>
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let ranking of resultsPerRanking | keyvalue" size="12" sizeLg="6" sizeXl="6">
+                <beping-ranking-summary [ranking]="ranking.key" [results]="ranking.value"></beping-ranking-summary>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ng-container>
+
