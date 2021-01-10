@@ -18,13 +18,6 @@ import {of} from 'rxjs';
 import {sub} from 'date-fns';
 import {CurrentSeasonChanged} from '../season';
 
-export interface ClubsStateModel {
-    clubs: ClubEntry[];
-}
-
-const defaultState: ClubsStateModel = {
-    clubs: []
-};
 
 @State<EntityStateModel<ClubEntry>>({
     name: 'clubs',
