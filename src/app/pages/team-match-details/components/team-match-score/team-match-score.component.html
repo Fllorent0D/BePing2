@@ -1,45 +1,50 @@
 <ion-grid class="ion-padding-start ion-padding-end">
-  <ion-row class="ion-text-center ion-align-items-center">
-    <ion-col size="5">
-      <ion-text *ngIf="!match.IsAwayForfeited">
-        <h2>{{homeScore}}</h2>
-      </ion-text>
-      <ng-container *ngIf="isHomeFF">
-        <ion-text *ngIf="isHomeFG">
-          <h2>FG</h2>
-        </ion-text>
-        <ion-text *ngIf="!isHomeFG">
-          <h2>FF</h2>
-        </ion-text>
-      </ng-container>
-      <p>{{match.HomeTeam}}</p>
-    </ion-col>
-    <ion-col size="2">
-      <h1>VS</h1>
-    </ion-col>
-    <ion-col size="5">
-      <ion-text *ngIf="!match.IsAwayForfeited">
-        <h2>{{awayScore}}</h2>
-      </ion-text>
-      <ng-container *ngIf="isAwayFF">
-        <ion-text *ngIf="isAwayFG">
-          <h2>FG</h2>
-        </ion-text>
-        <ion-text *ngIf="!isAwayFG">
-          <h2>FF</h2>
-        </ion-text>
-      </ng-container>
+    <ion-row class="ion-text-center ion-align-items-center">
+        <ion-col size="5">
+            <ion-text *ngIf="!match.IsAwayForfeited">
+                <h2>{{homeScore}}</h2>
+            </ion-text>
+            <ng-container *ngIf="isHomeFF">
+                <ion-text *ngIf="isHomeFG">
+                    <h2>FG</h2>
+                </ion-text>
+                <ion-text *ngIf="!isHomeFG">
+                    <h2>FF</h2>
+                </ion-text>
+            </ng-container>
+            <ion-button color="dark" fill="clear" (click)="homeTeamClicked.emit()">
+                {{match.HomeTeam}}
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-button>
+        </ion-col>
+        <ion-col size="2">
+            <h1>VS</h1>
+        </ion-col>
+        <ion-col size="5">
+            <ion-text *ngIf="!match.IsAwayForfeited">
+                <h2>{{awayScore}}</h2>
+            </ion-text>
+            <ng-container *ngIf="isAwayFF">
+                <ion-text *ngIf="isAwayFG">
+                    <h2>FG</h2>
+                </ion-text>
+                <ion-text *ngIf="!isAwayFG">
+                    <h2>FF</h2>
+                </ion-text>
+            </ng-container>
 
-      <p>{{match.AwayTeam}}
-      <p>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <div class="progress-bar">
-        <span [ngStyle]="{width: homeScorePct + '%'}"></span>
-        <span [ngStyle]="{width: awayScorePct + '%'}"></span>
-      </div>
-    </ion-col>
-  </ion-row>
+            <ion-button color="dark" fill="clear" (click)="awayTeamClicked.emit()">
+                {{match.AwayTeam}}
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <div class="progress-bar">
+                <span [ngStyle]="{width: homeScorePct + '%'}"></span>
+                <span [ngStyle]="{width: awayScorePct + '%'}"></span>
+            </div>
+        </ion-col>
+    </ion-row>
 </ion-grid>

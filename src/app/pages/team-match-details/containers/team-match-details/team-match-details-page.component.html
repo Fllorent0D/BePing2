@@ -8,7 +8,11 @@
 </ion-header>
 <ion-content>
     <ng-container *ngIf="match$ | async as match">
-        <beping-team-match-score [match]="match"></beping-team-match-score>
+        <beping-team-match-score
+                [match]="match"
+                (homeTeamClicked)="navigateToTeamPage(match.HomeClub, match.HomeTeam)"
+                (awayTeamClicked)="navigateToTeamPage(match.AwayClub, match.AwayTeam)"
+        ></beping-team-match-score>
         <beping-team-match-player-list [match]="match"></beping-team-match-player-list>
         <beping-individual-matches-list [match]="match"></beping-individual-matches-list>
     </ng-container>

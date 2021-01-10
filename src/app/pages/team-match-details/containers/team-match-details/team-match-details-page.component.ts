@@ -1,9 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MatchesService} from '../../../../core/api/services/matches.service';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {Observable} from 'rxjs';
+import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
+import {Store} from '@ngxs/store';
+import {ClubsState} from '../../../../core/store/clubs';
+import {ClubsService} from '../../../../core/api/services/clubs.service';
+import {TeamEntry} from '../../../../core/api/models/team-entry';
+import {ClubEntry} from '../../../../core/api/models/club-entry';
 
 @Component({
     selector: 'beping-team-match-details',
@@ -16,15 +22,33 @@ export class TeamMatchDetailsPage implements OnInit {
 
     constructor(
         private readonly activatedRoute: ActivatedRoute,
-        private readonly matchesService: MatchesService
+        private readonly matchesService: MatchesService,
+        private readonly tabsNavigation: TabsNavigationService,
+        private readonly clubService: ClubsService,
+        private readonly store: Store
     ) {
     }
 
     ngOnInit() {
         this.match$ = this.activatedRoute.paramMap.pipe(
             map((params: ParamMap) => params.get('uniqueIndex') as string),
-            switchMap((uniqueIndex: string) => this.matchesService.findMatchById({matchUniqueId: uniqueIndex, withDetails: true}))
+            switchMap((uniqueIndex: string) => this.matchesService.findMatchById({matchUniqueId: uniqueIndex, withDetails: true})),
+            tap((m) => console.log(m))
         );
     }
+
+    navigateToTeamPage(clubIndex: string, clubTeam: string) {
+        this.store.select(ClubsState.getClubByUniqueIndex(clubIndex)).pipe(
+            map((club: ClubEntry) => clubTeam.replace(club.Name, '').trim()),
+            switchMap((teamName) =>
+                this.clubService.findClubTeams({clubIndex}).pipe(
+                    map((teams: TeamEntry[]) => teams.find((team) => team.Team === teamName))
+                )
+            )
+        ).subscribe((team) => {
+            this.tabsNavigation.navigateTo(['clubs', clubIndex, 'team', team.TeamId]);
+        });
+    }
+
 
 }

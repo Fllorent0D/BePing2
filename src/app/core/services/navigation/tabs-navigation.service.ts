@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import {NavController} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -7,7 +8,8 @@ import {Router} from '@angular/router';
 export class TabsNavigationService {
 
     constructor(
-        private readonly router: Router
+        private readonly router: Router,
+        private readonly navCtrl: NavController
     ) {
     }
 
@@ -22,6 +24,7 @@ export class TabsNavigationService {
             newUrl.push(...page);
         }
 
+        this.navCtrl.setDirection('forward', true, 'forward');
         return this.router.navigate([`${newUrl.join('/')}`]);
     }
 

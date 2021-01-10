@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 
 @Component({
@@ -8,6 +8,9 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 })
 export class TeamMatchScoreComponent implements OnInit {
     @Input() match: TeamMatchesEntry;
+
+    @Output() homeTeamClicked: EventEmitter<void> = new EventEmitter<void>();
+    @Output() awayTeamClicked: EventEmitter<void> = new EventEmitter<void>();
 
     constructor() {
     }
@@ -24,10 +27,22 @@ export class TeamMatchScoreComponent implements OnInit {
     }
 
     get homeScorePct() {
+        if (this.isHomeFF) {
+            return 0;
+        }
+        if (this.isAwayFF) {
+            return 100;
+        }
         return (this.homeScore / (this.homeScore + this.awayScore)) * 100 - 0.5;
     }
 
     get awayScorePct() {
+        if (this.isAwayFF) {
+            return 0;
+        }
+        if (this.isHomeFF) {
+            return 100;
+        }
         return (this.awayScore / (this.homeScore + this.awayScore)) * 100 - 0.5;
     }
 
@@ -48,4 +63,7 @@ export class TeamMatchScoreComponent implements OnInit {
     }
 
 
+    teamClicked(team: string) {
+
+    }
 }
