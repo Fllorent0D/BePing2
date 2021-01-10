@@ -61,7 +61,8 @@ import {TeamResultAdBannerComponent} from './ads/team-result-ad-banner/team-resu
         MemberVictoryChartComponent,
         MemberSummaryPerRankingComponent,
         MemberLatestMatchesComponent,
-        TeamResultAdBannerComponent
+        TeamResultAdBannerComponent,
+        SectionTitleComponent
     ],
     imports: [
         CommonModule,

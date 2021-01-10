@@ -1,0 +1,15 @@
+<ion-header translucent="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Détail du match</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ng-container *ngIf="match$ | async as match">
+        <beping-team-match-score [match]="match"></beping-team-match-score>
+        <beping-team-match-player-list [match]="match"></beping-team-match-player-list>
+        <beping-individual-matches-list [match]="match"></beping-individual-matches-list>
+    </ng-container>
+</ion-content>

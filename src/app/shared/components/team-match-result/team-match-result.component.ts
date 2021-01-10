@@ -1,5 +1,6 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {TeamMatchesEntry} from '../../../core/api/models/team-matches-entry';
+import {TabsNavigationService} from '../../../core/services/navigation/tabs-navigation.service';
 
 @Component({
     selector: 'beping-team-match-result',
@@ -11,7 +12,9 @@ export class TeamMatchResultComponent implements OnInit {
 
     @Input() match: TeamMatchesEntry;
 
-    constructor() {
+    constructor(
+        private readonly tabNavigation: TabsNavigationService
+    ) {
     }
 
     ngOnInit() {
@@ -34,4 +37,7 @@ export class TeamMatchResultComponent implements OnInit {
     }
 
 
+    navigateToDetails() {
+        this.tabNavigation.navigateTo(['team-match-details', this.match.MatchUniqueId.toString()]);
+    }
 }

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MemberEntryResultEntry} from '../../../core/api/models/member-entry-result-entry';
+import {TabsNavigationService} from '../../../core/services/navigation/tabs-navigation.service';
 
 @Component({
     selector: 'beping-individual-match',
@@ -10,10 +11,15 @@ export class IndividualMatchComponent implements OnInit {
 
     @Input() result?: MemberEntryResultEntry = null;
 
-    constructor() {
+    constructor(
+        private readonly tabNavigation: TabsNavigationService
+    ) {
     }
 
     ngOnInit() {
     }
 
+    navigateToDetails() {
+        this.tabNavigation.navigateTo(['team-match-details', this.result.MatchUniqueId.toString()]);
+    }
 }

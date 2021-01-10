@@ -1,0 +1,19 @@
+<ion-content>
+  <beping-card [padding]="true" *ngFor="let venue of venues">
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="11">
+          <ion-text class="text-strong">{{venue.Name}}</ion-text>
+          <br>
+          <ion-text color="grey">{{venue.Street}} {{venue.Town}}</ion-text>
+          <br>
+          <ion-text color="grey">{{venue.Phone}}</ion-text>
+        </ion-col>
+        <ion-col size="1" class="ion-text-end">
+          <ion-icon name="navigate-circle-outline" size="large" class="ion"
+                    color="primary"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </beping-card>
+</ion-content>

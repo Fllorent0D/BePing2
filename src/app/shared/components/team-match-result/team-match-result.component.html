@@ -1,5 +1,5 @@
-<beping-card>
-    <ion-grid>
+<ion-item class="large" (click)="navigateToDetails()">
+    <ion-grid class="ion-no-padding">
         <ion-row class="ion-text-center" *ngIf="match.Score">
             <ion-col class="ion-no-padding">
                 <ion-text color="grey">{{match.Date | date:'dd MMMM YYYY'}}</ion-text>
@@ -42,4 +42,4 @@
             </ion-col>
         </ion-row>
     </ion-grid>
-</beping-card>
+</ion-item>

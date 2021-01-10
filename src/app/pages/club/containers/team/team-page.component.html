@@ -50,83 +50,90 @@
                         </ion-row>
                     </ion-grid>
                     <ng-container *ngIf="team$ | async as team">
-                        <beping-card *ngFor="let rankingEntry of ranking$ | async; let index = index"
-                                     [highlighted]="isSameTeam(rankingEntry, team, club$|async)">
+                        <ion-item *ngFor="let rankingEntry of ranking$ | async; let index = index"
+                                  [class.is-color-primary]="isSameTeam(rankingEntry, team, club$|async)" detail>
                             <ion-grid style="padding-top: 7px; padding-bottom: 7px">
                                 <ion-row class="ion-align-items-center">
-                                    <ion-col class="ion-text-nowrap" size="1">
-                                        <span>{{rankingEntry.Position}}</span>
+                                    <ion-col class="ion-text-wrap" size="1">
+                                        <ion-label>
+                                            <h2>{{rankingEntry.Position}}</h2>
+                                        </ion-label>
                                     </ion-col>
                                     <ion-col size="5">
-                                        {{rankingEntry.Team}}
-                                    </ion-col>
-                                    <ion-col class="border-right ion-text-center" size="1">
-                                        <ion-label>
-                                            {{rankingEntry.GamesPlayed}}
+                                        <ion-label class="ion-text-wrap">
+                                            <h2>{{rankingEntry.Team}}</h2>
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="border-right ion-text-center" size="1">
                                         <ion-label>
-                                            {{rankingEntry.GamesWon}}
+                                            <h2>{{rankingEntry.GamesPlayed}}</h2>
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="border-right ion-text-center" size="1">
                                         <ion-label>
-                                            {{rankingEntry.GamesLost}}
+                                            <h2>{{rankingEntry.GamesWon}}</h2>
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="border-right ion-text-center" size="1">
                                         <ion-label>
-                                            {{rankingEntry.GamesDraw}}
+                                            <h2>{{rankingEntry.GamesLost}}</h2>
+                                        </ion-label>
+                                    </ion-col>
+                                    <ion-col class="border-right ion-text-center" size="1">
+                                        <ion-label>
+                                            <h2>{{rankingEntry.GamesDraw}}</h2>
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="ion-text-center text-bold" size="2">
                                         <ion-label>
-                                            {{rankingEntry.Points}}
+                                            <h2>{{rankingEntry.Points}}</h2>
                                         </ion-label>
                                     </ion-col>
                                 </ion-row>
                             </ion-grid>
-                        </beping-card>
+                        </ion-item>
                     </ng-container>
 
                 </ion-content>
             </super-tab>
             <super-tab>
                 <ion-content>
-                    <ion-grid class="ion-no-padding">
-                        <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
-                            <ion-col size="5">
-                                <ion-text class="ion-text-wrap">Nom</ion-text>
-                            </ion-col>
-                            <ion-col class="" size="2">
-                                <ion-text class="ion-text-nowrap">Cla.</ion-text>
-                            </ion-col>
-                            <ion-col class="" size="2">
-                                <ion-text class="ion-text-nowrap">J.</ion-text>
-                            </ion-col>
-                            <ion-col class="ion-text-center" size="2">
-                                <ion-text class="ion-text-nowrap">%</ion-text>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-
-                    <beping-card [padding]="true">
-                        <ion-grid>
-                            <ion-row class="ion-align-items-center">
-                                <ion-col class="" size="5">
-                                    <ion-label>
-                                        Florent Cardoen
-                                    </ion-label>
+                    <ion-header>
+                        <ion-grid class="ion-no-padding">
+                            <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
+                                <ion-col size="5">
+                                    <ion-text class="ion-text-wrap">Nom</ion-text>
                                 </ion-col>
                                 <ion-col class="" size="2">
-                                    <ion-label class="ion-text-nowrap">
-                                        D2
+                                    <ion-text class="ion-text-nowrap">Cla.</ion-text>
+                                </ion-col>
+                                <ion-col class="" size="2">
+                                    <ion-text class="ion-text-nowrap">J.</ion-text>
+                                </ion-col>
+                                <ion-col class="ion-text-center" size="2">
+                                    <ion-text class="ion-text-nowrap">%</ion-text>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+
+                    </ion-header>
+
+                    <ion-item detail>
+                        <ion-grid>
+                            <ion-row class="ion-align-items-center">
+                                <ion-col class="" size="6">
+                                    <ion-label>
+                                        <h2>Florent Cardoen</h2>
                                     </ion-label>
                                 </ion-col>
                                 <ion-col class="" size="2">
                                     <ion-label class="ion-text-wrap">
-                                        10
+                                        <h2>D2</h2>
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="" size="2">
+                                    <ion-label class="ion-text-wrap">
+                                        <h2>10</h2>
                                     </ion-label>
                                 </ion-col>
                                 <ion-col class="ion-text-center ion-no-padding" size="2">
@@ -137,13 +144,10 @@
                                             [title]="'71%'">
                                     </beping-victory-chart>
                                 </ion-col>
-                                <ion-col class="ion-text-end ion-no-padding" size="1">
-                                    <ion-icon name="chevron-forward-outline" size="large" class="ion"
-                                              color="grey"></ion-icon>
-                                </ion-col>
                             </ion-row>
                         </ion-grid>
-                    </beping-card>
+
+                    </ion-item>
                 </ion-content>
             </super-tab>
             <super-tab>

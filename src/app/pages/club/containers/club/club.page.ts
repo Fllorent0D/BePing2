@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject} from 'rxjs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
-import {map, switchMap} from 'rxjs/operators';
+import {filter, map, share, switchMap, take, tap} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
@@ -14,6 +14,8 @@ import {TeamEntry} from '../../../../core/api/models/team-entry';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
+import {add, format, sub} from 'date-fns';
+import {IonVirtualScroll} from '@ionic/angular';
 
 @Component({
     selector: 'beping-club',
@@ -26,7 +28,11 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     members$: Observable<MemberEntry[]>;
     venues$: Observable<VenueEntry[]>;
     teams$: Observable<TeamEntry[]>;
-    matches: Observable<TeamMatchesEntry[]>;
+    matches$: Observable<TeamMatchesEntry[]>;
+    matches: TeamMatchesEntry[] = [];
+    from$: BehaviorSubject<Date>;
+    to$: BehaviorSubject<Date>;
+    loadLater: Observable<TeamMatchesEntry[]>;
 
     constructor(
         private readonly activatedRoute: ActivatedRoute,
@@ -39,6 +45,9 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
         protected readonly changeDetectionRef: ChangeDetectorRef
     ) {
         super(changeDetectionRef);
+
+        this.from$ = new BehaviorSubject<Date>(sub(new Date(), {weeks: 2}));
+        this.to$ = new BehaviorSubject<Date>(new Date());
     }
 
     ngOnInit() {
@@ -52,9 +61,50 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
             switchMap((club) => this.clubService.findClubTeams({clubIndex: club.UniqueIndex}))
         );
 
-        this.matches = this.club$.pipe(
+        this.matches$ = this.club$.pipe(
             switchMap((club) => this.matchesService.findAllMatches({club: club.UniqueIndex}))
         );
+
+        /*
+                this.matches$ = combineLatest([
+                    this.club$,
+                    this.fromToDate$
+                ]).pipe(
+                    switchMap(([club, {to, from}]) => this.matchesService.findAllMatches({
+                        club: club.UniqueIndex,
+                        yearDateFrom: format(from, 'yyyy-LL-dd'),
+                        yearDateTo: format(to, 'yyyy-LL-dd')
+                    })),
+                    map((matches: TeamMatchesEntry[]) => matches.filter(
+                        (m) => !this.matches.find((alreadyExisting) => alreadyExisting.MatchUniqueId === m.MatchUniqueId)
+                    )),
+                    tap((newMatches) => {
+                        if (this.matches.length <= 5) {
+                            this.loadMore();
+                        }
+                    }),
+                    share()
+                );
+
+         */
+        this.loadLater = combineLatest([this.club$, this.to$])
+            .pipe(
+                switchMap(([club, to]) => this.matchesService.findAllMatches({
+                    club: club.UniqueIndex,
+                    yearDateFrom: format(add(to, {days: 1}), 'yyyy-LL-dd'),
+                    yearDateTo: format(add(to, {weeks: 2}), 'yyyy-LL-dd')
+                })),
+                map((matches: TeamMatchesEntry[]) => matches.sort((a, b) => a.Date > b.Date ? 1 : -1)),
+                share()
+            );
+
+        this.loadLater.subscribe((test) => {
+            this.matches.push(...test);
+            if (this.matches.length < 10) {
+                this.loadLaterMatches();
+            }
+            this.changeDetectionRef.markForCheck();
+        });
 
         this.venues$ = this.club$.pipe(
             map((club) => club.VenueEntries)
@@ -81,5 +131,32 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     }
 
 
+    loadLaterMatches(event?) {
+        this.to$.next(add(this.to$.value, {weeks: 2}));
+
+        if (event) {
+            this.loadLater.pipe(
+                take(1)
+            ).subscribe(() => {
+                event.target.complete();
+            });
+        }
+    }
+
+    loadEarlierMatches(event) {
+        /*
+        this.fromToDate$.next({
+            ...this.fromToDate$.value,
+            from: sub(this.fromToDate$.value.from, {weeks: 1})
+        });
+        if (event) {
+            this.matches.pipe(
+                take(1)
+            ).subscribe(() => event.target.complete());
+        }
+
+
+         */
+    }
 }
 

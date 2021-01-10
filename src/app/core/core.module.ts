@@ -9,6 +9,7 @@ import {states} from './store';
 import {NgxsAsyncStoragePluginModule} from '@ngxs-labs/async-storage-plugin';
 import {NgxsStorageService} from './services/store/ngxs-storage.service';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import {SuperTabsModule} from '@ionic-super-tabs/angular';
         NgxsReduxDevtoolsPluginModule.forRoot({
             disabled: environment.production
         }),
-        NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService)
+        NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService),
+        ScrollingModule
     ]
 })
 export class CoreModule {

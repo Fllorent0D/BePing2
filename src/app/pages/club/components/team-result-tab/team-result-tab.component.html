@@ -1,0 +1,11 @@
+<ion-content>
+  <virtual-scroller
+          #scroll
+          [items]="matches"
+          [enableUnequalChildrenSizes]="true">
+    <beping-team-match-result
+            *ngFor="let item of scroll.viewPortItems"
+            [match]="item">
+    </beping-team-match-result>
+  </virtual-scroller>
+</ion-content>

@@ -8,6 +8,7 @@ export interface MemberEntryResultEntry {
   FirstName: string;
   LastName: string;
   MatchId?: string;
+  MatchUniqueId?: number;
   Ranking: string;
   RankingEvaluationCount?: number;
   RankingEvaluationEntries?: Array<RankingEvaluationEntry>;

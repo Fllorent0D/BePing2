@@ -19,7 +19,7 @@ export class MatchesPage implements OnInit {
     }
 
     navigateToClub(index) {
-        this.tabsNavigationService.navigateTo(['club', index]);
+        this.tabsNavigationService.navigateTo(['clubs', index]);
     }
 
 

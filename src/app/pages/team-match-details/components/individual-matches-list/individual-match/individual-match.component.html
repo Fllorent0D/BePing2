@@ -1,0 +1,27 @@
+<ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5">
+        <ion-label>
+          <ion-text>
+            [{{individualMatch.HomePlayerMatchIndex}}] <span class="ion-hide-sm-down">{{homePlayer.FirstName | titlecase}}</span> {{homePlayer.LastName | titlecase}}
+          </ion-text>
+        </ion-label>
+      </ion-col>
+      <ion-col size="2">
+        <ion-label class="ion-text-center is-color-primary score">
+          <ion-text>
+            {{individualMatch.HomeSetCount}} - {{individualMatch.AwaySetCount}}
+          </ion-text>
+        </ion-label>
+      </ion-col>
+      <ion-col size="5">
+        <ion-label class="ion-text-right">
+          <ion-text>
+            <span class="ion-hide-sm-down">{{awayPlayer.FirstName | titlecase}}</span> {{awayPlayer.LastName | titlecase}} [{{individualMatch.AwayPlayerMatchIndex}}]
+          </ion-text>
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>

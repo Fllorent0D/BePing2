@@ -1,0 +1,10 @@
+<beping-section-title [title]="'Matches'"></beping-section-title>
+
+<ion-list>
+    <beping-team-match-individual-match
+            [individualMatch]="individualMatch"
+            [homePlayer]="getPlayerWithId(individualMatch.HomePlayerUniqueIndex[0])"
+            [awayPlayer]="getPlayerWithId(individualMatch.AwayPlayerUniqueIndex[0])"
+            *ngFor="let individualMatch of match.MatchDetails.IndividualMatchResults">
+    </beping-team-match-individual-match>
+</ion-list>

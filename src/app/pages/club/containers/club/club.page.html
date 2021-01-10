@@ -22,94 +22,32 @@
         </div>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content scroll-y="false">
     <super-tabs #superTabs>
         <super-tabs-container>
             <super-tab>
-                <div *ngIf="members$ | async as members">
-                    <ion-grid class="ion-no-padding">
-                        <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 10px 10px 5px 20px;">
-                            <ion-col size="2">
-                                <ion-text class="ion-text-wrap">Index</ion-text>
-                            </ion-col>
-                            <ion-col size="6" offset="1">
-                                <ion-text class="ion-text-wrap">Nom</ion-text>
-                            </ion-col>
-                            <ion-col size="3">
-                                <ion-text class="ion-text-wrap">Classement</ion-text>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                    <beping-card *ngFor="let member of members; let index = index" [padding]="false">
-                        <ion-grid style="padding-top: 7px; padding-bottom: 7px">
-                            <ion-row>
-                                <ion-col class="ion-text-end ion-text-nowrap border-right" style="padding-right: 6px"
-                                         size="1">
-                                    <ion-label>{{member.Position}}</ion-label>
-                                </ion-col>
-                                <ion-col class="ion-text-nowrap" style="padding-left: 6px" size="1">
-                                    <ion-label>{{member.RankingIndex}}</ion-label>
-                                </ion-col>
-                                <ion-col size="7" offset="1">
-                                    {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
-                                </ion-col>
-                                <ion-col class="ion-text-nowrap" size="1">
-                                    <ion-label>{{member.Ranking}}</ion-label>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </beping-card>
-                </div>
+                <beping-club-player-list-tab
+                        [members]="members$ | async"
+                >
+                </beping-club-player-list-tab>
             </super-tab>
             <super-tab>
-                <ion-content>
-                    <beping-card
-                            [padding]="true"
-                            *ngFor="let team of teams$ |async"
-                            [routerLink]="['team', team.TeamId]"
-                    >
-                        <ion-grid>
-                            <ion-row class="ion-align-items-center">
-                                <ion-col size="11">
-                                    <ion-text class="text-strong">{{(club$ | async).Name}} {{team.Team}}</ion-text>
-                                    <br>
-                                    <ion-text color="grey">{{team.DivisionName}}</ion-text>
-                                </ion-col>
-                                <ion-col size="1" class="ion-text-end">
-                                    <ion-icon name="chevron-forward-outline" size="large" class="ion"
-                                              color="grey"></ion-icon>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </beping-card>
-                </ion-content>
+                <beping-club-team-list-tab
+                        [teams]="teams$|async"
+                        [club]="club$|async"
+                ></beping-club-team-list-tab>
             </super-tab>
             <super-tab>
-                <ion-content>
-                    <beping-card [padding]="true" *ngFor="let venue of venues$ |async">
-                        <ion-grid>
-                            <ion-row class="ion-align-items-center">
-                                <ion-col size="11">
-                                    <ion-text class="text-strong">{{venue.Name}}</ion-text>
-                                    <br>
-                                    <ion-text color="grey">{{venue.Street}} {{venue.Town}}</ion-text>
-                                    <br>
-                                    <ion-text color="grey">{{venue.Phone}}</ion-text>
-                                </ion-col>
-                                <ion-col size="1" class="ion-text-end">
-                                    <ion-icon name="navigate-circle-outline" size="large" class="ion"
-                                              color="primary"></ion-icon>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-                    </beping-card>
-                </ion-content>
+                <beping-club-pratical-info-tab
+                        [venues]="venues$|async"
+                >
+                </beping-club-pratical-info-tab>
             </super-tab>
             <super-tab>
-                <ion-content>
-                    <beping-team-match-result [match]="match"
-                                              *ngFor="let match of matches | async"></beping-team-match-result>
-                </ion-content>
+                <beping-team-result-tab
+                        [matches]="matches$|async"
+                >
+                </beping-team-result-tab>
             </super-tab>
         </super-tabs-container>
     </super-tabs>

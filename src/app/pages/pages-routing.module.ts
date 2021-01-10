@@ -8,8 +8,8 @@ const routes: Routes = [
         component: ExploreContainerComponent
     },
     {
-        path: 'club',
-        loadChildren: () => import('./club/club.module').then(m => m.ClubPageModule)
+        path: 'clubs',
+        loadChildren: () => import('./club/clubs.module').then(m => m.ClubsPagesModule)
     },
     {
         path: 'player',
@@ -18,6 +18,10 @@ const routes: Routes = [
     {
         path: 'matches',
         loadChildren: () => import('./matches/matches.module').then(m => m.MatchesPageModule)
+    },
+    {
+        path: 'team-match-details',
+        loadChildren: () => import('./team-match-details/team-match-details.module').then(m => m.TeamMatchDetailsModule)
     }
 ];
 
