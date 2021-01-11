@@ -1,5 +1,5 @@
 <ion-grid>
-    <ion-row class="ion-text-center">
+    <ion-row class="ion-text-center" *ngIf="!platform.is('ios')">
         <ion-col>
             <ion-text>
                 <h2 class="ion-no-margin">{{member.LastName |titlecase}} {{member.FirstName |titlecase}}</h2>

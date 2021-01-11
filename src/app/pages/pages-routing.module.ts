@@ -22,6 +22,10 @@ const routes: Routes = [
     {
         path: 'team-match-details',
         loadChildren: () => import('./team-match-details/team-match-details.module').then(m => m.TeamMatchDetailsModule)
+    },
+    {
+        path: 'settings',
+        loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule)
     }
 ];
 

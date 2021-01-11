@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MemberEntry} from '../../../core/api/models/member-entry';
+import {Platform} from '@ionic/angular';
 
 @Component({
     selector: 'beping-member-name-ranking-info',
@@ -10,7 +11,9 @@ export class MemberNameRankingInfoComponent implements OnInit {
 
     @Input() member: MemberEntry;
 
-    constructor() {
+    constructor(
+        public platform: Platform
+    ) {
     }
 
     ngOnInit() {

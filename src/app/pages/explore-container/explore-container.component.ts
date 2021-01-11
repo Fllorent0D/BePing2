@@ -5,9 +5,11 @@ import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
 import {MemberEntry} from '../../core/api/models/member-entry';
 import {UserState} from '../../core/store/user/user.state';
 import {map, share, shareReplay, switchMap, take, tap} from 'rxjs/operators';
-import {ToastController} from '@ionic/angular';
+import {IonRouterOutlet, ModalController, ToastController} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {AdsService} from '../../core/services/firebase/ads.service';
+import {ChooseClubPage} from '../modals/choose-club/choose-club.page';
+import {SettingsPage} from '../settings/containers/settings-page/settings.page';
 
 @Component({
     selector: 'beping-explore-container',
@@ -24,7 +26,9 @@ export class ExploreContainerComponent implements OnInit {
     constructor(
         private store: Store,
         private toastrCtrl: ToastController,
-        private adsService: AdsService
+        private adsService: AdsService,
+        private readonly modalCtrl: ModalController,
+        private readonly ionRouter: IonRouterOutlet
     ) {
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(share());
         this.categoriesAvailable$.pipe(
@@ -76,6 +80,17 @@ export class ExploreContainerComponent implements OnInit {
         }
     }
 
+    async openSettings() {
+        const modal = await this.modalCtrl.create({
+            component: SettingsPage,
+            swipeToClose: true,
+            componentProps: {
+                isModal: true
+            },
+            presentingElement: this.ionRouter.nativeEl
+        });
+        await modal.present();
+    }
 
     test() {
 
