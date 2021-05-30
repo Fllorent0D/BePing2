@@ -1,6 +1,9 @@
 import {MemberEntry} from '../../api/models/member-entry';
 import {ClubEntry} from '../../api/models/club-entry';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
+import {UserMemberEntries} from './user.state';
+import {PLAYER_CATEGORY} from '../../models/user';
+import {LANG} from '../../models/langs';
 
 export class SetUser {
     static readonly type = '[user] Set user';
@@ -25,7 +28,7 @@ export class UpdateMemberEntriesSuccess {
     static readonly type = '[user] Update member entries success';
 
     constructor(
-        public memberEntries: { [key: string]: MemberEntry }
+        public memberEntries: UserMemberEntries
     ) {
     }
 }
@@ -34,10 +37,11 @@ export class UpdateMemberEntriesFailure {
     static readonly type = '[user] Update member entries failure';
 
     constructor(
-        public memberEntries: { [key: string]: MemberEntry }
+        public memberEntries: UserMemberEntries
     ) {
     }
 }
+
 export class UpdateLatestMatchesSuccess {
     static readonly type = '[user] Update latest matches success';
 
@@ -46,6 +50,16 @@ export class UpdateLatestMatchesSuccess {
     ) {
     }
 }
+
+export class UpdateMainCategory {
+    static readonly type = '[user] Update main category';
+
+    constructor(
+        public category: PLAYER_CATEGORY
+    ) {
+    }
+}
+
 
 export class HasSeenOnBoarding {
     static readonly type = '[user] Has seen onboarding';

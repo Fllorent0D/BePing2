@@ -97,58 +97,10 @@
                 </ion-content>
             </super-tab>
             <super-tab>
-                <ion-content>
-                    <ion-header>
-                        <ion-grid class="ion-no-padding">
-                            <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
-                                <ion-col size="5">
-                                    <ion-text class="ion-text-wrap">Nom</ion-text>
-                                </ion-col>
-                                <ion-col class="" size="2">
-                                    <ion-text class="ion-text-nowrap">Cla.</ion-text>
-                                </ion-col>
-                                <ion-col class="" size="2">
-                                    <ion-text class="ion-text-nowrap">J.</ion-text>
-                                </ion-col>
-                                <ion-col class="ion-text-center" size="2">
-                                    <ion-text class="ion-text-nowrap">%</ion-text>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-
-                    </ion-header>
-
-                    <ion-item detail>
-                        <ion-grid>
-                            <ion-row class="ion-align-items-center">
-                                <ion-col class="" size="6">
-                                    <ion-label>
-                                        <h2>Florent Cardoen</h2>
-                                    </ion-label>
-                                </ion-col>
-                                <ion-col class="" size="2">
-                                    <ion-label class="ion-text-wrap">
-                                        <h2>D2</h2>
-                                    </ion-label>
-                                </ion-col>
-                                <ion-col class="" size="2">
-                                    <ion-label class="ion-text-wrap">
-                                        <h2>10</h2>
-                                    </ion-label>
-                                </ion-col>
-                                <ion-col class="ion-text-center ion-no-padding" size="2">
-                                    <beping-victory-chart
-                                            style="max-height: 40px"
-                                            [bluePct]="71"
-                                            [redPct]="29"
-                                            [title]="'71%'">
-                                    </beping-victory-chart>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
-
-                    </ion-item>
-                </ion-content>
+                <beping-team-players-stats
+                        [stats]="playersStats$|async"
+                        (playerClicked)="navigateToPlayer($event)"
+                ></beping-team-players-stats>
             </super-tab>
             <super-tab>
                 <ion-content>

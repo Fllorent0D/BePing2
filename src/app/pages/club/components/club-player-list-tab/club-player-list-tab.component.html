@@ -1,6 +1,6 @@
 <ion-content>
   <ion-virtual-scroll [items]="members" approxItemHeight="60px">
-    <ion-item *virtualItem="let member; let index = index">
+    <ion-item *virtualItem="let member; let index = index" (click)="memberClicked.emit(member.UniqueIndex)">
       <ion-grid class="ion-no-padding">
         <ion-row>
           <ion-col class="ion-text-end border-right"

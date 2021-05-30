@@ -16,8 +16,8 @@ import {DivisionEntry} from '../../api/models/division-entry';
 import {DivisionsService} from '../../api/services/divisions.service';
 import {GetDivisions} from './divisions.actions';
 import {sub} from 'date-fns';
-import {GetClubs} from '../clubs';
 import {CurrentSeasonChanged} from '../season';
+import {UpdateCurrentLangSuccess} from '../settings';
 
 @State<EntityStateModel<DivisionEntry>>({
     name: 'divisions',
@@ -39,7 +39,7 @@ export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOn
         }
     }
 
-    @Action([GetDivisions, CurrentSeasonChanged])
+    @Action([GetDivisions, CurrentSeasonChanged, UpdateCurrentLangSuccess])
     getDivisions(ctx: StateContext<EntityStateModel<DivisionEntry>>) {
         ctx.dispatch(new SetLoading(DivisionsState, true));
 

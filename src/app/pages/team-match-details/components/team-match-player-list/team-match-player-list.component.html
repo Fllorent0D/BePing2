@@ -7,7 +7,11 @@
                 <ion-text class="ion-padding-start" color="grey">{{match.HomeTeam}}</ion-text>
             </ion-label>
             <ion-list>
-                <beping-team-match-player-item [player]="player" *ngFor="let player of match.MatchDetails.HomePlayers.Players"></beping-team-match-player-item>
+                <beping-team-match-player-item
+                        [player]="player"
+                        *ngFor="let player of match.MatchDetails.HomePlayers.Players"
+                        (playerClicked)="playerClicked.emit(player.UniqueIndex)"
+                ></beping-team-match-player-item>
             </ion-list>
 
         </ion-col>
@@ -17,7 +21,11 @@
             </ion-label>
 
             <ion-list>
-                <beping-team-match-player-item [player]="player" *ngFor="let player of match.MatchDetails.AwayPlayers.Players"></beping-team-match-player-item>
+                <beping-team-match-player-item
+                        [player]="player"
+                        *ngFor="let player of match.MatchDetails.AwayPlayers.Players"
+                        (playerClicked)="playerClicked.emit(player.UniqueIndex)"
+                ></beping-team-match-player-item>
             </ion-list>
 
         </ion-col>

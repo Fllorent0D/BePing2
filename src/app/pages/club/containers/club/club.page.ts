@@ -3,7 +3,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject} from 'rxjs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
-import {filter, map, share, switchMap, take, tap} from 'rxjs/operators';
+import {map, share, switchMap, take, tap} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
@@ -15,7 +15,7 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
 import {add, format, sub} from 'date-fns';
-import {IonVirtualScroll} from '@ionic/angular';
+import {FavoritesState, ToggleClubFromFavorites} from '../../../../core/store/favorites';
 
 @Component({
     selector: 'beping-club',
@@ -32,6 +32,9 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     matches: TeamMatchesEntry[] = [];
     from$: BehaviorSubject<Date>;
     to$: BehaviorSubject<Date>;
+
+    isFavorite$: Observable<boolean>;
+
     loadLater: Observable<TeamMatchesEntry[]>;
 
     constructor(
@@ -55,6 +58,10 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
         this.club$ = this.activatedRoute.paramMap.pipe(
             map((params: ParamMap) => params.get('uniqueIndex') as string),
             switchMap((uniqueIndex: string) => this.store.select(ClubsState.getClubByUniqueIndex(uniqueIndex)))
+        );
+
+        this.isFavorite$ = this.club$.pipe(
+            switchMap((club) => this.store.select(FavoritesState.isClubInFavorite(club.UniqueIndex)))
         );
 
         this.teams$ = this.club$.pipe(
@@ -116,8 +123,8 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
         );
     }
 
-    navigateToPlayer() {
-        this.tabsNavigationService.navigateTo(['player']);
+    navigateToPlayer(uniqueIndex: number) {
+        this.tabsNavigationService.navigateTo(['player', uniqueIndex.toString(10)]);
     }
 
     navigateToTeamPage(team: TeamEntry, club: ClubEntry) {
@@ -157,6 +164,13 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
 
 
          */
+    }
+
+    toggleClubFavorite() {
+        this.club$.pipe(
+            take(1)
+        ).subscribe((club) => this.store.dispatch(new ToggleClubFromFavorites(club.UniqueIndex)));
+
     }
 }
 

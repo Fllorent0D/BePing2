@@ -6,6 +6,7 @@ import {MembersService} from '../../api/services/members.service';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {MatchesService} from '../../api/services/matches.service';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
+import {UserMemberEntries} from '../../store/user/user.state';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +19,24 @@ export class PlayerCategoryService {
     ) {
     }
 
-    getMemberPlayerCategories(memberUniqueIndex: number): Observable<{ [key: string]: MemberEntry }> {
+    static getPlayedCategories(memberEntries: UserMemberEntries): PLAYER_CATEGORY[] {
+        const keys = Object.keys(memberEntries) as PLAYER_CATEGORY[];
+        return keys.filter((key) => memberEntries[key].ResultEntries);
+    }
+
+    static getMainCategory(memberEntries: UserMemberEntries): PLAYER_CATEGORY {
+        const playedCategories = PlayerCategoryService.getPlayedCategories(memberEntries);
+
+        if (playedCategories.length === 1) {
+            return playedCategories[0];
+        }
+        if (playedCategories.find((cat) => cat === PLAYER_CATEGORY.MEN)) {
+            return PLAYER_CATEGORY.MEN;
+        }
+        return playedCategories[0];
+    }
+
+    getMemberPlayerCategories(memberUniqueIndex: number): Observable<UserMemberEntries> {
         const isCategory = (category: PLAYER_CATEGORY) =>
             this.membersService.findMemberById({
                 playerCategory: category,
@@ -49,10 +67,10 @@ export class PlayerCategoryService {
         );
     }
 
-    getMemberLatestMatches(members: { [key: string]: MemberEntry }): Observable<{ [key: string]: TeamMatchesEntry[] }> {
+    getMemberLatestMatches(members: UserMemberEntries): Observable<{ [key: string]: TeamMatchesEntry[] }> {
         const clubIndexes = [...new Set(Object.values(members).map((entry) => entry.Club))];
         const matchIds = Object.values(members)
-            .map((entry) => [...entry.ResultEntries]
+            .map((entry) => [...(entry.ResultEntries ?? [])]
                 .sort((a, b) => b.Date.localeCompare(a.Date))
                 .map((result) => result.MatchId)
                 .filter((item, pos, arr) => arr.indexOf(item) === pos)
@@ -71,7 +89,8 @@ export class PlayerCategoryService {
             ),
             map((matches: TeamMatchesEntry[]) =>
                 Object.entries(members).reduce((acc, [category, member]) => {
-                    const ids = member.ResultEntries.map((result) => result.MatchId);
+                    const results = member.ResultEntries ?? [];
+                    const ids = results.map((result) => result.MatchId);
                     acc[category] = matches.filter((match) => ids.includes(match.MatchId));
                     return acc;
                 }, {})

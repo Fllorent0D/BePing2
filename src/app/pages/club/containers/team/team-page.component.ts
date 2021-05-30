@@ -7,12 +7,15 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {DivisionsService} from '../../../../core/api/services/divisions.service';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
 import {TeamEntry} from '../../../../core/api/models/team-entry';
-import {map, switchMap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {Store} from '@ngxs/store';
+import {TeamPlayersStats, TeamPlayerStats} from '../../model/team-players-stats.model';
+import {TeamPlayersStatsService} from '../../services/team-players-stats.service';
+import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 
 @Component({
     selector: 'beping-teams',
@@ -30,7 +33,7 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
     team$: Observable<TeamEntry>;
     clubIndex$: Observable<string>;
     club$: Observable<ClubEntry>;
-
+    playersStats$: Observable<TeamPlayersStats>;
 
     constructor(
         private readonly divisionsService: DivisionsService,
@@ -38,7 +41,9 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         private readonly matchsService: MatchesService,
         private readonly activatedRoute: ActivatedRoute,
         private readonly store: Store,
-        protected readonly changeDetectionRef: ChangeDetectorRef
+        protected readonly changeDetectionRef: ChangeDetectorRef,
+        private readonly tabsNavigation: TabsNavigationService,
+        private readonly teamPlayerStatsService: TeamPlayersStatsService
     ) {
         super(changeDetectionRef);
     }
@@ -79,27 +84,25 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
             }))
         );
 
-        combineLatest([
+        this.playersStats$ = combineLatest([
             this.team$,
             this.calendar$,
             this.club$
         ]).pipe(
-            map(([team, matches, club]: [TeamEntry, TeamMatchesEntry[], ClubEntry]) => {
-                for (const match of matches) {
-                    const teamName = (club.Name + ' ' + team.Team).trim();
-                    const teamPosition = match.HomeTeam === teamName ? 'Home' : 'Away';
-                    const oppositeTeam = teamPosition === 'Home' ? 'Away' : 'Home';
-                }
-                return;
-            })
-        ).subscribe(() => {
-
-        });
+            map(([team, matches, club]: [TeamEntry, TeamMatchesEntry[], ClubEntry]) =>
+                this.teamPlayerStatsService.computeTeamPlayersStats(matches, team, club)
+            ),
+            tap((t) => console.log(t))
+        );
 
 
         this.ranking$ = this.team$.pipe(
             switchMap((team: TeamEntry) => this.divisionsService.findDivisionRanking({divisionId: team.DivisionId}))
         );
+    }
+
+    navigateToPlayer(uniqueIndex: number) {
+        this.tabsNavigation.navigateTo(['player', uniqueIndex.toString(10)]);
     }
 
     isSameTeam(rankingEntry: RankingEntry, team: TeamEntry, club: ClubEntry): boolean {

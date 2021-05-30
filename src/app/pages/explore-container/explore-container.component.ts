@@ -5,11 +5,12 @@ import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
 import {MemberEntry} from '../../core/api/models/member-entry';
 import {UserState} from '../../core/store/user/user.state';
 import {map, share, shareReplay, switchMap, take, tap} from 'rxjs/operators';
-import {IonRouterOutlet, ModalController, ToastController} from '@ionic/angular';
+import {IonRouterOutlet, ModalController, Platform, ToastController} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {AdsService} from '../../core/services/firebase/ads.service';
 import {ChooseClubPage} from '../modals/choose-club/choose-club.page';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
+import {ModalBaseComponent} from '../modals/modal-base/modal-base.component';
 
 @Component({
     selector: 'beping-explore-container',
@@ -28,22 +29,10 @@ export class ExploreContainerComponent implements OnInit {
         private toastrCtrl: ToastController,
         private adsService: AdsService,
         private readonly modalCtrl: ModalController,
-        private readonly ionRouter: IonRouterOutlet
+        private readonly ionRouter: IonRouterOutlet,
     ) {
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(share());
-        this.categoriesAvailable$.pipe(
-            take(1),
-            map((categories: PLAYER_CATEGORY[]) => {
-                if (categories.length === 1) {
-                    return categories[0];
-                }
-                if (categories.find((cat) => cat === PLAYER_CATEGORY.MEN)) {
-                    return PLAYER_CATEGORY.MEN;
-                }
-                return categories[0];
-            }),
-            shareReplay()
-        ).subscribe((category) => this.currentCategory$.next(category));
+        this.store.select(UserState.getMainPlayerCategory).subscribe((category) => this.currentCategory$.next(category));
 
         this.currentMemberEntry$ = this.currentCategory$.pipe(
             switchMap((category: PLAYER_CATEGORY) => this.store.select(UserState.getMemberEntryForCategory(category))),
@@ -82,10 +71,10 @@ export class ExploreContainerComponent implements OnInit {
 
     async openSettings() {
         const modal = await this.modalCtrl.create({
-            component: SettingsPage,
+            component: ModalBaseComponent,
             swipeToClose: true,
             componentProps: {
-                isModal: true
+                rootPage: SettingsPage,
             },
             presentingElement: this.ionRouter.nativeEl
         });

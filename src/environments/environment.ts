@@ -4,7 +4,10 @@
 
 export const environment = {
     production: false,
-    tabtUrl: 'http://juc.floca.be:3000',
+    tabtUrl: 'http://juc.floca.be:3004',
+    internalPages: {
+        register: 'redirect-register.html'
+    },
     firebaseConfig: {
         apiKey: 'putakeyhere',
         authDomain: 'beping-196714.firebaseapp.com',

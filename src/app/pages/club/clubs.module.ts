@@ -16,6 +16,7 @@ import {ClubPlayerListTabComponent} from './components/club-player-list-tab/club
 import {ClubTeamListTabComponent} from './components/club-team-list-tab/club-team-list-tab.component';
 import {ClubPraticalInfoTabComponent} from './components/club-pratical-info-tab/club-pratical-info-tab.component';
 import {TeamResultTabComponent} from './components/team-result-tab/team-result-tab.component';
+import {TeamPlayersStatsComponent} from './components/team-players-stats/team-players-stats.component';
 
 @NgModule({
     imports: [
@@ -34,7 +35,8 @@ import {TeamResultTabComponent} from './components/team-result-tab/team-result-t
         ClubPlayerListTabComponent,
         ClubTeamListTabComponent,
         ClubPraticalInfoTabComponent,
-        TeamResultTabComponent
+        TeamResultTabComponent,
+        TeamPlayersStatsComponent
     ]
 })
 export class ClubsPagesModule {

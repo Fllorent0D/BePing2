@@ -10,7 +10,15 @@ import {NgxsAsyncStoragePluginModule} from '@ngxs-labs/async-storage-plugin';
 import {NgxsStorageService} from './services/store/ngxs-storage.service';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TabtDatabaseInterceptor} from './interceptors/tabt-database-interceptor.service';
+import {TabtCredentialsInterceptor} from './interceptors/tabt-credentials-interceptor.service';
 
+export function HttpLoaderFactory(http: HttpClient) {
+    return new TranslateHttpLoader(http);
+}
 
 @NgModule({
     declarations: [],
@@ -36,7 +44,27 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
             disabled: environment.production
         }),
         NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService),
-        ScrollingModule
+        ScrollingModule,
+        TranslateModule.forRoot({
+            defaultLanguage: 'fr',
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        })
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TabtDatabaseInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TabtCredentialsInterceptor,
+            multi: true
+        }
     ]
 })
 export class CoreModule {

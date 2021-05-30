@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MemberEntryResultEntry} from '../../../core/api/models/member-entry-result-entry';
+import {Platform} from '@ionic/angular';
 
 @Component({
     selector: 'beping-member-summary-per-ranking',
@@ -9,7 +10,13 @@ import {MemberEntryResultEntry} from '../../../core/api/models/member-entry-resu
 export class MemberSummaryPerRankingComponent {
 
     resultsPerRanking: object;
+    isTablet: boolean;
 
+    constructor(
+        private readonly platform: Platform
+    ) {
+        this.isTablet = this.platform.is('tablet') || this.platform.is('desktop');
+    }
 
     @Input() set memberResultEntries(memberResultEntries: MemberEntryResultEntry[]) {
         if (!memberResultEntries) {

@@ -50,5 +50,9 @@ export class TeamMatchDetailsPage implements OnInit {
         });
     }
 
+    navigateToPlayer(memberUniqueIndex: number) {
+        this.tabsNavigation.navigateTo(['player', memberUniqueIndex.toString()]);
+    }
+
 
 }

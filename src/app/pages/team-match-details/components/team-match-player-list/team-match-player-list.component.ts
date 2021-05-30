@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 
 @Component({
@@ -8,6 +8,7 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 })
 export class TeamMatchPlayerListComponent implements OnInit {
     @Input() match: TeamMatchesEntry;
+    @Output() playerClicked: EventEmitter<number> = new EventEmitter<number>();
 
     constructor() {
     }

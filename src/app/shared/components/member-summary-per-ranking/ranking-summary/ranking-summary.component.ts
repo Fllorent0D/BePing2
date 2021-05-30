@@ -16,7 +16,7 @@ export class RankingSummaryComponent implements OnInit {
     defeatsPct = 0;
     total = 0;
 
-    isOpen = false;
+    @Input() isOpen = false;
 
     completeResults: MemberEntryResultEntry[];
 

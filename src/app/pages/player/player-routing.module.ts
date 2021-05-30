@@ -1,16 +1,17 @@
-import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 
-import {PlayerPage} from './player.page';
+import {OtherPlayersComponent} from './containers/other-players/other-players.component';
+import {CurrentUserComponent} from './containers/current-user/current-user.component';
+import {NgModule} from '@angular/core';
 
 const routes: Routes = [
     {
         path: '',
-        component: PlayerPage
+        component: CurrentUserComponent
     },
     {
         path: ':id',
-        component: PlayerPage
+        component: OtherPlayersComponent
     }
 ];
 

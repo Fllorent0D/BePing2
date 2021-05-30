@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MemberEntry} from '../../../../core/api/models/member-entry';
 
 @Component({
@@ -9,6 +9,7 @@ import {MemberEntry} from '../../../../core/api/models/member-entry';
 export class ClubPlayerListTabComponent implements OnInit {
 
   @Input() members: MemberEntry[] = [];
+  @Output() memberClicked: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 

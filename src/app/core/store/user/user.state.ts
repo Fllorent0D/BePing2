@@ -2,21 +2,31 @@ import {Injectable} from '@angular/core';
 import {Action, createSelector, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {MemberEntry} from '../../api/models/member-entry';
 import {ClubEntry} from '../../api/models/club-entry';
-import {UpdateMemberEntries, HasSeenOnBoarding, UpdateMemberEntriesSuccess, SetUser, UpdateLatestMatchesSuccess} from './user.actions';
+import {
+    HasSeenOnBoarding,
+    SetUser,
+    UpdateLatestMatchesSuccess,
+    UpdateMainCategory,
+    UpdateMemberEntries,
+    UpdateMemberEntriesSuccess
+} from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
-import {map, switchMap} from 'rxjs/operators';
+import {switchMap} from 'rxjs/operators';
 import {sub} from 'date-fns';
 import {PLAYER_CATEGORY} from '../../models/user';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
+import {TabTState} from './tab-t-state.service';
+import {Plugins} from '@capacitor/core';
+
+export type UserMemberEntries = { [key: string]: MemberEntry };
 
 export interface UserStateModel {
-    memberEntries?: {
-        [key: string]: MemberEntry
-    };
+    memberEntries?: UserMemberEntries;
     latestMatches?: {
         [key: string]: TeamMatchesEntry[]
     };
     memberUniqueIndex?: number;
+    mainCategory?: PLAYER_CATEGORY;
     club?: ClubEntry;
     hasSeeOnBoarding: boolean;
     lastUpdated: number;
@@ -25,17 +35,20 @@ export interface UserStateModel {
 const defaultState: UserStateModel = {
     memberEntries: null,
     memberUniqueIndex: null,
+    mainCategory: null,
     latestMatches: null,
     club: null,
     hasSeeOnBoarding: false,
     lastUpdated: 0
 };
 
+const {Device} = Plugins;
 
 @Injectable()
 @State<UserStateModel>({
     name: 'user',
-    defaults: defaultState
+    defaults: defaultState,
+    children: [TabTState]
 })
 export class UserState implements NgxsOnInit {
 
@@ -46,9 +59,22 @@ export class UserState implements NgxsOnInit {
 
     @Selector([UserState])
     static availablePlayerCategories(state: UserStateModel): PLAYER_CATEGORY[] {
-        const keys = Object.keys(state.memberEntries) as PLAYER_CATEGORY[];
-        return keys.filter((key) => state.memberEntries[key].ResultEntries);
+        return PlayerCategoryService.getPlayedCategories(state.memberEntries);
     }
+
+    @Selector([UserState])
+    static getPlayerName(state: UserStateModel): string {
+        const keys = Object.keys(state.memberEntries)[0];
+        const memberEntry = state.memberEntries[keys];
+
+        return memberEntry.FirstName + ' ' + memberEntry.LastName;
+    }
+
+    @Selector([UserState])
+    static getMainPlayerCategory(state: UserStateModel): PLAYER_CATEGORY {
+        return state.mainCategory;
+    }
+
 
     static getMemberEntryForCategory(category: PLAYER_CATEGORY) {
         return createSelector([UserState], (userState: UserStateModel) => {
@@ -62,6 +88,7 @@ export class UserState implements NgxsOnInit {
         });
     }
 
+
     constructor(
         private readonly memberPlayerCategoryService: PlayerCategoryService
     ) {
@@ -74,6 +101,7 @@ export class UserState implements NgxsOnInit {
         if (state.memberUniqueIndex && state.lastUpdated < timeThreshold.getTime()) {
             dispatch(new UpdateMemberEntries(state.memberUniqueIndex));
         }
+
         dispatch(new UpdateMemberEntriesSuccess(state.memberEntries));
     }
 
@@ -103,10 +131,15 @@ export class UserState implements NgxsOnInit {
     }
 
     @Action(UpdateMemberEntriesSuccess)
-    updateMemberEntriesSuccess({patchState}: StateContext<UserStateModel>, action: UpdateMemberEntriesSuccess) {
+    updateMemberEntriesSuccess({patchState, getState}: StateContext<UserStateModel>, action: UpdateMemberEntriesSuccess) {
+        const state = getState();
+
+        const category: PLAYER_CATEGORY = state.mainCategory ?? PlayerCategoryService.getMainCategory(action.memberEntries);
+
         return patchState({
             memberEntries: action.memberEntries,
-            lastUpdated: Date.now()
+            lastUpdated: Date.now(),
+            mainCategory: category
         });
     }
 
@@ -124,5 +157,13 @@ export class UserState implements NgxsOnInit {
             hasSeeOnBoarding: true
         });
     }
+
+    @Action(UpdateMainCategory)
+    updateMainCategory({patchState}: StateContext<UserStateModel>, action: UpdateMainCategory) {
+        return patchState({
+            mainCategory: action.category
+        });
+    }
+
 
 }

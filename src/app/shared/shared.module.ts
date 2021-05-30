@@ -21,6 +21,7 @@ import {MemberLatestMatchesComponent} from './components/member-latest-matches/m
 import {RankingSummaryComponent} from './components/member-summary-per-ranking/ranking-summary/ranking-summary.component';
 import { AppearDirective } from './directives/appear.directive';
 import {TeamResultAdBannerComponent} from './ads/team-result-ad-banner/team-result-ad-banner.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -62,12 +63,14 @@ import {TeamResultAdBannerComponent} from './ads/team-result-ad-banner/team-resu
         MemberSummaryPerRankingComponent,
         MemberLatestMatchesComponent,
         TeamResultAdBannerComponent,
-        SectionTitleComponent
+        SectionTitleComponent,
+        TranslateModule
     ],
     imports: [
         CommonModule,
         IonicModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        TranslateModule
     ]
 })
 export class SharedModule {

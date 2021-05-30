@@ -34,6 +34,11 @@ export class SeasonState implements NgxsOnInit {
     }
 
     @Selector([SeasonState])
+    static getCurrentSeason(state: SeasonStateModel): SeasonEntry | null {
+        return state.currentSeason;
+    }
+
+    @Selector([SeasonState])
     static error(state: SeasonStateModel): Error | null {
         return state.error;
     }

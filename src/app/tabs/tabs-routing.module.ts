@@ -15,7 +15,7 @@ const routes: Routes = [
     },
     {
         path: 'tab3',
-        redirectTo: 'tab3/player',
+        redirectTo: 'tab3/player/142453',
         pathMatch: 'full'
     },
     {

@@ -13,7 +13,10 @@
                 (homeTeamClicked)="navigateToTeamPage(match.HomeClub, match.HomeTeam)"
                 (awayTeamClicked)="navigateToTeamPage(match.AwayClub, match.AwayTeam)"
         ></beping-team-match-score>
-        <beping-team-match-player-list [match]="match"></beping-team-match-player-list>
+        <beping-team-match-player-list
+                [match]="match"
+                (playerClicked)="navigateToPlayer($event)"
+        ></beping-team-match-player-list>
         <beping-individual-matches-list [match]="match"></beping-individual-matches-list>
     </ng-container>
 </ion-content>

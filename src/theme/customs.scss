@@ -1,3 +1,61 @@
+.ion-color-grey {
+  --ion-color-base: var(--ion-color-grey);
+  --ion-color-base-rgb: var(--ion-color-grey-rgb);
+  --ion-color-contrast: var(--ion-color-grey-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-grey-contrast-rgb);
+  --ion-color-shade: var(--ion-color-grey-shade);
+  --ion-color-tint: var(--ion-color-grey-tint);
+}
+.ion-color-green {
+  --ion-color-base: var(--ion-color-green);
+  --ion-color-base-rgb: var(--ion-color-green-rgb);
+  --ion-color-contrast: var(--ion-color-green-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-green-contrast-rgb);
+  --ion-color-shade: var(--ion-color-green);
+  --ion-color-tint: var(--ion-color-green-tint);
+}
+.ion-color-pink {
+  --ion-color-base: var(--ion-color-pink);
+  --ion-color-base-rgb: var(--ion-color-pink-rgb);
+  --ion-color-contrast: var(--ion-color-pink-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-pink-contrast-rgb);
+  --ion-color-shade: var(--ion-color-pink-shade);
+  --ion-color-tint: var(--ion-color-pink-tint);
+}
+ion-card{
+  border-radius: 15px;
+  // box-shadow: 0 7px 30px -10px rgba(92, 132, 143, 1);
+  ion-card-content{
+    color: var(--ion-color-dark)
+  }
+}
+ion-toolbar.toolbar-compact{
+  --padding-bottom: 0px;
+  --padding-top: 0px;
+  --min-height: 40px;
+  ion-segment {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    --ripple-color: transparent;
+
+    ion-segment-button {
+      --ripple-color: transparent;
+      --background-activated: transparent;
+      min-height: 40px;
+      //--padding-start: 3px;
+      //--padding-end: 16px;
+      // justify-content: start;
+      ion-label {
+        font-size: 13px;
+        text-transform: none;
+        letter-spacing: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+
 ion-list-header {
   text-align: center;
 }
@@ -160,6 +218,7 @@ ion-item.large {
 ion-list {
   --padding-start: 10px;
   --background: black !important;
+  background-color: black !important;
 }
 .progress-bar {
   border: none;

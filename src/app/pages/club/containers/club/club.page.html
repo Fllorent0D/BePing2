@@ -4,6 +4,12 @@
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>{{(club$ |async).LongName}}</ion-title>
+        <ion-buttons slot="end">
+            <beping-favorite-btn
+                    [enabled]="isFavorite$|async"
+                    (clicked)="toggleClubFavorite()"
+            ></beping-favorite-btn>
+        </ion-buttons>
     </ion-toolbar>
     <ion-toolbar>
         <div class="scrollmenu" #scrollMenu>
@@ -28,6 +34,7 @@
             <super-tab>
                 <beping-club-player-list-tab
                         [members]="members$ | async"
+                        (memberClicked)="navigateToPlayer($event)"
                 >
                 </beping-club-player-list-tab>
             </super-tab>
