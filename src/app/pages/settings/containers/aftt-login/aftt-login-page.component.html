@@ -1,0 +1,59 @@
+<ion-header>
+
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'SETTINGS.CONNECT_TO_FEDERATION'|translate}}</ion-title>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+            <ion-item>
+                <ion-input
+                        [formControlName]="'username'"
+                        [autofocus]="true"
+                        tabindex="1"
+                        placeholder="{{'SETTINGS.USERNAME'|translate}}">
+                </ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input
+                        [formControlName]="'password'"
+                        placeholder="{{'SETTINGS.PASSWORD'|translate}}"
+                        tabindex="2"
+                        type="password">
+                </ion-input>
+            </ion-item>
+            <ion-item class="ion-text-center" type="submit" color="primary" [disabled]="loginForm.invalid"
+                      (click)="login()">
+                <ion-label class="ion-no-margin">
+                    <span *ngIf="!loading; else loader">{{'SETTINGS.LOGIN'|translate}}</span>
+                    <ng-template #loader>
+                        <ion-spinner name="dots"></ion-spinner>
+                    </ng-template>
+                </ion-label>
+            </ion-item>
+            <ion-row>
+                <ion-col class="ion-text-center">
+                    <ion-button (click)="login()" color="primary" fill="clear">Mot de passe oublié?</ion-button>
+                </ion-col>
+            </ion-row>
+            <ion-item class="ion-color-grey">
+                <p>
+                    {{'SETTINGS.BEPING_NOT_AFFILIATE' | translate}}
+                </p>
+            </ion-item>
+            <ion-item class="ion-color-grey">
+                <p>
+                    {{'SETTINGS.BEPING_NOT_OFFICIAL' | translate}}
+                </p>
+            </ion-item>
+        </form>
+    </ion-list>
+
+
+</ion-content>

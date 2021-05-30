@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title
+                *ngIf="currentMemberEntry$|async as memberEntry">{{memberEntry.FirstName | titlecase}} {{memberEntry.LastName | titlecase}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding-bottom">
+    <beping-player-content
+            [categoriesAvailable]="categoriesAvailable$|async"
+            [currentCategory]="currentCategory$|async"
+            [latestMatches]="latestMatches$|async"
+            [currentMemberEntry]="currentMemberEntry$|async">
+    </beping-player-content>
+    <ng-container *ngIf="categoriesAvailable$|async as playercategories">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="playercategories.length > 1">
+            <ion-fab-button>
+                <ion-icon [name]="getIcon(currentCategory$|async)"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="top">
+                <ion-fab-button
+                        [attr.data-desc]="category | titlecase"
+                        [disabled]="category === (currentCategory$|async)"
+                        *ngFor="let category of playercategories"
+                        (click)="categoryClicked(category)">
+                    <ion-icon [name]="getIcon(category)"></ion-icon>
+                </ion-fab-button>
+            </ion-fab-list>
+        </ion-fab>
+
+    </ng-container>
+
+</ion-content>

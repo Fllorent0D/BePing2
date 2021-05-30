@@ -1,0 +1,31 @@
+
+  <!--
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+-->
+
+  <ng-container *ngIf="currentMemberEntry">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">{{currentMemberEntry.FirstName | titlecase}} {{currentMemberEntry.LastName | titlecase}}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <beping-member-name-ranking-info
+            [member]="currentMemberEntry">
+    </beping-member-name-ranking-info>
+
+    <beping-member-victory-chart
+            [memberResultEntries]="currentMemberEntry.ResultEntries">
+    </beping-member-victory-chart>
+    <beping-tie-break-played
+            [memberResultEntries]="currentMemberEntry.ResultEntries">
+    </beping-tie-break-played>
+    <beping-member-latest-matches
+            [matches]="latestMatches">
+    </beping-member-latest-matches>
+    <beping-member-summary-per-ranking
+            [memberResultEntries]="currentMemberEntry.ResultEntries">
+    </beping-member-summary-per-ranking>
+  </ng-container>
+
