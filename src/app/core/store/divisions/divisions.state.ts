@@ -34,7 +34,7 @@ export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOn
         const state = ctx.getState();
         const timeThreshold = sub(Date.now(), {weeks: 1});
 
-        if (!state.ids.length || state.lastUpdated < timeThreshold.getTime()) {
+        if (!state.ids.length || state.lastUpdated < timeThreshold.getTime() || state.error) {
             ctx.dispatch(new GetDivisions());
         }
     }
@@ -44,7 +44,12 @@ export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOn
         ctx.dispatch(new SetLoading(DivisionsState, true));
 
         return this.divisionsService.findAllDivisions().pipe(
-            map((divisions: DivisionEntry[]) => ctx.dispatch(new CreateOrReplace(DivisionsState, divisions))),
+            map((divisions: DivisionEntry[]) =>
+                ctx.dispatch([
+                    new CreateOrReplace(DivisionsState, divisions),
+                    new SetError(DivisionsState, null)
+                ])
+            ),
             catchError((err: Error) => of(ctx.dispatch(new SetError(DivisionsState, err)))),
             finalize(() => ctx.dispatch(new SetLoading(DivisionsState, false)))
         );

@@ -14,10 +14,10 @@
                         <ion-col>
                             {{member.Ranking}}
                         </ion-col>
-                        <ion-col>
+                        <ion-col *ngIf="nextRanking && nextRanking !== '?'">
                             <ion-icon name="arrow-forward-outline"></ion-icon>
                         </ion-col>
-                        <ion-col>
+                        <ion-col *ngIf="nextRanking && nextRanking !== '?'">
                             {{nextRanking}}
                         </ion-col>
                     </ion-row>

@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Réglages</ion-title>
+        <ion-title>{{'SIDEMENU.SETTINGS'|translate}}</ion-title>
         <ion-buttons slot="end">
             <ion-button *ngIf="isModal" (click)="closeModal()">
                 <ion-icon icon="close-outline"></ion-icon>
@@ -15,49 +15,48 @@
         <ion-row>
             <ion-col class="ion-text-center">
                 <h1>{{(season$|async).Name}}</h1>
-                <ion-text color="grey">Saison actuelle</ion-text>
+                <ion-text color="grey">{{'SETTINGS.CURRENT_SEASON' | translate}}</ion-text>
             </ion-col>
         </ion-row>
     </ion-grid>
-    <beping-section-title title="Utilisateur"></beping-section-title>
+    <beping-section-title [title]="'USER' | translate"></beping-section-title>
 
     <ion-list>
         <ion-item detail>
             <ion-label>
-                Joueur actif
+                {{'SETTINGS.ACTIVE_USER' | translate}}
             </ion-label>
             <ion-label slot="end">Florent Cardoen</ion-label>
         </ion-item>
-        <ion-item *ngIf="(playerCategories$ | async) > 1">
-            <ion-label>Catégorie principale</ion-label>
+        <ion-item *ngIf="(playerCategories$ | async)?.length > 1">
+            <ion-label>{{'SETTINGS.DISPLAY_RANKING' | translate}}</ion-label>
             <ion-select placeholder="Select One" [interface]="'popover'" [value]="mainCategory$|async"
                         (ionChange)="mainCategoryChanged($event)">
                 <ion-select-option
                         [value]="category"
-                        *ngFor="let category of playerCategories$|async">{{category}}</ion-select-option>
+                        *ngFor="let category of playerCategories$|async">{{'PLAYER_CATEGORY.' + category | translate}}
+                </ion-select-option>
             </ion-select>
         </ion-item>
-    </ion-list>
-
-    <ion-list>
         <ion-item>
-            <ion-label>Langue {{currentLang$|async}}</ion-label>
-            <ion-select placeholder="Select One" [value]="currentLang$|async" [interface]="'popover'" (ionChange)="changeLang($event )">
-                <ion-select-option value="fr">Français</ion-select-option>
-                <ion-select-option value="nl">Néerlandais</ion-select-option>
+            <ion-label>{{'SETTINGS.CHANGE_LANGUAGE' | translate}} {{currentLang$|async}}</ion-label>
+            <ion-select placeholder="Select One" [value]="currentLang$|async" [interface]="'popover'"
+                        (ionChange)="changeLang($event )">
+                <ion-select-option value="fr">{{'SETTINGS.FRENCH' | translate}}</ion-select-option>
+                <ion-select-option value="nl">{{'SETTINGS.DUTCH' | translate}}</ion-select-option>
             </ion-select>
         </ion-item>
     </ion-list>
-    <beping-section-title title="Compte AFTT"></beping-section-title>
+    <beping-section-title [title]="'SETTINGS.CONNECT_TO_FEDERATION'|translate"></beping-section-title>
     <ng-container *ngIf="isLoggedIn|async; else anonymous">
         <ion-list class="ion-margin-bottom">
             <ion-item>
                 <ion-icon icon="checkmark-circle" color="success" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">Vous êtes connecté en tant que {{account$|async}}</ion-label>
+                <ion-label class="ion-text-wrap">{{'SETTINGS.YOU_ARE_CONNECTED' | translate}}</ion-label>
             </ion-item>
             <ion-item color="danger" (click)="logout()">
                 <ion-icon icon="log-out-outline" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">Se déconnecter</ion-label>
+                <ion-label class="ion-text-wrap">{{'SETTINGS.LOGOUT' | translate}}</ion-label>
             </ion-item>
         </ion-list>
     </ng-container>
@@ -66,11 +65,11 @@
         <ion-list class="ion-margin-bottom">
             <ion-item detail (click)="login()">
                 <ion-icon icon="link-outline" color="primary" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">Lier son compte AFTT</ion-label>
+                <ion-label class="ion-text-wrap">{{'SETTINGS.LOGIN' | translate}}</ion-label>
             </ion-item>
             <ion-item detail (click)="register()">
                 <ion-icon icon="log-in-outline" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">Créer un compte AFTT</ion-label>
+                <ion-label class="ion-text-wrap">{{'SETTINGS.REGISTER' | translate}}</ion-label>
             </ion-item>
         </ion-list>
     </ng-template>

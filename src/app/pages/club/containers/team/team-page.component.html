@@ -8,13 +8,13 @@
     <ion-toolbar>
         <div class="scrollmenu" #scrollMenu>
             <ion-chip color="primary" id="tab1" [class.act]="tabIndex === 0" (click)="selectTab(0)">
-                <ion-label>Classement</ion-label>
+                <ion-label>{{'TEAM_STAT.RANKING' | translate}}</ion-label>
             </ion-chip>
             <ion-chip color="primary" id="tab2" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
-                <ion-label>Joueurs</ion-label>
+                <ion-label>{{'COMMON.PLAYERS' | translate}}</ion-label>
             </ion-chip>
             <ion-chip color="primary" id="tab3" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
-                <ion-label>Calendrier</ion-label>
+                <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
             </ion-chip>
         </div>
     </ion-toolbar>
@@ -27,25 +27,25 @@
                     <ion-grid class="ion-no-padding">
                         <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
                             <ion-col size="1">
-                                <ion-text class="ion-text-wrap">NO.</ion-text>
+                                <ion-text class="ion-text-wrap">{{'TEAM_STAT.RANKING_THREE_LETTERS' | translate}}</ion-text>
                             </ion-col>
                             <ion-col size="5">
-                                <ion-text class="ion-text-wrap">Equipe</ion-text>
+                                <ion-text class="ion-text-wrap">{{'COMMON.TEAM'|translate}}</ion-text>
                             </ion-col>
                             <ion-col class="ion-text-center" size="1">
-                                <ion-text class="ion-text-wrap">J</ion-text>
+                                <ion-text class="ion-text-wrap">{{'TEAM_STAT.PLAYED_FIRST_LETTER' | translate}}</ion-text>
                             </ion-col>
                             <ion-col class="ion-text-center" size="1">
-                                <ion-text class="ion-text-wrap">G</ion-text>
+                                <ion-text class="ion-text-wrap">{{'TEAM_STAT.WON_FIRST_LETTER' | translate}}</ion-text>
                             </ion-col>
                             <ion-col class="ion-text-center" size="1">
-                                <ion-text class="ion-text-wrap">P</ion-text>
+                                <ion-text class="ion-text-wrap">{{'TEAM_STAT.LOST_FIRST_LETTER' | translate}}</ion-text>
                             </ion-col>
                             <ion-col class="ion-text-center" size="1">
-                                <ion-text class="ion-text-wrap">N</ion-text>
+                                <ion-text class="ion-text-wrap">{{'TEAM_STAT.DRAW_FIRST_LETTER' | translate}}</ion-text>
                             </ion-col>
                             <ion-col class="ion-text-center" size="2">
-                                <ion-text class="ion-text-wrap">Pts</ion-text>
+                                <ion-text class="ion-text-wrap">{{'TEAM_STAT.POINTS_THREE_LETTER' | translate}}</ion-text>
                             </ion-col>
                         </ion-row>
                     </ion-grid>

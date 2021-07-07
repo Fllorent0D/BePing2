@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AdOptions, AdSize, AdPosition } from '@capacitor-community/admob';
-import {Plugins} from '@capacitor/core';
-const { AdMob } = Plugins;
 
 @Component({
   selector: 'beping-team-result-ad-banner',

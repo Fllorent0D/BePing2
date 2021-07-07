@@ -1,6 +1,10 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {SuperTabs} from '@ionic-super-tabs/angular';
 
+@Component({
+    selector: 'beping-abstract-page-tab',
+    template: '<h1>test</h1>'
+})
 export class AbstractPageTabsComponent implements AfterViewInit {
 
     @ViewChild('superTabs') public slides: SuperTabs;

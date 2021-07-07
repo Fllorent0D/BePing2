@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Plugins} from '@capacitor/core';
 import {environment} from '../../../../environments/environment';
+import {Browser} from '@capacitor/browser';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,6 @@ export class InAppBrowserService {
     }
 
     async openInAppBrowser(url: string) {
-        const {Browser} = Plugins;
         await Browser.open({url});
     }
 

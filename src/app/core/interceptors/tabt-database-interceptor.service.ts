@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Store} from '@ngxs/store';
-import {UserState} from '../store/user/user.state';
 import {LANG} from '../models/langs';
 import {SettingsState} from '../store/settings';
 
@@ -24,9 +23,13 @@ export class TabtDatabaseInterceptor implements HttpInterceptor {
         const lang: LANG = this.store.selectSnapshot(SettingsState.getCurrentLang);
         const database: TABT_DATABASES = lang === LANG.NL ? TABT_DATABASES.VTTL : TABT_DATABASES.AFTT;
 
+        const newBody = request.urlWithParams;
+        console.log(newBody);
+
         const authReq = request.clone({
-            headers: request.headers.set('X-Tabt-Database', database)
+            headers: request.headers.set('X-Tabt-Database', database).set('X-Tabt-Season', '21')
         });
+
 
         return next.handle(authReq);
     }

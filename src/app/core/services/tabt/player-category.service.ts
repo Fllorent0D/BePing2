@@ -3,7 +3,7 @@ import {MemberEntry} from '../../api/models/member-entry';
 import {PLAYER_CATEGORY} from '../../models/user';
 import {combineLatest, Observable, of} from 'rxjs';
 import {MembersService} from '../../api/services/members.service';
-import {catchError, map, switchMap} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {MatchesService} from '../../api/services/matches.service';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
 import {UserMemberEntries} from '../../store/user/user.state';
@@ -20,8 +20,7 @@ export class PlayerCategoryService {
     }
 
     static getPlayedCategories(memberEntries: UserMemberEntries): PLAYER_CATEGORY[] {
-        const keys = Object.keys(memberEntries) as PLAYER_CATEGORY[];
-        return keys.filter((key) => memberEntries[key].ResultEntries);
+        return Object.keys(memberEntries) as PLAYER_CATEGORY[];
     }
 
     static getMainCategory(memberEntries: UserMemberEntries): PLAYER_CATEGORY {
@@ -30,7 +29,7 @@ export class PlayerCategoryService {
         if (playedCategories.length === 1) {
             return playedCategories[0];
         }
-        if (playedCategories.find((cat) => cat === PLAYER_CATEGORY.MEN)) {
+        if (playedCategories.length === 0 || playedCategories.find((cat) => cat === PLAYER_CATEGORY.MEN)) {
             return PLAYER_CATEGORY.MEN;
         }
         return playedCategories[0];

@@ -1,8 +1,7 @@
 <ion-content>
   <virtual-scroller
           #scroll
-          [items]="matches"
-          [enableUnequalChildrenSizes]="true">
+          [items]="matches">
     <beping-team-match-result
             *ngFor="let item of scroll.viewPortItems"
             [match]="item">

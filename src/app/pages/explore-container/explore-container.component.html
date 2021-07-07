@@ -15,29 +15,38 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
   -->
-
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">BePing</ion-title>
+        </ion-toolbar>
+    </ion-header>
     <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry">
-        <ion-header collapse="condense">
-            <ion-toolbar>
-                <ion-title size="large">{{currentMemberEntry.FirstName | titlecase}} {{currentMemberEntry.LastName | titlecase}}</ion-title>
-            </ion-toolbar>
-        </ion-header>
         <beping-member-name-ranking-info
                 [member]="currentMemberEntry">
         </beping-member-name-ranking-info>
-        <button (click)="test()"> test</button>
-        <beping-member-victory-chart
-                [memberResultEntries]="currentMemberEntry.ResultEntries">
-        </beping-member-victory-chart>
-        <beping-tie-break-played
-                [memberResultEntries]="currentMemberEntry.ResultEntries">
-        </beping-tie-break-played>
-        <beping-member-latest-matches
-                [matches]="latestMatches$| async">
-        </beping-member-latest-matches>
-        <beping-member-summary-per-ranking
-                [memberResultEntries]="currentMemberEntry.ResultEntries">
-        </beping-member-summary-per-ranking>
+        <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
+            <beping-member-victory-chart
+                    [memberResultEntries]="currentMemberEntry.ResultEntries">
+            </beping-member-victory-chart>
+            <beping-tie-break-played
+                    [memberResultEntries]="currentMemberEntry.ResultEntries">
+            </beping-tie-break-played>
+            <beping-member-latest-matches
+                    [matches]="latestMatches$| async">
+            </beping-member-latest-matches>
+            <beping-member-summary-per-ranking
+                    [memberResultEntries]="currentMemberEntry.ResultEntries">
+            </beping-member-summary-per-ranking>
+        </ng-container>
+        <ng-template #noResults>
+            <div class="no-result-container ion-padding">
+                <ion-icon name="information-circle-outline" size="large"></ion-icon>
+                <h1>Aucune statistique disponible
+                    <ng-container *ngIf="(categoriesAvailable$ |async)?.length > 1">dans cette catégorie</ng-container>
+                </h1>
+            </div>
+        </ng-template>
+
     </ng-container>
 
     <ng-container *ngIf="categoriesAvailable$ |async as playercategories">
@@ -47,8 +56,9 @@
             </ion-fab-button>
             <ion-fab-list side="top">
                 <ion-fab-button
-                        [attr.data-desc]="category | titlecase"
+                        [attr.data-desc]="'PLAYER_CATEGORY.' + category | translate"
                         [disabled]="category === (currentCategory$|async)"
+                        [color]="category === (currentCategory$|async)?'primary': 'light'"
                         *ngFor="let category of playercategories"
                         (click)="categoryClicked(category)">
                     <ion-icon [name]="getIcon(category)"></ion-icon>

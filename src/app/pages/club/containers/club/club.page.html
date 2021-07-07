@@ -14,16 +14,16 @@
     <ion-toolbar>
         <div class="scrollmenu" #scrollMenu>
             <ion-chip color="primary" id="tab1" [class.act]="tabIndex === 0" (click)="selectTab(0)">
-                <ion-label>Liste de force</ion-label>
+                <ion-label>{{'CLUB_DETAILS.LIST_OF_STRENGTH' | translate}}</ion-label>
             </ion-chip>
             <ion-chip color="primary" id="tab2" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
-                <ion-label>Equipes</ion-label>
+                <ion-label>{{'COMMON.TEAMS' | translate}}</ion-label>
             </ion-chip>
             <ion-chip color="primary" id="tab3" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
-                <ion-label>Infos. pratiques</ion-label>
+                <ion-label>{{'CLUB_DETAILS.INFOS' | translate}}</ion-label>
             </ion-chip>
             <ion-chip color="primary" id="tab4" [class.act]="tabIndex === 3" outline (click)="selectTab(3)">
-                <ion-label>Calendrier</ion-label>
+                <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
             </ion-chip>
         </div>
     </ion-toolbar>

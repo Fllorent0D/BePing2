@@ -1,7 +1,7 @@
 {
   "appId": "be.floca.beping",
   "appName": "BePing",
-  "bundledWebRuntime": false,
+  "bundledWebRuntime": true,
   "npmClient": "npm",
   "webDir": "www",
   "plugins": {

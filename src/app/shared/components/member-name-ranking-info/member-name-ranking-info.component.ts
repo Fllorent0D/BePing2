@@ -12,6 +12,9 @@ export class MemberNameRankingInfoComponent implements OnInit {
 
     @Input() member: MemberEntry;
 
+    nextRanking: string;
+    elo: string;
+
     constructor(
         public platform: Platform,
         private readonly rankingService: RankingService
@@ -19,15 +22,7 @@ export class MemberNameRankingInfoComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.nextRanking = this.rankingService.getNextRanking(this.member.RankingPointsEntries);
+        this.elo = this.rankingService.getELOPoints(this.member.RankingPointsEntries);
     }
-
-
-    get elo() {
-        return this.rankingService.getELOPoints(this.member.RankingPointsEntries);
-    }
-
-    get nextRanking() {
-        return this.rankingService.getNextRanking(this.member.RankingPointsEntries);
-    }
-
 }

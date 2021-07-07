@@ -1,16 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from '@ngxs/store';
 import {PLAYER_CATEGORY} from '../../core/models/user';
-import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
+import {Observable, ReplaySubject} from 'rxjs';
 import {MemberEntry} from '../../core/api/models/member-entry';
 import {UserState} from '../../core/store/user/user.state';
-import {map, share, shareReplay, switchMap, take, tap} from 'rxjs/operators';
-import {IonRouterOutlet, ModalController, Platform, ToastController} from '@ionic/angular';
+import {shareReplay, switchMap, take, tap} from 'rxjs/operators';
+import {IonRouterOutlet, ModalController, ToastController} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
-import {AdsService} from '../../core/services/firebase/ads.service';
-import {ChooseClubPage} from '../modals/choose-club/choose-club.page';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
 import {ModalBaseComponent} from '../modals/modal-base/modal-base.component';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'beping-explore-container',
@@ -27,20 +26,24 @@ export class ExploreContainerComponent implements OnInit {
     constructor(
         private store: Store,
         private toastrCtrl: ToastController,
-        private adsService: AdsService,
         private readonly modalCtrl: ModalController,
         private readonly ionRouter: IonRouterOutlet,
+        private readonly translateService: TranslateService
     ) {
-        this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(share());
-        this.store.select(UserState.getMainPlayerCategory).subscribe((category) => this.currentCategory$.next(category));
+        this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
+
+        this.store.select(UserState.getMainPlayerCategory)
+            .pipe(take(1))
+            .subscribe((category) => this.currentCategory$.next(category));
 
         this.currentMemberEntry$ = this.currentCategory$.pipe(
             switchMap((category: PLAYER_CATEGORY) => this.store.select(UserState.getMemberEntryForCategory(category))),
-            share()
+            tap((a) => console.log(a)),
+            shareReplay(1)
         );
         this.latestMatches$ = this.currentCategory$.pipe(
             switchMap((category: PLAYER_CATEGORY) => this.store.select(UserState.getLatestMatchesForCategory(category))),
-            share()
+            shareReplay(1)
         );
     }
 
@@ -50,8 +53,12 @@ export class ExploreContainerComponent implements OnInit {
 
     async categoryClicked(category: PLAYER_CATEGORY) {
         this.currentCategory$.next(category);
+        const catTranslation = this.translateService.instant('PLAYER_CATEGORY.' + category);
+        const catChangedTranslation = this.translateService.instant('DASHBOARD.PLAYER_CATEGORY_CHANGED', {category: catTranslation});
         const toast = await this.toastrCtrl.create({
-            message: `Profil ${category} chargé`,
+            message: catChangedTranslation,
+            position: 'top',
+            color: 'primary',
             duration: 3000
         });
         toast.present();
@@ -74,15 +81,10 @@ export class ExploreContainerComponent implements OnInit {
             component: ModalBaseComponent,
             swipeToClose: true,
             componentProps: {
-                rootPage: SettingsPage,
+                rootPage: SettingsPage
             },
             presentingElement: this.ionRouter.nativeEl
         });
         await modal.present();
-    }
-
-    test() {
-
-        this.adsService.interstitialAd();
     }
 }

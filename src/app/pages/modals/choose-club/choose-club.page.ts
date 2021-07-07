@@ -1,15 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ClubEntry} from '../../../core/api/models/club-entry';
 import {ModalController} from '@ionic/angular';
 import {ClubsState} from '../../../core/store/clubs';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {FormControl} from '@angular/forms';
-import {debounceTime, distinctUntilChanged, startWith, switchMap, tap} from 'rxjs/operators';
+import {distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
 
-import {Plugins, Capacitor} from '@capacitor/core';
+import {Capacitor} from '@capacitor/core';
 
-const {Keyboard} = Plugins;
+import {Keyboard} from '@capacitor/keyboard';
 
 @Component({
     selector: 'beping-choose-club',
@@ -51,7 +51,7 @@ export class ChooseClubPage implements OnInit {
     }
 
     private async hideKeyboard() {
-        if (Capacitor.platform !== 'web') {
+        if (Capacitor.getPlatform() !== 'web') {
             await Keyboard.hide();
         }
     }

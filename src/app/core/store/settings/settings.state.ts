@@ -1,7 +1,7 @@
 import {LANG} from '../../models/langs';
 import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
-import {Device} from '@capacitor/core';
 import {TranslateService} from '@ngx-translate/core';
+import {Device} from '@capacitor/device';
 import {SetTheme, UpdateCurrentLang, UpdateCurrentLangSuccess} from './settings.actions';
 import {Injectable} from '@angular/core';
 

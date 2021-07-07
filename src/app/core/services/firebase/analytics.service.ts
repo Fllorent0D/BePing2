@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Plugins} from '@capacitor/core';
 import {environment} from '../../../../environments/environment';
-import {NavigationEnd, Route, Router, RouterEvent} from '@angular/router';
+import {NavigationEnd, Router, RouterEvent} from '@angular/router';
 import {filter} from 'rxjs/operators';
 
-const {FirebaseAnalytics, Device} = Plugins;
-
+import {FirebaseAnalytics} from '@capacitor-community/firebase-analytics';
+import {Device} from '@capacitor/device';
 
 @Injectable({
     providedIn: 'root'
@@ -23,7 +22,7 @@ export class AnalyticsService {
 
     async initFb() {
         if ((await Device.getInfo()).platform === 'web') {
-            FirebaseAnalytics.initializeFirebase(environment.firebaseConfig);
+            await FirebaseAnalytics.initializeFirebase(environment.firebaseConfig);
         }
     }
 

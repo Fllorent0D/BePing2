@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Plugins, Capacitor} from '@capacitor/core';
-
-const {Keyboard} = Plugins;
+import {Capacitor} from '@capacitor/core';
+import {Keyboard} from '@capacitor/keyboard';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +11,7 @@ export class KeyboardService {
     }
 
     public async hideKeyboard(): Promise<void> {
-        if (Capacitor.platform !== 'web') {
+        if (Capacitor.getPlatform() !== 'web') {
             await Keyboard.hide();
         }
     }

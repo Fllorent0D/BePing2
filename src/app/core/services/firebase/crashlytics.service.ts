@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Plugins} from '@capacitor/core';
 
-const {FirebaseCrashlytics} = Plugins;
+import {FirebaseCrashlytics} from '@capacitor-community/firebase-crashlytics';
 
 @Injectable({
     providedIn: 'root'

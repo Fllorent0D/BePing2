@@ -16,7 +16,6 @@ import {sub} from 'date-fns';
 import {PLAYER_CATEGORY} from '../../models/user';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
 import {TabTState} from './tab-t-state.service';
-import {Plugins} from '@capacitor/core';
 
 export type UserMemberEntries = { [key: string]: MemberEntry };
 
@@ -42,7 +41,6 @@ const defaultState: UserStateModel = {
     lastUpdated: 0
 };
 
-const {Device} = Plugins;
 
 @Injectable()
 @State<UserStateModel>({
@@ -102,7 +100,7 @@ export class UserState implements NgxsOnInit {
             dispatch(new UpdateMemberEntries(state.memberUniqueIndex));
         }
 
-        dispatch(new UpdateMemberEntriesSuccess(state.memberEntries));
+        // dispatch(new UpdateMemberEntriesSuccess(state.memberEntries));
     }
 
 

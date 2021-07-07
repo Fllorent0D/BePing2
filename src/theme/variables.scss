@@ -115,7 +115,7 @@
     --background: #ffffff;
   }
   ion-list{
-    --background: #ffffff;
+    --background: #ffffff !important;
   }
   ion-item {
     --background: #f5f5f5;
@@ -237,11 +237,12 @@
     --ion-toolbar-color: #ffffff;
     --ion-item-background: #1c1c1d;
     --ion-card-background: #1c1c1d;
+    ion-list {
+      --background: black;
+    }
   }
 
-  ion-list {
-    --background: black;
-  }
+
 
   /*
    * Material Design Dark Theme

@@ -52,7 +52,7 @@ export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
         const state = ctx.getState();
         const timeThreshold = sub(Date.now(), {months: 1});
 
-        if (!state.ids.length || state.lastUpdated < timeThreshold.getTime()) {
+        if (!state.ids.length || state.lastUpdated < timeThreshold.getTime() || state.error) {
             ctx.dispatch(new GetClubs());
         }
     }
@@ -62,7 +62,12 @@ export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
         ctx.dispatch(new SetLoading(ClubsState, true));
 
         return this.clubsService.findAllClubs().pipe(
-            map((clubs: ClubEntry[]) => ctx.dispatch(new CreateOrReplace(ClubsState, clubs))),
+            map((clubs: ClubEntry[]) =>
+                ctx.dispatch([
+                    new CreateOrReplace(ClubsState, clubs),
+                    new SetError(ClubsState, null)
+                ])
+            ),
             catchError((err: Error) => of(ctx.dispatch(new SetError(ClubsState, err)))),
             finalize(() => ctx.dispatch(new SetLoading(ClubsState, false)))
         );

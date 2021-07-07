@@ -67,7 +67,8 @@
     "DECISIVE_SETS_LOST": "Belles perdues",
     "SCORE_DISTRIBUTION": "Répartition des scores",
     "ELO_POINT" : "Points ELO",
-    "LATEST_MATCHES" : "Derniers matchs"
+    "LATEST_MATCHES" : "Derniers matchs",
+    "PLAYER_CATEGORY_CHANGED": "Catégorie {{category}} chargée"
   },
   "MATCH_ENTRY_SHEET": {
     "MATCH_ENTRY_SHEET": "Feuille de match",
@@ -211,6 +212,7 @@
     "LOST_FIRST_LETTER": "P",
     "DRAW_FIRST_LETTER": "N",
     "POINTS_FIRST_LETTER": "P",
+    "POINTS_THREE_LETTER": "Pts",
     "NAME_THREE_LETTERS": "Nom",
     "RANKING_THREE_LETTERS": "Cla",
     "PLAYED_THREE_LETTERS": "Nbr",
@@ -226,6 +228,7 @@
   },
   "SETTINGS": {
     "CHANGE_USER": "Changer d'utilisateur",
+    "ACTIVE_USER": "Joueur actif",
     "CANT_LOAD_TRANSLATIONS": "Impossible de télécharger les traductions des divisions",
     "BEPING_NOT_AFFILIATE": "BePing n'est associée avec aucune organisation officielle (AFTT, VTTL, FRBTT).",
     "BEPING_NOT_OFFICIAL": "Cette application n'est pas officielle. Si une différence venait à être constatée pour les rencontres de l'AFTT, seule l'application officielle de l’AFTT doit être prise en compte.",
@@ -247,19 +250,16 @@
     "CONNECT_TO_FEDERATION" : "Compte AFTT",
     "USERNAME" : "Nom d'utilisateur",
     "PASSWORD" : "Mot de passe",
-    "LOGIN" : "Connexion",
+    "LOGIN" : "Se connecter",
     "LOGOUT" : "Déconnexion",
     "LOGIN_PASSWORD_INCORRECT" : "Votre identifiant ou mot de passe est incorrect",
-    "YOU_ARE_CONNECTED" : "Vous êtes connecté",
+    "YOU_ARE_CONNECTED" : "Connecté en tant que {{username}}",
     "SYNC_ERROR" : "Erreur de synchronisation",
     "REGISTER" : "S'inscrire",
     "FORGOT_PASSWORD": "Identifiant ou mot de passe perdu ?",
     "TABT_ACCOUNT": "La connexion à votre compte AFTT permet à BePing de récuperer plus d'informations sur votre profil (classement provisoire, listes de force...)",
     "DISPLAY_RANKING": "Catégorie principale",
     "CATEGORY_TO_SHOW_IN_HOME": "Catégories des matchs affichés sur la page d'accueil",
-    "MALE": "Hommes",
-    "FEMALE": "Dames",
-    "VETERAN" : "Vétéran",
     "WHICH_CATEGORY_DO_YOU_WANT": "Quelle catégorie voulez-vous utiliser?"
   },
   "EMAIL": {
@@ -326,6 +326,13 @@
     "LUXEMBOURG": "Luxembourg",
     "VTTL": "Régional VTTL",
     "IWB": "IWB"
+  },
+  "PLAYER_CATEGORY": {
+    "MEN": "Seniors hommes",
+    "WOMEN": "Seniors dames",
+    "VETERANS": "Vétérans",
+    "VETERANS_WOMEN": "Aînées",
+    "YOUTH": "Jeunes"
   },
   "USER": "Utilisateur"
 }
