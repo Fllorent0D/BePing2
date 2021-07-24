@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {MatchesService} from '../../../../core/api/services/matches.service';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, shareReplay, switchMap, tap} from 'rxjs/operators';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {Observable} from 'rxjs';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
@@ -33,7 +33,7 @@ export class TeamMatchDetailsPage implements OnInit {
         this.match$ = this.activatedRoute.paramMap.pipe(
             map((params: ParamMap) => params.get('uniqueIndex') as string),
             switchMap((uniqueIndex: string) => this.matchesService.findMatchById({matchUniqueId: uniqueIndex, withDetails: true})),
-            tap((m) => console.log(m))
+            shareReplay(1),
         );
     }
 

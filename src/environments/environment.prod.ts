@@ -1,8 +1,9 @@
 export const environment = {
   production: false,
-  tabtUrl: 'https://tabt-rest.herokuapp.com',
+  tabtUrl: 'http://192.168.0.108:3004',
   internalPages: {
-    register: 'redirect-register.html'
+    basePath: '/static/',
+    registerRedirect: 'redirect-register.html'
   },
   firebaseConfig: {
     apiKey: 'putakeyhere',

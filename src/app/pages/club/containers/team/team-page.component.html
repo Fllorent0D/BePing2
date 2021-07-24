@@ -51,12 +51,15 @@
                     </ion-grid>
                     <ng-container *ngIf="team$ | async as team">
                         <ion-item *ngFor="let rankingEntry of ranking$ | async; let index = index"
-                                  [class.is-color-primary]="isSameTeam(rankingEntry, team, club$|async)" detail>
+                                  [class.is-color-primary]="isSameTeam(rankingEntry, team, club$|async)"
+                                  (click)="teamSelected(rankingEntry)"
+                            style="--padding-start: 0px; --padding-end: 0px;"
+                        >
                             <ion-grid style="padding-top: 7px; padding-bottom: 7px">
                                 <ion-row class="ion-align-items-center">
                                     <ion-col class="ion-text-wrap" size="1">
-                                        <ion-label>
-                                            <h2>{{rankingEntry.Position}}</h2>
+                                        <ion-label class="ion-text-wrap">
+                                            {{rankingEntry.Position}}
                                         </ion-label>
                                     </ion-col>
                                     <ion-col size="5">
@@ -65,28 +68,28 @@
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="border-right ion-text-center" size="1">
-                                        <ion-label>
-                                            <h2>{{rankingEntry.GamesPlayed}}</h2>
+                                        <ion-label class="ion-text-wrap" color="grey">
+                                            {{rankingEntry.GamesPlayed}}
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="border-right ion-text-center" size="1">
-                                        <ion-label>
-                                            <h2>{{rankingEntry.GamesWon}}</h2>
+                                        <ion-label class="ion-text-wrap" color="grey">
+                                            {{rankingEntry.GamesWon}}
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="border-right ion-text-center" size="1">
-                                        <ion-label>
-                                            <h2>{{rankingEntry.GamesLost}}</h2>
+                                        <ion-label class="ion-text-wrap" color="grey">
+                                            {{rankingEntry.GamesLost}}
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="border-right ion-text-center" size="1">
-                                        <ion-label>
-                                            <h2>{{rankingEntry.GamesDraw}}</h2>
+                                        <ion-label class="ion-text-wrap" color="grey">
+                                            {{rankingEntry.GamesDraw}}
                                         </ion-label>
                                     </ion-col>
                                     <ion-col class="ion-text-center text-bold" size="2">
-                                        <ion-label>
-                                            <h2>{{rankingEntry.Points}}</h2>
+                                        <ion-label class="ion-text-wrap">
+                                           {{rankingEntry.Points}}
                                         </ion-label>
                                     </ion-col>
                                 </ion-row>

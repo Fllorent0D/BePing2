@@ -244,3 +244,15 @@ ion-list {
 .score {
   font-weight: 700;
 }
+.ion-no-padding-horizontal {
+  --padding-start: var(--ion-padding, 0px);
+  --padding-end: var(--ion-padding, 0px);
+  padding-left: var(--ion-padding, 0px);
+  padding-right: var(--ion-padding, 0px);
+}
+.ion-no-margin-horizontal {
+  --margin-start: var(--ion-padding, 0px);
+  --margin-end: var(--ion-padding, 0px);
+  margin-left: var(--ion-padding, 0px);
+  margin-right: var(--ion-padding, 0px);
+}

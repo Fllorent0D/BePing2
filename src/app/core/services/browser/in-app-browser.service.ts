@@ -11,14 +11,13 @@ export class InAppBrowserService {
     }
 
     async openInAppBrowser(url: string) {
-        await Browser.open({url});
+        await Browser.open({url, presentationStyle: 'popover'});
     }
 
     async openRegisterPage(internalPlayerId, internalClubId) {
-        const url = new URL(window.location.href);
-        console.log(window.location.href);
-        url.pathname = '/assets/html/' + environment.internalPages.register;
-        //url.protocol = 'http';
+        const url = new URL(environment.tabtUrl);
+        url.protocol = 'http';
+        url.pathname = environment.internalPages.basePath + environment.internalPages.registerRedirect;
         url.searchParams.append('internalPlayerId', internalPlayerId);
         url.searchParams.append('internalClubId', internalClubId);
         console.log(url.href);

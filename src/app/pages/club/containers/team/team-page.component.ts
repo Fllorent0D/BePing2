@@ -7,13 +7,13 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {DivisionsService} from '../../../../core/api/services/divisions.service';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
 import {TeamEntry} from '../../../../core/api/models/team-entry';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, shareReplay, switchMap, take, tap} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {Store} from '@ngxs/store';
-import {TeamPlayersStats, TeamPlayerStats} from '../../model/team-players-stats.model';
+import {TeamPlayersStats} from '../../model/team-players-stats.model';
 import {TeamPlayersStatsService} from '../../services/team-players-stats.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 
@@ -58,7 +58,8 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         );
 
         this.club$ = this.clubIndex$.pipe(
-            switchMap((clubIndex: string) => this.store.select(ClubsState.getClubByUniqueIndex(clubIndex)))
+            switchMap((clubIndex: string) => this.store.select(ClubsState.getClubByUniqueIndex(clubIndex))),
+            shareReplay(1)
         );
 
         this.team$ = combineLatest([
@@ -69,7 +70,8 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
                 this.clubsService.findClubTeams({clubIndex}).pipe(
                     map((teams: TeamEntry[]) => teams.find((team) => team.TeamId === teamId))
                 )
-            )
+            ),
+        shareReplay(1)
         );
 
         this.calendar$ = combineLatest([
@@ -81,7 +83,8 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
                 team: team.Team,
                 divisionId: team.DivisionId,
                 withDetails: true
-            }))
+            })),
+            shareReplay(1)
         );
 
         this.playersStats$ = combineLatest([
@@ -97,7 +100,8 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
 
 
         this.ranking$ = this.team$.pipe(
-            switchMap((team: TeamEntry) => this.divisionsService.findDivisionRanking({divisionId: team.DivisionId}))
+            switchMap((team: TeamEntry) => this.divisionsService.findDivisionRanking({divisionId: team.DivisionId})),
+            shareReplay(1)
         );
     }
 
@@ -109,4 +113,22 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         return rankingEntry.TeamClub === club.UniqueIndex && rankingEntry.Team === (club.LongName + ' ' + team.Team).trim();
     }
 
+    teamSelected(rankingEntry: RankingEntry) {
+        console.log(rankingEntry);
+
+        combineLatest([
+            this.store.select(ClubsState.getClubByUniqueIndex(rankingEntry.TeamClub)),
+            this.clubsService.findClubTeams({clubIndex: rankingEntry.TeamClub})
+        ]).pipe(
+            take(1),
+            map(([clubEntry, teams]: [ClubEntry, TeamEntry[]]) => ({
+                    team: teams.find((team) => this.isSameTeam(rankingEntry, team, clubEntry)),
+                    club: clubEntry
+                })
+            )
+        ).subscribe(({team, club}) => {
+            this.tabsNavigation.navigateTo(['clubs', club.UniqueIndex, 'team', team.TeamId]);
+        });
+
+    }
 }

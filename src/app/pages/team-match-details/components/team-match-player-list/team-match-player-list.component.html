@@ -3,31 +3,31 @@
 <ion-grid class="ion-no-padding">
     <ion-row>
         <ion-col size-sm="6" size-xs="12">
-            <ion-label>
-                <ion-text class="ion-padding-start" color="grey">{{match.HomeTeam}}</ion-text>
+            <ion-label class="ion-padding-start" color="grey">
+                {{match.HomeTeam}}
             </ion-label>
             <ion-list>
-                <beping-team-match-player-item
-                        [player]="player"
-                        *ngFor="let player of match.MatchDetails.HomePlayers.Players"
-                        (playerClicked)="playerClicked.emit(player.UniqueIndex)"
-                ></beping-team-match-player-item>
+                <ion-item *ngFor="let player of match.MatchDetails.HomePlayers.Players">
+                    <beping-team-match-player-item
+                            [player]="player"
+                            (playerClicked)="playerClicked.emit(player.UniqueIndex)"
+                    ></beping-team-match-player-item>
+                </ion-item>
             </ion-list>
 
         </ion-col>
         <ion-col size-sm="6" size-xs="12">
-            <ion-label>
-                <ion-text class="ion-padding-start" color="grey">{{match.AwayTeam}}</ion-text>
+            <ion-label class="ion-padding-start" color="grey">
+                {{match.AwayTeam}}
             </ion-label>
-
             <ion-list>
-                <beping-team-match-player-item
-                        [player]="player"
-                        *ngFor="let player of match.MatchDetails.AwayPlayers.Players"
-                        (playerClicked)="playerClicked.emit(player.UniqueIndex)"
-                ></beping-team-match-player-item>
+                <ion-item *ngFor="let player of match.MatchDetails.AwayPlayers.Players">
+                    <beping-team-match-player-item
+                            [player]="player"
+                            (playerClicked)="playerClicked.emit(player.UniqueIndex)"
+                    ></beping-team-match-player-item>
+                </ion-item>
             </ion-list>
-
         </ion-col>
     </ion-row>
 </ion-grid>

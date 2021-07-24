@@ -1,4 +1,4 @@
-<beping-card [padding]="false" (click)="navigateToDetails()">
+<beping-card [padding]="false" [marging]="false" (click)="navigateToDetails()">
     <ion-grid>
         <ion-row class="ion-align-items-center">
             <ion-col class="ion-text-center border-right" size="2">
@@ -8,14 +8,16 @@
             </ion-col>
             <ion-col class="ion-no-padding ion-padding-start" size="8">
                 <ion-text>
-                    <ion-text>{{result.FirstName}} {{result.LastName}}</ion-text>
+                    <ion-text>{{result.FirstName |titlecase}} {{result.LastName |titlecase}}</ion-text>
                     <br>
-                    <ion-text color="grey">{{result.Club}} - {{result.CompetitionType === 'C' ? result.MatchId : result.TournamentName}}</ion-text>
+                    <ion-text color="grey">{{result.Club}}
+                        - {{result.CompetitionType === 'C' ? result.MatchId : result.TournamentName}}</ion-text>
                 </ion-text>
             </ion-col>
             <ion-col class="ion-text-center ion-no-padding" [class.is-color-primary]="result.SetFor === 3"
                      [class.is-color-danger]="result.SetAgainst === 3" size="2">
-                <ion-text class="ion-no-margin" style="font-size: 1.3em">{{result.SetFor}}-{{result.SetAgainst}}</ion-text>
+                <ion-text class="ion-no-margin small" style="font-size: 1.3em">{{result.SetFor}}
+                    -{{result.SetAgainst}}</ion-text>
                 <br>
                 <ion-text>{{result.SetFor === 3 ? 'Victoire' : 'Défaite'}}</ion-text>
             </ion-col>

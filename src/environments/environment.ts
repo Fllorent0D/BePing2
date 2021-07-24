@@ -6,7 +6,8 @@ export const environment = {
     production: false,
     tabtUrl: 'http://localhost:3004',
     internalPages: {
-        register: 'redirect-register.html'
+        basePath: '/static/',
+        registerRedirect: 'redirect-register.html'
     },
     firebaseConfig: {
         apiKey: 'putakeyhere',
