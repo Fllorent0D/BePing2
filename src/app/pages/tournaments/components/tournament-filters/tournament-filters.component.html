@@ -1,0 +1,34 @@
+<ion-list>
+    <form [formGroup]="formGroup">
+        <ion-item>
+            <ion-label class="ion-text-wrap">Niveau</ion-label>
+            <ion-select multiple="true"
+                        formControlName="levelsToDisplay">
+                <ion-select-option [value]="6">Super Division</ion-select-option>
+                <ion-select-option [value]="1">National</ion-select-option>
+                <ion-select-option [value]="15">Régional VTTL</ion-select-option>
+                <ion-select-option [value]="16">Régional IWB</ion-select-option>
+                <ion-select-option [value]="5">Prov. Vl.-b/Br.</ion-select-option>
+                <ion-select-option [value]="7">Prov. Oost-Vl.</ion-select-option>
+                <ion-select-option [value]="8">Prov. Antwerpen</ion-select-option>
+                <ion-select-option [value]="9">Prov. West-Vl.</ion-select-option>
+                <ion-select-option [value]="10">Prov. Limburg</ion-select-option>
+                <ion-select-option [value]="4">Prov. Hainaut</ion-select-option>
+                <ion-select-option [value]="11">Prov. B.B.W</ion-select-option>
+                <ion-select-option [value]="12">Prov. Namur</ion-select-option>
+                <ion-select-option [value]="13">Prov. Liège</ion-select-option>
+                <ion-select-option [value]="14">Prov. Lux</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label class="ion-text-wrap">Afficher tournois terminés</ion-label>
+            <ion-toggle formControlName="showPastTournaments"></ion-toggle>
+        </ion-item>
+
+        <ion-item button color="primary" class="ion-margin-top text-center" (click)="submit()">
+            <ion-icon name="search" slot="start"></ion-icon>
+            Filtrer
+        </ion-item>
+    </form>
+
+</ion-list>

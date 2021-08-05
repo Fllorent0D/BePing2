@@ -1,0 +1,30 @@
+<ion-header translucent="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Tournois</ion-title>
+        <ion-buttons slot="primary" (click)="showFilters($event)">
+            <ion-button color="secondary">
+                <ion-icon slot="icon-only" icon="options-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ng-container *ngFor="let month of tournamentsFiltered$ | async">
+            <ion-list-header>
+                {{ 'MONTHS.' + month.month|translate}} {{month.year}}
+            </ion-list-header>
+            <ion-item detail *ngFor="let tournament of month.tournaments" (click)="navigateToTournamentDetail(tournament)">
+                <ion-label class="ion-text-wrap">
+                    <h3>{{tournament.Name}}</h3>
+                    <p>{{tournament.DateFrom | date}} {{tournament.DateTo ? ' - ' + (tournament.DateTo | date) : ''}}</p>
+                </ion-label>
+                <ion-note slot="end"  *ngIf="isPast(tournament)"><ion-icon icon="checkmark-circle" color="success" ></ion-icon></ion-note>
+            </ion-item>
+        </ng-container>
+
+    </ion-list>
+</ion-content>
