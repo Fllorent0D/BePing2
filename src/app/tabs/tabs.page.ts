@@ -11,7 +11,6 @@ export class TabsPage implements OnInit {
     selectedTab: string;
 
     constructor(
-        private nav: NavController
     ) {
     }
 

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {MatchesService} from '../../../../core/api/services/matches.service';
 import {map, shareReplay, switchMap, tap} from 'rxjs/operators';
-import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {Observable} from 'rxjs';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
+import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
+import {MatchesService} from '../../../../core/api/services/matches.service';
 import {TeamEntry} from '../../../../core/api/models/team-entry';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 

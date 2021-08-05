@@ -1,0 +1,16 @@
+export enum Level {
+    NATIONAL = 1,
+    HAINAUT = 4,
+    VLAAMS_BRABANT_BR = 5,
+    SUPER_DIVISION = 6,
+    OOST_VLANDEREN = 7,
+    ANTWERP = 8,
+    WEST_VLAANDEREN = 9,
+    LIMBURG = 10,
+    BRUSSELS_BRABANT_WALLON = 11,
+    NAMUR = 12,
+    LIEGE = 13,
+    LUXEMBOURG = 14,
+    REGION_VTTL = 15,
+    IWB = 16,
+}

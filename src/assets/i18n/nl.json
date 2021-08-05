@@ -67,7 +67,7 @@
     "DECISIVE_SETS_LOST": "Verloren belles",
     "SCORE_DISTRIBUTION": "Verdeling van de scores",
     "ELO_POINT": "ELO punten",
-    "LATEST_MATCHES" : "Laatste wedstrijden",
+    "LATEST_MATCHES": "Laatste wedstrijden",
     "PLAYER_CATEGORY_CHANGED": "{{category}} categorie geladen"
   },
   "MATCH_ENTRY_SHEET": {
@@ -262,7 +262,7 @@
     "CATEGORY_TO_SHOW_IN_HOME": "Categorieën van wedstrijden geplaatst op de startpagina",
     "MALE": "Heren",
     "FEMALE": "Dames",
-    "VETERAN" : "Veteraan",
+    "VETERAN": "Veteraan",
     "WHICH_CATEGORY_DO_YOU_WANT": "Welke categorie wil je gebruiken?"
   },
   "EMAIL": {
@@ -279,7 +279,7 @@
     "END_REGISTRATION_DATE": "Einde van de inschrijvingen",
     "SERIES": "Reeksen",
     "LOADING_RESULTS": "Resultaten laden...",
-    "FUTURE" : "Gepland",
+    "FUTURE": "Gepland",
     "PAST": "Afgewerkt"
   },
   "NAVIGATION": {
@@ -306,29 +306,28 @@
     "NOTIFICATIONS": "Meldingen",
     "ADD_CLUB": "Club toevoegen",
     "ADD_DIVISION": "Afdeling toevoegen",
-    "ADD_FAVORITE_DIVISIONS" : "Favoriete afdelingen toevoegen",
+    "ADD_FAVORITE_DIVISIONS": "Favoriete afdelingen toevoegen",
     "ADD_OWN_CLUB": "Eigen club toevoegen",
     "SUCCESSFULLY_SUBSCRIBED_TO": "U krijgt nu meldingen van {{subscription}}",
     "CHOOSE_DIVISION": "Kies een afdeling",
     "CHOOSE_TEAM": "Kies een ploeg",
     "ADD_TEAM": "Kies een ploeg",
     "NO_TEAM": "Geen ploegen"
-
   },
-  "DIVISION_LEVEL":{
+  "DIVISION_LEVEL": {
     "NATIONAL": "Nationaal",
     "HAINAUT": "Henegouwen",
-    "FLEMISH_BRABANT": "Vlaams-Brabant",
-    "SUPERDIVISION": "Super Afdeling",
-    "EAST_FLANDERS": "Oost-Vlaanderen",
+    "VLAAMS_BRABANT_BR": "Vlaams-Brabant",
+    "SUPER_DIVISION": "Super Afdeling",
+    "OOST_VLANDEREN": "Oost-Vlaanderen",
     "ANTWERP": "Antwerpen",
-    "WEST_FLANDERS": "West-Vlaanderen",
+    "WEST_VLAANDEREN": "West-Vlaanderen",
     "LIMBURG": "Limburg",
-    "WALLOON_BRABANT": "Waals-Brabant",
+    "BRUSSELS_BRABANT_WALLON": "Waals-Brabant",
     "NAMUR": "Namen",
     "LIEGE": "Luik",
     "LUXEMBOURG": "Luxemburg",
-    "VTTL": "VTTL",
+    "REGION_VTTL": "VTTL",
     "IWB": "IWB"
   },
   "PLAYER_CATEGORY": {
@@ -337,6 +336,20 @@
     "VETERANS": "Veteranen",
     "VETERANS_WOMEN": "Dames Veteranen",
     "YOUTH": "Jeugd"
+  },
+  "MONTHS": {
+    "0": "Januari",
+    "1": "Februari",
+    "2": "Maart",
+    "3": "April",
+    "4": "Mei",
+    "5": "Juni",
+    "6": "Juli",
+    "7": "Augustus",
+    "8": "September",
+    "9": "Oktober",
+    "10": "November",
+    "11": "December"
   },
   "USER": "Gebruiker"
 }

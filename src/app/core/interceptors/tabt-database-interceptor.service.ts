@@ -27,7 +27,7 @@ export class TabtDatabaseInterceptor implements HttpInterceptor {
         console.log(newBody);
 
         const authReq = request.clone({
-            headers: request.headers.set('X-Tabt-Database', database).set('X-Tabt-Season', '20')
+            headers: request.headers.set('X-Tabt-Database', database).set('X-Tabt-Season', '22')
         });
 
 

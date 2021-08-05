@@ -22,6 +22,7 @@
   --ion-color-shade: var(--ion-color-pink-shade);
   --ion-color-tint: var(--ion-color-pink-tint);
 }
+
 ion-card{
   border-radius: 15px;
   // box-shadow: 0 7px 30px -10px rgba(92, 132, 143, 1);
@@ -255,4 +256,18 @@ ion-list {
   --margin-end: var(--ion-padding, 0px);
   margin-left: var(--ion-padding, 0px);
   margin-right: var(--ion-padding, 0px);
+}
+
+ion-popover{
+  .popover-wrapper{
+    .popover-content{
+      width:80vw;
+      max-width:500px;
+    }
+  }
+}
+.custom-popover {
+
+  --backdrop-opacity: 40%;
+  --background: black;
 }

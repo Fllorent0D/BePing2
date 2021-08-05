@@ -29,11 +29,11 @@ export class TeamMatchResultComponent implements OnInit {
     }
 
     get isHomeFG(): boolean {
-        return this.match.IsHomeWithdrawn === '1';
+        return this.match.IsHomeWithdrawn;
     }
 
     get isAwayFG(): boolean {
-        return this.match.IsAwayWithdrawn === '1';
+        return this.match.IsAwayWithdrawn;
     }
 
 

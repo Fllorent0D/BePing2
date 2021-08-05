@@ -4,18 +4,18 @@ import {TabsPage} from './tabs.page';
 
 const routes: Routes = [
     {
-        path: 'tab1',
-        redirectTo: 'tab1/home',
+        path: 'homeTab',
+        redirectTo: 'homeTab/home',
         pathMatch: 'full'
     },
     {
-        path: 'tab2',
-        redirectTo: 'tab2/matches',
+        path: 'favoritesTab',
+        redirectTo: 'favoritesTab/matches',
         pathMatch: 'full'
     },
     {
-        path: 'tab3',
-        redirectTo: 'tab3/player/142453',
+        path: 'tournamentsTab',
+        redirectTo: 'tournamentsTab/tournaments',
         pathMatch: 'full'
     },
     {
@@ -23,20 +23,24 @@ const routes: Routes = [
         component: TabsPage,
         children: [
             {
-                path: 'tab1',
+                path: 'homeTab',
                 loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
             },
             {
-                path: 'tab2',
+                path: 'favoritesTab',
                 loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
             },
             {
-                path: 'tab3',
+                path: 'tournamentsTab',
+                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
+            },
+            {
+                path: 'searchTab',
                 loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
             },
             {
                 path: '',
-                redirectTo: 'tab1/home',
+                redirectTo: 'homeTab/home',
                 pathMatch: 'full'
             }
         ]

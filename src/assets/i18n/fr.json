@@ -314,17 +314,17 @@
   "DIVISION_LEVEL":{
     "NATIONAL": "National",
     "HAINAUT": "Hainaut",
-    "FLEMISH_BRABANT": "Brabant flamand",
-    "SUPERDIVISION": "Super Division",
-    "EAST_FLANDERS": "Flandre-Orientale",
+    "VLAAMS_BRABANT_BR": "Brabant flamand",
+    "SUPER_DIVISION": "Super Division",
+    "OOST_VLANDEREN": "Flandre-Orientale",
     "ANTWERP": "Anvers",
-    "WEST_FLANDERS": "Flandre-Occidentale",
+    "WEST_VLAANDEREN": "Flandre-Occidentale",
     "LIMBURG": "Limbourg",
-    "WALLOON_BRABANT": "Brabant wallon",
+    "BRUSSELS_BRABANT_WALLON": "Brabant wallon",
     "NAMUR": "Namur",
     "LIEGE": "Liège",
     "LUXEMBOURG": "Luxembourg",
-    "VTTL": "Régional VTTL",
+    "REGION_VTTL": "Régional VTTL",
     "IWB": "IWB"
   },
   "PLAYER_CATEGORY": {
@@ -333,6 +333,20 @@
     "VETERANS": "Vétérans",
     "VETERANS_WOMEN": "Aînées",
     "YOUTH": "Jeunes"
+  },
+  "MONTHS": {
+    "0":"Janvier",
+    "1":"Février",
+    "2":"Mars",
+    "3":"Avril",
+    "4":"Mai",
+    "5":"Juin",
+    "6":"Juillet",
+    "7":"Août",
+    "8":"Septembre",
+    "9":"Octobre",
+    "10":"Novembre",
+    "11":"Décembre"
   },
   "USER": "Utilisateur"
 }
