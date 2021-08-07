@@ -9,6 +9,8 @@ import {TournamentFiltersComponent} from './components/tournament-filters/tourna
 import { TournamentDetailPageComponent } from './containers/tournament-detail-page/tournament-detail-page.component';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {TournamentRegistrationModalComponent} from './containers/tournament-registration-modal/tournament-registration-modal.component';
+import {TournamentSeriesDetailsComponent} from './containers/tournament-series-details/tournament-series-details.component';
+import {TournamentRegistrationsPageComponent} from './containers/tournament-registrations-page/tournament-registrations-page.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import {TournamentRegistrationModalComponent} from './containers/tournament-regi
         TournamentsPageComponent,
         TournamentFiltersComponent,
         TournamentDetailPageComponent,
-        TournamentRegistrationModalComponent
+        TournamentRegistrationModalComponent,
+        TournamentSeriesDetailsComponent,
+        TournamentRegistrationsPageComponent
     ],
     imports: [
         CommonModule,

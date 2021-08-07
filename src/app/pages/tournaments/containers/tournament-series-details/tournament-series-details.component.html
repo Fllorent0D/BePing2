@@ -1,0 +1,23 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Séries</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+      <ion-item *ngFor="let serie of series" [detail]="serie.RegistrationCount > 0" (click)="serieClicked(serie)">
+        <ion-label>
+          <h3>
+            {{serie.Name}}
+          </h3>
+          <p>
+            {{serie.RegistrationCount}} inscriptions
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+</ion-content>

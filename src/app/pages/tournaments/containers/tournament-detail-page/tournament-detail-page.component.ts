@@ -9,10 +9,9 @@ import {VenueEntry} from '../../../../core/api/models/venue-entry';
 import {GeocoderService} from '../../../../core/services/geocoding/geocoding.service';
 import {OSMAddress} from '../../../../core/models/osm/osm-search.model';
 import {Level} from '../../../../core/models/level';
-import {ModalBaseComponent} from '../../../modals/modal-base/modal-base.component';
-import {SettingsPage} from '../../../settings/containers/settings-page/settings.page';
 import {IonRouterOutlet, ModalController} from '@ionic/angular';
-import {TournamentRegistrationModalComponent} from '../tournament-registration-modal/tournament-registration-modal.component';
+import {InAppBrowserService} from '../../../../core/services/browser/in-app-browser.service';
+import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 
 @Component({
     selector: 'beping-tournament-detail-page',
@@ -39,7 +38,8 @@ export class TournamentDetailPageComponent implements OnInit {
         private readonly geocoderService: GeocoderService,
         private readonly modalCtrl: ModalController,
         private readonly ionRouter: IonRouterOutlet,
-
+        private readonly inAppBrowser: InAppBrowserService,
+        private readonly tabNavigate: TabsNavigationService
     ) {
     }
 
@@ -85,16 +85,14 @@ export class TournamentDetailPageComponent implements OnInit {
         return new Date(tournament.DateTo ?? tournament.DateFrom).getTime() < Date.now();
     }
 
-    async register(tournament: TournamentEntry) {
-        const modal = await this.modalCtrl.create({
-            component: TournamentRegistrationModalComponent,
-            swipeToClose: true,
-            componentProps: {
-                tournament
-            },
-            presentingElement: this.ionRouter.nativeEl
-        });
-        await modal.present();
+    register(tournament: TournamentEntry): void {
+        this.inAppBrowser.openTournamentRegistration(tournament.UniqueIndex);
     }
 
+    seriesClicked(tournament: TournamentEntry): void {
+        this.tabNavigate.navigateTo(
+            ['tournaments', tournament.UniqueIndex.toString(10), 'series'],
+            {state: {series: tournament.SerieEntries}}
+        );
+    }
 }

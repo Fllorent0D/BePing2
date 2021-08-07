@@ -4,6 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {Device} from '@capacitor/device';
 import {SetTheme, UpdateCurrentLang, UpdateCurrentLangSuccess} from './settings.actions';
 import {Injectable} from '@angular/core';
+import {TABT_DATABASES} from '../../interceptors/tabt-database-interceptor.service';
 
 export enum THEME {
     LIGHT = 'light',
@@ -29,6 +30,17 @@ export class SettingsState implements NgxsOnInit {
     @Selector([SettingsState])
     static getCurrentLang(state: SettingsStateModel): LANG {
         return state.lang;
+    }
+
+    @Selector([SettingsState])
+    static getCurrentDatabase(state: SettingsStateModel): TABT_DATABASES {
+        switch (state.lang) {
+            case LANG.NL:
+                return TABT_DATABASES.VTTL;
+            case LANG.FR:
+            default:
+                return TABT_DATABASES.AFTT;
+        }
     }
 
     @Selector([SettingsState])

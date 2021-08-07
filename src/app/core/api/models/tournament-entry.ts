@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+import { TournamentSerieEntry } from './tournament-serie-entry';
 export interface TournamentEntry {
   DateFrom: string;
   DateTo: string;
@@ -8,11 +9,11 @@ export interface TournamentEntry {
   Name: string;
   RegistrationDate: string;
   SerieCount: number;
-  SerieEntries: Array<string>;
+  SerieEntries: Array<TournamentSerieEntry>;
   UniqueIndex: number;
-  Venue: {
+  Venue?: {
     Name: string;
-    Street: string;
     Town: string;
+    Street: string;
   };
 }

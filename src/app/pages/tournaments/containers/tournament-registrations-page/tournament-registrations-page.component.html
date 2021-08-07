@@ -1,0 +1,25 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Inscriptions</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let registration of registrations" detail (click)="registrationClicked(registration)">
+      <ion-label>
+        <h3>
+          {{registration.Member.FirstName | titlecase}} {{registration.Member.LastName | titlecase}}
+        </h3>
+        <p>
+          Inscription le {{registration.RegistrationDate | date}}
+        </p>
+      </ion-label>
+      <ion-note slot="end">{{registration.Member.Ranking}}</ion-note>
+
+    </ion-item>
+  </ion-list>
+
+</ion-content>

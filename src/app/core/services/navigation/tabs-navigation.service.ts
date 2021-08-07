@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import {NavigationExtras, Router} from '@angular/router';
 import {NavController} from '@ionic/angular';
 
 @Injectable({
@@ -13,19 +13,19 @@ export class TabsNavigationService {
     ) {
     }
 
-    navigateTo(page: string | string []): Promise<boolean> {
+    navigateTo(page: string | string [], extras?: NavigationExtras): Promise<boolean> {
         // Oh yea such nice workaround
         const url = this.router.url.split('/');
         const newUrl = url.slice(0, 3);
 
         if (typeof page === 'string') {
-            newUrl.push(page);
+            newUrl.push(...page.split('/'));
         } else {
             newUrl.push(...page);
         }
 
         this.navCtrl.setDirection('forward', true, 'forward');
-        return this.router.navigate([`${newUrl.join('/')}`]);
+        return this.router.navigate([`${newUrl.join('/')}`], extras);
     }
 
 }

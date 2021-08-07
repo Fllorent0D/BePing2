@@ -5,6 +5,16 @@ export const environment = {
     basePath: '/static/',
     registerRedirect: 'redirect-register.html'
   },
+  tabtLinks: {
+    aftt: {
+      domain: 'resultats.aftt.be',
+      tournamentRegisterPath: '/tournoi/inscription'
+    },
+    vttl: {
+      domain: 'competitie.vttl.be',
+      tournamentRegisterPath: '/tornooi/inschrijving'
+    }
+  },
   firebaseConfig: {
     apiKey: 'putakeyhere',
     authDomain: 'beping-196714.firebaseapp.com',
