@@ -14,8 +14,8 @@ import {UpdateMainCategory} from '../../../../core/store/user/user.actions';
 import {TranslateService} from '@ngx-translate/core';
 import {LANG} from '../../../../core/models/langs';
 import {SetTheme, SettingsState, THEME, UpdateCurrentLang} from '../../../../core/store/settings';
-import {InternalIdentifiersService} from '../../../../core/api/services/internal-identifiers.service';
 import {InAppBrowserService} from '../../../../core/services/browser/in-app-browser.service';
+import {InternalIdentifiersService} from '../../../../core/api/services/internal-identifiers.service';
 import {SeasonEntry} from '../../../../core/api/models/season-entry';
 
 @Component({
@@ -93,9 +93,9 @@ export class SettingsPage implements OnInit {
                 clubUniqueIndex: userState.club.UniqueIndex,
                 playerUniqueIndex: userState.memberUniqueIndex
             }))
-        ).subscribe(({clubInternalIdentifier, playerInternalIdentifier}) => {
-            this.browser.openRegisterPage(playerInternalIdentifier, clubInternalIdentifier);
-            console.log(clubInternalIdentifier, playerInternalIdentifier);
+        ).subscribe(({url}) => {
+            this.browser.openInAppBrowser(url);
+            console.log(url);
         });
     }
 }

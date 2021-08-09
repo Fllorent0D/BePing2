@@ -20,16 +20,6 @@ export class InAppBrowserService {
         Browser.removeAllListeners();
     }
 
-    async openRegisterPage(internalPlayerId, internalClubId) {
-        const url = new URL(environment.tabtUrl);
-        url.protocol = 'http';
-        url.pathname = environment.internalPages.basePath + environment.internalPages.registerRedirect;
-        url.searchParams.append('internalPlayerId', internalPlayerId);
-        url.searchParams.append('internalClubId', internalClubId);
-        console.log(url.href);
-        await this.openInAppBrowser(url.href);
-    }
-
     async openTournamentRegistration(tournamentId: number): Promise<void> {
         const database: TABT_DATABASES = this.store.selectSnapshot(SettingsState.getCurrentDatabase);
         const urls = environment.tabtLinks[database];

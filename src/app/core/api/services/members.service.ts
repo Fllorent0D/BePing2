@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { MemberEntry } from '../models/member-entry';
+import { WeeklyElo } from '../models/weekly-elo';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,14 @@ export class MembersService extends BaseService {
    * This method doesn't expect any request body.
    */
   findAllMembers$Response(params?: {
+    club?: string;
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    uniqueIndex?: number;
+    nameSearch?: string;
+    extendedInformation?: boolean;
+    rankingPointsInformation?: boolean;
+    withResults?: boolean;
+    withOpponentRankingEvaluation?: boolean;
 
     /**
      * Account to do a request
@@ -59,23 +68,10 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-    club?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
-    uniqueIndex?: number;
-    nameSearch?: string;
-    extendedInformation?: boolean;
-    rankingPointsInformation?: boolean;
-    withResults?: boolean;
-    withOpponentRankingEvaluation?: boolean;
   }): Observable<StrictHttpResponse<Array<MemberEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, MembersService.FindAllMembersPath, 'get');
     if (params) {
-      rb.header('X-Tabt-Account', params['X-Tabt-Account'], {});
-      rb.header('X-Tabt-Password', params['X-Tabt-Password'], {});
-      rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
-      rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
-      rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
       rb.query('club', params.club, {});
       rb.query('playerCategory', params.playerCategory, {});
       rb.query('uniqueIndex', params.uniqueIndex, {});
@@ -84,6 +80,11 @@ export class MembersService extends BaseService {
       rb.query('rankingPointsInformation', params.rankingPointsInformation, {});
       rb.query('withResults', params.withResults, {});
       rb.query('withOpponentRankingEvaluation', params.withOpponentRankingEvaluation, {});
+      rb.header('X-Tabt-Account', params['X-Tabt-Account'], {});
+      rb.header('X-Tabt-Password', params['X-Tabt-Password'], {});
+      rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
+      rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
+      rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
     }
 
     return this.http.request(rb.build({
@@ -104,6 +105,14 @@ export class MembersService extends BaseService {
    * This method doesn't expect any request body.
    */
   findAllMembers(params?: {
+    club?: string;
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    uniqueIndex?: number;
+    nameSearch?: string;
+    extendedInformation?: boolean;
+    rankingPointsInformation?: boolean;
+    withResults?: boolean;
+    withOpponentRankingEvaluation?: boolean;
 
     /**
      * Account to do a request
@@ -129,14 +138,6 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-    club?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
-    uniqueIndex?: number;
-    nameSearch?: string;
-    extendedInformation?: boolean;
-    rankingPointsInformation?: boolean;
-    withResults?: boolean;
-    withOpponentRankingEvaluation?: boolean;
   }): Observable<Array<MemberEntry>> {
 
     return this.findAllMembers$Response(params).pipe(
@@ -156,6 +157,14 @@ export class MembersService extends BaseService {
    * This method doesn't expect any request body.
    */
   findMemberById$Response(params: {
+    club?: string;
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    nameSearch?: string;
+    extendedInformation?: boolean;
+    rankingPointsInformation?: boolean;
+    withResults?: boolean;
+    withOpponentRankingEvaluation?: boolean;
+    uniqueIndex: number;
 
     /**
      * Account to do a request
@@ -181,23 +190,10 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-    club?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
-    nameSearch?: string;
-    extendedInformation?: boolean;
-    rankingPointsInformation?: boolean;
-    withResults?: boolean;
-    withOpponentRankingEvaluation?: boolean;
-    uniqueIndex: number;
   }): Observable<StrictHttpResponse<MemberEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberByIdPath, 'get');
     if (params) {
-      rb.header('X-Tabt-Account', params['X-Tabt-Account'], {});
-      rb.header('X-Tabt-Password', params['X-Tabt-Password'], {});
-      rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
-      rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
-      rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
       rb.query('club', params.club, {});
       rb.query('playerCategory', params.playerCategory, {});
       rb.query('nameSearch', params.nameSearch, {});
@@ -206,6 +202,11 @@ export class MembersService extends BaseService {
       rb.query('withResults', params.withResults, {});
       rb.query('withOpponentRankingEvaluation', params.withOpponentRankingEvaluation, {});
       rb.path('uniqueIndex', params.uniqueIndex, {});
+      rb.header('X-Tabt-Account', params['X-Tabt-Account'], {});
+      rb.header('X-Tabt-Password', params['X-Tabt-Password'], {});
+      rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
+      rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
+      rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
     }
 
     return this.http.request(rb.build({
@@ -226,6 +227,14 @@ export class MembersService extends BaseService {
    * This method doesn't expect any request body.
    */
   findMemberById(params: {
+    club?: string;
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    nameSearch?: string;
+    extendedInformation?: boolean;
+    rankingPointsInformation?: boolean;
+    withResults?: boolean;
+    withOpponentRankingEvaluation?: boolean;
+    uniqueIndex: number;
 
     /**
      * Account to do a request
@@ -251,18 +260,59 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-    club?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
-    nameSearch?: string;
-    extendedInformation?: boolean;
-    rankingPointsInformation?: boolean;
-    withResults?: boolean;
-    withOpponentRankingEvaluation?: boolean;
-    uniqueIndex: number;
   }): Observable<MemberEntry> {
 
     return this.findMemberById$Response(params).pipe(
       map((r: StrictHttpResponse<MemberEntry>) => r.body as MemberEntry)
+    );
+  }
+
+  /**
+   * Path part for operation findMemberEloHistory
+   */
+  static readonly FindMemberEloHistoryPath = '/api/members/{uniqueIndex}/elo';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findMemberEloHistory()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberEloHistory$Response(params: {
+    uniqueIndex: number;
+    season?: number;
+  }): Observable<StrictHttpResponse<Array<WeeklyElo>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberEloHistoryPath, 'get');
+    if (params) {
+      rb.path('uniqueIndex', params.uniqueIndex, {});
+      rb.query('season', params.season, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<WeeklyElo>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findMemberEloHistory$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberEloHistory(params: {
+    uniqueIndex: number;
+    season?: number;
+  }): Observable<Array<WeeklyElo>> {
+
+    return this.findMemberEloHistory$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<WeeklyElo>>) => r.body as Array<WeeklyElo>)
     );
   }
 

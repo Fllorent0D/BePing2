@@ -10,6 +10,7 @@ import {SharedModule} from '../../shared/shared.module';
 import {OtherPlayersComponent} from './containers/other-players/other-players.component';
 import {CurrentUserComponent} from './containers/current-user/current-user.component';
 import {PlayerContentComponent} from './components/player-content/player-content.component';
+import {ExploreContainerComponentModule} from '../explore-container/explore-container.module';
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import {PlayerContentComponent} from './components/player-content/player-content
         FormsModule,
         IonicModule,
         PlayerPageRoutingModule,
-        SharedModule
+        SharedModule,
+        ExploreContainerComponentModule
     ],
     declarations: [
         OtherPlayersComponent,

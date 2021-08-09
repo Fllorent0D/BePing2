@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface InternalIdentifiers {
+export interface InternalIdentifiersDto {
   clubInternalIdentifier: number;
   playerInternalIdentifier: number;
 }

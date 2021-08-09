@@ -11,6 +11,8 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CoreModule} from './core/core.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgChartsModule} from 'ng2-charts';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -23,7 +25,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
         BrowserAnimationsModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        CoreModule
+        CoreModule,
+        SharedModule,
+        NgChartsModule.forRoot()
     ],
     providers: [
         StatusBar,

@@ -45,7 +45,7 @@ import {TranslateModule} from '@ngx-translate/core';
         MemberLatestMatchesComponent,
         RankingSummaryComponent,
         AppearDirective,
-        TeamResultAdBannerComponent
+        TeamResultAdBannerComponent,
     ],
     exports: [
         RankingComponent,
@@ -64,13 +64,13 @@ import {TranslateModule} from '@ngx-translate/core';
         MemberLatestMatchesComponent,
         TeamResultAdBannerComponent,
         SectionTitleComponent,
-        TranslateModule
+        TranslateModule,
     ],
     imports: [
         CommonModule,
         IonicModule,
         ReactiveFormsModule,
-        TranslateModule
+        TranslateModule,
     ]
 })
 export class SharedModule {

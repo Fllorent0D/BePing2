@@ -28,12 +28,15 @@
             <beping-member-victory-chart
                     [memberResultEntries]="currentMemberEntry.ResultEntries">
             </beping-member-victory-chart>
+            <beping-weekly-elo>
+            </beping-weekly-elo>
             <beping-tie-break-played
                     [memberResultEntries]="currentMemberEntry.ResultEntries">
             </beping-tie-break-played>
             <beping-member-latest-matches
                     [matches]="latestMatches$| async">
             </beping-member-latest-matches>
+
             <beping-member-summary-per-ranking
                     [memberResultEntries]="currentMemberEntry.ResultEntries">
             </beping-member-summary-per-ranking>

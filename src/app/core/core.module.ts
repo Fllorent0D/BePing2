@@ -16,6 +16,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TabtDatabaseInterceptor} from './interceptors/tabt-database-interceptor.service';
 import {TabtCredentialsInterceptor} from './interceptors/tabt-credentials-interceptor.service';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import {NgChartsModule} from 'ng2-charts';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);

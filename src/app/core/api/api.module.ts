@@ -10,6 +10,7 @@ import { TournamentsService } from './services/tournaments.service';
 import { SeasonsService } from './services/seasons.service';
 import { MembersService } from './services/members.service';
 import { MatchesService } from './services/matches.service';
+import { Head2HeadService } from './services/head-2-head.service';
 import { HealthService } from './services/health.service';
 import { InternalIdentifiersService } from './services/internal-identifiers.service';
 
@@ -27,6 +28,7 @@ import { InternalIdentifiersService } from './services/internal-identifiers.serv
     SeasonsService,
     MembersService,
     MatchesService,
+    Head2HeadService,
     HealthService,
     InternalIdentifiersService,
     ApiConfiguration

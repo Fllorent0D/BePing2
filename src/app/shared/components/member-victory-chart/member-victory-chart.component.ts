@@ -22,7 +22,7 @@ export class MemberVictoryChartComponent {
         this.victories = memberResultEntries.filter((result) => result.Result === 'V').length;
         this.defeats = memberResultEntries.filter((result) => result.Result === 'D').length;
         this.total = memberResultEntries.length;
-        this.defeatsPct = Math.floor((this.defeats / this.total) * 100);
-        this.victoriesPct = Math.floor((this.victories / this.total) * 100);
+        this.defeatsPct = Math.round((this.defeats / this.total) * 100);
+        this.victoriesPct = Math.round((this.victories / this.total) * 100);
     }
 }

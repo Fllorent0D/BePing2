@@ -386,6 +386,7 @@ export class ClubsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
+    season?: number;
     clubIndex: string;
   }): Observable<StrictHttpResponse<Array<TeamEntry>>> {
 
@@ -396,6 +397,7 @@ export class ClubsService extends BaseService {
       rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
       rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
       rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
+      rb.query('season', params.season, {});
       rb.path('clubIndex', params.clubIndex, {});
     }
 
@@ -442,6 +444,7 @@ export class ClubsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
+    season?: number;
     clubIndex: string;
   }): Observable<Array<TeamEntry>> {
 
@@ -487,6 +490,7 @@ export class ClubsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
+    season?: number;
     clubIndex: string;
   }): Observable<StrictHttpResponse<Array<VenueEntryWithAddress>>> {
 
@@ -497,6 +501,7 @@ export class ClubsService extends BaseService {
       rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
       rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
       rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
+      rb.query('season', params.season, {});
       rb.path('clubIndex', params.clubIndex, {});
     }
 
@@ -543,6 +548,7 @@ export class ClubsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
+    season?: number;
     clubIndex: string;
   }): Observable<Array<VenueEntryWithAddress>> {
 
