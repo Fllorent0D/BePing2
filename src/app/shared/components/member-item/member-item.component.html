@@ -1,0 +1,9 @@
+<ion-item (click)="memberClicked.emit(member)" [detail]="detail">
+  <ion-label>
+    <h3>
+      {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
+    </h3>
+    <p>{{member.Club}}</p>
+  </ion-label>
+  <ion-note slot="end">{{member.Ranking}}</ion-note>
+</ion-item>
