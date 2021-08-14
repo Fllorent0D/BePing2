@@ -30,6 +30,10 @@ const routes: Routes = [
     {
         path: 'tournaments',
         loadChildren: () => import('./tournaments/tournaments.module').then(m => m.TournamentsModule)
+    },
+    {
+        path: 'search',
+        loadChildren: () => import('./search/search.module').then(m => m.SearchModule)
     }
 ];
 

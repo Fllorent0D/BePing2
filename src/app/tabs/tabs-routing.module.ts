@@ -19,6 +19,11 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'searchTab',
+        redirectTo: 'searchTab/search',
+        pathMatch: 'full'
+    },
+    {
         path: '',
         component: TabsPage,
         children: [

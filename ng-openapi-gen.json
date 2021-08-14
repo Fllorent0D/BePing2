@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
   "input": "http://localhost:3004/api-json",
-  "output": "src/app/api",
+  "output": "src/app/core/api",
   "ignoreUnusedModels": false
 }

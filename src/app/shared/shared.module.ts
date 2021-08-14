@@ -22,6 +22,9 @@ import {RankingSummaryComponent} from './components/member-summary-per-ranking/r
 import { AppearDirective } from './directives/appear.directive';
 import {TeamResultAdBannerComponent} from './ads/team-result-ad-banner/team-result-ad-banner.component';
 import {TranslateModule} from '@ngx-translate/core';
+import { WithLoadingPipe } from './pipes/with-loading.pipe';
+import {MemberItemComponent} from './components/member-item/member-item.component';
+import {ClubItemComponent} from './components/club-item/club-item.component';
 
 
 @NgModule({
@@ -46,6 +49,9 @@ import {TranslateModule} from '@ngx-translate/core';
         RankingSummaryComponent,
         AppearDirective,
         TeamResultAdBannerComponent,
+        WithLoadingPipe,
+        MemberItemComponent,
+        ClubItemComponent
     ],
     exports: [
         RankingComponent,
@@ -65,6 +71,8 @@ import {TranslateModule} from '@ngx-translate/core';
         TeamResultAdBannerComponent,
         SectionTitleComponent,
         TranslateModule,
+        MemberItemComponent,
+        ClubItemComponent
     ],
     imports: [
         CommonModule,

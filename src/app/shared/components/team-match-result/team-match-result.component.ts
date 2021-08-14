@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {TeamMatchesEntry} from '../../../core/api/models/team-matches-entry';
 import {TabsNavigationService} from '../../../core/services/navigation/tabs-navigation.service';
 
@@ -11,6 +11,7 @@ import {TabsNavigationService} from '../../../core/services/navigation/tabs-navi
 export class TeamMatchResultComponent implements OnInit {
 
     @Input() match: TeamMatchesEntry;
+    @Output() matchClicked: EventEmitter<TeamMatchesEntry> = new EventEmitter<TeamMatchesEntry>();
 
     constructor(
         private readonly tabNavigation: TabsNavigationService

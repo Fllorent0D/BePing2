@@ -5,11 +5,6 @@
 -->
 
 <ng-container *ngIf="currentMemberEntry">
-    <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">{{currentMemberEntry.FirstName | titlecase}} {{currentMemberEntry.LastName | titlecase}}</ion-title>
-      </ion-toolbar>
-    </ion-header>
     <beping-member-name-ranking-info
             [member]="currentMemberEntry">
     </beping-member-name-ranking-info>

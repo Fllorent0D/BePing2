@@ -271,3 +271,39 @@ ion-popover{
   --backdrop-opacity: 40%;
   --background: black;
 }
+
+.no-result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 70%;
+  margin: auto;
+  text-align: center;
+  h3 {
+    font-size: 23px;
+  }
+
+  ion-icon {
+    font-size: 35px;
+  }
+}
+
+.intro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 70%;
+  margin: auto;
+  text-align: center;
+  h3 {
+    font-size: 20px;
+  }
+
+  ion-icon {
+    font-size: 35px;
+  }
+}

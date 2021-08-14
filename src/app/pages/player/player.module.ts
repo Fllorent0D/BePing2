@@ -18,8 +18,7 @@ import {ExploreContainerComponentModule} from '../explore-container/explore-cont
         FormsModule,
         IonicModule,
         PlayerPageRoutingModule,
-        SharedModule,
-        ExploreContainerComponentModule
+        SharedModule
     ],
     declarations: [
         OtherPlayersComponent,

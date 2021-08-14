@@ -6,14 +6,14 @@
 
     <circle *ngIf="redPct > 0" class="donut-segment path" cx="21" cy="22" r="15.91549430918954" fill="transparent"
             stroke="#F09694" stroke-width="3" id="redCircle"
-            stroke-linecap="round" [attr.stroke-dasharray]="redDashArray" stroke-dashoffset="22.9" #redCircle
-            [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 22.9,strokeOffset:22.9}}">
+            stroke-linecap="round" [attr.stroke-dasharray]="redDashArray" stroke-dashoffset="23.4" #redCircle
+            [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 23.4,strokeOffset:23.4}}">
         >
     </circle>
     <circle *ngIf="bluePct > 0" class="donut-segment" cx="21" cy="22" r="15.91549430918954" fill="transparent"
             stroke="#5B8BF7" stroke-width="3" [attr.stroke-dasharray]="blueDashArray"
-            [attr.stroke-dashoffset]="100 - redPct + 22.6"
-            [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 22.6), strokeOffsetStart: 27.6}}"
+            [attr.stroke-dashoffset]="100 - redPct + 23.25"
+            [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 23.25), strokeOffsetStart: 27.6}}"
             stroke-linecap="round" #blueCircle></circle>
 
 

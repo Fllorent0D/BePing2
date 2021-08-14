@@ -20,6 +20,7 @@ import {NgChartsModule} from 'ng2-charts';
         SharedModule,
         RouterModule,
         SettingsPageModule,
+        NgChartsModule
     ],
     declarations: [
         ExploreContainerComponent,

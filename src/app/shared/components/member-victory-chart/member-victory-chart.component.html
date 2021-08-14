@@ -1,20 +1,22 @@
+<beping-card>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center ion-align-items-center" style="min-height: 125px; max-height: 400px">
+            <ion-col size="3" [sizeXl]="5" class="ion-text-center" [hidden]="victories === 0">
+                <ion-text><p class="ion-no-margin text-highlight">{{victories}} ({{victoriesPct}}%)</p></ion-text>
+                <ion-text color="grey"><p class="ion-no-margin">Victoires</p></ion-text>
+            </ion-col>
+            <ion-col size="6" [sizeXl]="2">
+                <beping-victory-chart [redPct]="defeatsPct" [bluePct]="victoriesPct" [title]="total.toString()"
+                                      [subtitle]="'matches'"></beping-victory-chart>
+            </ion-col>
+            <ion-col size="3" [sizeXl]="5" class="ion-text-center" [hidden]="defeats === 0">
+                <ion-text><p class="ion-no-margin text-highlight">{{defeats}} ({{defeatsPct}}%)</p></ion-text>
+                <ion-text color="grey"><p class="ion-no-margin">Défaites</p></ion-text>
+            </ion-col>
+        </ion-row>
+        <ion-row>
 
-<ion-grid>
-    <ion-row class="ion-justify-content-center ion-align-items-center" style="min-height: 125px; max-height: 400px">
-        <ion-col size="3" [sizeXl]="5" class="ion-text-center" [hidden]="victories === 0">
-            <ion-text><p class="ion-no-margin text-highlight">{{victories}} ({{victoriesPct}}%)</p></ion-text>
-            <ion-text color="grey"><p class="ion-no-margin">Victoires</p></ion-text>
-        </ion-col>
-        <ion-col size="6" [sizeXl]="2">
-            <beping-victory-chart [redPct]="defeatsPct" [bluePct]="victoriesPct" [title]="total.toString()"
-                                  [subtitle]="'matches'"></beping-victory-chart>
-        </ion-col>
-        <ion-col size="3" [sizeXl]="5" class="ion-text-center" [hidden]="defeats === 0">
-            <ion-text><p class="ion-no-margin text-highlight">{{defeats}} ({{defeatsPct}}%)</p></ion-text>
-            <ion-text color="grey"><p class="ion-no-margin">Défaites</p></ion-text>
-        </ion-col>
-    </ion-row>
-    <ion-row>
+        </ion-row>
+    </ion-grid>
 
-    </ion-row>
-</ion-grid>
+</beping-card>

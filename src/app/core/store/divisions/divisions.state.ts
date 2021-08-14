@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Action, NgxsOnInit, State, StateContext} from '@ngxs/store';
+import {Action, createSelector, NgxsOnInit, State, StateContext} from '@ngxs/store';
 
 import {catchError, finalize, map} from 'rxjs/operators';
 import {
@@ -25,6 +25,17 @@ import {UpdateCurrentLangSuccess} from '../settings';
 })
 @Injectable()
 export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOnInit {
+
+    static searchDivision(terms: string) {
+        const termsLowerCased = terms.toLowerCase();
+        return createSelector(
+            [DivisionsState.entities],
+            (divisions: DivisionEntry[]) => {
+                return divisions
+                    .filter((div) => `${div.DivisionName}`.toLowerCase().indexOf(termsLowerCased) > -1)
+                    .sort((a, b) => b.DivisionCategory > a.DivisionCategory ? 1 : b.DivisionCategory > a.DivisionCategory ? -1 : 0);
+            });
+    }
 
     constructor(private readonly divisionsService: DivisionsService) {
         super(DivisionsState, 'DivisionId', IdStrategy.EntityIdGenerator);

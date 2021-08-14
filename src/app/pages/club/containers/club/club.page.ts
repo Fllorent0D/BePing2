@@ -94,6 +94,7 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
                 );
 
          */
+        /*
         this.loadLater = combineLatest([this.club$, this.to$])
             .pipe(
                 switchMap(([club, to]) => this.matchesService.findAllMatches({
@@ -111,7 +112,7 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
                 this.loadLaterMatches();
             }
             this.changeDetectionRef.markForCheck();
-        });
+        });*/
 
         this.venues$ = this.club$.pipe(
             map((club) => club.VenueEntries)
