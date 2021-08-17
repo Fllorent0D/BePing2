@@ -162,8 +162,7 @@ export class SearchPageComponent implements OnInit {
     }
 
     divisionClicked(division: DivisionEntry) {
-        //this.tabNavigator.navigateTo(['division', member.UniqueIndex]);
-
+        this.tabNavigator.navigateTo(['divisions', division.DivisionId.toString(10)]);
     }
 
     matchClicked(teamMatchEntry: TeamMatchesEntry) {

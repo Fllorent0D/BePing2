@@ -1,8 +1,8 @@
 <ion-header translucent="true">
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title>Recherche</ion-title>
     </ion-toolbar>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-searchbar [formControl]="searchControl" placeholder="club, division, joueur, match"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
@@ -27,7 +27,7 @@
             <ion-list-header>
                 {{ 'Divisions' }}
             </ion-list-header>
-            <ion-item detail *ngFor="let div of divisions.results" >
+            <ion-item detail *ngFor="let div of divisions.results" (click)="divisionClicked(div)">
                 <ion-label class="ion-text-wrap">
                     <h3>{{div.DivisionName.split('-')[0] | titlecase}}</h3>
                     <p>{{'DIVISION_LEVEL.' + div.Level | translate}}

@@ -31,8 +31,8 @@ export class TeamMatchDetailsPage implements OnInit {
 
     ngOnInit() {
         this.match$ = this.activatedRoute.paramMap.pipe(
-            map((params: ParamMap) => params.get('uniqueIndex') as string),
-            switchMap((uniqueIndex: string) => this.matchesService.findMatchById({matchUniqueId: uniqueIndex, withDetails: true})),
+            map((params: ParamMap) => Number(params.get('uniqueIndex'))),
+            switchMap((uniqueIndex: number) => this.matchesService.findMatchById({matchUniqueId: uniqueIndex, withDetails: true})),
             shareReplay(1),
         );
     }

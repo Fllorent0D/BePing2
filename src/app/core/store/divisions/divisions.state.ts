@@ -18,6 +18,7 @@ import {GetDivisions} from './divisions.actions';
 import {sub} from 'date-fns';
 import {CurrentSeasonChanged} from '../season';
 import {UpdateCurrentLangSuccess} from '../settings';
+import {ClubEntry} from '../../api/models/club-entry';
 
 @State<EntityStateModel<DivisionEntry>>({
     name: 'divisions',
@@ -36,7 +37,11 @@ export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOn
                     .sort((a, b) => b.DivisionCategory > a.DivisionCategory ? 1 : b.DivisionCategory > a.DivisionCategory ? -1 : 0);
             });
     }
-
+    static getDivisionByUniqueIndex(uniqueIndex: number) {
+        return createSelector([DivisionsState.entities], (divisions: DivisionEntry[]) => {
+            return divisions.find((division) => division.DivisionId === uniqueIndex);
+        });
+    }
     constructor(private readonly divisionsService: DivisionsService) {
         super(DivisionsState, 'DivisionId', IdStrategy.EntityIdGenerator);
     }

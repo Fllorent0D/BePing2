@@ -7,6 +7,7 @@ export { Players } from './models/players';
 export { IndividualMatchResult } from './models/individual-match-result';
 export { MatchDetails } from './models/match-details';
 export { TeamMatchesEntry } from './models/team-matches-entry';
+export { MemberResults } from './models/member-results';
 export { VenueEntry } from './models/venue-entry';
 export { ClubEntry } from './models/club-entry';
 export { RankingPointsEntry } from './models/ranking-points-entry';

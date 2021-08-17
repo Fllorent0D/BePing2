@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {trigger, animate, transition, style, keyframes} from '@angular/animations';
+import {animate, keyframes, style, transition, trigger} from '@angular/animations';
 
 export const circleAnimations =
     trigger('circleAnimation', [
@@ -23,6 +23,7 @@ export class VictoryChartComponent {
     @Input() redPct = 50;
     @Input() title = '';
     @Input() subtitle?: string;
+    @Input() small = false;
 
 
     get blueDashArray(): string {

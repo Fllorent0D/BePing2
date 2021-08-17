@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RankingComponent} from './components/ranking/ranking.component';
 import {IonicModule} from '@ionic/angular';
@@ -19,10 +19,10 @@ import {MemberSummaryPerRankingComponent} from './components/member-summary-per-
 import {SectionTitleComponent} from './components/section-title/section-title.component';
 import {MemberLatestMatchesComponent} from './components/member-latest-matches/member-latest-matches.component';
 import {RankingSummaryComponent} from './components/member-summary-per-ranking/ranking-summary/ranking-summary.component';
-import { AppearDirective } from './directives/appear.directive';
+import {AppearDirective} from './directives/appear.directive';
 import {TeamResultAdBannerComponent} from './ads/team-result-ad-banner/team-result-ad-banner.component';
 import {TranslateModule} from '@ngx-translate/core';
-import { WithLoadingPipe } from './pipes/with-loading.pipe';
+import {WithLoadingPipe} from './pipes/with-loading.pipe';
 import {MemberItemComponent} from './components/member-item/member-item.component';
 import {ClubItemComponent} from './components/club-item/club-item.component';
 
@@ -72,13 +72,16 @@ import {ClubItemComponent} from './components/club-item/club-item.component';
         SectionTitleComponent,
         TranslateModule,
         MemberItemComponent,
-        ClubItemComponent
+        ClubItemComponent,
+        IonicModule,
+        ReactiveFormsModule,
+        TranslateModule
     ],
     imports: [
         CommonModule,
         IonicModule,
         ReactiveFormsModule,
-        TranslateModule,
+        TranslateModule
     ]
 })
 export class SharedModule {

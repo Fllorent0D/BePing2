@@ -42,6 +42,7 @@
                 <ion-col class="ion-text-center ion-no-padding" size="2">
                     <beping-victory-chart
                             style="max-height: 40px"
+                            [small]="true"
                             [bluePct]="stat.winPct"
                             [redPct]="stat.lostPct"
                             [title]="stat.winPct + '%'">

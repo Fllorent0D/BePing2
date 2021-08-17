@@ -428,7 +428,7 @@ export class MatchesService extends BaseService {
     yearDateTo?: string;
     withDetails?: boolean;
     matchId?: string;
-    matchUniqueId: string;
+    matchUniqueId: number;
   }): Observable<StrictHttpResponse<TeamMatchesEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, MatchesService.FindMatchByIdPath, 'get');
@@ -514,7 +514,7 @@ export class MatchesService extends BaseService {
     yearDateTo?: string;
     withDetails?: boolean;
     matchId?: string;
-    matchUniqueId: string;
+    matchUniqueId: number;
   }): Observable<TeamMatchesEntry> {
 
     return this.findMatchById$Response(params).pipe(

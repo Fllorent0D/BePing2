@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {CoreModule} from './core/core.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,8 @@ import {SharedModule} from './shared/shared.module';
         IonicModule.forRoot(),
         AppRoutingModule,
         CoreModule,
-        SharedModule
+        SharedModule,
+        ScrollingModule
     ],
     providers: [
         StatusBar,

@@ -77,24 +77,24 @@
 
   /* grey  */
   --ion-color-grey: #9B9B9B;
-  --ion-color-grey-rgb: 155,155,155;
+  --ion-color-grey-rgb: 155, 155, 155;
   --ion-color-grey-contrast: #ffffff;
-  --ion-color-grey-contrast-rgb: 0,0,0;
+  --ion-color-grey-contrast-rgb: 0, 0, 0;
   --ion-color-grey-shade: #888888;
   --ion-color-grey-tint: #a5a5a5;
 
   --ion-color-green: #69bb7b;
-  --ion-color-green-rgb: 105,187,123;
+  --ion-color-green-rgb: 105, 187, 123;
   --ion-color-green-contrast: #000000;
-  --ion-color-green-contrast-rgb: 0,0,0;
+  --ion-color-green-contrast-rgb: 0, 0, 0;
   --ion-color-green-shade: #69bb7b;
   --ion-color-green-tint: #69bb7b;
 
 
   --ion-color-pink: #FF9191;
-  --ion-color-pink-rgb: 255,145,145;
+  --ion-color-pink-rgb: 255, 145, 145;
   --ion-color-pink-contrast: #000000;
-  --ion-color-pink-contrast-rgb: 0,0,0;
+  --ion-color-pink-contrast-rgb: 0, 0, 0;
   --ion-color-pink-shade: #e08080;
   --ion-color-pink-tint: #ff9c9c;
 
@@ -106,22 +106,39 @@
   font-weight: 500;
   --border-color: #E6E6E6;
   --ion-card-background: #ffffff;
+  --ion-tab-bar-border: 0;
 
+  ion-tab-button {
+    --color: var(--ion-color-medium);
+    --color-selected: var(--ion-color-primary);
 
+    &::before {
+      background-color: transparent;
+      display: block;
+      content: "";
+      margin: 0 auto;
+      width: 20px;
+      height: 2px;
+    }
+
+    &.tab-selected::before {
+      background-color: var(--ion-color-primary);
+    }
+  }
 }
 
 @media (prefers-color-scheme: light) {
   ion-content {
     --background: #f5f5f5 !important;
   }
-  ion-list{
+  ion-list {
     --background: #f5f5f5 !important;
     background-color: #f5f5f5 !important;
   }
   ion-item {
     --background: #ffffff;
   }
-  ion-card{
+  ion-card {
     --background: white;
     box-shadow: none !important;
   }
@@ -242,12 +259,12 @@
     --ion-toolbar-color: #ffffff;
     --ion-item-background: #1c1c1d;
     --ion-card-background: #1c1c1d;
+
     ion-list {
       --background: black !important;
       background-color: black !important;
     }
   }
-
 
 
   /*
