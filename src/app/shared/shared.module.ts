@@ -4,7 +4,7 @@ import {RankingComponent} from './components/ranking/ranking.component';
 import {IonicModule} from '@ionic/angular';
 import {InfoTeamMatchComponent} from './components/info-team-match/info-team-match.component';
 import {IonDotDotDotDividerComponent} from './components/ion-dot-dot-dot-divider/ion-dot-dot-dot-divider.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ListHeaderDatesComponent} from './components/list-header-dates/list-header-dates.component';
 import {FavoriteBtnComponent} from './components/favorite-btn/favorite-btn.component';
 import {LoadingBtnComponent} from './components/loading-btn/loading-btn.component';
@@ -25,63 +25,68 @@ import {TranslateModule} from '@ngx-translate/core';
 import {WithLoadingPipe} from './pipes/with-loading.pipe';
 import {MemberItemComponent} from './components/member-item/member-item.component';
 import {ClubItemComponent} from './components/club-item/club-item.component';
+import {WeeklyEloComponent} from './components/weekly-elo/weekly-elo.component';
+import {NgChartsModule} from 'ng2-charts';
+import {LocalDatePipe} from './pipes/local-date.pipe';
+import {SuperTabsModule} from '@ionic-super-tabs/angular';
 
+const COMPONENTS = [
+    RankingComponent,
+    InfoTeamMatchComponent,
+    IonDotDotDotDividerComponent,
+    ListHeaderDatesComponent,
+    FavoriteBtnComponent,
+    LoadingBtnComponent,
+    VictoryChartComponent,
+    BepingCardComponent,
+    IndividualMatchComponent,
+    TeamMatchResultComponent,
+    TieBreakPlayedComponent,
+    MemberNameRankingInfoComponent,
+    MemberVictoryChartComponent,
+    MemberSummaryPerRankingComponent,
+    SectionTitleComponent,
+    MemberLatestMatchesComponent,
+    RankingSummaryComponent,
+    TeamResultAdBannerComponent,
+    MemberItemComponent,
+    ClubItemComponent,
+    WeeklyEloComponent
+];
+const PIPES = [
+    WithLoadingPipe,
+    LocalDatePipe
+];
+const DIRECTIVES = [
+    AppearDirective
+];
 
 @NgModule({
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
-        RankingComponent,
-        InfoTeamMatchComponent,
-        IonDotDotDotDividerComponent,
-        ListHeaderDatesComponent,
-        FavoriteBtnComponent,
-        LoadingBtnComponent,
-        VictoryChartComponent,
-        BepingCardComponent,
-        IndividualMatchComponent,
-        TeamMatchResultComponent,
-        TieBreakPlayedComponent,
-        MemberNameRankingInfoComponent,
-        MemberVictoryChartComponent,
-        MemberSummaryPerRankingComponent,
-        SectionTitleComponent,
-        MemberLatestMatchesComponent,
-        RankingSummaryComponent,
-        AppearDirective,
-        TeamResultAdBannerComponent,
-        WithLoadingPipe,
-        MemberItemComponent,
-        ClubItemComponent
+        COMPONENTS,
+        DIRECTIVES,
+        PIPES
     ],
     exports: [
-        RankingComponent,
-        InfoTeamMatchComponent,
-        ListHeaderDatesComponent,
-        FavoriteBtnComponent,
-        LoadingBtnComponent,
-        VictoryChartComponent,
-        BepingCardComponent,
-        IndividualMatchComponent,
-        TeamMatchResultComponent,
-        TieBreakPlayedComponent,
-        MemberNameRankingInfoComponent,
-        MemberVictoryChartComponent,
-        MemberSummaryPerRankingComponent,
-        MemberLatestMatchesComponent,
-        TeamResultAdBannerComponent,
-        SectionTitleComponent,
-        TranslateModule,
-        MemberItemComponent,
-        ClubItemComponent,
+        CommonModule,
         IonicModule,
+        FormsModule,
         ReactiveFormsModule,
-        TranslateModule
+        TranslateModule,
+        NgChartsModule,
+        SuperTabsModule,
+        COMPONENTS,
+        PIPES,
     ],
     imports: [
         CommonModule,
         IonicModule,
+        FormsModule,
         ReactiveFormsModule,
-        TranslateModule
+        TranslateModule,
+        NgChartsModule,
+        SuperTabsModule
     ]
 })
 export class SharedModule {

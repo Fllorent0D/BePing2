@@ -81,6 +81,14 @@
             },
             "ci": {
               "progress": false
+            },
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
             }
           }
         },
@@ -95,6 +103,10 @@
             },
             "ci": {
               "progress": false
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "app:build:hmr"
             }
           }
         },
@@ -189,11 +201,14 @@
     }
   },
   "cli": {
-    "defaultCollection": "@ionic/angular-toolkit",
+    "defaultCollection": "@datorama/akita",
     "analytics": false
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
+      "styleext": "scss"
+    },
+    "@datorama/akita:component": {
       "styleext": "scss"
     },
     "@ionic/angular-toolkit:page": {

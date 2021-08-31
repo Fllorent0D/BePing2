@@ -6,12 +6,13 @@
 
 <ng-container *ngIf="currentMemberEntry">
     <beping-member-name-ranking-info
+            [displayName]="false"
             [member]="currentMemberEntry">
     </beping-member-name-ranking-info>
-
     <beping-member-victory-chart
             [memberResultEntries]="currentMemberEntry.ResultEntries">
     </beping-member-victory-chart>
+    <beping-weekly-elo *ngIf="weeklyElo" [weeklyElo]="weeklyElo"></beping-weekly-elo>
     <beping-tie-break-played
             [memberResultEntries]="currentMemberEntry.ResultEntries">
     </beping-tie-break-played>

@@ -24,6 +24,11 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'divisionsTab',
+        redirectTo: 'divisionsTab/divisions/regions',
+        pathMatch: 'full'
+    },
+    {
         path: '',
         component: TabsPage,
         children: [
@@ -33,6 +38,10 @@ const routes: Routes = [
             },
             {
                 path: 'favoritesTab',
+                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
+            },
+            {
+                path: 'divisionsTab',
                 loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
             },
             {

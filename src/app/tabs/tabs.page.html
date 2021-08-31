@@ -1,25 +1,30 @@
 <ion-tabs (ionTabsDidChange)="tabChanged($event)">
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="homeTab">
-      <ion-icon name="home{{selectedTab !== 'homeTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
-      <ion-label>Accueil</ion-label>
-    </ion-tab-button>
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="homeTab">
+            <ion-icon name="home{{selectedTab !== 'homeTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-label>{{'SIDEMENU.HOME'|translate}}</ion-label>
+        </ion-tab-button>
 
-    <ion-tab-button tab="favoritesTab">
-      <ion-icon name="tennisball{{selectedTab !== 'favoritesTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
-      <ion-label>Matches</ion-label>
-    </ion-tab-button>
+        <ion-tab-button tab="divisionsTab">
+            <ion-icon name="list{{selectedTab !== 'divisionsTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-label>{{'COMMON.DIVISIONS'|translate}}</ion-label>
+        </ion-tab-button>
 
-    <ion-tab-button tab="tournamentsTab">
-      <ion-icon name="trophy{{selectedTab !== 'tournamentsTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
-      <ion-label>Tournois</ion-label>
-    </ion-tab-button>
+        <ion-tab-button tab="favoritesTab">
+            <ion-icon name="star{{selectedTab !== 'favoritesTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-label>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-label>
+        </ion-tab-button>
 
-    <ion-tab-button tab="searchTab">
-      <ion-icon name="search{{selectedTab !== 'searchTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
-      <ion-label>Recherche</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
+        <ion-tab-button tab="tournamentsTab">
+            <ion-icon name="trophy{{selectedTab !== 'tournamentsTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-label>{{'COMMON.TOURNAMENTS'|translate}}</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="searchTab">
+            <ion-icon name="search{{selectedTab !== 'searchTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-label>{{'SEARCH.SEARCH'|translate}}</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
 
 </ion-tabs>

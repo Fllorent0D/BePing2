@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IonNav, ModalController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {Store} from '@ngxs/store';
@@ -8,7 +8,7 @@ import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {TabTState, TabTStateModel} from '../../../../core/store/user/tab-t-state.service';
 import {Logout} from '../../../../core/store/user/aftt.actions';
 import {map, switchMap, take} from 'rxjs/operators';
-import {AfttLoginPage} from '../aftt-login/aftt-login-page.component';
+import {AfttLoginPage} from '../../../modals/aftt-login/aftt-login-page.component';
 import {FormControl} from '@angular/forms';
 import {UpdateMainCategory} from '../../../../core/store/user/user.actions';
 import {TranslateService} from '@ngx-translate/core';
@@ -17,6 +17,12 @@ import {SetTheme, SettingsState, THEME, UpdateCurrentLang} from '../../../../cor
 import {InAppBrowserService} from '../../../../core/services/browser/in-app-browser.service';
 import {InternalIdentifiersService} from '../../../../core/api/services/internal-identifiers.service';
 import {SeasonEntry} from '../../../../core/api/models/season-entry';
+import {ChooseMainMemberClubComponent} from '../../../modals/choose-main-member-club/choose-main-member-club.component';
+import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
+import {ContactComponent} from '../contact/contact.component';
+import {ConditionsUsageComponent} from '../conditions-usage/conditions-usage.component';
+import {PrivacyComponent} from '../privacy/privacy.component';
+import {App} from '@capacitor/app';
 
 @Component({
     selector: 'beping-settings',
@@ -24,8 +30,6 @@ import {SeasonEntry} from '../../../../core/api/models/season-entry';
     styleUrls: ['./settings.page.scss']
 })
 export class SettingsPage implements OnInit {
-
-    @Input() isModal = false;
 
     playerName$: Observable<string>;
     playerCategories$: Observable<PLAYER_CATEGORY[]>;
@@ -37,6 +41,8 @@ export class SettingsPage implements OnInit {
     currentTheme$: Observable<THEME>;
     mainPlayerCategory: FormControl;
     userState$: Observable<UserStateModel>;
+    version: string;
+    build: string;
 
     constructor(
         private readonly modalCtrl: ModalController,
@@ -44,7 +50,8 @@ export class SettingsPage implements OnInit {
         private readonly ionNav: IonNav,
         private readonly translate: TranslateService,
         private readonly internalIdService: InternalIdentifiersService,
-        private readonly browser: InAppBrowserService
+        private readonly browser: InAppBrowserService,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -58,16 +65,50 @@ export class SettingsPage implements OnInit {
         this.account$ = this.store.select(TabTState).pipe(map((aftt: TabTStateModel) => aftt.account));
         this.currentLang$ = this.store.select(SettingsState.getCurrentLang);
         this.currentTheme$ = this.store.select(SettingsState.getCurrentTheme);
+        this.getAppInfo();
         console.log(this.translate.currentLang);
     }
 
+    async getAppInfo() {
+        const info = await App.getInfo();
+        this.version = info.version;
+        this.build = info.build;
+    }
+
+    async changeMember() {
+        this.ionNav.push(ChooseMainMemberClubComponent);
+        /*
+        const modal = await this.modalCtrl.create({
+            component: ModalBaseComponent,
+            swipeToClose: true,
+            componentProps: {
+                rootPage: ChooseMainMemberClubComponent
+            }
+        });
+        await modal.present();
+
+        await modal.onWillDismiss();
+    */
+    }
+
     async closeModal() {
-        console.log(this.modalCtrl);
         await this.modalCtrl.dismiss();
     }
 
     login() {
         this.ionNav.push(AfttLoginPage);
+    }
+
+    contact() {
+        this.ionNav.push(ContactComponent);
+    }
+
+    cgu() {
+        this.ionNav.push(ConditionsUsageComponent);
+    }
+
+    privacy() {
+        this.ionNav.push(PrivacyComponent);
     }
 
     logout() {
@@ -79,6 +120,7 @@ export class SettingsPage implements OnInit {
     }
 
     changeLang(event: CustomEvent) {
+
         this.store.dispatch(new UpdateCurrentLang(event.detail.value));
     }
 
@@ -87,6 +129,8 @@ export class SettingsPage implements OnInit {
     }
 
     register() {
+        this.analyticsService.logEvent('register');
+
         this.userState$.pipe(
             take(1),
             switchMap((userState: UserStateModel) => this.internalIdService.getRegisterLink({

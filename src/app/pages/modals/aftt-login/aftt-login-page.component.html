@@ -1,10 +1,16 @@
 <ion-header>
 
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
         </ion-buttons>
         <ion-title>{{'SETTINGS.CONNECT_TO_FEDERATION'|translate}}</ion-title>
+        <ion-buttons slot="end" *ngIf="modalCtrl">
+        <ion-button (click)="closeModal()">
+            <ion-icon icon="close-outline"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+
     </ion-toolbar>
 
 </ion-header>
@@ -15,7 +21,6 @@
             <ion-item>
                 <ion-input
                         [formControlName]="'username'"
-                        [autofocus]="true"
                         tabindex="1"
                         placeholder="{{'SETTINGS.USERNAME'|translate}}">
                 </ion-input>

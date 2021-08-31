@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TournamentsService} from '../../../../core/api/services/tournaments.service';
 import {TournamentEntry} from '../../../../core/api/models/tournament-entry';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
-import {PopoverController} from '@ionic/angular';
+import {IonRouterOutlet, ModalController, PopoverController} from '@ionic/angular';
 import {TournamentFiltersComponent} from '../../components/tournament-filters/tournament-filters.component';
 import {map} from 'rxjs/operators';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
@@ -38,7 +38,9 @@ export class TournamentsPageComponent implements OnInit {
     constructor(
         private readonly tournamentService: TournamentsService,
         private readonly popoverController: PopoverController,
-        private readonly tabNavigator: TabsNavigationService
+        private readonly modalCtrl: ModalController,
+        private readonly tabNavigator: TabsNavigationService,
+        private readonly ionRouterOutlet: IonRouterOutlet,
     ) {
     }
 
@@ -107,21 +109,18 @@ export class TournamentsPageComponent implements OnInit {
 
     }
 
-    async showFilters(event: Event) {
-        const popover = await this.popoverController.create({
+    async showFilters() {
+        const modal = await this.modalCtrl.create({
             component: TournamentFiltersComponent,
-            cssClass: 'custom-popover',
+            swipeToClose: true,
+            presentingElement: this.ionRouterOutlet.nativeEl,
             componentProps: {
                 filter: this.tournamentsFilter$.getValue()
-            },
-            showBackdrop: true,
-            backdropDismiss: true,
-            event,
-            translucent: true
+            }
         });
-        await popover.present();
+        await modal.present();
 
-        const {data} = await popover.onDidDismiss<TournamentsFilter>();
+        const {data} = await modal.onWillDismiss<TournamentsFilter>();
         if (data) {
             this.tournamentsFilter$.next(data);
         }

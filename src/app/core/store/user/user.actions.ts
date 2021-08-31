@@ -4,6 +4,7 @@ import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
 import {UserMemberEntries} from './user.state';
 import {PLAYER_CATEGORY} from '../../models/user';
 import {LANG} from '../../models/langs';
+import {WeeklyElo} from '../../api/models/weekly-elo';
 
 export class SetUser {
     static readonly type = '[user] Set user';
@@ -11,6 +12,15 @@ export class SetUser {
     constructor(
         public memberUniqueIndex: number,
         public club: ClubEntry
+    ) {
+    }
+}
+
+export class ClubTransfer {
+    static readonly type = '[user] club has changed';
+
+    constructor(
+        public newClubIndex: string
     ) {
     }
 }
@@ -29,6 +39,15 @@ export class UpdateMemberEntriesSuccess {
 
     constructor(
         public memberEntries: UserMemberEntries
+    ) {
+    }
+}
+
+export class UpdateWeeklyEloSuccess {
+    static readonly type = '[user] Update weekly elo success';
+
+    constructor(
+        public elo: WeeklyElo[]
     ) {
     }
 }
@@ -56,6 +75,15 @@ export class UpdateMainCategory {
 
     constructor(
         public category: PLAYER_CATEGORY
+    ) {
+    }
+}
+
+export class SetLoading {
+    static readonly type = '[user] set loading';
+
+    constructor(
+        public loading: boolean
     ) {
     }
 }

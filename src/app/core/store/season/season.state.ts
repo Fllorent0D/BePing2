@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {SeasonEntry} from '../../api/models/season-entry';
-import {catchError, finalize, map, switchMap} from 'rxjs/operators';
+import {catchError, filter, finalize, switchMap, take} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {GetCurrentSeason, GetCurrentSeasonFailure, CurrentSeasonChanged, SetSeasonLoading} from './season.actions';
+import {CurrentSeasonChanged, GetCurrentSeason, GetCurrentSeasonFailure, SetSeasonLoading} from './season.actions';
 import {SeasonsService} from '../../api/services/seasons.service';
-import {SetLoading} from '@ngxs-labs/entity-state';
 import {ToastController} from '@ionic/angular';
+import {AnalyticsService} from '../../services/firebase/analytics.service';
+import {StorageService} from '../../services/store/storage.service';
 
 export interface SeasonStateModel {
     currentSeason: SeasonEntry | null;
@@ -45,12 +46,16 @@ export class SeasonState implements NgxsOnInit {
 
     constructor(
         private readonly seasonsService: SeasonsService,
-        private readonly toastService: ToastController
+        private readonly toastService: ToastController,
+        private readonly analyticsService: AnalyticsService,
+        private readonly storage: StorageService
     ) {
     }
 
     ngxsOnInit(ctx?: StateContext<any>): any {
+        console.log('ON INIT:::');
         ctx.dispatch(new GetCurrentSeason());
+
     }
 
     @Action(GetCurrentSeason)
@@ -61,6 +66,7 @@ export class SeasonState implements NgxsOnInit {
             switchMap((seasonEntry: SeasonEntry) => {
 
                 if (seasonEntry.Name !== state.currentSeason?.Name) {
+                    this.analyticsService.logEvent('season_changed', {newSeason: seasonEntry.Name});
                     return dispatch(new CurrentSeasonChanged(seasonEntry));
                 }
                 return of();

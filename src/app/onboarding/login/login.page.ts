@@ -1,19 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {IonRouterOutlet, ModalController, NavController} from '@ionic/angular';
+import {IonRouterOutlet, LoadingController, ModalController, NavController} from '@ionic/angular';
 import {ChooseClubPage} from '../../pages/modals/choose-club/choose-club.page';
 import {Select, Store} from '@ngxs/store';
 import {ClubsState} from '../../core/store/clubs';
 import {combineLatest, Observable} from 'rxjs';
 import {ClubEntry} from '../../core/api/models/club-entry';
-import {map, take} from 'rxjs/operators';
+import {finalize, map, switchMap} from 'rxjs/operators';
 import {DivisionsState} from '../../core/store/divisions';
-import {DivisionEntry} from '../../core/api/models/division-entry';
 import {SeasonState} from '../../core/store/season';
 import {ChoosePlayerPage} from '../../pages/modals/choose-player/choose-player.page';
 import {MemberEntry} from '../../core/api/models/member-entry';
-import {ClubsService} from '../../core/api/services/clubs.service';
 import {Router} from '@angular/router';
 import {HasSeenOnBoarding, SetUser} from '../../core/store/user/user.actions';
+import {AfttLoginPage} from '../../pages/modals/aftt-login/aftt-login-page.component';
+import {MembersService} from '../../core/api/services/members.service';
+import {ClubsService} from '../../core/api/services/clubs.service';
 
 @Component({
     selector: 'beping-login-page',
@@ -45,7 +46,10 @@ export class LoginPage implements OnInit {
         private readonly ionRouterOutlet: IonRouterOutlet,
         private readonly navCtrl: NavController,
         private readonly store: Store,
-        private readonly router: Router
+        private readonly router: Router,
+        private readonly membersService: MembersService,
+        private readonly clubService: ClubsService,
+        private readonly loaderCtrl: LoadingController
     ) {
     }
 
@@ -115,11 +119,51 @@ export class LoginPage implements OnInit {
     startBePing() {
         this.store.dispatch([
             new HasSeenOnBoarding(),
-            new SetUser(this.selectedMember.UniqueIndex, this.selectedClub)
+            ...((!!this.selectedMember && !!this.selectedClub) ? [new SetUser(this.selectedMember.UniqueIndex, this.selectedClub)] : [])
         ]).subscribe(() => {
             this.navCtrl.setDirection('root', true, 'forward');
             this.router.navigate(['tabs']);
         });
     }
 
+    async loginWithAFTT() {
+        const modal = await this.modalCtrl.create({
+            component: AfttLoginPage,
+            swipeToClose: true,
+            presentingElement: this.ionRouterOutlet.nativeEl,
+            componentProps: {}
+        });
+        await modal.present();
+
+        const result = await modal.onWillDismiss();
+        if (result?.data?.logged) {
+            const loader = await this.loaderCtrl.create({
+                message: 'Recherche en cours...'
+            });
+            loader.present();
+
+            this.membersService.findAllMembers({
+                nameSearch: ' ',
+                rankingPointsInformation: true
+            }).pipe(
+                map((members: MemberEntry[]) => members.filter((member) => member.RankingPointsEntries?.length > 1)),
+                map((members) => {
+                    if (members.length === 1) {
+                        return members[0];
+                    }
+                    throw new Error('Player not found');
+                }),
+                switchMap((member: MemberEntry) =>
+                    this.clubService.findClubById({clubIndex: member.Club}).pipe(
+                        map((club) => ({club, member}))
+                    )
+                ),
+                finalize(() => loader.dismiss())
+            ).subscribe(({club, member}) => {
+                this.selectedMember = member;
+                this.selectedClub = club;
+                this.startBePing();
+            });
+        }
+    }
 }

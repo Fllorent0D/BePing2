@@ -1,9 +1,9 @@
-<ion-header translucent="true">
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button [text]="'BACK'|translate"></ion-back-button>
     </ion-buttons>
-    <ion-title>Inscriptions</ion-title>
+    <ion-title>{{'TOURNAMENTS.REGISTRATIONS'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -14,7 +14,7 @@
           {{registration.Member.FirstName | titlecase}} {{registration.Member.LastName | titlecase}}
         </h3>
         <p>
-          Inscription le {{registration.RegistrationDate | date}}
+          {{'TOURNAMENTS.REGISTERED_ON'|translate}} {{registration.RegistrationDate | localizedDate}}
         </p>
       </ion-label>
       <ion-note slot="end">{{registration.Member.Ranking}}</ion-note>

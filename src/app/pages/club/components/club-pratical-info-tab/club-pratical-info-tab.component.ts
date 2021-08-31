@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {VenueEntry} from '../../../../core/api/models/venue-entry';
+import {StartNavigationService} from '../../../../core/services/start-navigation.service';
 
 @Component({
     selector: 'beping-club-pratical-info-tab',
@@ -10,10 +11,15 @@ export class ClubPraticalInfoTabComponent implements OnInit {
 
     @Input() venues: VenueEntry[] = [];
 
-    constructor() {
+    constructor(
+        private readonly navigateService: StartNavigationService
+    ) {
     }
 
     ngOnInit() {
     }
 
+    navigateToVenue(venue: VenueEntry) {
+        this.navigateService.navigateToVenue(venue);
+    }
 }

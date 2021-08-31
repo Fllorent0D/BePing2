@@ -326,3 +326,17 @@ ion-popover {
     font-size: 35px;
   }
 }
+
+hr {
+  display: block;
+  height: 0px !important;
+  border-width: 1px !important;
+  border-top: 1px solid var(--ion-color-grey-shade);
+  margin: 1em;
+}
+.region-icon{
+  svg{
+    fill: var(--color)
+  }
+
+}

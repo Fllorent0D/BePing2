@@ -1,7 +1,7 @@
-<ion-header translucent="true">
-    <ion-toolbar>
+<ion-header >
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
         </ion-buttons>
         <ion-title>{{(clubIndex$ | async)}} {{(team$ | async)?.Team}}</ion-title>
     </ion-toolbar>

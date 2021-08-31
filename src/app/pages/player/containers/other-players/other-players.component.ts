@@ -7,7 +7,13 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PlayerCategoryService} from '../../../../core/services/tabt/player-category.service';
 import {ToastController} from '@ionic/angular';
-import {map, share, switchMap, take} from 'rxjs/operators';
+import {map, share, shareReplay, switchMap, take} from 'rxjs/operators';
+import {FavoritesState, ToggleMemberFromFavorites} from '../../../../core/store/favorites';
+import {Store} from '@ngxs/store';
+import {WeeklyElo} from '../../../../core/api/models/weekly-elo';
+import {MembersService} from '../../../../core/api/services/members.service';
+import {NotificationType} from '@capacitor/haptics';
+import {HapticsService} from '../../../../core/services/haptics.service';
 
 @Component({
     selector: 'beping-other-players',
@@ -22,12 +28,16 @@ export class OtherPlayersComponent implements OnInit {
     currentMemberEntry$: Observable<MemberEntry>;
     userMemberEntries$: Observable<UserMemberEntries>;
     latestMatches$: Observable<TeamMatchesEntry[]>;
+    isFavorite$: Observable<boolean>;
+    weeklyElo$: Observable<WeeklyElo[]>;
 
     constructor(
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
         private readonly playerCategoryService: PlayerCategoryService,
-        private readonly toastrCtrl: ToastController
+        private readonly membersService: MembersService,
+        private readonly toastrCtrl: ToastController,
+        private readonly store: Store,
     ) {
     }
 
@@ -35,12 +45,21 @@ export class OtherPlayersComponent implements OnInit {
         this.memberUniqueIndex$ = this.activatedRoute.paramMap.pipe(
             map((params: ParamMap) => Number(params.get('id')))
         );
+
+        this.isFavorite$ = this.memberUniqueIndex$.pipe(
+            switchMap((id) => this.store.select(FavoritesState.isPlayerInFavorite(id)))
+        );
+
         this.userMemberEntries$ = this.memberUniqueIndex$.pipe(
             switchMap((memberIndex) => this.playerCategoryService.getMemberPlayerCategories(memberIndex)),
             share()
         );
         this.categoriesAvailable$ = this.userMemberEntries$.pipe(
             map((memberEntries: UserMemberEntries) => PlayerCategoryService.getPlayedCategories(memberEntries))
+        );
+
+        this.weeklyElo$ = this.memberUniqueIndex$.pipe(
+            switchMap((uniqueIndex) => this.membersService.findMemberEloHistory({uniqueIndex}))
         );
 
         this.userMemberEntries$.pipe(
@@ -54,7 +73,8 @@ export class OtherPlayersComponent implements OnInit {
             this.currentCategory$,
             this.userMemberEntries$
         ]).pipe(
-            map(([category, userMemberEntries]) => userMemberEntries[category])
+            map(([category, userMemberEntries]) => userMemberEntries[category]),
+            shareReplay(1)
         );
     }
 
@@ -66,6 +86,7 @@ export class OtherPlayersComponent implements OnInit {
         });
         toast.present();
     }
+
     getIcon(category: PLAYER_CATEGORY) {
         switch (category) {
             case PLAYER_CATEGORY.MEN:
@@ -76,5 +97,12 @@ export class OtherPlayersComponent implements OnInit {
             case PLAYER_CATEGORY.VETERANS_WOMEN:
                 return 'female-outline';
         }
+    }
+
+    toggleFavorite() {
+        this.currentMemberEntry$.pipe(
+            take(1),
+            switchMap((member: MemberEntry) => this.store.dispatch(new ToggleMemberFromFavorites(member)))
+        ).subscribe();
     }
 }

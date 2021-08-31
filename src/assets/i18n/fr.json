@@ -11,10 +11,10 @@
   "APP_RATING": {
    "TITLE": "Notez %@ ?",
    "MESSAGE": "Si vous aimez utiliser %@, n’oubliez pas de voter sur l’App Store. Cela ne prend qu’une minute. Merci d’avance pour votre soutien !",
-   "CANCEL_BUTTON_LABEL": "Non, merci",
+   "CANCEL_BUTTON_LABEL": "Non merci",
    "LATER_BUTTON_LABEL": "Me le rappeler ultérieurement",
    "RATE_BUTTON_LABEL": "Noter maintenant",
-   "YES_BUTTON_LABEL": "Oui!",
+   "YES_BUTTON_LABEL": "Oui",
    "NO_BUTTON_LABEL": "Pas vraiment",
    "APPRATE_PROMPT_TITLE": "Aimez-vous utiliser %@ ?",
    "FEEDBACK_PROMPT_TITLE": "Avez-vous envie de nous envoyer un commentaire ?"
@@ -30,7 +30,7 @@
     "CLUB": "Club",
     "CLUBS": "Clubs",
     "MATCH": "Match",
-    "MATCHES": "Matches",
+    "MATCHES": "Matchs",
     "DIVISION": "Division",
     "DIVISIONS": "Divisions",
     "PROVINCE": "Province",
@@ -58,6 +58,13 @@
     "DATE" : "Date"
   },
   "DASHBOARD": {
+    "LOGIN_TO_AFTT": "Se connecter avec resultats.aftt.be",
+    "RANKING_ESTIMATION": "Votre estimation de classement n'apparaît pas?",
+    "NO_RESULTS": "Aucunes statistiques disponibles",
+    "IN_THIS_CATEGORY": "Aucunes statistiques disponibles",
+    "NO_PLAYER_SELECTED": "Pas de joueur sélectionné",
+    "CHOOSE_PLAYER": "Sélectionner un joueur",
+    "YOU_CAN_SEE_RESULTS_BOTTOM_NAV": "Vous pouvez consulter les résultats en utilisant la navigation dans le bas de l'écran",
     "PERSONAL_STATS": "Statistiques personnelles",
     "CANT_LOAD_DASHBOARD": "Impossible de charger le tableau de bord",
     "SUMMARY_BY_RANKING": "Résumé par classement",
@@ -68,7 +75,8 @@
     "SCORE_DISTRIBUTION": "Répartition des scores",
     "ELO_POINT" : "Points ELO",
     "LATEST_MATCHES" : "Derniers matchs",
-    "PLAYER_CATEGORY_CHANGED": "Catégorie {{category}} chargée"
+    "PLAYER_CATEGORY_CHANGED": "Catégorie {{category}} chargée",
+    "SEE_DETAILS": "Afficher détails"
   },
   "MATCH_ENTRY_SHEET": {
     "MATCH_ENTRY_SHEET": "Feuille de match",
@@ -90,6 +98,13 @@
       "YOUR_FAVORITE": "Vos favoris"
     },
     "PICK_DIVISION": "Choisissez une division"
+  },
+  "FAVORITES": {
+    "NO_PLAYERS": "Aucun joueur en favoris",
+    "NO_CLUBS": "Aucun club en favoris",
+    "NO_DIVISIONS": "Aucune division en favoris",
+    "NO_FAVORITE": "Aucun favori",
+    "INSTRUCTIONS": "Vous pouvez ajouter des favoris lorsque vous naviguez sur la page d'un club, d’un joueur ou d’une division"
   },
   "CALENDAR_CLUB": {
     "CANT_LOAD_CALENDAR": "Impossible de charger le calendrier",
@@ -142,14 +157,14 @@
     "IT_S_OVER": "C'est fini!",
     "LAST_STEP": "Dernière étape !",
     "WHO_ARE_YOU": "Qui êtes-vous ?",
-    "NEED_IDENTITY_TO_FIND_YOUR_DATE": "Nous devons savoir qui vous êtes pour vous sélectionner les informations à vous montrer.",
-    "WHO_AM_I": "Qui suis-je?",
+    "NEED_IDENTITY_TO_FIND_YOUR_DATE": "Nous devons savoir qui vous êtes pour sélectionner les informations à vous montrer.",
+    "WHO_AM_I": "Qui suis-je ?",
     "HELLO_NAME": "Bonjour {{name}}",
     "HELLO": "Bonjour",
     "PREFETCH_DATA_ACCESSIBLE_OFFLINE": "On précharge vos infos pour y avoir accès sans internet.",
-    "READY": "Tout est prêt!",
+    "READY": "Tout est prêt !",
     "START": "Démarrez !",
-    "START_BEPING": "Commercer à utiliser BePing",
+    "START_BEPING": "Commencer à utiliser BePing",
     "NO_PLAYER_FOUND": "Aucun joueur trouvé"
   },
   "PLAYER_STATS": {
@@ -164,7 +179,7 @@
     "CHOOSE_PLAYER_TO_RATE": "Choisir un joueur à noter",
     "DELETE_NOTE": "Supprimer la note",
     "ADD_NOTE": "Ajouter une note",
-    "ARE_YOU_SURE_TO_DELETE_NOTE": "Etes-vous certain de vouloir supprimer la note?",
+    "ARE_YOU_SURE_TO_DELETE_NOTE": "Êtes-vous certain de vouloir supprimer la note?",
     "NOTES_ABOUT_NAME": "Notes de {{firstname}} {{lastname}}",
     "NOTES": "Notes",
     "SEARCH_PLAYER": "Chercher un joueur",
@@ -196,10 +211,14 @@
   },
   "SEARCH": {
     "SEARCH": "Rechercher",
+    "SEARCHING_PLAYERS": "Recherche de joueurs",
+    "SEARCHING_MATCHES": "Recherche de matchs",
     "NAME_OR_INDEX": "Nom ou indice",
     "NAME_OR_AFFILIATE_INDEX": "Nom ou numéro d'affilié",
     "NO_RESULT": "Aucun résultat",
-    "CLUB_MAP" : "Carte des clubs"
+    "CLUB_MAP" : "Carte des clubs",
+    "SEARCH_EXPLANATION": "Vous pouvez chercher joueurs, divisions, clubs ou feuilles de match",
+    "PLACEHOLDER": "Club, division, joueur, match"
   },
   "TEAM_STAT": {
     "LOADING_TEAM_RESULTS": "Chargement des résultats de l'équipe",
@@ -228,21 +247,25 @@
   },
   "SETTINGS": {
     "CHANGE_USER": "Changer d'utilisateur",
-    "ACTIVE_USER": "Joueur actif",
+    "ACTIVE_USER": "Joueur principal",
     "CANT_LOAD_TRANSLATIONS": "Impossible de télécharger les traductions des divisions",
     "BEPING_NOT_AFFILIATE": "BePing n'est associée avec aucune organisation officielle (AFTT, VTTL, FRBTT).",
     "BEPING_NOT_OFFICIAL": "Cette application n'est pas officielle. Si une différence venait à être constatée pour les rencontres de l'AFTT, seule l'application officielle de l’AFTT doit être prise en compte.",
     "CONTACT_DEVELOPER": "Contacter le développeur",
     "CONTRIBUTE_TO_DEV": "Payer une bière au développeur",
     "SOURCE_CODE": "Code source de l'application",
-    "MAKE_A_DONATION": "Make a donation",
+    "MAKE_A_DONATION": "Faire un don",
     "NO_THANKS": "Non merci",
     "SETTINGS": "Réglages",
     "WANNA_HELP": "Voulez-vous aider ?",
     "DONATION_GOAL": "BePing est une application gratuite et restera gratuite. Maintenir une application en vie coûte un peu argent. Les dons seront entièrement consacrés à l'amélioration de l'application 😊",
     "CHANGE_LANGUAGE": "Changer de langue",
-    "DUTCH": "Néerlandais",
+    "DUTCH": "Dutch",
     "FRENCH": "Français",
+    "ENGLISH": "English",
+    "WHICH_CLUB": "Dans quel club jouez-vous?",
+    "WHO_ARE_YOU": "Qui êtes-vous?",
+    "APPLY": "Appliquer",
     "RELOAD_DATA": "Recharger les données du profil",
     "CURRENT_SEASON": "Saison actuelle",
     "SYNC_IN_PROGRESS" : "Synchronisation en cours...",
@@ -260,7 +283,10 @@
     "TABT_ACCOUNT": "La connexion à votre compte AFTT permet à BePing de récuperer plus d'informations sur votre profil (classement provisoire, listes de force...)",
     "DISPLAY_RANKING": "Catégorie principale",
     "CATEGORY_TO_SHOW_IN_HOME": "Catégories des matchs affichés sur la page d'accueil",
-    "WHICH_CATEGORY_DO_YOU_WANT": "Quelle catégorie voulez-vous utiliser?"
+    "WHICH_CATEGORY_DO_YOU_WANT": "Quelle catégorie voulez-vous utiliser?",
+    "PRIVACY_POLICY": "Politique de confidentialité",
+    "TERMS_AND_CONDITIONS": "Conditions d'utilisation",
+    "MORE_INFO": "Informations complémentaires"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaire BePing"
@@ -271,13 +297,19 @@
     "INFORMATION" : "Informations",
     "VERIFY_INFO" : "Vérifiez les informations",
     "REGISTER" :	"S'inscrire",
-    "CHOOSE_SERIE" : "Choisissez une série",
+    "CHOOSE_SERIE" : "Choisir une série",
     "DATE" : "Date",
     "END_REGISTRATION_DATE" : "Fin des inscriptions",
     "SERIES" : "Séries",
     "LOADING_RESULTS": "Chargement des résultats...",
     "FUTURE" : "A venir",
-    "PAST": "Terminé"
+    "PAST": "Terminé",
+    "FILTERS": "Filtres",
+    "DISPLAY_FINISHED": "Afficher tournois terminés",
+    "TOURNAMENT_ENDED": "Tournoi terminé",
+    "REGISTER_ENDED": "Inscriptions terminées",
+    "REGISTRATIONS": "Inscriptions",
+    "REGISTERED_ON": "Inscription le"
   },
   "NAVIGATION":{
     "NAVIGATE_TO_MATCH" : "Itinéraire jusqu'au match",
@@ -288,7 +320,7 @@
     "REMEMBER_CHOICE" : "Se souvenir de son choix",
     "USE_SAME_APP_NEXT_TIME" :"Utiliser la même application pour la prochaine navigation",
     "YES" : "Oui",
-    "NO" : "NON",
+    "NO" : "Non",
     "IMPOSSIBLE_TO_LAUNCH_NAVIGATION" : "Impossible de lancer la navigation"
   },
   "TABLE_TENNIS_BELGIUMTV": {
@@ -312,13 +344,16 @@
     "NO_TEAM": "Pas d'équipes"
   },
   "DIVISION_LEVEL":{
+    "LEVEL": "Niveau",
     "NATIONAL": "National",
     "HAINAUT": "Hainaut",
     "VLAAMS_BRABANT_BR": "Brabant flamand",
     "SUPER_DIVISION": "Super Division",
-    "OOST_VLANDEREN": "Flandre-Orientale",
+    "SUPER_DIVISION_MEN": "Super Division hommes",
+    "SUPER_DIVISION_WOMEN": "Super Division dames",
+    "OOST_VLANDEREN": "Flandre orientale",
     "ANTWERP": "Anvers",
-    "WEST_VLAANDEREN": "Flandre-Occidentale",
+    "WEST_VLAANDEREN": "Flandre occidentale",
     "LIMBURG": "Limbourg",
     "BRUSSELS_BRABANT_WALLON": "Brabant wallon",
     "NAMUR": "Namur",
@@ -327,6 +362,10 @@
     "REGION_VTTL": "Régional VTTL",
     "IWB": "IWB"
   },
+  "PROVINCE": "Province",
+  "REGIONAL": "Régional",
+  "PROVINCE_SHORT": "Prov.",
+  "REGIONAL_SHORT": "Régional",
   "PLAYER_CATEGORY": {
     "MEN": "Seniors hommes",
     "WOMEN": "Seniors dames",
@@ -348,5 +387,31 @@
     "10":"Novembre",
     "11":"Décembre"
   },
-  "USER": "Utilisateur"
+  "USER": "Utilisateur",
+  "BACK": "Retour",
+  "ONBOARDING": {
+    "CONTINUE": "Continuer",
+    "SKIP": "Passer",
+    "WELCOME_ON_BEPING": "Bienvenue sur BePing!",
+    "BEPING_THE_PING_APP": "L'application de Ping en Belgique",
+    "FIND_ALL_RESULTS": "Trouver tous les résultats et statistiques",
+    "ALL_RANKINGS": "Classements des divisions, meilleurs joueurs par division, ...",
+    "FOLLOW_FAVORITES": "Suivre ses favoris facilement",
+    "DIRECT_LINK_TO_FAVORITE":"Liens directs vers vos clubs, joueurs ou divisions favorites",
+    "FIND_TOUNAMENTS": "Trouver des tournois",
+    "FIND_AND_REGISTER_TOURNAMENTS": "Rechercher et s'inscrire à des tournois dans sa région",
+    "SEARCH_QUICKLY": "Rechercher ultra rapidement",
+    "SEARCH_EVERYTHING": "Rechercher des joueurs, divisions, clubs et même des feuilles de match",
+    "LETS_GO": "C'est parti",
+    "MADE_WITH_LOVE": "Fait avec ❤️ par Florent Cardoen",
+    "READ_AND_ACCEPT": "J'ai lu et j'accepte",
+    "TERMS_OF_USAGE": "les conditions générales d'utilisation",
+    "AND": "et",
+    "PRIVACY_POLICY": "la politique de confidentialité",
+    "OF_BEPING": "de BePing",
+    "START_BEPING": "Démarrer BePing",
+    "RETRY": "Réessayer",
+    "AN_ERROR_OCCURED": "Une erreur est survenue lors de l'activation de BePing",
+    "PREPARATION": "Préparation de BePing en cours..."
+  }
 }

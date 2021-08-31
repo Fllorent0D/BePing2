@@ -5,6 +5,7 @@ import {Device} from '@capacitor/device';
 import {SetTheme, UpdateCurrentLang, UpdateCurrentLangSuccess} from './settings.actions';
 import {Injectable} from '@angular/core';
 import {TABT_DATABASES} from '../../interceptors/tabt-database-interceptor.service';
+import {AnalyticsService} from '../../services/firebase/analytics.service';
 
 export enum THEME {
     LIGHT = 'light',
@@ -38,6 +39,7 @@ export class SettingsState implements NgxsOnInit {
             case LANG.NL:
                 return TABT_DATABASES.VTTL;
             case LANG.FR:
+            case LANG.EN:
             default:
                 return TABT_DATABASES.AFTT;
         }
@@ -49,7 +51,8 @@ export class SettingsState implements NgxsOnInit {
     }
 
     constructor(
-        private readonly translateService: TranslateService
+        private readonly translateService: TranslateService,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -59,7 +62,16 @@ export class SettingsState implements NgxsOnInit {
         if (!state.lang) {
             Device.getLanguageCode().then((langCode) => {
                 const lang: string = langCode.value.slice(0, 2);
-                dispatch(new UpdateCurrentLang(lang === LANG.NL ? LANG.NL : LANG.FR));
+                switch (lang) {
+                    case LANG.NL:
+                        dispatch(new UpdateCurrentLang(LANG.NL));
+                        break;
+                    case LANG.FR:
+                        dispatch(new UpdateCurrentLang(LANG.FR));
+                        break;
+                    default:
+                        dispatch(new UpdateCurrentLang(LANG.EN));
+                }
             });
         } else {
             this.translateService.setDefaultLang(state.lang);
@@ -68,7 +80,7 @@ export class SettingsState implements NgxsOnInit {
 
     @Action(UpdateCurrentLang)
     updateCurrentLang({patchState, dispatch}: StateContext<SettingsStateModel>, action: UpdateCurrentLang) {
-
+        this.analyticsService.setUserProperty('lang', action.lang);
         this.translateService.use(action.lang);
 
         patchState({

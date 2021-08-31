@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TournamentsFilter} from '../../containers/tournaments-page/tournaments-page.component';
 import {FormControl, FormGroup} from '@angular/forms';
-import {PopoverController} from '@ionic/angular';
+import {ModalController} from '@ionic/angular';
 
 @Component({
     selector: 'beping-tournament-filters',
@@ -15,7 +15,7 @@ export class TournamentFiltersComponent implements OnInit {
     formGroup: FormGroup;
 
     constructor(
-        private readonly popoverController: PopoverController
+        private readonly modalCtrl: ModalController
     ) {
     }
 
@@ -27,10 +27,13 @@ export class TournamentFiltersComponent implements OnInit {
     }
 
     submit() {
-        this.popoverController.dismiss({
+        this.modalCtrl.dismiss({
             levelsToDisplay: this.formGroup.get('levelsToDisplay').value,
             showPastTournaments: this.formGroup.get('showPastTournaments').value
         } as TournamentsFilter);
     }
 
+    cancel() {
+        this.modalCtrl.dismiss();
+    }
 }

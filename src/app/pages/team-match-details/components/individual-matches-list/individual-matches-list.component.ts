@@ -16,9 +16,9 @@ export class IndividualMatchesListComponent implements OnInit {
     ngOnInit() {
     }
 
-    getPlayerWithId(uniqueIndex: string): Player {
+    getPlayerWithId(uniqueIndex: number[]): Player[] {
         return [...this.match.MatchDetails.AwayPlayers.Players, ...this.match.MatchDetails.HomePlayers.Players]
-            .find((player) => player.UniqueIndex === Number(uniqueIndex));
+            .filter((player) => uniqueIndex.includes(player.UniqueIndex));
     }
 
 }

@@ -1,14 +1,22 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
         </ion-buttons>
         <ion-title
-                *ngIf="currentMemberEntry$|async as memberEntry">{{memberEntry.FirstName | titlecase}} {{memberEntry.LastName | titlecase}}</ion-title>
+                *ngIf="currentMemberEntry$|async as memberEntry">{{memberEntry.FirstName | titlecase}} {{memberEntry.LastName | titlecase}}
+        </ion-title>
+        <ion-buttons slot="end">
+            <beping-favorite-btn
+                    [enabled]="isFavorite$|async"
+                    (clicked)="toggleFavorite()"
+            ></beping-favorite-btn>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-bottom">
     <beping-player-content
+            [weeklyElo]="weeklyElo$|async"
             [categoriesAvailable]="categoriesAvailable$|async"
             [currentCategory]="currentCategory$|async"
             [latestMatches]="latestMatches$|async"

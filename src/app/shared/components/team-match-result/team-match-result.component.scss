@@ -3,7 +3,9 @@
   padding-bottom: 10px;
 }
 
-
+.small-date{
+  font-size: 13px;
+}
 
 .date {
   color: var(--ion-color-pink);
@@ -16,7 +18,4 @@ beping-team-match-result {
     font-size: 15px;
   }
 
-  ion-item {
-    height: 90px;
-  }
 }

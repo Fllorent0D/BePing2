@@ -11,5 +11,7 @@ export interface TournamentEntry {
   SerieCount: number;
   SerieEntries: Array<TournamentSerieEntry>;
   UniqueIndex: number;
-  Venue?: {  };
+  Venue?: {
+    Name: string
+  };
 }

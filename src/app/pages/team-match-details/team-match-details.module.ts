@@ -1,8 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {TeamMatchDetailsRoutingModule} from './team-match-details-routing.module';
-import {FormsModule} from '@angular/forms';
-import {IonicModule} from '@ionic/angular';
 import {SharedModule} from '../../shared/shared.module';
 import {TeamMatchDetailsPage} from './containers/team-match-details/team-match-details-page.component';
 import {TeamMatchPlayerListComponent} from './components/team-match-player-list/team-match-player-list.component';
@@ -22,10 +19,7 @@ import {TeamMatchIndividualMatchComponent} from './components/individual-matches
         TeamMatchIndividualMatchComponent
     ],
     imports: [
-        CommonModule,
         SharedModule,
-        FormsModule,
-        IonicModule,
         TeamMatchDetailsRoutingModule
     ]
 })

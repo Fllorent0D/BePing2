@@ -1,9 +1,9 @@
-<ion-header translucent="true">
+<ion-header>
     <ion-toolbar color="primary">
-        <ion-title>Recherche</ion-title>
+        <ion-title>{{'SEARCH.SEARCH'|translate}}</ion-title>
     </ion-toolbar>
     <ion-toolbar color="primary">
-        <ion-searchbar [formControl]="searchControl" placeholder="club, division, joueur, match"></ion-searchbar>
+        <ion-searchbar [formControl]="searchControl" [placeholder]="'SEARCH.PLACEHOLDER'|translate"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -11,7 +11,7 @@
     <ng-container *ngIf="clubsFound$ | async as clubs">
         <ion-list *ngIf="clubs.results?.length > 0">
             <ion-list-header>
-                {{ 'Club' }}
+                {{ 'COMMON.CLUBS' | translate }}
             </ion-list-header>
             <beping-club-item
                     *ngFor="let club of clubs.results"
@@ -25,7 +25,7 @@
     <ng-container *ngIf="divisionsFound$ | async as divisions">
         <ion-list *ngIf="divisions.results?.length > 0">
             <ion-list-header>
-                {{ 'Divisions' }}
+                {{ 'COMMON.DIVISIONS'| translate }}
             </ion-list-header>
             <ion-item detail *ngFor="let div of divisions.results" (click)="divisionClicked(div)">
                 <ion-label class="ion-text-wrap">
@@ -40,7 +40,7 @@
     <ng-container *ngIf="membersFound$ | async as membersSearchResults">
         <ion-list *ngIf="membersSearchResults.results?.length > 0">
             <ion-list-header>
-                {{ 'Joueurs' }}
+                {{ 'COMMON.PLAYERS'| translate }}
             </ion-list-header>
             <beping-member-item
                     [member]="player"
@@ -51,12 +51,12 @@
         </ion-list>
         <ion-list *ngIf="membersSearchResults.isLoading">
             <ion-list-header>
-                {{ 'Joueurs' }}
+                {{ 'COMMON.PLAYERS'|translate }}
             </ion-list-header>
             <ion-item>
                 <ion-spinner slot="start"></ion-spinner>
                 <ion-label>
-                    Recherche de joueurs
+                    {{'SEARCH.SEARCHING_PLAYERS'|translate}}
                 </ion-label>
             </ion-item>
         </ion-list>
@@ -66,7 +66,7 @@
     <ng-container *ngIf="matchesFound$ | async as matches">
         <ion-list *ngIf="matches.results?.length > 0">
             <ion-list-header>
-                {{ 'Matchs' }}
+                {{ 'COMMON.MATCHES'|translate }}
             </ion-list-header>
             <beping-team-match-result
                     *ngFor="let matchesEntry of matches.results" [match]="matchesEntry"
@@ -76,12 +76,12 @@
         </ion-list>
         <ion-list *ngIf="matches.isLoading">
             <ion-list-header>
-                {{ 'Matchs' }}
+                {{ 'COMMON.MATCHES'|translate }}
             </ion-list-header>
             <ion-item>
                 <ion-spinner slot="start"></ion-spinner>
                 <ion-label>
-                    Recherche de match
+                    {{ 'SEARCH.SEARCHING_MATCHES'|translate }}
                 </ion-label>
             </ion-item>
         </ion-list>
@@ -89,14 +89,14 @@
     <ng-container *ngIf="noResult$ | async">
         <div class="no-result-container ion-padding">
             <ion-icon [color]="'grey'" name="information-circle-outline" size="large"></ion-icon>
-            <ion-label [color]="'grey'"><h1>Aucun résultat trouvé</h1></ion-label>
+            <ion-label [color]="'grey'"><h1>{{ 'SEARCH.NO_RESULT'|translate }}</h1></ion-label>
 
         </div>
     </ng-container>
     <ng-container *ngIf="introScreen$ | async">
         <div class="no-result-container ion-padding">
             <ion-icon [color]="'grey'" name="search-outline" size="large"></ion-icon>
-            <ion-label [color]="'grey'"><h1>Vous pouvez chercher joueur, division, club ou feuille de match</h1></ion-label>
+            <ion-label [color]="'grey'"><h1>{{'SEARCH.SEARCH_EXPLANATION'|translate}}</h1></ion-label>
         </div>
     </ng-container>
 </ion-content>

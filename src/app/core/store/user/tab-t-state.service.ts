@@ -15,6 +15,7 @@ import {TestOutput} from '../../api/models/test-output';
 import {ToastController} from '@ionic/angular';
 import {SeasonEntry} from '../../api/models/season-entry';
 import {SeasonStateModel} from '../season';
+import {AnalyticsService} from '../../services/firebase/analytics.service';
 
 export interface TabTStateModel {
     account: string | null;
@@ -40,7 +41,8 @@ export class TabTState {
     }
 
     constructor(
-        private readonly testService: HealthService
+        private readonly testService: HealthService,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -53,8 +55,10 @@ export class TabTState {
         }).pipe(
             map((response: TestOutput) => {
                 if (!response.IsValidAccount) {
+                    this.analyticsService.logEvent('login_failure', { account: action.account});
                     throw new Error('Invalid login');
                 }
+                this.analyticsService.logEvent('login_success', { account: action.account});
                 return response;
             }),
             tap((response: TestOutput) => {
@@ -69,6 +73,7 @@ export class TabTState {
 
     @Action(Logout)
     async logout({patchState}: StateContext<TabTStateModel>) {
+        this.analyticsService.logEvent('logout');
         return patchState({
             account: null,
             password: null

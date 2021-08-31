@@ -10,19 +10,20 @@
                     <ion-col>
                         <ion-text>{{victories}} ({{victoriesPct}}%)</ion-text>
                         <br>
-                        <ion-text color="grey">Victoires</ion-text>
+                        <ion-text color="grey">{{'COMMON.WINS'|translate}}</ion-text>
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
                         <ion-text>{{defeats}} ({{defeatsPct}}%)</ion-text>
                         <br>
-                        <ion-text color="grey">Défaites</ion-text>
+                        <ion-text color="grey">{{'COMMON.DEFEATS'|translate}}</ion-text>
                     </ion-col>
                 </ion-row>
                 <ion-row class="ion-align-items-end">
                     <ion-col>
-                        <ion-button fill="clear" size="small" (click)="isOpen = !isOpen">Afficher détails
+                        <ion-button fill="clear" size="small" (click)="isOpen = !isOpen">
+                            {{'DASHBOARD.SEE_DETAILS'|translate}}
                         </ion-button>
                     </ion-col>
                 </ion-row>

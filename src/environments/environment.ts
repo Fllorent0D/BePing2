@@ -4,6 +4,7 @@
 
 export const environment = {
     production: false,
+    hmr: false,
     tabtUrl: 'http://localhost:3004',
     internalPages: {
         basePath: '/static/',

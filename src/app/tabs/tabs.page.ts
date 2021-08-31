@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController} from '@ionic/angular';
+import {HapticsService} from '../core/services/haptics.service';
 
 @Component({
     selector: 'beping-tabs',
@@ -11,6 +11,7 @@ export class TabsPage implements OnInit {
     selectedTab: string;
 
     constructor(
+        private readonly haptics: HapticsService
     ) {
     }
 
@@ -19,7 +20,7 @@ export class TabsPage implements OnInit {
     }
 
     tabChanged({tab}: { tab: string }) {
-        console.log(this.selectedTab);
+        this.haptics.hapticsImpact();
         this.selectedTab = tab;
     }
 }

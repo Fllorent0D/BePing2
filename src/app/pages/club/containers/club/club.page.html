@@ -1,7 +1,7 @@
-<ion-header translucent="true">
-    <ion-toolbar>
+<ion-header >
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
         </ion-buttons>
         <ion-title>{{(club$ |async).LongName}}</ion-title>
         <ion-buttons slot="end">
@@ -33,10 +33,12 @@
         <super-tabs-container>
             <super-tab>
                 <beping-club-player-list-tab
-                        [members]="members$ | async"
-                        (memberClicked)="navigateToPlayer($event)"
-                >
-                </beping-club-player-list-tab>
+                            [members]="members$ | async"
+                            (memberClicked)="navigateToPlayer($event)"
+                    >
+                    </beping-club-player-list-tab>
+
+
             </super-tab>
             <super-tab>
                 <beping-club-team-list-tab
@@ -58,4 +60,19 @@
             </super-tab>
         </super-tabs-container>
     </super-tabs>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="tabIndex !== 0">
+        <ion-fab-button>
+            <ion-icon [name]="getIcon(currentCategory$ | async)"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+            <ion-fab-button
+                    [attr.data-desc]="'PLAYER_CATEGORY.' + category | translate"
+                    [disabled]="category === (currentCategory$|async)"
+                    [color]="category === (currentCategory$|async)?'primary': 'light'"
+                    *ngFor="let category of CATEGORIES"
+                    (click)="categoryClicked(category)">
+                <ion-icon [name]="getIcon(category)"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
 </ion-content>

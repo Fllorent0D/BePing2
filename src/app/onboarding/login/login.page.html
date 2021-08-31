@@ -1,4 +1,4 @@
-<ion-header translucent="true">
+<ion-header >
     <ion-toolbar>
         <ion-title>Bienvenue dans BePing</ion-title>
     </ion-toolbar>
@@ -10,12 +10,6 @@
             <ion-title size="large">Bienvenue</ion-title>
         </ion-toolbar>
     </ion-header>
-    <div class="ion-padding-horizontal">
-        <p>
-            Create a list with all possible keywords that fit to your product, service or business field. The more the
-            better.
-        </p>
-    </div>
 
     <ion-list class="ion-margin-bottom">
         <ion-item>
@@ -37,6 +31,17 @@
             </ng-container>
         </ion-item>
     </ion-list>
+
+    <div class="ion-padding-horizontal">
+        <p>Connectez-vous avec l'AFTT et BePing fera le reste.</p>
+        <section>
+            <ion-button expand="block" (click)="loginWithAFTT()">Connexion avec resultat.aftt.be</ion-button>
+        </section>
+    </div>
+    <hr>
+    <p class="ion-padding-horizontal">
+        Sélectionnez manuellement votre identité.
+    </p>
     <ion-list class="ion-margin-bottom">
         <ion-item [disabled]="state.hasError || state.isLoading" button (click)="chooseClub()">
             <ion-icon name="ellipse-outline" slot="start" *ngIf="!selectedClub"></ion-icon>
@@ -58,5 +63,11 @@
     <section>
         <ion-button expand="block" fill="clear" (click)="startBePing()" [disabled]="!selectedMember || !selectedClub">Démarrer BePing</ion-button>
     </section>
-
+    <hr>
+    <div class="ion-padding-horizontal">
+        <p>Je ne suis pas affilié, je veux juste consulter les résultats.</p>
+        <section>
+            <ion-button expand="block" fill="clear" (click)="startBePing()">Démarrer sans identification</ion-button>
+        </section>
+    </div>
 </ion-content>

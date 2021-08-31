@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
-import {BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, ReplaySubject} from 'rxjs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
-import {map, share, switchMap, take, tap} from 'rxjs/operators';
+import {map, switchMap, take} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
@@ -14,8 +14,12 @@ import {TeamEntry} from '../../../../core/api/models/team-entry';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
-import {add, format, sub} from 'date-fns';
+import {add, sub} from 'date-fns';
 import {FavoritesState, ToggleClubFromFavorites} from '../../../../core/store/favorites';
+import {PLAYER_CATEGORY} from '../../../../core/models/user';
+import {ImpactStyle} from '@capacitor/haptics';
+import {HapticsService} from '../../../../core/services/haptics.service';
+import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 
 @Component({
     selector: 'beping-club',
@@ -36,6 +40,8 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     isFavorite$: Observable<boolean>;
 
     loadLater: Observable<TeamMatchesEntry[]>;
+    CATEGORIES = [PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN, PLAYER_CATEGORY.YOUTH, PLAYER_CATEGORY.VETERANS];
+    currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
 
     constructor(
         private readonly activatedRoute: ActivatedRoute,
@@ -45,7 +51,9 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
         private readonly clubService: ClubsService,
         private readonly matchesService: MatchesService,
         private readonly clubMembersListService: ClubMembersListService,
-        protected readonly changeDetectionRef: ChangeDetectorRef
+        protected readonly changeDetectionRef: ChangeDetectorRef,
+        private readonly hapticService: HapticsService,
+        private readonly analyticsService: AnalyticsService
     ) {
         super(changeDetectionRef);
 
@@ -54,6 +62,7 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.currentCategory$.next(PLAYER_CATEGORY.MEN);
 
         this.club$ = this.activatedRoute.paramMap.pipe(
             map((params: ParamMap) => params.get('uniqueIndex') as string),
@@ -72,56 +81,23 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
             switchMap((club) => this.matchesService.findAllMatches({club: club.UniqueIndex}))
         );
 
-        /*
-                this.matches$ = combineLatest([
-                    this.club$,
-                    this.fromToDate$
-                ]).pipe(
-                    switchMap(([club, {to, from}]) => this.matchesService.findAllMatches({
-                        club: club.UniqueIndex,
-                        yearDateFrom: format(from, 'yyyy-LL-dd'),
-                        yearDateTo: format(to, 'yyyy-LL-dd')
-                    })),
-                    map((matches: TeamMatchesEntry[]) => matches.filter(
-                        (m) => !this.matches.find((alreadyExisting) => alreadyExisting.MatchUniqueId === m.MatchUniqueId)
-                    )),
-                    tap((newMatches) => {
-                        if (this.matches.length <= 5) {
-                            this.loadMore();
-                        }
-                    }),
-                    share()
-                );
-
-         */
-        /*
-        this.loadLater = combineLatest([this.club$, this.to$])
-            .pipe(
-                switchMap(([club, to]) => this.matchesService.findAllMatches({
-                    club: club.UniqueIndex,
-                    yearDateFrom: format(add(to, {days: 1}), 'yyyy-LL-dd'),
-                    yearDateTo: format(add(to, {weeks: 2}), 'yyyy-LL-dd')
-                })),
-                map((matches: TeamMatchesEntry[]) => matches.sort((a, b) => a.Date > b.Date ? 1 : -1)),
-                share()
-            );
-
-        this.loadLater.subscribe((test) => {
-            this.matches.push(...test);
-            if (this.matches.length < 10) {
-                this.loadLaterMatches();
-            }
-            this.changeDetectionRef.markForCheck();
-        });*/
-
         this.venues$ = this.club$.pipe(
             map((club) => club.VenueEntries)
         );
 
-        this.members$ = this.club$.pipe(
-            switchMap((club: ClubEntry) => this.clubService.findClubMembers({clubIndex: club.UniqueIndex})),
+        this.members$ = combineLatest([
+            this.currentCategory$,
+            this.club$
+        ]).pipe(
+            switchMap(([category, club]) => this.clubService.findClubMembers({clubIndex: club.UniqueIndex, playerCategory: category})),
             map((members: MemberEntry[]) => this.clubMembersListService.transformToClubMembersList(members))
         );
+    }
+
+    async categoryClicked(category: PLAYER_CATEGORY) {
+        this.analyticsService.logEvent('member_category_changed');
+        this.hapticService.hapticsImpact(ImpactStyle.Medium);
+        this.currentCategory$.next(category);
     }
 
     navigateToPlayer(uniqueIndex: number) {
@@ -167,11 +143,24 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
          */
     }
 
+    getIcon(category: PLAYER_CATEGORY) {
+        switch (category) {
+            case PLAYER_CATEGORY.MEN:
+            case PLAYER_CATEGORY.VETERANS:
+                return 'male-outline';
+            case PLAYER_CATEGORY.WOMEN:
+            case PLAYER_CATEGORY.VETERANS_WOMEN:
+                return 'female-outline';
+            case PLAYER_CATEGORY.YOUTH:
+                return 'happy-outline';
+        }
+    }
+
     toggleClubFavorite() {
         this.club$.pipe(
-            take(1)
-        ).subscribe((club) => this.store.dispatch(new ToggleClubFromFavorites(club.UniqueIndex)));
-
+            take(1),
+            switchMap((club: ClubEntry) => this.store.dispatch(new ToggleClubFromFavorites(club)))
+        ).subscribe();
     }
 }
 

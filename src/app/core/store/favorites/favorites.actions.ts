@@ -1,13 +1,25 @@
-export class ToggleDivisionFromFavorites {
-    static readonly type = '[divisions] toggle division from favorites';
+import {ClubEntry} from '../../api/models/club-entry';
+import {DivisionEntry} from '../../api/models/division-entry';
+import {MemberEntry} from '../../api/models/member-entry';
 
-    constructor(public divisionId: string) {
+
+export class ToggleClubFromFavorites {
+    static readonly type = '[Favorites] toggle club from favorites';
+
+    constructor(public payload: ClubEntry) {
     }
 }
 
-export class ToggleClubFromFavorites {
-    static readonly type = '[divisions] toggle club from favorites';
+export class ToggleDivisionFromFavorites {
+    static readonly type = '[Favorites] toggle division from favorites';
 
-    constructor(public clubUniqueIndex: string) {
+    constructor(public payload: DivisionEntry) {
+    }
+}
+
+export class ToggleMemberFromFavorites {
+    static readonly type = '[Favorites] toggle member from favorites';
+
+    constructor(public payload: MemberEntry) {
     }
 }

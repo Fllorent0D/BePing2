@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { SettingsPage } from './containers/settings-page/settings.page';
-import {AfttLoginPage} from './containers/aftt-login/aftt-login-page.component';
+import {SettingsPage} from './containers/settings-page/settings.page';
+import {AfttLoginPage} from '../modals/aftt-login/aftt-login-page.component';
+import {ContactComponent} from './containers/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'aftt-login',
     component: AfttLoginPage
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
   }
 ];
 

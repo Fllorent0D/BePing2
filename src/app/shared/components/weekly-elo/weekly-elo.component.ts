@@ -1,12 +1,13 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ChartData, ChartOptions} from 'chart.js';
+import {WeeklyElo} from '../../../core/api/models/weekly-elo';
 
 @Component({
     selector: 'beping-weekly-elo',
     templateUrl: './weekly-elo.component.html',
     styleUrls: ['./weekly-elo.component.scss']
 })
-export class WeeklyEloComponent implements AfterViewInit {
+export class WeeklyEloComponent implements AfterViewInit, OnInit {
     type = 'line';
     data: ChartData;
     options: ChartOptions = {
@@ -19,7 +20,7 @@ export class WeeklyEloComponent implements AfterViewInit {
         },
         layout: {
             padding: {
-                left: -100
+                left: -200
             }
         },
 
@@ -36,9 +37,8 @@ export class WeeklyEloComponent implements AfterViewInit {
                     drawBorder: false
                 },
                 ticks: {
-                    mirror: true,
-                    padding: -5,
-                    callback: (tick, index) => index % 2 ? tick : ''
+                    mirror: true
+                    // callback: (tick, index) => index % 2 ? tick : ''
 
                 }
             }
@@ -63,23 +63,30 @@ export class WeeklyEloComponent implements AfterViewInit {
         }
     };
     @ViewChild('canvasElement') canvas: ElementRef<HTMLCanvasElement>;
+    @Input() weeklyElo: WeeklyElo[] = [];
 
     constructor() {
     }
 
+    ngOnInit(): void {
+
+    }
+
+
     ngAfterViewInit() {
         const ctx = this.canvas.nativeElement.getContext('2d');
+
         const purpleOrangeGradient = ctx.createLinearGradient(0, 0, 0, 800);
         purpleOrangeGradient.addColorStop(1, 'rgba(146,146,146,0.4)');
         purpleOrangeGradient.addColorStop(0, 'rgba(234,231,234,0)');
 
         this.data = {
-            labels: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15'],
+            labels: this.weeklyElo.map(week => week.weekName),
 
             datasets: [
                 {
                     label: 'My First dataset',
-                    data: [1221, 1221, 1161, 1143, 1119, 1119, 1147, 1172, 1142, 1160, 1160, 1191, 1189, 1189, 1217, 1217, 1257],
+                    data: this.weeklyElo.map(week => week.elo),
                     tension: 0.5,
                     backgroundColor: purpleOrangeGradient,
                     hoverBackgroundColor: purpleOrangeGradient,
@@ -87,6 +94,7 @@ export class WeeklyEloComponent implements AfterViewInit {
                 }
             ]
         };
+
     }
 
 }

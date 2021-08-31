@@ -1,11 +1,7 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {SearchPageComponent} from './container/search-page/search-page.component';
-import {SearchRoutingModule} from './search-routing.module';
-import {IonicModule} from '@ionic/angular';
-import {ReactiveFormsModule} from '@angular/forms';
-import {TranslateModule} from '@ngx-translate/core';
 import {SharedModule} from '../../shared/shared.module';
+import {SearchRoutingModule} from './search-routing.module';
 
 
 @NgModule({
@@ -13,12 +9,8 @@ import {SharedModule} from '../../shared/shared.module';
         SearchPageComponent
     ],
     imports: [
-        CommonModule,
-        SearchRoutingModule,
-        IonicModule,
-        ReactiveFormsModule,
-        TranslateModule,
-        SharedModule
+        SharedModule,
+        SearchRoutingModule
     ]
 })
 export class SearchModule {

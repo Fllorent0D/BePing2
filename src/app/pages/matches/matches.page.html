@@ -1,80 +1,152 @@
-<ion-header class="ion-no-border">
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <beping-favorite-btn></beping-favorite-btn>
-            <beping-loading-btn [loading]="isloading"></beping-loading-btn>
-        </ion-buttons>
-        <ion-title>Matches</ion-title>
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-title>
     </ion-toolbar>
+    <!--
+    <ion-toolbar>
+        <div class="scrollmenu" #scrollMenu>
+            <ion-chip color="primary" id="tab1" [class.act]="tabIndex === 0" (click)="selectTab(0)">
+                <ion-label>Clubs</ion-label>
+            </ion-chip>
+            <ion-chip color="primary" id="tab4" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
+                <ion-label>Equipe</ion-label>
+            </ion-chip>
+            <ion-chip color="primary" id="tab2" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
+                <ion-label>Joueurs</ion-label>
+            </ion-chip>
+            <ion-chip color="primary" id="tab3" [class.act]="tabIndex === 3" outline (click)="selectTab(3)">
+                <ion-label>Divisions</ion-label>
+            </ion-chip>
+
+        </div>
+    </ion-toolbar>
+    -->
 </ion-header>
 <ion-content fullscreen>
-    <super-tabs>
+    <!--
+    <super-tabs #superTabs>
         <super-tabs-container>
             <super-tab>
-                <ion-content>
-                    <ion-button (click)="navigateToClub('L360')">Go to club L360</ion-button>
-                    <ion-button (click)="navigateToClub('N051')">Go to club N051</ion-button>
-                    <ion-list>
-                        <ion-item>
-                            <ion-label>Pokémon Yellow</ion-label>
-                            <ion-label>Pokémon Yellow</ion-label>
-                            <ion-label>Pokémon Yellow</ion-label>
-                            <ion-label>Pokémon Yellow</ion-label>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Mega Man X</ion-label>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>The Legend of Zelda</ion-label>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Pac-Man</ion-label>
-                        </ion-item>
-                        <ion-item>
-                            <ion-label>Super Mario World</ion-label>
-                        </ion-item>
-                    </ion-list>
+                <ion-list>
+                    <ion-item detail *ngFor="let club of favoritesClub | async"
+                              (click)="navigateToClub(club.uniqueIndex)">
+                        <ion-label class="ion-text-wrap">
+                            <h3>{{club.label}}</h3>
+                        </ion-label>
+                        <ion-note slot="end" *ngIf="club.note">{{club.note}}</ion-note>
+                    </ion-item>
+                </ion-list>
 
-                </ion-content>
             </super-tab>
             <super-tab>
-                <ion-content>
-                    Page #2
-                </ion-content>
+                <ion-list>
+
+
+                </ion-list>
             </super-tab>
             <super-tab>
-                <ion-content>
-                    Page #3
-                </ion-content>
+                <ion-list>
+                    <ion-item detail *ngFor="let club of favoritesClub | async"
+                              (click)="navigateToClub(club.uniqueIndex)">
+                        <ion-label class="ion-text-wrap">
+                            <h3>{{club.label}}</h3>
+                        </ion-label>
+                        <ion-note slot="end" *ngIf="club.note">{{club.note}}</ion-note>
+                    </ion-item>
+
+                </ion-list>
             </super-tab>
+            <super-tab>
+                <ion-list>
+                    <ion-item detail *ngFor="let division of favoritesDivision | async"
+                              (click)="navigateToClub(division.uniqueIndex)">
+                        <ion-label class="ion-text-wrap">
+                            <h3>{{division.label}}</h3>
+                        </ion-label>
+                        <ion-note slot="end" *ngIf="division.note">{{division.note}}</ion-note>
+                    </ion-item>
+
+                </ion-list>
+            </super-tab>
+
         </super-tabs-container>
     </super-tabs>
-</ion-content>
 
-    <!--
-    <ion-list>
-      <beping-list-header-dates></beping-list-header-dates>
-      <ion-item-group>
-        <ion-item lines="full">
-          <ion-label>
-            <b>Division 4C</b>
-            <p>Hommes</p>
-          </ion-label>
-        </ion-item>
-        <beping-ion-item-team-match></beping-ion-item-team-match>
-        <beping-ion-item-team-match></beping-ion-item-team-match>
-        <beping-ion-item-team-match [lines]="'none'"></beping-ion-item-team-match>
-      </ion-item-group>
-      <beping-list-header-dates></beping-list-header-dates>
-      <ion-item-group>
-        <ion-item lines="full">
-          <ion-label>
-            <b>Division 4C</b>
-            <p>Hommes</p>
-          </ion-label>
-        </ion-item>
-        <beping-ion-item-team-match></beping-ion-item-team-match>
-        <beping-ion-item-team-match></beping-ion-item-team-match>
-        <beping-ion-item-team-match [lines]="'none'"></beping-ion-item-team-match>
-      </ion-item-group>
-    </ion-list>-->
+-->
+    <ng-container *ngIf="hasFavorites$ | async; else noFavorite">
+        <ng-container *ngIf="favoritesClub | async as clubs">
+            <ion-list>
+                <ion-list-header>
+                    {{'COMMON.CLUBS'|translate}}
+                </ion-list-header>
+                <ion-item detail *ngFor="let club of clubs"
+                          (click)="navigateToClub(club.uniqueIndex)">
+                    <ion-label class="ion-text-wrap">
+                        <h3>{{club.label}}</h3>
+                    </ion-label>
+                    <ion-note slot="end" *ngIf="club.note">{{club.note}}</ion-note>
+                </ion-item>
+                <ng-container *ngIf="clubs.length === 0">
+                    <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
+                        <h3>{{'FAVORITES.NO_CLUBS'|translate}}</h3>
+                    </ion-label>
+                </ng-container>
+
+            </ion-list>
+
+        </ng-container>
+        <ng-container *ngIf="favoritesDivision | async as divisions">
+            <ion-list>
+                <ion-list-header>
+                    {{'COMMON.DIVISIONS'|translate}}
+
+                </ion-list-header>
+                <ion-item detail *ngFor="let division of divisions"
+                          (click)="navigateToDivisions(division.uniqueIndex)">
+                    <ion-label class="ion-text-wrap">
+                        <h3>{{division.label}}</h3>
+                    </ion-label>
+                    <ion-note slot="end" *ngIf="division.note">{{division.note}}</ion-note>
+                </ion-item>
+                <ng-container *ngIf="divisions.length === 0">
+                    <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
+                        <h3>{{'FAVORITES.NO_PLAYERS'|translate}}</h3>
+                    </ion-label>
+                </ng-container>
+
+            </ion-list>
+
+
+        </ng-container>
+        <ng-container *ngIf="favoritesMember | async as members">
+            <ion-list>
+                <ion-list-header>
+                    {{'COMMON.PLAYERS'|translate}}
+
+                </ion-list-header>
+                <ion-item detail *ngFor="let member of members"
+                          (click)="navigateToMember(member.uniqueIndex)">
+                    <ion-label class="ion-text-wrap">
+                        <h3>{{member.label | titlecase}}</h3>
+                    </ion-label>
+                    <ion-note slot="end" *ngIf="member.note">{{member.note}}</ion-note>
+                </ion-item>
+                <ng-container *ngIf="members.length === 0">
+                    <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
+                        <h3>{{'FAVORITES.NO_PLAYERS'|translate}}</h3>
+                    </ion-label>
+                </ng-container>
+
+            </ion-list>
+
+        </ng-container>
+    </ng-container>
+    <ng-template #noFavorite>
+        <div class="no-result-container ion-padding">
+            <ion-icon [color]="'grey'" name="star-outline" size="large"></ion-icon>
+            <ion-label [color]="'grey'" class="ion-margin-top"><h1>{{'FAVORITES.NO_FAVORITE'|translate}}</h1></ion-label>
+            <ion-label [color]="'grey'" class="ion-margin-top"><h1>{{'FAVORITES.INSTRUCTIONS'|translate}}</h1></ion-label>
+        </div>
+    </ng-template>
+
+</ion-content>

@@ -9,9 +9,11 @@ import {VenueEntry} from '../../../../core/api/models/venue-entry';
 import {GeocoderService} from '../../../../core/services/geocoding/geocoding.service';
 import {OSMAddress} from '../../../../core/models/osm/osm-search.model';
 import {Level} from '../../../../core/models/level';
-import {IonRouterOutlet, ModalController} from '@ionic/angular';
+import {IonRouterOutlet, ModalController, ToastController} from '@ionic/angular';
 import {InAppBrowserService} from '../../../../core/services/browser/in-app-browser.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
+import {StartNavigationService} from '../../../../core/services/start-navigation.service';
+import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 
 @Component({
     selector: 'beping-tournament-detail-page',
@@ -31,6 +33,8 @@ export class TournamentDetailPageComponent implements OnInit {
     };
     map: Map;
     Level = Level;
+    osmAddress: OSMAddress;
+
 
     constructor(
         private readonly tournamentService: TournamentsService,
@@ -39,7 +43,10 @@ export class TournamentDetailPageComponent implements OnInit {
         private readonly modalCtrl: ModalController,
         private readonly ionRouter: IonRouterOutlet,
         private readonly inAppBrowser: InAppBrowserService,
-        private readonly tabNavigate: TabsNavigationService
+        private readonly tabNavigate: TabsNavigationService,
+        private readonly navigation: StartNavigationService,
+        private readonly toastrService: ToastController,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -63,6 +70,7 @@ export class TournamentDetailPageComponent implements OnInit {
                 return this.geocoderService.search(street, town, postalCodal);
             }),
             tap((osmAddress: OSMAddress) => {
+                this.osmAddress = osmAddress;
                 this.map.setView([Number(osmAddress.lat), Number(osmAddress.lon)], 13, {animate: true, duration: 5});
                 const marker = new Marker([Number(osmAddress.lat), Number(osmAddress.lon)]);
                 this.map.addLayer(marker);
@@ -86,6 +94,7 @@ export class TournamentDetailPageComponent implements OnInit {
     }
 
     register(tournament: TournamentEntry): void {
+        this.analyticsService.logEvent('tournament_registration_open', {tournament: tournament.UniqueIndex});
         this.inAppBrowser.openTournamentRegistration(tournament.UniqueIndex);
     }
 
@@ -94,5 +103,21 @@ export class TournamentDetailPageComponent implements OnInit {
             ['tournaments', tournament.UniqueIndex.toString(10), 'series'],
             {state: {series: tournament.SerieEntries}}
         );
+    }
+
+    async startNavigation(tournament: TournamentEntry) {
+        try {
+            if (this.osmAddress) {
+                this.navigation.navigateToOSMAddress(this.osmAddress);
+            }
+        } catch (e) {
+            const toast = await this.toastrService.create({
+                message: 'Impossible to find coordinates',
+                color: 'danger',
+                duration: 5000
+            });
+            toast.present();
+        }
+
     }
 }

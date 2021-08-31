@@ -3,7 +3,7 @@
     <ion-grid class="border-bottom">
       <ion-row class="text-highlight">
         <ion-col>
-          <ion-text>Belles jouées</ion-text>
+          <ion-text>{{'DASHBOARD.DECISIVE_SETS_PLAYED'|translate}}</ion-text>
         </ion-col>
         <ion-col class="ion-text-end">
           <ion-text>{{totalTieBreak}} <ng-container *ngIf="totalTieBreak > 0">({{totalTieBreakPct}}%)</ng-container></ion-text>
@@ -17,12 +17,12 @@
         <ion-col>
           <ion-text class="text-strong">{{victories}} ({{victoriesPct}}%)</ion-text>
           <br>
-          <ion-text color="grey">Victoires</ion-text>
+          <ion-text color="grey">{{'COMMON.WINS'|translate}}</ion-text>
         </ion-col>
         <ion-col class="ion-text-end">
           <ion-text class="text-strong">{{defeats}} ({{defeatsPct}}%)</ion-text>
           <br>
-          <ion-text color="grey">Défaites</ion-text>
+          <ion-text color="grey">{{'COMMON.DEFEATS'|translate}}</ion-text>
         </ion-col>
       </ion-row>
       <ion-row>

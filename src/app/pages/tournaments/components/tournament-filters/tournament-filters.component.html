@@ -1,34 +1,47 @@
-<ion-list>
-    <form [formGroup]="formGroup">
-        <ion-item>
-            <ion-label class="ion-text-wrap">Niveau</ion-label>
-            <ion-select multiple="true"
-                        formControlName="levelsToDisplay">
-                <ion-select-option [value]="6">Super Division</ion-select-option>
-                <ion-select-option [value]="1">National</ion-select-option>
-                <ion-select-option [value]="15">Régional VTTL</ion-select-option>
-                <ion-select-option [value]="16">Régional IWB</ion-select-option>
-                <ion-select-option [value]="5">Prov. Vl.-b/Br.</ion-select-option>
-                <ion-select-option [value]="7">Prov. Oost-Vl.</ion-select-option>
-                <ion-select-option [value]="8">Prov. Antwerpen</ion-select-option>
-                <ion-select-option [value]="9">Prov. West-Vl.</ion-select-option>
-                <ion-select-option [value]="10">Prov. Limburg</ion-select-option>
-                <ion-select-option [value]="4">Prov. Hainaut</ion-select-option>
-                <ion-select-option [value]="11">Prov. B.B.W</ion-select-option>
-                <ion-select-option [value]="12">Prov. Namur</ion-select-option>
-                <ion-select-option [value]="13">Prov. Liège</ion-select-option>
-                <ion-select-option [value]="14">Prov. Lux</ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-item>
-            <ion-label class="ion-text-wrap">Afficher tournois terminés</ion-label>
-            <ion-toggle formControlName="showPastTournaments"></ion-toggle>
-        </ion-item>
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>{{'TOURNAMENTS.FILTERS'|translate}}</ion-title>
+        <ion-buttons slot="primary" (click)="cancel()">
+            <ion-button>
+                <ion-icon slot="icon-only" icon="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <form [formGroup]="formGroup">
+            <ion-item>
+                <ion-label class="ion-text-wrap">{{'DIVISION_LEVEL.LEVEL'|translate}}</ion-label>
+                <ion-select multiple="true"
+                            formControlName="levelsToDisplay">
+                    <ion-select-option [value]="6">{{'DIVISION_LEVEL.SUPER_DIVISION'|translate}}</ion-select-option>
+                    <ion-select-option [value]="1">{{'DIVISION_LEVEL.NATIONAL'|translate}}</ion-select-option>
+                    <ion-select-option [value]="15">{{'DIVISION_LEVEL.REGION_VTTL'|translate}}</ion-select-option>
+                    <ion-select-option [value]="16">{{'DIVISION_LEVEL.IWB'|translate}}</ion-select-option>
+                    <ion-select-option [value]="5">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.VLAAMS_BRABANT_BR'|translate}}</ion-select-option>
+                    <ion-select-option [value]="7">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.OOST_VLANDEREN'|translate}}</ion-select-option>
+                    <ion-select-option [value]="8">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.ANTWERP'|translate}}</ion-select-option>
+                    <ion-select-option [value]="9">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.WEST_VLAANDEREN'|translate}}</ion-select-option>
+                    <ion-select-option [value]="10">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIMBURG'|translate}}</ion-select-option>
+                    <ion-select-option [value]="4">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.HAINAUT'|translate}}</ion-select-option>
+                    <ion-select-option [value]="11">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.BRUSSELS_BRABANT_WALLON'|translate}}</ion-select-option>
+                    <ion-select-option [value]="12">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.NAMUR'|translate}}</ion-select-option>
+                    <ion-select-option [value]="13">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIEGE'|translate}}</ion-select-option>
+                    <ion-select-option [value]="14">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LUXEMBOURG'|translate}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label class="ion-text-wrap">{{'TOURNAMENTS.DISPLAY_FINISHED'|translate}}</ion-label>
+                <ion-toggle formControlName="showPastTournaments"></ion-toggle>
+            </ion-item>
 
-        <ion-item button color="primary" class="ion-margin-top text-center" (click)="submit()">
-            <ion-icon name="search" slot="start"></ion-icon>
-            Filtrer
-        </ion-item>
-    </form>
+            <ion-item button color="primary" class="ion-margin-top text-center" (click)="submit()">
+                <ion-icon name="search" slot="start"></ion-icon>
+                {{"SETTINGS.APPLY"|translate}}
+            </ion-item>
+        </form>
 
-</ion-list>
+    </ion-list>
+
+</ion-content>

@@ -1,12 +1,18 @@
-
-
 <ion-content class="ion-padding-bottom" fullscreen>
+    <ion-refresher  slot="fixed" (ionRefresh)="refresh($event)" #refresher>
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
     <div class="extended-gradient"></div>
-    <ion-toolbar color="transparent">
+
+    <ion-toolbar color="transparent" mode="md">
         <ion-title color="clear">BePing</ion-title>
+        <ion-buttons slot="start">
+            <beping-loading-btn [loading]="isLoading$ | async"></beping-loading-btn>
+        </ion-buttons>
         <ion-buttons slot="end">
             <ion-button (click)="openSettings()">
-                <ion-icon slot="icon-only" name="person-circle-outline"></ion-icon>
+                <ion-icon slot="icon-only" name="cog-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -15,17 +21,30 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
   -->
-    <div class="content">
-        <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry">
+    <div>
+
+        <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry; else noMember">
+
             <beping-member-name-ranking-info
                     [member]="currentMemberEntry">
             </beping-member-name-ranking-info>
+            <beping-card [padding]="true" [marging]="true" *ngIf="!(isLoggedIn$|async) && ((database|async) === TABT_DATABASES.AFTT)">
+                <h3 class="ion-text-center ion-padding">{{'DASHBOARD.RANKING_ESTIMATION'|translate}}</h3>
+                <ion-button expand="block" class="ion-margin" (click)="loginWithAFTT()">
+                    {{'DASHBOARD.LOGIN_TO_AFTT'|translate}}
+                </ion-button>
+            </beping-card>
             <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
                 <beping-member-victory-chart
                         [memberResultEntries]="currentMemberEntry.ResultEntries">
                 </beping-member-victory-chart>
-                <beping-weekly-elo>
-                </beping-weekly-elo>
+                <ng-container *ngIf="weeklyElos$|async as elos">
+                    <beping-weekly-elo
+                            *ngIf="elos.length > 0"
+                            [weeklyElo]="elos">
+                    </beping-weekly-elo>
+                </ng-container>
+
                 <beping-tie-break-played
                         [memberResultEntries]="currentMemberEntry.ResultEntries">
                 </beping-tie-break-played>
@@ -38,36 +57,53 @@
                 </beping-member-summary-per-ranking>
             </ng-container>
             <ng-template #noResults>
-                <div class="no-result-container ion-padding">
-                    <ion-icon name="information-circle-outline" size="large"></ion-icon>
-                    <h1>Aucune statistique disponible
-                        <ng-container *ngIf="(categoriesAvailable$ |async)?.length > 1">dans cette catégorie</ng-container>
-                    </h1>
-                </div>
+                <beping-card class="ion-text-center" [padding]="true">
+
+                    <ion-icon name="information-circle-outline" class="ion-padding-top" size="large" slot="start"></ion-icon>
+                    <h2 class="ion-padding">
+                        {{'DASHBOARD.NO_RESULTS'|translate}}
+                        <ng-container *ngIf="(categoriesAvailable$ |async)?.length > 1">
+                            {{'DASHBOARD.IN_THIS_CATEGORY'|translate}}
+                        </ng-container></h2>
+                </beping-card>
             </ng-template>
 
         </ng-container>
+        <ng-template #noMember>
+            <beping-card [padding]="true" [marging]="true">
+                <h3 class="ion-text-center ion-padding">
+                    {{'DASHBOARD.NO_PLAYER_SELECTED'|translate}}
+                </h3>
+                <ion-button expand="block" class="ion-margin" (click)="chooseMainMember()">{{'DASHBOARD.CHOOSE_PLAYER'|translate}}
+                </ion-button>
 
-        <ng-container *ngIf="categoriesAvailable$ |async as playercategories">
-            <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="playercategories.length > 1">
-                <ion-fab-button>
-                    <ion-icon [name]="getIcon(currentCategory$ | async)"></ion-icon>
-                </ion-fab-button>
-                <ion-fab-list side="top">
-                    <ion-fab-button
-                            [attr.data-desc]="'PLAYER_CATEGORY.' + category | translate"
-                            [disabled]="category === (currentCategory$|async)"
-                            [color]="category === (currentCategory$|async)?'primary': 'light'"
-                            *ngFor="let category of playercategories"
-                            (click)="categoryClicked(category)">
-                        <ion-icon [name]="getIcon(category)"></ion-icon>
-                    </ion-fab-button>
-                </ion-fab-list>
-            </ion-fab>
+            </beping-card>
+            <beping-card [padding]="true" [marging]="true">
+                <h3 class="ion-text-center ion-padding">
+                    {{'DASHBOARD.YOU_CAN_SEE_RESULTS_BOTTOM_NAV'|translate}}
+                </h3>
+            </beping-card>
+        </ng-template>
 
-        </ng-container>
+
     </div>
+    <ng-container *ngIf="categoriesAvailable$ |async as playercategories">
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="playercategories.length > 1">
+            <ion-fab-button>
+                <ion-icon [name]="getIcon(currentCategory$ | async)"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="top">
+                <ion-fab-button
+                        [attr.data-desc]="'PLAYER_CATEGORY.' + category | translate"
+                        [disabled]="category === (currentCategory$|async)"
+                        [color]="category === (currentCategory$|async)?'primary': 'light'"
+                        *ngFor="let category of playercategories"
+                        (click)="categoryClicked(category)">
+                    <ion-icon [name]="getIcon(category)"></ion-icon>
+                </ion-fab-button>
+            </ion-fab-list>
+        </ion-fab>
 
-
+    </ng-container>
 
 </ion-content>

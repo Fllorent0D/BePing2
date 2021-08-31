@@ -2,11 +2,11 @@
     <ion-grid>
         <ion-row class="ion-align-items-center">
             <ion-col class="ion-text-center border-right" size="2">
-                <ion-text style="font-size: 1.5em">24</ion-text>
+                <ion-text style="font-size: 1.5em">{{result.Date|localizedDate:'dd'}}</ion-text>
                 <br>
-                <ion-text>Aug</ion-text>
+                <ion-text>{{result.Date|localizedDate:'MMM'}}</ion-text>
             </ion-col>
-            <ion-col class="ion-no-padding ion-padding-start" size="8">
+            <ion-col class="ion-no-padding ion-padding-start" size="7">
                 <ion-text>
                     <ion-text>{{result.FirstName |titlecase}} {{result.LastName |titlecase}}</ion-text>
                     <br>
@@ -15,11 +15,11 @@
                 </ion-text>
             </ion-col>
             <ion-col class="ion-text-center ion-no-padding" [class.is-color-primary]="result.SetFor === 3"
-                     [class.is-color-danger]="result.SetAgainst === 3" size="2">
+                     [class.is-color-danger]="result.SetAgainst === 3" size="3">
                 <ion-text class="ion-no-margin small" style="font-size: 1.3em">{{result.SetFor}}
                     - {{result.SetAgainst}}</ion-text>
                 <br>
-                <ion-text>{{result.SetFor === 3 ? 'Victoire' : 'Défaite'}}</ion-text>
+                <ion-text class="ion-text-wrap">{{(result.SetFor === 3 ? 'COMMON.WIN' : 'COMMON.DEFEAT')|translate}}</ion-text>
             </ion-col>
         </ion-row>
 

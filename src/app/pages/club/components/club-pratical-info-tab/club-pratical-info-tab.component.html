@@ -1,5 +1,5 @@
 <ion-content>
-  <beping-card [padding]="true" *ngFor="let venue of venues">
+  <beping-card [padding]="true" *ngFor="let venue of venues" (click)="navigateToVenue(venue)">
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="11">

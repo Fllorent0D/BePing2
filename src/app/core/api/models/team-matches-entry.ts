@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { MatchDetails } from './match-details';
+import {VenueEntry} from './venue-entry';
 export interface TeamMatchesEntry {
   AwayClub: string;
   AwayTeam: string;
@@ -25,6 +26,6 @@ export interface TeamMatchesEntry {
   Time: string;
   Venue: number;
   VenueClub: string;
-  VenueEntry: {  };
+  VenueEntry: VenueEntry;
   WeekName: string;
 }

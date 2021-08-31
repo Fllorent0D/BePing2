@@ -5,7 +5,7 @@ import {ExploreContainerComponent} from './explore-container/explore-container.c
 const routes: Routes = [
     {
         path: 'home',
-        component: ExploreContainerComponent
+        loadChildren: () => import('./explore-container/explore-container.module').then(m => m.ExploreContainerComponentModule)
     },
     {
         path: 'clubs',

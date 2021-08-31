@@ -1,25 +1,21 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-import {IonicModule} from '@ionic/angular';
 
 import {SettingsPageRoutingModule} from './settings-routing.module';
 
 import {SettingsPage} from './containers/settings-page/settings.page';
 import {SharedModule} from '../../shared/shared.module';
-import {AfttLoginPage} from './containers/aftt-login/aftt-login-page.component';
+import {ModalsModule} from '../modals/modals.module';
+import { ContactComponent } from './containers/contact/contact.component';
+import { PrivacyComponent } from './containers/privacy/privacy.component';
+import { ConditionsUsageComponent } from './containers/conditions-usage/conditions-usage.component';
 
 @NgModule({
     imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
         SettingsPageRoutingModule,
         SharedModule,
-        ReactiveFormsModule
+        ModalsModule
     ],
-    declarations: [SettingsPage, AfttLoginPage]
+    declarations: [SettingsPage, ContactComponent, PrivacyComponent, ConditionsUsageComponent]
 })
 export class SettingsPageModule {
 }

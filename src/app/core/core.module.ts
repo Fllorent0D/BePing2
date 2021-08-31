@@ -16,7 +16,6 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TabtDatabaseInterceptor} from './interceptors/tabt-database-interceptor.service';
 import {TabtCredentialsInterceptor} from './interceptors/tabt-credentials-interceptor.service';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
-import {NgChartsModule} from 'ng2-charts';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -30,22 +29,22 @@ export function HttpLoaderFactory(http: HttpClient) {
             rootUrl: environment.tabtUrl
         }),
         SuperTabsModule.forRoot(),
+        NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService),
         NgxsModule.forRoot(
-            states,
-            {
+            [], {
                 developmentMode: !environment.production,
                 selectorOptions: {
                     injectContainerState: false
                 }
             }
         ),
+        NgxsModule.forFeature(states),
         NgxsLoggerPluginModule.forRoot({
             disabled: environment.production
         }),
         NgxsReduxDevtoolsPluginModule.forRoot({
             disabled: environment.production
         }),
-        NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService),
         ScrollingModule,
         TranslateModule.forRoot({
             defaultLanguage: 'fr',

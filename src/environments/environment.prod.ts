@@ -1,6 +1,7 @@
 export const environment = {
-  production: false,
-  tabtUrl: 'http://192.168.0.108:3004',
+  production: true,
+  hmr: false,
+  tabtUrl: 'https://tabt-rest.herokuapp.com',
   internalPages: {
     basePath: '/static/',
     registerRedirect: 'redirect-register.html'

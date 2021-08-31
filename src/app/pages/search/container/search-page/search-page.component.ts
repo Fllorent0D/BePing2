@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {combineLatest, iif, Observable, of} from 'rxjs';
-import {debounceTime, map, mergeMap, share, shareReplay, startWith, take} from 'rxjs/operators';
+import {debounceTime, map, mergeMap, share, shareReplay, startWith, take, tap} from 'rxjs/operators';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
@@ -12,6 +12,8 @@ import {MemberEntry} from '../../../../core/api/models/member-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
+import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
+import {FirebaseAnalytics} from '@capacitor-community/firebase-analytics';
 
 interface SearchResults<T> {
     results?: T[];
@@ -41,7 +43,8 @@ export class SearchPageComponent implements OnInit {
         private readonly store: Store,
         private readonly memberService: MembersService,
         private readonly matchesService: MatchesService,
-        private readonly tabNavigator: TabsNavigationService
+        private readonly tabNavigator: TabsNavigationService,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -51,6 +54,7 @@ export class SearchPageComponent implements OnInit {
         this.searchControl = new FormControl();
         this.searchInput$ = this.searchControl.valueChanges.pipe(
             debounceTime(1000),
+            tap((terms: string) => this.analyticsService.logEvent('search', {search_term: terms})),
             shareReplay(1),
             startWith('')
         );

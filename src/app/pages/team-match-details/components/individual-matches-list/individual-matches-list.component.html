@@ -1,10 +1,10 @@
-<beping-section-title [title]="'Matches'"></beping-section-title>
+<beping-section-title [title]="'COMMON.MATCHES'|translate"></beping-section-title>
 
 <ion-list>
     <beping-team-match-individual-match
             [individualMatch]="individualMatch"
-            [homePlayer]="getPlayerWithId(individualMatch.HomePlayerUniqueIndex[0])"
-            [awayPlayer]="getPlayerWithId(individualMatch.AwayPlayerUniqueIndex[0])"
+            [homePlayer]="getPlayerWithId(individualMatch.HomePlayerUniqueIndex)"
+            [awayPlayer]="getPlayerWithId(individualMatch.AwayPlayerUniqueIndex)"
             *ngFor="let individualMatch of match.MatchDetails.IndividualMatchResults">
     </beping-team-match-individual-match>
 </ion-list>

@@ -9,10 +9,12 @@ import {Player} from '../../../../../core/api/models/player';
 })
 export class TeamMatchIndividualMatchComponent implements OnInit {
   @Input() individualMatch: IndividualMatchResult;
-  @Input() homePlayer: Player;
-  @Input() awayPlayer: Player;
+  @Input() homePlayer: Player[];
+  @Input() awayPlayer: Player[];
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.homePlayer)
+  }
 
 }

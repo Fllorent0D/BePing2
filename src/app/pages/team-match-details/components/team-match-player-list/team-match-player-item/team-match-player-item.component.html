@@ -1,22 +1,28 @@
 <ion-row (click)="playerClicked.emit()">
     <ion-col size="1" class="border-right">
         <ion-label>
-            {{player.Position}}
+            {{player?.Position}}
         </ion-label>
     </ion-col>
-    <ion-col size="7">
+    <ion-col size="7" class="ion-padding-start">
         <ion-label>
-            {{player.FirstName | titlecase}} {{player.LastName| titlecase}}
+            {{player?.FirstName | titlecase}} {{player?.LastName| titlecase}}
         </ion-label>
     </ion-col>
     <ion-col size="2">
         <ion-label class="ion-text-right">
-            {{player.Ranking}}
+            {{player?.Ranking}}
         </ion-label>
     </ion-col>
     <ion-col size="2">
         <ion-label class="ion-text-right">
-            {{player.VictoryCount}}
+            <span *ngIf="player.IsForfeited">
+                WO
+            </span>
+            <span *ngIf="!player.IsForfeited">
+                {{player?.VictoryCount}}
+            </span>
+
         </ion-label>
     </ion-col>
 </ion-row>

@@ -1,9 +1,9 @@
-<ion-header translucent="true">
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button [text]="'BACK'|translate"></ion-back-button>
     </ion-buttons>
-    <ion-title>Séries</ion-title>
+    <ion-title>{{'TOURNAMENTS.SERIES'|translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -14,7 +14,7 @@
             {{serie.Name}}
           </h3>
           <p>
-            {{serie.RegistrationCount}} inscriptions
+            {{serie.RegistrationCount}} {{'TOURNAMENTS.REGISTRATIONS'|translate}}
           </p>
         </ion-label>
       </ion-item>

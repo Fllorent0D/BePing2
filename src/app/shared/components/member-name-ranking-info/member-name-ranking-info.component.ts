@@ -11,6 +11,7 @@ import {RankingService} from '../../../core/services/tabt/ranking.service';
 export class MemberNameRankingInfoComponent implements OnInit {
 
     @Input() member: MemberEntry;
+    @Input() displayName = true;
 
     nextRanking: string;
     elo: string;

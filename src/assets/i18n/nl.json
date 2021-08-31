@@ -9,15 +9,15 @@
     "SETTINGS": "Instellingen"
   },
   "APP_RATING": {
-    "TITLE": "Would you mind rating %@?",
-    "MESSAGE": "It won’t take more than a minute and helps to promote our app. Thanks for your support!",
-    "CANCEL_BUTTON_LABEL": "No, Thanks",
-    "LATER_BUTTON_LABEL": "Remind Me Later",
-    "RATE_BUTTON_LABEL": "Rate It Now",
-    "YES_BUTTON_LABEL": "Yes!",
-    "NO_BUTTON_LABEL": "Not really",
-    "APPRATE_PROMPT_TITLE": "Do you like using %@?",
-    "FEEDBACK_PROMPT_TITLE": "Mind giving us some feedback?"
+    "TITLE": "Wil je deze app een rating geven?",
+    "MESSAGE": "Het neemt minder dan een minuut van je tijd en je zou er ons enorm mee helpen de app te verbeteren !",
+    "CANCEL_BUTTON_LABEL": "Neen, dank je",
+    "LATER_BUTTON_LABEL": "Herinner mij er later aan",
+    "RATE_BUTTON_LABEL": "Geef nu je rating",
+    "YES_BUTTON_LABEL": "Ja",
+    "NO_BUTTON_LABEL": "Niet echt",
+    "APPRATE_PROMPT_TITLE": "Gebruik je graag %@?",
+    "FEEDBACK_PROMPT_TITLE": "Wil je graag feedback geven?"
   },
   "COMMON": {
     "CALENDAR": "Kalender",
@@ -58,6 +58,13 @@
     "DATE": "Datum"
   },
   "DASHBOARD": {
+    "LOGIN_TO_AFTT": "Login to resultats.aftt.be",
+    "RANKING_ESTIMATION": "Uw schatting van de rangschikking wordt niet weergegeven?",
+    "NO_RESULTS": "Geen statistieken beschikbaar",
+    "IN_THIS_CATEGORY": "in deze categorie",
+    "NO_PLAYER_SELECTED": "Geen speler geselecteerd",
+    "CHOOSE_PLAYER": "Selecteer een speler",
+    "YOU_CAN_SEE_RESULTS_BOTTOM_NAV": "U kunt de resultaten raadplegen via de navigatie onderaan",
     "PERSONAL_STATS": "Individuele statistieken",
     "CANT_LOAD_DASHBOARD": "Dashboard kan niet worden opgeladen",
     "SUMMARY_BY_RANKING": "Samenvatting per klassement",
@@ -68,7 +75,8 @@
     "SCORE_DISTRIBUTION": "Verdeling van de scores",
     "ELO_POINT": "ELO punten",
     "LATEST_MATCHES": "Laatste wedstrijden",
-    "PLAYER_CATEGORY_CHANGED": "{{category}} categorie geladen"
+    "PLAYER_CATEGORY_CHANGED": "{{category}} categorie geladen",
+    "SEE_DETAILS": "Details bekijken"
   },
   "MATCH_ENTRY_SHEET": {
     "MATCH_ENTRY_SHEET": "Wedstrijdblad",
@@ -77,12 +85,12 @@
     "MATCH_DETAILS": "Match Details",
     "MATCH_NUMBER": "Wedstrijdnummer",
     "HELP_MATCH_SHEET": "Hulp voor wedstrijdblad",
-    "IMPOSSIBLE_TO_LOAD_TEAMS": "Kan de force lijsten niet laden"
+    "IMPOSSIBLE_TO_LOAD_TEAMS": "Kan de sterktelijst niet laden"
   },
   "RESULTS_BY_DIVISION": {
     "RESULTS": "Resultaten",
     "LOADING_RESULTS": "Laden van resultaten",
-    "IMPOSSIBLE_TO_LOAD": "Impossible de charger les matchs",
+    "IMPOSSIBLE_TO_LOAD": "Onmogelijk de wedstrijden te laden",
     "FAVORITES": {
       "FAVORITES": "Favorieten",
       "ADD_TO_FAVORITES": "Toevoegen aan favorieten",
@@ -90,6 +98,13 @@
       "YOUR_FAVORITE": "Uw favorieten"
     },
     "PICK_DIVISION": "Kies een divisie"
+  },
+  "FAVORITES": {
+    "NO_PLAYERS": "Geen favoriete spelers",
+    "NO_CLUBS": "Geen favoriete clubs",
+    "NO_DIVISIONS": "Geen favoriete afdelingen",
+    "NO_FAVORITE": "Geen favorieten",
+    "INSTRUCTIONS": "U kunt favorieten toevoegen wanneer u de pagina van een club, speler of afdelingen bekijkt"
   },
   "CALENDAR_CLUB": {
     "CANT_LOAD_CALENDAR": "Kalender kan niet worden opgeladen",
@@ -196,10 +211,14 @@
   },
   "SEARCH": {
     "SEARCH": "Zoek",
+    "SEARCHING_PLAYERS": "Zoeken naar spelers aan de gang",
+    "SEARCHING_MATCHES": "Zoeken naar huidige overeenkomsten",
     "NAME_OR_INDEX": "Naam of index",
     "NAME_OR_AFFILIATE_INDEX": "Naam of index",
     "NO_RESULT": "Geen resultaat",
-    "CLUB_MAP": "Map van de clubs"
+    "CLUB_MAP": "Map van de clubs",
+    "SEARCH_EXPLANATION": "U kunt zoeken naar spelers, afdelingen, clubs of wedstrijdverslagen",
+    "PLACEHOLDER": "Club, afdeling, speler, wedstrijd"
   },
   "TEAM_STAT": {
     "LOADING_TEAM_RESULTS": "Ploegresultaten worden gedownload",
@@ -243,6 +262,10 @@
     "CHANGE_LANGUAGE": "Wijzig de taal",
     "DUTCH": "Nederlands",
     "FRENCH": "Français",
+    "ENGLISH": "English",
+    "WHICH_CLUB": "In welke club speel je?",
+    "WHO_ARE_YOU": "Wie ben jij?",
+    "APPLY": "Apply",
     "RELOAD_DATA": "Profielgegevens herladen",
     "CURRENT_SEASON": "Huidige seizoen",
     "SYNC_IN_PROGRESS": "Bezig met synchronisatie...",
@@ -263,7 +286,10 @@
     "MALE": "Heren",
     "FEMALE": "Dames",
     "VETERAN": "Veteraan",
-    "WHICH_CATEGORY_DO_YOU_WANT": "Welke categorie wil je gebruiken?"
+    "WHICH_CATEGORY_DO_YOU_WANT": "Welke categorie wil je gebruiken?",
+    "PRIVACY_POLICY": "Privacybeleid",
+    "TERMS_AND_CONDITIONS": "Gebruiksvoorwaarden",
+    "MORE_INFO": "Extra informatie"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaar BePing"
@@ -280,11 +306,17 @@
     "SERIES": "Reeksen",
     "LOADING_RESULTS": "Resultaten laden...",
     "FUTURE": "Gepland",
-    "PAST": "Afgewerkt"
+    "PAST": "Afgewerkt",
+    "FILTERS": "Filters",
+    "DISPLAY_FINISHED": "Toernooien met einde tonen",
+    "TOURNAMENT_ENDED": "Toernooi afgelopen",
+    "REGISTER_ENDED": "Inschrijving beëindigd",
+    "REGISTRATIONS": "Registraties",
+    "REGISTERED_ON": "Geregistreerd op"
   },
   "NAVIGATION": {
     "NAVIGATE_TO_MATCH": "Wegbeschrijvng naar wedstrijd",
-    "VERIFY_NAVIGATION_INFO": "Veuillez vérifier l'adresse du match. BePing n'est pas responsable d'une mauvaise adresse.",
+    "VERIFY_NAVIGATION_INFO": "Gelieve het adres van de wedstrijd na te kijken. BePing is niet verantwoordelijk voor een foutief adres.",
     "START_NAVIGATION": "Gelieve het adres van de wedstrijd na te kijken. BePing is niet verantwoordelijk voor een foutief adres.",
     "NAVIGATE": "Start",
     "SELECT_APP": "",
@@ -311,14 +343,17 @@
     "SUCCESSFULLY_SUBSCRIBED_TO": "U krijgt nu meldingen van {{subscription}}",
     "CHOOSE_DIVISION": "Kies een afdeling",
     "CHOOSE_TEAM": "Kies een ploeg",
-    "ADD_TEAM": "Kies een ploeg",
+    "ADD_TEAM": "Voeg een team toe",
     "NO_TEAM": "Geen ploegen"
   },
   "DIVISION_LEVEL": {
+    "LEVEL": "Niveau",
     "NATIONAL": "Nationaal",
     "HAINAUT": "Henegouwen",
     "VLAAMS_BRABANT_BR": "Vlaams-Brabant",
     "SUPER_DIVISION": "Super Afdeling",
+    "SUPER_DIVISION_MEN": "Super Divisie Heren",
+    "SUPER_DIVISION_WOMEN": "Super Divisie Dames",
     "OOST_VLANDEREN": "Oost-Vlaanderen",
     "ANTWERP": "Antwerpen",
     "WEST_VLAANDEREN": "West-Vlaanderen",
@@ -327,9 +362,13 @@
     "NAMUR": "Namen",
     "LIEGE": "Luik",
     "LUXEMBOURG": "Luxemburg",
-    "REGION_VTTL": "VTTL",
+    "REGION_VTTL": "Landelijk VTTL",
     "IWB": "IWB"
   },
+  "PROVINCE": "Provincie",
+  "REGIONAL": "Landelijk",
+  "PROVINCE_SHORT": "Prov.",
+  "REGIONAL_SHORT": "Land.",
   "PLAYER_CATEGORY": {
     "MEN": "Seniors heren",
     "WOMEN": "Seniors dames",
@@ -351,5 +390,31 @@
     "10": "November",
     "11": "December"
   },
-  "USER": "Gebruiker"
+  "USER": "Gebruiker",
+  "BACK": "Back",
+  "ONBOARDING": {
+    "CONTINUE": "Doorgaan",
+    "SKIP": "Overslaan",
+    "WELCOME_ON_BEPING": "Welkom bij BePing!",
+    "BEPING_THE_PING_APP": "De Ping-app in België",
+    "FIND_ALL_RESULTS": "Vind alle resultaten en statistieken",
+    "ALL_RANKINGS": "Divisieklassementen, beste spelers per divisie, ...",
+    "FOLLOW_FAVORITES": "Volg makkelijk je favorieten",
+    "DIRECT_LINK_TO_FAVORITE":"Directe links naar je favoriete clubs, spelers of divisies",
+    "FIND_TOUNAMENTS": "Vind toernooien",
+    "FIND_AND_REGISTER_TOURNAMENTS": "Vind en registreer voor toernooien in uw regio",
+    "SEARCH_QUICKLY": "Supersnel zoeken",
+    "SEARCH_EVERYTHING": "Zoeken naar spelers, divisies, clubs en zelfs wedstrijdbladen",
+    "LETS_GO": "Let's go",
+    "MADE_WITH_LOVE": "Met ❤️ gemaakt door Florent Cardoen",
+    "READ_AND_ACCEPT": "Ik heb",
+    "TERMS_OF_USAGE": "de algemene gebruiksvoorwaarden",
+    "AND": "en",
+    "PRIVACY_POLICY": "het privacybeleid",
+    "OF_BEPING": "van BePing gelezen en aanvaard",
+    "START_BEPING": "Start BePing",
+    "RETRY": "Opnieuw proberen",
+    "AN_ERROR_OCCURED": "Er is een fout opgetreden tijdens het voorbereiden van BePing",
+    "PREPARATION": "BePing maakt zich klaar..."
+  }
 }

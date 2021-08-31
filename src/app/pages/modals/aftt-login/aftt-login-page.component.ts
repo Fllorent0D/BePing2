@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit, Optional} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Store} from '@ngxs/store';
-import {Login} from '../../../../core/store/user/aftt.actions';
+import {Login} from '../../../core/store/user/aftt.actions';
 import {finalize, take} from 'rxjs/operators';
-import {IonNav, ToastController} from '@ionic/angular';
-import {KeyboardService} from '../../../../core/services/keyboard/keyboard.service';
+import {IonNav, ModalController, ToastController} from '@ionic/angular';
+import {KeyboardService} from '../../../core/services/keyboard/keyboard.service';
 
 @Component({
     selector: 'beping-aftt-login',
@@ -20,7 +20,8 @@ export class AfttLoginPage implements OnInit {
         private readonly formBuilder: FormBuilder,
         private readonly store: Store,
         private readonly toastr: ToastController,
-        private readonly ionNav: IonNav,
+        @Optional() private readonly ionNav: IonNav,
+        @Optional() public readonly modalCtrl: ModalController,
         private readonly keyboardService: KeyboardService
     ) {
     }
@@ -40,14 +41,19 @@ export class AfttLoginPage implements OnInit {
             take(1),
             finalize(() => this.loading = false)
         ).subscribe(async () => {
-            const toast = await this.toastr.create({
-                message: 'Connecté avec l\'AFTT',
-                position: 'bottom',
-                color: 'success',
-                duration: 2000
-            });
-            await toast.present();
-            await this.ionNav.pop();
+            if (this.modalCtrl) {
+                await this.modalCtrl.dismiss({logged: true});
+            } else {
+                const toast = await this.toastr.create({
+                    message: 'Connecté avec l\'AFTT',
+                    position: 'bottom',
+                    color: 'success',
+                    duration: 2000
+                });
+                await toast.present();
+                await this.ionNav.pop();
+            }
+
         }, async () => {
             const toast = await this.toastr.create({
                 message: 'Login invalide',
@@ -57,5 +63,9 @@ export class AfttLoginPage implements OnInit {
             });
             await toast.present();
         });
+    }
+
+    closeModal() {
+        this.modalCtrl.dismiss({logged: false});
     }
 }

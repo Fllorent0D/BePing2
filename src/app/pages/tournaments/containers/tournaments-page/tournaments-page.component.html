@@ -1,10 +1,10 @@
-<ion-header translucent="true">
+<ion-header >
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
         </ion-buttons>
-        <ion-title>Tournois</ion-title>
-        <ion-buttons slot="primary" (click)="showFilters($event)">
+        <ion-title>{{'COMMON.TOURNAMENTS'|translate}}</ion-title>
+        <ion-buttons slot="primary" (click)="showFilters()">
             <ion-button color="secondary">
                 <ion-icon slot="icon-only" icon="options-outline"></ion-icon>
             </ion-button>
@@ -20,7 +20,7 @@
             <ion-item detail *ngFor="let tournament of month.tournaments" (click)="navigateToTournamentDetail(tournament)">
                 <ion-label class="ion-text-wrap">
                     <h3>{{tournament.Name}}</h3>
-                    <p>{{tournament.DateFrom | date}} {{tournament.DateTo ? ' - ' + (tournament.DateTo | date) : ''}}</p>
+                    <p>{{tournament.DateFrom | localizedDate}} {{tournament.DateTo ? ' - ' + (tournament.DateTo | localizedDate) : ''}}</p>
                 </ion-label>
                 <ion-note slot="end"  *ngIf="isPast(tournament)"><ion-icon icon="checkmark-circle" color="success" ></ion-icon></ion-note>
             </ion-item>
