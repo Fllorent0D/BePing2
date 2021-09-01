@@ -1,0 +1,253 @@
+<ion-header>
+
+    <ion-toolbar color="primary">
+        <ion-buttons>
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'SETTINGS.TERMS_AND_CONDITIONS' | translate}}</ion-title>
+        <ion-buttons slot="end" *ngIf="isModal">
+            <ion-button (click)="closeModal()">
+                <ion-icon icon="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-segment (ionChange)="segmentChanged($event)" [value]="lang$|async">
+            <ion-segment-button value="fr">
+                <ion-label>{{'SETTINGS.FRENCH'|translate}}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="nl">
+                <ion-label>{{'SETTINGS.DUTCH'|translate}}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="en">
+                <ion-label>{{'SETTINGS.ENGLISH'|translate}}</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ng-container *ngIf="lang$|async as lang">
+        <div *ngIf="lang === LANG.FR">
+            <h2 id="d-finitions">Définitions</h2>
+            <p>Vous : La personne qui avez téléchargé et utilisez l'application BePing.</p>
+            <p>Nous : Moi, Florent Cardoen, le concepteur de l'application BePing.</p>
+            <h1 id="termes-et-conditions">Termes et conditions</h1>
+            <p>En téléchargeant ou en utilisant l'application, ces conditions s'appliqueront automatiquement à vous.
+                Vous devez donc vous assurer de les lire attentivement avant d'utiliser l'application. Vous n'êtes pas
+                autorisé à copier ou à modifier l'application, une partie de l'application ou nos marques de commerce de
+                quelque manière que ce soit. Vous n'êtes pas autorisé à essayer d'extraire le code source de
+                l'application. Vous ne devez pas non plus essayer de traduire l'application dans d'autres langues ou de
+                créer des versions dérivées. L'application elle-même, ainsi que toutes les marques, droits d'auteur,
+                droits de base de données et autres droits de propriété intellectuelle qui s'y rapportent, nous
+                appartiennent toujours.</p>
+            <p>Nous nous engageons à ce que l'application soit la plus utile et efficace possible. Pour cette raison,
+                nous nous réservons le droit d'apporter des modifications à l'application ou de facturer nos services, à
+                tout moment et pour quelque raison que ce soit. Nous ne vous facturerons jamais l'application ou ses
+                services sans vous indiquer très clairement ce pour quoi vous payez.</p>
+            <p>L'application BePing stocke et traite les données personnelles que vous nous avez fournies, afin de
+                fournir notre service. Il est de votre responsabilité de sécuriser votre téléphone et l'accès à
+                l'application. Nous vous recommandons donc de ne pas jailbreaker ou rooter votre téléphone, c'est-à-dire
+                à supprimer les restrictions et limitations logicielles imposées par le système d'exploitation officiel
+                de votre appareil. Cette manœuvre pourrait rendre votre téléphone vulnérable aux logiciels
+                virus/programmes malveillants, pourrait compromettre les fonctionnalités de sécurité de votre téléphone
+                et pourrait avoir pour conséquence que l'application BePing ne fonctionne pas correctement ou pas du
+                tout.</p>
+            <p>L'application utilise des services tiers qui déclarent leurs propres conditions générales.</p>
+            <p>Liens vers les conditions générales des fournisseurs de services tiers utilisés par l'application:</p>
+            <ul>
+                <li><a href="https://resultats.aftt.be/?legal=1">TabT</a></li>
+                <li><a href="https://policies.google.com/terms">Services Google Play</a></li>
+                <li><a href="https://firebase.google.com/terms/analytics">Google Analytics pour Firebase</a></li>
+                <li><a href="https://firebase.google.com/terms/crashlytics">Firebase Crashlytics</a></li>
+            </ul>
+            <p>Vous devez savoir qu'il y a certaines choses dont nous ne sommes pas responsables. Certaines fonctions de
+                l'application nécessitent que l'application dispose d'une connexion internet active. La connexion peut
+                être de type Wi-Fi ou fournie par votre fournisseur de réseau mobile, mais nous ne pouvons être tenus
+                responsable du fait que l'application ne fonctionne pas à pleine capacité si vous n'avez pas accès au
+                Wi-Fi ou que vous n'ayez plus de données mobile dans votre forfait.</p>
+            <p>Si vous utilisez l'application en dehors d'une zone Wi-Fi, vous devez vous rappeler que les conditions de
+                votre contrat avec votre fournisseur de réseau mobile s'appliqueront toujours. En conséquence, votre
+                opérateur de téléphonie mobile peut vous facturer le coût des données pendant la durée de la connexion
+                lors de l'accès à l'application, ou d'autres frais de tiers. En utilisant l'application, vous acceptez
+                la responsabilité de ces frais, y compris les frais de données en itinérance si vous utilisez
+                l'application en dehors de votre territoire d'origine (région ou pays) sans désactiver l'itinérance des
+                données. Si vous n'êtes pas le payeur de la facture de l'appareil sur lequel vous utilisez
+                l'application, sachez que nous supposons que vous avez reçu l'autorisation du payeur de la facture pour
+                utiliser l'application.</p>
+            <p>Dans le même ordre d'idées, nous ne pouvons pas toujours assumer la responsabilité de la façon dont vous
+                utilisez l'application, c'est-à-dire que vous devez vous assurer que votre appareil reste chargé. Nous
+                déclinons toute responsabilité si votre appareil est à court de batterie et que vous ne puissiez pas
+                l'allumer pour profiter du service.</p>
+            <p>En ce qui concerne notre responsabilité lorsque vous utilisez l'application, il est important de garder à
+                l'esprit que, même si nous nous efforçons de garantir que celle-ci soit mise à jour et correcte à tout
+                moment, nous comptons sur des tiers pour pouvoir vous fournir les informations. Nous n'acceptons aucune
+                responsabilité pour toute perte, directe ou indirecte, que vous pourriez subir en vous fiant entièrement
+                aux fonctionnalités de l'application.</p>
+            <p>Il peut arriver que l'application doive être mise à jour à un moment ou l'autre. L'application étant
+                actuellement disponible sur Android et iOS, les exigences pour les deux systèmes – ainsi que pour tous
+                les systèmes supplémentaires auxquels nous décidons d'étendre la disponibilité de l'application -
+                peuvent changer. Dans ce cas, il vous appartiendra de télécharger les mises à jour si vous souhaitez
+                continuer à utiliser l'application. Nous ne pouvons pas promettre de toujours mettre à jour
+                l'application de sorte qu'elle soit pertinente pour vous et/ou fonctionne avec la version Android et iOS
+                que vous avez installée sur votre appareil. Cependant, vous vous engagez à toujours accepter les mises à
+                jour de l'application lorsque celles-ci vous sont proposées. Nous pouvons également décider d'arrêter de
+                fournir l'application et de mettre fin à son utilisation à tout moment sans vous donner un préavis de
+                résiliation. Sauf indication contraire de notre part, en cas de résiliation, (a) les droits et licences
+                qui vous sont accordés dans les présentes conditions prendront fin ; (b) vous devez cesser d'utiliser
+                l'application et, si nécessaire, la supprimer de votre appareil.</p>
+            <h2 id="modifications-apport-es-ces-conditions-g-n-rales">Modifications apportées à ces conditions
+                générales</h2>
+            <p>Nous pouvons mettre à jour nos conditions générales de temps à autre. Dès lors, il vous est conseillé de
+                consulter cette page périodiquement pour vous tenir au courant des changements éventuels. Nous vous
+                informerons de tout changement en publiant les nouvelles conditions générales sur cette page. </p>
+            <p>Ces termes et conditions sont en vigueur à partir du 30/08/21</p>
+            <h2 id="nous-contacter">Nous contacter</h2>
+            <p>Si vous avez des questions ou des suggestions concernant nos conditions générales, n'hésitez pas à nous
+                contacter via f.cardoen@me.com.</p>
+        </div>
+        <div *ngIf="lang === LANG.EN">
+            <h2 id="definitions">Definitions</h2>
+            <p>You: The person who downloaded and used the BePing app.</p>
+            <p>We: Me, Florent Cardoen, the designer of the BePing application.</p>
+            <h1 id="terms-and-conditions">Terms and conditions</h1>
+            <p>By downloading or using the app, these terms will automatically apply to you. So you need to make sure
+                you read them carefully before using the app. You are not permitted to copy or modify the app, any part
+                of the app, or our trademarks in any way. You are not allowed to try to extract the source code of the
+                application. You should also not try to translate the app into other languages or create derivative
+                versions. The app itself, along with all trademarks, copyrights, database rights, and other intellectual
+                property rights related to it, still belong to us.</p>
+            <p>We are committed to making the application as useful and efficient as possible. For this reason, we
+                reserve the right to make changes to the application or to charge for our services, at any time and for
+                any reason. We will never charge you for the app or its services without making it very clear to you
+                what you are paying for.</p>
+            <p>The BePing application stores and processes the personal data you have provided to us, in order to
+                provide our service. It is your responsibility to secure your phone and access to the app. So we
+                recommend that you do not <em>jailbreak</em> or <em>root</em> your phone, i.e. remove the restrictions
+                and software limitations imposed by the official operating system of your device. This maneuver could
+                make your phone vulnerable to virus / malware software, could compromise your phone's security
+                features and could result in the BePing app not working properly or at all.</p>
+            <p>The application uses third-party services which declare their own terms and conditions.</p>
+            <p>Links to the terms and conditions of third-party service providers used by the application:</p>
+            <ul>
+                <li><a href="https://resultats.aftt.be/?legal=1">TabT</a></li>
+                <li><a href="https://policies.google.com/terms">Google Play Services</a></li>
+                <li><a href="https://firebase.google.com/terms/analytics">Google Analytics for Firebase</a></li>
+                <li><a href="https://firebase.google.com/terms/crashlytics">Firebase Crashlytics</a></li>
+            </ul>
+            <p>You should know that there are some things that we are not responsible for. Certain functions of the
+                application require that the application has an active internet connection. The connection can be Wi-Fi
+                type or provided by your mobile network provider, but we cannot be held responsible that the application
+                does not work at full capacity if you do not have access to Wi-Fi or that you no longer have mobile data
+                in your plan.</p>
+            <p>If you use the app outside of a Wi-Fi zone, you should remember that the terms of your contract with your
+                mobile network provider will still apply. As a result, your mobile operator may charge you for the cost
+                of data for the duration of the connection when accessing the app, or other third-party charges. By
+                using the app, you accept responsibility for these charges, including data roaming charges if you use
+                the app outside of your home territory (region or country) without disabling data roaming. If you are
+                not the bill payer for the device you are using the app on, please be aware that we assume that you have
+                received permission from the bill payer to use the app.</p>
+            <p>On a related note, we can't always take responsibility for how you use the app i.e. you need to make
+                sure your device stays charged. We are not responsible if your device runs out of battery and you cannot
+                turn it on to enjoy service.</p>
+            <p>Regarding our responsibility when using the app, it is important to keep in mind that while we make every
+                effort to ensure that it is up-to-date and correct at all times, we rely on third parties to be able to
+                provide you with the information. We accept no responsibility for any loss, direct or indirect, that you
+                may suffer by relying entirely on the functionality of the application.</p>
+            <p>There may be times when the app needs to be updated at some point. With the app currently available on
+                Android and iOS, the requirements for both systems - as well as any additional systems to which we
+                decide to expand the availability of the app - may change. In this case, it will be up to you to
+                download the updates if you wish to continue using the application.
+                we. We cannot promise to always update the app so that it is relevant to you and / or works with the
+                Android and iOS version you have installed on your device. However, you agree to always accept updates
+                to the application when they are offered to you. We may also decide to stop providing the Application
+                and terminate its use at any time without giving you notice of termination. Unless we indicate
+                otherwise, upon termination, (a) your rights and licenses granted to you in these Terms will terminate;
+                (b) you must stop using the app and, if necessary, delete it from your device.</p>
+            <h2 id="changes-to-these-general-conditions">Changes to these general conditions</h2>
+            <p>We may update our terms and conditions from time to time. Therefore, you are advised to check this page
+                periodically to keep up to date with any changes. We will notify you of any changes by posting the new
+                terms and conditions on this page.</p>
+            <p>These terms and conditions are in effect from 08/30/21</p>
+            <h2 id="contact-us">Contact us</h2>
+            <p>If you have any questions or suggestions regarding our terms and conditions, please do not hesitate to
+                contact us via f.cardoen@me.com.</p>
+
+        </div>
+        <div *ngIf="(lang$|async) === LANG.NL">
+            <h2 id="definities">Definities</h2>
+            <p>U: De persoon die de BePing app heeft gedownload en gebruikt.</p>
+            <p>Wij : Ik, Florent Cardoen, de ontwerper van de BePing app.</p>
+            <h1 id="voorwaarden-en-bepalingen">Voorwaarden en bepalingen</h1>
+            <p>Door de app te downloaden of te gebruiken, zijn deze voorwaarden automatisch op u van app. U moet er dus
+                voor zorgen dat u ze zorgvuldig leest voordat u de App gebruikt. U mag de App, een deel van de App of
+                onze handelsmerken op geen enkele manier kopiëren of wijzigen. U mag niet proberen de broncode van de
+                App te extraheren. U mag ook niet proberen de app in andere talen te vertalen of afgeleide versies te
+                maken. De app zelf, evenals alle handelsmerken, auteursrechten, databankrechten en andere intellectuele
+                eigendomsrechten die erop betrekking hebben, zijn nog steeds van ons.</p>
+            <p>Wij doen ons best om de app zo nuttig en doeltreffend mogelijk te maken. Daarom behouden wij ons het
+                recht voor om op elk moment en om welke reden dan ook wijzigingen in de app aan te brengen of kosten
+                voor onze diensten in rekening te brengen. Wij zullen u nooit kosten aanrekenen voor de app of de
+                diensten ervan zonder zeer duidelijk te maken waarvoor u betaalt.</p>
+            <p>De BePing-app bewaart en verwerkt de persoonsgegevens die u aan ons hebt verstrekt, om onze dienst te
+                kunnen verlenen. Het is uw verantwoordelijkheid om uw telefoon en de toegang tot de app te beveiligen.
+                Daarom raden wij u aan uw telefoon niet te jailbreaken of te rooten, d.w.z. de softwarebeperkingen en
+                -beperkingen te verwijderen die door het officiële besturingssysteem van uw toestel worden opgelegd. Als
+                u dat doet, kan uw telefoon kwetsbaar worden voor virus/malware software, kunnen de beveiligingsfuncties
+                van uw telefoon in gevaar komen en kan de BePing-app niet goed of helemaal niet werken.</p>
+            <p>De app gebruikt diensten van derden die hun eigen voorwaarden verkondigen.</p>
+            <p>Links naar de voorwaarden van dienstverleners van derden die door de app worden gebruikt:</p>
+            <ul>
+                <li><a href="https://resultats.aftt.be/?legal=1">TabT</a></li>
+                <li><a href="https://www.google.com/policies/privacy/">Google Play Services</a></li>
+                <li><a href="https://firebase.google.com/policies/analytics">Google Analytics voor Firebase</a></li>
+                <li><a href="https://firebase.google.com/support/privacy/">Firebase Crashlytics</a></li>
+            </ul>
+            <p>U moet weten dat er sommige dingen zijn waarvoor wij niet verantwoordelijk zijn. Voor sommige functies
+                van de app is een actieve internetverbinding nodig. De verbinding kan via Wi-Fi zijn of door uw mobiele
+                netwerkprovider worden geleverd, maar wij kunnen niet verantwoordelijk worden gesteld voor het feit dat
+                de app niet op volle capaciteit werkt als u geen toegang hebt tot Wi-Fi of geen mobiele gegevens meer
+                hebt in uw abonnement.</p>
+            <p>Als u de app buiten een Wi-Fi-zone gebruikt, moet u eraan denken dat de voorwaarden van uw contract met
+                uw mobiele netwerkprovider nog steeds van app zijn. Als gevolg daarvan kan uw mobiele operator u de
+                kosten van gegevens voor de duur van de verbinding in rekening brengen wanneer u de app opent, of andere
+                kosten van derden. Door de App te gebruiken aanvaardt u de verantwoordelijkheid voor deze kosten, met
+                inbegrip van kosten voor dataroaming indien u de App buiten uw eigen grondgebied (regio of land)
+                gebruikt zonder dat u dataroaming uitschakelt. Als u niet de betaler bent van de rekening van het
+                apparaat waarop u de App gebruikt, moet u weten dat wij ervan uitgaan dat u toestemming van de betaler
+                hebt gekregen om de App te gebruiken.</p>
+            <p>Evenzo kunnen wij niet altijd de verantwoordelijkheid op ons nemen voor de manier waarop u de app
+                gebruikt, d.w.z. dat u ervoor moet zorgen dat uw toestel opgeladen blijft. Wij kunnen niet
+                verantwoordelijk worden gesteld als de batterij van uw toestel leeg raakt en u het niet kunt aanzetten
+                om de dienst te gebruiken.</p>
+            <p>Wat onze aansprakelijkheid betreft wanneer u de app gebruikt, is het belangrijk te bedenken dat wij
+                weliswaar trachten ervoor te zorgen dat de informatie steeds actueel en correct is, maar dat wij een
+                beroep doen op derden om de informatie aan u te kunnen verstrekken. Wij aanvaarden geen
+                verantwoordelijkheid voor enig verlies, direct of indirect, dat u zou kunnen lijden als gevolg van het
+                volledig vertrouwen op de functionaliteit van de app.</p>
+            <p>Het kan zijn dat de app op een gegeven moment bijgewerkt moet worden. Aangezien de app momenteel
+                beschikbaar is op Android en iOS, kunnen de vereisten voor beide systemen - en eventuele bijkomende
+                systemen waartoe wij besluiten de beschikbaarheid van de app uit te breiden - veranderen. In dat geval
+                is het uw verantwoordelijkheid om updates te downloaden als u de app wilt blijven gebruiken. Wij kunnen
+                niet beloven dat wij de App altijd bijwerken, zodat hij relevant voor u is en/of werkt met de Android-
+                en iOS-versie die u op uw toestel geïnstalleerd hebt. U stemt er echter mee in om updates van de App
+                altijd te aanvaarden wanneer ze u worden aangeboden. Wij kunnen ook te allen tijde besluiten om de
+                levering van de App te stoppen en het gebruik ervan te beëindigen zonder u daarvan in kennis te stellen.
+                Tenzij wij anders bepalen, worden bij beëindiging (a) de rechten en licenties die u in deze Voorwaarden
+                worden verleend, beëindigd; (b) moet u het gebruik van de App staken en deze, indien nodig, van uw
+                apparaat verwijderen.</p>
+            <h2 id="wijzigingen-in-deze-voorwaarden">Wijzigingen in deze voorwaarden</h2>
+            <p>Wij kunnen onze bepalingen en voorwaarden van tijd tot tijd bijwerken. U wordt daarom aangeraden deze
+                pagina regelmatig te controleren op eventuele wijzigingen. Wij zullen u op de hoogte brengen van
+                eventuele wijzigingen door de nieuwe voorwaarden op deze pagina te plaatsen.</p>
+            <p>Deze voorwaarden zijn geldig vanaf 30/08/21</p>
+            <h2 id="neem-contact-met-ons-op">Neem contact met ons op</h2>
+            <p>Als u vragen of suggesties hebt over onze voorwaarden, kunt u contact met ons opnemen via
+                f.cardoen@me.com.</p>
+        </div>
+        <div *ngIf="(lang$|async) === LANG.NL">
+
+        </div>
+    </ng-container>
+
+</ion-content>

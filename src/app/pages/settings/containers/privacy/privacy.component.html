@@ -1,0 +1,297 @@
+<ion-header>
+
+    <ion-toolbar color="primary">
+        <ion-buttons>
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'SETTINGS.PRIVACY_POLICY' | translate}}</ion-title>
+        <ion-buttons slot="end" *ngIf="isModal">
+            <ion-button (click)="closeModal()">
+                <ion-icon icon="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-segment (ionChange)="segmentChanged($event)" [value]="lang$|async">
+            <ion-segment-button value="fr">
+                <ion-label>{{'SETTINGS.FRENCH'|translate}}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="nl">
+                <ion-label>{{'SETTINGS.DUTCH'|translate}}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button value="en">
+                <ion-label>{{'SETTINGS.ENGLISH'|translate}}</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ng-container *ngIf="lang$|async as lang">
+        <div *ngIf="lang === LANG.FR">
+            <h2 id="d-finitions">Définitions</h2>
+            <p>Vous: la personne qui avez chargé et utilisez l'application BePing</p>
+            <p>Nous: Moi, Florent Cardoen, le concepteur de l'application BePing</p>
+            <p>Service: désigne ici les fonctionnalités fournies par une application</p>
+            <h1 id="politique-de-confidentialit-">Politique de confidentialité</h1>
+            <p>Nous avons conçu l'application BePing en tant qu'application Freemium. Ce service vous est fourni
+                gratuitement et est destiné à être utilisé tel quel.</p>
+            <p>Cette page est utilisée pour informer les visiteurs de notre politique en matière de collecte,
+                d'utilisation et de divulgation des informations personnelles si quelqu'un décide d'utiliser notre
+                service.</p>
+            <p>Si vous choisissez d'utiliser notre service, vous acceptez la collecte et l'utilisation d'informations en
+                rapport avec cette politique. Les informations personnelles que nous collectons sont utilisées pour
+                fournir et améliorer le service. Nous n'utiliserons ni ne partagerons vos informations avec qui que ce
+                soit, sauf tel que décrit dans la présente politique de confidentialité.</p>
+            <p>Les termes utilisés dans cette politique de confidentialité ont la même signification que dans nos
+                conditions générales, qui sont accessibles sur BePing, sauf indication contraire dans la présente
+                politique de confidentialité.</p>
+            <h2 id="informations-disponibles-sur-beping">Informations disponibles sur BePing</h2>
+            <p>Les données présentes dans l'application telles que noms de joueurs, noms de clubs, tournois ou résultats
+                de matchs ne sont pas gérées par nous. Ces informations sont mises en libre disposition par l'Aile
+                Francophone de Tennis de Table et la Vlaamse Tafeltennisliga. Nous ne pouvons donc pas être tenus
+                responsables de la publication de ces informations. Si des changements doivent être effectués, vous
+                devez vous adresser à l'entité responsable.</p>
+            <h2 id="collecte-et-utilisation-des-informations">Collecte et utilisation des informations</h2>
+            <p>Pour une meilleure expérience, lors de l'utilisation de notre service, nous pouvons vous demander de nous
+                fournir certaines informations personnellement identifiables, y compris, mais sans s'y limiter, vos
+                identifiants pour votre compte AFTT/VTTL et votre profil de joueur dans les listes de force de club. Les
+                informations que nous demandons sont conservées sur votre appareil et ne sont collectées qu'à des fins
+                d'analyse d'utilisation de l'application.</p>
+            <p>L'application utilise des services tiers qui peuvent collecter des informations utilisées pour vous
+                identifier.</p>
+            <p>Liens vers la politique de confidentialité des fournisseurs de services tiers utilisés par l'application
+                :</p>
+            <ul>
+                <li><a href="https://www.google.com/policies/privacy/">Services Google Play</a></li>
+                <li><a href="https://firebase.google.com/policies/analytics">Google Analytics pour Firebase</a></li>
+                <li><a href="https://firebase.google.com/support/privacy/">Firebase Crashlytics</a></li>
+            </ul>
+            <h2 id="donn-es-de-journal">Données de journal</h2>
+            <p>Nous tenons à vous vous informer que, en cas d'erreur dans l'application, nous collectons – via des
+                produits tiers – des données et des informations sur votre téléphone appelées <em>Données de
+                    Journal</em>. Ces données de journal peuvent inclure des informations telles que l'adresse IP de
+                votre appareil, le nom de l'appareil, la version du système d'exploitation, la configuration de
+                l'application lors de l'utilisation de notre service, l'heure et la date de l'utilisation du service
+                ainsi que d'autres statistiques.</p>
+            <h2 id="cookies">Cookies</h2>
+            <p>Les cookies sont des fichiers contenant une petite quantité de données qui sont couramment utilisés comme
+                identifiants uniques anonymes. Ceux-ci sont envoyés à votre navigateur à partir des sites Web que vous
+                visitez et sont stockés dans la mémoire interne de votre appareil.</p>
+            <p>Ce service n'utilise pas explicitement ces cookies. Cependant, l'application peut utiliser du code et des
+                bibliothèques tierces qui utilisent des cookies pour collecter des informations et améliorer leurs
+                services. Vous avez la possibilité d'accepter ou de refuser ces cookies et de savoir quand un cookie est
+                envoyé à votre appareil. Si vous choisissez de refuser nos cookies, vous ne pourrez peut-être pas
+                utiliser certaines parties de ce service.</p>
+            <h2 id="les-fournisseurs-de-services">Les fournisseurs de services</h2>
+            <p>Nous pouvons employer des sociétés tierces et des particuliers pour les raisons suivantes :</p>
+            <ul>
+                <li>pour faciliter notre service;</li>
+                <li>pour fournir le service en notre nom ;</li>
+                <li>pour effectuer des services liés au service ; ou</li>
+                <li>pour nous aider à analyser comment notre service est utilisé.</li>
+            </ul>
+            <p>Nous tenons à vous informer que ces tiers ont accès à vos informations personnelles. Cela est dû au fait
+                que ces tiers effectuent les tâches qui leur sont confiées en notre nom. Cependant, ils sont tenus de ne
+                pas divulguer ou utiliser les informations à d'autres fins.</p>
+            <h2 id="s-curit-">Sécurité</h2>
+            <p>Nous apprécions votre confiance en nous fournissant vos informations personnelles. C'est la raison pour
+                laquelle nous nous efforçons d'utiliser des moyens commercialement acceptables pour les protéger. Mais
+                soyez conscient qu'aucune méthode de transmission sur internet ou méthode de stockage électronique n'est
+                sûre et fiable à 100% et que, dès lors, nous ne pouvons pas garantir sa sécurité absolue.</p>
+            <h2 id="liens-vers-d-autres-sites">Liens vers d'autres sites</h2>
+            <p>Ce service peut contenir des liens vers d'autres sites. Si vous cliquez sur un lien tiers, vous serez
+                dirigé vers ce site. Notez que ces sites externes ne sont pas exploités par nous. Par conséquent, nous
+                vous conseillons fortement de consulter la politique de confidentialité de ces sites web. Nous n'avons
+                aucun contrôle et n'assumons aucune responsabilité quant au contenu, aux politiques de confidentialité
+                ou aux pratiques de tout site ou service tiers.</p>
+            <h2 id="confidentialit-des-enfants">Confidentialité des enfants</h2>
+            <p>Ces services ne s'adressent pas aux personnes de moins de 13 ans. Nous ne collectons pas sciemment
+                d'informations personnellement identifiables auprès d'enfants de moins de 13 ans. Si vous êtes parent ou
+                tuteur et que vous savez que votre enfant nous a fourni des informations personnelles, veuillez nous
+                contacter afin que nous puissions prendre les mesures nécessaires.</p>
+            <h2 id="modifications-apport-es-cette-politique-de-confidentialit-">Modifications apportées à cette
+                politique de confidentialité</h2>
+            <p>Nous pouvons mettre à jour notre politique de confidentialité de temps à autre. Ainsi, il vous est
+                conseillé de consulter cette page périodiquement pour tout changement. Nous vous informerons de tout
+                changement en publiant la nouvelle politique de confidentialité sur cette page.</p>
+            <p>Cette politique est effective à partir du 30/08/21.</p>
+            <h2 id="nous-contacter">Nous contacter</h2>
+            <p>Si vous avez des questions ou des suggestions concernant notre politique de confidentialité, n'hésitez
+                pas à nous contacter à f.cardoen@me.com.</p>
+        </div>
+        <div *ngIf="lang===LANG.EN">
+            <h2 id="definitions">Definitions</h2>
+            <p>You: the person who downloaded and used the BePing application</p>
+            <p>We: Me, Florent Cardoen, the designer of the BePing application</p>
+            <p>Service: here refers to the functionalities provided by an application</p>
+            <h1 id="privacy-policy">Privacy Policy</h1>
+            <p>We designed the BePing app as a Freemium app. This service is provided to you free of charge and is
+                intended to be used as is.</p>
+            <p>This page is used to inform visitors of our policy on the collection, use and disclosure of personal
+                information if someone decides to use our service.</p>
+            <p>If you choose to use our service, you agree to the collection and use of information in connection with
+                this policy. The personal information we collect is used to provide and improve the service. We will not
+                use or share your information with anyone except as described in this privacy policy.</p>
+            <p>The terms used in this privacy policy have the same meaning as in our terms and conditions, which can be
+                accessed on BePing, unless otherwise specified in this privacy policy.</p>
+            <h2 id="information-available-on-beping">Information available on BePing</h2>
+            <p>The data present in the application such as player names, club names, tournaments or match results are
+                not managed by us. This information is made freely available by the Francophone Table Tennis Wing and
+                the Vlaamse Tafeltennisliga. We therefore cannot be held responsible for the publication of this
+                information. If changes need to be made, you should contact the responsible entity.</p>
+            <h2 id="collection-and-use-of-information">Collection and use of information</h2>
+            <p>For a better experience, when using our service, we may ask you to provide us with certain personally
+                identifiable information, including, but not limited to, your credentials for your AFTT / VTTL account
+                and your player profile in club strength lists. The information we request is stored on your device and
+                is only collected for the purpose of analyzing application usage.</p>
+            <p>The application uses third-party services which may collect information used to identify you.</p>
+            <p>Links to the privacy policy of third-party service providers used by the app:</p>
+            <ul>
+                <li><a href="https://www.google.com/policies/privacy/">Google Play Services</a></li>
+                <li><a href="https://firebase.google.com/policies/analytics">Google Analytics for Firebase</a></li>
+                <li><a href="https://firebase.google.com/support/privacy/">Firebase Crashlytics</a></li>
+            </ul>
+            <h2 id="log-data">Log data</h2>
+            <p>We would like to inform you that, in the event of an error in the application, we collect - through
+                third-party products - data and information on your phone called <em>Log Data</em>. This log data may
+                include information such as your device&#39;s IP address, device name, operating system version, app
+                configuration while using our service, time and date of use of the service as well as other statistics.
+            </p>
+            <h2 id="cookies">Cookies</h2>
+            <p>Cookies are files containing a small amount of data which are commonly used as anonymous unique
+                identifiers. These are sent to your browser from the websites you visit and are stored in the internal
+                memory of your device.</p>
+            <p>This service does not explicitly use these cookies. However, the application may use code and third-party
+                libraries that use cookies to collect information and improve their services. You have the option of
+                accepting or rejecting these cookies and knowing when a cookie is sent to your device. If you choose to
+                decline our cookies, you may not be able to use certain parts of this service.</p>
+            <h2 id="service-providers">Service providers</h2>
+            <p>We may employ third party companies and individuals for the following reasons:</p>
+            <ul>
+                <li>to facilitate our service;</li>
+                <li>to provide the service on our behalf;</li>
+                <li>to perform services related to the service; Where</li>
+                <li>to help us analyze how our service is used.</li>
+            </ul>
+            <p>We would like to inform you that these third parties have access to your personal information. This is
+                because these third parties perform the tasks assigned to them on our behalf. However, they are required
+                not to disclose or use the information for any other purpose.</p>
+            <h2 id="security">Security</h2>
+            <p>We value your trust in providing us with your personal information. This is the reason why we strive to
+                use commercially acceptable means to protect them. But be aware that no method of transmission over the
+                internet or method of electronic storage is 100% secure and reliable and therefore we cannot guarantee
+                its absolute security.</p>
+            <h2 id="links-to-other-sites">Links to other sites</h2>
+            <p>This service may contain links to other sites. If you click on a third-party link, you will be directed
+                to that site. Note that these external sites are not operated by us. Therefore, we strongly advise you
+                to consult the privacy policy of these websites. We have no control over and assume no responsibility
+                for the content, privacy policies or practices of any third party sites or services.</p>
+            <h2 id="children-s-privacy">Children&#39;s privacy</h2>
+            <p>These services are not intended for people under the age of 13. We do not knowingly collect personally
+                identifiable information from children under the age of 13. If you are a parent or guardian and know
+                that your child has provided us with personal information, please contact us so that we can take
+                appropriate action.</p>
+            <h2 id="changes-to-this-privacy-policy">Changes to this privacy policy</h2>
+            <p>We may update our privacy policy from time to time. Thus, you are advised to consult this page
+                periodically for any changes. We will notify you of any changes by posting the new privacy policy on
+                this page.</p>
+            <p>This policy is effective from 08/30/21.</p>
+            <h2 id="contact-us">Contact us</h2>
+            <p>If you have any questions or suggestions regarding our privacy policy, please do not hesitate to contact
+                us at f.cardoen@me.com.</p>
+        </div>
+        <div *ngIf="lang === LANG.NL">
+            <h2 id="definities">Definities</h2>
+            <p>U: de persoon die de BePing-app gedownload en gebruikt heeft</p>
+            <p>Wij: Ik, Florent Cardoen, de ontwerper van de BePing app</p>
+            <p>Dienst: verwijst naar de functionaliteit die door een app wordt geboden</p>
+            <h1 id="privacybeleid">Privacybeleid</h1>
+            <p>Wij hebben de BePing-app ontworpen als een Freemium-app. Deze dienst wordt u gratis aangeboden en is
+                bedoeld voor dit soort gebruik.</p>
+            <p>Deze pagina wordt gebruikt om bezoekers op de hoogte te brengen van ons beleid inzake het verzamelen,
+                gebruiken en onthullen van persoonlijke informatie als iemand besluit van onze dienst gebruik te
+                maken.</p>
+            <p>Als u ervoor kiest onze dienst te gebruiken, stemt u in met het verzamelen en gebruiken van informatie in
+                overeenstemming met dit beleid. De persoonlijke informatie die wij verzamelen wordt gebruikt om de
+                dienst te verlenen en te verbeteren. Wij zullen uw informatie niet gebruiken of met iemand anders delen,
+                behalve zoals beschreven in dit privacybeleid.</p>
+            <p>Termen die in dit Privacybeleid gebruikt worden, hebben dezelfde betekenis als in onze Algemene
+                Voorwaarden, die beschikbaar zijn op BePing, tenzij anders vermeld in dit Privacybeleid.</p>
+            <h2 id="informatie-beschikbaar-op-beping">Informatie beschikbaar op BePing</h2>
+            <p>De gegevens in de app, zoals spelersnamen, clubnamen, toernooien of wedstrijduitslagen worden niet door
+                ons beheerd. Deze informatie wordt vrij ter beschikking gesteld door de Aile Francophone de Tennis de
+                Table en de Vlaamse Tafeltennisliga. Wij kunnen dus niet verantwoordelijk worden gesteld voor de
+                publicatie van deze informatie. Als er wijzigingen moeten worden aangebracht, moet u contact opnemen met
+                de verantwoordelijke instantie.</p>
+            <h2 id="verzameling-en-gebruik-van-informatie">Verzameling en gebruik van informatie</h2>
+            <p>Voor een betere ervaring kunnen wij u, wanneer u onze dienst gebruikt, vragen om ons bepaalde persoonlijk
+                identificeerbare informatie te geven, met inbegrip van, maar niet beperkt tot, uw
+                AFTT/VTTL-accountgegevens en uw spelersprofiel in de clubsterktelijsten. De informatie die wij vragen
+                wordt op uw toestel opgeslagen en wordt uitsluitend verzameld om het gebruik van de app te
+                analyseren.</p>
+            <p>De app gebruikt diensten van derden die informatie kunnen verzamelen die gebruikt wordt om u te
+                identificeren.</p>
+            <p>Links naar het privacybeleid van derde dienstverleners die door de app worden gebruikt:</p>
+            <ul>
+                <li><a href="https://www.google.com/policies/privacy/">Google Play Services</a></li>
+                <li><a href="https://firebase.google.com/policies/analytics">Google Analytics for Firebase</a></li>
+                <li><a href="https://firebase.google.com/support/privacy/">Firebase Crashlytics</a></li>
+            </ul>
+            <h2 id="loggegevens">Loggegevens</h2>
+            <p>Wij willen u erop wijzen dat wij, in geval van een fout in de app, - via producten van derden - gegevens
+                en informatie over uw telefoon verzamelen, Loggegevens genaamd. Deze loggegevens kunnen informatie
+                bevatten zoals het IP-adres van uw toestel, de naam van het toestel, de versie van het
+                besturingssysteem, de configuratie van de app wanneer u onze dienst gebruikt, de tijd en de datum van
+                het gebruik van de dienst en andere statistieken.</p>
+            <h2 id="cookies">Cookies</h2>
+            <p>Cookies zijn bestanden met een kleine hoeveelheid gegevens die gewoonlijk gebruikt worden als anonieme
+                unieke identificatoren. Deze worden naar uw browser gestuurd vanaf de websites die u bezoekt en worden
+                opgeslagen in het interne geheugen van uw toestel.</p>
+            <p>Deze dienst maakt niet expliciet gebruik van deze cookies. De app kan echter code en bibliotheken van
+                derden gebruiken die cookies gebruiken om informatie te verzamelen en hun diensten te verbeteren. U hebt
+                de mogelijkheid om deze cookies te aanvaarden of te weigeren en om te weten wanneer er een cookie naar
+                uw toestel wordt gestuurd. Als u ervoor kiest onze cookies te weigeren, kan het zijn dat u sommige delen
+                van deze dienst niet kunt gebruiken.</p>
+            <h2 id="dienstverleners">Dienstverleners</h2>
+            <p>Wij kunnen bedrijven en personen van derden in dienst nemen om de volgende redenen:</p>
+            <ul>
+                <li>om onze dienstverlening te vergemakkelijken;</li>
+                <li>om de dienst namens ons te verlenen;</li>
+                <li>om diensten in verband met de dienst te verrichten; of</li>
+                <li>om ons te helpen analyseren hoe onze dienst wordt gebruikt.</li>
+            </ul>
+            <p>Wij willen u erop wijzen dat deze derden toegang hebben tot uw persoonlijke gegevens. Deze derden voeren
+                namelijk de hun toevertrouwde taken namens ons uit. Zij zijn echter verplicht de informatie niet voor
+                andere doeleinden bekend te maken of te gebruiken.</p>
+            <h2 id="veiligheid">Veiligheid</h2>
+            <p>Wij waarderen het vertrouwen dat u in ons stelt door ons uw persoonlijke informatie te verstrekken.
+                Daarom streven wij ernaar het met commercieel aanvaardbare middelen te beschermen. Wees u er echter van
+                bewust dat geen enkele methode van transmissie over het Internet of methode van elektronische opslag
+                100% veilig en betrouwbaar is, en wij kunnen de absolute veiligheid ervan niet garanderen.</p>
+            <h2 id="links-naar-andere-sites">Links naar andere sites</h2>
+            <p>Deze dienst kan links naar andere sites bevatten. Als u op een link van een derde partij klikt, wordt u
+                naar die site geleid. Gelieve er nota van te nemen dat deze externe sites niet door ons beheerd worden.
+                Daarom raden wij u ten zeerste aan het privacybeleid van deze websites te controleren. Wij hebben geen
+                controle over, en nemen geen verantwoordelijkheid voor, de inhoud, het privacybeleid of de praktijken
+                van een site of dienst van een derde.</p>
+            <h2 id="privacy-van-kinderen">Privacy van kinderen</h2>
+            <p>Deze diensten zijn niet bedoeld voor personen onder de 13 jaar. Wij verzamelen niet bewust persoonlijk
+                identificeerbare informatie van kinderen onder de leeftijd van 13 jaar. Als u een ouder of voogd bent en
+                u weet dat uw kind ons persoonlijke informatie heeft gegeven, neem dan contact met ons op, zodat wij
+                passende maatregelen kunnen nemen.</p>
+            <h2 id="wijzigingen-in-dit-privacybeleid">Wijzigingen in dit privacybeleid</h2>
+            <p>Wij kunnen ons privacybeleid van tijd tot tijd bijwerken. U wordt dan ook aangeraden deze pagina
+                regelmatig te controleren op eventuele wijzigingen. Wij zullen u op de hoogte brengen van eventuele
+                wijzigingen door het nieuwe privacybeleid op deze pagina te plaatsen.</p>
+            <p>Dit beleid is van kracht vanaf 30/08/21.</p>
+            <h2 id="neem-contact-met-ons-op">Neem contact met ons op</h2>
+            <p>Als u vragen of suggesties hebt over ons privacybeleid, kunt u contact met ons opnemen via
+                f.cardoen@me.com.</p>
+
+        </div>
+    </ng-container>
+
+
+</ion-content>

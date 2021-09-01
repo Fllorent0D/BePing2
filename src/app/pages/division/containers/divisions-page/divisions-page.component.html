@@ -1,0 +1,18 @@
+<ion-header >
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{('DIVISION_LEVEL.' + (level$|async)) |translate}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item detail *ngFor="let div of divisions$ | async" (click)="divisionClicked(div)">
+            <ion-label class="ion-text-wrap">
+                <h3>{{div.DivisionName.split('-')[0] | titlecase}}</h3>
+                <p *ngIf="div.DivisionCategory">{{'PLAYER_CATEGORY.' + div.DivisionCategory | translate | titlecase}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

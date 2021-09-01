@@ -1,0 +1,180 @@
+<ion-header >
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{(division$ |async)?.DivisionName}}</ion-title>
+        <ion-buttons slot="end">
+            <beping-favorite-btn
+                    [enabled]="isFavorite$|async"
+                    (clicked)="toggleFavorite()"
+            ></beping-favorite-btn>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+        <div class="scrollmenu" #scrollMenu>
+            <ion-chip color="dark" id="tab1" [class.act]="tabIndex === 0" (click)="selectTab(0)">
+                <ion-label>{{'TEAM_STAT.RANKING' | translate}}</ion-label>
+            </ion-chip>
+            <ion-chip color="dark" id="tab2" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
+                <ion-label>{{'COMMON.PLAYERS' | translate}}</ion-label>
+            </ion-chip>
+            <ion-chip color="dark" id="tab3" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
+                <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
+            </ion-chip>
+        </div>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="false">
+    <super-tabs #superTabs>
+        <super-tabs-container>
+            <super-tab>
+                <ion-grid class="ion-no-padding">
+                    <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
+                        <ion-col size="1">
+                            <ion-text class="ion-text-wrap">{{'TEAM_STAT.RANKING_THREE_LETTERS' | translate}}</ion-text>
+                        </ion-col>
+                        <ion-col size="5">
+                            <ion-text class="ion-text-wrap">{{'COMMON.TEAM'|translate}}</ion-text>
+                        </ion-col>
+                        <ion-col class="ion-text-center" size="1">
+                            <ion-text class="ion-text-wrap">{{'TEAM_STAT.PLAYED_FIRST_LETTER' | translate}}</ion-text>
+                        </ion-col>
+                        <ion-col class="ion-text-center" size="1">
+                            <ion-text class="ion-text-wrap">{{'TEAM_STAT.WON_FIRST_LETTER' | translate}}</ion-text>
+                        </ion-col>
+                        <ion-col class="ion-text-center" size="1">
+                            <ion-text class="ion-text-wrap">{{'TEAM_STAT.LOST_FIRST_LETTER' | translate}}</ion-text>
+                        </ion-col>
+                        <ion-col class="ion-text-center" size="1">
+                            <ion-text class="ion-text-wrap">{{'TEAM_STAT.DRAW_FIRST_LETTER' | translate}}</ion-text>
+                        </ion-col>
+                        <ion-col class="ion-text-center" size="2">
+                            <ion-text class="ion-text-wrap">{{'TEAM_STAT.POINTS_THREE_LETTER' | translate}}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <ng-container *ngIf="ranking$ | async as ranking">
+                    <ion-item *ngFor="let rankingEntry of ranking; let index = index"
+                              (click)="navigateToTeam(rankingEntry)"
+                              style="--padding-start: 0px; --padding-end: 0px;"
+                    >
+                        <ion-grid style="padding-top: 7px; padding-bottom: 7px">
+                            <ion-row class="ion-align-items-center">
+                                <ion-col class="ion-text-wrap" size="1">
+                                    <ion-label class="ion-text-wrap">
+                                        {{rankingEntry.Position}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <ion-label class="ion-text-wrap">
+                                        <h2>{{rankingEntry.Team}}</h2>
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="border-right ion-text-center" size="1">
+                                    <ion-label class="ion-text-wrap" color="grey">
+                                        {{rankingEntry.GamesPlayed}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="border-right ion-text-center" size="1">
+                                    <ion-label class="ion-text-wrap" color="grey">
+                                        {{rankingEntry.GamesWon}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="border-right ion-text-center" size="1">
+                                    <ion-label class="ion-text-wrap" color="grey">
+                                        {{rankingEntry.GamesLost}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="border-right ion-text-center" size="1">
+                                    <ion-label class="ion-text-wrap" color="grey">
+                                        {{rankingEntry.GamesDraw}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="ion-text-center text-bold" size="2">
+                                    <ion-label class="ion-text-wrap">
+                                        {{rankingEntry.Points}}
+                                    </ion-label>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                </ng-container>
+            </super-tab>
+            <super-tab>
+                <cdk-virtual-scroll-viewport itemSize="70" minBufferPx="900"
+                                             maxBufferPx="1350">
+                    <ion-header>
+                        <ion-grid class="ion-no-padding">
+                            <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
+                                <ion-col size="5">
+                                    <ion-text class="ion-text-wrap">{{'TEAM_STAT.NAME_THREE_LETTERS'|translate}}</ion-text>
+                                </ion-col>
+                                <ion-col class="" size="2">
+                                    <ion-text class="ion-text-nowrap">{{'TEAM_STAT.RANKING_THREE_LETTERS'|translate}}</ion-text>
+                                </ion-col>
+                                <ion-col class="" size="2">
+                                    <ion-text class="ion-text-nowrap">{{'TEAM_STAT.PLAYED_FIRST_LETTER'|translate}}</ion-text>
+                                </ion-col>
+                                <ion-col class="ion-text-center" size="2">
+                                    <ion-text class="ion-text-nowrap">{{'TEAM_STAT.PERCENT_THREE_LETTERS'|translate}}</ion-text>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+
+                    </ion-header>
+                    <ion-list>
+                        <ion-item detail *cdkVirtualFor="let stat of memberRanking$|async" (click)="navigateToPlayer(stat.uniqueIndex)">
+                            <ion-grid>
+                                <ion-row class="ion-align-items-center">
+                                    <ion-col class="" size="6">
+                                        <ion-label>
+                                            <ion-text class="ion-text-wrap">
+                                                <h2>{{stat.firstName | titlecase}} {{stat.lastName | titlecase}}</h2>
+                                            </ion-text>
+                                        </ion-label>
+                                    </ion-col>
+                                    <ion-col class="" size="2">
+                                        <ion-label class="ion-text-wrap">
+                                            <h2>{{stat.ranking}}</h2>
+                                        </ion-label>
+                                    </ion-col>
+                                    <ion-col class="" size="2">
+                                        <ion-label class="ion-text-wrap">
+                                            <h2>{{stat.played}}</h2>
+                                        </ion-label>
+                                    </ion-col>
+                                    <ion-col class="ion-text-center ion-no-padding" size="2">
+                                        <beping-victory-chart
+                                                [small]="true"
+                                                [bluePct]="stat.winPourcentage"
+                                                [redPct]="stat.losePourcentage"
+                                                [title]="stat.winPourcentage + '%'"
+                                        >
+                                        </beping-victory-chart>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+
+                        </ion-item>
+                    </ion-list>
+
+                </cdk-virtual-scroll-viewport>
+
+            </super-tab>
+            <super-tab>
+                <cdk-virtual-scroll-viewport
+                        itemSize="70"
+                        minBufferPx="900"
+                        maxBufferPx="1350">
+                    <beping-team-match-result [match]="match"
+                                              *cdkVirtualFor="let match of matches$ | async"></beping-team-match-result>
+                </cdk-virtual-scroll-viewport>
+
+            </super-tab>
+        </super-tabs-container>
+    </super-tabs>
+
+</ion-content>
+
+
