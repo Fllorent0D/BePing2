@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { MatchDetails } from './match-details';
-import {VenueEntry} from './venue-entry';
+import { VenueEntry } from './venue-entry';
 export interface TeamMatchesEntry {
   AwayClub: string;
   AwayTeam: string;

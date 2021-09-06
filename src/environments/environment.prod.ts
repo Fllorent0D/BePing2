@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   hmr: false,
-  tabtUrl: 'https://tabt-rest.herokuapp.com',
+  tabtUrl: 'https://tabt-rest.floca.be',
   internalPages: {
     basePath: '/static/',
     registerRedirect: 'redirect-register.html'
@@ -9,11 +9,14 @@ export const environment = {
   tabtLinks: {
     aftt: {
       domain: 'resultats.aftt.be',
-      tournamentRegisterPath: '/tournoi/inscription'
+      tournamentRegisterPath: '/tournoi/inscription',
+      register: 'enregistrement'
     },
     vttl: {
       domain: 'competitie.vttl.be',
-      tournamentRegisterPath: '/tornooi/inschrijving'
+      tournamentRegisterPath: '/tornooi/inschrijving',
+      register: 'registratie',
+      resetPassword: 'https://auth.vttl.be/mail.pl'
     }
   },
   firebaseConfig: {

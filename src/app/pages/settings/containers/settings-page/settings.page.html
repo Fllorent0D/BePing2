@@ -53,11 +53,11 @@
         <ion-list class="ion-margin-bottom">
             <ion-item>
                 <ion-icon icon="checkmark-circle" color="success" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">{{'SETTINGS.YOU_ARE_CONNECTED' | translate}}</ion-label>
+                <ion-label class="ion-text-wrap"  *ngIf="(account$|async) as account">{{'SETTINGS.YOU_ARE_CONNECTED' | translate:{username: account} }}</ion-label>
             </ion-item>
             <ion-item color="danger" (click)="logout()">
                 <ion-icon icon="log-out-outline" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">{{'SETTINGS.LOGOUT' | translate:{username: (account$|async)} }}</ion-label>
+                <ion-label class="ion-text-wrap">{{'SETTINGS.LOGOUT' |translate }}</ion-label>
             </ion-item>
         </ion-list>
     </ng-container>

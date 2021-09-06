@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Action, createSelector, NgxsOnInit, State, StateContext} from '@ngxs/store';
 
-import {catchError, finalize, map} from 'rxjs/operators';
+import {catchError, finalize, map, switchMap} from 'rxjs/operators';
 import {
     CreateOrReplace,
     defaultEntityState,
     EntityState,
     EntityStateModel,
-    IdStrategy,
+    IdStrategy, Reset,
     SetError,
     SetLoading
 } from '@ngxs-labs/entity-state';
@@ -58,14 +58,21 @@ export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOn
 
     ngxsOnInit(ctx?: StateContext<EntityStateModel<DivisionEntry>>): void {
         const state = ctx.getState();
-        const timeThreshold = sub(Date.now(), {weeks: 1});
+        const timeThreshold = sub(Date.now(), {days: 3});
 
         if (!state.ids.length || state.lastUpdated < timeThreshold.getTime() || state.error) {
             ctx.dispatch(new GetDivisions());
         }
     }
 
-    @Action([GetDivisions, CurrentSeasonChanged, UpdateCurrentLangSuccess])
+    @Action([CurrentSeasonChanged])
+    seasonChanged(ctx: StateContext<EntityStateModel<DivisionEntry>>) {
+        return ctx.dispatch(new Reset(DivisionsState)).pipe(
+            switchMap(() => ctx.dispatch(new GetDivisions()))
+        );
+    }
+
+    @Action([GetDivisions, UpdateCurrentLangSuccess])
     getDivisions(ctx: StateContext<EntityStateModel<DivisionEntry>>) {
         ctx.dispatch(new SetLoading(DivisionsState, true));
 

@@ -6,10 +6,10 @@
         </ion-buttons>
         <ion-title>{{'SETTINGS.CONNECT_TO_FEDERATION'|translate}}</ion-title>
         <ion-buttons slot="end" *ngIf="modalCtrl">
-        <ion-button (click)="closeModal()">
-            <ion-icon icon="close-outline"></ion-icon>
-        </ion-button>
-    </ion-buttons>
+            <ion-button (click)="closeModal()">
+                <ion-icon icon="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
 
     </ion-toolbar>
 
@@ -44,9 +44,22 @@
             </ion-item>
             <ion-row>
                 <ion-col class="ion-text-center">
-                    <ion-button (click)="login()" color="primary" fill="clear">{{'SETTINGS.FORGOT_PASSWORD' | translate}}</ion-button>
+                    <ion-button (click)="forgot()" color="primary"
+                                fill="clear">{{'SETTINGS.FORGOT_PASSWORD' | translate}}</ion-button>
                 </ion-col>
             </ion-row>
+            <ion-row>
+                <ion-col class="ion-text-center">
+                    <ion-button (click)="register()" color="primary"
+                                fill="clear">{{'SETTINGS.REGISTER' | translate}}</ion-button>
+                </ion-col>
+            </ion-row>
+            <ion-item class="ion-color-grey" *ngIf="(lang$|async) === 'fr'">
+                <p>
+                    Attention, l'identifiant demandé n'est pas celui de votre espace personnel! BePing a besoin des identifiants du site
+                    https://resultats.aftt.be/
+                </p>
+            </ion-item>
             <ion-item class="ion-color-grey">
                 <p>
                     {{'SETTINGS.BEPING_NOT_AFFILIATE' | translate}}
@@ -57,6 +70,7 @@
                     {{'SETTINGS.BEPING_NOT_OFFICIAL' | translate}}
                 </p>
             </ion-item>
+
         </form>
     </ion-list>
 

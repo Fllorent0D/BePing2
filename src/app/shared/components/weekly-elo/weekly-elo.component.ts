@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {ChartData, ChartOptions} from 'chart.js';
 import {WeeklyElo} from '../../../core/api/models/weekly-elo';
+import {fr} from 'date-fns/locale';
+import 'chartjs-adapter-date-fns';
 
 @Component({
     selector: 'beping-weekly-elo',
@@ -26,6 +28,15 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
 
         scales: {
             x: {
+                type: 'time',
+                adapters: {
+                    date: {
+                        locale: fr
+                    }
+                },
+                time: {
+                    minUnit: 'day'
+                },
                 grid: {
                     display: false,
                     drawBorder: false
@@ -37,7 +48,8 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
                     drawBorder: false
                 },
                 ticks: {
-                    mirror: true
+                    mirror: true,
+                    stepSize: 1
                     // callback: (tick, index) => index % 2 ? tick : ''
 
                 }
@@ -48,6 +60,7 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
                 easing: 'easeInOutCubic',
                 duration: 1500,
                 delay: 1000,
+
                 from: 160
             }
         },
@@ -69,7 +82,9 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
     }
 
     ngOnInit(): void {
-
+        if (this.weeklyElo.length === 1) {
+            this.options.elements.point.radius = 4;
+        }
     }
 
 
@@ -88,6 +103,8 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
                     label: 'My First dataset',
                     data: this.weeklyElo.map(week => week.elo),
                     tension: 0.5,
+                    pointBackgroundColor: '#5B8BF7',
+                    pointBorderColor: '#5B8BF7',
                     backgroundColor: purpleOrangeGradient,
                     hoverBackgroundColor: purpleOrangeGradient,
                     fill: true

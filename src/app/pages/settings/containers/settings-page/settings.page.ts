@@ -130,16 +130,12 @@ export class SettingsPage implements OnInit {
 
     register() {
         this.analyticsService.logEvent('register');
+        const user: UserStateModel = this.store.selectSnapshot(UserState);
 
-        this.userState$.pipe(
-            take(1),
-            switchMap((userState: UserStateModel) => this.internalIdService.getRegisterLink({
-                clubUniqueIndex: userState.club.UniqueIndex,
-                playerUniqueIndex: userState.memberUniqueIndex
-            }))
-        ).subscribe(({url}) => {
-            this.browser.openInAppBrowser(url);
-            console.log(url);
-        });
+        if (user.memberUniqueIndex) {
+            this.browser.openRegister(user.memberUniqueIndex, user.club.UniqueIndex);
+        } else {
+            this.browser.openRegister();
+        }
     }
 }

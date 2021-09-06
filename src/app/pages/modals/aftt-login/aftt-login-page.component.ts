@@ -1,10 +1,17 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {Login} from '../../../core/store/user/aftt.actions';
 import {finalize, take} from 'rxjs/operators';
 import {IonNav, ModalController, ToastController} from '@ionic/angular';
 import {KeyboardService} from '../../../core/services/keyboard/keyboard.service';
+import {InAppBrowserService} from '../../../core/services/browser/in-app-browser.service';
+import {LANG} from '../../../core/models/langs';
+import {SettingsState} from '../../../core/store/settings';
+import {Observable} from 'rxjs';
+import {UserState, UserStateModel} from '../../../core/store/user/user.state';
+import {InternalIdentifiersService} from '../../../core/api/services/internal-identifiers.service';
+import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
 
 @Component({
     selector: 'beping-aftt-login',
@@ -15,6 +22,8 @@ export class AfttLoginPage implements OnInit {
 
     loginForm: FormGroup;
     loading = false;
+    @Select(SettingsState.getCurrentLang) lang$: Observable<LANG>;
+    @Select(UserState) userState$: Observable<UserStateModel>;
 
     constructor(
         private readonly formBuilder: FormBuilder,
@@ -22,7 +31,10 @@ export class AfttLoginPage implements OnInit {
         private readonly toastr: ToastController,
         @Optional() private readonly ionNav: IonNav,
         @Optional() public readonly modalCtrl: ModalController,
-        private readonly keyboardService: KeyboardService
+        private readonly keyboardService: KeyboardService,
+        private readonly internalIdService: InternalIdentifiersService,
+        private readonly browser: InAppBrowserService,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -65,7 +77,22 @@ export class AfttLoginPage implements OnInit {
         });
     }
 
+    forgot() {
+        this.browser.openForgotPwd();
+    }
+
     closeModal() {
         this.modalCtrl.dismiss({logged: false});
+    }
+
+    register() {
+        this.analyticsService.logEvent('register');
+        const user: UserStateModel = this.store.selectSnapshot(UserState);
+
+        if (user.memberUniqueIndex) {
+            this.browser.openRegister(user.memberUniqueIndex, user.club.UniqueIndex);
+        } else {
+            this.browser.openRegister();
+        }
     }
 }

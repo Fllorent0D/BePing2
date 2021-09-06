@@ -101,7 +101,7 @@
             </super-tab>
             <super-tab>
                 <beping-team-players-stats
-                        [stats]="playersStats$|async"
+                        [stats]="memberRanking$|async"
                         (playerClicked)="navigateToPlayer($event)"
                 ></beping-team-players-stats>
             </super-tab>

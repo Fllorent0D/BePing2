@@ -4,13 +4,14 @@ import {Action, createSelector, NgxsOnInit, SelectorOptions, State, StateContext
 import {ClubEntry} from '../../api/models/club-entry';
 import {GetClubs} from './clubs.actions';
 import {ClubsService} from '../../api/services/clubs.service';
-import {catchError, finalize, map} from 'rxjs/operators';
+import {catchError, finalize, map, switchMap} from 'rxjs/operators';
 import {
     CreateOrReplace,
     defaultEntityState,
     EntityState,
     EntityStateModel,
     IdStrategy,
+    Reset,
     SetError,
     SetLoading
 } from '@ngxs-labs/entity-state';
@@ -50,11 +51,18 @@ export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
 
     ngxsOnInit(ctx?: StateContext<EntityStateModel<ClubEntry>>): void {
         const state = ctx.getState();
-        const timeThreshold = sub(Date.now(), {months: 1});
+        const timeThreshold = sub(Date.now(), {weeks: 2});
 
         if (!state.ids.length || state.lastUpdated < timeThreshold.getTime() || state.error) {
             ctx.dispatch(new GetClubs());
         }
+    }
+
+    @Action([CurrentSeasonChanged])
+    seasonChanged(ctx: StateContext<EntityStateModel<ClubEntry>>) {
+        return ctx.dispatch(new Reset(ClubsState)).pipe(
+            switchMap(() => ctx.dispatch(new GetClubs()))
+        );
     }
 
     @Action([GetClubs, CurrentSeasonChanged])

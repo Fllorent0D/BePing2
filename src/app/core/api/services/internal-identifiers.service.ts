@@ -36,12 +36,14 @@ export class InternalIdentifiersService extends BaseService {
    */
   getInternalIds$Response(params: {
     clubUniqueIndex: string;
+    database: string;
     playerUniqueIndex: number;
   }): Observable<StrictHttpResponse<InternalIdentifiersDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, InternalIdentifiersService.GetInternalIdsPath, 'get');
     if (params) {
       rb.query('clubUniqueIndex', params.clubUniqueIndex, {});
+      rb.query('database', params.database, {});
       rb.query('playerUniqueIndex', params.playerUniqueIndex, {});
     }
 
@@ -64,6 +66,7 @@ export class InternalIdentifiersService extends BaseService {
    */
   getInternalIds(params: {
     clubUniqueIndex: string;
+    database: string;
     playerUniqueIndex: number;
   }): Observable<InternalIdentifiersDto> {
 
@@ -85,12 +88,14 @@ export class InternalIdentifiersService extends BaseService {
    */
   getRegisterLink$Response(params: {
     clubUniqueIndex: string;
+    database: string;
     playerUniqueIndex: number;
   }): Observable<StrictHttpResponse<RedirectLinkDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, InternalIdentifiersService.GetRegisterLinkPath, 'get');
     if (params) {
       rb.query('clubUniqueIndex', params.clubUniqueIndex, {});
+      rb.query('database', params.database, {});
       rb.query('playerUniqueIndex', params.playerUniqueIndex, {});
     }
 
@@ -113,6 +118,7 @@ export class InternalIdentifiersService extends BaseService {
    */
   getRegisterLink(params: {
     clubUniqueIndex: string;
+    database: string;
     playerUniqueIndex: number;
   }): Observable<RedirectLinkDto> {
 

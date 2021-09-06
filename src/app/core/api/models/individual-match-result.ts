@@ -1,11 +1,11 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface IndividualMatchResult {
-  AwayPlayerMatchIndex: Array<number>;
-  AwayPlayerUniqueIndex: Array<number>;
+  AwayPlayerMatchIndex: Array<string>;
+  AwayPlayerUniqueIndex: Array<string>;
   AwaySetCount: number;
-  HomePlayerMatchIndex: Array<number>;
-  HomePlayerUniqueIndex: Array<number>;
+  HomePlayerMatchIndex: Array<string>;
+  HomePlayerUniqueIndex: Array<string>;
   HomeSetCount: number;
   IsAwayForfeited: boolean;
   IsHomeForfeited: boolean;

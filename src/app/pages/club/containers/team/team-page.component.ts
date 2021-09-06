@@ -16,6 +16,7 @@ import {Store} from '@ngxs/store';
 import {TeamPlayersStats} from '../../model/team-players-stats.model';
 import {TeamPlayersStatsService} from '../../services/team-players-stats.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
+import {MemberResults} from '../../../../core/api/models/member-results';
 
 @Component({
     selector: 'beping-teams',
@@ -28,12 +29,12 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
     ranking$: Observable<RankingEntry[]>;
     players$: Observable<MemberEntry[]>;
     calendar$: Observable<TeamMatchesEntry[]>;
+    memberRanking$: Observable<MemberResults[]>;
 
     teamId$: Observable<string>;
     team$: Observable<TeamEntry>;
     clubIndex$: Observable<string>;
     club$: Observable<ClubEntry>;
-    playersStats$: Observable<TeamPlayersStats>;
 
     constructor(
         private readonly divisionsService: DivisionsService,
@@ -71,7 +72,7 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
                     map((teams: TeamEntry[]) => teams.find((team) => team.TeamId === teamId))
                 )
             ),
-        shareReplay(1)
+            shareReplay(1)
         );
 
         this.calendar$ = combineLatest([
@@ -87,15 +88,14 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
             shareReplay(1)
         );
 
-        this.playersStats$ = combineLatest([
+        this.memberRanking$ = combineLatest([
             this.team$,
-            this.calendar$,
             this.club$
         ]).pipe(
-            map(([team, matches, club]: [TeamEntry, TeamMatchesEntry[], ClubEntry]) =>
-                this.teamPlayerStatsService.computeTeamPlayersStats(matches, team, club)
+            switchMap(([team, club]: [TeamEntry, ClubEntry]) =>
+                this.clubsService.findClubTeamsMemberRanking({clubIndex: club.UniqueIndex, teamId: team.TeamId})
             ),
-            tap((t) => console.log(t))
+            tap((t) => console.log('ttt', t))
         );
 
 

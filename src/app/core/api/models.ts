@@ -1,6 +1,7 @@
 export { DivisionEntry } from './models/division-entry';
 export { TabtException } from './models/tabt-exception';
 export { RankingEntry } from './models/ranking-entry';
+export { VenueEntry } from './models/venue-entry';
 export { Player } from './models/player';
 export { DoubleTeam } from './models/double-team';
 export { Players } from './models/players';
@@ -8,7 +9,6 @@ export { IndividualMatchResult } from './models/individual-match-result';
 export { MatchDetails } from './models/match-details';
 export { TeamMatchesEntry } from './models/team-matches-entry';
 export { MemberResults } from './models/member-results';
-export { VenueEntry } from './models/venue-entry';
 export { ClubEntry } from './models/club-entry';
 export { RankingPointsEntry } from './models/ranking-points-entry';
 export { Phone } from './models/phone';
