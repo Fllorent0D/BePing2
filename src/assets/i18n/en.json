@@ -286,7 +286,11 @@
     "WHICH_CATEGORY_DO_YOU_WANT": "Which category do you want to see first?",
     "PRIVACY_POLICY": "Privacy policy",
     "TERMS_AND_CONDITIONS": "Terms of use",
-    "MORE_INFO": "Additional information"
+    "MORE_INFO": "Additional information",
+    "ADVANCED":  "Advanced settings",
+    "REFRESH_BEPING": "Refresh BePing",
+    "NEED_INTERNET_TO_REFRESH": "Internet connection is required to refresh BePing",
+    "BEPING_REFRESHED": "BePing refreshed"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "BePing comment"

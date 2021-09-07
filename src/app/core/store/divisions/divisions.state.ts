@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Action, createSelector, NgxsOnInit, State, StateContext} from '@ngxs/store';
-
 import {catchError, finalize, map, switchMap} from 'rxjs/operators';
 import {
     CreateOrReplace,
     defaultEntityState,
     EntityState,
     EntityStateModel,
-    IdStrategy, Reset,
+    IdStrategy,
+    Reset,
     SetError,
     SetLoading
 } from '@ngxs-labs/entity-state';
@@ -60,7 +60,10 @@ export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOn
         const state = ctx.getState();
         const timeThreshold = sub(Date.now(), {days: 3});
 
-        if (!state.ids.length || state.lastUpdated < timeThreshold.getTime() || state.error) {
+        if (
+            !state.ids.length ||
+            state.lastUpdated < timeThreshold.getTime() ||
+            state.error) {
             ctx.dispatch(new GetDivisions());
         }
     }

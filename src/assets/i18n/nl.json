@@ -289,7 +289,11 @@
     "WHICH_CATEGORY_DO_YOU_WANT": "Welke categorie wil je gebruiken?",
     "PRIVACY_POLICY": "Privacybeleid",
     "TERMS_AND_CONDITIONS": "Gebruiksvoorwaarden",
-    "MORE_INFO": "Extra informatie"
+    "MORE_INFO": "Extra informatie",
+    "ADVANCED":  "Geavanceerde instellingen",
+    "REFRESH_BEPING": "BePing vernieuwen",
+    "NEED_INTERNET_TO_REFRESH": "Internetverbinding is vereist om BePing te vernieuwen",
+    "BEPING_REFRESHED": "BePing vernieuwd"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaar BePing"

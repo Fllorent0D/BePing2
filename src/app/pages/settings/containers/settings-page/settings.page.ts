@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IonNav, ModalController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {Store} from '@ngxs/store';
@@ -7,7 +7,7 @@ import {SeasonState} from '../../../../core/store/season';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {TabTState, TabTStateModel} from '../../../../core/store/user/tab-t-state.service';
 import {Logout} from '../../../../core/store/user/aftt.actions';
-import {map, switchMap, take} from 'rxjs/operators';
+import {finalize, map, switchMap} from 'rxjs/operators';
 import {AfttLoginPage} from '../../../modals/aftt-login/aftt-login-page.component';
 import {FormControl} from '@angular/forms';
 import {UpdateMainCategory} from '../../../../core/store/user/user.actions';
@@ -23,13 +23,18 @@ import {ContactComponent} from '../contact/contact.component';
 import {ConditionsUsageComponent} from '../conditions-usage/conditions-usage.component';
 import {PrivacyComponent} from '../privacy/privacy.component';
 import {App} from '@capacitor/app';
+import {DivisionsState, GetDivisions} from '../../../../core/store/divisions';
+import {ClubsState, GetClubs} from '../../../../core/store/clubs';
+import {Reset} from '@ngxs-labs/entity-state';
+import {DialogService} from '../../../../core/services/dialog-service.service';
+import {Network} from '@capacitor/network';
 
 @Component({
     selector: 'beping-settings',
     templateUrl: './settings.page.html',
     styleUrls: ['./settings.page.scss']
 })
-export class SettingsPage implements OnInit {
+export class SettingsPage implements OnInit, OnDestroy {
 
     playerName$: Observable<string>;
     playerCategories$: Observable<PLAYER_CATEGORY[]>;
@@ -43,6 +48,7 @@ export class SettingsPage implements OnInit {
     userState$: Observable<UserStateModel>;
     version: string;
     build: string;
+    isOnline: boolean;
 
     constructor(
         private readonly modalCtrl: ModalController,
@@ -51,7 +57,8 @@ export class SettingsPage implements OnInit {
         private readonly translate: TranslateService,
         private readonly internalIdService: InternalIdentifiersService,
         private readonly browser: InAppBrowserService,
-        private readonly analyticsService: AnalyticsService
+        private readonly analyticsService: AnalyticsService,
+        private readonly dialogService: DialogService
     ) {
     }
 
@@ -66,7 +73,11 @@ export class SettingsPage implements OnInit {
         this.currentLang$ = this.store.select(SettingsState.getCurrentLang);
         this.currentTheme$ = this.store.select(SettingsState.getCurrentTheme);
         this.getAppInfo();
-        console.log(this.translate.currentLang);
+        this.listenNetwork();
+    }
+
+    ngOnDestroy(): void {
+        Network.removeAllListeners();
     }
 
     async getAppInfo() {
@@ -138,4 +149,35 @@ export class SettingsPage implements OnInit {
             this.browser.openRegister();
         }
     }
+
+    async resetCache() {
+        const loader = await this.dialogService.showLoading({
+            message: this.translate.instant('SETUP.LOADING'),
+            backdropDismiss: false
+        });
+        this.store.dispatch([
+            new Reset(DivisionsState),
+            new Reset(ClubsState)
+        ]).pipe(
+            switchMap(() => this.store.dispatch([
+                new GetDivisions(),
+                new GetClubs()
+            ])),
+            finalize(() => loader.dismiss())
+        ).subscribe(() => {
+            this.dialogService.showToast({
+                duration: 3000,
+                color: 'success',
+                message: this.translate.instant('SETTINGS.BEPING_REFRESHED')
+            });
+        });
+    }
+
+    private async listenNetwork() {
+        const status = await Network.getStatus();
+        this.isOnline = status.connected;
+        Network.addListener('networkStatusChange', networkStatus => this.isOnline = networkStatus.connected);
+    }
+
+
 }

@@ -40,7 +40,6 @@
                 </beping-member-victory-chart>
                 <ng-container *ngIf="weeklyElos$|async as elos">
                     <beping-weekly-elo
-                            *ngIf="elos.length > 0"
                             [weeklyElo]="elos">
                     </beping-weekly-elo>
                 </ng-container>

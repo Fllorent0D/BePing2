@@ -286,7 +286,11 @@
     "WHICH_CATEGORY_DO_YOU_WANT": "Quelle catégorie voulez-vous utiliser?",
     "PRIVACY_POLICY": "Politique de confidentialité",
     "TERMS_AND_CONDITIONS": "Conditions d'utilisation",
-    "MORE_INFO": "Informations complémentaires"
+    "MORE_INFO": "Informations complémentaires",
+    "ADVANCED":  "Paramètres avancés",
+    "REFRESH_BEPING": "Actualiser BePing",
+    "NEED_INTERNET_TO_REFRESH": "Une connexion Internet est requise pour actualiser BePing",
+    "BEPING_REFRESHED": "BePing actualisé"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaire BePing"

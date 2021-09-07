@@ -51,7 +51,7 @@ export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
 
     ngxsOnInit(ctx?: StateContext<EntityStateModel<ClubEntry>>): void {
         const state = ctx.getState();
-        const timeThreshold = sub(Date.now(), {weeks: 2});
+        const timeThreshold = sub(Date.now(), {weeks: 1});
 
         if (!state.ids.length || state.lastUpdated < timeThreshold.getTime() || state.error) {
             ctx.dispatch(new GetClubs());
