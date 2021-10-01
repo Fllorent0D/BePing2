@@ -3,7 +3,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {BehaviorSubject, combineLatest, Observable, ReplaySubject} from 'rxjs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
-import {map, switchMap, take} from 'rxjs/operators';
+import {map, switchMap, take, tap} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
@@ -77,9 +77,9 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
             switchMap((club) => this.clubService.findClubTeams({clubIndex: club.UniqueIndex}))
         );
 
-        this.matches$ = this.club$.pipe(
-            switchMap((club) => this.matchesService.findAllMatches({club: club.UniqueIndex}))
-        );
+        //this.matches$ = this.club$.pipe(
+         //   switchMap((club) => this.matchesService.findAllMatches({club: club.UniqueIndex})),
+        //);
 
         this.venues$ = this.club$.pipe(
             map((club) => club.VenueEntries)
@@ -92,6 +92,7 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
             switchMap(([category, club]) => this.clubService.findClubMembers({clubIndex: club.UniqueIndex, playerCategory: category})),
             map((members: MemberEntry[]) => this.clubMembersListService.transformToClubMembersList(members))
         );
+
     }
 
     async categoryClicked(category: PLAYER_CATEGORY) {

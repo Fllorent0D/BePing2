@@ -29,6 +29,7 @@ import {WeeklyEloComponent} from './components/weekly-elo/weekly-elo.component';
 import {NgChartsModule} from 'ng2-charts';
 import {LocalDatePipe} from './pipes/local-date.pipe';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
+import {NgPipesModule} from 'ngx-pipes';
 
 const COMPONENTS = [
     RankingComponent,
@@ -55,7 +56,7 @@ const COMPONENTS = [
 ];
 const PIPES = [
     WithLoadingPipe,
-    LocalDatePipe
+    LocalDatePipe,
 ];
 const DIRECTIVES = [
     AppearDirective
@@ -66,7 +67,7 @@ const DIRECTIVES = [
     declarations: [
         COMPONENTS,
         DIRECTIVES,
-        PIPES
+        PIPES,
     ],
     exports: [
         CommonModule,
@@ -75,6 +76,7 @@ const DIRECTIVES = [
         ReactiveFormsModule,
         TranslateModule,
         NgChartsModule,
+        NgPipesModule,
         SuperTabsModule,
         COMPONENTS,
         PIPES,

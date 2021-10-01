@@ -3,7 +3,7 @@ import {TournamentEntry} from '../../../../core/api/models/tournament-entry';
 import {Observable} from 'rxjs';
 import {TournamentsService} from '../../../../core/api/services/tournaments.service';
 import {ActivatedRoute, Params} from '@angular/router';
-import {filter, map, share, switchMap, tap} from 'rxjs/operators';
+import {filter, map, share, switchMap, take, tap} from 'rxjs/operators';
 import {latLng, Map, MapOptions, Marker, tileLayer} from 'leaflet';
 import {VenueEntry} from '../../../../core/api/models/venue-entry';
 import {GeocoderService} from '../../../../core/services/geocoding/geocoding.service';
@@ -74,7 +74,8 @@ export class TournamentDetailPageComponent implements OnInit {
                 this.map.setView([Number(osmAddress.lat), Number(osmAddress.lon)], 13, {animate: true, duration: 5});
                 const marker = new Marker([Number(osmAddress.lat), Number(osmAddress.lon)]);
                 this.map.addLayer(marker);
-            })
+            }),
+            take(1)
         ).subscribe();
     }
 

@@ -4,7 +4,7 @@ import {PLAYER_CATEGORY} from '../../core/models/user';
 import {Observable, ReplaySubject} from 'rxjs';
 import {MemberEntry} from '../../core/api/models/member-entry';
 import {UserState} from '../../core/store/user/user.state';
-import {shareReplay, switchMap, take, tap} from 'rxjs/operators';
+import {shareReplay, switchMap, take, takeUntil, tap} from 'rxjs/operators';
 import {IonRouterOutlet, LoadingController, ModalController, ToastController} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
@@ -22,13 +22,14 @@ import {TABT_DATABASES} from '../../core/interceptors/tabt-database-interceptor.
 import {HapticsService} from '../../core/services/haptics.service';
 import {ImpactStyle} from '@capacitor/haptics';
 import {AnalyticsService} from '../../core/services/firebase/analytics.service';
+import {OnDestroyHook} from '../../core/on-destroy-hook';
 
 @Component({
     selector: 'beping-explore-container',
     templateUrl: './explore-container.component.html',
     styleUrls: ['./explore-container.component.scss']
 })
-export class ExploreContainerComponent implements OnInit {
+export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
 
     categoriesAvailable$: Observable<PLAYER_CATEGORY[]>;
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
@@ -54,10 +55,12 @@ export class ExploreContainerComponent implements OnInit {
         private readonly hapticsService: HapticsService,
         private readonly analyticsService: AnalyticsService
     ) {
+        super();
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
 
-        this.store.select(UserState.getMainPlayerCategory)
-            .subscribe((category) => this.currentCategory$.next(category));
+        this.store.select(UserState.getMainPlayerCategory).pipe(
+            takeUntil(this.ngUnsubscribe)
+        ).subscribe((category) => this.currentCategory$.next(category));
 
         this.currentMemberEntry$ = this.currentCategory$.pipe(
             switchMap((category: PLAYER_CATEGORY) => this.store.select(UserState.getMemberEntryForCategory(category))),

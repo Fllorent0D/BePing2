@@ -7,8 +7,6 @@
                 <ion-text>{{match.HomeTeam}}</ion-text>
             </ion-col>
             <ion-col class="ion-text-center ion-no-padding" *ngIf="match.Score">
-
-
                 <ion-text *ngIf="!match.IsAwayForfeited && !match.IsHomeForfeited">
                     <h1 class="ion-no-margin is-color-primary score">{{match.Score}}</h1>
                 </ion-text>
@@ -21,12 +19,12 @@
                     </ion-text>
                 </ng-container>
                 <ion-text color="grey" class="small-date">{{match.Date | localizedDate:'dd MMM'}}</ion-text>
-
             </ion-col>
             <ion-col class="ion-text-center ion-no-padding " *ngIf="!match.Score">
                 <ion-text class="is-color-pink">
-                    <h1 class="ion-no-margin date">{{match.Date | localizedDate:'dd'}}</h1>
-                    <ion-text class="ion-no-margin">{{match.Date | localizedDate:'MMM'}}</ion-text>
+                    <h2 class="ion-no-margin date" *ngIf="isTablet">{{match.Date | localizedDate:'dd MMM'}}</h2>
+                    <h2 class="ion-no-margin date" *ngIf="!isTablet">{{match.Date | localizedDate:'dd/MM'}}</h2>
+                    <ion-text class="ion-no-margin">{{matchTime}}</ion-text>
                 </ion-text>
             </ion-col>
             <ion-col class="ion-text-end text-highlight ion-no-padding" [class.is-color-danger]="isAwayFF">

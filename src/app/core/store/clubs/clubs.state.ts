@@ -45,6 +45,13 @@ export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
         });
     }
 
+    static getClubName(uniqueIndex: string) {
+        return createSelector([ClubsState.entities], (clubs: ClubEntry[]) => {
+            const club = clubs.find((clubEntry: ClubEntry) => clubEntry.UniqueIndex === uniqueIndex);
+            return club.Name;
+        });
+    }
+
     constructor(private readonly clubsService: ClubsService) {
         super(ClubsState, 'UniqueIndex', IdStrategy.EntityIdGenerator);
     }

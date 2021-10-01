@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {TeamMatchesEntry} from '../../../core/api/models/team-matches-entry';
 import {TabsNavigationService} from '../../../core/services/navigation/tabs-navigation.service';
-import {ActionSheetController} from '@ionic/angular';
+import {ActionSheetController, Platform} from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import {ClubsState} from '../../../core/store/clubs';
 import {map, switchMap, take} from 'rxjs/operators';
@@ -21,6 +21,7 @@ export class TeamMatchResultComponent implements OnInit {
 
     @Input() match: TeamMatchesEntry;
     @Output() matchClicked: EventEmitter<TeamMatchesEntry> = new EventEmitter<TeamMatchesEntry>();
+    isTablet: boolean;
 
     constructor(
         private readonly tabNavigation: TabsNavigationService,
@@ -28,8 +29,10 @@ export class TeamMatchResultComponent implements OnInit {
         private readonly translate: TranslateService,
         private readonly store: Store,
         private readonly clubService: ClubsService,
-        private readonly startNavigation: StartNavigationService
+        private readonly startNavigation: StartNavigationService,
+        private readonly platform: Platform
     ) {
+        this.isTablet = this.platform.is('tablet') || this.platform.is('desktop');
     }
 
     ngOnInit() {
@@ -51,6 +54,12 @@ export class TeamMatchResultComponent implements OnInit {
         return this.match.IsAwayWithdrawn;
     }
 
+    get matchTime(): string {
+        const splitted = this.match?.Time?.split(':');
+        if (splitted?.length === 3) {
+            return `${splitted[0]}:${splitted[1]}`;
+        }
+    }
 
     async navigateToDetails() {
         if (this.match.MatchUniqueId) {

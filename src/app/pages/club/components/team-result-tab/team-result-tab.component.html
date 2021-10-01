@@ -1,10 +1,7 @@
-<ion-content>
-  <virtual-scroller
-          #scroll
-          [items]="matches">
-    <beping-team-match-result
-            *ngFor="let item of scroll.viewPortItems"
-            [match]="item">
-    </beping-team-match-result>
-  </virtual-scroller>
-</ion-content>
+<cdk-virtual-scroll-viewport
+        itemSize="90"
+        minBufferPx="900"
+        maxBufferPx="1350">
+  <beping-team-match-result [match]="match" *cdkVirtualFor="let match of matches">
+  </beping-team-match-result>
+</cdk-virtual-scroll-viewport>

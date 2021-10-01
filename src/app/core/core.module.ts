@@ -16,6 +16,7 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TabtDatabaseInterceptor} from './interceptors/tabt-database-interceptor.service';
 import {TabtCredentialsInterceptor} from './interceptors/tabt-credentials-interceptor.service';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import {BepingUserAgentInterceptor} from './interceptors/beping-user-agent.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -26,7 +27,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     imports: [
         CommonModule,
         ApiModule.forRoot({
-            rootUrl: environment.tabtUrl
+            rootUrl: environment.tabtUrl,
         }),
         SuperTabsModule.forRoot(),
         NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService),
@@ -65,6 +66,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TabtCredentialsInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: BepingUserAgentInterceptor,
             multi: true
         }
     ]

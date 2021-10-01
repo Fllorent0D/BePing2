@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface TeamEntry {
-  DivisionCategory: number;
+  DivisionCategory: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
   DivisionId: number;
   DivisionName: string;
   MatchType: number;

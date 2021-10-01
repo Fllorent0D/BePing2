@@ -22,9 +22,11 @@
             <ion-chip color="primary" id="tab3" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
                 <ion-label>{{'CLUB_DETAILS.INFOS' | translate}}</ion-label>
             </ion-chip>
+            <!--
             <ion-chip color="primary" id="tab4" [class.act]="tabIndex === 3" outline (click)="selectTab(3)">
                 <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
             </ion-chip>
+            -->
         </div>
     </ion-toolbar>
 </ion-header>
@@ -52,12 +54,13 @@
                 >
                 </beping-club-pratical-info-tab>
             </super-tab>
+            <!--
             <super-tab>
                 <beping-team-result-tab
                         [matches]="matches$|async"
                 >
                 </beping-team-result-tab>
-            </super-tab>
+            </super-tab>-->
         </super-tabs-container>
     </super-tabs>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="tabIndex !== 0">

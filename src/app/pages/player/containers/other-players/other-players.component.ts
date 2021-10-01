@@ -12,8 +12,6 @@ import {FavoritesState, ToggleMemberFromFavorites} from '../../../../core/store/
 import {Store} from '@ngxs/store';
 import {WeeklyElo} from '../../../../core/api/models/weekly-elo';
 import {MembersService} from '../../../../core/api/services/members.service';
-import {NotificationType} from '@capacitor/haptics';
-import {HapticsService} from '../../../../core/services/haptics.service';
 
 @Component({
     selector: 'beping-other-players',
@@ -37,7 +35,7 @@ export class OtherPlayersComponent implements OnInit {
         private readonly playerCategoryService: PlayerCategoryService,
         private readonly membersService: MembersService,
         private readonly toastrCtrl: ToastController,
-        private readonly store: Store,
+        private readonly store: Store
     ) {
     }
 

@@ -28,8 +28,6 @@ export interface FavoritesStateModel {
 })
 @Injectable()
 export class FavoritesState {
-
-
     static isClubInFavorite(clubUniqueIndex: string) {
         return createSelector([FavoritesState], (state: FavoritesStateModel): boolean => {
             return !!state.clubs.find((item) => clubUniqueIndex === item.uniqueIndex);

@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header>
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button [text]="'BACK'|translate"></ion-back-button>
@@ -53,7 +53,7 @@
                 </ion-grid>
                 <ng-container *ngIf="team$ | async as team">
                     <ion-item *ngFor="let rankingEntry of ranking$ | async; let index = index"
-                              [class.is-color-primary]="isSameTeam(rankingEntry, team, club$|async)"
+                              [class.is-color-primary]="isSameTeam(rankingEntry, team, club$|async, team.DivisionId)"
                               (click)="teamSelected(rankingEntry)"
                               style="--padding-start: 0px; --padding-end: 0px;"
                     >
@@ -106,14 +106,7 @@
                 ></beping-team-players-stats>
             </super-tab>
             <super-tab>
-                <cdk-virtual-scroll-viewport
-                        itemSize="90"
-                        minBufferPx="900"
-                        maxBufferPx="1350">
-                    <beping-team-match-result [match]="match" *cdkVirtualFor="let match of calendar$ | async">
-
-                    </beping-team-match-result>
-                </cdk-virtual-scroll-viewport>
+                <beping-team-result-tab [matches]="calendar$|async"></beping-team-result-tab>
             </super-tab>
         </super-tabs-container>
     </super-tabs>

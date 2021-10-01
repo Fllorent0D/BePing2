@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
-import {map, shareReplay, switchMap, tap} from 'rxjs/operators';
+import {map, shareReplay, switchMap, take, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {Store} from '@ngxs/store';
@@ -44,7 +44,8 @@ export class TeamMatchDetailsPage implements OnInit {
                 this.clubService.findClubTeams({clubIndex}).pipe(
                     map((teams: TeamEntry[]) => teams.find((team) => team.Team === teamName))
                 )
-            )
+            ),
+            take(1)
         ).subscribe((team) => {
             this.tabsNavigation.navigateTo(['clubs', clubIndex, 'team', team.TeamId]);
         });

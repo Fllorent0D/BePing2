@@ -12,8 +12,6 @@ import {WeeklyElo} from '../../../../core/api/models/weekly-elo';
 })
 export class PlayerContentComponent implements OnInit {
 
-
-    // TODO Add defaults
     @Input() categoriesAvailable: PLAYER_CATEGORY[];
     @Input() currentCategory: PLAYER_CATEGORY;
     @Input() currentMemberEntry: MemberEntry;

@@ -1,20 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Action, createSelector, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
-import {MemberEntry} from '../../api/models/member-entry';
-import {ClubEntry} from '../../api/models/club-entry';
-import {UpdateMemberEntries, HasSeenOnBoarding, UpdateMemberEntriesSuccess, SetUser, UpdateLatestMatchesSuccess} from './user.actions';
-import {PlayerCategoryService} from '../../services/tabt/player-category.service';
-import {map, switchMap, tap} from 'rxjs/operators';
-import {sub} from 'date-fns';
-import {PLAYER_CATEGORY} from '../../models/user';
-import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
-import {Login, LoginFailure, LoginSuccess, Logout} from './aftt.actions';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
+import {map, tap} from 'rxjs/operators';
+import {Login, Logout} from './aftt.actions';
 import {HealthService} from '../../api/services/health.service';
-import {iif} from 'rxjs';
 import {TestOutput} from '../../api/models/test-output';
-import {ToastController} from '@ionic/angular';
-import {SeasonEntry} from '../../api/models/season-entry';
-import {SeasonStateModel} from '../season';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
 
 export interface TabTStateModel {
@@ -55,10 +44,10 @@ export class TabTState {
         }).pipe(
             map((response: TestOutput) => {
                 if (!response.IsValidAccount) {
-                    this.analyticsService.logEvent('login_failure', { account: action.account});
+                    this.analyticsService.logEvent('login_failure', {account: action.account});
                     throw new Error('Invalid login');
                 }
-                this.analyticsService.logEvent('login_success', { account: action.account});
+                this.analyticsService.logEvent('login_success', {account: action.account});
                 return response;
             }),
             tap((response: TestOutput) => {

@@ -13,10 +13,11 @@ import {ClubsState} from '../../../../core/store/clubs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {Store} from '@ngxs/store';
-import {TeamPlayersStats} from '../../model/team-players-stats.model';
 import {TeamPlayersStatsService} from '../../services/team-players-stats.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {MemberResults} from '../../../../core/api/models/member-results';
+import {DivisionEntry} from '../../../../core/api/models/division-entry';
+import {DivisionsState} from '../../../../core/store/divisions';
 
 @Component({
     selector: 'beping-teams',
@@ -109,8 +110,10 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         this.tabsNavigation.navigateTo(['player', uniqueIndex.toString(10)]);
     }
 
-    isSameTeam(rankingEntry: RankingEntry, team: TeamEntry, club: ClubEntry): boolean {
-        return rankingEntry.TeamClub === club.UniqueIndex && rankingEntry.Team === (club.LongName + ' ' + team.Team).trim();
+    isSameTeam(rankingEntry: RankingEntry, team: TeamEntry, club: ClubEntry, divisionId: number): boolean {
+        return rankingEntry.TeamClub === club.UniqueIndex &&
+            divisionId === team.DivisionId &&
+            rankingEntry.Team === (club.LongName + ' ' + team.Team).trim();
     }
 
     teamSelected(rankingEntry: RankingEntry) {
@@ -118,11 +121,12 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
 
         combineLatest([
             this.store.select(ClubsState.getClubByUniqueIndex(rankingEntry.TeamClub)),
-            this.clubsService.findClubTeams({clubIndex: rankingEntry.TeamClub})
+            this.clubsService.findClubTeams({clubIndex: rankingEntry.TeamClub}),
+            this.team$.pipe(map((team) => team.DivisionId))
         ]).pipe(
             take(1),
-            map(([clubEntry, teams]: [ClubEntry, TeamEntry[]]) => ({
-                    team: teams.find((team) => this.isSameTeam(rankingEntry, team, clubEntry)),
+            map(([clubEntry, teams, divisionId]: [ClubEntry, TeamEntry[], number]) => ({
+                    team: teams.find((team) => this.isSameTeam(rankingEntry, team, clubEntry, divisionId)),
                     club: clubEntry
                 })
             )
