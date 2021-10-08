@@ -16,8 +16,6 @@ import {Store} from '@ngxs/store';
 import {TeamPlayersStatsService} from '../../services/team-players-stats.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {MemberResults} from '../../../../core/api/models/member-results';
-import {DivisionEntry} from '../../../../core/api/models/division-entry';
-import {DivisionsState} from '../../../../core/store/divisions';
 
 @Component({
     selector: 'beping-teams',

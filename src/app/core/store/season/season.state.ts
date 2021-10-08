@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {SeasonEntry} from '../../api/models/season-entry';
-import {catchError, filter, finalize, switchMap, take} from 'rxjs/operators';
+import {catchError, finalize, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {CurrentSeasonChanged, GetCurrentSeason, GetCurrentSeasonFailure, SetSeasonLoading} from './season.actions';
 import {SeasonsService} from '../../api/services/seasons.service';
-import {ToastController} from '@ionic/angular';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
-import {StorageService} from '../../services/store/storage.service';
+import {DialogService} from '../../../shared/services/dialog-service.service';
 
 export interface SeasonStateModel {
     currentSeason: SeasonEntry | null;
@@ -29,6 +28,13 @@ const defaultState: SeasonStateModel = {
 })
 export class SeasonState implements NgxsOnInit {
 
+    constructor(
+        private readonly seasonsService: SeasonsService,
+        private readonly dialogService: DialogService,
+        private readonly analyticsService: AnalyticsService
+    ) {
+    }
+
     @Selector([SeasonState])
     static loading(state: SeasonStateModel): boolean {
         return state.loading;
@@ -42,14 +48,6 @@ export class SeasonState implements NgxsOnInit {
     @Selector([SeasonState])
     static error(state: SeasonStateModel): Error | null {
         return state.error;
-    }
-
-    constructor(
-        private readonly seasonsService: SeasonsService,
-        private readonly toastService: ToastController,
-        private readonly analyticsService: AnalyticsService,
-        private readonly storage: StorageService
-    ) {
     }
 
     ngxsOnInit(ctx?: StateContext<any>): any {
@@ -78,12 +76,11 @@ export class SeasonState implements NgxsOnInit {
 
     @Action(CurrentSeasonChanged)
     async setCurrentSeason(ctx: StateContext<SeasonStateModel>, action: CurrentSeasonChanged) {
-        const toast = await this.toastService.create({
+        this.dialogService.showToast({
             message: 'Season changed. Loading new season...',
             position: 'top',
             duration: 3000
         });
-        toast.present();
         return ctx.patchState({currentSeason: action.season});
     }
 

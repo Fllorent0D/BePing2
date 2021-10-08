@@ -17,12 +17,7 @@ import localFR from '@angular/common/locales/fr';
 import localNL from '@angular/common/locales/nl';
 import {GlobalErrorHandlerService} from './core/services/gloabel-error-handler.service';
 import {AnalyticsService} from './core/services/firebase/analytics.service';
-import {StorageService} from './core/services/store/storage.service';
-import {NgxsAsyncStoragePluginModule} from '@ngxs-labs/async-storage-plugin';
-import {NgxsStorageService} from './core/services/store/ngxs-storage.service';
-import {NgxsModule} from '@ngxs/store';
-import {environment} from '../environments/environment';
-import {SeasonState} from './core/store/season';
+import {CrashlyticsService} from './core/services/crashlytics.service';
 
 registerLocaleData(localFR);
 registerLocaleData(localNL);
@@ -37,10 +32,9 @@ registerLocaleData(localNL);
         BrowserModule,
         BrowserAnimationsModule,
         IonicModule.forRoot(),
-
         AppRoutingModule,
         CoreModule,
-        ScrollingModule
+        ScrollingModule,
     ],
     providers: [
         StatusBar,
@@ -49,12 +43,11 @@ registerLocaleData(localNL);
         {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
         {
             provide: APP_INITIALIZER,
-            useFactory: (
-                analyticsService: AnalyticsService,
-                storageService: StorageService,
-                seasonState: SeasonState) =>
-                () => Promise.all([analyticsService.initFb()]),
-            deps: [AnalyticsService, StorageService, SeasonState],
+            useFactory: (analyticsService: AnalyticsService, crashlytics: CrashlyticsService) => () => Promise.all([
+                analyticsService.initFb(),
+                crashlytics.init()
+            ]),
+            deps: [AnalyticsService, CrashlyticsService],
             multi: true
         }
     ],

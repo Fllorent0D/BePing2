@@ -1,10 +1,10 @@
-<ion-header >
+<ion-header>
     <ion-toolbar>
         <ion-title>Bienvenue dans BePing</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true" *ngIf="{isLoading: isLoading$ | async, hasError: hasError$ | async} as state">
+<ion-content *ngIf="{isLoading: isLoading$ | async, hasError: hasError$ | async} as state" fullscreen="true">
     <ion-header collapse="condense">
         <ion-toolbar>
             <ion-title size="large">Bienvenue</ion-title>
@@ -15,17 +15,17 @@
         <ion-item>
             <ion-spinner *ngIf="state.isLoading" slot="start"></ion-spinner>
             <ng-container *ngIf="!state.isLoading">
-                <ion-icon icon="ellipse-outline" color="danger" slot="start" *ngIf="state.hasError"></ion-icon>
-                <ion-icon icon="checkmark-circle" color="success" slot="start" *ngIf="!state.hasError"></ion-icon>
+                <ion-icon *ngIf="state.hasError" color="danger" icon="ellipse-outline" slot="start"></ion-icon>
+                <ion-icon *ngIf="!state.hasError" color="success" icon="checkmark-circle" slot="start"></ion-icon>
             </ng-container>
-            <ion-label class="ion-text-wrap" *ngIf="state.isLoading">Un moment... on se synchronise avec la
+            <ion-label *ngIf="state.isLoading" class="ion-text-wrap">Un moment... on se synchronise avec la
                 fédération
             </ion-label>
             <ng-container *ngIf="!state.isLoading">
-                <ion-label class="ion-text-wrap" *ngIf="!state.hasError">Beping est synchronisé avec la
+                <ion-label *ngIf="!state.hasError" class="ion-text-wrap">Beping est synchronisé avec la
                     fédération
                 </ion-label>
-                <ion-label class="ion-text-wrap" *ngIf="state.hasError">Une erreur est survenue lors de la
+                <ion-label *ngIf="state.hasError" class="ion-text-wrap">Une erreur est survenue lors de la
                     synchronisation
                 </ion-label>
             </ng-container>
@@ -35,7 +35,7 @@
     <div class="ion-padding-horizontal">
         <p>Connectez-vous avec l'AFTT et BePing fera le reste.</p>
         <section>
-            <ion-button expand="block" (click)="loginWithAFTT()">Connexion avec resultat.aftt.be</ion-button>
+            <ion-button (click)="loginWithAFTT()" expand="block">Connexion avec resultat.aftt.be</ion-button>
         </section>
     </div>
     <hr>
@@ -43,17 +43,17 @@
         Sélectionnez manuellement votre identité.
     </p>
     <ion-list class="ion-margin-bottom">
-        <ion-item [disabled]="state.hasError || state.isLoading" button (click)="chooseClub()">
-            <ion-icon name="ellipse-outline" slot="start" *ngIf="!selectedClub"></ion-icon>
-            <ion-icon name="checkmark-circle" color="success" slot="start" *ngIf="selectedClub"></ion-icon>
+        <ion-item (click)="chooseClub()" [disabled]="state.hasError || state.isLoading" button>
+            <ion-icon *ngIf="!selectedClub" name="ellipse-outline" slot="start"></ion-icon>
+            <ion-icon *ngIf="selectedClub" color="success" name="checkmark-circle" slot="start"></ion-icon>
             <ion-label>
                 <h2 *ngIf="!selectedClub">Dans quel club jouez-vous?</h2>
                 <h2 *ngIf="selectedClub">{{selectedClub.UniqueIndex}} - {{selectedClub.LongName}}</h2>
             </ion-label>
         </ion-item>
-        <ion-item button [disabled]="!selectedClub" (click)="choosePlayer()">
-            <ion-icon name="ellipse-outline" slot="start" *ngIf="!selectedMember"></ion-icon>
-            <ion-icon name="checkmark-circle" color="success" slot="start" *ngIf="selectedMember"></ion-icon>
+        <ion-item (click)="choosePlayer()" [disabled]="!selectedClub" button>
+            <ion-icon *ngIf="!selectedMember" name="ellipse-outline" slot="start"></ion-icon>
+            <ion-icon *ngIf="selectedMember" color="success" name="checkmark-circle" slot="start"></ion-icon>
             <ion-label>
                 <h2 *ngIf="!selectedMember">Qui êtes-vous?</h2>
                 <h2 *ngIf="selectedMember">{{selectedMember.FirstName | titlecase}} {{selectedMember.LastName | titlecase}}</h2>
@@ -61,13 +61,15 @@
         </ion-item>
     </ion-list>
     <section>
-        <ion-button expand="block" fill="clear" (click)="startBePing()" [disabled]="!selectedMember || !selectedClub">Démarrer BePing</ion-button>
+        <ion-button (click)="startBePing()" [disabled]="!selectedMember || !selectedClub" expand="block" fill="clear">
+            Démarrer BePing
+        </ion-button>
     </section>
     <hr>
     <div class="ion-padding-horizontal">
         <p>Je ne suis pas affilié, je veux juste consulter les résultats.</p>
         <section>
-            <ion-button expand="block" fill="clear" (click)="startBePing()">Démarrer sans identification</ion-button>
+            <ion-button (click)="startBePing()" expand="block" fill="clear">Démarrer sans identification</ion-button>
         </section>
     </div>
 </ion-content>

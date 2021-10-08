@@ -6,14 +6,14 @@
         <ion-title>{{(clubIndex$ | async)}} {{(team$ | async)?.Team}}</ion-title>
     </ion-toolbar>
     <ion-toolbar>
-        <div class="scrollmenu" #scrollMenu>
-            <ion-chip color="primary" id="tab1" [class.act]="tabIndex === 0" (click)="selectTab(0)">
+        <div #scrollMenu class="scrollmenu">
+            <ion-chip (click)="selectTab(0)" [class.act]="tabIndex === 0" color="primary" id="tab1">
                 <ion-label>{{'TEAM_STAT.RANKING' | translate}}</ion-label>
             </ion-chip>
-            <ion-chip color="primary" id="tab2" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
+            <ion-chip (click)="selectTab(1)" [class.act]="tabIndex === 1" color="primary" id="tab2" outline>
                 <ion-label>{{'COMMON.PLAYERS' | translate}}</ion-label>
             </ion-chip>
-            <ion-chip color="primary" id="tab3" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
+            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="primary" id="tab3" outline>
                 <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
             </ion-chip>
         </div>
@@ -52,9 +52,9 @@
                     </ion-row>
                 </ion-grid>
                 <ng-container *ngIf="team$ | async as team">
-                    <ion-item *ngFor="let rankingEntry of ranking$ | async; let index = index"
+                    <ion-item (click)="teamSelected(rankingEntry)"
+                              *ngFor="let rankingEntry of ranking$ | async; let index = index"
                               [class.is-color-primary]="isSameTeam(rankingEntry, team, club$|async, team.DivisionId)"
-                              (click)="teamSelected(rankingEntry)"
                               style="--padding-start: 0px; --padding-end: 0px;"
                     >
                         <ion-grid style="padding-top: 7px; padding-bottom: 7px">
@@ -101,8 +101,8 @@
             </super-tab>
             <super-tab>
                 <beping-team-players-stats
-                        [stats]="memberRanking$|async"
                         (playerClicked)="navigateToPlayer($event)"
+                        [stats]="memberRanking$|async"
                 ></beping-team-players-stats>
             </super-tab>
             <super-tab>

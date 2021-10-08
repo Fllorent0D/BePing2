@@ -13,7 +13,6 @@ import {MatchesService} from '../../../../core/api/services/matches.service';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
-import {FirebaseAnalytics} from '@capacitor-community/firebase-analytics';
 
 interface SearchResults<T> {
     results?: T[];

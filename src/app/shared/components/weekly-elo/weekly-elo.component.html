@@ -1,10 +1,10 @@
-<beping-card  [padding]="false" >
-  <canvas #canvasElement
-          style="max-height: 200px"
-          baseChart
-          [data]="data"
-          [options]="options"
-          [legend]="false"
-          [type]="'line'">
-  </canvas>
+<beping-card [padding]="false">
+    <canvas #canvasElement
+            [data]="data"
+            [legend]="true"
+            [options]="options"
+            [type]="'line'"
+            baseChart
+            style="max-height: 400px">
+    </canvas>
 </beping-card>

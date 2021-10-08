@@ -5,7 +5,7 @@
             <ion-back-button [text]="'BACK'|translate"></ion-back-button>
         </ion-buttons>
         <ion-title>{{'SETTINGS.CONNECT_TO_FEDERATION'|translate}}</ion-title>
-        <ion-buttons slot="end" *ngIf="modalCtrl">
+        <ion-buttons *ngIf="modalCtrl" slot="end">
             <ion-button (click)="closeModal()">
                 <ion-icon icon="close-outline"></ion-icon>
             </ion-button>
@@ -17,12 +17,12 @@
 
 <ion-content>
     <ion-list>
-        <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+        <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
             <ion-item>
                 <ion-input
                         [formControlName]="'username'"
-                        tabindex="1"
-                        placeholder="{{'SETTINGS.USERNAME'|translate}}">
+                        placeholder="{{'SETTINGS.USERNAME'|translate}}"
+                        tabindex="1">
                 </ion-input>
             </ion-item>
             <ion-item>
@@ -33,8 +33,8 @@
                         type="password">
                 </ion-input>
             </ion-item>
-            <ion-item class="ion-text-center" type="submit" color="primary" [disabled]="loginForm.invalid"
-                      (click)="login()">
+            <ion-item (click)="login()" [disabled]="loginForm.invalid" class="ion-text-center" color="primary"
+                      type="submit">
                 <ion-label class="ion-no-margin">
                     <span *ngIf="!loading; else loader">{{'SETTINGS.LOGIN'|translate}}</span>
                     <ng-template #loader>
@@ -54,9 +54,10 @@
                                 fill="clear">{{'SETTINGS.REGISTER' | translate}}</ion-button>
                 </ion-col>
             </ion-row>
-            <ion-item class="ion-color-grey" *ngIf="(lang$|async) === 'fr'">
+            <ion-item *ngIf="(lang$|async) === 'fr'" class="ion-color-grey">
                 <p>
-                    Attention, l'identifiant demandé n'est pas celui de votre espace personnel! BePing a besoin des identifiants du site
+                    Attention, l'identifiant demandé n'est pas celui de votre espace personnel! BePing a besoin des
+                    identifiants du site
                     https://resultats.aftt.be/
                 </p>
             </ion-item>

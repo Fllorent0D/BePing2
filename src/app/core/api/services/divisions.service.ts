@@ -28,7 +28,7 @@ export class DivisionsService extends BaseService {
   /**
    * Path part for operation findAllDivisions
    */
-  static readonly FindAllDivisionsPath = '/api/divisions';
+  static readonly FindAllDivisionsPath = '/v1/divisions';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -132,7 +132,7 @@ export class DivisionsService extends BaseService {
   /**
    * Path part for operation findDivisionById
    */
-  static readonly FindDivisionByIdPath = '/api/divisions/{divisionId}';
+  static readonly FindDivisionByIdPath = '/v1/divisions/{divisionId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -239,7 +239,7 @@ export class DivisionsService extends BaseService {
   /**
    * Path part for operation findDivisionRanking
    */
-  static readonly FindDivisionRankingPath = '/api/divisions/{divisionId}/ranking';
+  static readonly FindDivisionRankingPath = '/v1/divisions/{divisionId}/ranking';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -346,7 +346,7 @@ export class DivisionsService extends BaseService {
   /**
    * Path part for operation findDivisionMatches
    */
-  static readonly FindDivisionMatchesPath = '/api/divisions/{divisionId}/matches';
+  static readonly FindDivisionMatchesPath = '/v1/divisions/{divisionId}/matches';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -475,7 +475,7 @@ export class DivisionsService extends BaseService {
   /**
    * Path part for operation findDivisionMembers
    */
-  static readonly FindDivisionMembersPath = '/api/divisions/{divisionId}/members/ranking';
+  static readonly FindDivisionMembersPath = '/v1/divisions/{divisionId}/members/ranking';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

@@ -20,6 +20,9 @@ export class RankingSummaryComponent implements OnInit {
 
     completeResults: MemberEntryResultEntry[];
 
+    constructor() {
+    }
+
     @Input() set results(results: MemberEntryResultEntry[]) {
         if (!results) {
             results = [];
@@ -30,9 +33,6 @@ export class RankingSummaryComponent implements OnInit {
         this.total = results.length;
         this.defeatsPct = Math.floor((this.defeats / this.total) * 100);
         this.victoriesPct = Math.floor((this.victories / this.total) * 100);
-    }
-
-    constructor() {
     }
 
     ngOnInit() {

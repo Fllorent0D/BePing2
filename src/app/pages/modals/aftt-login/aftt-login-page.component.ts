@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Select, Store} from '@ngxs/store';
 import {Login} from '../../../core/store/user/aftt.actions';
 import {finalize, take} from 'rxjs/operators';
-import {IonNav, ModalController, ToastController} from '@ionic/angular';
+import {IonNav, ModalController} from '@ionic/angular';
 import {KeyboardService} from '../../../core/services/keyboard/keyboard.service';
 import {InAppBrowserService} from '../../../core/services/browser/in-app-browser.service';
 import {LANG} from '../../../core/models/langs';
@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
 import {UserState, UserStateModel} from '../../../core/store/user/user.state';
 import {InternalIdentifiersService} from '../../../core/api/services/internal-identifiers.service';
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
+import {DialogService} from '../../../shared/services/dialog-service.service';
 
 @Component({
     selector: 'beping-aftt-login',
@@ -28,7 +29,7 @@ export class AfttLoginPage implements OnInit {
     constructor(
         private readonly formBuilder: FormBuilder,
         private readonly store: Store,
-        private readonly toastr: ToastController,
+        private readonly dialogService: DialogService,
         @Optional() private readonly ionNav: IonNav,
         @Optional() public readonly modalCtrl: ModalController,
         private readonly keyboardService: KeyboardService,
@@ -54,26 +55,24 @@ export class AfttLoginPage implements OnInit {
             finalize(() => this.loading = false)
         ).subscribe(async () => {
             if (this.modalCtrl) {
-                await this.modalCtrl.dismiss({logged: true});
+                this.modalCtrl.dismiss({logged: true});
             } else {
-                const toast = await this.toastr.create({
+                this.dialogService.showToast({
                     message: 'Connecté avec l\'AFTT',
                     position: 'bottom',
                     color: 'success',
                     duration: 2000
                 });
-                await toast.present();
-                await this.ionNav.pop();
+                this.ionNav.pop();
             }
 
         }, async () => {
-            const toast = await this.toastr.create({
+            this.dialogService.showToast({
                 message: 'Login invalide',
                 position: 'bottom',
                 color: 'danger',
                 duration: 2000
             });
-            await toast.present();
         });
     }
 

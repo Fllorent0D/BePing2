@@ -1,8 +1,8 @@
 <ion-grid>
     <ion-row>
         <ion-col>
-            <beping-victory-chart redPct="{{defeatsPct}}" bluePct="{{victoriesPct}}"
-                                  [title]="ranking"></beping-victory-chart>
+            <beping-victory-chart [title]="ranking" bluePct="{{victoriesPct}}"
+                                  redPct="{{defeatsPct}}"></beping-victory-chart>
         </ion-col>
         <ion-col>
             <ion-grid>
@@ -22,7 +22,7 @@
                 </ion-row>
                 <ion-row class="ion-align-items-end">
                     <ion-col>
-                        <ion-button fill="clear" size="small" (click)="isOpen = !isOpen">
+                        <ion-button (click)="isOpen = !isOpen" fill="clear" size="small">
                             {{'DASHBOARD.SEE_DETAILS'|translate}}
                         </ion-button>
                     </ion-col>

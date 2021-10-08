@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header>
     <ion-toolbar color="primary">
         <ion-title>{{'SETTINGS.WHICH_CLUB'|translate}}</ion-title>
         <ion-buttons slot="end">
@@ -9,23 +9,23 @@
     </ion-toolbar>
     <ion-toolbar>
         <ion-searchbar
-                [formControl]="searchBox"
                 (search)="searchClicked()"
-                enterkeyhint="search"
+                [formControl]="searchBox"
                 debounce="500"
-                type="search"
+                enterkeyhint="search"
                 placeholder="Rechercher"
+                type="search"
         ></ion-searchbar>
     </ion-toolbar>
 
 </ion-header>
 
 <ion-content fullscreen="true">
-    <ion-virtual-scroll [items]="clubsFound$ | async" [headerFn]="categoryHeader">
+    <ion-virtual-scroll [headerFn]="categoryHeader" [items]="clubsFound$ | async">
         <ion-item-divider *virtualHeader="let header" sticky>
             {{ header }}
         </ion-item-divider>
-        <ion-item *virtualItem="let club" (click)="clubClicked(club)">
+        <ion-item (click)="clubClicked(club)" *virtualItem="let club">
             <ion-label>{{club.UniqueIndex}} - {{club.LongName}}</ion-label>
         </ion-item>
     </ion-virtual-scroll>

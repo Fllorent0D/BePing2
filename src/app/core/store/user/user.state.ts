@@ -11,7 +11,7 @@ import {
     UpdateMainCategory,
     UpdateMemberEntries,
     UpdateMemberEntriesSuccess,
-    UpdateWeeklyEloSuccess
+    UpdateWeeklyNumericRankingSuccess
 } from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
 import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
@@ -23,6 +23,7 @@ import {combineLatest, of} from 'rxjs';
 import {MembersService} from '../../api/services/members.service';
 import {WeeklyElo} from '../../api/models/weekly-elo';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
+import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
 
 export type UserMemberEntries = { [key: string]: MemberEntry };
 
@@ -34,7 +35,7 @@ export interface UserStateModel {
     memberUniqueIndex?: number;
     mainCategory?: PLAYER_CATEGORY;
     club?: ClubEntry;
-    weeklyElo?: WeeklyElo[];
+    numericRankings?: WeeklyNumericRanking[];
     hasSeeOnBoarding: boolean;
     isLoading: boolean;
     lastUpdated: number;
@@ -45,8 +46,8 @@ const defaultState: UserStateModel = {
     memberUniqueIndex: null,
     mainCategory: null,
     latestMatches: null,
-    weeklyElo: null,
     club: null,
+    numericRankings: null,
     hasSeeOnBoarding: false,
     lastUpdated: 0,
     isLoading: false
@@ -61,6 +62,13 @@ const defaultState: UserStateModel = {
 })
 export class UserState implements NgxsOnInit {
 
+    constructor(
+        private readonly memberPlayerCategoryService: PlayerCategoryService,
+        private readonly memberService: MembersService,
+        private readonly analyticsService: AnalyticsService
+    ) {
+    }
+
     @Selector([UserState])
     static shouldSeeOnboarding(state: UserStateModel): boolean {
         return !state.hasSeeOnBoarding;
@@ -72,8 +80,8 @@ export class UserState implements NgxsOnInit {
     }
 
     @Selector([UserState])
-    static weeklyEloPoint(state: UserStateModel): WeeklyElo[] {
-        return state.weeklyElo;
+    static numericRankings(state: UserStateModel): WeeklyNumericRanking[] {
+        return state.numericRankings;
     }
 
     @Selector([UserState])
@@ -94,7 +102,6 @@ export class UserState implements NgxsOnInit {
         return state.mainCategory;
     }
 
-
     static getMemberEntryForCategory(category: PLAYER_CATEGORY) {
         return createSelector([UserState], (userState: UserStateModel) => {
             return userState.memberEntries[category];
@@ -107,17 +114,9 @@ export class UserState implements NgxsOnInit {
         });
     }
 
-
-    constructor(
-        private readonly memberPlayerCategoryService: PlayerCategoryService,
-        private readonly memberService: MembersService,
-        private readonly analyticsService: AnalyticsService
-    ) {
-    }
-
     ngxsOnInit({getState, dispatch}: StateContext<UserStateModel>): void {
         const state = getState();
-        const timeThreshold = sub(Date.now(), {minutes: 10});
+        const timeThreshold = sub(Date.now(), {minutes: 30});
 
         if (state.memberUniqueIndex) {
             this.analyticsService.setUser(state.memberUniqueIndex.toString(10));
@@ -126,8 +125,10 @@ export class UserState implements NgxsOnInit {
             this.analyticsService.setUserProperty('club', state.club.UniqueIndex);
         }
 
-        if (state.lastUpdated > timeThreshold.getTime() && state.memberUniqueIndex) {
+        if (state.lastUpdated < timeThreshold.getTime() && state.memberUniqueIndex) {
             dispatch(new UpdateMemberEntries(state.memberUniqueIndex));
+        } else {
+            console.log('no refreshing:::', state.lastUpdated, '>', timeThreshold.getTime());
         }
     }
 
@@ -161,15 +162,15 @@ export class UserState implements NgxsOnInit {
     updateMemberEntries({dispatch, getState}: StateContext<UserStateModel>, action: UpdateMemberEntries) {
         return combineLatest([
             this.memberPlayerCategoryService.getMemberPlayerCategories(action.memberUniqueIndex),
-            this.memberService.findMemberEloHistory({uniqueIndex: action.memberUniqueIndex})
+            this.memberService.findMemberNumericRankingsHistory({uniqueIndex: action.memberUniqueIndex})
                 .pipe(catchError(() => of([])))
         ]).pipe(
             tap(() => dispatch(new SetLoading(true))),
-            switchMap(([memberEntries, eloHistory]) => {
+            switchMap(([memberEntries, numericRanking]) => {
                 const state = getState();
                 const actions: Array<any> = [
                     new UpdateMemberEntriesSuccess(memberEntries),
-                    new UpdateWeeklyEloSuccess(eloHistory)
+                    new UpdateWeeklyNumericRankingSuccess(numericRanking)
                 ];
                 const categories = Object.keys(memberEntries);
                 if (state.club.UniqueIndex !== memberEntries?.[categories?.[0]]?.Club) {
@@ -202,10 +203,10 @@ export class UserState implements NgxsOnInit {
         });
     }
 
-    @Action(UpdateWeeklyEloSuccess)
-    updateWeeklyEloSuccess({patchState, getState}: StateContext<UserStateModel>, action: UpdateWeeklyEloSuccess) {
+    @Action(UpdateWeeklyNumericRankingSuccess)
+    updateWeeklyNumericRankingSuccess({patchState, getState}: StateContext<UserStateModel>, action: UpdateWeeklyNumericRankingSuccess) {
         return patchState({
-            weeklyElo: action.elo
+            numericRankings: action.numericRankings
         });
     }
 

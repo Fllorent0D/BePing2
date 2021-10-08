@@ -1,13 +1,13 @@
 import {TestBed} from '@angular/core/testing';
 
-import {TabsNavigationService} from './tabs-navigation.service';
+import {DialogServiceService} from './dialog-service.service';
 
-describe('TabsNavigationService', () => {
-    let service: TabsNavigationService;
+describe('DialogServiceService', () => {
+    let service: DialogServiceService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(TabsNavigationService);
+        service = TestBed.inject(DialogServiceService);
     });
 
     it('should be created', () => {

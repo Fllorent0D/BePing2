@@ -9,8 +9,8 @@
             <ion-list>
                 <ion-item *ngFor="let player of match.MatchDetails.HomePlayers.Players">
                     <beping-team-match-player-item
-                            [player]="player"
                             (playerClicked)="playerClicked.emit(player.UniqueIndex)"
+                            [player]="player"
                     ></beping-team-match-player-item>
                 </ion-item>
             </ion-list>
@@ -23,8 +23,8 @@
             <ion-list>
                 <ion-item *ngFor="let player of match.MatchDetails.AwayPlayers.Players">
                     <beping-team-match-player-item
-                            [player]="player"
                             (playerClicked)="playerClicked.emit(player.UniqueIndex)"
+                            [player]="player"
                     ></beping-team-match-player-item>
                 </ion-item>
             </ion-list>

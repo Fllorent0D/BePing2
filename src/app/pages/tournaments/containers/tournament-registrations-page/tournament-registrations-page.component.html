@@ -1,25 +1,25 @@
-<ion-header >
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button [text]="'BACK'|translate"></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{'TOURNAMENTS.REGISTRATIONS'|translate}}</ion-title>
-  </ion-toolbar>
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'TOURNAMENTS.REGISTRATIONS'|translate}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let registration of registrations" detail (click)="registrationClicked(registration)">
-      <ion-label>
-        <h3>
-          {{registration.Member.FirstName | titlecase}} {{registration.Member.LastName | titlecase}}
-        </h3>
-        <p>
-          {{'TOURNAMENTS.REGISTERED_ON'|translate}} {{registration.RegistrationDate | localizedDate}}
-        </p>
-      </ion-label>
-      <ion-note slot="end">{{registration.Member.Ranking}}</ion-note>
+    <ion-list>
+        <ion-item (click)="registrationClicked(registration)" *ngFor="let registration of registrations" detail>
+            <ion-label>
+                <h3>
+                    {{registration.Member.FirstName | titlecase}} {{registration.Member.LastName | titlecase}}
+                </h3>
+                <p>
+                    {{'TOURNAMENTS.REGISTERED_ON'|translate}} {{registration.RegistrationDate | localizedDate}}
+                </p>
+            </ion-label>
+            <ion-note slot="end">{{registration.Member.Ranking}}</ion-note>
 
-    </ion-item>
-  </ion-list>
+        </ion-item>
+    </ion-list>
 
 </ion-content>

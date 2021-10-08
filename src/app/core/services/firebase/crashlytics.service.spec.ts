@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { CrashlyticsService } from './crashlytics.service';
+import {CrashlyticsService} from './crashlytics.service';
 
 describe('CrashlyticsService', () => {
-  let service: CrashlyticsService;
+    let service: CrashlyticsService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(CrashlyticsService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(CrashlyticsService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

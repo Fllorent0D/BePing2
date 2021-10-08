@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { PlayerCategoryService } from './player-category.service';
+import {PlayerCategoryService} from './player-category.service';
 
 describe('PlayerCategoryService', () => {
-  let service: PlayerCategoryService;
+    let service: PlayerCategoryService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(PlayerCategoryService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(PlayerCategoryService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });

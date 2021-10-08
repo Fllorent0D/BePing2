@@ -30,6 +30,7 @@ import {NgChartsModule} from 'ng2-charts';
 import {LocalDatePipe} from './pipes/local-date.pipe';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {NgPipesModule} from 'ngx-pipes';
+import {DialogService} from './services/dialog-service.service';
 
 const COMPONENTS = [
     RankingComponent,
@@ -56,7 +57,7 @@ const COMPONENTS = [
 ];
 const PIPES = [
     WithLoadingPipe,
-    LocalDatePipe,
+    LocalDatePipe
 ];
 const DIRECTIVES = [
     AppearDirective
@@ -67,7 +68,7 @@ const DIRECTIVES = [
     declarations: [
         COMPONENTS,
         DIRECTIVES,
-        PIPES,
+        PIPES
     ],
     exports: [
         CommonModule,
@@ -78,8 +79,9 @@ const DIRECTIVES = [
         NgChartsModule,
         NgPipesModule,
         SuperTabsModule,
+        DialogService,
         COMPONENTS,
-        PIPES,
+        PIPES
     ],
     imports: [
         CommonModule,
@@ -89,6 +91,9 @@ const DIRECTIVES = [
         TranslateModule,
         NgChartsModule,
         SuperTabsModule
+    ],
+    providers: [
+        DialogService
     ]
 })
 export class SharedModule {

@@ -12,9 +12,9 @@
                     <h2>FF</h2>
                 </ion-text>
             </ng-container>
-            <ion-button color="dark" fill="clear" (click)="homeTeamClicked.emit()">
+            <ion-button (click)="homeTeamClicked.emit()" color="dark" fill="clear">
                 {{match.HomeTeam}}
-                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+                <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
             </ion-button>
         </ion-col>
         <ion-col size="2">
@@ -34,9 +34,9 @@
 
             </ng-container>
 
-            <ion-button color="dark" fill="clear" (click)="awayTeamClicked.emit()">
+            <ion-button (click)="awayTeamClicked.emit()" color="dark" fill="clear">
                 {{match.AwayTeam}}
-                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+                <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
             </ion-button>
         </ion-col>
     </ion-row>

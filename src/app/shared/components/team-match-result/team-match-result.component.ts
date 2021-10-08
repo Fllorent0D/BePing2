@@ -35,9 +35,6 @@ export class TeamMatchResultComponent implements OnInit {
         this.isTablet = this.platform.is('tablet') || this.platform.is('desktop');
     }
 
-    ngOnInit() {
-    }
-
     get isHomeFF(): boolean {
         return this.match.IsHomeForfeited && !this.isAwayFG;
     }
@@ -59,6 +56,9 @@ export class TeamMatchResultComponent implements OnInit {
         if (splitted?.length === 3) {
             return `${splitted[0]}:${splitted[1]}`;
         }
+    }
+
+    ngOnInit() {
     }
 
     async navigateToDetails() {

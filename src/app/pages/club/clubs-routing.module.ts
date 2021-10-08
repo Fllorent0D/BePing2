@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 import {ClubPage} from './containers/club/club.page';
 import {TeamPage} from './containers/team/team-page.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
     {
         path: ':uniqueIndex',
         component: ClubPage
-    },
+    }
 ];
 
 @NgModule({

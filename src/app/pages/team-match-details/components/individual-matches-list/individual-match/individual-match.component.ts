@@ -3,18 +3,20 @@ import {IndividualMatchResult} from '../../../../../core/api/models/individual-m
 import {Player} from '../../../../../core/api/models/player';
 
 @Component({
-  selector: 'beping-team-match-individual-match',
-  templateUrl: './individual-match.component.html',
-  styleUrls: ['./individual-match.component.scss'],
+    selector: 'beping-team-match-individual-match',
+    templateUrl: './individual-match.component.html',
+    styleUrls: ['./individual-match.component.scss']
 })
 export class TeamMatchIndividualMatchComponent implements OnInit {
-  @Input() individualMatch: IndividualMatchResult;
-  @Input() homePlayer: Player[];
-  @Input() awayPlayer: Player[];
-  constructor() { }
+    @Input() individualMatch: IndividualMatchResult;
+    @Input() homePlayer: Player[];
+    @Input() awayPlayer: Player[];
 
-  ngOnInit() {
-    console.log(this.homePlayer)
-  }
+    constructor() {
+    }
+
+    ngOnInit() {
+        console.log(this.homePlayer);
+    }
 
 }

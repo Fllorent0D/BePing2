@@ -2,27 +2,27 @@
 
     <ion-tab-bar slot="bottom">
         <ion-tab-button tab="homeTab">
-            <ion-icon name="home{{selectedTab !== 'homeTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-icon [size]="'small'" name="home{{selectedTab !== 'homeTab' ? '-outline' : ''}}"></ion-icon>
             <ion-label>{{'SIDEMENU.HOME'|translate}}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="divisionsTab">
-            <ion-icon name="list{{selectedTab !== 'divisionsTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-icon [size]="'small'" name="list{{selectedTab !== 'divisionsTab' ? '-outline' : ''}}"></ion-icon>
             <ion-label>{{'COMMON.DIVISIONS'|translate}}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="favoritesTab">
-            <ion-icon name="star{{selectedTab !== 'favoritesTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-icon [size]="'small'" name="star{{selectedTab !== 'favoritesTab' ? '-outline' : ''}}"></ion-icon>
             <ion-label>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="tournamentsTab">
-            <ion-icon name="trophy{{selectedTab !== 'tournamentsTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-icon [size]="'small'" name="trophy{{selectedTab !== 'tournamentsTab' ? '-outline' : ''}}"></ion-icon>
             <ion-label>{{'COMMON.TOURNAMENTS'|translate}}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="searchTab">
-            <ion-icon name="search{{selectedTab !== 'searchTab' ? '-outline' : ''}}" [size]="'small'"></ion-icon>
+            <ion-icon [size]="'small'" name="search{{selectedTab !== 'searchTab' ? '-outline' : ''}}"></ion-icon>
             <ion-label>{{'SEARCH.SEARCH'|translate}}</ion-label>
         </ion-tab-button>
     </ion-tab-bar>

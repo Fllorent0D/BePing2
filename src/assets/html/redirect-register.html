@@ -1,45 +1,46 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+    <meta content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+          http-equiv="Content-Security-Policy">
 </head>
 
 <body>
-    <h1>Redirection...</h1>
+<h1>Redirection...</h1>
 </body>
 <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const playerId = urlParams.get('internalPlayerId');
-    const clubId = urlParams.get('internalClubId');
+  const urlParams = new URLSearchParams(window.location.search);
+  const playerId = urlParams.get('internalPlayerId');
+  const clubId = urlParams.get('internalClubId');
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'https://resultats.aftt.be/index.php?menu=0&register=1';
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://resultats.aftt.be/index.php?menu=0&register=1';
 
 
-    const playerIdField = document.createElement('input');
-    playerIdField.type = 'hidden';
-    playerIdField.name = 'player_id';
-    playerIdField.value = playerId;
+  const playerIdField = document.createElement('input');
+  playerIdField.type = 'hidden';
+  playerIdField.name = 'player_id';
+  playerIdField.value = playerId;
 
-    form.appendChild(playerIdField);
+  form.appendChild(playerIdField);
 
-    const clubIdField = document.createElement('input');
-    clubIdField.type = 'hidden';
-    clubIdField.name = 'club_id';
-    clubIdField.value = playerId;
-    form.appendChild(clubIdField);
+  const clubIdField = document.createElement('input');
+  clubIdField.type = 'hidden';
+  clubIdField.name = 'club_id';
+  clubIdField.value = playerId;
+  form.appendChild(clubIdField);
 
-    const stepField = document.createElement('input');
-    stepField.type = 'hidden';
-    stepField.name = 'RegisterStep';
-    stepField.value = '3';
-    form.appendChild(stepField);
+  const stepField = document.createElement('input');
+  stepField.type = 'hidden';
+  stepField.name = 'RegisterStep';
+  stepField.value = '3';
+  form.appendChild(stepField);
 
-    document.body.appendChild(form);
-    form.submit();
+  document.body.appendChild(form);
+  form.submit();
 
-    console.log(playerId, clubId)
+  console.log(playerId, clubId)
 </script>
 
 </html>

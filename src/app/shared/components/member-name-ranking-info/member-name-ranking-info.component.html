@@ -1,8 +1,9 @@
 <ion-grid>
-    <ion-row class="ion-text-center" *ngIf="displayName">
+    <ion-row *ngIf="displayName" class="ion-text-center">
         <ion-col>
             <ion-text color="clear">
-                <h2 class="ion-no-margin" style="color: white">{{member.FirstName |titlecase}} {{member.LastName |titlecase}}</h2>
+                <h2 class="ion-no-margin"
+                    style="color: white">{{member.FirstName |titlecase}} {{member.LastName |titlecase}}</h2>
             </ion-text>
         </ion-col>
     </ion-row>

@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header>
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button [text]="'BACK'|translate"></ion-back-button>
@@ -6,20 +6,20 @@
         <ion-title>{{(club$ |async).LongName}}</ion-title>
         <ion-buttons slot="end">
             <beping-favorite-btn
-                    [enabled]="isFavorite$|async"
                     (clicked)="toggleClubFavorite()"
+                    [enabled]="isFavorite$|async"
             ></beping-favorite-btn>
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar>
-        <div class="scrollmenu" #scrollMenu>
-            <ion-chip color="primary" id="tab1" [class.act]="tabIndex === 0" (click)="selectTab(0)">
+        <div #scrollMenu class="scrollmenu">
+            <ion-chip (click)="selectTab(0)" [class.act]="tabIndex === 0" color="primary" id="tab1">
                 <ion-label>{{'CLUB_DETAILS.LIST_OF_STRENGTH' | translate}}</ion-label>
             </ion-chip>
-            <ion-chip color="primary" id="tab2" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
+            <ion-chip (click)="selectTab(1)" [class.act]="tabIndex === 1" color="primary" id="tab2" outline>
                 <ion-label>{{'COMMON.TEAMS' | translate}}</ion-label>
             </ion-chip>
-            <ion-chip color="primary" id="tab3" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
+            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="primary" id="tab3" outline>
                 <ion-label>{{'CLUB_DETAILS.INFOS' | translate}}</ion-label>
             </ion-chip>
             <!--
@@ -35,17 +35,17 @@
         <super-tabs-container>
             <super-tab>
                 <beping-club-player-list-tab
-                            [members]="members$ | async"
-                            (memberClicked)="navigateToPlayer($event)"
-                    >
-                    </beping-club-player-list-tab>
+                        (memberClicked)="navigateToPlayer($event)"
+                        [members]="members$ | async"
+                >
+                </beping-club-player-list-tab>
 
 
             </super-tab>
             <super-tab>
                 <beping-club-team-list-tab
-                        [teams]="teams$|async"
                         [club]="club$|async"
+                        [teams]="teams$|async"
                 ></beping-club-team-list-tab>
             </super-tab>
             <super-tab>
@@ -63,17 +63,17 @@
             </super-tab>-->
         </super-tabs-container>
     </super-tabs>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" [hidden]="tabIndex !== 0">
+    <ion-fab [hidden]="tabIndex !== 0" horizontal="end" slot="fixed" vertical="bottom">
         <ion-fab-button>
             <ion-icon [name]="getIcon(currentCategory$ | async)"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="top">
             <ion-fab-button
-                    [attr.data-desc]="'PLAYER_CATEGORY.' + category | translate"
-                    [disabled]="category === (currentCategory$|async)"
-                    [color]="category === (currentCategory$|async)?'primary': 'light'"
+                    (click)="categoryClicked(category)"
                     *ngFor="let category of CATEGORIES"
-                    (click)="categoryClicked(category)">
+                    [attr.data-desc]="'PLAYER_CATEGORY.' + category | translate"
+                    [color]="category === (currentCategory$|async)?'primary': 'light'"
+                    [disabled]="category === (currentCategory$|async)">
                 <ion-icon [name]="getIcon(category)"></ion-icon>
             </ion-fab-button>
         </ion-fab-list>

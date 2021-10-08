@@ -50,12 +50,6 @@ export class ChooseClubPage implements OnInit {
         await this.modalCtrl.dismiss();
     }
 
-    private async hideKeyboard() {
-        if (Capacitor.getPlatform() !== 'web') {
-            await Keyboard.hide();
-        }
-    }
-
     searchClicked() {
         this.hideKeyboard();
     }
@@ -68,5 +62,11 @@ export class ChooseClubPage implements OnInit {
         }
 
         return null;
+    }
+
+    private async hideKeyboard() {
+        if (Capacitor.getPlatform() !== 'web') {
+            await Keyboard.hide();
+        }
     }
 }

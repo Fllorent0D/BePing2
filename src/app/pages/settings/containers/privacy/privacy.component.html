@@ -5,7 +5,7 @@
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>{{'SETTINGS.PRIVACY_POLICY' | translate}}</ion-title>
-        <ion-buttons slot="end" *ngIf="isModal">
+        <ion-buttons *ngIf="isModal" slot="end">
             <ion-button (click)="closeModal()">
                 <ion-icon icon="close-outline"></ion-icon>
             </ion-button>

@@ -16,24 +16,25 @@
 
 <ion-content>
     <ion-list class="ion-margin-bottom">
-        <ion-item button (click)="chooseClub()">
-            <ion-icon name="ellipse-outline" slot="start" *ngIf="!selectedClub"></ion-icon>
-            <ion-icon name="checkmark-circle" color="success" slot="start" *ngIf="selectedClub"></ion-icon>
+        <ion-item (click)="chooseClub()" button>
+            <ion-icon *ngIf="!selectedClub" name="ellipse-outline" slot="start"></ion-icon>
+            <ion-icon *ngIf="selectedClub" color="success" name="checkmark-circle" slot="start"></ion-icon>
             <ion-label>
                 <h2 *ngIf="!selectedClub">{{'SETTINGS.WHICH_CLUB'|translate}}</h2>
                 <h2 *ngIf="selectedClub">{{selectedClub.UniqueIndex}} - {{selectedClub.LongName}}</h2>
             </ion-label>
         </ion-item>
-        <ion-item button [disabled]="!selectedClub" (click)="choosePlayer()">
-            <ion-icon name="ellipse-outline" slot="start" *ngIf="!selectedMember"></ion-icon>
-            <ion-icon name="checkmark-circle" color="success" slot="start" *ngIf="selectedMember"></ion-icon>
+        <ion-item (click)="choosePlayer()" [disabled]="!selectedClub" button>
+            <ion-icon *ngIf="!selectedMember" name="ellipse-outline" slot="start"></ion-icon>
+            <ion-icon *ngIf="selectedMember" color="success" name="checkmark-circle" slot="start"></ion-icon>
             <ion-label>
                 <h2 *ngIf="!selectedMember">{{'SETTINGS.WHO_ARE_YOU'|translate}}</h2>
                 <h2 *ngIf="selectedMember">{{selectedMember.FirstName | titlecase}} {{selectedMember.LastName | titlecase}}</h2>
             </ion-label>
         </ion-item>
-        <ion-item class="ion-text-center" type="submit" color="primary" [disabled]="!(selectedMember && selectedClub) || isLoading"
-                  (click)="select()">
+        <ion-item (click)="select()" [disabled]="!(selectedMember && selectedClub) || isLoading" class="ion-text-center"
+                  color="primary"
+                  type="submit">
             <ion-label class="ion-no-margin">{{'SETTINGS.APPLY'|translate}}</ion-label>
         </ion-item>
     </ion-list>

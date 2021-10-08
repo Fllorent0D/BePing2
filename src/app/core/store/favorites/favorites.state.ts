@@ -28,6 +28,12 @@ export interface FavoritesStateModel {
 })
 @Injectable()
 export class FavoritesState {
+    constructor(
+        private readonly haptics: HapticsService,
+        private readonly analyticsService: AnalyticsService
+    ) {
+    }
+
     static isClubInFavorite(clubUniqueIndex: string) {
         return createSelector([FavoritesState], (state: FavoritesStateModel): boolean => {
             return !!state.clubs.find((item) => clubUniqueIndex === item.uniqueIndex);
@@ -44,12 +50,6 @@ export class FavoritesState {
         return createSelector([FavoritesState], (state: FavoritesStateModel): boolean => {
             return !!state.members.find((item) => memberIndex === item.uniqueIndex);
         });
-    }
-
-    constructor(
-        private readonly haptics: HapticsService,
-        private readonly analyticsService: AnalyticsService
-    ) {
     }
 
     @Selector([FavoritesState])

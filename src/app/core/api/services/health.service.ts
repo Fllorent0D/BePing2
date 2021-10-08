@@ -25,7 +25,7 @@ export class HealthService extends BaseService {
   /**
    * Path part for operation checkHealth
    */
-  static readonly CheckHealthPath = '/api/health';
+  static readonly CheckHealthPath = '/v1/health';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -68,7 +68,7 @@ export class HealthService extends BaseService {
   /**
    * Path part for operation testRequest
    */
-  static readonly TestRequestPath = '/api/health/test';
+  static readonly TestRequestPath = '/v1/health/test';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -166,7 +166,7 @@ export class HealthService extends BaseService {
   /**
    * Path part for operation context
    */
-  static readonly ContextPath = '/api/health/context';
+  static readonly ContextPath = '/v1/health/context';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

@@ -3,10 +3,10 @@ import {RouterModule, Routes} from '@angular/router';
 import {ExploreContainerComponent} from './explore-container.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ExploreContainerComponent,
-  }
+    {
+        path: '',
+        component: ExploreContainerComponent
+    }
 ];
 
 @NgModule({

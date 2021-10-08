@@ -11,6 +11,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { MemberEntry } from '../models/member-entry';
 import { WeeklyElo } from '../models/weekly-elo';
+import { WeeklyNumericRanking } from '../models/weekly-numeric-ranking';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class MembersService extends BaseService {
   /**
    * Path part for operation findAllMembers
    */
-  static readonly FindAllMembersPath = '/api/members';
+  static readonly FindAllMembersPath = '/v1/members';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -148,7 +149,7 @@ export class MembersService extends BaseService {
   /**
    * Path part for operation findMemberById
    */
-  static readonly FindMemberByIdPath = '/api/members/{uniqueIndex}';
+  static readonly FindMemberByIdPath = '/v1/members/{uniqueIndex}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -270,13 +271,15 @@ export class MembersService extends BaseService {
   /**
    * Path part for operation findMemberEloHistory
    */
-  static readonly FindMemberEloHistoryPath = '/api/members/{uniqueIndex}/elo';
+  static readonly FindMemberEloHistoryPath = '/v1/members/{uniqueIndex}/elo';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `findMemberEloHistory()` instead.
    *
    * This method doesn't expect any request body.
+   *
+   * @deprecated
    */
   findMemberEloHistory$Response(params: {
     uniqueIndex: number;
@@ -305,6 +308,8 @@ export class MembersService extends BaseService {
    * To access the full response (for headers, for example), `findMemberEloHistory$Response()` instead.
    *
    * This method doesn't expect any request body.
+   *
+   * @deprecated
    */
   findMemberEloHistory(params: {
     uniqueIndex: number;
@@ -313,6 +318,55 @@ export class MembersService extends BaseService {
 
     return this.findMemberEloHistory$Response(params).pipe(
       map((r: StrictHttpResponse<Array<WeeklyElo>>) => r.body as Array<WeeklyElo>)
+    );
+  }
+
+  /**
+   * Path part for operation findMemberNumericRankingsHistory
+   */
+  static readonly FindMemberNumericRankingsHistoryPath = '/v1/members/{uniqueIndex}/numeric-rankings';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findMemberNumericRankingsHistory()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberNumericRankingsHistory$Response(params: {
+    uniqueIndex: number;
+    season?: number;
+  }): Observable<StrictHttpResponse<Array<WeeklyNumericRanking>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberNumericRankingsHistoryPath, 'get');
+    if (params) {
+      rb.path('uniqueIndex', params.uniqueIndex, {});
+      rb.query('season', params.season, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<WeeklyNumericRanking>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findMemberNumericRankingsHistory$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberNumericRankingsHistory(params: {
+    uniqueIndex: number;
+    season?: number;
+  }): Observable<Array<WeeklyNumericRanking>> {
+
+    return this.findMemberNumericRankingsHistory$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<WeeklyNumericRanking>>) => r.body as Array<WeeklyNumericRanking>)
     );
   }
 

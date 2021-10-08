@@ -1,15 +1,15 @@
 <beping-card>
     <ion-grid>
         <ion-row class="ion-justify-content-center ion-align-items-center" style="min-height: 125px; max-height: 400px">
-            <ion-col size="3" [sizeXl]="5" class="ion-text-center" [hidden]="victories === 0">
+            <ion-col [hidden]="victories === 0" [sizeXl]="5" class="ion-text-center" size="3">
                 <ion-text><p class="ion-no-margin text-highlight">{{victories}} ({{victoriesPct}}%)</p></ion-text>
                 <ion-text color="grey"><p class="ion-no-margin">{{'COMMON.WINS'|translate}}</p></ion-text>
             </ion-col>
-            <ion-col size="6" [sizeXl]="2">
-                <beping-victory-chart [redPct]="defeatsPct" [bluePct]="victoriesPct" [title]="total.toString()"
-                                      [subtitle]="'matches'"></beping-victory-chart>
+            <ion-col [sizeXl]="2" size="6">
+                <beping-victory-chart [bluePct]="victoriesPct" [redPct]="defeatsPct" [subtitle]="'matches'"
+                                      [title]="total.toString()"></beping-victory-chart>
             </ion-col>
-            <ion-col size="3" [sizeXl]="5" class="ion-text-center" [hidden]="defeats === 0">
+            <ion-col [hidden]="defeats === 0" [sizeXl]="5" class="ion-text-center" size="3">
                 <ion-text><p class="ion-no-margin text-highlight">{{defeats}} ({{defeatsPct}}%)</p></ion-text>
                 <ion-text color="grey"><p class="ion-no-margin">{{'COMMON.DEFEATS'|translate}}</p></ion-text>
             </ion-col>

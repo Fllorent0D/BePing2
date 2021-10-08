@@ -6,9 +6,11 @@
     flex-direction: column;
   }
 }
-.text-small{
+
+.text-small {
   font-size: 13px;
 }
+
 .photo-white-container {
   background-color: var(--ion-background-color);
   justify-content: space-between;
@@ -39,17 +41,20 @@
     justify-content: flex-end;
     flex-direction: column;
   }
+
   display: flex;
   align-items: flex-end;
 }
 
 .onboarding-slide {
-  ion-row:first-child{
+  ion-row:first-child {
     flex-grow: 1;
   }
-  ion-row:nth-child(2){
+
+  ion-row:nth-child(2) {
     flex-grow: 2;
   }
+
   padding-top: var(--ion-safe-area-top);
   justify-content: space-between !important;
   display: flex;

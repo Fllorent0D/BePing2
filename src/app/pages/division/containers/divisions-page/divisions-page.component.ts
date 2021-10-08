@@ -22,7 +22,6 @@ export class DivisionsPageComponent implements OnInit {
         private readonly activatedRoute: ActivatedRoute,
         private readonly store: Store,
         private readonly tabRouting: TabsNavigationService
-
     ) {
     }
 

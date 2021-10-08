@@ -131,6 +131,7 @@
     .item-input.item-has-focus {
       border-bottom: 1px solid var(--ion-color-primary);
       --highlight-height: 1px;
+
       ion-icon {
         color: var(--ion-color-primary);
       }
@@ -138,6 +139,7 @@
 
     .item-input.is-password-field {
       --inner-padding-end: 0;
+
       ion-button.ios {
         height: auto;
         margin: 0;
@@ -155,6 +157,7 @@
     ion-item[color] {
       --detail-icon-color: var(--ion-color-contrast);
       --detail-icon-opacity: 1;
+
       ion-icon {
         color: var(--ion-background-color);
       }
@@ -180,7 +183,7 @@
         border-left: 1px solid var(--ion-color-is-mute-light);
       }
 
-      div[slot=end] h3{
+      div[slot=end] h3 {
         font-size: 0.9rem;
         font-weight: normal;
       }
@@ -209,6 +212,7 @@
     ion-item, button.item {
       border-left: 1px solid var(--ion-color-is-mute-light);
       border-right: 1px solid var(--ion-color-is-mute-light);
+
       &[button] {
         border-width: 2px;
       }
@@ -220,12 +224,15 @@
       border-top: 1px solid var(--ion-color-is-mute-light);
       margin-bottom: 1em;
     }
+
     ion-item:last-child {
       margin-bottom: 0;
     }
+
     ion-item[lines="none"] {
       border-width: 0;
     }
+
     ion-grid {
       margin-right: -10px;
       margin-left: -10px;
@@ -269,6 +276,7 @@
     padding-bottom: 0;
     padding-top: 0;
     margin-bottom: 16px;
+
     ion-item {
       --detail-icon-opacity: var(--is-list-buttons-detail-icon-opacity);
     }
@@ -334,6 +342,7 @@
       margin-top: 5px;
       margin-left: 5px;
     }
+
     p {
       font-size: 0.7rem;
     }

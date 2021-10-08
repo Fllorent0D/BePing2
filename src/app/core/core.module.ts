@@ -17,6 +17,8 @@ import {TabtDatabaseInterceptor} from './interceptors/tabt-database-interceptor.
 import {TabtCredentialsInterceptor} from './interceptors/tabt-credentials-interceptor.service';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {BepingUserAgentInterceptor} from './interceptors/beping-user-agent.interceptor';
+import {DialogService} from '../shared/services/dialog-service.service';
+import {UserStateModel} from './store/user/user.state';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -27,10 +29,21 @@ export function HttpLoaderFactory(http: HttpClient) {
     imports: [
         CommonModule,
         ApiModule.forRoot({
-            rootUrl: environment.tabtUrl,
+            rootUrl: environment.tabtUrl
         }),
         SuperTabsModule.forRoot(),
-        NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService),
+        NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService, {
+            migrations: [
+                {
+                    version: 1,
+                    key: 'user',
+                    migrate: (state) => {
+                        delete state.weeklyElo;
+                        return state;
+                    }
+                }
+            ]
+        }),
         NgxsModule.forRoot(
             [], {
                 developmentMode: !environment.production,
@@ -72,7 +85,8 @@ export function HttpLoaderFactory(http: HttpClient) {
             provide: HTTP_INTERCEPTORS,
             useClass: BepingUserAgentInterceptor,
             multi: true
-        }
+        },
+        DialogService
     ]
 })
 export class CoreModule {

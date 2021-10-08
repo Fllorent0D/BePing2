@@ -28,6 +28,12 @@ export interface SettingsStateModel {
 })
 @Injectable()
 export class SettingsState implements NgxsOnInit {
+    constructor(
+        private readonly translateService: TranslateService,
+        private readonly analyticsService: AnalyticsService
+    ) {
+    }
+
     @Selector([SettingsState])
     static getCurrentLang(state: SettingsStateModel): LANG {
         return state.lang;
@@ -48,12 +54,6 @@ export class SettingsState implements NgxsOnInit {
     @Selector([SettingsState])
     static getCurrentTheme(state: SettingsStateModel): THEME {
         return state.theme;
-    }
-
-    constructor(
-        private readonly translateService: TranslateService,
-        private readonly analyticsService: AnalyticsService
-    ) {
     }
 
     ngxsOnInit({getState, dispatch}: StateContext<SettingsStateModel>): void {

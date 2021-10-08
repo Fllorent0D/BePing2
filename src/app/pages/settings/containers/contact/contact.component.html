@@ -12,14 +12,17 @@
     <ion-list>
         <ion-item class="ion-color-grey">
             <p>
-            <b>BePing n'est pas responsable de l'encodage des résultats de matchs ni des informations de clubs ou de tournois que vous pouvez trouver dans BePing.</b><br/><br/>
-                Si un changement dans ces informations est requis, le développeur de BePing ne saura pas vous aider.<br/><br/>
+                <b>BePing n'est pas responsable de l'encodage des résultats de matchs ni des informations de clubs ou de
+                    tournois que vous pouvez trouver dans BePing.</b><br/><br/>
+                Si un changement dans ces informations est requis, le développeur de BePing ne saura pas vous
+                aider.<br/><br/>
                 Merci de consulter votre secrétaire de club ou la fédération afin d'effectuer les changements adéquats.
-                Une fois les changements effectuer au niveau de la fédération, BePing sera automatiquement mis à jour.<br/>
+                Une fois les changements effectuer au niveau de la fédération, BePing sera automatiquement mis à
+                jour.<br/>
             </p>
         </ion-item>
-        <ion-item class="ion-color-grey" color="primary" (click)="sendEmail()">
-            <ion-icon slot="start" icon="mail-outline"></ion-icon>
+        <ion-item (click)="sendEmail()" class="ion-color-grey" color="primary">
+            <ion-icon icon="mail-outline" slot="start"></ion-icon>
             <ion-label>Envoyer un mail</ion-label>
         </ion-item>
     </ion-list>

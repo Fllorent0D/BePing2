@@ -1,10 +1,10 @@
 <ion-content>
     <ion-virtual-scroll [items]="teams" approxItemHeight="50px">
         <ion-item
-                class="large"
                 *virtualItem="let team"
-                detail
-                [routerLink]="['team', team.TeamId]">
+                [routerLink]="['team', team.TeamId]"
+                class="large"
+                detail>
             <ion-label>
                 <h2>{{club.Name}} {{team.Team}}</h2>
                 <p>{{team.DivisionName}}</p>

@@ -9,11 +9,12 @@ import {VenueEntry} from '../../../../core/api/models/venue-entry';
 import {GeocoderService} from '../../../../core/services/geocoding/geocoding.service';
 import {OSMAddress} from '../../../../core/models/osm/osm-search.model';
 import {Level} from '../../../../core/models/level';
-import {IonRouterOutlet, ModalController, ToastController} from '@ionic/angular';
+import {IonRouterOutlet, ModalController} from '@ionic/angular';
 import {InAppBrowserService} from '../../../../core/services/browser/in-app-browser.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {StartNavigationService} from '../../../../core/services/start-navigation.service';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
+import {DialogService} from '../../../../shared/services/dialog-service.service';
 
 @Component({
     selector: 'beping-tournament-detail-page',
@@ -45,7 +46,7 @@ export class TournamentDetailPageComponent implements OnInit {
         private readonly inAppBrowser: InAppBrowserService,
         private readonly tabNavigate: TabsNavigationService,
         private readonly navigation: StartNavigationService,
-        private readonly toastrService: ToastController,
+        private readonly dialogService: DialogService,
         private readonly analyticsService: AnalyticsService
     ) {
     }
@@ -79,10 +80,10 @@ export class TournamentDetailPageComponent implements OnInit {
         ).subscribe();
     }
 
-    onMapReady(map: Map) {
-        this.map = map;
+    onMapReady(leafletMap: Map) {
+        this.map = leafletMap;
         setTimeout(() => {
-            map.invalidateSize();
+            leafletMap.invalidateSize();
         }, 0);
     }
 
@@ -112,12 +113,11 @@ export class TournamentDetailPageComponent implements OnInit {
                 this.navigation.navigateToOSMAddress(this.osmAddress);
             }
         } catch (e) {
-            const toast = await this.toastrService.create({
+            this.dialogService.showToast({
                 message: 'Impossible to find coordinates',
                 color: 'danger',
                 duration: 5000
             });
-            toast.present();
         }
 
     }

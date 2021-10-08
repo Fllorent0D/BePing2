@@ -24,17 +24,16 @@ const defaultState: TabTStateModel = {
 })
 export class TabTState {
 
-    @Selector([TabTState])
-    static isLoggedIn(state: TabTStateModel): boolean {
-        return !!state.account;
-    }
-
     constructor(
         private readonly testService: HealthService,
         private readonly analyticsService: AnalyticsService
     ) {
     }
 
+    @Selector([TabTState])
+    static isLoggedIn(state: TabTStateModel): boolean {
+        return !!state.account;
+    }
 
     @Action(Login)
     login({dispatch, patchState}: StateContext<TabTStateModel>, action: Login) {

@@ -25,6 +25,7 @@ export { TournamentEntry } from './models/tournament-entry';
 export { RegisterTournament } from './models/register-tournament';
 export { SeasonEntry } from './models/season-entry';
 export { WeeklyElo } from './models/weekly-elo';
+export { WeeklyNumericRanking } from './models/weekly-numeric-ranking';
 export { MatchSystemEntry } from './models/match-system-entry';
 export { TestOutput } from './models/test-output';
 export { InternalIdentifiersDto } from './models/internal-identifiers-dto';

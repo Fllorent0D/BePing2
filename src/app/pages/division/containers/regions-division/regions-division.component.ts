@@ -8,7 +8,7 @@ import {DivisionEntry} from '../../../../core/api/models/division-entry';
 import {Observable} from 'rxjs';
 import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interceptor.service';
 import {SettingsState} from '../../../../core/store/settings';
-import {DialogService} from '../../../../core/services/dialog-service.service';
+import {DialogService} from '../../../../shared/services/dialog-service.service';
 
 @Component({
     selector: 'beping-regions-division',

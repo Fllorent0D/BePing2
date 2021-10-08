@@ -2,8 +2,8 @@ import {Component, Input, OnInit, Optional} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {LANG} from '../../../../core/models/langs';
 import {SettingsState} from '../../../../core/store/settings';
-import {Select, Store} from '@ngxs/store';
-import {Observable, ReplaySubject} from 'rxjs';
+import {Store} from '@ngxs/store';
+import {ReplaySubject} from 'rxjs';
 
 @Component({
     selector: 'beping-privacy',

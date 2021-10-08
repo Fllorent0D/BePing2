@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {from, Observable} from 'rxjs';
 import {StorageService} from './storage.service';
-import {StorageEngine} from '@ngxs/storage-plugin';
 import {AsyncStorageEngine} from '@ngxs-labs/async-storage-plugin';
 
 @Injectable({

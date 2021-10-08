@@ -1,4 +1,4 @@
-<ion-header >
+<ion-header>
     <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button [text]="'BACK'|translate"></ion-back-button>
@@ -9,13 +9,13 @@
 <ion-content>
     <ng-container *ngIf="match$ | async as match">
         <beping-team-match-score
-                [match]="match"
-                (homeTeamClicked)="navigateToTeamPage(match.HomeClub, match.HomeTeam)"
                 (awayTeamClicked)="navigateToTeamPage(match.AwayClub, match.AwayTeam)"
+                (homeTeamClicked)="navigateToTeamPage(match.HomeClub, match.HomeTeam)"
+                [match]="match"
         ></beping-team-match-score>
         <beping-team-match-player-list
-                [match]="match"
                 (playerClicked)="navigateToPlayer($event)"
+                [match]="match"
         ></beping-team-match-player-list>
         <beping-individual-matches-list [match]="match"></beping-individual-matches-list>
     </ng-container>

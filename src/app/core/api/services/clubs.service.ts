@@ -29,7 +29,7 @@ export class ClubsService extends BaseService {
   /**
    * Path part for operation findAllClubs
    */
-  static readonly FindAllClubsPath = '/api/clubs';
+  static readonly FindAllClubsPath = '/v1/clubs';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -130,7 +130,7 @@ export class ClubsService extends BaseService {
   /**
    * Path part for operation findClubById
    */
-  static readonly FindClubByIdPath = '/api/clubs/{clubIndex}';
+  static readonly FindClubByIdPath = '/v1/clubs/{clubIndex}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -231,7 +231,7 @@ export class ClubsService extends BaseService {
   /**
    * Path part for operation findClubMembers
    */
-  static readonly FindClubMembersPath = '/api/clubs/{clubIndex}/members';
+  static readonly FindClubMembersPath = '/v1/clubs/{clubIndex}/members';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -353,7 +353,7 @@ export class ClubsService extends BaseService {
   /**
    * Path part for operation findClubTeams
    */
-  static readonly FindClubTeamsPath = '/api/clubs/{clubIndex}/teams';
+  static readonly FindClubTeamsPath = '/v1/clubs/{clubIndex}/teams';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -457,7 +457,7 @@ export class ClubsService extends BaseService {
   /**
    * Path part for operation findClubTeamsMemberRanking
    */
-  static readonly FindClubTeamsMemberRankingPath = '/api/clubs/{clubIndex}/teams/{teamId}/ranking';
+  static readonly FindClubTeamsMemberRankingPath = '/v1/clubs/{clubIndex}/teams/{teamId}/ranking';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -564,7 +564,7 @@ export class ClubsService extends BaseService {
   /**
    * Path part for operation findClubVenues
    */
-  static readonly FindClubVenuesPath = '/api/clubs/{clubIndex}/venues';
+  static readonly FindClubVenuesPath = '/v1/clubs/{clubIndex}/venues';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -666,17 +666,17 @@ export class ClubsService extends BaseService {
   }
 
   /**
-   * Path part for operation findDivisionMembers_1
+   * Path part for operation findMembersRanking
    */
-  static readonly FindDivisionMembers_1Path = '/api/clubs/{clubIndex}/members/ranking';
+  static readonly FindMembersRankingPath = '/v1/clubs/{clubIndex}/members/ranking';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findDivisionMembers_1()` instead.
+   * To access only the response body, use `findMembersRanking()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findDivisionMembers_1$Response(params: {
+  findMembersRanking$Response(params: {
 
     /**
      * Account to do a request
@@ -706,7 +706,7 @@ export class ClubsService extends BaseService {
     season?: number;
   }): Observable<StrictHttpResponse<Array<MemberResults>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, ClubsService.FindDivisionMembers_1Path, 'get');
+    const rb = new RequestBuilder(this.rootUrl, ClubsService.FindMembersRankingPath, 'get');
     if (params) {
       rb.header('X-Tabt-Account', params['X-Tabt-Account'], {});
       rb.header('X-Tabt-Password', params['X-Tabt-Password'], {});
@@ -730,11 +730,11 @@ export class ClubsService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `findDivisionMembers_1$Response()` instead.
+   * To access the full response (for headers, for example), `findMembersRanking$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  findDivisionMembers_1(params: {
+  findMembersRanking(params: {
 
     /**
      * Account to do a request
@@ -764,7 +764,7 @@ export class ClubsService extends BaseService {
     season?: number;
   }): Observable<Array<MemberResults>> {
 
-    return this.findDivisionMembers_1$Response(params).pipe(
+    return this.findMembersRanking$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberResults>>) => r.body as Array<MemberResults>)
     );
   }

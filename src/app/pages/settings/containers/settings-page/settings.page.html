@@ -22,26 +22,26 @@
     <beping-section-title [title]="'USER' | translate"></beping-section-title>
 
     <ion-list>
-        <ion-item detail (click)="changeMember()">
+        <ion-item (click)="changeMember()" detail>
             <ion-label>
                 {{'SETTINGS.ACTIVE_USER' | translate}}
             </ion-label>
-            <ion-label slot="end" class="ion-text-end">{{playerName$|async|titlecase}}</ion-label>
+            <ion-label class="ion-text-end" slot="end">{{playerName$|async|titlecase}}</ion-label>
         </ion-item>
         <ion-item *ngIf="(playerCategories$ | async)?.length > 1">
             <ion-label>{{'SETTINGS.DISPLAY_RANKING' | translate}}</ion-label>
-            <ion-select placeholder="Select One" [interface]="'popover'" [value]="mainCategory$|async"
-                        (ionChange)="mainCategoryChanged($event)">
+            <ion-select (ionChange)="mainCategoryChanged($event)" [interface]="'popover'" [value]="mainCategory$|async"
+                        placeholder="Select One">
                 <ion-select-option
-                        [value]="category"
-                        *ngFor="let category of playerCategories$|async">{{'PLAYER_CATEGORY.' + category | translate}}
+                        *ngFor="let category of playerCategories$|async"
+                        [value]="category">{{'PLAYER_CATEGORY.' + category | translate}}
                 </ion-select-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label>{{'SETTINGS.CHANGE_LANGUAGE' | translate}} {{currentLang$|async}}</ion-label>
-            <ion-select placeholder="Select One" [value]="currentLang$|async" [interface]="'popover'"
-                        (ionChange)="changeLang($event )">
+            <ion-select (ionChange)="changeLang($event )" [interface]="'popover'" [value]="currentLang$|async"
+                        placeholder="Select One">
                 <ion-select-option value="fr">{{'SETTINGS.FRENCH' | translate}}</ion-select-option>
                 <ion-select-option value="nl">{{'SETTINGS.DUTCH' | translate}}</ion-select-option>
                 <ion-select-option value="en">{{'SETTINGS.ENGLISH' | translate}}</ion-select-option>
@@ -52,11 +52,11 @@
     <ng-container *ngIf="isLoggedIn|async; else anonymous">
         <ion-list class="ion-margin-bottom">
             <ion-item>
-                <ion-icon icon="checkmark-circle" color="success" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap"
-                           *ngIf="(account$|async) as account">{{'SETTINGS.YOU_ARE_CONNECTED' | translate:{username: account} }}</ion-label>
+                <ion-icon color="success" icon="checkmark-circle" slot="start"></ion-icon>
+                <ion-label *ngIf="(account$|async) as account"
+                           class="ion-text-wrap">{{'SETTINGS.YOU_ARE_CONNECTED' | translate:{username: account} }}</ion-label>
             </ion-item>
-            <ion-item color="danger" (click)="logout()">
+            <ion-item (click)="logout()" color="danger">
                 <ion-icon icon="log-out-outline" slot="start"></ion-icon>
                 <ion-label class="ion-text-wrap">{{'SETTINGS.LOGOUT' |translate }}</ion-label>
             </ion-item>
@@ -65,11 +65,11 @@
 
     <ng-template #anonymous>
         <ion-list class="ion-margin-bottom">
-            <ion-item detail (click)="login()">
-                <ion-icon icon="link-outline" color="primary" slot="start"></ion-icon>
+            <ion-item (click)="login()" detail>
+                <ion-icon color="primary" icon="link-outline" slot="start"></ion-icon>
                 <ion-label class="ion-text-wrap">{{'SETTINGS.LOGIN' | translate}}</ion-label>
             </ion-item>
-            <ion-item detail (click)="register()">
+            <ion-item (click)="register()" detail>
                 <ion-icon icon="log-in-outline" slot="start"></ion-icon>
                 <ion-label class="ion-text-wrap">{{'SETTINGS.REGISTER' | translate}}</ion-label>
             </ion-item>
@@ -77,7 +77,7 @@
     </ng-template>
     <beping-section-title [title]="'SETTINGS.ADVANCED'|translate"></beping-section-title>
     <ion-list>
-        <ion-item detail (click)="resetCache()" [disabled]="!isOnline">
+        <ion-item (click)="resetCache()" [disabled]="!isOnline" detail>
             <ion-label>
                 {{'SETTINGS.REFRESH_BEPING' | translate}}
             </ion-label>
@@ -117,17 +117,17 @@
         --->
     <beping-section-title [title]="'SETTINGS.MORE_INFO'|translate"></beping-section-title>
     <ion-list>
-        <ion-item detail (click)="contact()">
+        <ion-item (click)="contact()" detail>
             <ion-label>
                 {{'SETTINGS.CONTACT_DEVELOPER' | translate}}
             </ion-label>
         </ion-item>
-        <ion-item detail (click)="cgu()">
+        <ion-item (click)="cgu()" detail>
             <ion-label>
                 {{'SETTINGS.TERMS_AND_CONDITIONS' | translate}}
             </ion-label>
         </ion-item>
-        <ion-item detail (click)="privacy()">
+        <ion-item (click)="privacy()" detail>
             <ion-label>
                 {{'SETTINGS.PRIVACY_POLICY' | translate}}
             </ion-label>

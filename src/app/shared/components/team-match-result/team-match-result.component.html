@@ -1,33 +1,33 @@
-<ion-item class="large" (click)="navigateToDetails()">
+<ion-item (click)="navigateToDetails()" class="large">
     <ion-grid class="ion-no-padding">
 
-        <ion-row class="ion-align-items-center ion-no-padding"  [class.no-score]="!match.Score">
-            <ion-col class="text-highlight ion-no-padding"
-                     [class.is-color-danger]="isHomeFF">
+        <ion-row [class.no-score]="!match.Score" class="ion-align-items-center ion-no-padding">
+            <ion-col [class.is-color-danger]="isHomeFF"
+                     class="text-highlight ion-no-padding">
                 <ion-text>{{match.HomeTeam}}</ion-text>
             </ion-col>
-            <ion-col class="ion-text-center ion-no-padding" *ngIf="match.Score">
+            <ion-col *ngIf="match.Score" class="ion-text-center ion-no-padding">
                 <ion-text *ngIf="!match.IsAwayForfeited && !match.IsHomeForfeited">
                     <h1 class="ion-no-margin is-color-primary score">{{match.Score}}</h1>
                 </ion-text>
                 <ng-container *ngIf="isAwayFF || isHomeFF">
-                    <ion-text color="grey" *ngIf="isHomeFG || isAwayFG">
+                    <ion-text *ngIf="isHomeFG || isAwayFG" color="grey">
                         <h1 class="ion-no-margin">FG</h1>
                     </ion-text>
-                    <ion-text color="grey" *ngIf="(isAwayFF || isHomeFF) && (!isAwayFG && !isHomeFG)">
+                    <ion-text *ngIf="(isAwayFF || isHomeFF) && (!isAwayFG && !isHomeFG)" color="grey">
                         <h1 class="ion-no-margin">FF</h1>
                     </ion-text>
                 </ng-container>
-                <ion-text color="grey" class="small-date">{{match.Date | localizedDate:'dd MMM'}}</ion-text>
+                <ion-text class="small-date" color="grey">{{match.Date | localizedDate:'dd MMM'}}</ion-text>
             </ion-col>
-            <ion-col class="ion-text-center ion-no-padding " *ngIf="!match.Score">
+            <ion-col *ngIf="!match.Score" class="ion-text-center ion-no-padding ">
                 <ion-text class="is-color-pink">
-                    <h2 class="ion-no-margin date" *ngIf="isTablet">{{match.Date | localizedDate:'dd MMM'}}</h2>
-                    <h2 class="ion-no-margin date" *ngIf="!isTablet">{{match.Date | localizedDate:'dd/MM'}}</h2>
+                    <h2 *ngIf="isTablet" class="ion-no-margin date">{{match.Date | localizedDate:'dd MMM'}}</h2>
+                    <h2 *ngIf="!isTablet" class="ion-no-margin date">{{match.Date | localizedDate:'dd/MM'}}</h2>
                     <ion-text class="ion-no-margin">{{matchTime}}</ion-text>
                 </ion-text>
             </ion-col>
-            <ion-col class="ion-text-end text-highlight ion-no-padding" [class.is-color-danger]="isAwayFF">
+            <ion-col [class.is-color-danger]="isAwayFF" class="ion-text-end text-highlight ion-no-padding">
                 <ion-text>{{match.AwayTeam}}</ion-text>
             </ion-col>
         </ion-row>

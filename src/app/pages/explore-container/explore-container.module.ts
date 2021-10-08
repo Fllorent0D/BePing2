@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
 
 import {ExploreContainerComponent} from './explore-container.component';
 import {Tab1PageRoutingModule} from './explorer-container.module';

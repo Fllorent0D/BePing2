@@ -27,7 +27,7 @@ export class TournamentsService extends BaseService {
   /**
    * Path part for operation findAllTournaments
    */
-  static readonly FindAllTournamentsPath = '/api/tournaments';
+  static readonly FindAllTournamentsPath = '/v1/tournaments';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -125,7 +125,7 @@ export class TournamentsService extends BaseService {
   /**
    * Path part for operation findTournamentById
    */
-  static readonly FindTournamentByIdPath = '/api/tournaments/{tournamentId}';
+  static readonly FindTournamentByIdPath = '/v1/tournaments/{tournamentId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -232,7 +232,7 @@ export class TournamentsService extends BaseService {
   /**
    * Path part for operation findSeriesByTournament
    */
-  static readonly FindSeriesByTournamentPath = '/api/tournaments/{tournamentId}/series';
+  static readonly FindSeriesByTournamentPath = '/v1/tournaments/{tournamentId}/series';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -333,7 +333,7 @@ export class TournamentsService extends BaseService {
   /**
    * Path part for operation registerToSerie
    */
-  static readonly RegisterToSeriePath = '/api/tournaments/{tournamentId}/serie/{serieId}/register';
+  static readonly RegisterToSeriePath = '/v1/tournaments/{tournamentId}/serie/{serieId}/register';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

@@ -1,7 +1,7 @@
 <cdk-virtual-scroll-viewport
         itemSize="90"
-        minBufferPx="900"
-        maxBufferPx="1350">
-  <beping-team-match-result [match]="match" *cdkVirtualFor="let match of matches">
-  </beping-team-match-result>
+        maxBufferPx="1350"
+        minBufferPx="900">
+    <beping-team-match-result *cdkVirtualFor="let match of matches" [match]="match">
+    </beping-team-match-result>
 </cdk-virtual-scroll-viewport>

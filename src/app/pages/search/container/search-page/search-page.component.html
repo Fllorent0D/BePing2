@@ -14,10 +14,10 @@
                 {{ 'COMMON.CLUBS' | translate }}
             </ion-list-header>
             <beping-club-item
+                    (clubClicked)="clubClicked($event)"
                     *ngFor="let club of clubs.results"
                     [club]="club"
                     [detail]="true"
-                    (clubClicked)="clubClicked($event)"
             ></beping-club-item>
         </ion-list>
     </ng-container>
@@ -27,7 +27,7 @@
             <ion-list-header>
                 {{ 'COMMON.DIVISIONS'| translate }}
             </ion-list-header>
-            <ion-item detail *ngFor="let div of divisions.results" (click)="divisionClicked(div)">
+            <ion-item (click)="divisionClicked(div)" *ngFor="let div of divisions.results" detail>
                 <ion-label class="ion-text-wrap">
                     <h3>{{div.DivisionName.split('-')[0] | titlecase}}</h3>
                     <p>{{'DIVISION_LEVEL.' + div.Level | translate}}
@@ -43,10 +43,10 @@
                 {{ 'COMMON.PLAYERS'| translate }}
             </ion-list-header>
             <beping-member-item
-                    [member]="player"
+                    (memberClicked)="memberClicked($event)"
                     *ngFor="let player of membersSearchResults.results"
                     [detail]="true"
-                    (memberClicked)="memberClicked($event)"
+                    [member]="player"
             ></beping-member-item>
         </ion-list>
         <ion-list *ngIf="membersSearchResults.isLoading">

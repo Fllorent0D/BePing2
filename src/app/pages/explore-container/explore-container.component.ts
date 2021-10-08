@@ -5,7 +5,7 @@ import {Observable, ReplaySubject} from 'rxjs';
 import {MemberEntry} from '../../core/api/models/member-entry';
 import {UserState} from '../../core/store/user/user.state';
 import {shareReplay, switchMap, take, takeUntil, tap} from 'rxjs/operators';
-import {IonRouterOutlet, LoadingController, ModalController, ToastController} from '@ionic/angular';
+import {IonRouterOutlet, LoadingController, ModalController} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
 import {ModalBaseComponent} from '../modals/modal-base/modal-base.component';
@@ -23,6 +23,8 @@ import {HapticsService} from '../../core/services/haptics.service';
 import {ImpactStyle} from '@capacitor/haptics';
 import {AnalyticsService} from '../../core/services/firebase/analytics.service';
 import {OnDestroyHook} from '../../core/on-destroy-hook';
+import {DialogService} from '../../shared/services/dialog-service.service';
+import {WeeklyNumericRanking} from '../../core/api/models/weekly-numeric-ranking';
 
 @Component({
     selector: 'beping-explore-container',
@@ -37,14 +39,14 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
     latestMatches$: Observable<TeamMatchesEntry[]>;
 
     @Select(TabTState.isLoggedIn) isLoggedIn$: Observable<boolean>;
-    @Select(UserState.weeklyEloPoint) weeklyElos$: Observable<WeeklyElo[]>;
+    @Select(UserState.numericRankings) numericRankings$: Observable<WeeklyNumericRanking[]>;
     @Select(UserState.isLoading) isLoading$: Observable<boolean>;
     @Select(SettingsState.getCurrentDatabase) database: Observable<TABT_DATABASES>;
     TABT_DATABASES = TABT_DATABASES;
 
     constructor(
         private store: Store,
-        private toastrCtrl: ToastController,
+        private readonly dialogService: DialogService,
         private readonly modalCtrl: ModalController,
         private readonly ionRouter: IonRouterOutlet,
         private readonly translateService: TranslateService,
@@ -82,13 +84,12 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
         this.currentCategory$.next(category);
         const catTranslation = this.translateService.instant('PLAYER_CATEGORY.' + category);
         const catChangedTranslation = this.translateService.instant('DASHBOARD.PLAYER_CATEGORY_CHANGED', {category: catTranslation});
-        const toast = await this.toastrCtrl.create({
+        this.dialogService.showToast({
             message: catChangedTranslation,
             position: 'top',
             color: 'primary',
             duration: 3000
         });
-        toast.present();
     }
 
     getIcon(category: PLAYER_CATEGORY) {
@@ -106,7 +107,7 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
     async openSettings() {
         this.analyticsService.logEvent('open_settings');
 
-        const modal = await this.modalCtrl.create({
+        this.dialogService.showModal({
             component: ModalBaseComponent,
             swipeToClose: true,
             componentProps: {
@@ -114,36 +115,33 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
             },
             presentingElement: this.ionRouter.nativeEl
         });
-        await modal.present();
     }
 
     async loginWithAFTT() {
         this.analyticsService.logEvent('login_cta');
 
-        const modal = await this.modalCtrl.create({
+        const modal = await this.dialogService.showModal({
             component: AfttLoginPage,
             swipeToClose: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
             componentProps: {}
         });
-        await modal.present();
 
         const result = await modal.onWillDismiss();
         if (result?.data?.logged) {
-            const toast = await this.toastrCtrl.create({
+            await this.dialogService.showToast({
                 message: 'Votre classement arrivera sous peu',
                 position: 'top',
                 color: 'success',
                 duration: 5000
             });
-            toast.present();
         }
     }
 
     async chooseMainMember() {
         this.analyticsService.logEvent('open_choose_main_member');
 
-        const modal = await this.modalCtrl.create({
+        await this.dialogService.showModal({
             component: ModalBaseComponent,
             swipeToClose: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
@@ -151,9 +149,6 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
                 rootPage: ChooseMainMemberClubComponent
             }
         });
-        await modal.present();
-
-        await modal.onWillDismiss();
     }
 
     refresh(event: CustomEvent) {

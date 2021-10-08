@@ -25,7 +25,7 @@ export class SeasonsService extends BaseService {
   /**
    * Path part for operation findAllSeason
    */
-  static readonly FindAllSeasonPath = '/api/seasons';
+  static readonly FindAllSeasonPath = '/v1/seasons';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -68,7 +68,7 @@ export class SeasonsService extends BaseService {
   /**
    * Path part for operation findCurrentSeason
    */
-  static readonly FindCurrentSeasonPath = '/api/seasons/current';
+  static readonly FindCurrentSeasonPath = '/v1/seasons/current';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

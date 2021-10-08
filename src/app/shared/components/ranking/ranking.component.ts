@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'beping-ranking',
-  templateUrl: './ranking.component.html',
-  styleUrls: ['./ranking.component.scss'],
+    selector: 'beping-ranking',
+    templateUrl: './ranking.component.html',
+    styleUrls: ['./ranking.component.scss']
 })
 export class RankingComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+    }
 
 }

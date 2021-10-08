@@ -1,4 +1,4 @@
-<beping-card [padding]="false" [marging]="false" (click)="navigateToDetails()">
+<beping-card (click)="navigateToDetails()" [marging]="false" [padding]="false">
     <ion-grid>
         <ion-row class="ion-align-items-center">
             <ion-col class="ion-text-center border-right" size="2">
@@ -14,12 +14,13 @@
                         - {{result.CompetitionType === 'C' ? result.MatchId : result.TournamentName}}</ion-text>
                 </ion-text>
             </ion-col>
-            <ion-col class="ion-text-center ion-no-padding" [class.is-color-primary]="result.SetFor === 3"
-                     [class.is-color-danger]="result.SetAgainst === 3" size="3">
+            <ion-col [class.is-color-danger]="result.SetAgainst === 3" [class.is-color-primary]="result.SetFor === 3"
+                     class="ion-text-center ion-no-padding" size="3">
                 <ion-text class="ion-no-margin small" style="font-size: 1.3em">{{result.SetFor}}
                     - {{result.SetAgainst}}</ion-text>
                 <br>
-                <ion-text class="ion-text-wrap">{{(result.SetFor === 3 ? 'COMMON.WIN' : 'COMMON.DEFEAT')|translate}}</ion-text>
+                <ion-text
+                        class="ion-text-wrap">{{(result.SetFor === 3 ? 'COMMON.WIN' : 'COMMON.DEFEAT')|translate}}</ion-text>
             </ion-col>
         </ion-row>
 

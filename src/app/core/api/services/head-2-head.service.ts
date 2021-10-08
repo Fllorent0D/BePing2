@@ -24,7 +24,7 @@ export class Head2HeadService extends BaseService {
   /**
    * Path part for operation findHead2HeadMatches
    */
-  static readonly FindHead2HeadMatchesPath = '/api/head2head/{playerUniqueIndex}/{opponentUniqueIndex}';
+  static readonly FindHead2HeadMatchesPath = '/v1/head2head/{playerUniqueIndex}/{opponentUniqueIndex}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

@@ -25,22 +25,21 @@ export interface TournamentsFilter {
     styleUrls: ['./tournaments-page.component.scss']
 })
 export class TournamentsPageComponent implements OnInit {
+    tournaments$: Observable<TournamentByMonth[]>;
+    tournamentsFiltered$: Observable<TournamentByMonth[]>;
     // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     private defaultFilter: TournamentsFilter = {
         levelsToDisplay: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
         showPastTournaments: false
     };
-    tournaments$: Observable<TournamentByMonth[]>;
     tournamentsFilter$: BehaviorSubject<TournamentsFilter> = new BehaviorSubject<TournamentsFilter>(this.defaultFilter);
-
-    tournamentsFiltered$: Observable<TournamentByMonth[]>;
 
     constructor(
         private readonly tournamentService: TournamentsService,
         private readonly popoverController: PopoverController,
         private readonly modalCtrl: ModalController,
         private readonly tabNavigator: TabsNavigationService,
-        private readonly ionRouterOutlet: IonRouterOutlet,
+        private readonly ionRouterOutlet: IonRouterOutlet
     ) {
     }
 

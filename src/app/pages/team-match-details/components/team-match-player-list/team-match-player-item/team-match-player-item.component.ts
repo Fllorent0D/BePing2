@@ -11,6 +11,7 @@ export class TeamMatchPlayerItemComponent implements OnInit {
 
     @Input() player: Player;
     @Output() playerClicked: EventEmitter<void> = new EventEmitter<void>();
+
     constructor() {
     }
 

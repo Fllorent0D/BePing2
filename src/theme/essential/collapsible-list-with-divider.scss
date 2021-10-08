@@ -10,16 +10,16 @@
         }
       }
 
-        span {
-          font-size: 0.9rem;
-          font-weight: 400;
-          color: var(--ion-color-is-text-dark);
-        }
+      span {
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--ion-color-is-text-dark);
+      }
 
-        span:first-child {
-          font-weight: 300;
-          color: var(--ion-color-is-mute-normal);
-        }
+      span:first-child {
+        font-weight: 300;
+        color: var(--ion-color-is-mute-normal);
+      }
 
 
       ion-col:not(:first-child) {

@@ -26,7 +26,7 @@ import {App} from '@capacitor/app';
 import {DivisionsState, GetDivisions} from '../../../../core/store/divisions';
 import {ClubsState, GetClubs} from '../../../../core/store/clubs';
 import {Reset} from '@ngxs-labs/entity-state';
-import {DialogService} from '../../../../core/services/dialog-service.service';
+import {DialogService} from '../../../../shared/services/dialog-service.service';
 import {Network} from '@capacitor/network';
 
 @Component({

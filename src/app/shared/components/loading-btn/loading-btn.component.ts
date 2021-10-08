@@ -1,5 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {createAnimation, Animation, IonIcon} from '@ionic/angular';
+import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'beping-loading-btn',

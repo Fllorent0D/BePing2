@@ -12,7 +12,30 @@
     <beping-member-victory-chart
             [memberResultEntries]="currentMemberEntry.ResultEntries">
     </beping-member-victory-chart>
-    <beping-weekly-elo *ngIf="weeklyElo" [weeklyElo]="weeklyElo"></beping-weekly-elo>
+
+    <ng-container *ngIf="numericRankings">
+        <ion-row class="ion-no-padding">
+            <ion-col class="ion-no-padding" size-md="6" size-xs="12">
+                <beping-weekly-elo *ngIf="numericRankings"
+                                   [numericRankings]="numericRankings"
+                                   [prop]="'elo'"
+                                   [label]="'ELO'"
+                                   [color]="'#5B8BF7'"
+
+                ></beping-weekly-elo>
+            </ion-col>
+            <ion-col class="ion-no-padding" size-md="6" size-xs="12">
+                <beping-weekly-elo *ngIf="numericRankings"
+                                   [numericRankings]="numericRankings"
+                                   [prop]="'bel'"
+                                   [label]="'Numérique'"
+                                   [color]="'#ae5bf7'"
+
+                ></beping-weekly-elo>
+            </ion-col>
+        </ion-row>
+    </ng-container>
+
     <beping-tie-break-played
             [memberResultEntries]="currentMemberEntry.ResultEntries">
     </beping-tie-break-played>
@@ -22,5 +45,5 @@
     <beping-member-summary-per-ranking
             [memberResultEntries]="currentMemberEntry.ResultEntries">
     </beping-member-summary-per-ranking>
-  </ng-container>
+</ng-container>
 

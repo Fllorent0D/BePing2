@@ -12,7 +12,7 @@
 <ion-content fullscreen="true">
     <ng-container *ngIf="members$ | async as members; else loader">
         <ion-virtual-scroll [items]="members">
-            <ion-item *virtualItem="let member" (click)="memberClicked(member)">
+            <ion-item (click)="memberClicked(member)" *virtualItem="let member">
                 <ion-label>{{member.FirstName | titlecase}} {{member.LastName | titlecase}}</ion-label>
                 <ion-note slot="end">{{member.Ranking}}</ion-note>
             </ion-item>
@@ -21,7 +21,7 @@
     <ng-template #loader>
         <ion-item *ngFor="let t of skeletonRows">
             <ion-label>
-                <ion-skeleton-text animated [ngStyle]="{width: t+'%'}"></ion-skeleton-text>
+                <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated></ion-skeleton-text>
             </ion-label>
         </ion-item>
     </ng-template>

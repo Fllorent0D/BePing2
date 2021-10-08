@@ -8,31 +8,31 @@
         </ion-title>
         <ion-buttons slot="end">
             <beping-favorite-btn
-                    [enabled]="isFavorite$|async"
                     (clicked)="toggleFavorite()"
+                    [enabled]="isFavorite$|async"
             ></beping-favorite-btn>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-bottom">
     <beping-player-content
-            [weeklyElo]="weeklyElo$|async"
             [categoriesAvailable]="categoriesAvailable$|async"
             [currentCategory]="currentCategory$|async"
+            [currentMemberEntry]="currentMemberEntry$|async"
             [latestMatches]="latestMatches$|async"
-            [currentMemberEntry]="currentMemberEntry$|async">
+            [numericRankings]="numericRankings$|async">
     </beping-player-content>
     <ng-container *ngIf="categoriesAvailable$|async as playercategories">
-        <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="playercategories.length > 1">
+        <ion-fab *ngIf="playercategories.length > 1" horizontal="end" slot="fixed" vertical="bottom">
             <ion-fab-button>
                 <ion-icon [name]="getIcon(currentCategory$|async)"></ion-icon>
             </ion-fab-button>
             <ion-fab-list side="top">
                 <ion-fab-button
-                        [attr.data-desc]="category | titlecase"
-                        [disabled]="category === (currentCategory$|async)"
+                        (click)="categoryClicked(category)"
                         *ngFor="let category of playercategories"
-                        (click)="categoryClicked(category)">
+                        [attr.data-desc]="category | titlecase"
+                        [disabled]="category === (currentCategory$|async)">
                     <ion-icon [name]="getIcon(category)"></ion-icon>
                 </ion-fab-button>
             </ion-fab-list>

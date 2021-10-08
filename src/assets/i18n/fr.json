@@ -9,18 +9,18 @@
     "SETTINGS": "Paramètres"
   },
   "APP_RATING": {
-   "TITLE": "Notez %@ ?",
-   "MESSAGE": "Si vous aimez utiliser %@, n’oubliez pas de voter sur l’App Store. Cela ne prend qu’une minute. Merci d’avance pour votre soutien !",
-   "CANCEL_BUTTON_LABEL": "Non merci",
-   "LATER_BUTTON_LABEL": "Me le rappeler ultérieurement",
-   "RATE_BUTTON_LABEL": "Noter maintenant",
-   "YES_BUTTON_LABEL": "Oui",
-   "NO_BUTTON_LABEL": "Pas vraiment",
-   "APPRATE_PROMPT_TITLE": "Aimez-vous utiliser %@ ?",
-   "FEEDBACK_PROMPT_TITLE": "Avez-vous envie de nous envoyer un commentaire ?"
+    "TITLE": "Notez %@ ?",
+    "MESSAGE": "Si vous aimez utiliser %@, n’oubliez pas de voter sur l’App Store. Cela ne prend qu’une minute. Merci d’avance pour votre soutien !",
+    "CANCEL_BUTTON_LABEL": "Non merci",
+    "LATER_BUTTON_LABEL": "Me le rappeler ultérieurement",
+    "RATE_BUTTON_LABEL": "Noter maintenant",
+    "YES_BUTTON_LABEL": "Oui",
+    "NO_BUTTON_LABEL": "Pas vraiment",
+    "APPRATE_PROMPT_TITLE": "Aimez-vous utiliser %@ ?",
+    "FEEDBACK_PROMPT_TITLE": "Avez-vous envie de nous envoyer un commentaire ?"
   },
   "COMMON": {
-    "CALENDAR" : "Calendrier",
+    "CALENDAR": "Calendrier",
     "PRESS_ONCE_MORE_TO_QUIT": "Appuyer encore une fois pour quitter",
     "CANCEL": "Annuler",
     "OK": "Ok",
@@ -54,8 +54,8 @@
     "HOME_TEAM": "Visité",
     "AWAY_TEAM": "Visiteur",
     "AVAILABLE_SOON": "Disponible bientôt",
-    "NO_INFO" : "Pas d'informations",
-    "DATE" : "Date"
+    "NO_INFO": "Pas d'informations",
+    "DATE": "Date"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Se connecter avec resultats.aftt.be",
@@ -73,8 +73,8 @@
     "DECISIVE_SETS_WON": "Belles gagnées",
     "DECISIVE_SETS_LOST": "Belles perdues",
     "SCORE_DISTRIBUTION": "Répartition des scores",
-    "ELO_POINT" : "Points ELO",
-    "LATEST_MATCHES" : "Derniers matchs",
+    "ELO_POINT": "Points ELO",
+    "LATEST_MATCHES": "Derniers matchs",
     "PLAYER_CATEGORY_CHANGED": "Catégorie {{category}} chargée",
     "SEE_DETAILS": "Afficher détails"
   },
@@ -82,15 +82,15 @@
     "MATCH_ENTRY_SHEET": "Feuille de match",
     "STATS_ON_TEAM": "Statistiques sur {{team}}",
     "WO": "WO",
-    "MATCH_DETAILS" : "Détails du match",
-    "MATCH_NUMBER" : "Numéro du match",
-    "HELP_MATCH_SHEET" : "Aide pour feuille de match",
-    "IMPOSSIBLE_TO_LOAD_TEAMS" : "Impossible de charger les listes de force"
+    "MATCH_DETAILS": "Détails du match",
+    "MATCH_NUMBER": "Numéro du match",
+    "HELP_MATCH_SHEET": "Aide pour feuille de match",
+    "IMPOSSIBLE_TO_LOAD_TEAMS": "Impossible de charger les listes de force"
   },
   "RESULTS_BY_DIVISION": {
     "RESULTS": "Résultats",
-    "LOADING_RESULTS" : "Chargement des résultats",
-    "IMPOSSIBLE_TO_LOAD" : "Impossible de charger les matchs",
+    "LOADING_RESULTS": "Chargement des résultats",
+    "IMPOSSIBLE_TO_LOAD": "Impossible de charger les matchs",
     "FAVORITES": {
       "FAVORITES": "Favoris",
       "ADD_TO_FAVORITES": "Ajouter aux favoris",
@@ -110,16 +110,16 @@
     "CANT_LOAD_CALENDAR": "Impossible de charger le calendrier",
     "CALENDAR_OF_CLUB": "Calendrier de {{club}}",
     "NO_INFO_AVAILABLE": "Aucune information disponible",
-    "DAYS":{
-      "MONDAY":"Lundi",
-      "TUESDAY":"Mardi",
-      "WEDNESDAY":"Mercredi",
-      "THURSDAY":"Jeudi",
-      "FRIDAY":"Vendredi",
-      "SATURDAY":"Samedi",
-      "SUNDAY":"Dimanche"
+    "DAYS": {
+      "MONDAY": "Lundi",
+      "TUESDAY": "Mardi",
+      "WEDNESDAY": "Mercredi",
+      "THURSDAY": "Jeudi",
+      "FRIDAY": "Vendredi",
+      "SATURDAY": "Samedi",
+      "SUNDAY": "Dimanche"
     },
-    "THIS_WEEK" : "Cette semaine"
+    "THIS_WEEK": "Cette semaine"
   },
   "CLUB_DETAILS": {
     "LIST_OF_STRENGTH": "Liste de force",
@@ -216,7 +216,7 @@
     "NAME_OR_INDEX": "Nom ou indice",
     "NAME_OR_AFFILIATE_INDEX": "Nom ou numéro d'affilié",
     "NO_RESULT": "Aucun résultat",
-    "CLUB_MAP" : "Carte des clubs",
+    "CLUB_MAP": "Carte des clubs",
     "SEARCH_EXPLANATION": "Vous pouvez chercher joueurs, divisions, clubs ou feuilles de match",
     "PLACEHOLDER": "Club, division, joueur, match"
   },
@@ -268,17 +268,17 @@
     "APPLY": "Appliquer",
     "RELOAD_DATA": "Recharger les données du profil",
     "CURRENT_SEASON": "Saison actuelle",
-    "SYNC_IN_PROGRESS" : "Synchronisation en cours...",
-    "SYNC_FINISH" : "Synchronisation terminée",
-    "CONNECT_TO_FEDERATION" : "Compte AFTT",
-    "USERNAME" : "Nom d'utilisateur",
-    "PASSWORD" : "Mot de passe",
-    "LOGIN" : "Se connecter",
-    "LOGOUT" : "Déconnexion",
-    "LOGIN_PASSWORD_INCORRECT" : "Votre identifiant ou mot de passe est incorrect",
-    "YOU_ARE_CONNECTED" : "Connecté en tant que {{username}}",
-    "SYNC_ERROR" : "Erreur de synchronisation",
-    "REGISTER" : "S'inscrire",
+    "SYNC_IN_PROGRESS": "Synchronisation en cours...",
+    "SYNC_FINISH": "Synchronisation terminée",
+    "CONNECT_TO_FEDERATION": "Compte AFTT",
+    "USERNAME": "Nom d'utilisateur",
+    "PASSWORD": "Mot de passe",
+    "LOGIN": "Se connecter",
+    "LOGOUT": "Déconnexion",
+    "LOGIN_PASSWORD_INCORRECT": "Votre identifiant ou mot de passe est incorrect",
+    "YOU_ARE_CONNECTED": "Connecté en tant que {{username}}",
+    "SYNC_ERROR": "Erreur de synchronisation",
+    "REGISTER": "S'inscrire",
     "FORGOT_PASSWORD": "Identifiant ou mot de passe perdu ?",
     "TABT_ACCOUNT": "La connexion à votre compte AFTT permet à BePing de récuperer plus d'informations sur votre profil (classement provisoire, listes de force...)",
     "DISPLAY_RANKING": "Catégorie principale",
@@ -287,7 +287,7 @@
     "PRIVACY_POLICY": "Politique de confidentialité",
     "TERMS_AND_CONDITIONS": "Conditions d'utilisation",
     "MORE_INFO": "Informations complémentaires",
-    "ADVANCED":  "Paramètres avancés",
+    "ADVANCED": "Paramètres avancés",
     "REFRESH_BEPING": "Actualiser BePing",
     "NEED_INTERNET_TO_REFRESH": "Une connexion Internet est requise pour actualiser BePing",
     "BEPING_REFRESHED": "BePing actualisé"
@@ -297,16 +297,16 @@
   },
   "ERROR_OF_FEDERATION": "Erreur de {{federation}}",
   "INDEPENDANT_ERROR": "Erreur externe à BePing : {{error}}",
-  "TOURNAMENTS":{
-    "INFORMATION" : "Informations",
-    "VERIFY_INFO" : "Vérifiez les informations",
-    "REGISTER" :	"S'inscrire",
-    "CHOOSE_SERIE" : "Choisir une série",
-    "DATE" : "Date",
-    "END_REGISTRATION_DATE" : "Fin des inscriptions",
-    "SERIES" : "Séries",
+  "TOURNAMENTS": {
+    "INFORMATION": "Informations",
+    "VERIFY_INFO": "Vérifiez les informations",
+    "REGISTER": "S'inscrire",
+    "CHOOSE_SERIE": "Choisir une série",
+    "DATE": "Date",
+    "END_REGISTRATION_DATE": "Fin des inscriptions",
+    "SERIES": "Séries",
     "LOADING_RESULTS": "Chargement des résultats...",
-    "FUTURE" : "A venir",
+    "FUTURE": "A venir",
     "PAST": "Terminé",
     "FILTERS": "Filtres",
     "DISPLAY_FINISHED": "Afficher tournois terminés",
@@ -315,17 +315,17 @@
     "REGISTRATIONS": "Inscriptions",
     "REGISTERED_ON": "Inscription le"
   },
-  "NAVIGATION":{
-    "NAVIGATE_TO_MATCH" : "Itinéraire jusqu'au match",
-    "VERIFY_NAVIGATION_INFO" : "Veuillez vérifier l'adresse du match. BePing n'est pas responsable d'une mauvaise adresse.",
-    "START_NAVIGATION" : "Démarrage navigation",
-    "NAVIGATE" : "Démarrer",
-    "SELECT_APP" : "Selecteer een applicatie om te navigeren",
-    "REMEMBER_CHOICE" : "Se souvenir de son choix",
-    "USE_SAME_APP_NEXT_TIME" :"Utiliser la même application pour la prochaine navigation",
-    "YES" : "Oui",
-    "NO" : "Non",
-    "IMPOSSIBLE_TO_LAUNCH_NAVIGATION" : "Impossible de lancer la navigation"
+  "NAVIGATION": {
+    "NAVIGATE_TO_MATCH": "Itinéraire jusqu'au match",
+    "VERIFY_NAVIGATION_INFO": "Veuillez vérifier l'adresse du match. BePing n'est pas responsable d'une mauvaise adresse.",
+    "START_NAVIGATION": "Démarrage navigation",
+    "NAVIGATE": "Démarrer",
+    "SELECT_APP": "Selecteer een applicatie om te navigeren",
+    "REMEMBER_CHOICE": "Se souvenir de son choix",
+    "USE_SAME_APP_NEXT_TIME": "Utiliser la même application pour la prochaine navigation",
+    "YES": "Oui",
+    "NO": "Non",
+    "IMPOSSIBLE_TO_LAUNCH_NAVIGATION": "Impossible de lancer la navigation"
   },
   "TABLE_TENNIS_BELGIUMTV": {
     "DO_YOU_LIKE_THE_CHANNEL": "Aimez-vous Table Tennis BelgiumTV?",
@@ -339,7 +339,7 @@
     "NOTIFICATIONS": "Notifications",
     "ADD_CLUB": "Ajouter un club",
     "ADD_DIVISION": "Ajouter une division",
-    "ADD_FAVORITE_DIVISIONS" : "Ajouter ses divisions favorites",
+    "ADD_FAVORITE_DIVISIONS": "Ajouter ses divisions favorites",
     "ADD_OWN_CLUB": "Ajouter son club",
     "SUCCESSFULLY_SUBSCRIBED_TO": "Vous recevrez maintenant des notifications pour {{subscription}}",
     "CHOOSE_DIVISION": "Choisissez une division",
@@ -347,7 +347,7 @@
     "ADD_TEAM": "Ajouter une équipe",
     "NO_TEAM": "Pas d'équipes"
   },
-  "DIVISION_LEVEL":{
+  "DIVISION_LEVEL": {
     "LEVEL": "Niveau",
     "NATIONAL": "National",
     "HAINAUT": "Hainaut",
@@ -378,18 +378,18 @@
     "YOUTH": "Jeunes"
   },
   "MONTHS": {
-    "0":"Janvier",
-    "1":"Février",
-    "2":"Mars",
-    "3":"Avril",
-    "4":"Mai",
-    "5":"Juin",
-    "6":"Juillet",
-    "7":"Août",
-    "8":"Septembre",
-    "9":"Octobre",
-    "10":"Novembre",
-    "11":"Décembre"
+    "0": "Janvier",
+    "1": "Février",
+    "2": "Mars",
+    "3": "Avril",
+    "4": "Mai",
+    "5": "Juin",
+    "6": "Juillet",
+    "7": "Août",
+    "8": "Septembre",
+    "9": "Octobre",
+    "10": "Novembre",
+    "11": "Décembre"
   },
   "USER": "Utilisateur",
   "BACK": "Retour",
@@ -401,7 +401,7 @@
     "FIND_ALL_RESULTS": "Trouver tous les résultats et statistiques",
     "ALL_RANKINGS": "Classements des divisions, meilleurs joueurs par division, ...",
     "FOLLOW_FAVORITES": "Suivre ses favoris facilement",
-    "DIRECT_LINK_TO_FAVORITE":"Liens directs vers vos clubs, joueurs ou divisions favorites",
+    "DIRECT_LINK_TO_FAVORITE": "Liens directs vers vos clubs, joueurs ou divisions favorites",
     "FIND_TOUNAMENTS": "Trouver des tournois",
     "FIND_AND_REGISTER_TOURNAMENTS": "Rechercher et s'inscrire à des tournois dans sa région",
     "SEARCH_QUICKLY": "Rechercher ultra rapidement",

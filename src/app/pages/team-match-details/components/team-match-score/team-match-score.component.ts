@@ -15,9 +15,6 @@ export class TeamMatchScoreComponent implements OnInit {
     constructor() {
     }
 
-    ngOnInit() {
-    }
-
     get homeScore(): number {
         return Number(this.match.Score.split('-')[0]);
     }
@@ -62,6 +59,8 @@ export class TeamMatchScoreComponent implements OnInit {
         return this.match.IsAwayWithdrawn;
     }
 
+    ngOnInit() {
+    }
 
     teamClicked(team: string) {
 

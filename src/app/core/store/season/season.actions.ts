@@ -21,8 +21,10 @@ export class GetCurrentSeasonFailure {
 export class GetCurrentSeason {
     static readonly type = '[season] get current season';
 }
+
 export class SetSeasonLoading {
     static readonly type = '[season] set season loading';
+
     constructor(
         public loading: boolean
     ) {

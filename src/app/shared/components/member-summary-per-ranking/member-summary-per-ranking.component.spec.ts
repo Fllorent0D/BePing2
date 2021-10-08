@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { MemberSummaryPerRankingComponent } from './member-summary-per-ranking.component';
+import {MemberSummaryPerRankingComponent} from './member-summary-per-ranking.component';
 
 describe('MemberSummaryPerRankingComponent', () => {
-  let component: MemberSummaryPerRankingComponent;
-  let fixture: ComponentFixture<MemberSummaryPerRankingComponent>;
+    let component: MemberSummaryPerRankingComponent;
+    let fixture: ComponentFixture<MemberSummaryPerRankingComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MemberSummaryPerRankingComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [MemberSummaryPerRankingComponent],
+            imports: [IonicModule.forRoot()]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(MemberSummaryPerRankingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(MemberSummaryPerRankingComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

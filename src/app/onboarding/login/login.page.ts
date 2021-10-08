@@ -15,6 +15,7 @@ import {HasSeenOnBoarding, SetUser} from '../../core/store/user/user.actions';
 import {AfttLoginPage} from '../../pages/modals/aftt-login/aftt-login-page.component';
 import {MembersService} from '../../core/api/services/members.service';
 import {ClubsService} from '../../core/api/services/clubs.service';
+import {DialogService} from '../../shared/services/dialog-service.service';
 
 @Component({
     selector: 'beping-login-page',
@@ -42,7 +43,7 @@ export class LoginPage implements OnInit {
     selectedMember: MemberEntry | null;
 
     constructor(
-        private readonly modalCtrl: ModalController,
+        private readonly dialogService: DialogService,
         private readonly ionRouterOutlet: IonRouterOutlet,
         private readonly navCtrl: NavController,
         private readonly store: Store,
@@ -82,13 +83,11 @@ export class LoginPage implements OnInit {
     }
 
     async chooseClub() {
-        const modal = await this.modalCtrl.create({
+        const modal = await this.dialogService.showModal({
             component: ChooseClubPage,
             swipeToClose: true,
             presentingElement: this.ionRouterOutlet.nativeEl
         });
-        await modal.present();
-
         const result = await modal.onWillDismiss();
         if (result?.data?.club) {
             this.selectedClub = result.data.club;
@@ -98,7 +97,7 @@ export class LoginPage implements OnInit {
     }
 
     async choosePlayer() {
-        const modal = await this.modalCtrl.create({
+        const modal = await this.dialogService.showModal({
             component: ChoosePlayerPage,
             swipeToClose: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
@@ -107,7 +106,6 @@ export class LoginPage implements OnInit {
                 club: this.selectedClub
             }
         });
-        await modal.present();
 
         const result = await modal.onWillDismiss();
         if (result?.data?.member) {
@@ -127,13 +125,12 @@ export class LoginPage implements OnInit {
     }
 
     async loginWithAFTT() {
-        const modal = await this.modalCtrl.create({
+        const modal = await this.dialogService.showModal({
             component: AfttLoginPage,
             swipeToClose: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
             componentProps: {}
         });
-        await modal.present();
 
         const result = await modal.onWillDismiss();
         if (result?.data?.logged) {

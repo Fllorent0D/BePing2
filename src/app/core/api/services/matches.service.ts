@@ -26,7 +26,7 @@ export class MatchesService extends BaseService {
   /**
    * Path part for operation findAllMatches
    */
-  static readonly FindAllMatchesPath = '/api/matches';
+  static readonly FindAllMatchesPath = '/v1/matches';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -176,7 +176,7 @@ export class MatchesService extends BaseService {
   /**
    * Path part for operation findAllMatchSystems
    */
-  static readonly FindAllMatchSystemsPath = '/api/matches/systems';
+  static readonly FindAllMatchSystemsPath = '/v1/matches/systems';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -274,7 +274,7 @@ export class MatchesService extends BaseService {
   /**
    * Path part for operation findMatchSystemById
    */
-  static readonly FindMatchSystemByIdPath = '/api/matches/systems/{matchSystemId}';
+  static readonly FindMatchSystemByIdPath = '/v1/matches/systems/{matchSystemId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -375,7 +375,7 @@ export class MatchesService extends BaseService {
   /**
    * Path part for operation findMatchById
    */
-  static readonly FindMatchByIdPath = '/api/matches/{matchUniqueId}';
+  static readonly FindMatchByIdPath = '/v1/matches/{matchUniqueId}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

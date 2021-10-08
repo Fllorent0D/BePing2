@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { CurrentUserComponent } from './current-user.component';
+import {CurrentUserComponent} from './current-user.component';
 
 describe('CurrentUserComponent', () => {
-  let component: CurrentUserComponent;
-  let fixture: ComponentFixture<CurrentUserComponent>;
+    let component: CurrentUserComponent;
+    let fixture: ComponentFixture<CurrentUserComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CurrentUserComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [CurrentUserComponent],
+            imports: [IonicModule.forRoot()]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(CurrentUserComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(CurrentUserComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

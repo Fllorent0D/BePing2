@@ -1,6 +1,7 @@
-svg{
+svg {
   max-height: 100px;
 }
+
 .chart-text {
   fill: var(--ion-text-color);
   -moz-transform: translateY(0.25em);
@@ -28,6 +29,7 @@ svg{
   -webkit-transform: translateY(0.3em);
   transform: translateY(0.3em);
 }
+
 .only-number {
   font-size: 0.65rem;
 }

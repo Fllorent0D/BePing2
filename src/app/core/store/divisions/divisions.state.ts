@@ -27,6 +27,10 @@ import {Level} from '../../models/level';
 @Injectable()
 export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOnInit {
 
+    constructor(private readonly divisionsService: DivisionsService) {
+        super(DivisionsState, 'DivisionId', IdStrategy.EntityIdGenerator);
+    }
+
     static searchDivision(terms: string) {
         const termsLowerCased = terms.toLowerCase();
         return createSelector(
@@ -50,10 +54,6 @@ export class DivisionsState extends EntityState<DivisionEntry> implements NgxsOn
                 .filter((division) => division.Level === level)
                 .sort((a, b) => a.DivisionName?.localeCompare(b.DivisionName));
         });
-    }
-
-    constructor(private readonly divisionsService: DivisionsService) {
-        super(DivisionsState, 'DivisionId', IdStrategy.EntityIdGenerator);
     }
 
     ngxsOnInit(ctx?: StateContext<EntityStateModel<DivisionEntry>>): void {

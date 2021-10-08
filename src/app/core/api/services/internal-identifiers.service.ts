@@ -26,7 +26,7 @@ export class InternalIdentifiersService extends BaseService {
   /**
    * Path part for operation getInternalIds
    */
-  static readonly GetInternalIdsPath = '/api/internal-identifiers';
+  static readonly GetInternalIdsPath = '/v1/internal-identifiers';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
@@ -78,7 +78,7 @@ export class InternalIdentifiersService extends BaseService {
   /**
    * Path part for operation getRegisterLink
    */
-  static readonly GetRegisterLinkPath = '/api/internal-identifiers/link';
+  static readonly GetRegisterLinkPath = '/v1/internal-identifiers/link';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.

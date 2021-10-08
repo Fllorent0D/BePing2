@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ExploreContainerComponent} from './explore-container/explore-container.component';
 
 const routes: Routes = [
     {

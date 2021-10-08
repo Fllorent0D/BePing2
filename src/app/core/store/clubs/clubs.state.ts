@@ -30,6 +30,10 @@ import {CurrentSeasonChanged} from '../season';
 @Injectable()
 export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
 
+    constructor(private readonly clubsService: ClubsService) {
+        super(ClubsState, 'UniqueIndex', IdStrategy.EntityIdGenerator);
+    }
+
     static searchClub(terms: string) {
         const termsLowerCased = terms.toLowerCase();
         return createSelector([ClubsState.entities], (clubs: ClubEntry[]) => {
@@ -50,10 +54,6 @@ export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
             const club = clubs.find((clubEntry: ClubEntry) => clubEntry.UniqueIndex === uniqueIndex);
             return club.Name;
         });
-    }
-
-    constructor(private readonly clubsService: ClubsService) {
-        super(ClubsState, 'UniqueIndex', IdStrategy.EntityIdGenerator);
     }
 
     ngxsOnInit(ctx?: StateContext<EntityStateModel<ClubEntry>>): void {

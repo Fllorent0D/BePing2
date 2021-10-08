@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'beping-modal-base',
-  templateUrl: './modal-base.component.html',
-  styleUrls: ['./modal-base.component.scss'],
+    selector: 'beping-modal-base',
+    templateUrl: './modal-base.component.html',
+    styleUrls: ['./modal-base.component.scss']
 })
 export class ModalBaseComponent implements OnInit {
-  rootPage: any;
+    rootPage: any;
 
-  constructor() {}
+    constructor() {
+    }
 
-  ngOnInit() {
-    console.log('init');
-  }
+    ngOnInit() {
+        console.log('init');
+    }
 }

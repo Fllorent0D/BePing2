@@ -26,11 +26,11 @@ export class AnalyticsService {
         }
         this.analyticsReady.next(true);
 
-        this.router.events.pipe(filter((e: RouterEvent) => {
-            return e instanceof NavigationEnd;
-        })).subscribe(async (event: RouterEvent) => {
-            await this.setScreenName(event.url);
-        });
+        this.router.events.pipe(
+            filter((e: RouterEvent) => e instanceof NavigationEnd))
+            .subscribe(async (event: RouterEvent) => {
+                await this.setScreenName(event.url);
+            });
     }
 
     async setUser(userId: string): Promise<void> {

@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { IonDotDotDotDividerComponent } from './ion-dot-dot-dot-divider.component';
+import {IonDotDotDotDividerComponent} from './ion-dot-dot-dot-divider.component';
 
 describe('IonDotDotDotDividerComponent', () => {
-  let component: IonDotDotDotDividerComponent;
-  let fixture: ComponentFixture<IonDotDotDotDividerComponent>;
+    let component: IonDotDotDotDividerComponent;
+    let fixture: ComponentFixture<IonDotDotDotDividerComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ IonDotDotDotDividerComponent ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [IonDotDotDotDividerComponent],
+            imports: [IonicModule.forRoot()]
+        }).compileComponents();
 
-    fixture = TestBed.createComponent(IonDotDotDotDividerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }));
+        fixture = TestBed.createComponent(IonDotDotDotDividerComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

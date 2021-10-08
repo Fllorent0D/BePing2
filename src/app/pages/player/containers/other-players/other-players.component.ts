@@ -6,12 +6,13 @@ import {UserMemberEntries} from '../../../../core/store/user/user.state';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PlayerCategoryService} from '../../../../core/services/tabt/player-category.service';
-import {ToastController} from '@ionic/angular';
 import {map, share, shareReplay, switchMap, take} from 'rxjs/operators';
 import {FavoritesState, ToggleMemberFromFavorites} from '../../../../core/store/favorites';
 import {Store} from '@ngxs/store';
 import {WeeklyElo} from '../../../../core/api/models/weekly-elo';
 import {MembersService} from '../../../../core/api/services/members.service';
+import {DialogService} from '../../../../shared/services/dialog-service.service';
+import {WeeklyNumericRanking} from '../../../../core/api/models/weekly-numeric-ranking';
 
 @Component({
     selector: 'beping-other-players',
@@ -27,14 +28,14 @@ export class OtherPlayersComponent implements OnInit {
     userMemberEntries$: Observable<UserMemberEntries>;
     latestMatches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
-    weeklyElo$: Observable<WeeklyElo[]>;
+    numericRankings$: Observable<WeeklyNumericRanking[]>;
 
     constructor(
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute,
         private readonly playerCategoryService: PlayerCategoryService,
         private readonly membersService: MembersService,
-        private readonly toastrCtrl: ToastController,
+        private readonly dialogService: DialogService,
         private readonly store: Store
     ) {
     }
@@ -56,8 +57,8 @@ export class OtherPlayersComponent implements OnInit {
             map((memberEntries: UserMemberEntries) => PlayerCategoryService.getPlayedCategories(memberEntries))
         );
 
-        this.weeklyElo$ = this.memberUniqueIndex$.pipe(
-            switchMap((uniqueIndex) => this.membersService.findMemberEloHistory({uniqueIndex}))
+        this.numericRankings$ = this.memberUniqueIndex$.pipe(
+            switchMap((uniqueIndex) => this.membersService.findMemberNumericRankingsHistory({uniqueIndex}))
         );
 
         this.userMemberEntries$.pipe(
@@ -78,11 +79,10 @@ export class OtherPlayersComponent implements OnInit {
 
     async categoryClicked(category: PLAYER_CATEGORY) {
         this.currentCategory$.next(category);
-        const toast = await this.toastrCtrl.create({
+        this.dialogService.showToast({
             message: `Profil ${category} chargé`,
             duration: 3000
         });
-        toast.present();
     }
 
     getIcon(category: PLAYER_CATEGORY) {

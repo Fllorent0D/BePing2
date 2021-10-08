@@ -1,27 +1,27 @@
-<svg style="max-height: {{small ? 70 : 200}}px" viewBox="0 0 42 42" class="donut">
-    <circle class="donut-hole" cx="21" cy="22" r="15.91549430918954" fill="transparent"></circle>
-    <circle class="donut-ring" cx="21" cy="22" r="15.91549430918954" fill="transparent" stroke="transparent"
+<svg class="donut" style="max-height: {{small ? 70 : 200}}px" viewBox="0 0 42 42">
+    <circle class="donut-hole" cx="21" cy="22" fill="transparent" r="15.91549430918954"></circle>
+    <circle class="donut-ring" cx="21" cy="22" fill="transparent" r="15.91549430918954" stroke="transparent"
             stroke-width="2"></circle>
 
 
-    <circle *ngIf="redPct > 0" class="donut-segment path" cx="21" cy="22" r="15.91549430918954" fill="transparent"
-            stroke="#F09694" stroke-width="3" id="redCircle"
-            stroke-linecap="round" [attr.stroke-dasharray]="redDashArray" stroke-dashoffset="23.4" #redCircle
-            [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 23.4,strokeOffset:23.4}}">
+    <circle #redCircle *ngIf="redPct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 23.4,strokeOffset:23.4}}" [attr.stroke-dasharray]="redDashArray" class="donut-segment path" cx="21"
+            cy="22" fill="transparent" id="redCircle"
+            r="15.91549430918954" stroke="#F09694" stroke-dashoffset="23.4" stroke-linecap="round"
+            stroke-width="3">
         >
     </circle>
-    <circle *ngIf="bluePct > 0" class="donut-segment" cx="21" cy="22" r="15.91549430918954" fill="transparent"
-            stroke="#5B8BF7" stroke-width="3" [attr.stroke-dasharray]="blueDashArray"
-            [attr.stroke-dashoffset]="100 - redPct + 23.25"
-            [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 23.25), strokeOffsetStart: 27.6}}"
-            stroke-linecap="round" #blueCircle></circle>
+    <circle #blueCircle *ngIf="bluePct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 23.25), strokeOffsetStart: 27.6}}" [attr.stroke-dasharray]="blueDashArray" [attr.stroke-dashoffset]="100 - redPct + 23.25" class="donut-segment"
+            cx="21" cy="22" fill="transparent"
+            r="15.91549430918954"
+            stroke="#5B8BF7"
+            stroke-linecap="round" stroke-width="3"></circle>
 
 
     <g class="chart-text">
-        <text x="50%" [attr.y]="subtitle ? '55%' : '68%'" class="chart-number" [class.only-number]="!subtitle">
+        <text [attr.y]="subtitle ? '55%' : '68%'" [class.only-number]="!subtitle" class="chart-number" x="50%">
             {{title}}
         </text>
-        <text x="50%" y="50%" class="chart-label">
+        <text class="chart-label" x="50%" y="50%">
             {{subtitle}}
         </text>
     </g>

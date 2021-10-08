@@ -10,7 +10,7 @@ import {map} from 'rxjs/operators';
 import {HasSeenOnBoarding} from '../../core/store/user/user.actions';
 import {FormControl, Validators} from '@angular/forms';
 import {AnalyticsService} from '../../core/services/firebase/analytics.service';
-import {DialogService} from '../../core/services/dialog-service.service';
+import {DialogService} from '../../shared/services/dialog-service.service';
 import {PrivacyComponent} from '../../pages/settings/containers/privacy/privacy.component';
 import {ConditionsUsageComponent} from '../../pages/settings/containers/conditions-usage/conditions-usage.component';
 

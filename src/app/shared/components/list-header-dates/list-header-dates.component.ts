@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'beping-list-header-dates',
-  templateUrl: './list-header-dates.component.html',
-  styleUrls: ['./list-header-dates.component.scss'],
+    selector: 'beping-list-header-dates',
+    templateUrl: './list-header-dates.component.html',
+    styleUrls: ['./list-header-dates.component.scss']
 })
 export class ListHeaderDatesComponent implements OnInit {
 
-  constructor() { }
+    constructor() {
+    }
 
-  ngOnInit() {}
+    ngOnInit() {
+    }
 
 }
