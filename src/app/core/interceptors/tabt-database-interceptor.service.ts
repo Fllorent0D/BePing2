@@ -4,11 +4,28 @@ import {Observable} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {LANG} from '../models/langs';
 import {SettingsState} from '../store/settings';
+import {ClubCategory} from '../models/club';
 
 export enum TABT_DATABASES {
     AFTT = 'aftt',
     VTTL = 'vttl'
 }
+
+export const AFTT_CLUB_CATEGORIES = [
+    ClubCategory.HAINAUT,
+    ClubCategory.LIEGE,
+    ClubCategory.LUXEMBOURG,
+    ClubCategory.BRUSSELS_BRABANT_WALLON,
+    ClubCategory.NAMUR,
+];
+
+export const VTTL_CLUB_CATEGORIES = [
+    ClubCategory.VLAAMS_BRABANT_BR,
+    ClubCategory.OOST_VLANDEREN,
+    ClubCategory.WEST_VLAANDEREN,
+    ClubCategory.ANTWERP,
+    ClubCategory.LIMBURG,
+];
 
 
 @Injectable()
@@ -20,9 +37,7 @@ export class TabtDatabaseInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        const lang: LANG = this.store.selectSnapshot(SettingsState.getCurrentLang);
-        const database: TABT_DATABASES = lang === LANG.NL ? TABT_DATABASES.VTTL : TABT_DATABASES.AFTT;
-
+        const database: TABT_DATABASES = this.store.selectSnapshot(SettingsState.getCurrentDatabase) || TABT_DATABASES.AFTT;
         const newBody = request.urlWithParams;
         console.log(newBody);
 

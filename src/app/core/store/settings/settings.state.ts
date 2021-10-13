@@ -2,10 +2,12 @@ import {LANG} from '../../models/langs';
 import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {TranslateService} from '@ngx-translate/core';
 import {Device} from '@capacitor/device';
-import {SetTheme, UpdateCurrentLang, UpdateCurrentLangSuccess} from './settings.actions';
+import {SetTheme, ToggleDisplayELO, ToggleDisplayNumericRanking, UpdateCurrentLang, UpdateCurrentLangSuccess} from './settings.actions';
 import {Injectable} from '@angular/core';
-import {TABT_DATABASES} from '../../interceptors/tabt-database-interceptor.service';
+import {AFTT_CLUB_CATEGORIES, TABT_DATABASES, VTTL_CLUB_CATEGORIES} from '../../interceptors/tabt-database-interceptor.service';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
+import {UserState, UserStateModel} from '../user/user.state';
+import {SetUser, UpdateClubEntry} from '../user/user.actions';
 
 export enum THEME {
     LIGHT = 'light',
@@ -16,6 +18,8 @@ export enum THEME {
 export interface SettingsStateModel {
     theme: THEME;
     lang?: LANG;
+    displayELO: boolean;
+    displayNumericRanking: boolean;
 }
 
 
@@ -23,7 +27,9 @@ export interface SettingsStateModel {
     name: 'settings',
     defaults: {
         theme: THEME.LIGHT,
-        lang: null
+        lang: null,
+        displayELO: false,
+        displayNumericRanking: true
     }
 })
 @Injectable()
@@ -40,15 +46,21 @@ export class SettingsState implements NgxsOnInit {
     }
 
     @Selector([SettingsState])
-    static getCurrentDatabase(state: SettingsStateModel): TABT_DATABASES {
-        switch (state.lang) {
-            case LANG.NL:
-                return TABT_DATABASES.VTTL;
-            case LANG.FR:
-            case LANG.EN:
-            default:
-                return TABT_DATABASES.AFTT;
+    static displayELO(state: SettingsStateModel): boolean {
+        return state.displayELO;
+    }
+
+    @Selector([SettingsState])
+    static displayNumericRanking(state: SettingsStateModel): boolean {
+        return state.displayNumericRanking;
+    }
+
+    @Selector([UserState])
+    static getCurrentDatabase(state: UserStateModel): TABT_DATABASES {
+        if (VTTL_CLUB_CATEGORIES.includes(state.club.Category)) {
+            return TABT_DATABASES.VTTL;
         }
+        return TABT_DATABASES.AFTT;
     }
 
     @Selector([SettingsState])
@@ -89,6 +101,29 @@ export class SettingsState implements NgxsOnInit {
 
         return dispatch(new UpdateCurrentLangSuccess());
     }
+
+    @Action(ToggleDisplayELO)
+    toggleDisplayElo({patchState, dispatch}: StateContext<SettingsStateModel>, action: ToggleDisplayELO) {
+        return patchState({
+            displayELO: action.display
+        });
+    }
+
+    @Action(ToggleDisplayNumericRanking)
+    toggleDisplayNumericRanking({patchState, dispatch}: StateContext<SettingsStateModel>, action: ToggleDisplayNumericRanking) {
+        return patchState({
+            displayNumericRanking: action.display
+        });
+    }
+
+    @Action([UpdateClubEntry, SetUser])
+    updateSettingClubUpdate({patchState, dispatch}: StateContext<SettingsStateModel>, {club}: UpdateClubEntry | SetUser) {
+        return patchState({
+            displayELO: VTTL_CLUB_CATEGORIES.includes(club.Category),
+            displayNumericRanking: AFTT_CLUB_CATEGORIES.includes(club.Category)
+        });
+    }
+
 
     @Action(SetTheme)
     updateTheme({patchState}: StateContext<SettingsStateModel>, action: SetTheme) {

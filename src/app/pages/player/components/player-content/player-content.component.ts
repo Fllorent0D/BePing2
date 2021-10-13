@@ -5,6 +5,7 @@ import {UserMemberEntries} from '../../../../core/store/user/user.state';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {WeeklyElo} from '../../../../core/api/models/weekly-elo';
 import {WeeklyNumericRanking} from '../../../../core/api/models/weekly-numeric-ranking';
+import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interceptor.service';
 
 @Component({
     selector: 'beping-player-content',
@@ -19,6 +20,10 @@ export class PlayerContentComponent implements OnInit {
     @Input() userMemberEntries: UserMemberEntries;
     @Input() latestMatches: TeamMatchesEntry[];
     @Input() numericRankings: WeeklyNumericRanking[];
+    @Input() displayELO: boolean;
+    @Input() displayNumericRanking: boolean;
+    @Input() database: TABT_DATABASES;
+
 
     constructor() {
     }

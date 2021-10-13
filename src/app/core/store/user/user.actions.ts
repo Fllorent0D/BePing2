@@ -23,6 +23,14 @@ export class ClubTransfer {
     ) {
     }
 }
+export class UpdateClubEntry {
+    static readonly type = '[user] update club';
+
+    constructor(
+        public club: ClubEntry
+    ) {
+    }
+}
 
 export class UpdateMemberEntries {
     static readonly type = '[user] Update member entries';

@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {IonNav, ModalController} from '@ionic/angular';
 import {Observable} from 'rxjs';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {UserState, UserStateModel} from '../../../../core/store/user/user.state';
 import {SeasonState} from '../../../../core/store/season';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
@@ -13,7 +13,14 @@ import {FormControl} from '@angular/forms';
 import {UpdateMainCategory} from '../../../../core/store/user/user.actions';
 import {TranslateService} from '@ngx-translate/core';
 import {LANG} from '../../../../core/models/langs';
-import {SetTheme, SettingsState, THEME, UpdateCurrentLang} from '../../../../core/store/settings';
+import {
+    SetTheme,
+    SettingsState,
+    THEME,
+    ToggleDisplayELO,
+    ToggleDisplayNumericRanking,
+    UpdateCurrentLang
+} from '../../../../core/store/settings';
 import {InAppBrowserService} from '../../../../core/services/browser/in-app-browser.service';
 import {InternalIdentifiersService} from '../../../../core/api/services/internal-identifiers.service';
 import {SeasonEntry} from '../../../../core/api/models/season-entry';
@@ -28,6 +35,7 @@ import {ClubsState, GetClubs} from '../../../../core/store/clubs';
 import {Reset} from '@ngxs-labs/entity-state';
 import {DialogService} from '../../../../shared/services/dialog-service.service';
 import {Network} from '@capacitor/network';
+import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interceptor.service';
 
 @Component({
     selector: 'beping-settings',
@@ -46,6 +54,11 @@ export class SettingsPage implements OnInit, OnDestroy {
     currentTheme$: Observable<THEME>;
     mainPlayerCategory: FormControl;
     userState$: Observable<UserStateModel>;
+
+    @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
+    @Select(SettingsState.displayNumericRanking) displayNumeric$: Observable<boolean>;
+    @Select(SettingsState.getCurrentDatabase) currentDatabase$: Observable<TABT_DATABASES>;
+
     version: string;
     build: string;
     isOnline: boolean;
@@ -180,4 +193,11 @@ export class SettingsPage implements OnInit, OnDestroy {
     }
 
 
+    toggleELO(event: CustomEvent) {
+        this.store.dispatch(new ToggleDisplayELO(event.detail.checked));
+    }
+
+    toggleNumericRanking(event: CustomEvent) {
+        this.store.dispatch(new ToggleDisplayNumericRanking(event.detail.checked));
+    }
 }

@@ -48,6 +48,24 @@
             </ion-select>
         </ion-item>
     </ion-list>
+    <beping-section-title [title]="'COMMON.RANKINGS' | translate"></beping-section-title>
+    <ion-list>
+        <ion-item>
+            <ion-label>Afficher les points ELO</ion-label>
+            <ion-toggle
+                    [checked]="displayELO$|async"
+                    (ionChange)="toggleELO($event)">
+            </ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Afficher le classement numérique</ion-label>
+            <ion-toggle
+                    [disabled]="(currentDatabase$|async) === 'vttl'"
+                    [checked]="displayNumeric$|async"
+                    (ionChange)="toggleNumericRanking($event)">
+            </ion-toggle>
+        </ion-item>
+    </ion-list>
     <beping-section-title [title]="'SETTINGS.CONNECT_TO_FEDERATION'|translate"></beping-section-title>
     <ng-container *ngIf="isLoggedIn|async; else anonymous">
         <ion-list class="ion-margin-bottom">

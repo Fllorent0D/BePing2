@@ -6,3 +6,4 @@ export enum PLAYER_CATEGORY {
     YOUTH = 'YOUTH',
 }
 
+export type MEMBER_CATEGORY_STRING = 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';

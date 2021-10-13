@@ -55,7 +55,8 @@
     "AWAY_TEAM": "Away team",
     "AVAILABLE_SOON": "Available soon",
     "NO_INFO": "No information",
-    "DATE": "Date"
+    "DATE": "Date",
+    "RANKINGS": "Rankings"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Login to resultats.aftt.be",

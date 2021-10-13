@@ -6,7 +6,7 @@ import {
     ClubTransfer,
     HasSeenOnBoarding,
     SetLoading,
-    SetUser,
+    SetUser, UpdateClubEntry,
     UpdateLatestMatchesSuccess,
     UpdateMainCategory,
     UpdateMemberEntries,
@@ -14,18 +14,23 @@ import {
     UpdateWeeklyNumericRankingSuccess
 } from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
-import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
+import {catchError, finalize, map, switchMap, tap} from 'rxjs/operators';
 import {sub} from 'date-fns';
 import {PLAYER_CATEGORY} from '../../models/user';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
 import {TabTState} from './tab-t-state.service';
-import {combineLatest, of} from 'rxjs';
 import {MembersService} from '../../api/services/members.service';
-import {WeeklyElo} from '../../api/models/weekly-elo';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
 import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
+import {DeepPartial} from 'chart.js/types/utils';
+import {ClubsService} from '../../api/services/clubs.service';
+import {of} from 'rxjs';
 
-export type UserMemberEntries = { [key: string]: MemberEntry };
+export interface UserMemberEntry extends MemberEntry {
+    numericRankings?: WeeklyNumericRanking[];
+}
+
+export type UserMemberEntries = { [key: string]: UserMemberEntry };
 
 export interface UserStateModel {
     memberEntries?: UserMemberEntries;
@@ -65,6 +70,7 @@ export class UserState implements NgxsOnInit {
     constructor(
         private readonly memberPlayerCategoryService: PlayerCategoryService,
         private readonly memberService: MembersService,
+        private readonly clubService: ClubsService,
         private readonly analyticsService: AnalyticsService
     ) {
     }
@@ -124,6 +130,7 @@ export class UserState implements NgxsOnInit {
         if (state.club) {
             this.analyticsService.setUserProperty('club', state.club.UniqueIndex);
         }
+        dispatch(new UpdateMemberEntries(state.memberUniqueIndex));
 
         if (state.lastUpdated < timeThreshold.getTime() && state.memberUniqueIndex) {
             dispatch(new UpdateMemberEntries(state.memberUniqueIndex));
@@ -150,8 +157,15 @@ export class UserState implements NgxsOnInit {
     }
 
     @Action(ClubTransfer)
-    setClub({patchState, dispatch}: StateContext<UserStateModel>, action: SetUser) {
-        this.analyticsService.setUserProperty('club_id', action.club.UniqueIndex);
+    clubTransfer({patchState, dispatch}: StateContext<UserStateModel>, action: ClubTransfer) {
+        this.analyticsService.setUserProperty('club_id', action.newClubIndex);
+        return this.clubService.findClubById({clubIndex: action.newClubIndex}).pipe(
+            map((club) => dispatch(new UpdateClubEntry(club)))
+        );
+    }
+
+    @Action(UpdateClubEntry)
+    updateClubEntry({patchState, dispatch}: StateContext<UserStateModel>, action: UpdateClubEntry) {
         return patchState({
             club: action.club
         });
@@ -160,25 +174,39 @@ export class UserState implements NgxsOnInit {
 
     @Action([UpdateMemberEntries])
     updateMemberEntries({dispatch, getState}: StateContext<UserStateModel>, action: UpdateMemberEntries) {
-        return combineLatest([
-            this.memberPlayerCategoryService.getMemberPlayerCategories(action.memberUniqueIndex),
-            this.memberService.findMemberNumericRankingsHistory({uniqueIndex: action.memberUniqueIndex})
-                .pipe(catchError(() => of([])))
-        ]).pipe(
+        return this.memberPlayerCategoryService.getMemberPlayerCategories(action.memberUniqueIndex).pipe(
             tap(() => dispatch(new SetLoading(true))),
-            switchMap(([memberEntries, numericRanking]) => {
+            switchMap((memberEntries) => {
                 const state = getState();
-                const actions: Array<any> = [
-                    new UpdateMemberEntriesSuccess(memberEntries),
-                    new UpdateWeeklyNumericRankingSuccess(numericRanking)
-                ];
                 const categories = Object.keys(memberEntries);
+                const actions: Array<any> = [
+                    new UpdateMemberEntriesSuccess(memberEntries)
+                ];
                 if (state.club.UniqueIndex !== memberEntries?.[categories?.[0]]?.Club) {
                     actions.push(new ClubTransfer(memberEntries[categories[0]].Club));
                 }
                 return dispatch(actions);
             }),
             finalize(() => dispatch(new SetLoading(false)))
+        );
+    }
+
+    @Action([UpdateMemberEntriesSuccess])
+    updateGraphs({patchState, getState}: StateContext<UserStateModel>, action: UpdateMemberEntriesSuccess) {
+        return this.memberPlayerCategoryService.getMemberNumericRankings(action.memberEntries).pipe(
+            map((rankingsPerCategory) => {
+                const state: UserStateModel = getState();
+                const patchStateObj: DeepPartial<UserMemberEntries> = {...state.memberEntries};
+                for (const [key, rankings] of Object.entries(rankingsPerCategory)) {
+                    patchStateObj[key] = {
+                        ...state.memberEntries[key],
+                        numericRankings: rankings
+                    };
+                }
+                // @ts-ignore
+                return patchState({memberEntries: patchStateObj});
+            }),
+            catchError(() => of(null)),
         );
     }
 

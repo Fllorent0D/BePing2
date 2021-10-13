@@ -7,6 +7,8 @@
 <ng-container *ngIf="currentMemberEntry">
     <beping-member-name-ranking-info
             [displayName]="false"
+            [displayELO]="displayELO"
+            [displayNumericRanking]="displayNumericRanking"
             [member]="currentMemberEntry">
     </beping-member-name-ranking-info>
     <beping-member-victory-chart
@@ -14,26 +16,11 @@
     </beping-member-victory-chart>
 
     <ng-container *ngIf="numericRankings">
-        <ion-row class="ion-no-padding">
-            <ion-col class="ion-no-padding" size-md="6" size-xs="12">
-                <beping-weekly-elo *ngIf="numericRankings"
-                                   [numericRankings]="numericRankings"
-                                   [prop]="'elo'"
-                                   [label]="'ELO'"
-                                   [color]="'#5B8BF7'"
-
-                ></beping-weekly-elo>
-            </ion-col>
-            <ion-col class="ion-no-padding" size-md="6" size-xs="12">
-                <beping-weekly-elo *ngIf="numericRankings"
-                                   [numericRankings]="numericRankings"
-                                   [prop]="'bel'"
-                                   [label]="'Numérique'"
-                                   [color]="'#ae5bf7'"
-
-                ></beping-weekly-elo>
-            </ion-col>
-        </ion-row>
+        <beping-ranking-history-graphs
+                [numericRankings]="numericRankings"
+                [displayNumericRanking]="displayNumericRanking"
+                [displayElo]="displayELO">
+        </beping-ranking-history-graphs>
     </ng-container>
 
     <beping-tie-break-played

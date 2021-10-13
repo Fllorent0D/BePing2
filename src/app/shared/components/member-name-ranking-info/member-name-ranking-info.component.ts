@@ -1,20 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MemberEntry} from '../../../core/api/models/member-entry';
 import {Platform} from '@ionic/angular';
-import {RankingService} from '../../../core/services/tabt/ranking.service';
+import {RankingMethodName, RankingService} from '../../../core/services/tabt/ranking.service';
 
 @Component({
     selector: 'beping-member-name-ranking-info',
     templateUrl: './member-name-ranking-info.component.html',
     styleUrls: ['./member-name-ranking-info.component.scss']
 })
-export class MemberNameRankingInfoComponent implements OnInit {
+export class MemberNameRankingInfoComponent {
 
     @Input() member: MemberEntry;
     @Input() displayName = true;
-
-    nextRanking: string;
-    elo: string;
+    @Input() displayELO = false;
+    @Input() displayNumericRanking = false;
 
     constructor(
         public platform: Platform,
@@ -22,8 +21,19 @@ export class MemberNameRankingInfoComponent implements OnInit {
     ) {
     }
 
-    ngOnInit() {
-        this.nextRanking = this.rankingService.getNextRanking(this.member.RankingPointsEntries);
-        this.elo = this.rankingService.getELOPoints(this.member.RankingPointsEntries);
+    get elo(): string {
+        return this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.ELO);
+    }
+
+    get nextRanking(): string {
+        return this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.AILE_FRANCOPHONE);
+    }
+
+    get bel(): string {
+        return this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.BEL_POINTS);
+    }
+
+    get belRanking(): string {
+        return this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.BEL_RANKING);
     }
 }

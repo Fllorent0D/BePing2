@@ -23,3 +23,21 @@ export class SetTheme {
     }
 }
 
+export class ToggleDisplayELO {
+    static readonly type = '[settings] Toggle Display ELO';
+
+    constructor(
+        public display: boolean
+    ) {
+    }
+}
+
+export class ToggleDisplayNumericRanking {
+    static readonly type = '[settings] Toggle Display numeric ranking';
+
+    constructor(
+        public display: boolean
+    ) {
+    }
+}
+

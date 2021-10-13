@@ -274,6 +274,13 @@ ion-list {
   margin-right: var(--ion-padding, 0px);
 }
 
+.ion-no-margin-vertical {
+  --margin-top: var(--ion-padding, 0px);
+  --margin-bottom: var(--ion-padding, 0px);
+  margin-top: var(--ion-padding, 0px);
+  margin-bottom: var(--ion-padding, 0px);
+}
+
 ion-popover {
   .popover-wrapper {
     .popover-content {
@@ -340,4 +347,27 @@ hr {
     fill: var(--color)
   }
 
+}
+.white{
+  transition: color 0.8s linear;
+}
+.shining {
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.0), #fff, rgba(255, 255, 255, 0.0));
+  background-repeat: no-repeat;
+  background-size: 80%;
+  color:  rgba(255, 255, 255, 0.5);
+  transition: color 0.5s linear;
+  animation: shiningKeyFrame 1s linear infinite;
+  -webkit-background-clip: text;
+  // -webkit-text-fill-color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes shiningKeyFrame {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
 }

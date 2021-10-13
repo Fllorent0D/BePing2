@@ -9,6 +9,7 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 export class BepingCardComponent implements OnInit {
     @Input() padding = true;
     @Input() marging = true;
+    @Input() margingVertical = true;
     @Input() highlighted = false;
 
     constructor() {

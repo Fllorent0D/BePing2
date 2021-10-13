@@ -335,12 +335,14 @@ export class MembersService extends BaseService {
   findMemberNumericRankingsHistory$Response(params: {
     uniqueIndex: number;
     season?: number;
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
   }): Observable<StrictHttpResponse<Array<WeeklyNumericRanking>>> {
 
     const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberNumericRankingsHistoryPath, 'get');
     if (params) {
       rb.path('uniqueIndex', params.uniqueIndex, {});
       rb.query('season', params.season, {});
+      rb.query('category', params.category, {});
     }
 
     return this.http.request(rb.build({
@@ -363,6 +365,7 @@ export class MembersService extends BaseService {
   findMemberNumericRankingsHistory(params: {
     uniqueIndex: number;
     season?: number;
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
   }): Observable<Array<WeeklyNumericRanking>> {
 
     return this.findMemberNumericRankingsHistory$Response(params).pipe(

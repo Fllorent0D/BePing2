@@ -8,11 +8,15 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PlayerCategoryService} from '../../../../core/services/tabt/player-category.service';
 import {map, share, shareReplay, switchMap, take} from 'rxjs/operators';
 import {FavoritesState, ToggleMemberFromFavorites} from '../../../../core/store/favorites';
-import {Store} from '@ngxs/store';
-import {WeeklyElo} from '../../../../core/api/models/weekly-elo';
+import {Select, Store} from '@ngxs/store';
 import {MembersService} from '../../../../core/api/services/members.service';
 import {DialogService} from '../../../../shared/services/dialog-service.service';
 import {WeeklyNumericRanking} from '../../../../core/api/models/weekly-numeric-ranking';
+import {SettingsState} from '../../../../core/store/settings';
+import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interceptor.service';
+import {ActionSheetController} from '@ionic/angular';
+import {TranslateService} from '@ngx-translate/core';
+import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 
 @Component({
     selector: 'beping-other-players',
@@ -29,6 +33,9 @@ export class OtherPlayersComponent implements OnInit {
     latestMatches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
     numericRankings$: Observable<WeeklyNumericRanking[]>;
+    @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
+    @Select(SettingsState.displayNumericRanking) displayNumericRanking$: Observable<boolean>;
+    @Select(SettingsState.getCurrentDatabase) database$: Observable<TABT_DATABASES>;
 
     constructor(
         private readonly router: Router,
@@ -36,7 +43,10 @@ export class OtherPlayersComponent implements OnInit {
         private readonly playerCategoryService: PlayerCategoryService,
         private readonly membersService: MembersService,
         private readonly dialogService: DialogService,
-        private readonly store: Store
+        private readonly store: Store,
+        private readonly actionSheetController: ActionSheetController,
+        private readonly translate: TranslateService,
+        private readonly tabNavigator: TabsNavigationService
     ) {
     }
 
@@ -57,9 +67,6 @@ export class OtherPlayersComponent implements OnInit {
             map((memberEntries: UserMemberEntries) => PlayerCategoryService.getPlayedCategories(memberEntries))
         );
 
-        this.numericRankings$ = this.memberUniqueIndex$.pipe(
-            switchMap((uniqueIndex) => this.membersService.findMemberNumericRankingsHistory({uniqueIndex}))
-        );
 
         this.userMemberEntries$.pipe(
             take(1),
@@ -68,12 +75,22 @@ export class OtherPlayersComponent implements OnInit {
             this.currentCategory$.next(category);
         });
 
+
         this.currentMemberEntry$ = combineLatest([
             this.currentCategory$,
             this.userMemberEntries$
         ]).pipe(
             map(([category, userMemberEntries]) => userMemberEntries[category]),
             shareReplay(1)
+        );
+        this.numericRankings$ = combineLatest([
+            this.currentCategory$,
+            this.currentMemberEntry$
+        ]).pipe(
+            switchMap(([category, memberEntry]) => this.membersService.findMemberNumericRankingsHistory({
+                uniqueIndex: memberEntry.UniqueIndex,
+                category
+            }))
         );
     }
 
@@ -102,5 +119,33 @@ export class OtherPlayersComponent implements OnInit {
             take(1),
             switchMap((member: MemberEntry) => this.store.dispatch(new ToggleMemberFromFavorites(member)))
         ).subscribe();
+    }
+
+    openMenu() {
+        this.currentMemberEntry$.pipe(
+            take(1)
+        ).subscribe(async (member) => {
+            const actionSheet = await this.actionSheetController.create({
+                buttons: [{
+                    text: this.translate.instant('TEAM_STAT.INFO_ABOUT_CLUB', {club: member.Club}),
+                    handler: () => {
+                        this.tabNavigator.navigateTo(['clubs', member.Club]);
+                    }
+                }, {
+                    text: this.translate.instant('COMMON.CANCEL'),
+                    icon: 'close',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }]
+            });
+            await actionSheet.present();
+
+            const {role} = await actionSheet.onDidDismiss();
+            console.log('onDidDismiss resolved with role', role);
+        });
+
+
     }
 }

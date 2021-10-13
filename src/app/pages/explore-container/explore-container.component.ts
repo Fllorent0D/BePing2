@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {PLAYER_CATEGORY} from '../../core/models/user';
-import {Observable, ReplaySubject} from 'rxjs';
-import {MemberEntry} from '../../core/api/models/member-entry';
-import {UserState} from '../../core/store/user/user.state';
-import {shareReplay, switchMap, take, takeUntil, tap} from 'rxjs/operators';
-import {IonRouterOutlet, LoadingController, ModalController} from '@ionic/angular';
+import {iif, Observable, of, ReplaySubject} from 'rxjs';
+import {UserMemberEntry, UserState} from '../../core/store/user/user.state';
+import {delay, shareReplay, switchMap, take, takeUntil, tap} from 'rxjs/operators';
+import {IonRouterOutlet, LoadingController, ModalController, Platform} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
 import {ModalBaseComponent} from '../modals/modal-base/modal-base.component';
@@ -16,7 +15,6 @@ import {ClubsService} from '../../core/api/services/clubs.service';
 import {UpdateMemberEntries} from '../../core/store/user/user.actions';
 import {TabTState} from '../../core/store/user/tab-t-state.service';
 import {ChooseMainMemberClubComponent} from '../modals/choose-main-member-club/choose-main-member-club.component';
-import {WeeklyElo} from '../../core/api/models/weekly-elo';
 import {SettingsState} from '../../core/store/settings';
 import {TABT_DATABASES} from '../../core/interceptors/tabt-database-interceptor.service';
 import {HapticsService} from '../../core/services/haptics.service';
@@ -24,7 +22,6 @@ import {ImpactStyle} from '@capacitor/haptics';
 import {AnalyticsService} from '../../core/services/firebase/analytics.service';
 import {OnDestroyHook} from '../../core/on-destroy-hook';
 import {DialogService} from '../../shared/services/dialog-service.service';
-import {WeeklyNumericRanking} from '../../core/api/models/weekly-numeric-ranking';
 
 @Component({
     selector: 'beping-explore-container',
@@ -35,13 +32,13 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
 
     categoriesAvailable$: Observable<PLAYER_CATEGORY[]>;
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
-    currentMemberEntry$: Observable<MemberEntry>;
+    currentMemberEntry$: Observable<UserMemberEntry>;
     latestMatches$: Observable<TeamMatchesEntry[]>;
-
+    isLoading$: Observable<boolean>;
     @Select(TabTState.isLoggedIn) isLoggedIn$: Observable<boolean>;
-    @Select(UserState.numericRankings) numericRankings$: Observable<WeeklyNumericRanking[]>;
-    @Select(UserState.isLoading) isLoading$: Observable<boolean>;
     @Select(SettingsState.getCurrentDatabase) database: Observable<TABT_DATABASES>;
+    @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
+    @Select(SettingsState.displayNumericRanking) displayNumericRanking$: Observable<boolean>;
     TABT_DATABASES = TABT_DATABASES;
 
     constructor(
@@ -55,11 +52,16 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
         private readonly loaderCtrl: LoadingController,
         private readonly ionRouterOutlet: IonRouterOutlet,
         private readonly hapticsService: HapticsService,
-        private readonly analyticsService: AnalyticsService
+        private readonly analyticsService: AnalyticsService,
+        private readonly platform: Platform
     ) {
         super();
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
-
+        this.isLoading$ = this.store.select(UserState.isLoading).pipe(
+            switchMap((loading) => {
+                return iif(() => loading, of(loading), of(loading).pipe(delay(2_000)));
+            })
+        );
         this.store.select(UserState.getMainPlayerCategory).pipe(
             takeUntil(this.ngUnsubscribe)
         ).subscribe((category) => this.currentCategory$.next(category));

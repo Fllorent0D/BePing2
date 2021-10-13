@@ -11,6 +11,9 @@
                     (clicked)="toggleFavorite()"
                     [enabled]="isFavorite$|async"
             ></beping-favorite-btn>
+            <ion-button color="primary" (click)="openMenu()">
+                <ion-icon slot="icon-only" icon="ellipsis-vertical"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -20,6 +23,9 @@
             [currentCategory]="currentCategory$|async"
             [currentMemberEntry]="currentMemberEntry$|async"
             [latestMatches]="latestMatches$|async"
+            [displayELO]="displayELO$|async"
+            [displayNumericRanking]="displayNumericRanking$|async"
+            [database]="database$|async"
             [numericRankings]="numericRankings$|async">
     </beping-player-content>
     <ng-container *ngIf="categoriesAvailable$|async as playercategories">

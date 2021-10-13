@@ -13,12 +13,11 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TabtDatabaseInterceptor} from './interceptors/tabt-database-interceptor.service';
+import {AFTT_CLUB_CATEGORIES, TabtDatabaseInterceptor, VTTL_CLUB_CATEGORIES} from './interceptors/tabt-database-interceptor.service';
 import {TabtCredentialsInterceptor} from './interceptors/tabt-credentials-interceptor.service';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {BepingUserAgentInterceptor} from './interceptors/beping-user-agent.interceptor';
 import {DialogService} from '../shared/services/dialog-service.service';
-import {UserStateModel} from './store/user/user.state';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -35,11 +34,25 @@ export function HttpLoaderFactory(http: HttpClient) {
         NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService, {
             migrations: [
                 {
-                    version: 1,
-                    key: 'user',
+                    version: undefined,
                     migrate: (state) => {
-                        delete state.weeklyElo;
-                        return state;
+                        if (!state) {
+                            return;
+                        }
+                        if (state?.user?.weeklyElo) {
+                            delete state.user.weeklyElo;
+                        }
+                        if (!state.settings.hasOwnProperty('displayELO')) {
+                            state.settings.displayELO = VTTL_CLUB_CATEGORIES.includes(state.user.club.Category);
+                        }
+                        if (!state.settings.hasOwnProperty('displayNumericRanking')) {
+                            state.settings.displayNumericRanking = AFTT_CLUB_CATEGORIES.includes(state.user.club.Category);
+                        }
+                        console.log('Running migration to version 1');
+                        return {
+                            ...state,
+                            version: 1
+                        };
                     }
                 }
             ]

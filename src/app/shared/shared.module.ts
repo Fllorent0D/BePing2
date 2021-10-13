@@ -31,6 +31,7 @@ import {LocalDatePipe} from './pipes/local-date.pipe';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {NgPipesModule} from 'ngx-pipes';
 import {DialogService} from './services/dialog-service.service';
+import {RankingHistoryGraphsComponent} from './components/ranking-history-graphs/ranking-history-graphs.component';
 
 const COMPONENTS = [
     RankingComponent,
@@ -53,7 +54,8 @@ const COMPONENTS = [
     TeamResultAdBannerComponent,
     MemberItemComponent,
     ClubItemComponent,
-    WeeklyEloComponent
+    WeeklyEloComponent,
+    RankingHistoryGraphsComponent
 ];
 const PIPES = [
     WithLoadingPipe,
@@ -68,7 +70,7 @@ const DIRECTIVES = [
     declarations: [
         COMPONENTS,
         DIRECTIVES,
-        PIPES
+        PIPES,
     ],
     exports: [
         CommonModule,
@@ -79,9 +81,8 @@ const DIRECTIVES = [
         NgChartsModule,
         NgPipesModule,
         SuperTabsModule,
-        DialogService,
         COMPONENTS,
-        PIPES
+        PIPES,
     ],
     imports: [
         CommonModule,

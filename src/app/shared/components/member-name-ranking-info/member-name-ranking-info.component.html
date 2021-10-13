@@ -9,7 +9,6 @@
     </ion-row>
     <ion-row class="ion-text-center">
         <ion-col>
-
             <ion-chip>
                 <ion-label>
                     <ion-row>
@@ -25,8 +24,15 @@
                     </ion-row>
                 </ion-label>
             </ion-chip>
-            <ion-chip>
+            <ion-chip *ngIf="displayELO">
                 <ion-label>ELO {{elo}}</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="displayNumericRanking">
+                <ion-label>BEL {{bel}}</ion-label>
+            </ion-chip>
+            <ion-chip *ngIf="displayNumericRanking">
+                <ion-icon [icon]="'podium-outline'" color="clear"></ion-icon>
+                <ion-label>{{belRanking}}</ion-label>
             </ion-chip>
 
         </ion-col>

@@ -9,16 +9,25 @@ import {WeeklyNumericRanking} from '../../../core/api/models/weekly-numeric-rank
     templateUrl: './weekly-elo.component.html',
     styleUrls: ['./weekly-elo.component.scss']
 })
-export class WeeklyEloComponent implements AfterViewInit, OnInit {
+export class WeeklyEloComponent implements OnInit, AfterViewInit {
+    private dataset: WeeklyNumericRanking[];
+
     type = 'line';
     data: ChartData;
     options: ChartOptions;
+    viewInit = false;
     @Input() prop: string;
     @Input() label: string;
     @Input() color: string;
+    @Input() marginVertical = true;
 
     @ViewChild('canvasElement') canvas: ElementRef<HTMLCanvasElement>;
-    @Input() numericRankings: WeeklyNumericRanking[] = [];
+
+    @Input() set numericRankings(numericRankings: WeeklyNumericRanking[]) {
+        this.dataset = numericRankings;
+        this.computeData();
+    }
+
 
     constructor() {
     }
@@ -27,8 +36,15 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
 
     }
 
-
     ngAfterViewInit() {
+        this.viewInit = true;
+        this.computeData()
+    }
+
+    computeData() {
+        if (!this.viewInit) {
+            return;
+        }
         const ctx = this.canvas.nativeElement.getContext('2d');
 
         const purpleOrangeGradient = ctx.createLinearGradient(0, 0, 0, 800);
@@ -36,12 +52,11 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
         purpleOrangeGradient.addColorStop(0, 'rgba(234,231,234,0)');
 
         this.data = {
-            labels: this.numericRankings.map(week => week.weekName),
-
+            labels: this.dataset.map(week => week.weekName),
             datasets: [
                 {
                     label: this.label,
-                    data: this.numericRankings.map(week => week[this.prop]),
+                    data: this.dataset.map(week => week[this.prop]),
                     tension: 0.5,
                     pointBackgroundColor: this.color,
                     pointBorderColor: this.color,
@@ -49,7 +64,7 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
                     backgroundColor: purpleOrangeGradient,
                     hoverBackgroundColor: purpleOrangeGradient,
                     fill: true
-                },
+                }
             ]
         };
 
@@ -68,7 +83,8 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
             },
             layout: {
                 padding: {
-                    left: -200
+                    left: -200,
+                    bottom: 0
                 }
             },
 
@@ -81,11 +97,21 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
                         }
                     },
                     time: {
-                        minUnit: 'day'
+                        minUnit: 'week',
+                        displayFormats: {
+                            day: 'dd/MM',
+                            week: 'dd/MM',
+                            month: 'MMM',
+                            quarter: 'MMM',
+                            year: 'MM/YYYY'
+                        }
                     },
                     grid: {
                         display: false,
                         drawBorder: false
+                    },
+                    ticks: {
+                        mirror: false
                     }
                 },
                 y: {
@@ -96,7 +122,6 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
                     ticks: {
                         mirror: true,
                         stepSize: 5
-                        // callback: (tick, index) => index % 2 ? tick : ''
                     }
                 }
             },
@@ -119,7 +144,9 @@ export class WeeklyEloComponent implements AfterViewInit, OnInit {
                 }
             }
         };
-        if (this.numericRankings.length === 1) {
+        if (this.dataset.length === 1) {
+            // @ts-ignore
+            this.options.scales.x.time.unit = 'day';
             this.options.elements.point.radius = 4;
         }
         console.log(this.data);

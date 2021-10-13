@@ -6,10 +6,8 @@
     <div class="extended-gradient"></div>
 
     <ion-toolbar color="transparent" mode="md">
-        <ion-title color="clear">BePing</ion-title>
-        <ion-buttons slot="start">
-            <beping-loading-btn [loading]="isLoading$ | async"></beping-loading-btn>
-        </ion-buttons>
+        <ion-title color="clear"><span [class.shining]="isLoading$ | async" [class.white]="!(isLoading$ | async)">BePing</span></ion-title>
+
         <ion-buttons slot="end">
             <ion-button (click)="openSettings()">
                 <ion-icon name="cog-outline" slot="icon-only"></ion-icon>
@@ -26,6 +24,8 @@
         <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry; else noMember">
 
             <beping-member-name-ranking-info
+                    [displayELO]="displayELO$|async"
+                    [displayNumericRanking]="displayNumericRanking$|async"
                     [member]="currentMemberEntry">
             </beping-member-name-ranking-info>
             <beping-card *ngIf="!(isLoggedIn$|async) && ((database|async) === TABT_DATABASES.AFTT)" [marging]="true"
@@ -40,27 +40,12 @@
                         [memberResultEntries]="currentMemberEntry.ResultEntries">
                 </beping-member-victory-chart>
 
-                <ng-container *ngIf="numericRankings$|async as numericRankings">
-                    <ion-row class="ion-no-padding">
-                        <ion-col class="ion-no-padding" size-md="6" size-xs="12">
-                            <beping-weekly-elo *ngIf="numericRankings"
-                                               [numericRankings]="numericRankings"
-                                               [prop]="'elo'"
-                                               [label]="'ELO'"
-                                               [color]="'#5B8BF7'"
-
-                            ></beping-weekly-elo>
-                        </ion-col>
-                        <ion-col class="ion-no-padding" size-md="6" size-xs="12">
-                            <beping-weekly-elo *ngIf="numericRankings"
-                                               [numericRankings]="numericRankings"
-                                               [prop]="'bel'"
-                                               [label]="'Numérique'"
-                                               [color]="'#ae5bf7'"
-
-                            ></beping-weekly-elo>
-                        </ion-col>
-                    </ion-row>
+                <ng-container *ngIf="currentMemberEntry.numericRankings">
+                    <beping-ranking-history-graphs
+                            [displayElo]="displayELO$|async"
+                            [displayNumericRanking]="displayNumericRanking$|async"
+                            [numericRankings]="currentMemberEntry.numericRankings">
+                    </beping-ranking-history-graphs>
                 </ng-container>
 
                 <beping-tie-break-played
