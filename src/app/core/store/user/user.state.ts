@@ -130,7 +130,6 @@ export class UserState implements NgxsOnInit {
         if (state.club) {
             this.analyticsService.setUserProperty('club', state.club.UniqueIndex);
         }
-        dispatch(new UpdateMemberEntries(state.memberUniqueIndex));
 
         if (state.lastUpdated < timeThreshold.getTime() && state.memberUniqueIndex) {
             dispatch(new UpdateMemberEntries(state.memberUniqueIndex));

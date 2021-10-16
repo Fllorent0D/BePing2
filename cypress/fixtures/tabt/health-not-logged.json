@@ -1,0 +1,11 @@
+{
+  "Timestamp": "2021-10-16T09:00:56.000Z",
+  "ApiVersion": "0.7.26",
+  "IsValidAccount": false,
+  "Language": "fr",
+  "Database": "aftt",
+  "RequestorIp": "127.0.0.1",
+  "ConsumedTicks": 13305178,
+  "CurrentQuota": 0,
+  "AllowedQuota": 30000
+}

@@ -42,5 +42,20 @@ export class RankingService {
         return '?';
     }
 
+    static isRankingHigher(a: string, b: string) {
+        if (a === b) {
+            return false;
+        }
+        const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+        const letterA = alphabet.indexOf(a.charAt(0).toLowerCase());
+        const letterB = alphabet.indexOf(b.charAt(0).toLowerCase());
+        const numberA = Number(a.replace(/\D/g, ''));
+        const numberB = Number(b.replace(/\D/g, ''));
+        if (letterA === letterB) {
+            return numberA < numberB;
+        }
 
+        return letterA < letterB;
+
+    }
 }

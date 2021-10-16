@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {MemberEntry} from '../../../core/api/models/member-entry';
 import {Platform} from '@ionic/angular';
 import {RankingMethodName, RankingService} from '../../../core/services/tabt/ranking.service';

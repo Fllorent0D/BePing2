@@ -180,10 +180,10 @@
                                               style="max-width: 57px; min-width: 26px"></ion-checkbox>
                                 <ion-label class="ion-text-wrap ion-text-left ion-padding-start text-small">
                                     {{'ONBOARDING.READ_AND_ACCEPT'|translate}}
-                                    <ion-text (click)="openCGU()"
+                                    <ion-text id="onboarding-cgu" (click)="openCGU()"
                                               color="primary">{{'ONBOARDING.TERMS_OF_USAGE'|translate}}</ion-text>
                                     {{'ONBOARDING.AND'|translate}}
-                                    <ion-text (click)="openPrivacy()"
+                                    <ion-text id="onboarding-privacy-policy" (click)="openPrivacy()"
                                               color="primary">{{'ONBOARDING.PRIVACY_POLICY'|translate}}</ion-text>
                                     {{'ONBOARDING.OF_BEPING'|translate}}</ion-label>
                             </div>
@@ -193,6 +193,7 @@
                                     [disabled]="!acceptTermControl.value"
                                     [expand]="'block'"
                                     color="primary"
+                                    id="onboarding-start-beping"
                                     fill="solid">
                                 <ion-label>
                                     {{'ONBOARDING.START_BEPING'|translate}}
@@ -205,7 +206,9 @@
                                     *ngIf="state.hasError"
                                     [expand]="'block'"
                                     color="warning"
-                                    fill="solid">
+                                    fill="solid"
+                                    id="onboarding-retry"
+                            >
                                 <ion-label>
                                     {{'ONBOARDING.RETRY'|translate}}
                                 </ion-label>

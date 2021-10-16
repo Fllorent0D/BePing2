@@ -57,7 +57,7 @@ export class SettingsState implements NgxsOnInit {
 
     @Selector([UserState])
     static getCurrentDatabase(state: UserStateModel): TABT_DATABASES {
-        if (VTTL_CLUB_CATEGORIES.includes(state.club.Category)) {
+        if (VTTL_CLUB_CATEGORIES.includes(state?.club?.Category)) {
             return TABT_DATABASES.VTTL;
         }
         return TABT_DATABASES.AFTT;

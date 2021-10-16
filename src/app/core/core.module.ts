@@ -42,10 +42,10 @@ export function HttpLoaderFactory(http: HttpClient) {
                         if (state?.user?.weeklyElo) {
                             delete state.user.weeklyElo;
                         }
-                        if (!state.settings.hasOwnProperty('displayELO')) {
+                        if (!state?.settings?.hasOwnProperty('displayELO') && state?.user?.club) {
                             state.settings.displayELO = VTTL_CLUB_CATEGORIES.includes(state.user.club.Category);
                         }
-                        if (!state.settings.hasOwnProperty('displayNumericRanking')) {
+                        if (!state.settings.hasOwnProperty('displayNumericRanking') && state?.user?.club) {
                             state.settings.displayNumericRanking = AFTT_CLUB_CATEGORIES.includes(state.user.club.Category);
                         }
                         console.log('Running migration to version 1');
