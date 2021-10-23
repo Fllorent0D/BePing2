@@ -88,6 +88,12 @@ export class TeamMatchResultComponent implements OnInit {
                         }
                     },
                     {
+                        text: this.translate.instant('MATCH_ENTRY_SHEET.HELP_MATCH_SHEET', {team: this.match.AwayTeam}),
+                        handler: () => {
+                            this.tabNavigation.navigateTo(['team-match-details', 'match-sheet-helper'], {state: {match: this.match}});
+                        }
+                    },
+                    {
                         text: this.translate.instant('COMMON.CANCEL'),
                         role: 'cancel',
                         handler: () => {

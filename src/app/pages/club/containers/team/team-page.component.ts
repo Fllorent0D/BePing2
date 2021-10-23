@@ -82,6 +82,7 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
                 club: clubIndex,
                 team: team.Team,
                 divisionId: team.DivisionId,
+                showDivisionName: 'short',
                 withDetails: true
             })),
             shareReplay(1)

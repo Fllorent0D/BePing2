@@ -56,7 +56,11 @@
     "AVAILABLE_SOON": "Disponible bientôt",
     "NO_INFO": "Pas d'informations",
     "DATE": "Date",
-    "RANKINGS": "Classements"
+    "RANKINGS": "Classements",
+    "CATEGORY": "Catégorie",
+    "VENUE": "Local",
+    "SERIE": "Série",
+    "TIME": "Heure"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Se connecter avec resultats.aftt.be",

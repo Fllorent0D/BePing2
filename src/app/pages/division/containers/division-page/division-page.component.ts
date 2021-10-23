@@ -69,7 +69,7 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
         );
 
         this.matches$ = this.divisionId$.pipe(
-            switchMap((id: number) => this.matchesService.findAllMatches({divisionId: id})),
+            switchMap((id: number) => this.matchesService.findAllMatches({divisionId: id, showDivisionName: 'short'})),
             share()
         );
 

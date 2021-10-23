@@ -56,7 +56,11 @@
     "AVAILABLE_SOON": "Binnenkort beschikbaar",
     "NO_INFO": "Geen informatie",
     "DATE": "Datum",
-    "RANKINGS": "Rangschikking"
+    "RANKINGS": "Rangschikking",
+    "CATEGORY": "Categorie",
+    "VENUE": "Lokaal",
+    "SERIE": "Reeks",
+    "TIME": "Uur"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Login to resultats.aftt.be",

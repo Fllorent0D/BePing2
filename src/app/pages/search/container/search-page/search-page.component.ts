@@ -13,6 +13,7 @@ import {MatchesService} from '../../../../core/api/services/matches.service';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
+import {RateApp} from 'capacitor-rate-app';
 
 interface SearchResults<T> {
     results?: T[];
@@ -116,6 +117,7 @@ export class SearchPageComponent implements OnInit {
                         () => matchSheetRegex.test(val),
                         this.matchesService.findAllMatches({
                             matchId: val,
+                            showDivisionName: 'short',
                             weekName: Number(groups?.[2])
                         }).pipe(
                             map((results) => ({isLoading: false, results})),
@@ -157,19 +159,22 @@ export class SearchPageComponent implements OnInit {
 
     clubClicked(club: ClubEntry) {
         this.tabNavigator.navigateTo(['clubs', club.UniqueIndex]);
+        RateApp.requestReview();
     }
 
     memberClicked(member: MemberEntry) {
         this.tabNavigator.navigateTo(['player', member.UniqueIndex.toString(10)]);
-
+        RateApp.requestReview();
     }
 
     divisionClicked(division: DivisionEntry) {
         this.tabNavigator.navigateTo(['divisions', division.DivisionId.toString(10)]);
+        RateApp.requestReview();
     }
 
     matchClicked(teamMatchEntry: TeamMatchesEntry) {
         this.tabNavigator.navigateTo(['team-match-details', teamMatchEntry.MatchUniqueId.toString(10)]);
+        RateApp.requestReview();
     }
 
 }

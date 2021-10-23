@@ -56,7 +56,12 @@
     "AVAILABLE_SOON": "Available soon",
     "NO_INFO": "No information",
     "DATE": "Date",
-    "RANKINGS": "Rankings"
+    "RANKINGS": "Rankings",
+    "CATEGORY": "Category",
+    "VENUE": "Venue",
+    "SERIE": "Serie",
+    "TIME": "Time",
+    "DATE"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Login to resultats.aftt.be",

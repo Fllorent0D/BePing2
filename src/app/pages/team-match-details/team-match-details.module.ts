@@ -7,6 +7,9 @@ import {TeamMatchPlayerItemComponent} from './components/team-match-player-list/
 import {IndividualMatchesListComponent} from './components/individual-matches-list/individual-matches-list.component';
 import {TeamMatchScoreComponent} from './components/team-match-score/team-match-score.component';
 import {TeamMatchIndividualMatchComponent} from './components/individual-matches-list/individual-match/individual-match.component';
+import { MatchSheetHelperPage } from './containers/team-match-helper-page/match-sheet-helper-page.component';
+import { TeamMatchInfoListComponent } from './components/team-match-info-list/team-match-info-list.component';
+import { MemberListOfStrenghCheckboxComponent } from './components/member-list-of-strengh-checkbox/member-list-of-strengh-checkbox.component';
 
 
 @NgModule({
@@ -16,7 +19,10 @@ import {TeamMatchIndividualMatchComponent} from './components/individual-matches
         TeamMatchPlayerItemComponent,
         IndividualMatchesListComponent,
         TeamMatchScoreComponent,
-        TeamMatchIndividualMatchComponent
+        TeamMatchIndividualMatchComponent,
+        MatchSheetHelperPage,
+        TeamMatchInfoListComponent,
+        MemberListOfStrenghCheckboxComponent
     ],
     imports: [
         SharedModule,
