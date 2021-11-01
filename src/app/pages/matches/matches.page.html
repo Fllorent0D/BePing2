@@ -23,63 +23,46 @@
     -->
 </ion-header>
 <ion-content fullscreen>
-    <!--
-    <super-tabs #superTabs>
-        <super-tabs-container>
-            <super-tab>
-                <ion-list>
-                    <ion-item detail *ngFor="let club of favoritesClub | async"
-                              (click)="navigateToClub(club.uniqueIndex)">
-                        <ion-label class="ion-text-wrap">
-                            <h3>{{club.label}}</h3>
-                        </ion-label>
-                        <ion-note slot="end" *ngIf="club.note">{{club.note}}</ion-note>
-                    </ion-item>
-                </ion-list>
-
-            </super-tab>
-            <super-tab>
-                <ion-list>
-
-
-                </ion-list>
-            </super-tab>
-            <super-tab>
-                <ion-list>
-                    <ion-item detail *ngFor="let club of favoritesClub | async"
-                              (click)="navigateToClub(club.uniqueIndex)">
-                        <ion-label class="ion-text-wrap">
-                            <h3>{{club.label}}</h3>
-                        </ion-label>
-                        <ion-note slot="end" *ngIf="club.note">{{club.note}}</ion-note>
-                    </ion-item>
-
-                </ion-list>
-            </super-tab>
-            <super-tab>
-                <ion-list>
-                    <ion-item detail *ngFor="let division of favoritesDivision | async"
-                              (click)="navigateToClub(division.uniqueIndex)">
-                        <ion-label class="ion-text-wrap">
-                            <h3>{{division.label}}</h3>
-                        </ion-label>
-                        <ion-note slot="end" *ngIf="division.note">{{division.note}}</ion-note>
-                    </ion-item>
-
-                </ion-list>
-            </super-tab>
-
-        </super-tabs-container>
-    </super-tabs>
-
--->
+    <ion-button
+            *ngIf="memberClub | async as club"
+            (click)="navigateToURI(['clubs', club.UniqueIndex])"
+            class="ion-margin-top ion-padding-horizontal"
+            size="medium"
+            fill="outline"
+            expand="block">
+        <ion-icon name="star-outline" slot="start"></ion-icon>
+        <ion-label>
+            {{club.UniqueIndex}} - {{club.LongName}}
+        </ion-label>
+    </ion-button>
     <ng-container *ngIf="hasFavorites$ | async; else noFavorite">
+        <ng-container *ngIf="favoritesTeam | async as teams">
+            <ion-list>
+                <ion-list-header>
+                    {{'COMMON.TEAMS'|translate}}
+                </ion-list-header>
+                <ion-item (click)="navigateToURI(team.uri)" *ngFor="let team of teams"
+                          detail>
+                    <ion-label class="ion-text-wrap">
+                        <h3>{{team.label}}</h3>
+                    </ion-label>
+                    <ion-note *ngIf="team.note" slot="end">{{'PLAYER_CATEGORY.' + team.note|translate}}</ion-note>
+                </ion-item>
+                <ng-container *ngIf="teams.length === 0">
+                    <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
+                        <h3>{{'FAVORITES.NO_TEAM'|translate}}</h3>
+                    </ion-label>
+                </ng-container>
+
+            </ion-list>
+
+        </ng-container>
         <ng-container *ngIf="favoritesClub | async as clubs">
             <ion-list>
                 <ion-list-header>
                     {{'COMMON.CLUBS'|translate}}
                 </ion-list-header>
-                <ion-item (click)="navigateToClub(club.uniqueIndex)" *ngFor="let club of clubs"
+                <ion-item (click)="navigateToURI(club.uri)" *ngFor="let club of clubs"
                           detail>
                     <ion-label class="ion-text-wrap">
                         <h3>{{club.label}}</h3>
@@ -99,9 +82,8 @@
             <ion-list>
                 <ion-list-header>
                     {{'COMMON.DIVISIONS'|translate}}
-
                 </ion-list-header>
-                <ion-item (click)="navigateToDivisions(division.uniqueIndex)" *ngFor="let division of divisions"
+                <ion-item (click)="navigateToURI(division.uri)" *ngFor="let division of divisions"
                           detail>
                     <ion-label class="ion-text-wrap">
                         <h3>{{division.label}}</h3>
@@ -124,7 +106,7 @@
                     {{'COMMON.PLAYERS'|translate}}
 
                 </ion-list-header>
-                <ion-item (click)="navigateToMember(member.uniqueIndex)" *ngFor="let member of members"
+                <ion-item (click)="navigateToURI(member.uri)" *ngFor="let member of members"
                           detail>
                     <ion-label class="ion-text-wrap">
                         <h3>{{member.label | titlecase}}</h3>

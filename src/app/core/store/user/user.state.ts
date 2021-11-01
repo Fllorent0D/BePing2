@@ -6,7 +6,8 @@ import {
     ClubTransfer,
     HasSeenOnBoarding,
     SetLoading,
-    SetUser, UpdateClubEntry,
+    SetUser,
+    UpdateClubEntry,
     UpdateLatestMatchesSuccess,
     UpdateMainCategory,
     UpdateMemberEntries,
@@ -108,6 +109,11 @@ export class UserState implements NgxsOnInit {
         return state.mainCategory;
     }
 
+    @Selector([UserState])
+    static getMemberClub(state: UserStateModel): ClubEntry | void {
+        return state.club;
+    }
+
     static getMemberEntryForCategory(category: PLAYER_CATEGORY) {
         return createSelector([UserState], (userState: UserStateModel) => {
             return userState.memberEntries[category];
@@ -205,7 +211,7 @@ export class UserState implements NgxsOnInit {
                 // @ts-ignore
                 return patchState({memberEntries: patchStateObj});
             }),
-            catchError(() => of(null)),
+            catchError(() => of(null))
         );
     }
 

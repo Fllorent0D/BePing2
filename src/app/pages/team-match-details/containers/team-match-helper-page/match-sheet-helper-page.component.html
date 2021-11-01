@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'MATCH_ENTRY_SHEET.HELP_MATCH_SHEET'|translate}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <beping-team-match-info-list *ngIf="match" [match]="match"></beping-team-match-info-list>
+    <ion-list-header>
+        {{ 'CLUB_DETAILS.LIST_OF_STRENGTH' | translate }}
+    </ion-list-header>
+    <ion-segment class="ion-padding" [(ngModel)]="club">
+        <ion-segment-button value="home" >
+            <ion-label>{{ 'COMMON.HOME_TEAM' | translate }}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="away">
+            <ion-label>{{ 'COMMON.AWAY_TEAM' | translate }}</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    <beping-member-list-of-strengh-checkbox [players]="club === 'home' ? (homeMembers$|async) : (awayMembers$|async)"></beping-member-list-of-strengh-checkbox>
+</ion-content>

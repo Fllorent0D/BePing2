@@ -1,0 +1,41 @@
+<ion-list>
+    <ion-list-header>
+        {{ 'MATCH_ENTRY_SHEET.MATCH_DETAILS' | translate }}
+    </ion-list-header>
+    <ion-item>
+        <ion-label class="text-bold">{{'COMMON.HOME_TEAM'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{match.HomeTeam}} [{{match.HomeClub}}]</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class="text-bold">{{'COMMON.AWAY_TEAM'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{match.AwayTeam}} [{{match.AwayClub}}]</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class="text-bold">{{'COMMON.CATEGORY'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{'PLAYER_CATEGORY.'+match.DivisionCategory | translate}}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class="text-bold">{{'COMMON.VENUE'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{match.VenueEntry?.Street}}, {{match.VenueEntry?.Town}}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class="text-bold">{{'COMMON.DIVISION'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{getDivisionNumber(match.DivisionName)}}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class="text-bold">{{'COMMON.SERIE'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{getDivisionSerie(match.DivisionName)}}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class="text-bold">{{'COMMON.DATE'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{match.Date | localizedDate:'dd/MM/YYYY'}}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class="text-bold">{{'COMMON.TIME'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{match.Time}}</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-label class="text-bold">{{'MATCH_ENTRY_SHEET.MATCH_NUMBER'|translate}}</ion-label>
+        <ion-label class="ion-text-end ion-text-wrap">{{match.MatchId}}</ion-label>
+    </ion-item>
+</ion-list>

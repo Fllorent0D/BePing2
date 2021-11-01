@@ -60,8 +60,7 @@
     "CATEGORY": "Category",
     "VENUE": "Venue",
     "SERIE": "Serie",
-    "TIME": "Time",
-    "DATE"
+    "TIME": "Time"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Login to resultats.aftt.be",
@@ -423,5 +422,11 @@
     "RETRY": "Retry",
     "AN_ERROR_OCCURED": "An error occurred while preparing BePing",
     "PREPARATION": "BePing is getting ready..."
+  },
+  "ERROR_TABT": {
+    "INTERNAL": "A technical problem occurred. Please try again later. Error: {{error}}",
+    "BAD_REQUEST": "BePing has sent the wrong information to the server. Error: {{error}}",
+    "FORBIDDEN": "The BePing server does not allow you to see this information.",
+    "TOO_MANY_REQUESTS": "Please wait a few minutes before you try again"
   }
 }

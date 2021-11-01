@@ -4,6 +4,12 @@
             <ion-back-button [text]="'BACK'|translate"></ion-back-button>
         </ion-buttons>
         <ion-title>{{(clubIndex$ | async)}} {{(team$ | async)?.Team}}</ion-title>
+        <ion-buttons slot="end">
+            <beping-favorite-btn
+                    (clicked)="toggleFavorite()"
+                    [enabled]="isFavorite$|async"
+            ></beping-favorite-btn>
+        </ion-buttons>
     </ion-toolbar>
     <ion-toolbar>
         <div #scrollMenu class="scrollmenu">

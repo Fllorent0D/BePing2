@@ -1,6 +1,11 @@
 import {Action, createSelector, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {ToggleClubFromFavorites, ToggleDivisionFromFavorites, ToggleMemberFromFavorites} from './favorites.actions';
+import {
+    ToggleClubFromFavorites,
+    ToggleDivisionFromFavorites,
+    ToggleMemberFromFavorites,
+    ToggleTeamsFromFavorites
+} from './favorites.actions';
 import {HapticsService} from '../../services/haptics.service';
 import {ImpactStyle} from '@capacitor/haptics';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
@@ -8,6 +13,7 @@ import {AnalyticsService} from '../../services/firebase/analytics.service';
 export interface FavoriteItem<T = string | number> {
     uniqueIndex: T;
     label: string;
+    uri?: string[];
     note?: string;
 }
 
@@ -15,15 +21,16 @@ export interface FavoritesStateModel {
     clubs: FavoriteItem<string>[];
     divisions: FavoriteItem<number>[];
     members: FavoriteItem<number>[];
+    teams: FavoriteItem<string>[];
 }
-
 
 @State<FavoritesStateModel>({
     name: 'favorites',
     defaults: {
         clubs: [],
         divisions: [],
-        members: []
+        members: [],
+        teams: []
     }
 })
 @Injectable()
@@ -37,6 +44,12 @@ export class FavoritesState {
     static isClubInFavorite(clubUniqueIndex: string) {
         return createSelector([FavoritesState], (state: FavoritesStateModel): boolean => {
             return !!state.clubs.find((item) => clubUniqueIndex === item.uniqueIndex);
+        });
+    }
+
+    static isTeamInFavorite(index: string) {
+        return createSelector([FavoritesState], (state: FavoritesStateModel): boolean => {
+            return !!state.teams.find((item) => index === item.uniqueIndex);
         });
     }
 
@@ -60,6 +73,11 @@ export class FavoritesState {
     @Selector([FavoritesState])
     static favoriteDivision(state: FavoritesStateModel) {
         return state.divisions;
+    }
+
+    @Selector([FavoritesState])
+    static favoriteTeams(state: FavoritesStateModel) {
+        return state.teams;
     }
 
     @Selector([FavoritesState])
@@ -111,6 +129,21 @@ export class FavoritesState {
 
         return patchState({
             divisions: newFavorites
+        });
+    }
+
+    @Action([ToggleTeamsFromFavorites])
+    toggleTeamFromFavorites({getState, patchState}: StateContext<FavoritesStateModel>, {payload}: ToggleTeamsFromFavorites) {
+        const state = getState();
+        const alreadyInFavorites = !!(state.teams ?? []).find((item) => payload.uniqueIndex === item.uniqueIndex);
+
+        const newFavorites = alreadyInFavorites ?
+            (state.teams ?? []).filter(item => item.uniqueIndex !== payload.uniqueIndex) :
+            [...(state.teams ?? []), payload];
+        this.analyticsService.logEvent(alreadyInFavorites ? 'remove_teams_favorites' : 'add_teams_favorites', {team: payload.uniqueIndex});
+
+        return patchState({
+            teams: newFavorites
         });
     }
 

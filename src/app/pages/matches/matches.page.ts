@@ -4,6 +4,8 @@ import {FavoriteItem, FavoritesState} from '../../core/store/favorites';
 import {combineLatest, Observable} from 'rxjs';
 import {Select} from '@ngxs/store';
 import {map} from 'rxjs/operators';
+import {UserState} from '../../core/store/user/user.state';
+import {ClubEntry} from '../../core/api/models/club-entry';
 
 @Component({
     selector: 'beping-matches',
@@ -15,14 +17,14 @@ export class MatchesPage implements OnInit {
     @Select(FavoritesState.favoriteClubs) favoritesClub: Observable<FavoriteItem<string>[]>;
     @Select(FavoritesState.favoriteMembers) favoritesMember: Observable<FavoriteItem<number>[]>;
     @Select(FavoritesState.favoriteDivision) favoritesDivision: Observable<FavoriteItem<number>[]>;
+    @Select(FavoritesState.favoriteTeams) favoritesTeam: Observable<FavoriteItem<string>[]>;
 
+    @Select(UserState.getMemberClub) memberClub: Observable<ClubEntry | void>;
     hasFavorites$: Observable<boolean>;
 
     constructor(
         private readonly tabsNavigationService: TabsNavigationService,
-        private readonly changeDetectorRef: ChangeDetectorRef
     ) {
-        // super(changeDetectorRef);
     }
 
     ngOnInit() {
@@ -35,16 +37,8 @@ export class MatchesPage implements OnInit {
         );
     }
 
-    navigateToClub(index: string) {
-        this.tabsNavigationService.navigateTo(['clubs', index]);
-    }
-
-    navigateToMember(index: number) {
-        this.tabsNavigationService.navigateTo(['player', index.toString(10)]);
-    }
-
-    navigateToDivisions(index: number) {
-        this.tabsNavigationService.navigateTo(['divisions', index.toString(10)]);
+    navigateToURI(uri: string[]) {
+        this.tabsNavigationService.navigateTo(uri);
     }
 
 

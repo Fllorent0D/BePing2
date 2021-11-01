@@ -24,21 +24,20 @@ export class TeamMatchIndividualMatchComponent implements OnInit {
         if (this.individualMatch.HomeSetCount < this.individualMatch.AwaySetCount) {
             return false;
         }
-        const pos = this.individualMatch.Position;
         const awayPlayer = this.awayPlayer.find((player) => player.UniqueIndex === this.individualMatch.AwayPlayerUniqueIndex[0]);
         const homePlayer = this.homePlayer.find((player) => player.UniqueIndex === this.individualMatch.HomePlayerUniqueIndex[0]);
-        return RankingService.isRankingHigher(awayPlayer.Ranking, homePlayer.Ranking);
+
+        return !!awayPlayer && !!homePlayer && RankingService.isRankingHigher(awayPlayer.Ranking, homePlayer.Ranking);
     }
 
     isAwayPerf(): boolean {
         if (this.individualMatch.HomeSetCount > this.individualMatch.AwaySetCount) {
             return false;
         }
-        const pos = this.individualMatch.Position;
 
         const awayPlayer = this.awayPlayer.find((player) => player.UniqueIndex === this.individualMatch.AwayPlayerUniqueIndex[0]);
         const homePlayer = this.homePlayer.find((player) => player.UniqueIndex === this.individualMatch.HomePlayerUniqueIndex[0]);
-        return RankingService.isRankingHigher(homePlayer.Ranking, awayPlayer.Ranking, );
+        return !!awayPlayer && !!homePlayer && RankingService.isRankingHigher(homePlayer.Ranking, awayPlayer.Ranking);
     }
 
 }

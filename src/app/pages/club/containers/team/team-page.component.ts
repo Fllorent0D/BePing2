@@ -7,7 +7,7 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {DivisionsService} from '../../../../core/api/services/divisions.service';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
 import {TeamEntry} from '../../../../core/api/models/team-entry';
-import {map, shareReplay, switchMap, take, tap} from 'rxjs/operators';
+import {map, shareReplay, switchMap, take} from 'rxjs/operators';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
@@ -16,6 +16,7 @@ import {Store} from '@ngxs/store';
 import {TeamPlayersStatsService} from '../../services/team-players-stats.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {MemberResults} from '../../../../core/api/models/member-results';
+import {FavoriteItem, FavoritesState, ToggleTeamsFromFavorites} from '../../../../core/store/favorites';
 
 @Component({
     selector: 'beping-teams',
@@ -34,6 +35,8 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
     team$: Observable<TeamEntry>;
     clubIndex$: Observable<string>;
     club$: Observable<ClubEntry>;
+
+    isFavorite$: Observable<boolean>;
 
     constructor(
         private readonly divisionsService: DivisionsService,
@@ -74,6 +77,10 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
             shareReplay(1)
         );
 
+        this.isFavorite$ = this.team$.pipe(
+            switchMap((team: TeamEntry) => this.store.select(FavoritesState.isTeamInFavorite(team.TeamId)))
+        );
+
         this.calendar$ = combineLatest([
             this.clubIndex$,
             this.team$
@@ -94,10 +101,8 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         ]).pipe(
             switchMap(([team, club]: [TeamEntry, ClubEntry]) =>
                 this.clubsService.findClubTeamsMemberRanking({clubIndex: club.UniqueIndex, teamId: team.TeamId})
-            ),
-            tap((t) => console.log('ttt', t))
+            )
         );
-
 
         this.ranking$ = this.team$.pipe(
             switchMap((team: TeamEntry) => this.divisionsService.findDivisionRanking({divisionId: team.DivisionId})),
@@ -116,8 +121,6 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
     }
 
     teamSelected(rankingEntry: RankingEntry) {
-        console.log(rankingEntry);
-
         combineLatest([
             this.store.select(ClubsState.getClubByUniqueIndex(rankingEntry.TeamClub)),
             this.clubsService.findClubTeams({clubIndex: rankingEntry.TeamClub}),
@@ -133,5 +136,17 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
             this.tabsNavigation.navigateTo(['clubs', club.UniqueIndex, 'team', team.TeamId]);
         });
 
+    }
+
+    toggleFavorite() {
+        combineLatest([this.club$, this.team$]).pipe(
+            map(([club, team]) => (new ToggleTeamsFromFavorites({
+                uniqueIndex: team.TeamId,
+                uri: ['clubs', club.UniqueIndex, 'team', team.TeamId],
+                note: team.DivisionCategory,
+                label: club.Name + ' ' + team.Team
+            } as FavoriteItem<string>))),
+            switchMap((favItem) => this.store.dispatch(favItem))
+        ).subscribe();
     }
 }

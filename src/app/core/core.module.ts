@@ -12,12 +12,14 @@ import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {AFTT_CLUB_CATEGORIES, TabtDatabaseInterceptor, VTTL_CLUB_CATEGORIES} from './interceptors/tabt-database-interceptor.service';
 import {TabtCredentialsInterceptor} from './interceptors/tabt-credentials-interceptor.service';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {BepingUserAgentInterceptor} from './interceptors/beping-user-agent.interceptor';
 import {DialogService} from '../shared/services/dialog-service.service';
+import {TabtHttpErrorHandlerInterceptor} from './interceptors/tabt-http-error-handler-interceptor.service';
+import {FavoriteItem} from './store/favorites';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -54,7 +56,58 @@ export function HttpLoaderFactory(http: HttpClient) {
                             version: 1
                         };
                     }
+                },
+                {
+                    version: 1,
+                    migrate: (state) => {
+                        if (!state) {
+                            return;
+                        }
+                        // clubs/N051
+                        // player/118444
+                        // divisions/5780
+                        console.log('Running migration to version 2');
+
+                        if (state?.favorites?.clubs?.length) {
+                            state.favorites.clubs = state?.favorites?.clubs.map(
+                                (favClub: FavoriteItem<string>): FavoriteItem<string> => {
+                                    return {
+                                        ...favClub,
+                                        uri: ['clubs', favClub.uniqueIndex]
+                                    };
+                                });
+                        }
+
+                        if (state?.favorites?.divisions?.length) {
+                            state.favorites.divisions = state?.favorites?.divisions.map(
+                                (favDivision: FavoriteItem<number>): FavoriteItem<number> => {
+                                    return {
+                                        ...favDivision,
+                                        uri: ['divisions', favDivision.uniqueIndex.toString()]
+                                    };
+                                });
+                        }
+                        if (state?.favorites?.members?.length) {
+                            state.favorites.members = state?.favorites?.members.map(
+                                (favMember: FavoriteItem<number>): FavoriteItem<number> => {
+                                    return {
+                                        ...favMember,
+                                        uri: ['player', favMember.uniqueIndex.toString()]
+                                    };
+                                });
+                        }
+                        if (!state?.favorites?.teams) {
+                            state.favorites.teams = [];
+                        }
+
+                        return {
+                            ...state,
+                            version: 2
+                        };
+                    }
                 }
+
+
             ]
         }),
         NgxsModule.forRoot(
@@ -84,6 +137,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         LeafletModule
     ],
     providers: [
+        TranslateService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TabtDatabaseInterceptor,
@@ -97,6 +151,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         {
             provide: HTTP_INTERCEPTORS,
             useClass: BepingUserAgentInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TabtHttpErrorHandlerInterceptor,
             multi: true
         },
         DialogService

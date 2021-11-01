@@ -425,5 +425,11 @@
     "RETRY": "Opnieuw proberen",
     "AN_ERROR_OCCURED": "Er is een fout opgetreden tijdens het voorbereiden van BePing",
     "PREPARATION": "BePing maakt zich klaar..."
+  },
+  "ERROR_TABT": {
+    "INTERNAL": "Er heeft zich een technisch probleem voorgedaan. Probeer het later nog eens. Fout: {{error}}",
+    "BAD_REQUEST": "BePing heeft de verkeerde informatie naar de server gestuurd. Fout: {{error}}",
+    "FORBIDDEN": "De BePing server staat niet toe dat u deze informatie ziet.",
+    "TOO_MANY_REQUESTS": "Wacht een paar minuten voordat u het opnieuw probeert."
   }
 }

@@ -422,5 +422,11 @@
     "RETRY": "Réessayer",
     "AN_ERROR_OCCURED": "Une erreur est survenue lors de l'activation de BePing",
     "PREPARATION": "Préparation de BePing en cours..."
+  },
+  "ERROR_TABT": {
+    "INTERNAL": "Un problème technique est survenu. Veuillez réessayer plus tard. Erreur: {{error}}",
+    "BAD_REQUEST": "BePing a envoyé une mauvaise information au serveur. Erreur: {{error}}",
+    "FORBIDDEN": "Le serveur de BePing ne vous authorize pas à voir cette information",
+    "TOO_MANY_REQUESTS": "Veuillez attendre quelques minutes avant de réessayer"
   }
 }
