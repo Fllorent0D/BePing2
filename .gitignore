@@ -29,3 +29,7 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+node_modules/
+ios/
+android/
+android_old/
