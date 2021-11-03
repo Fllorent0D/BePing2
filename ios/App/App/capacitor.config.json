@@ -1,0 +1,17 @@
+{
+	"appId": "be.floca.beping",
+	"appName": "BePing",
+	"bundledWebRuntime": true,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0
+		},
+		"Keyboard": {
+			"resize": "body",
+			"style": "dark"
+		}
+	},
+	"cordova": {}
+}
