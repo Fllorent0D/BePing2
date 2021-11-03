@@ -32,6 +32,8 @@ import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {NgPipesModule} from 'ngx-pipes';
 import {DialogService} from './services/dialog-service.service';
 import {RankingHistoryGraphsComponent} from './components/ranking-history-graphs/ranking-history-graphs.component';
+import { WeekSelectorComponent } from './components/week-selector/week-selector.component';
+import { TeamMatchesEntryListComponent } from './components/team-matches-entry-list/team-matches-entry-list.component';
 
 const COMPONENTS = [
     RankingComponent,
@@ -71,6 +73,8 @@ const DIRECTIVES = [
         COMPONENTS,
         DIRECTIVES,
         PIPES,
+        WeekSelectorComponent,
+        TeamMatchesEntryListComponent,
     ],
     exports: [
         CommonModule,
@@ -83,6 +87,8 @@ const DIRECTIVES = [
         SuperTabsModule,
         COMPONENTS,
         PIPES,
+        WeekSelectorComponent,
+        TeamMatchesEntryListComponent,
     ],
     imports: [
         CommonModule,

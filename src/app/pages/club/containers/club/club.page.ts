@@ -77,9 +77,9 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
             switchMap((club) => this.clubService.findClubTeams({clubIndex: club.UniqueIndex}))
         );
 
-        //this.matches$ = this.club$.pipe(
-        //   switchMap((club) => this.matchesService.findAllMatches({club: club.UniqueIndex})),
-        //);
+        this.matches$ = this.club$.pipe(
+            switchMap((club) => this.matchesService.findAllMatches({club: club.UniqueIndex})),
+        );
 
         this.venues$ = this.club$.pipe(
             map((club) => club.VenueEntries)

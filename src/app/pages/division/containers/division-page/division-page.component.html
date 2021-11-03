@@ -16,11 +16,11 @@
             <ion-chip (click)="selectTab(0)" [class.act]="tabIndex === 0" color="dark" id="tab1">
                 <ion-label>{{'TEAM_STAT.RANKING' | translate}}</ion-label>
             </ion-chip>
-            <ion-chip (click)="selectTab(1)" [class.act]="tabIndex === 1" color="dark" id="tab2" outline>
-                <ion-label>{{'COMMON.PLAYERS' | translate}}</ion-label>
-            </ion-chip>
-            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="dark" id="tab3" outline>
+            <ion-chip (click)="selectTab(1)" [class.act]="tabIndex === 1" color="dark" id="tab3" outline>
                 <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
+            </ion-chip>
+            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="dark" id="tab2" outline>
+                <ion-label>{{'COMMON.PLAYERS' | translate}}</ion-label>
             </ion-chip>
         </div>
     </ion-toolbar>
@@ -102,6 +102,9 @@
                 </ng-container>
             </super-tab>
             <super-tab>
+                <beping-team-matches-entry-list [teamMatchEntries$]="matches$"></beping-team-matches-entry-list>
+            </super-tab>
+            <super-tab>
                 <cdk-virtual-scroll-viewport itemSize="70" maxBufferPx="1350"
                                              minBufferPx="900">
                     <ion-header>
@@ -128,7 +131,8 @@
 
                     </ion-header>
                     <ion-list>
-                        <ion-item (click)="navigateToPlayer(stat.uniqueIndex)" *cdkVirtualFor="let stat of memberRanking$|async"
+                        <ion-item (click)="navigateToPlayer(stat.uniqueIndex)"
+                                  *cdkVirtualFor="let stat of memberRanking$|async"
                                   detail>
                             <ion-grid>
                                 <ion-row class="ion-align-items-center">
@@ -167,16 +171,7 @@
                 </cdk-virtual-scroll-viewport>
 
             </super-tab>
-            <super-tab>
-                <cdk-virtual-scroll-viewport
-                        itemSize="70"
-                        maxBufferPx="1350"
-                        minBufferPx="900">
-                    <beping-team-match-result *cdkVirtualFor="let match of matches$ | async"
-                                              [match]="match"></beping-team-match-result>
-                </cdk-virtual-scroll-viewport>
 
-            </super-tab>
         </super-tabs-container>
     </super-tabs>
 

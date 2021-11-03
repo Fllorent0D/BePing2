@@ -282,6 +282,7 @@ ion-list {
 }
 
 ion-popover {
+  --max-height: 500px;
   .popover-wrapper {
     .popover-content {
       width: 80vw;

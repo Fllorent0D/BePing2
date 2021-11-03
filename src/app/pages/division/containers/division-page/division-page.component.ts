@@ -17,6 +17,7 @@ import {TeamEntry} from '../../../../core/api/models/team-entry';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {FavoritesState, ToggleDivisionFromFavorites} from '../../../../core/store/favorites';
+import {FormControl} from '@angular/forms';
 
 @Component({
     selector: 'beping-division-page',
@@ -31,7 +32,6 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
     memberRanking$: Observable<MemberResults[]>;
     matches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
-
     constructor(
         protected readonly changeDetectionRef: ChangeDetectorRef,
         protected readonly activatedRouted: ActivatedRoute,
@@ -70,7 +70,7 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
 
         this.matches$ = this.divisionId$.pipe(
             switchMap((id: number) => this.matchesService.findAllMatches({divisionId: id, showDivisionName: 'short'})),
-            share()
+            shareReplay(1)
         );
 
 
@@ -83,8 +83,6 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
     }
 
     navigateToTeam(rankingEntry: RankingEntry) {
-        console.log(rankingEntry);
-
         combineLatest([
             this.store.select(ClubsState.getClubByUniqueIndex(rankingEntry.TeamClub)),
             this.clubsService.findClubTeams({clubIndex: rankingEntry.TeamClub}),

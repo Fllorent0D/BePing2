@@ -16,11 +16,11 @@
             <ion-chip (click)="selectTab(0)" [class.act]="tabIndex === 0" color="primary" id="tab1">
                 <ion-label>{{'TEAM_STAT.RANKING' | translate}}</ion-label>
             </ion-chip>
-            <ion-chip (click)="selectTab(1)" [class.act]="tabIndex === 1" color="primary" id="tab2" outline>
-                <ion-label>{{'COMMON.PLAYERS' | translate}}</ion-label>
-            </ion-chip>
-            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="primary" id="tab3" outline>
+            <ion-chip (click)="selectTab(1)" [class.act]="tabIndex === 1" color="primary" id="tab3" outline>
                 <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
+            </ion-chip>
+            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="primary" id="tab2" outline>
+                <ion-label>{{'COMMON.PLAYERS' | translate}}</ion-label>
             </ion-chip>
         </div>
     </ion-toolbar>
@@ -106,13 +106,13 @@
                 </ng-container>
             </super-tab>
             <super-tab>
+                <beping-team-result-tab [matches]="calendar$|async"></beping-team-result-tab>
+            </super-tab>
+            <super-tab>
                 <beping-team-players-stats
                         (playerClicked)="navigateToPlayer($event)"
                         [stats]="memberRanking$|async"
                 ></beping-team-players-stats>
-            </super-tab>
-            <super-tab>
-                <beping-team-result-tab [matches]="calendar$|async"></beping-team-result-tab>
             </super-tab>
         </super-tabs-container>
     </super-tabs>

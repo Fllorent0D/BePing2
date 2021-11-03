@@ -16,17 +16,16 @@
             <ion-chip (click)="selectTab(0)" [class.act]="tabIndex === 0" color="primary" id="tab1">
                 <ion-label>{{'CLUB_DETAILS.LIST_OF_STRENGTH' | translate}}</ion-label>
             </ion-chip>
-            <ion-chip (click)="selectTab(1)" [class.act]="tabIndex === 1" color="primary" id="tab2" outline>
-                <ion-label>{{'COMMON.TEAMS' | translate}}</ion-label>
-            </ion-chip>
-            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="primary" id="tab3" outline>
-                <ion-label>{{'CLUB_DETAILS.INFOS' | translate}}</ion-label>
-            </ion-chip>
-            <!--
-            <ion-chip color="primary" id="tab4" [class.act]="tabIndex === 3" outline (click)="selectTab(3)">
+            <ion-chip color="primary" id="tab4" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
                 <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
             </ion-chip>
-            -->
+            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="primary" id="tab2" outline>
+                <ion-label>{{'COMMON.TEAMS' | translate}}</ion-label>
+            </ion-chip>
+            <ion-chip (click)="selectTab(3)" [class.act]="tabIndex === 3" color="primary" id="tab3" outline>
+                <ion-label>{{'CLUB_DETAILS.INFOS' | translate}}</ion-label>
+            </ion-chip>
+
         </div>
     </ion-toolbar>
 </ion-header>
@@ -39,8 +38,10 @@
                         [members]="members$ | async"
                 >
                 </beping-club-player-list-tab>
-
-
+            </super-tab>
+            <super-tab>
+                <beping-team-matches-entry-list [teamMatchEntries$]="matches$">
+                </beping-team-matches-entry-list>
             </super-tab>
             <super-tab>
                 <beping-club-team-list-tab
@@ -54,13 +55,6 @@
                 >
                 </beping-club-pratical-info-tab>
             </super-tab>
-            <!--
-            <super-tab>
-                <beping-team-result-tab
-                        [matches]="matches$|async"
-                >
-                </beping-team-result-tab>
-            </super-tab>-->
         </super-tabs-container>
     </super-tabs>
     <ion-fab [hidden]="tabIndex !== 0" horizontal="end" slot="fixed" vertical="bottom">

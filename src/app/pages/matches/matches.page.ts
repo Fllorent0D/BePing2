@@ -41,8 +41,4 @@ export class MatchesPage implements OnInit {
         this.tabsNavigationService.navigateTo(uri);
     }
 
-
-    test(event: CustomEvent<any>) {
-        console.log(event);
-    }
 }
