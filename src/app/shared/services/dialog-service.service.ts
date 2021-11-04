@@ -48,7 +48,7 @@ export class DialogService {
     public async showToast(
         opts: ToastOptions
     ): Promise<HTMLIonToastElement> {
-        const toast = await this.toastrCtrl.create({translucent: true, ...opts});
+        const toast = await this.toastrCtrl.create({...opts});
         await toast.present();
         return toast;
     }

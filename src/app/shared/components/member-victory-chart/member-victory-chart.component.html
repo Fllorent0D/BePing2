@@ -2,7 +2,7 @@
     <ion-grid>
         <ion-row class="ion-justify-content-center ion-align-items-center" style="min-height: 125px; max-height: 400px">
             <ion-col [hidden]="victories === 0" [sizeXl]="5" class="ion-text-center" size="3">
-                <ion-text><p class="ion-no-margin text-highlight">{{victories}} ({{victoriesPct}}%)</p></ion-text>
+                <ion-text><p class="ion-no-margin ">{{victories}} ({{victoriesPct}}%)</p></ion-text>
                 <ion-text color="grey"><p class="ion-no-margin">{{'COMMON.WINS'|translate}}</p></ion-text>
             </ion-col>
             <ion-col [sizeXl]="2" size="6">
@@ -10,7 +10,7 @@
                                       [title]="total.toString()"></beping-victory-chart>
             </ion-col>
             <ion-col [hidden]="defeats === 0" [sizeXl]="5" class="ion-text-center" size="3">
-                <ion-text><p class="ion-no-margin text-highlight">{{defeats}} ({{defeatsPct}}%)</p></ion-text>
+                <ion-text><p class="ion-no-margin ">{{defeats}} ({{defeatsPct}}%)</p></ion-text>
                 <ion-text color="grey"><p class="ion-no-margin">{{'COMMON.DEFEATS'|translate}}</p></ion-text>
             </ion-col>
         </ion-row>

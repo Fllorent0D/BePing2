@@ -12,17 +12,17 @@
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar>
-        <div #scrollMenu class="scrollmenu">
-            <ion-chip (click)="selectTab(0)" [class.act]="tabIndex === 0" color="primary" id="tab1">
+        <ion-segment [value]="tabIndex" (ionChange)="selectTab($event.detail.value)">
+            <ion-segment-button [value]="0">
                 <ion-label>{{'TEAM_STAT.RANKING' | translate}}</ion-label>
-            </ion-chip>
-            <ion-chip (click)="selectTab(1)" [class.act]="tabIndex === 1" color="primary" id="tab3" outline>
+            </ion-segment-button>
+            <ion-segment-button [value]="1">
                 <ion-label>{{'COMMON.CALENDAR' | translate}}</ion-label>
-            </ion-chip>
-            <ion-chip (click)="selectTab(2)" [class.act]="tabIndex === 2" color="primary" id="tab2" outline>
+            </ion-segment-button>
+            <ion-segment-button [value]="2">
                 <ion-label>{{'COMMON.PLAYERS' | translate}}</ion-label>
-            </ion-chip>
-        </div>
+            </ion-segment-button>
+        </ion-segment>
     </ion-toolbar>
 </ion-header>
 <ion-content>

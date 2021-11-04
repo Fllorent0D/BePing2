@@ -2,7 +2,7 @@
     <ion-grid class="ion-padding-vertical">
         <ion-row [class.no-score]="!match.Score" class="ion-align-items-center ion-no-padding">
             <ion-col [class.is-color-danger]="isHomeFF"
-                     class="text-highlight ion-no-padding">
+                     class=" ion-no-padding">
                 <ion-text>{{match.HomeTeam}}</ion-text>
             </ion-col>
             <ion-col *ngIf="match.Score" class="ion-text-center ion-no-padding">
@@ -26,7 +26,7 @@
                     <ion-text class="ion-no-margin">{{matchTime}}</ion-text>
                 </ion-text>
             </ion-col>
-            <ion-col [class.is-color-danger]="isAwayFF" class="ion-text-end text-highlight ion-no-padding">
+            <ion-col [class.is-color-danger]="isAwayFF" class="ion-text-end  ion-no-padding">
                 <ion-text>{{match.AwayTeam}}</ion-text>
             </ion-col>
         </ion-row>

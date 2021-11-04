@@ -3,9 +3,8 @@
         <ion-item
                 *virtualItem="let team"
                 [routerLink]="['team', team.TeamId]"
-                class="large"
                 detail>
-            <ion-label>
+            <ion-label class="ion-padding-vertical">
                 <h2>{{club.Name}} {{team.Team}}</h2>
                 <p>{{team.DivisionName}}</p>
             </ion-label>

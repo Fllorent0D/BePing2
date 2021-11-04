@@ -65,41 +65,46 @@ export class TeamMatchResultComponent implements OnInit {
         if (this.match.MatchUniqueId) {
             this.tabNavigation.navigateTo(['team-match-details', this.match.MatchUniqueId.toString()]);
         } else {
+            const buttons = [
+                {
+                    text: this.translate.instant('NAVIGATION.NAVIGATE_TO_MATCH'),
+                    handler: () => {
+                        this.startNavigation.navigateToVenue(this.match.VenueEntry);
+                    }
+                },
+                {
+                    text: this.translate.instant('MATCH_ENTRY_SHEET.STATS_ON_TEAM', {team: this.match.HomeTeam}),
+                    handler: () => {
+                        this.navigateToTeamPage(this.match.HomeClub, this.match.HomeTeam);
+                    }
+                },
+                {
+                    text: this.translate.instant('MATCH_ENTRY_SHEET.STATS_ON_TEAM', {team: this.match.AwayTeam}),
+                    handler: () => {
+                        this.navigateToTeamPage(this.match.AwayClub, this.match.AwayTeam);
+                    }
+                },
+                {
+                    text: this.translate.instant('COMMON.CANCEL'),
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ];
+            if (this.match.Date) {
+                const button = {
+                    text: this.translate.instant('MATCH_ENTRY_SHEET.HELP_MATCH_SHEET'),
+                    handler: () => {
+                        this.tabNavigation.navigateTo(['team-match-details', 'match-sheet-helper'], {state: {match: this.match}});
+                    }
+                };
+                buttons.splice(buttons.length, 0, button);
+            }
             const actionSheet = await this.actionSheetController.create({
                 header: this.translate.instant('CALENDAR_CLUB.NO_INFO_AVAILABLE'),
                 cssClass: 'my-custom-class',
-                buttons: [
-                    {
-                        text: this.translate.instant('NAVIGATION.NAVIGATE_TO_MATCH'),
-                        handler: () => {
-                            this.startNavigation.navigateToVenue(this.match.VenueEntry);
-                        }
-                    },
-                    {
-                        text: this.translate.instant('MATCH_ENTRY_SHEET.STATS_ON_TEAM', {team: this.match.HomeTeam}),
-                        handler: () => {
-                            this.navigateToTeamPage(this.match.HomeClub, this.match.HomeTeam);
-                        }
-                    },
-                    {
-                        text: this.translate.instant('MATCH_ENTRY_SHEET.STATS_ON_TEAM', {team: this.match.AwayTeam}),
-                        handler: () => {
-                            this.navigateToTeamPage(this.match.AwayClub, this.match.AwayTeam);
-                        }
-                    },
-                    {
-                        text: this.translate.instant('MATCH_ENTRY_SHEET.HELP_MATCH_SHEET', {team: this.match.AwayTeam}),
-                        handler: () => {
-                            this.tabNavigation.navigateTo(['team-match-details', 'match-sheet-helper'], {state: {match: this.match}});
-                        }
-                    },
-                    {
-                        text: this.translate.instant('COMMON.CANCEL'),
-                        role: 'cancel',
-                        handler: () => {
-                            console.log('Cancel clicked');
-                        }
-                    }]
+                buttons
             });
             await actionSheet.present();
 
