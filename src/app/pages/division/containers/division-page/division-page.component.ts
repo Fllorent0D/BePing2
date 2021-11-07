@@ -32,6 +32,7 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
     memberRanking$: Observable<MemberResults[]>;
     matches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
+
     constructor(
         protected readonly changeDetectionRef: ChangeDetectorRef,
         protected readonly activatedRouted: ActivatedRoute,
@@ -101,13 +102,26 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
     }
 
     navigateToPlayer(uniqueIndex: number) {
-        this.tabsNavigation.navigateTo(['player', uniqueIndex.toString(10)]);
+        this.division$.pipe(
+            take(1),
+        ).subscribe((division: DivisionEntry) => {
+            this.tabsNavigation.navigateTo(['player', uniqueIndex.toString(10)], {
+                state: {preferredPlayerCategory: division.DivisionCategory}
+            });
+        });
+
     }
 
     toggleFavorite() {
         this.division$.pipe(
             take(1),
-            switchMap((division: DivisionEntry) => this.store.dispatch(new ToggleDivisionFromFavorites(division)))
+            switchMap((division: DivisionEntry) => this.store.dispatch(new ToggleDivisionFromFavorites(
+                {
+                    uniqueIndex: division.DivisionId,
+                    uri: ['divisions', division.DivisionId.toString(10)],
+                    label: division.DivisionName
+                }
+            )))
         ).subscribe();
     }
 }

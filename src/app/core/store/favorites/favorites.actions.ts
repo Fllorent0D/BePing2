@@ -7,21 +7,21 @@ import {FavoriteItem} from './favorites.state';
 export class ToggleClubFromFavorites {
     static readonly type = '[Favorites] toggle club from favorites';
 
-    constructor(public payload: ClubEntry) {
+    constructor(public payload: FavoriteItem<string>) {
     }
 }
 
 export class ToggleDivisionFromFavorites {
     static readonly type = '[Favorites] toggle division from favorites';
 
-    constructor(public payload: DivisionEntry) {
+    constructor(public payload: FavoriteItem<number>) {
     }
 }
 
 export class ToggleMemberFromFavorites {
     static readonly type = '[Favorites] toggle member from favorites';
 
-    constructor(public payload: MemberEntry) {
+    constructor(public payload: FavoriteItem<number>) {
     }
 }
 

@@ -1,4 +1,4 @@
-<ion-toolbar>
+<ion-toolbar color="clear">
     <beping-week-selector [max]="maxWeekName$|async" [min]="1" [formControl]="weekSelected"></beping-week-selector>
 </ion-toolbar>
 <beping-team-match-result *ngFor="let match of teamMatchofSelectedWeek$|async"

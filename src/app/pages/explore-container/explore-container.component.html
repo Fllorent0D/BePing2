@@ -1,12 +1,8 @@
 <ion-content class="ion-padding-bottom" fullscreen>
-    <ion-refresher #refresher (ionRefresh)="refresh($event)" slot="fixed">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-
     <div class="extended-gradient"></div>
-
     <ion-toolbar color="transparent" mode="md">
-        <ion-title color="clear"><span [class.shining]="isLoading$ | async" [class.white]="!(isLoading$ | async)">BePing</span></ion-title>
+        <ion-title color="clear"><span [class.shining]="isLoading$ | async"
+                                       [class.white]="!(isLoading$ | async)">BePing</span></ion-title>
 
         <ion-buttons slot="end">
             <ion-button (click)="openSettings()">
@@ -14,85 +10,91 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
+    <ion-refresher #refresher (ionRefresh)="refresh($event)" slot="fixed">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <!--
     <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
   -->
-    <div>
+    <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry; else noMember">
 
-        <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry; else noMember">
+        <beping-member-name-ranking-info
+                [displayELO]="displayELO$|async"
+                [displayNumericRanking]="displayNumericRanking$|async"
+                [member]="currentMemberEntry">
+        </beping-member-name-ranking-info>
+        <beping-card *ngIf="!(isLoggedIn$|async) && ((database|async) === TABT_DATABASES.AFTT)" [marging]="true"
+                     [padding]="true">
+            <h3 class="ion-text-center ion-padding">{{'DASHBOARD.RANKING_ESTIMATION'|translate}}</h3>
+            <ion-button (click)="loginWithAFTT()" class="ion-margin" expand="block">
+                {{'DASHBOARD.LOGIN_TO_AFTT'|translate}}
+            </ion-button>
+        </beping-card>
+        <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
+            <beping-member-victory-chart
+                    [memberResultEntries]="currentMemberEntry.ResultEntries">
+            </beping-member-victory-chart>
 
-            <beping-member-name-ranking-info
-                    [displayELO]="displayELO$|async"
-                    [displayNumericRanking]="displayNumericRanking$|async"
-                    [member]="currentMemberEntry">
-            </beping-member-name-ranking-info>
-            <beping-card *ngIf="!(isLoggedIn$|async) && ((database|async) === TABT_DATABASES.AFTT)" [marging]="true"
-                         [padding]="true">
-                <h3 class="ion-text-center ion-padding">{{'DASHBOARD.RANKING_ESTIMATION'|translate}}</h3>
-                <ion-button (click)="loginWithAFTT()" class="ion-margin" expand="block">
-                    {{'DASHBOARD.LOGIN_TO_AFTT'|translate}}
-                </ion-button>
-            </beping-card>
-            <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
-                <beping-member-victory-chart
-                        [memberResultEntries]="currentMemberEntry.ResultEntries">
-                </beping-member-victory-chart>
-
-                <ng-container *ngIf="currentMemberEntry.numericRankings">
-                    <beping-ranking-history-graphs
-                            [displayElo]="displayELO$|async"
-                            [displayNumericRanking]="displayNumericRanking$|async"
-                            [numericRankings]="currentMemberEntry.numericRankings">
-                    </beping-ranking-history-graphs>
-                </ng-container>
-
-                <beping-tie-break-played
-                        [memberResultEntries]="currentMemberEntry.ResultEntries">
-                </beping-tie-break-played>
-                <beping-member-latest-matches
-                        [matches]="latestMatches$| async">
-                </beping-member-latest-matches>
-
-                <beping-member-summary-per-ranking
-                        [memberResultEntries]="currentMemberEntry.ResultEntries">
-                </beping-member-summary-per-ranking>
+            <ng-container *ngIf="currentMemberEntry.numericRankings">
+                <beping-ranking-history-graphs
+                        [displayElo]="displayELO$|async"
+                        [displayNumericRanking]="displayNumericRanking$|async"
+                        [numericRankings]="currentMemberEntry.numericRankings">
+                </beping-ranking-history-graphs>
             </ng-container>
-            <ng-template #noResults>
-                <beping-card [padding]="true" class="ion-text-center">
 
-                    <ion-icon class="ion-padding-top" name="information-circle-outline" size="large"
-                              slot="start"></ion-icon>
-                    <h2 class="ion-padding">
-                        {{'DASHBOARD.NO_RESULTS'|translate}}
-                        <ng-container *ngIf="(categoriesAvailable$ |async)?.length > 1">
-                            {{'DASHBOARD.IN_THIS_CATEGORY'|translate}}
-                        </ng-container>
-                    </h2>
-                </beping-card>
-            </ng-template>
+            <beping-tie-break-played
+                    [memberResultEntries]="currentMemberEntry.ResultEntries">
+            </beping-tie-break-played>
+            <beping-member-latest-matches
+                    [matches]="latestMatches$| async">
+            </beping-member-latest-matches>
 
+            <beping-member-summary-per-ranking
+                    [memberResultEntries]="currentMemberEntry.ResultEntries">
+            </beping-member-summary-per-ranking>
         </ng-container>
-        <ng-template #noMember>
-            <beping-card [marging]="true" [padding]="true">
-                <h3 class="ion-text-center ion-padding">
-                    {{'DASHBOARD.NO_PLAYER_SELECTED'|translate}}
-                </h3>
-                <ion-button (click)="chooseMainMember()" class="ion-margin"
-                            expand="block">{{'DASHBOARD.CHOOSE_PLAYER'|translate}}
-                </ion-button>
+        <ng-template #noResults>
+            <beping-card [padding]="true" class="ion-text-center">
 
-            </beping-card>
-            <beping-card [marging]="true" [padding]="true">
-                <h3 class="ion-text-center ion-padding">
-                    {{'DASHBOARD.YOU_CAN_SEE_RESULTS_BOTTOM_NAV'|translate}}
-                </h3>
+                <ion-icon class="ion-padding-top" name="information-circle-outline" size="large"
+                          slot="start"></ion-icon>
+                <h2 class="ion-padding">
+                    {{'DASHBOARD.NO_RESULTS'|translate}}
+                    <ng-container *ngIf="(categoriesAvailable$ |async)?.length > 1">
+                        {{'DASHBOARD.IN_THIS_CATEGORY'|translate}}
+                    </ng-container>
+                </h2>
             </beping-card>
         </ng-template>
 
+    </ng-container>
+    <ng-template #noMember>
+        <beping-card [marging]="true" [padding]="true">
+            <ion-grid>
+                <ion-row><h3 class="ion-text-center ion-padding">
+                    {{'DASHBOARD.NO_PLAYER_SELECTED'|translate}}
+                </h3></ion-row>
+                <ion-row>
+                    <ion-button (click)="chooseMainMember()" class="ion-margin"
+                                expand="block">{{'DASHBOARD.CHOOSE_PLAYER'|translate}}
+                    </ion-button>
+                </ion-row>
+            </ion-grid>
+            <br>
 
-    </div>
+
+        </beping-card>
+        <beping-card [marging]="true" [padding]="true">
+            <h3 class="ion-text-center ion-padding">
+                {{'DASHBOARD.YOU_CAN_SEE_RESULTS_BOTTOM_NAV'|translate}}
+            </h3>
+        </beping-card>
+    </ng-template>
+
+
     <ng-container *ngIf="categoriesAvailable$ |async as playercategories">
         <ion-fab *ngIf="playercategories.length > 1" horizontal="end" slot="fixed" vertical="bottom">
             <ion-fab-button>

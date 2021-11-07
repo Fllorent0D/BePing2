@@ -111,7 +111,13 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
     }
 
     navigateToPlayer(uniqueIndex: number) {
-        this.tabsNavigation.navigateTo(['player', uniqueIndex.toString(10)]);
+        this.team$.pipe(
+            take(1)
+        ).subscribe((team: TeamEntry) => {
+            this.tabsNavigation.navigateTo(['player', uniqueIndex.toString(10)], {
+                state: {preferredPlayerCategory: team.DivisionCategory}
+            });
+        });
     }
 
     isSameTeam(rankingEntry: RankingEntry, team: TeamEntry, club: ClubEntry, divisionId: number): boolean {

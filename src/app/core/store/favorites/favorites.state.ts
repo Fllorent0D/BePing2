@@ -88,12 +88,12 @@ export class FavoritesState {
 
     @Action([ToggleClubFromFavorites])
     toggleClubFromFavorites({getState, patchState}: StateContext<FavoritesStateModel>, {payload}: ToggleClubFromFavorites) {
-        const clubUniqueIndex = payload.UniqueIndex;
+        const clubUniqueIndex = payload.uniqueIndex;
         const state = getState();
         const alreadyInFavorites = !!state.clubs.find((item) => clubUniqueIndex === item.uniqueIndex);
         const newFavorites = alreadyInFavorites ?
             state.clubs.filter(item => item.uniqueIndex !== clubUniqueIndex) :
-            [...state.clubs, {uniqueIndex: clubUniqueIndex, label: payload.UniqueIndex + ' - ' + payload.LongName}];
+            [...state.clubs, payload];
         this.analyticsService.logEvent(alreadyInFavorites ? 'remove_club_favorites' : 'add_club_favorites', {clubUniqueIndex});
         return patchState({
             clubs: newFavorites
@@ -102,13 +102,13 @@ export class FavoritesState {
 
     @Action([ToggleMemberFromFavorites])
     toggleMemberFromFavorites({getState, patchState}: StateContext<FavoritesStateModel>, {payload}: ToggleMemberFromFavorites) {
-        const memberUniqueIndex = payload.UniqueIndex;
+        const memberUniqueIndex = payload.uniqueIndex;
         const state = getState();
         const alreadyInFavorites = !!state.members.find((item) => memberUniqueIndex === item.uniqueIndex);
 
         const newFavorites = alreadyInFavorites ?
             state.members.filter(item => item.uniqueIndex !== memberUniqueIndex) :
-            [...state.members, {uniqueIndex: memberUniqueIndex, label: `${payload.FirstName} ${payload.LastName}`, note: payload.Ranking}];
+            [...state.members, payload];
         this.analyticsService.logEvent(alreadyInFavorites ? 'remove_member_favorites' : 'add_member_favorites', {memberUniqueIndex});
 
         return patchState({
@@ -118,13 +118,13 @@ export class FavoritesState {
 
     @Action([ToggleDivisionFromFavorites])
     toggleDivisionFromFavorites({getState, patchState}: StateContext<FavoritesStateModel>, {payload}: ToggleDivisionFromFavorites) {
-        const index = payload.DivisionId;
+        const index = payload.uniqueIndex;
         const state = getState();
         const alreadyInFavorites = !!state.divisions.find((item) => index === item.uniqueIndex);
 
         const newFavorites = alreadyInFavorites ?
             state.divisions.filter(item => item.uniqueIndex !== index) :
-            [...state.divisions, {uniqueIndex: index, label: payload.DivisionName}];
+            [...state.divisions, payload];
         this.analyticsService.logEvent(alreadyInFavorites ? 'remove_division_favorites' : 'add_division_favorites', {divisionId: index});
 
         return patchState({

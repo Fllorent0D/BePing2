@@ -1,18 +1,15 @@
-<ion-header>
-
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true">
+    <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>{{'SETTINGS.CONNECT_TO_FEDERATION'|translate}}</ion-title>
-        <ion-buttons *ngIf="modalCtrl" slot="end">
+        <ion-buttons slot="end">
             <ion-button (click)="closeModal()">
                 <ion-icon icon="close-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
-
     </ion-toolbar>
-
 </ion-header>
 
 <ion-content>

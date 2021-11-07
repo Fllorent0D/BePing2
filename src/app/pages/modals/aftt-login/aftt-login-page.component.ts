@@ -23,6 +23,7 @@ export class AfttLoginPage implements OnInit {
 
     loginForm: FormGroup;
     loading = false;
+
     @Select(SettingsState.getCurrentLang) lang$: Observable<LANG>;
     @Select(UserState) userState$: Observable<UserStateModel>;
 
@@ -30,7 +31,7 @@ export class AfttLoginPage implements OnInit {
         private readonly formBuilder: FormBuilder,
         private readonly store: Store,
         private readonly dialogService: DialogService,
-        @Optional() private readonly ionNav: IonNav,
+        @Optional() public readonly ionNav: IonNav,
         @Optional() public readonly modalCtrl: ModalController,
         private readonly keyboardService: KeyboardService,
         private readonly internalIdService: InternalIdentifiersService,
@@ -39,7 +40,7 @@ export class AfttLoginPage implements OnInit {
     ) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         this.loginForm = this.formBuilder.group({
             username: ['', [Validators.required]],
             password: ['', [Validators.required]]

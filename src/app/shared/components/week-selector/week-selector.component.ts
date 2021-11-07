@@ -27,8 +27,8 @@ export class WeekSelectorComponent implements ControlValueAccessor {
 
     value = 1;
 
-    private currentMin = 1;
-    private currentMax = 22;
+    currentMin = 1;
+    currentMax = 22;
 
     weeks: number[];
 

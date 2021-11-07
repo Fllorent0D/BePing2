@@ -1,28 +1,18 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true" collapse="fade">
+    <ion-toolbar>
         <ion-title>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-title>
     </ion-toolbar>
-    <!--
-    <ion-toolbar>
-        <div class="scrollmenu" #scrollMenu>
-            <ion-chip color="primary" id="tab1" [class.act]="tabIndex === 0" (click)="selectTab(0)">
-                <ion-label>Clubs</ion-label>
-            </ion-chip>
-            <ion-chip color="primary" id="tab4" [class.act]="tabIndex === 1" outline (click)="selectTab(1)">
-                <ion-label>Equipe</ion-label>
-            </ion-chip>
-            <ion-chip color="primary" id="tab2" [class.act]="tabIndex === 2" outline (click)="selectTab(2)">
-                <ion-label>Joueurs</ion-label>
-            </ion-chip>
-            <ion-chip color="primary" id="tab3" [class.act]="tabIndex === 3" outline (click)="selectTab(3)">
-                <ion-label>Divisions</ion-label>
-            </ion-chip>
-
-        </div>
-    </ion-toolbar>
-    -->
 </ion-header>
-<ion-content fullscreen>
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button></ion-back-button>
+            </ion-buttons>
+            <ion-title size="large">{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
     <ion-button
             *ngIf="memberClub | async as club"
             (click)="navigateToURI(['clubs', club.UniqueIndex])"
@@ -50,7 +40,7 @@
                 </ion-item>
                 <ng-container *ngIf="teams.length === 0">
                     <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
-                        <h3>{{'FAVORITES.NO_TEAM'|translate}}</h3>
+                        <h3>{{'FAVORITES.NO_TEAMS'|translate}}</h3>
                     </ion-label>
                 </ng-container>
 

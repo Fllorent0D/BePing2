@@ -1,12 +1,20 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true" collapse="fade">
+    <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>{{('DIVISION_LEVEL.' + (level$|async)) |translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button></ion-back-button>
+            </ion-buttons>
+            <ion-title size="large">{{('DIVISION_LEVEL.' + (level$|async)) |translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
     <ion-list>
         <ion-item (click)="divisionClicked(div)" *ngFor="let div of divisions$ | async" detail>
             <ion-label class="ion-text-wrap">

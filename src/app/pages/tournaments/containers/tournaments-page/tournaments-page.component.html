@@ -1,7 +1,7 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true" collapse="fade">
+    <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>{{'COMMON.TOURNAMENTS'|translate}}</ion-title>
         <ion-buttons (click)="showFilters()" slot="primary">
@@ -11,7 +11,15 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button></ion-back-button>
+            </ion-buttons>
+            <ion-title size="large">{{'COMMON.TOURNAMENTS'|translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
     <ion-list>
         <ng-container *ngFor="let month of tournamentsFiltered$ | async">
             <ion-list-header>

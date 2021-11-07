@@ -1,11 +1,9 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true" collapse="fade">
+    <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title
-                *ngIf="currentMemberEntry$|async as memberEntry">{{memberEntry.FirstName | titlecase}} {{memberEntry.LastName | titlecase}}
-        </ion-title>
+        <ion-title *ngIf="currentMemberEntry$|async as memberEntry">{{memberEntry.FirstName | titlecase}} {{memberEntry.LastName | titlecase}}</ion-title>
         <ion-buttons slot="end">
             <beping-favorite-btn
                     (clicked)="toggleFavorite()"
@@ -17,7 +15,12 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding-bottom">
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large" *ngIf="currentMemberEntry$|async as memberEntry">{{memberEntry.FirstName | titlecase}} {{memberEntry.LastName | titlecase}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
     <beping-player-content
             [categoriesAvailable]="categoriesAvailable$|async"
             [currentCategory]="currentCategory$|async"

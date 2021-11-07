@@ -24,16 +24,32 @@ export class PlayerCategoryService {
         return Object.keys(memberEntries) as PLAYER_CATEGORY[];
     }
 
-    static getMainCategory(memberEntries: UserMemberEntries): PLAYER_CATEGORY {
+    static getMainCategory(memberEntries: UserMemberEntries, preferredCategory?: PLAYER_CATEGORY): PLAYER_CATEGORY {
+
         const playedCategories = PlayerCategoryService.getPlayedCategories(memberEntries);
 
-        if (playedCategories.length === 1) {
-            return playedCategories[0];
+        if (playedCategories.find((cat: PLAYER_CATEGORY) => cat === preferredCategory)) {
+            return preferredCategory;
         }
-        if (playedCategories.length === 0 || playedCategories.find((cat) => cat === PLAYER_CATEGORY.MEN)) {
+        const weight = [
+            PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN,
+            PLAYER_CATEGORY.VETERANS, PLAYER_CATEGORY.VETERANS_WOMEN, PLAYER_CATEGORY.YOUTH
+        ];
+        const weightedCategories = weight.filter(cat => playedCategories.includes(cat));
+        if (weightedCategories.length === 1) {
+            return weightedCategories[0];
+        }
+        if (weightedCategories.length === 0) {
             return PLAYER_CATEGORY.MEN;
         }
-        return playedCategories[0];
+
+        return weightedCategories.reduce((acc: PLAYER_CATEGORY, playerCategory: PLAYER_CATEGORY) => {
+            if ((memberEntries[playerCategory].ResultEntries?.length ?? 0) > memberEntries[acc].ResultEntries?.length ?? 0) {
+                return playerCategory;
+            }
+            return acc;
+
+        }, weightedCategories[0]);
     }
 
     getMemberPlayerCategories(memberUniqueIndex: number): Observable<UserMemberEntries> {
@@ -94,7 +110,6 @@ export class PlayerCategoryService {
             )
             // @ts-ignore
             .flat();
-        console.log(matchIds, members);
 
         return combineLatest(
             clubIndexes.map(clubIndex => this.matchesService.findAllMatches({club: clubIndex}))

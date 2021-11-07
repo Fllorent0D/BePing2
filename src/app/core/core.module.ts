@@ -63,9 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
                         if (!state) {
                             return;
                         }
-                        // clubs/N051
-                        // player/118444
-                        // divisions/5780
+
                         console.log('Running migration to version 2');
 
                         if (state?.favorites?.clubs?.length) {

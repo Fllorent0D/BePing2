@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ChooseClubPage} from '../choose-club/choose-club.page';
 import {ChoosePlayerPage} from '../choose-player/choose-player.page';
-import {IonNav, ModalController, NavController} from '@ionic/angular';
+import {IonNav, IonRouterOutlet, ModalController, NavController} from '@ionic/angular';
 import {Store} from '@ngxs/store';
 import {ClubEntry} from '../../../core/api/models/club-entry';
 import {MemberEntry} from '../../../core/api/models/member-entry';
 import {SetUser} from '../../../core/store/user/user.actions';
 import {finalize, tap} from 'rxjs/operators';
+import {Components} from '@ionic/core';
 
 @Component({
     selector: 'beping-choose-main-member-club',
@@ -21,7 +22,6 @@ export class ChooseMainMemberClubComponent implements OnInit {
 
     constructor(
         public readonly modalCtrl: ModalController,
-        private readonly ionRouterOutlet: IonNav,
         private readonly navCtrl: NavController,
         private readonly store: Store
     ) {
@@ -34,7 +34,8 @@ export class ChooseMainMemberClubComponent implements OnInit {
     async chooseClub() {
         const modal = await this.modalCtrl.create({
             component: ChooseClubPage,
-            swipeToClose: true
+            swipeToClose: true,
+            presentingElement: await this.modalCtrl.getTop()
         });
         await modal.present();
 
@@ -50,6 +51,7 @@ export class ChooseMainMemberClubComponent implements OnInit {
         const modal = await this.modalCtrl.create({
             component: ChoosePlayerPage,
             swipeToClose: true,
+            presentingElement: await this.modalCtrl.getTop(),
             componentProps: {
                 title: 'Qui êtes-vous?',
                 club: this.selectedClub

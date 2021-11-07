@@ -1,12 +1,21 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true" collapse="fade">
+    <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>{{'MATCH_ENTRY_SHEET.HELP_MATCH_SHEET'|translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button></ion-back-button>
+            </ion-buttons>
+            <ion-title size="large">{{'MATCH_ENTRY_SHEET.HELP_MATCH_SHEET'|translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
     <beping-team-match-info-list *ngIf="match" [match]="match"></beping-team-match-info-list>
     <ion-list-header>
         {{ 'CLUB_DETAILS.LIST_OF_STRENGTH' | translate }}

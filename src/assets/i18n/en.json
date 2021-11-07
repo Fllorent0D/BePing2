@@ -107,6 +107,7 @@
   "FAVORITES": {
     "NO_PLAYERS": "No favorite players",
     "NO_CLUBS": "No favorite clubs",
+    "NO_TEAMS": "No favorite teams",
     "NO_DIVISIONS": "No favorite divisions",
     "NO_FAVORITE": "No favorite",
     "INSTRUCTIONS": "You can add favorite from the club/division/player page"

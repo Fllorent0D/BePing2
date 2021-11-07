@@ -32,7 +32,7 @@ ion-card {
     color: var(--ion-color-dark)
   }
 }
-
+/*
 ion-toolbar.toolbar-compact {
   --padding-bottom: 0px;
   --padding-top: 0px;
@@ -42,24 +42,8 @@ ion-toolbar.toolbar-compact {
     padding-bottom: 0px;
     padding-top: 0px;
     --ripple-color: transparent;
-
-    ion-segment-button {
-      --ripple-color: transparent;
-      --background-activated: transparent;
-      min-height: 40px;
-      //--padding-start: 3px;
-      //--padding-end: 16px;
-      // justify-content: start;
-      ion-label {
-        font-size: 13px;
-        text-transform: none;
-        letter-spacing: 0px;
-        margin-top: 0px;
-        margin-bottom: 0px;
-      }
-    }
   }
-}
+}*/
 
 ion-list-header {
   text-align: center;
@@ -191,11 +175,6 @@ ion-fab-button[data-desc]::after {
 
 .scrollmenu::-webkit-scrollbar {
   display: none;
-}
-
-.scrollmenu {
-  background: transparent;
-
 }
 
 
@@ -341,7 +320,7 @@ hr {
 
 .region-icon {
   svg {
-    fill: var(--color)
+    fill: var(--ion-color-primary)
   }
 
 }

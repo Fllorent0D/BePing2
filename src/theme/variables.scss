@@ -105,7 +105,7 @@
   letter-spacing: 0.4px;
   font-weight: 500;
   --border-color: #E6E6E6;
-  --ion-card-background: #ffffff;
+  --ion-card-background: #F5F5F5;
   --ion-tab-bar-border: 0;
 
   ion-tab-button {
@@ -129,21 +129,22 @@
 
 @media (prefers-color-scheme: light) {
   ion-content {
-    --background: #f5f5f5 !important;
+    //--background: #f5f5f5 !important;
+    //--background: #f5f5f5 !important;
   }
   ion-list {
-    --background: #f5f5f5 !important;
-    background-color: #f5f5f5 !important;
+    --background: transparent !important;
+    background-color: transparent !important;
   }
   ion-item {
-    --background: #ffffff;
+    --background: #F5F5F5;
   }
   ion-card {
-    --background: white;
+    --background: #F5F5F5;
     box-shadow: none !important;
   }
   ion-list-header {
-    --background: #f3f3f3;
+    --background: transparent;
   }
 
 }
@@ -229,7 +230,7 @@
    */
 
   .ios body {
-    --ion-background-color: #121212;
+    --ion-background-color: #000000;
     --ion-background-color-rgb: 0, 0, 0;
 
     --ion-text-color: #ffffff;
@@ -261,8 +262,8 @@
     --ion-card-background: #1c1c1d;
 
     ion-list {
-      --background: #121212 !important;
-      background-color: #121212 !important;
+      --background: transparent !important;
+      background-color: transparent !important;
     }
   }
 
@@ -273,7 +274,7 @@
    */
 
   .md body {
-    --ion-background-color: #121212;
+    --ion-background-color: #000000;
     --ion-background-color-rgb: 18, 18, 18;
 
     --ion-text-color: #ffffff;

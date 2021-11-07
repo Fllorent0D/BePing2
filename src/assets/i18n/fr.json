@@ -107,6 +107,7 @@
   "FAVORITES": {
     "NO_PLAYERS": "Aucun joueur en favoris",
     "NO_CLUBS": "Aucun club en favoris",
+    "NO_TEAMS": "Aucune équipe en favoris",
     "NO_DIVISIONS": "Aucune division en favoris",
     "NO_FAVORITE": "Aucun favori",
     "INSTRUCTIONS": "Vous pouvez ajouter des favoris lorsque vous naviguez sur la page d'un club, d’un joueur ou d’une division"

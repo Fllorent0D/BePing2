@@ -15,7 +15,7 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
 import {add, sub} from 'date-fns';
-import {FavoritesState, ToggleClubFromFavorites} from '../../../../core/store/favorites';
+import {FavoriteItem, FavoritesState, ToggleClubFromFavorites, ToggleTeamsFromFavorites} from '../../../../core/store/favorites';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {ImpactStyle} from '@capacitor/haptics';
 import {HapticsService} from '../../../../core/services/haptics.service';
@@ -160,7 +160,12 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     toggleClubFavorite() {
         this.club$.pipe(
             take(1),
-            switchMap((club: ClubEntry) => this.store.dispatch(new ToggleClubFromFavorites(club)))
+            switchMap((club: ClubEntry) => this.store.dispatch(new ToggleClubFromFavorites({
+                uniqueIndex: club.UniqueIndex,
+                uri: ['clubs', club.UniqueIndex],
+                note: club.LongName,
+                label: club.UniqueIndex
+            } as FavoriteItem<string>)))
         ).subscribe();
     }
 }

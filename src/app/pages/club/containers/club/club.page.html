@@ -1,9 +1,9 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true">
+    <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button [text]="'BACK'|translate"></ion-back-button>
+            <ion-back-button ></ion-back-button>
         </ion-buttons>
-        <ion-title>{{(club$ |async).LongName}}</ion-title>
+        <ion-title>{{(club$ |async).UniqueIndex}} - {{(club$ |async).LongName}}</ion-title>
         <ion-buttons slot="end">
             <beping-favorite-btn
                     (clicked)="toggleClubFavorite()"

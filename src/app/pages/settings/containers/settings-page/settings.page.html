@@ -1,16 +1,14 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true">
+    <ion-toolbar>
         <ion-title>{{'SIDEMENU.SETTINGS'|translate}}</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="closeModal()">
+            <ion-button color="grey" (click)="closeModal()">
                 <ion-icon icon="close-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-
 </ion-header>
-
-<ion-content>
+<ion-content [fullscreen]="true">
     <ion-grid>
         <ion-row>
             <ion-col class="ion-text-center">

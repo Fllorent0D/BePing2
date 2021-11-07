@@ -1,7 +1,6 @@
-<ion-header>
-
-    <ion-toolbar color="primary">
-        <ion-buttons>
+<ion-header [translucent]="true" collapse="fade">
+    <ion-toolbar>
+        <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>{{'SETTINGS.TERMS_AND_CONDITIONS' | translate}}</ion-title>
@@ -26,7 +25,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" [fullscreen]="true">
     <ng-container *ngIf="lang$|async as lang">
         <div *ngIf="lang === LANG.FR">
             <h2 id="d-finitions">Définitions</h2>

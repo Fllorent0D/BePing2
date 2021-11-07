@@ -27,9 +27,18 @@ export class TeamMatchesEntryListComponent implements OnInit {
 
         this.predictedWeekName$ = this.teamMatchEntries$.pipe(
             map((matches) => {
-                const today = Date.now();
-                const futureMatches = matches.filter((m) => new Date(m.Date).getTime() > today);
-                return Number(groupBy(futureMatches, 'WeekName').filter((g) => g.length > 2)[0][0].WeekName);
+                try {
+                    const today = Date.now();
+                    const futureMatches = matches.filter((m) => new Date(m.Date).getTime() > today);
+                    const groupedByWeek = groupBy(futureMatches, 'WeekName');
+                    const mean = Math.round(groupedByWeek.map((group) => group.length).reduce((a, b) => a + b, 0) / groupedByWeek.length);
+                    const first = groupedByWeek.find(group => [mean, mean - 1, mean + 1].includes(group.length));
+                    console.log('first:::', first);
+                    return Number(first[0].WeekName);
+                } catch (err) {
+                    return 1;
+                }
+
             }),
             take(1)
         );

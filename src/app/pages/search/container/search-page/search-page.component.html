@@ -1,12 +1,24 @@
-<ion-header>
-    <ion-toolbar color="primary">
+<ion-header [translucent]="true" collapse="fade">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
         <ion-title>{{'SEARCH.SEARCH'|translate}}</ion-title>
+
     </ion-toolbar>
-    <ion-toolbar color="primary">
+    <ion-toolbar>
         <ion-searchbar [formControl]="searchControl" [placeholder]="'SEARCH.PLACEHOLDER'|translate"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button></ion-back-button>
+            </ion-buttons>
+            <ion-title size="large">{{'SEARCH.SEARCH'|translate}}</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
     <ng-container *ngIf="clubsFound$ | async as clubs">
         <ion-list *ngIf="clubs.results?.length > 0">

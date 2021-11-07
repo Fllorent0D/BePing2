@@ -17,6 +17,8 @@ import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interc
 import {ActionSheetController} from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
+import {TournamentSerieEntry} from '../../../../core/api/models/tournament-serie-entry';
+import {Location} from '@angular/common';
 
 @Component({
     selector: 'beping-other-players',
@@ -46,11 +48,14 @@ export class OtherPlayersComponent implements OnInit {
         private readonly store: Store,
         private readonly actionSheetController: ActionSheetController,
         private readonly translate: TranslateService,
-        private readonly tabNavigator: TabsNavigationService
+        private readonly tabNavigator: TabsNavigationService,
+        private readonly location: Location
     ) {
     }
 
     ngOnInit() {
+        const {preferredPlayerCategory} = this.location.getState() as { preferredPlayerCategory?: PLAYER_CATEGORY };
+
         this.memberUniqueIndex$ = this.activatedRoute.paramMap.pipe(
             map((params: ParamMap) => Number(params.get('id')))
         );
@@ -67,10 +72,9 @@ export class OtherPlayersComponent implements OnInit {
             map((memberEntries: UserMemberEntries) => PlayerCategoryService.getPlayedCategories(memberEntries))
         );
 
-
         this.userMemberEntries$.pipe(
             take(1),
-            map((memEntries: UserMemberEntries) => PlayerCategoryService.getMainCategory(memEntries))
+            map((memEntries: UserMemberEntries) => PlayerCategoryService.getMainCategory(memEntries, preferredPlayerCategory))
         ).subscribe((category) => {
             this.currentCategory$.next(category);
         });
@@ -117,7 +121,12 @@ export class OtherPlayersComponent implements OnInit {
     toggleFavorite() {
         this.currentMemberEntry$.pipe(
             take(1),
-            switchMap((member: MemberEntry) => this.store.dispatch(new ToggleMemberFromFavorites(member)))
+            switchMap((member: MemberEntry) => this.store.dispatch(new ToggleMemberFromFavorites({
+                uniqueIndex: member.UniqueIndex,
+                uri: ['player', member.UniqueIndex.toString(10)],
+                label: `${member.FirstName} ${member.LastName}`,
+                note: member.Ranking
+            })))
         ).subscribe();
     }
 
