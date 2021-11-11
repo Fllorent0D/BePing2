@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "icon-20@2x.png",
+      "filename" : "icon20@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
@@ -13,13 +13,13 @@
       "size" : "20x20"
     },
     {
-      "filename" : "icon-29.png",
+      "filename" : "icon29.png",
       "idiom" : "iphone",
       "scale" : "1x",
       "size" : "29x29"
     },
     {
-      "filename" : "icon-29@2x.png",
+      "filename" : "icon29@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
@@ -31,7 +31,7 @@
       "size" : "29x29"
     },
     {
-      "filename" : "icon-40@2x.png",
+      "filename" : "icon80@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
@@ -73,19 +73,19 @@
       "size" : "20x20"
     },
     {
-      "filename" : "AppIcon-20x20@2x-1.png",
+      "filename" : "icon20@2x-1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
-      "filename" : "AppIcon-29x29@1x.png",
+      "filename" : "icon29-1.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "29x29"
     },
     {
-      "filename" : "AppIcon-29x29@2x.png",
+      "filename" : "icon29@2x-1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
@@ -97,7 +97,7 @@
       "size" : "40x40"
     },
     {
-      "filename" : "AppIcon-40x40@2x-1.png",
+      "filename" : "icon80@2x-1.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
@@ -115,7 +115,7 @@
       "size" : "76x76"
     },
     {
-      "filename" : "AppIcon-83.5x83.5@2x.png",
+      "filename" : "icon83@2x.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "83.5x83.5"
@@ -131,78 +131,6 @@
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
-    },
-    {
-      "filename" : "icon-24@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "24x24"
-    },
-    {
-      "filename" : "icon-27.5@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "27.5x27.5"
-    },
-    {
-      "filename" : "icon-44@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "44x44"
-    },
-    {
-      "filename" : "icon-50.png",
-      "idiom" : "universal",
-      "scale" : "1x",
-      "size" : "50x50"
-    },
-    {
-      "filename" : "icon-50@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "50x50"
-    },
-    {
-      "filename" : "icon-60.png",
-      "idiom" : "universal",
-      "scale" : "1x",
-      "size" : "60x60"
-    },
-    {
-      "filename" : "icon-72.png",
-      "idiom" : "universal",
-      "scale" : "1x",
-      "size" : "72x72"
-    },
-    {
-      "filename" : "icon-72@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "72x72"
-    },
-    {
-      "filename" : "icon-83.5@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "83.5x83.5"
-    },
-    {
-      "filename" : "icon-86@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "86x86"
-    },
-    {
-      "filename" : "icon-98@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "98x98"
-    },
-    {
-      "filename" : "icon-108@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x",
-      "size" : "108x108"
     }
   ],
   "info" : {

@@ -27,10 +27,16 @@
         </beping-member-name-ranking-info>
         <beping-card *ngIf="!(isLoggedIn$|async) && ((database|async) === TABT_DATABASES.AFTT)" [marging]="true"
                      [padding]="true">
-            <h3 class="ion-text-center ion-padding">{{'DASHBOARD.RANKING_ESTIMATION'|translate}}</h3>
-            <ion-button (click)="loginWithAFTT()" class="ion-margin" expand="block">
-                {{'DASHBOARD.LOGIN_TO_AFTT'|translate}}
-            </ion-button>
+            <ion-grid class="">
+                <ion-row class="ion-justify-content-center"><h3 class="ion-text-center ion-padding">{{'DASHBOARD.RANKING_ESTIMATION'|translate}}</h3></ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-button (click)="loginWithAFTT()" class="ion-margin" expand="block">
+                        {{'DASHBOARD.LOGIN_TO_AFTT'|translate}}
+                    </ion-button>
+                </ion-row>
+            </ion-grid>
+
+
         </beping-card>
         <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
             <beping-member-victory-chart

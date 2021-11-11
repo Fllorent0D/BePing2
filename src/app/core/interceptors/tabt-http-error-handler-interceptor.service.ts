@@ -5,6 +5,7 @@ import {catchError} from 'rxjs/operators';
 import {DialogService} from '../../shared/services/dialog-service.service';
 import {environment} from '../../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
+import {CrashlyticsService} from '../services/crashlytics.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,8 @@ import {TranslateService} from '@ngx-translate/core';
 export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
     constructor(
         private readonly dialogService: DialogService,
-        private readonly injector: Injector
+        private readonly injector: Injector,
+        private readonly crashlytics: CrashlyticsService
     ) {
     }
 
@@ -21,6 +23,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
             catchError((err) => {
                 if (request.url.includes(environment.tabtUrl) &&
                     err instanceof HttpErrorResponse) {
+                    this.crashlytics.recordException({message: err.message});
                     const translateService = this.injector.get(TranslateService);
                     switch (err.status) {
                         case 403:
@@ -45,7 +48,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                             });
                             break;
                         case 404:
-                            console.log('not found');
+                            console.log('not found but not specially an error');
                             break;
                         default:
                         case 500:
