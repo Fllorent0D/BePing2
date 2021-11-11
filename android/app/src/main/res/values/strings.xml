@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">BePing</string>
+    <string name="title_activity_main">BePing</string>
+    <string name="package_name">be.floca.beping</string>
+    <string name="custom_url_scheme">be.floca.beping</string>
+</resources>

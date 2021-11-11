@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {combineLatest, Observable, ReplaySubject} from 'rxjs';
+import {combineLatest, Observable, of, ReplaySubject} from 'rxjs';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {MemberEntry} from '../../../../core/api/models/member-entry';
 import {UserMemberEntries} from '../../../../core/store/user/user.state';
@@ -17,7 +17,6 @@ import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interc
 import {ActionSheetController} from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
-import {TournamentSerieEntry} from '../../../../core/api/models/tournament-serie-entry';
 import {Location} from '@angular/common';
 
 @Component({
@@ -91,10 +90,15 @@ export class OtherPlayersComponent implements OnInit {
             this.currentCategory$,
             this.currentMemberEntry$
         ]).pipe(
-            switchMap(([category, memberEntry]) => this.membersService.findMemberNumericRankingsHistory({
-                uniqueIndex: memberEntry.UniqueIndex,
-                category
-            }))
+            switchMap(([category, memberEntry]) => {
+                if ([PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN].includes(category)) {
+                    return this.membersService.findMemberNumericRankingsHistory({
+                        uniqueIndex: memberEntry.UniqueIndex,
+                        category
+                    });
+                }
+                return of(null);
+            })
         );
     }
 

@@ -31,5 +31,4 @@ npm-debug.log*
 /plugins
 /www
 node_modules/
-android/
 android_old/
