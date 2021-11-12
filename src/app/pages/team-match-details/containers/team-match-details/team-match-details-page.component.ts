@@ -37,12 +37,12 @@ export class TeamMatchDetailsPage implements OnInit {
         );
     }
 
-    navigateToTeamPage(clubIndex: string, clubTeam: string) {
+    navigateToTeamPage(clubIndex: string, clubTeam: string, divisionId: number) {
         this.store.select(ClubsState.getClubByUniqueIndex(clubIndex)).pipe(
             map((club: ClubEntry) => clubTeam.replace(club.Name, '').trim()),
             switchMap((teamName) =>
                 this.clubService.findClubTeams({clubIndex}).pipe(
-                    map((teams: TeamEntry[]) => teams.find((team) => team.Team === teamName))
+                    map((teams: TeamEntry[]) => teams.find((team) => team.Team === teamName && team.DivisionId === divisionId))
                 )
             ),
             take(1)

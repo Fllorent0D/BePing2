@@ -109,6 +109,7 @@
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
 				9592DBEFFC6D2A0C8D5DEB22 /* [CP] Embed Pods Frameworks */,
+				5C908E65273D63FE0036F3D2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -171,6 +172,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5C908E65273D63FE0036F3D2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "find dSYM_directory -name \"*.dSYM\" | xargs -I \\{\\} $PODS_ROOT/FirebaseCrashlytics/upload-symbols -gsp /path/to/GoogleService-Info.plist -p platform \\{\\}\n";
+		};
 		6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

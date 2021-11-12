@@ -18,8 +18,8 @@
 
     <ng-container *ngIf="match$ | async as match">
         <beping-team-match-score
-                (awayTeamClicked)="navigateToTeamPage(match.AwayClub, match.AwayTeam)"
-                (homeTeamClicked)="navigateToTeamPage(match.HomeClub, match.HomeTeam)"
+                (awayTeamClicked)="navigateToTeamPage(match.AwayClub, match.AwayTeam, match.DivisionId)"
+                (homeTeamClicked)="navigateToTeamPage(match.HomeClub, match.HomeTeam, match.DivisionId)"
                 [match]="match"
         ></beping-team-match-score>
         <beping-team-match-player-list
