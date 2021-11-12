@@ -29,21 +29,21 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                         case 403:
                             this.dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.FORBIDDEN'),
-                                color: 'danger',
+                                color: 'dark',
                                 duration: 3000
                             });
                             break;
                         case 429:
                             this.dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.TOO_MANY_REQUESTS'),
-                                color: 'danger',
+                                color: 'dark',
                                 duration: 3000
                             });
                             break;
                         case 400:
                             this.dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.BAD_REQUEST', {error: err.statusText}),
-                                color: 'danger',
+                                color: 'dark',
                                 duration: 3000
                             });
                             break;
@@ -54,7 +54,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                         case 500:
                             this.dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.INTERNAL', {error: err.statusText}),
-                                color: 'danger',
+                                color: 'dark',
                                 duration: 3000
                             });
                             break;
