@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TournamentsFilter} from '../../containers/tournaments-page/tournaments-page.component';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ModalController} from '@ionic/angular';
+import { Level } from 'src/app/core/models/level';
 
 @Component({
     selector: 'beping-tournament-filters',
@@ -11,7 +12,7 @@ import {ModalController} from '@ionic/angular';
 export class TournamentFiltersComponent implements OnInit {
 
     @Input() filter: TournamentsFilter;
-
+    levels = Object.values(Level);
     formGroup: FormGroup;
 
     constructor(

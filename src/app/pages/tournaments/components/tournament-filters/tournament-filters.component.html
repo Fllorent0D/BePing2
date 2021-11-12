@@ -11,33 +11,11 @@
     <ion-list>
         <form [formGroup]="formGroup">
             <ion-item>
+
                 <ion-label class="ion-text-wrap">{{'DIVISION_LEVEL.LEVEL'|translate}}</ion-label>
                 <ion-select formControlName="levelsToDisplay"
                             multiple="true">
-                    <ion-select-option [value]="6">{{'DIVISION_LEVEL.SUPER_DIVISION'|translate}}</ion-select-option>
-                    <ion-select-option [value]="1">{{'DIVISION_LEVEL.NATIONAL'|translate}}</ion-select-option>
-                    <ion-select-option [value]="15">{{'DIVISION_LEVEL.REGION_VTTL'|translate}}</ion-select-option>
-                    <ion-select-option [value]="16">{{'DIVISION_LEVEL.IWB'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="5">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.VLAAMS_BRABANT_BR'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="7">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.OOST_VLANDEREN'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="8">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.ANTWERP'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="9">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.WEST_VLAANDEREN'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="10">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIMBURG'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="4">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.HAINAUT'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="11">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.BRUSSELS_BRABANT_WALLON'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="12">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.NAMUR'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="13">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIEGE'|translate}}</ion-select-option>
-                    <ion-select-option
-                            [value]="14">{{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LUXEMBOURG'|translate}}</ion-select-option>
+                    <ion-select-option *ngFor="let level of levels" [value]="level">{{('DIVISION_LEVEL.'+level)|translate}}</ion-select-option>
                 </ion-select>
             </ion-item>
             <ion-item>

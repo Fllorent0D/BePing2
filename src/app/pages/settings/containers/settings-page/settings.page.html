@@ -49,14 +49,14 @@
     <beping-section-title [title]="'COMMON.RANKINGS' | translate"></beping-section-title>
     <ion-list>
         <ion-item>
-            <ion-label>Afficher les points ELO</ion-label>
+            <ion-label>{{'SETTINGS.DISPLAY_ELO' | translate}}</ion-label>
             <ion-toggle
                     [checked]="displayELO$|async"
                     (ionChange)="toggleELO($event)">
             </ion-toggle>
         </ion-item>
         <ion-item>
-            <ion-label>Afficher le classement numérique</ion-label>
+            <ion-label>{{'SETTINGS.DISPLAY_BEL' | translate}}</ion-label>
             <ion-toggle
                     [disabled]="(currentDatabase$|async) === 'vttl'"
                     [checked]="displayNumeric$|async"

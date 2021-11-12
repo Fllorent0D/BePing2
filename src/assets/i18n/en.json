@@ -109,8 +109,8 @@
     "NO_CLUBS": "No favorite clubs",
     "NO_TEAMS": "No favorite teams",
     "NO_DIVISIONS": "No favorite divisions",
-    "NO_FAVORITE": "No favorite",
-    "INSTRUCTIONS": "You can add favorite from the club/division/player page"
+    "NO_FAVORITE": "No favorites",
+    "INSTRUCTIONS": "Favorites can be added in the club/division/player page"
   },
   "CALENDAR_CLUB": {
     "CANT_LOAD_CALENDAR": "Impossible to load calendar",
@@ -223,7 +223,7 @@
     "NAME_OR_AFFILIATE_INDEX": "Name or index",
     "NO_RESULT": "No results",
     "CLUB_MAP": "Club map",
-    "SEARCH_EXPLANATION": "You can look for clubs, players, match sheets or divisions",
+    "SEARCH_EXPLANATION": "You can search for clubs, players, match sheets or divisions",
     "PLACEHOLDER": "Club, division, player, match sheet"
   },
   "TEAM_STAT": {
@@ -267,6 +267,8 @@
     "DONATION_GOAL": "BePing is a free application and will remain free. Keeping an application alive costs some money. All donations will be used to improve the application 😊",
     "CHANGE_LANGUAGE": "Change language",
     "DUTCH": "Dutch",
+    "DISPLAY_ELO": "Display ELO ranking",
+    "DISPLAY_BEL": "Display AFTT numbered ranking",
     "FRENCH": "Français",
     "ENGLISH": "English",
     "WHICH_CLUB": "In which club are you playing ?",

@@ -6,6 +6,7 @@ import {IonRouterOutlet, ModalController, PopoverController} from '@ionic/angula
 import {TournamentFiltersComponent} from '../../components/tournament-filters/tournament-filters.component';
 import {map} from 'rxjs/operators';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
+import {Level} from '../../../../core/models/level';
 
 interface TournamentByMonth {
     month: number;
@@ -14,7 +15,7 @@ interface TournamentByMonth {
 }
 
 export interface TournamentsFilter {
-    levelsToDisplay: number[];
+    levelsToDisplay: string[];
     showPastTournaments: boolean;
 }
 
@@ -27,9 +28,8 @@ export interface TournamentsFilter {
 export class TournamentsPageComponent implements OnInit {
     tournaments$: Observable<TournamentByMonth[]>;
     tournamentsFiltered$: Observable<TournamentByMonth[]>;
-    // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     private defaultFilter: TournamentsFilter = {
-        levelsToDisplay: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+        levelsToDisplay: Object.values(Level),
         showPastTournaments: false
     };
     tournamentsFilter$: BehaviorSubject<TournamentsFilter> = new BehaviorSubject<TournamentsFilter>(this.defaultFilter);
@@ -46,6 +46,7 @@ export class TournamentsPageComponent implements OnInit {
     ngOnInit() {
         this.tournaments$ = this.tournamentService.findAllTournaments().pipe(
             map((tournaments: TournamentEntry[]) => {
+                console.log(tournaments);
                 return tournaments.reduce<TournamentByMonth[]>((acc: TournamentByMonth[], tournament: TournamentEntry) => {
                     const date = new Date(tournament.DateFrom);
                     const month = date.getMonth();
@@ -68,11 +69,15 @@ export class TournamentsPageComponent implements OnInit {
                 }, []);
             }),
             map((tournamentsByMonth: TournamentByMonth[]) => tournamentsByMonth.sort((a, b) => {
+                console.log(tournamentsByMonth);
+
                 const dateA = new Date(a.year, a.month, 0);
                 const dateb = new Date(b.year, b.month, 0);
                 return dateA.getTime() - dateb.getTime();
             })),
             map((tournamentsByMonth: TournamentByMonth[]) => {
+                console.log(tournamentsByMonth);
+
                 return tournamentsByMonth.map((byMonth) => {
                         return {
                             ...byMonth,
@@ -92,6 +97,8 @@ export class TournamentsPageComponent implements OnInit {
             this.tournamentsFilter$
         ]).pipe(
             map(([tournaments, filters]) => {
+                console.log(tournaments, filters);
+
                 return tournaments.map((byMonth) => {
                     return {
                         ...byMonth,

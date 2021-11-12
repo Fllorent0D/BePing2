@@ -5,7 +5,7 @@ export interface TournamentEntry {
   DateFrom: string;
   DateTo: string;
   ExternalIndex: string;
-  Level: number;
+  Level: string;
   Name: string;
   RegistrationDate: string;
   SerieCount: number;
