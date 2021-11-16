@@ -33,3 +33,4 @@ npm-debug.log*
 node_modules/
 android_old/
 /my-release-key.keystore
+/cypress/videos/
