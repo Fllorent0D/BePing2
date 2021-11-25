@@ -3,5 +3,5 @@
 export interface WeeklyNumericRanking {
   bel: number;
   elo: number;
-  weekName: number;
+  weekName: string;
 }

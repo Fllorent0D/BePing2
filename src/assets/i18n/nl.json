@@ -427,7 +427,8 @@
     "START_BEPING": "Start BePing",
     "RETRY": "Opnieuw proberen",
     "AN_ERROR_OCCURED": "Er is een fout opgetreden tijdens het voorbereiden van BePing",
-    "PREPARATION": "BePing maakt zich klaar..."
+    "PREPARATION": "BePing maakt zich klaar...",
+    "INTERNET_NEEDED": "Er is een internetverbinding nodig om BePing te initialiseren"
   },
   "ERROR_TABT": {
     "INTERNAL": "Er heeft zich een technisch probleem voorgedaan. Probeer het later nog eens. Fout: {{error}}",

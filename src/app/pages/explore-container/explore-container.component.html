@@ -5,6 +5,9 @@
                                        [class.white]="!(isLoading$ | async)">BePing</span></ion-title>
 
         <ion-buttons slot="end">
+            <ion-button (click)="openCalculator()">
+                <ion-icon name="cog-outline" slot="icon-only"></ion-icon>
+            </ion-button>
             <ion-button (click)="openSettings()">
                 <ion-icon name="cog-outline" slot="icon-only"></ion-icon>
             </ion-button>

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {IonRouterOutlet, IonSlides, NavController} from '@ionic/angular';
 import {Select, Store} from '@ngxs/store';
@@ -13,13 +13,14 @@ import {AnalyticsService} from '../../core/services/firebase/analytics.service';
 import {DialogService} from '../../shared/services/dialog-service.service';
 import {PrivacyComponent} from '../../pages/settings/containers/privacy/privacy.component';
 import {ConditionsUsageComponent} from '../../pages/settings/containers/conditions-usage/conditions-usage.component';
+import {Network} from '@capacitor/network';
 
 @Component({
     selector: 'beping-onboarding',
     templateUrl: './onboarding.page.html',
     styleUrls: ['./onboarding.page.scss']
 })
-export class OnboardingPage implements OnInit {
+export class OnboardingPage implements OnInit, OnDestroy {
     slideOpts = {
         autoplay: false
     };
@@ -37,6 +38,7 @@ export class OnboardingPage implements OnInit {
 
     isLoading$: Observable<boolean>;
     hasError$: Observable<boolean>;
+    isOnline: boolean;
 
     isSynchronized$: Observable<boolean>;
 
@@ -75,7 +77,18 @@ export class OnboardingPage implements OnInit {
         ]).pipe(
             map(([isLoading, hasError]) => isLoading && !hasError)
         );
+        this.listenNetwork();
 
+    }
+
+    ngOnDestroy(): void {
+        Network.removeAllListeners();
+    }
+
+    private async listenNetwork() {
+        const status = await Network.getStatus();
+        this.isOnline = status.connected;
+        Network.addListener('networkStatusChange', networkStatus => this.isOnline = networkStatus.connected);
     }
 
     skip() {

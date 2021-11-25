@@ -34,7 +34,27 @@ export class HealthService extends BaseService {
    * This method doesn't expect any request body.
    */
   checkHealth$Response(params?: {
-  }): Observable<StrictHttpResponse<{ 'status'?: string, 'info'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'error'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'details'?: { [key: string]: { 'status'?: string, [key: string]: string } } }>> {
+  }): Observable<StrictHttpResponse<{
+'status'?: string;
+'info'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+} | null;
+'error'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+} | null;
+'details'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+};
+}>> {
 
     const rb = new RequestBuilder(this.rootUrl, HealthService.CheckHealthPath, 'get');
     if (params) {
@@ -46,7 +66,27 @@ export class HealthService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{ 'status'?: string, 'info'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'error'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'details'?: { [key: string]: { 'status'?: string, [key: string]: string } } }>;
+        return r as StrictHttpResponse<{
+        'status'?: string;
+        'info'?: {
+        [key: string]: {
+        'status'?: string;
+        [key: string]: string;
+        };
+        } | null;
+        'error'?: {
+        [key: string]: {
+        'status'?: string;
+        [key: string]: string;
+        };
+        } | null;
+        'details'?: {
+        [key: string]: {
+        'status'?: string;
+        [key: string]: string;
+        };
+        };
+        }>;
       })
     );
   }
@@ -58,10 +98,70 @@ export class HealthService extends BaseService {
    * This method doesn't expect any request body.
    */
   checkHealth(params?: {
-  }): Observable<{ 'status'?: string, 'info'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'error'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'details'?: { [key: string]: { 'status'?: string, [key: string]: string } } }> {
+  }): Observable<{
+'status'?: string;
+'info'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+} | null;
+'error'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+} | null;
+'details'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+};
+}> {
 
     return this.checkHealth$Response(params).pipe(
-      map((r: StrictHttpResponse<{ 'status'?: string, 'info'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'error'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'details'?: { [key: string]: { 'status'?: string, [key: string]: string } } }>) => r.body as { 'status'?: string, 'info'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'error'?: { [key: string]: { 'status'?: string, [key: string]: string } }, 'details'?: { [key: string]: { 'status'?: string, [key: string]: string } } })
+      map((r: StrictHttpResponse<{
+'status'?: string;
+'info'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+} | null;
+'error'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+} | null;
+'details'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+};
+}>) => r.body as {
+'status'?: string;
+'info'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+} | null;
+'error'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+} | null;
+'details'?: {
+[key: string]: {
+'status'?: string;
+[key: string]: string;
+};
+};
+})
     );
   }
 

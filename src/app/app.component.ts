@@ -13,7 +13,6 @@ import {BackButtonEvent} from '@ionic/core';
     styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-    @ViewChild('routerOutletElement') routerOutletElement: IonRouterOutlet;
 
     constructor(
         private platform: Platform,
@@ -24,14 +23,6 @@ export class AppComponent {
     }
 
     initializeApp() {
-        document.addEventListener('ionBackButton', (ev: BackButtonEvent) => {
-            ev.detail.register(-1, () => {
-                if (!this.routerOutletElement.canGoBack()) {
-                    App.exitApp();
-                }
-            });
-        });
-
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();

@@ -54,7 +54,7 @@ export class TournamentDetailPageComponent implements OnInit {
     ngOnInit(): void {
         this.tournament$ = this.activatedRoute.params.pipe(
             map((params: Params) => params.id),
-            switchMap((id: string) => this.tournamentService.findTournamentById({
+            switchMap((id: string) => this.tournamentService.findTournamentByIdV2({
                 withResults: true,
                 withRegistrations: true,
                 tournamentId: Number(id)

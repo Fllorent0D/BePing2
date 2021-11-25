@@ -123,6 +123,104 @@ export class TournamentsService extends BaseService {
   }
 
   /**
+   * Path part for operation findAllTournamentsV2
+   */
+  static readonly FindAllTournamentsV2Path = '/v2/tournaments';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findAllTournamentsV2()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllTournamentsV2$Response(params?: {
+
+    /**
+     * Account to do a request
+     */
+    'X-Tabt-Account'?: string;
+
+    /**
+     * Password of the account
+     */
+    'X-Tabt-Password'?: string;
+
+    /**
+     * On Behalf of
+     */
+    'X-Tabt-OnBehalfOf'?: string;
+
+    /**
+     * Database to query
+     */
+    'X-Tabt-Database'?: 'aftt' | 'vttl';
+
+    /**
+     * Season name to query
+     */
+    'X-Tabt-Season'?: string;
+  }): Observable<StrictHttpResponse<Array<TournamentEntry>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TournamentsService.FindAllTournamentsV2Path, 'get');
+    if (params) {
+      rb.header('X-Tabt-Account', params['X-Tabt-Account'], {});
+      rb.header('X-Tabt-Password', params['X-Tabt-Password'], {});
+      rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
+      rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
+      rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<TournamentEntry>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findAllTournamentsV2$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllTournamentsV2(params?: {
+
+    /**
+     * Account to do a request
+     */
+    'X-Tabt-Account'?: string;
+
+    /**
+     * Password of the account
+     */
+    'X-Tabt-Password'?: string;
+
+    /**
+     * On Behalf of
+     */
+    'X-Tabt-OnBehalfOf'?: string;
+
+    /**
+     * Database to query
+     */
+    'X-Tabt-Database'?: 'aftt' | 'vttl';
+
+    /**
+     * Season name to query
+     */
+    'X-Tabt-Season'?: string;
+  }): Observable<Array<TournamentEntry>> {
+
+    return this.findAllTournamentsV2$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<TournamentEntry>>) => r.body as Array<TournamentEntry>)
+    );
+  }
+
+  /**
    * Path part for operation findTournamentById
    */
   static readonly FindTournamentByIdPath = '/v1/tournaments/{tournamentId}';
@@ -225,6 +323,113 @@ export class TournamentsService extends BaseService {
   }): Observable<TournamentEntry> {
 
     return this.findTournamentById$Response(params).pipe(
+      map((r: StrictHttpResponse<TournamentEntry>) => r.body as TournamentEntry)
+    );
+  }
+
+  /**
+   * Path part for operation findTournamentByIdV2
+   */
+  static readonly FindTournamentByIdV2Path = '/v2/tournaments/{tournamentId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findTournamentByIdV2()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findTournamentByIdV2$Response(params: {
+
+    /**
+     * Account to do a request
+     */
+    'X-Tabt-Account'?: string;
+
+    /**
+     * Password of the account
+     */
+    'X-Tabt-Password'?: string;
+
+    /**
+     * On Behalf of
+     */
+    'X-Tabt-OnBehalfOf'?: string;
+
+    /**
+     * Database to query
+     */
+    'X-Tabt-Database'?: 'aftt' | 'vttl';
+
+    /**
+     * Season name to query
+     */
+    'X-Tabt-Season'?: string;
+    withResults?: boolean;
+    withRegistrations?: boolean;
+    tournamentId: number;
+  }): Observable<StrictHttpResponse<TournamentEntry>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TournamentsService.FindTournamentByIdV2Path, 'get');
+    if (params) {
+      rb.header('X-Tabt-Account', params['X-Tabt-Account'], {});
+      rb.header('X-Tabt-Password', params['X-Tabt-Password'], {});
+      rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
+      rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
+      rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
+      rb.query('withResults', params.withResults, {});
+      rb.query('withRegistrations', params.withRegistrations, {});
+      rb.path('tournamentId', params.tournamentId, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<TournamentEntry>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findTournamentByIdV2$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findTournamentByIdV2(params: {
+
+    /**
+     * Account to do a request
+     */
+    'X-Tabt-Account'?: string;
+
+    /**
+     * Password of the account
+     */
+    'X-Tabt-Password'?: string;
+
+    /**
+     * On Behalf of
+     */
+    'X-Tabt-OnBehalfOf'?: string;
+
+    /**
+     * Database to query
+     */
+    'X-Tabt-Database'?: 'aftt' | 'vttl';
+
+    /**
+     * Season name to query
+     */
+    'X-Tabt-Season'?: string;
+    withResults?: boolean;
+    withRegistrations?: boolean;
+    tournamentId: number;
+  }): Observable<TournamentEntry> {
+
+    return this.findTournamentByIdV2$Response(params).pipe(
       map((r: StrictHttpResponse<TournamentEntry>) => r.body as TournamentEntry)
     );
   }

@@ -37,6 +37,10 @@ const routes: Routes = [
     {
         path: 'divisions',
         loadChildren: () => import('./division/division.module').then(m => m.DivisionModule)
+    },
+    {
+        path: 'points-calculator',
+        loadChildren: () => import('./points-calculator/points-calculator.module').then(m => m.PointsCalculatorModule)
     }
 ];
 

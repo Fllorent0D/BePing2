@@ -44,7 +44,7 @@ export class TournamentsPageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tournaments$ = this.tournamentService.findAllTournaments().pipe(
+        this.tournaments$ = this.tournamentService.findAllTournamentsV2().pipe(
             map((tournaments: TournamentEntry[]) => {
                 return tournaments.reduce<TournamentByMonth[]>((acc: TournamentByMonth[], tournament: TournamentEntry) => {
                     const date = new Date(tournament.DateFrom);

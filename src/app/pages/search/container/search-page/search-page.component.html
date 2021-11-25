@@ -23,7 +23,9 @@
     <ng-container *ngIf="clubsFound$ | async as clubs">
         <ion-list *ngIf="clubs.results?.length > 0">
             <ion-list-header>
-                {{ 'COMMON.CLUBS' | translate }}
+                <ion-label>
+                    {{ 'COMMON.CLUBS' | translate }}
+                </ion-label>
             </ion-list-header>
             <beping-club-item
                     (clubClicked)="clubClicked($event)"
@@ -37,7 +39,9 @@
     <ng-container *ngIf="divisionsFound$ | async as divisions">
         <ion-list *ngIf="divisions.results?.length > 0">
             <ion-list-header>
-                {{ 'COMMON.DIVISIONS'| translate }}
+                <ion-label>
+                    {{ 'COMMON.DIVISIONS'| translate }}
+                </ion-label>
             </ion-list-header>
             <ion-item (click)="divisionClicked(div)" *ngFor="let div of divisions.results" detail>
                 <ion-label class="ion-text-wrap">
@@ -52,7 +56,9 @@
     <ng-container *ngIf="membersFound$ | async as membersSearchResults">
         <ion-list *ngIf="membersSearchResults.results?.length > 0">
             <ion-list-header>
-                {{ 'COMMON.PLAYERS'| translate }}
+                <ion-label>
+                    {{ 'COMMON.PLAYERS'| translate }}
+                </ion-label>
             </ion-list-header>
             <beping-member-item
                     (memberClicked)="memberClicked($event)"
@@ -63,7 +69,9 @@
         </ion-list>
         <ion-list *ngIf="membersSearchResults.isLoading">
             <ion-list-header>
-                {{ 'COMMON.PLAYERS'|translate }}
+                <ion-label>
+                    {{ 'COMMON.PLAYERS'|translate }}
+                </ion-label>
             </ion-list-header>
             <ion-item>
                 <ion-spinner slot="start"></ion-spinner>
@@ -78,7 +86,9 @@
     <ng-container *ngIf="matchesFound$ | async as matches">
         <ion-list *ngIf="matches.results?.length > 0">
             <ion-list-header>
-                {{ 'COMMON.MATCHES'|translate }}
+                <ion-label>
+                    {{ 'COMMON.MATCHES'|translate }}
+                </ion-label>
             </ion-list-header>
             <beping-team-match-result
                     *ngFor="let matchesEntry of matches.results" [match]="matchesEntry"
@@ -88,7 +98,9 @@
         </ion-list>
         <ion-list *ngIf="matches.isLoading">
             <ion-list-header>
-                {{ 'COMMON.MATCHES'|translate }}
+                <ion-label>
+                    {{ 'COMMON.MATCHES'|translate }}
+                </ion-label>
             </ion-list-header>
             <ion-item>
                 <ion-spinner slot="start"></ion-spinner>

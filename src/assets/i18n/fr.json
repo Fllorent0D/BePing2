@@ -380,7 +380,9 @@
   "REGIONAL_SHORT": "Régional",
   "PLAYER_CATEGORY": {
     "MEN": "Seniors hommes",
+    "MEN_SHORT": "Hommes",
     "WOMEN": "Seniors dames",
+    "WOMEN_SHORT": "Dames",
     "VETERANS": "Vétérans",
     "VETERANS_WOMEN": "Aînées",
     "YOUTH": "Jeunes"
@@ -424,7 +426,8 @@
     "START_BEPING": "Démarrer BePing",
     "RETRY": "Réessayer",
     "AN_ERROR_OCCURED": "Une erreur est survenue lors de l'activation de BePing",
-    "PREPARATION": "Préparation de BePing en cours..."
+    "PREPARATION": "Préparation de BePing en cours...",
+    "INTERNET_NEEDED": "Une connexion internet est nécessaire pour initialiser BePing"
   },
   "ERROR_TABT": {
     "INTERNAL": "Un problème technique est survenu. Veuillez réessayer plus tard. Erreur: {{error}}",

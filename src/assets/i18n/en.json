@@ -424,7 +424,8 @@
     "START_BEPING": "Start BePing",
     "RETRY": "Retry",
     "AN_ERROR_OCCURED": "An error occurred while preparing BePing",
-    "PREPARATION": "BePing is getting ready..."
+    "PREPARATION": "BePing is getting ready...",
+    "INTERNET_NEEDED": "An Internet connection is needed to initialize BePing"
   },
   "ERROR_TABT": {
     "INTERNAL": "A technical problem occurred. Please try again later. Error: {{error}}",

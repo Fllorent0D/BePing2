@@ -6,6 +6,7 @@ import {ModalBaseComponent} from './modal-base/modal-base.component';
 import {AfttLoginPage} from './aftt-login/aftt-login-page.component';
 import {SharedModule} from '../../shared/shared.module';
 import {ChooseMainMemberClubComponent} from './choose-main-member-club/choose-main-member-club.component';
+import { SearchMemberComponent } from './search-player/search-member.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import {ChooseMainMemberClubComponent} from './choose-main-member-club/choose-ma
         ChoosePlayerPage,
         ModalBaseComponent,
         AfttLoginPage,
-        ChooseMainMemberClubComponent
+        ChooseMainMemberClubComponent,
+        SearchMemberComponent
     ],
     imports: [
         SharedModule

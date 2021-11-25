@@ -23,7 +23,9 @@
     <ion-list>
         <ng-container *ngFor="let month of tournamentsFiltered$ | async">
             <ion-list-header>
-                {{ 'MONTHS.' + month.month|translate}} {{month.year}}
+                <ion-label>
+                    {{ 'MONTHS.' + month.month|translate}} {{month.year}}
+                </ion-label>
             </ion-list-header>
             <ion-item (click)="navigateToTournamentDetail(tournament)" *ngFor="let tournament of month.tournaments"
                       detail>

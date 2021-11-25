@@ -18,7 +18,9 @@
 
     <beping-team-match-info-list *ngIf="match" [match]="match"></beping-team-match-info-list>
     <ion-list-header>
-        {{ 'CLUB_DETAILS.LIST_OF_STRENGTH' | translate }}
+        <ion-label>
+            {{ 'CLUB_DETAILS.LIST_OF_STRENGTH' | translate }}
+        </ion-label>
     </ion-list-header>
     <ion-segment class="ion-padding" [(ngModel)]="club">
         <ion-segment-button value="home" >

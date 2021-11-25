@@ -36,6 +36,5 @@ describe('Onboarding', () => {
         cy.get('#privacy-close').click();
         cy.get('ion-checkbox').click();
         cy.get('#onboarding-start-beping').click();
-
     });
 });

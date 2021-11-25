@@ -347,3 +347,15 @@ hr {
     background-position: 500%;
   }
 }
+h1, h2, h3, h4, h5 {
+  ion-icon {
+    vertical-align: middle;
+    padding-bottom: 3px;
+  }
+}
+
+ion-label {
+  ion-icon {
+    margin-bottom: -3px;
+  }
+}

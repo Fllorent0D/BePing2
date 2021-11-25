@@ -1,6 +1,3 @@
-import {Browser} from 'leaflet';
-
-
 describe('HomeScreen', () => {
     describe('Select main player', () => {
         beforeEach(async () => {

@@ -25,11 +25,18 @@ export class AbstractPageTabsComponent implements AfterViewInit {
             this.changeDetectionRef.markForCheck();
         });
     }
-
+    focusSegment(segmentId) {
+        document.getElementById(`segment-${segmentId}`).scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+        });
+    }
     selectTab(index) {
         if (index === this.tabIndex) {
             return;
         }
+        this.focusSegment(index);
         this.slides.selectTab(index);
     }
 }

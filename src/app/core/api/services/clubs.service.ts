@@ -13,7 +13,6 @@ import { ClubEntry } from '../models/club-entry';
 import { MemberEntry } from '../models/member-entry';
 import { MemberResults } from '../models/member-results';
 import { TeamEntry } from '../models/team-entry';
-import { VenueEntryWithAddress } from '../models/venue-entry-with-address';
 
 @Injectable({
   providedIn: 'root',
@@ -558,110 +557,6 @@ export class ClubsService extends BaseService {
 
     return this.findClubTeamsMemberRanking$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberResults>>) => r.body as Array<MemberResults>)
-    );
-  }
-
-  /**
-   * Path part for operation findClubVenues
-   */
-  static readonly FindClubVenuesPath = '/v1/clubs/{clubIndex}/venues';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findClubVenues()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findClubVenues$Response(params: {
-
-    /**
-     * Account to do a request
-     */
-    'X-Tabt-Account'?: string;
-
-    /**
-     * Password of the account
-     */
-    'X-Tabt-Password'?: string;
-
-    /**
-     * On Behalf of
-     */
-    'X-Tabt-OnBehalfOf'?: string;
-
-    /**
-     * Database to query
-     */
-    'X-Tabt-Database'?: 'aftt' | 'vttl';
-
-    /**
-     * Season name to query
-     */
-    'X-Tabt-Season'?: string;
-    season?: number;
-    clubIndex: string;
-  }): Observable<StrictHttpResponse<Array<VenueEntryWithAddress>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, ClubsService.FindClubVenuesPath, 'get');
-    if (params) {
-      rb.header('X-Tabt-Account', params['X-Tabt-Account'], {});
-      rb.header('X-Tabt-Password', params['X-Tabt-Password'], {});
-      rb.header('X-Tabt-OnBehalfOf', params['X-Tabt-OnBehalfOf'], {});
-      rb.header('X-Tabt-Database', params['X-Tabt-Database'], {});
-      rb.header('X-Tabt-Season', params['X-Tabt-Season'], {});
-      rb.query('season', params.season, {});
-      rb.path('clubIndex', params.clubIndex, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<VenueEntryWithAddress>>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `findClubVenues$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findClubVenues(params: {
-
-    /**
-     * Account to do a request
-     */
-    'X-Tabt-Account'?: string;
-
-    /**
-     * Password of the account
-     */
-    'X-Tabt-Password'?: string;
-
-    /**
-     * On Behalf of
-     */
-    'X-Tabt-OnBehalfOf'?: string;
-
-    /**
-     * Database to query
-     */
-    'X-Tabt-Database'?: 'aftt' | 'vttl';
-
-    /**
-     * Season name to query
-     */
-    'X-Tabt-Season'?: string;
-    season?: number;
-    clubIndex: string;
-  }): Observable<Array<VenueEntryWithAddress>> {
-
-    return this.findClubVenues$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<VenueEntryWithAddress>>) => r.body as Array<VenueEntryWithAddress>)
     );
   }
 

@@ -23,27 +23,29 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
             catchError((err) => {
                 if (request.url.includes(environment.tabtUrl) &&
                     err instanceof HttpErrorResponse) {
-                    this.crashlytics.recordException({message: err.message});
                     const translateService = this.injector.get(TranslateService);
                     switch (err.status) {
                         case 403:
+                            this.crashlytics.recordException({message: err.message});
                             this.dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.FORBIDDEN'),
-                                color: 'dark',
+                                color: 'medium',
                                 duration: 3000
                             });
                             break;
                         case 429:
+                            this.crashlytics.recordException({message: err.message});
                             this.dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.TOO_MANY_REQUESTS'),
-                                color: 'dark',
+                                color: 'medium',
                                 duration: 3000
                             });
                             break;
                         case 400:
+                            this.crashlytics.recordException({message: err.message});
                             this.dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.BAD_REQUEST', {error: err.statusText}),
-                                color: 'dark',
+                                color: 'medium',
                                 duration: 3000
                             });
                             break;
@@ -52,9 +54,10 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                             break;
                         default:
                         case 500:
+                            this.crashlytics.recordException({message: err.message});
                             this.dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.INTERNAL', {error: err.statusText}),
-                                color: 'dark',
+                                color: 'medium',
                                 duration: 3000
                             });
                             break;

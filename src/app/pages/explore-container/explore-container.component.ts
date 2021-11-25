@@ -22,6 +22,7 @@ import {ImpactStyle} from '@capacitor/haptics';
 import {AnalyticsService} from '../../core/services/firebase/analytics.service';
 import {OnDestroyHook} from '../../core/on-destroy-hook';
 import {DialogService} from '../../shared/services/dialog-service.service';
+import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
 
 @Component({
     selector: 'beping-explore-container',
@@ -53,7 +54,8 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
         private readonly ionRouterOutlet: IonRouterOutlet,
         private readonly hapticsService: HapticsService,
         private readonly analyticsService: AnalyticsService,
-        private readonly platform: Platform
+        private readonly platform: Platform,
+        private readonly tabNavigator: TabsNavigationService
     ) {
         super();
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
@@ -161,5 +163,9 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
             take(1),
             switchMap((member) => this.store.dispatch(new UpdateMemberEntries(member.UniqueIndex)))
         ).subscribe();
+    }
+
+    openCalculator() {
+        this.tabNavigator.navigateTo('points-calculator');
     }
 }

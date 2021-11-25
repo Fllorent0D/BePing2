@@ -29,7 +29,9 @@
         <ng-container *ngIf="favoritesTeam | async as teams">
             <ion-list>
                 <ion-list-header>
-                    {{'COMMON.TEAMS'|translate}}
+                    <ion-label>
+                        {{'COMMON.TEAMS'|translate}}
+                    </ion-label>
                 </ion-list-header>
                 <ion-item (click)="navigateToURI(team.uri)" *ngFor="let team of teams"
                           detail>
@@ -50,7 +52,9 @@
         <ng-container *ngIf="favoritesClub | async as clubs">
             <ion-list>
                 <ion-list-header>
-                    {{'COMMON.CLUBS'|translate}}
+                    <ion-label>
+                        {{'COMMON.CLUBS'|translate}}
+                    </ion-label>
                 </ion-list-header>
                 <ion-item (click)="navigateToURI(club.uri)" *ngFor="let club of clubs"
                           detail>
@@ -71,7 +75,9 @@
         <ng-container *ngIf="favoritesDivision | async as divisions">
             <ion-list>
                 <ion-list-header>
-                    {{'COMMON.DIVISIONS'|translate}}
+                    <ion-label>
+                        {{'COMMON.DIVISIONS'|translate}}
+                    </ion-label>
                 </ion-list-header>
                 <ion-item (click)="navigateToURI(division.uri)" *ngFor="let division of divisions"
                           detail>
@@ -93,8 +99,9 @@
         <ng-container *ngIf="favoritesMember | async as members">
             <ion-list>
                 <ion-list-header>
-                    {{'COMMON.PLAYERS'|translate}}
-
+                    <ion-label>
+                        {{'COMMON.PLAYERS'|translate}}
+                    </ion-label>
                 </ion-list-header>
                 <ion-item (click)="navigateToURI(member.uri)" *ngFor="let member of members"
                           detail>

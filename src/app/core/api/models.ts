@@ -17,7 +17,6 @@ export { RankingEvaluationEntry } from './models/ranking-evaluation-entry';
 export { MemberEntryResultEntry } from './models/member-entry-result-entry';
 export { MemberEntry } from './models/member-entry';
 export { TeamEntry } from './models/team-entry';
-export { VenueEntryWithAddress } from './models/venue-entry-with-address';
 export { TournamentSerieResultEntry } from './models/tournament-serie-result-entry';
 export { RegistrationEntry } from './models/registration-entry';
 export { TournamentSerieEntry } from './models/tournament-serie-entry';

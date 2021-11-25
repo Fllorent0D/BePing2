@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>{{'SETTINGS.SEARCH_PLAYER'|translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">
+                <ion-icon icon="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar
+                [formControl]="searchBox"
+                debounce="500"
+                enterkeyhint="search"
+                id="search-member"
+                placeholder="Rechercher"
+                type="search"
+        ></ion-searchbar>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content fullscreen="true">
+    <div [hidden]="loading">
+        <ion-item (click)="playerClicked(member)" *ngFor="let member of members$|async">
+            <ion-label>
+                {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
+            </ion-label>
+            <ion-label slot="end" *ngIf="showNumericRanking">{{belRanking(member)}} points</ion-label>
+            <ion-label slot="end" *ngIf="!showNumericRanking">{{member.Ranking}}</ion-label>
+        </ion-item>
+    </div>
+
+    <div *ngIf="loading">
+        <ion-item *ngFor="let t of skeletonRows">
+            <ion-label>
+                <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated></ion-skeleton-text>
+            </ion-label>
+        </ion-item>
+    </div>
+</ion-content>
