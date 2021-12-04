@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IonRouterOutlet, LoadingController, ModalController, NavController} from '@ionic/angular';
+import {IonRouterOutlet, LoadingController, NavController} from '@ionic/angular';
 import {ChooseClubPage} from '../../pages/modals/choose-club/choose-club.page';
 import {Select, Store} from '@ngxs/store';
 import {ClubsState} from '../../core/store/clubs';

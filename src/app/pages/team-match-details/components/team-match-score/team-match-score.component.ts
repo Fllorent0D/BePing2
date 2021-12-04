@@ -61,8 +61,4 @@ export class TeamMatchScoreComponent implements OnInit {
 
     ngOnInit() {
     }
-
-    teamClicked(team: string) {
-
-    }
 }

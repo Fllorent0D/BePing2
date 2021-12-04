@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Action, createSelector, NgxsOnInit, SelectorOptions, State, StateContext} from '@ngxs/store';
+import {Action, createSelector, NgxsOnInit, State, StateContext} from '@ngxs/store';
 
 import {ClubEntry} from '../../api/models/club-entry';
 import {GetClubs} from './clubs.actions';
