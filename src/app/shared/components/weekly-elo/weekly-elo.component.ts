@@ -38,14 +38,14 @@ export class WeeklyEloComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this.viewInit = true;
-        this.computeData()
+        this.computeData();
     }
 
     computeData() {
         if (!this.viewInit) {
             return;
         }
-        const ctx = this.canvas.nativeElement.getContext('2d');
+        const ctx = this.canvas?.nativeElement.getContext('2d');
 
         const purpleOrangeGradient = ctx.createLinearGradient(0, 0, 0, 800);
         purpleOrangeGradient.addColorStop(1, 'rgba(146,146,146,0.4)');

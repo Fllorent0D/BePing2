@@ -15,7 +15,7 @@ export class TabsNavigationService {
 
     navigateTo(page: string | string [], extras?: NavigationExtras): Promise<boolean> {
         // Oh yea such nice workaround
-        const url = this.router.url.split('/');
+        const url = this.router.url?.split('/');
         const newUrl = url.slice(0, 3);
 
         if (typeof page === 'string') {

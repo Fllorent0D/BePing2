@@ -21,19 +21,21 @@ export class MemberNameRankingInfoComponent {
     ) {
     }
 
-    get elo(): string {
+    get elo(): number {
         return this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.ELO);
     }
 
     get nextRanking(): string {
-        return this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.AILE_FRANCOPHONE);
+        const pts = this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.BEL_POINTS);
+        const position = this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.BEL_RANKING);
+        return this.rankingService.getEquivalentRanking(pts, position);
     }
 
-    get bel(): string {
+    get bel(): number {
         return this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.BEL_POINTS);
     }
 
-    get belRanking(): string {
+    get belRanking(): number {
         return this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.BEL_RANKING);
     }
 }

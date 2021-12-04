@@ -18,7 +18,7 @@
                         <ion-col *ngIf="nextRanking && nextRanking !== '?'">
                             <ion-icon name="arrow-forward-outline"></ion-icon>
                         </ion-col>
-                        <ion-col *ngIf="nextRanking && nextRanking !== '?'">
+                        <ion-col *ngIf="displayNumericRanking && nextRanking">
                             {{nextRanking}}
                         </ion-col>
                     </ion-row>
@@ -28,11 +28,10 @@
                 <ion-label>ELO {{elo}}</ion-label>
             </ion-chip>
             <ion-chip *ngIf="displayNumericRanking">
-                <ion-label>BEL {{bel}}</ion-label>
+                <ion-label>Pts {{bel}}</ion-label>
             </ion-chip>
             <ion-chip *ngIf="displayNumericRanking">
-                <ion-icon [icon]="'podium-outline'" color="clear"></ion-icon>
-                <ion-label>{{belRanking}}</ion-label>
+                <ion-label>Pos {{belRanking}}</ion-label>
             </ion-chip>
 
         </ion-col>

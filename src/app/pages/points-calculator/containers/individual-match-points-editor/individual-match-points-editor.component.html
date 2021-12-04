@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>{{'CALCULATOR.POINTS_CALCULATOR_MATCH'|translate}}</ion-title>
+        <ion-title>{{'CALCULATOR.ADD_MATCH'|translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
@@ -19,7 +19,7 @@
         <ion-list>
             <ion-radio-group formControlName="category">
                 <ion-list-header>
-                    <ion-label>Catégorie</ion-label>
+                    <ion-label>{{'CALCULATOR.CATEGORY'|translate}}</ion-label>
                 </ion-list-header>
 
                 <ion-item>
@@ -32,122 +32,78 @@
                 </ion-item>
             </ion-radio-group>
 
-            <ion-radio-group formControlName="opponent">
+            <ion-radio-group>
                 <ion-list-header>
-                    <ion-label>Adversaire</ion-label>
+                    <ion-label>{{'CALCULATOR.OPPONENT'|translate}}</ion-label>
                 </ion-list-header>
 
-                <ion-item [detail]="!formGroup.get('opponent').value" (click)="chooseMember()" [disabled]="formGroup.get('category').invalid">
-                    <ion-label *ngIf="!formGroup.get('opponent').value">Choisir adversaire</ion-label>
-                    <ion-label *ngIf="formGroup.get('opponent').value">
-                        {{formGroup.get('opponent').value.FirstName | titlecase}} {{formGroup.get('opponent').value.LastName | titlecase}}
+                <ion-item [detail]="!formGroup.get('opponentName').value" (click)="chooseMember()" [disabled]="formGroup.get('category').invalid">
+                    <ion-label *ngIf="!formGroup.get('opponentName').value">{{'CALCULATOR.CHOOSE_OPPONENT'|translate}}</ion-label>
+                    <ion-label *ngIf="formGroup.get('opponentName').value">
+                        {{formGroup.get('opponentName').value | titlecase}}
                     </ion-label>
-                    <ion-label *ngIf="formGroup.get('opponent').value" slot="end">
-                        {{belRanking(formGroup.get('opponent').value)}} points
+                    <ion-label *ngIf="formGroup.get('opponentRanking').value" slot="end">
+                        {{formGroup.get('opponentRanking').value}} points
                     </ion-label>
                 </ion-item>
             </ion-radio-group>
 
             <ion-radio-group formControlName="matchResult">
                 <ion-list-header>
-                    <ion-label>Résultat du match</ion-label>
+                    <ion-label>{{'CALCULATOR.MATCH_RESULT'|translate}}</ion-label>
                 </ion-list-header>
                 <ion-item>
-                    <ion-label>Victoire</ion-label>
-                    <ion-radio slot="start" color="success" [value]="EVENT_TYPE.CHAMPIONSHIP"></ion-radio>
+                    <ion-label>{{'COMMON.WIN'|translate}}</ion-label>
+                    <ion-radio slot="start" color="success" [value]="MATCH_RESULT.VICTORY"></ion-radio>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label>Défaite</ion-label>
-                    <ion-radio slot="start" color="danger" [value]="EVENT_TYPE.TOURNAMENT"></ion-radio>
+                    <ion-label>{{'COMMON.DEFEAT'|translate}}</ion-label>
+                    <ion-radio slot="start" color="danger" [value]="MATCH_RESULT.DEFEAT"></ion-radio>
                 </ion-item>
             </ion-radio-group>
 
             <ion-radio-group formControlName="eventType">
                 <ion-list-header>
-                    <ion-label>Type d'évènement</ion-label>
+                    <ion-label>{{'CALCULATOR.EVENT_TYPE.NAME'|translate}}</ion-label>
                 </ion-list-header>
                 <ion-item>
-                    <ion-label>Championnat</ion-label>
+                    <ion-label>{{'COMMON.CHAMPIONSHIP'|translate}}</ion-label>
                     <ion-radio slot="start" [value]="EVENT_TYPE.CHAMPIONSHIP"></ion-radio>
                 </ion-item>
 
                 <ion-item>
-                    <ion-label>Tournois</ion-label>
+                    <ion-label>{{'COMMON.TOURNAMENT'|translate}}</ion-label>
                     <ion-radio slot="start" [value]="EVENT_TYPE.TOURNAMENT"></ion-radio>
                 </ion-item>
             </ion-radio-group>
             <br>
+            <ion-list-header *ngIf="formGroup.get('eventType').value">
+                <ion-label>{{'CALCULATOR.EVENT_TYPE.CATEGORY'|translate}}</ion-label>
+            </ion-list-header>
             <ion-radio-group formControlName="eventId">
-
                 <ng-container *ngIf="formGroup.get('eventType').value === EVENT_TYPE.CHAMPIONSHIP">
-                    <ion-item>
-                        <ion-label>SuperDivision</ion-label>
-                        <ion-radio slot="start" value="R2"></ion-radio>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">
-                            National 1 <br>
-                            National 2
-                        </ion-label>
-                        <ion-radio slot="start" value="R5"></ion-radio>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">National 3<br>IWB<br>Landelijk</ion-label>
-                        <ion-radio slot="start" value="R6"></ion-radio>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">Proviciale 1</ion-label>
-                        <ion-radio slot="start" value="R7"></ion-radio>
-                    </ion-item>
-
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">Autres provinciales</ion-label>
-                        <ion-radio slot="start" value="R8"></ion-radio>
+                    <ion-item *ngFor="let event of coefficientPerEvent[EVENT_TYPE.CHAMPIONSHIP]">
+                        <ion-label class="multiline">{{('CALCULATOR.EVENT_TYPE.CHAMPIONSHIP.'+event.eventId) | translate}}</ion-label>
+                        <ion-radio slot="start" [value]="event.eventId"></ion-radio>
                     </ion-item>
                 </ng-container>
                 <ng-container *ngIf="formGroup.get('eventType').value === EVENT_TYPE.TOURNAMENT">
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">Tableau final des Championnats de Belgique A</ion-label>
-                        <ion-radio slot="start" value="R1"></ion-radio>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">
-                            Poules des championnats de Belgique A<br>
-                            Coupe de Belgique (1/2 finale et finale)
-                        </ion-label>
-                        <ion-radio slot="start" value="R2"></ion-radio>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">
-                            Championnats de Belgique : Jeunes/Vétérans/BCDE <br>
-                            Tournoi Série A (Série A)<br>
-                            Coupe de Belgique (jusque 1/4 finale)
-                        </ion-label>
-                        <ion-radio slot="start" value="R3"></ion-radio>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">
-                            Tournoi série A (BCDE-NC) <br>
-                            Championnats provinciaux : Jeunes/Vétérans/BCDE<br>
-                            Top 12 jeunes<br>
-                            Critérium National Jeunes
-                        </ion-label>
-                        <ion-radio slot="start" value="R4"></ion-radio>
-                    </ion-item>
-                    <ion-item>
-                        <ion-label class="ion-text-wrap">Tournoi Série B & C</ion-label>
-                        <ion-radio slot="start" value="R5"></ion-radio>
+                    <ion-item *ngFor="let event of coefficientPerEvent[EVENT_TYPE.TOURNAMENT]">
+                        <ion-label class="multiline">{{('CALCULATOR.EVENT_TYPE.TOURNAMENT.'+event.eventId) | translate}}</ion-label>
+                        <ion-radio slot="start" [value]="event.eventId"></ion-radio>
                     </ion-item>
                 </ng-container>
             </ion-radio-group>
-            <ion-item class="ion-margin-top ion-text-center" color="success" [disabled]="formGroup.invalid">
-                <ion-label>{{'COMMON.SAVE'|translate}}</ion-label>
+            <ion-item
+                    class="ion-margin-top ion-text-center"
+                    color="success"
+                    [disabled]="formGroup.invalid"
+                    (click)="save()"
+            >
+                <ion-label>{{'CALCULATOR.ADD_MATCH'|translate}}</ion-label>
             </ion-item>
-            {{formGroup.errors|json}}
-            {{formGroup.value|json}}
+
         </ion-list>
     </form>
 

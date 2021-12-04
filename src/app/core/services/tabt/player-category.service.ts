@@ -62,7 +62,7 @@ export class PlayerCategoryService {
                 withOpponentRankingEvaluation: true
             }).pipe(
                 map((memberEntry: MemberEntry) => ({category, memberEntry, found: true})),
-                catchError((err) => of({category, found: false}))
+                catchError(() => of({category, found: false}))
             );
 
         return combineLatest([
@@ -100,7 +100,7 @@ export class PlayerCategoryService {
     }
 
     getMemberLatestMatches(members: UserMemberEntries): Observable<{ [key: string]: TeamMatchesEntry[] }> {
-        const clubIndexes = [...new Set(Object.values(members).map((entry) => entry.Club))];
+        const clubIndexes = [...new Set(Object.values(members).map((entry) => entry?.Club))];
         const matchIds = Object.values(members)
             .map((entry) => [...(entry.ResultEntries ?? [])]
                 .sort((a, b) => b.Date.localeCompare(a.Date))

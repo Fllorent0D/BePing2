@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {RankingPointsEntry} from '../../api/models/ranking-points-entry';
+import {equivalenceRankingBelPos, equivalenceRankingBelPts, pivotRankingEquivalence} from '../../models/bel-ranking';
 
 export enum RankingMethodName {
     ELO = 'ELO',
@@ -17,31 +18,6 @@ export class RankingService {
     constructor() {
     }
 
-
-    getELOPoints(rankings: RankingPointsEntry[]): string {
-        const ranking = rankings.find(r => r.MethodName === RankingMethodName.ELO);
-        if (ranking) {
-            return ranking.Value;
-        }
-        return '?';
-    }
-
-    getPoints(rankings: RankingPointsEntry[], rankingMethod: RankingMethodName): string {
-        const ranking = rankings.find(r => r.MethodName === rankingMethod);
-        if (ranking) {
-            return ranking.Value;
-        }
-        return '?';
-    }
-
-    getNextRanking(rankings: RankingPointsEntry[]): string {
-        const ranking = rankings.find(r => r.MethodName === RankingMethodName.AILE_FRANCOPHONE);
-        if (ranking) {
-            return ranking.Value;
-        }
-        return '?';
-    }
-
     static isRankingHigher(a: string, b: string) {
         if (a === b) {
             return false;
@@ -57,5 +33,45 @@ export class RankingService {
 
         return letterA < letterB;
 
+    }
+
+
+    getEquivalentRanking(points: number, position: number): string {
+        const [pts, equivalenceTable] = points < pivotRankingEquivalence ?
+            [points, equivalenceRankingBelPts] :
+            [position, equivalenceRankingBelPos];
+
+        const bound = equivalenceTable.find(
+            ({upperBound, lowerBound}) => pts >= lowerBound && pts <= upperBound
+        );
+
+        if (bound.ranking === 'A') {
+            return 'A' + position;
+        }
+        return bound.ranking ?? '?';
+    }
+
+    getELOPoints(rankings: RankingPointsEntry[]): string {
+        const ranking = rankings.find(r => r.MethodName === RankingMethodName.ELO);
+        if (ranking) {
+            return ranking.Value;
+        }
+        return undefined;
+    }
+
+    getPoints(rankings: RankingPointsEntry[], rankingMethod: RankingMethodName): number {
+        const ranking = rankings.find(r => r.MethodName === rankingMethod);
+        if (ranking) {
+            return Number(ranking.Value);
+        }
+        return undefined;
+    }
+
+    getNextRanking(rankings: RankingPointsEntry[]): string {
+        const ranking = rankings.find(r => r.MethodName === RankingMethodName.AILE_FRANCOPHONE);
+        if (ranking) {
+            return ranking.Value;
+        }
+        return undefined;
     }
 }

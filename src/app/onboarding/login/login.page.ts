@@ -151,7 +151,7 @@ export class LoginPage implements OnInit {
                     throw new Error('Player not found');
                 }),
                 switchMap((member: MemberEntry) =>
-                    this.clubService.findClubById({clubIndex: member.Club}).pipe(
+                    this.clubService.findClubById({clubIndex: member?.Club}).pipe(
                         map((club) => ({club, member}))
                     )
                 ),

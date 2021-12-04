@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MemberEntry} from '../../../core/api/models/member-entry';
@@ -8,15 +8,19 @@ import {DialogService} from '../../../shared/services/dialog-service.service';
 import {PLAYER_CATEGORY} from '../../../core/models/user';
 import {RankingMethodName, RankingService} from '../../../core/services/tabt/ranking.service';
 import {ModalController} from '@ionic/angular';
+import {Components} from '@ionic/core';
+import IonSearchbar = Components.IonSearchbar;
 
 @Component({
     selector: 'beping-search-player',
     templateUrl: './search-member.component.html',
     styleUrls: ['./search-member.component.css']
 })
-export class SearchMemberComponent implements OnInit {
+export class SearchMemberComponent implements OnInit, AfterViewInit {
     @Input() showNumericRanking = false;
     @Input() memberCategory: PLAYER_CATEGORY | undefined;
+
+    @ViewChild('searchbar') searchBar: IonSearchbar;
 
     searchBox: FormControl;
     members$: Observable<MemberEntry[]>;
@@ -54,7 +58,7 @@ export class SearchMemberComponent implements OnInit {
         );
     }
 
-    belRanking(member: MemberEntry): string {
+    belRanking(member: MemberEntry): number {
         return this.rankingService.getPoints(member.RankingPointsEntries, RankingMethodName.BEL_POINTS);
     }
 
@@ -64,5 +68,9 @@ export class SearchMemberComponent implements OnInit {
 
     async playerClicked(member: MemberEntry) {
         await this.modalCtrl.dismiss({member});
+    }
+
+    ngAfterViewInit(): void {
+        this.searchBar.setFocus();
     }
 }

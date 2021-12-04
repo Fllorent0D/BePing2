@@ -63,7 +63,7 @@ export class TeamMatchResultComponent implements OnInit {
 
     async navigateToDetails() {
         if (this.match.MatchUniqueId) {
-            this.tabNavigation.navigateTo(['team-match-details', this.match.MatchUniqueId.toString()]);
+            this.tabNavigation.navigateTo(['team-match-details', this.match?.MatchUniqueId?.toString()]);
         } else {
             const buttons = [
                 {

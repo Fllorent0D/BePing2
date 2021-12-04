@@ -32,6 +32,7 @@ ion-card {
     color: var(--ion-color-dark)
   }
 }
+
 /*
 ion-toolbar.toolbar-compact {
   --padding-bottom: 0px;
@@ -194,7 +195,7 @@ ion-item {
   --inner-padding-start: 5px;
   margin: 8px 10px;
   border-radius: 15px;
-  box-shadow: rgba(50, 50, 93, 0.05) 0px 6px 12px -2px, rgba(0, 0, 0, 0.05) 0px 3px 7px -3px
+  box-shadow: rgba(50, 50, 93, 0.05) 0 6 12 -2, rgba(0, 0, 0, 0.05) 0 3 7 -3
   //box-shadow: rgba(50, 50, 93, 0.1) 0px 6px 12px -2px, rgba(0, 0, 0, 0.1) 0px 3px 7px -3px
 }
 
@@ -258,6 +259,7 @@ ion-list {
 
 ion-popover {
   --max-height: 500px;
+
   .popover-wrapper {
     .popover-content {
       width: 80vw;
@@ -324,15 +326,17 @@ hr {
   }
 
 }
-.white{
+
+.white {
   transition: color 0.8s linear;
 }
+
 .shining {
   overflow: hidden;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.0), #fff, rgba(255, 255, 255, 0.0));
   background-repeat: no-repeat;
   background-size: 80%;
-  color:  rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
   transition: color 0.5s linear;
   animation: shiningKeyFrame 1s linear infinite;
   -webkit-background-clip: text;
@@ -347,6 +351,7 @@ hr {
     background-position: 500%;
   }
 }
+
 h1, h2, h3, h4, h5 {
   ion-icon {
     vertical-align: middle;
@@ -358,4 +363,8 @@ ion-label {
   ion-icon {
     margin-bottom: -3px;
   }
+}
+
+.multiline {
+  white-space: pre-wrap !important;
 }

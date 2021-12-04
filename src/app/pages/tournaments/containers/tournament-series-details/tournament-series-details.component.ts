@@ -28,7 +28,7 @@ export class TournamentSeriesDetailsComponent implements OnInit {
             return;
         }
 
-        const url = this.location.path().split('/');
+        const url = this.location.path()?.split('/');
         url.splice(0, 3);
         url.push('registrations', serie.UniqueIndex.toString(10));
         this.tabsNavigator.navigateTo(url, {state: {registrations: serie.RegistrationEntries}});

@@ -140,9 +140,9 @@ export class OtherPlayersComponent implements OnInit {
         ).subscribe(async (member) => {
             const actionSheet = await this.actionSheetController.create({
                 buttons: [{
-                    text: this.translate.instant('TEAM_STAT.INFO_ABOUT_CLUB', {club: member.Club}),
+                    text: this.translate.instant('TEAM_STAT.INFO_ABOUT_CLUB', {club: member?.Club}),
                     handler: () => {
-                        this.tabNavigator.navigateTo(['clubs', member.Club]);
+                        this.tabNavigator.navigateTo(['clubs', member?.Club]);
                     }
                 }, {
                     text: this.translate.instant('COMMON.CANCEL'),

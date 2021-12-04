@@ -10,6 +10,16 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
+    <ion-toolbar *ngIf="(playerCategories$|async)?.length > 1">
+        <ion-segment [value]="currentCategory$|async" (ionChange)="categoryChanged($event)">
+            <ion-segment-button id="segment-0" [value]="PLAYER_CATEGORY.MEN">
+                <ion-label class="ion-text-capitalize">{{'PLAYER_CATEGORY.MEN_SHORT' | translate}}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button id="segment-1" [value]="PLAYER_CATEGORY.WOMEN">
+                <ion-label class="ion-text-capitalize">{{'PLAYER_CATEGORY.WOMEN_SHORT' | translate}}</ion-label>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
     <ion-header collapse="condense">
@@ -21,53 +31,42 @@
         </ion-toolbar>
     </ion-header>
     <ion-list>
-        <ion-item detail>
+        <ion-item *ngFor="let entry of pointsEntryWithPoints$|async">
             <ion-label class="ion-text-wrap">
                 <h3>
-                    Florent Cardoen
+                    {{entry.opponentName | titlecase}}
                 </h3>
                 <p>
-                    Provincial 4
+                    {{('CALCULATOR.EVENT_TYPE.'+entry.eventType.toUpperCase()+'.'+entry.eventId) | translate}}
                 </p>
             </ion-label>
-            <ion-label slot="end" color="success">
-                +200
+            <ion-label slot="end" [color]="entry.pointsWon >= 0 ? 'success' : 'danger'">
+                <ng-container *ngIf="entry.pointsWon > 0">+</ng-container>{{entry.pointsWon | number: '1.0-0'}}
             </ion-label>
         </ion-item>
-        <ion-item detail>
-            <ion-label class="ion-text-wrap">
-                <h3>
-                    Thierry Delvaux
-                </h3>
-                <p>
-                    Provincial 4
-                </p>
-            </ion-label>
-            <ion-label slot="end" color="danger">
-                -200
-            </ion-label>
-        </ion-item>
-        <ion-item class="ion-margin-top">
-            <ion-label class="ion-text-center">
-                <p>
-                    Ajouter un match
-                    <ion-icon name="add-circle"></ion-icon>
 
-                </p>
+        <ion-item class="ion-margin-top" (click)="addEntry()">
+            <ion-label class="ion-text-center" >
+                {{'CALCULATOR.ADD_MATCH'|translate}}
+                <ion-icon name="add-circle"></ion-icon>
             </ion-label>
         </ion-item>
-        <ion-item-divider></ion-item-divider>
-        <ion-item>
-            <ion-label>Points</ion-label>
-            <ion-label class="ion-text-end ion-text-wrap" color="success">
-                2000
-                <ion-icon name="trending-up"></ion-icon>
-            </ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-label>Classement équivalent</ion-label>
-            <ion-label class="ion-text-end ion-text-wrap">C2</ion-label>
-        </ion-item>
+        <ion-item-divider mode="md"></ion-item-divider>
+        <ng-container *ngIf="nextRanking$|async as nextRanking">
+            <ion-item *ngIf="nextRanking.futureBelPts">
+                <ion-label class="text-bold">{{'CALCULATOR.POINTS'|translate}}</ion-label>
+                <ion-label class="ion-text-end ion-text-wrap" [color]="nextRanking.futureBelPts >= nextRanking.currentBelPts ? 'success' : 'danger'">
+                    {{nextRanking.futureBelPts| number: '1.0-0'}}
+                    <ion-icon name="trending-up" *ngIf="nextRanking.futureBelPts > nextRanking.currentBelPts"></ion-icon>
+                    <ion-icon name="trending-down" *ngIf="nextRanking.futureBelPts < nextRanking.currentBelPts"></ion-icon>
+                </ion-label>
+            </ion-item>
+            <ion-item *ngIf="nextRanking.futureRanking">
+                <ion-label class="text-bold">{{'CALCULATOR.EQUIVALENT_RANKING'|translate}}</ion-label>
+                <ion-label class="ion-text-end ion-text-wrap">{{nextRanking.futureRanking}}</ion-label>
+            </ion-item>
+        </ng-container>
+
     </ion-list>
 
 </ion-content>

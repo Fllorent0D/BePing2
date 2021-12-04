@@ -434,5 +434,33 @@
     "BAD_REQUEST": "BePing a envoyé une mauvaise information au serveur. Erreur: {{error}}",
     "FORBIDDEN": "Le serveur de BePing ne vous authorize pas à voir cette information",
     "TOO_MANY_REQUESTS": "Veuillez attendre quelques minutes avant de réessayer"
+  },
+  "CALCULATOR": {
+    "POINTS_CALCULATOR": "Calculateur de points",
+    "EVENT_TYPE": {
+      "NAME": "Type d'événement",
+      "CATEGORY": "Catégorie d'événement",
+      "CHAMPIONSHIP": {
+        "R2": "SuperDivision",
+        "R5": "National 1\nNational 2",
+        "R6": "National 3\nIWB\nLandelijk",
+        "R7": "Proviciale 1",
+        "R8": "Autres provinciales"
+      },
+      "TOURNAMENT": {
+        "R1": "Tableau final des Championnats de Belgique A",
+        "R2": "Poules des championnats de Belgique A\nCoupe de Belgique (1/2 finale et finale)",
+        "R3": "Championnats de Belgique : Jeunes/Vétérans/BCDE\nTournoi Série A (Série A)\nCoupe de Belgique (jusque 1/4 finale)",
+        "R4": "Tournoi série A (BCDE-NC)\nChampionnats provinciaux : Jeunes/Vétérans/BCDE\nTop 12 jeunes\nCritérium National Jeunes",
+        "R5": "Tournoi Série B & C"
+      }
+    },
+    "ADD_MATCH": "Ajouter un résulat",
+    "POINTS": "Points",
+    "EQUIVALENT_RANKING": "Classement équivalent",
+    "CATEGORY": "Categorie",
+    "OPPONENT": "Adversaire",
+    "CHOOSE_OPPONENT": "Choisir adversaire",
+    "MATCH_RESULT": "Résultat du match"
   }
 }

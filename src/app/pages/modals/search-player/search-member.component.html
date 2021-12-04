@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
-        <ion-title>{{'SETTINGS.SEARCH_PLAYER'|translate}}</ion-title>
+        <ion-title>{{'NOTEBOOK.SEARCH_PLAYER'|translate}}</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="closeModal()">
                 <ion-icon icon="close-outline"></ion-icon>
@@ -9,12 +9,13 @@
     </ion-toolbar>
     <ion-toolbar>
         <ion-searchbar
-                [formControl]="searchBox"
-                debounce="500"
-                enterkeyhint="search"
-                id="search-member"
-                placeholder="Rechercher"
-                type="search"
+            #searchbar
+            [formControl]="searchBox"
+            debounce="500"
+            enterkeyhint="search"
+            id="search-member"
+            placeholder="{{'SEARCH.SEARCH'|translate}}"
+            type="search"
         ></ion-searchbar>
     </ion-toolbar>
 
@@ -34,7 +35,7 @@
     <div *ngIf="loading">
         <ion-item *ngFor="let t of skeletonRows">
             <ion-label>
-                <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated></ion-skeleton-text>
+                <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated="animated"></ion-skeleton-text>
             </ion-label>
         </ion-item>
     </div>

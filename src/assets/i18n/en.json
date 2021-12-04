@@ -188,7 +188,7 @@
     "ARE_YOU_SURE_TO_DELETE_NOTE": "Etes-vous certain de vouloir supprimer la note?",
     "NOTES_ABOUT_NAME": "Notes de {{firstname}} {{lastname}}",
     "NOTES": "Notes",
-    "SEARCH_PLAYER": "Chercher un joueur",
+    "SEARCH_PLAYER": "Search player",
     "SHOW_ALL_NOTES": "Afficher toutes les notes",
     "NEW_NOTE": {
       "ENCOUNTER_CONTEXT": "Contexte de la rencontre",
@@ -380,7 +380,9 @@
   "REGIONAL_SHORT": "Regional",
   "PLAYER_CATEGORY": {
     "MEN": "Senior Men",
+    "MEN_SHORT": "Men",
     "WOMEN": "Senior Women",
+    "WOMEN_SHORT": "Women",
     "VETERANS": "Senior",
     "VETERANS_WOMEN": "Seniors",
     "YOUTH": "Youth"
@@ -432,5 +434,33 @@
     "BAD_REQUEST": "BePing has sent the wrong information to the server. Error: {{error}}",
     "FORBIDDEN": "The BePing server does not allow you to see this information.",
     "TOO_MANY_REQUESTS": "Please wait a few minutes before you try again"
+  },
+  "CALCULATOR": {
+    "POINTS_CALCULATOR": "Points calculator",
+    "EVENT_TYPE": {
+      "NAME": "Event type",
+      "CATEGORY": "Event category",
+      "CHAMPIONSHIP": {
+        "R2": "SuperDivision",
+        "R5": "National 1\nNational 2",
+        "R6": "National 3\nIWB\nLandelijk",
+        "R7": "Proviciale 1",
+        "R8": "Autres provinciales"
+      },
+      "TOURNAMENT": {
+        "R1": "Tableau final des Championnats de Belgique A",
+        "R2": "Poules des championnats de Belgique A\nCoupe de Belgique (1/2 finale et finale)",
+        "R3": "Championnats de Belgique : Jeunes/Vétérans/BCDE\nTournoi Série A (Série A)\nCoupe de Belgique (jusque 1/4 finale)",
+        "R4": "Tournoi série A (BCDE-NC)\nChampionnats provinciaux : Jeunes/Vétérans/BCDE\nTop 12 jeunes\nCritérium National Jeunes",
+        "R5": "Tournoi Série B & C"
+      }
+    },
+    "ADD_MATCH": "Add result",
+    "POINTS": "Points",
+    "EQUIVALENT_RANKING": "Equivalent ranking",
+    "CATEGORY": "Category",
+    "OPPONENT": "Opponent",
+    "CHOOSE_OPPONENT": "Choose your opponent",
+    "MATCH_RESULT": "Match result"
   }
 }

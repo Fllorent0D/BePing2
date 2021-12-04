@@ -24,9 +24,6 @@ import {CurrentSeasonChanged} from '../season';
     name: 'clubs',
     defaults: defaultEntityState()
 })
-@SelectorOptions({
-    injectContainerState: false
-})
 @Injectable()
 export class ClubsState extends EntityState<ClubEntry> implements NgxsOnInit {
 

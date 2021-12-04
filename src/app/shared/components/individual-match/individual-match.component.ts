@@ -20,6 +20,6 @@ export class IndividualMatchComponent implements OnInit {
     }
 
     navigateToDetails() {
-        this.tabNavigation.navigateTo(['team-match-details', this.result.MatchUniqueId.toString()]);
+        this.tabNavigation.navigateTo(['team-match-details', this.result?.MatchUniqueId?.toString()]);
     }
 }

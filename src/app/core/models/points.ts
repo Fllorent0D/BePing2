@@ -10,6 +10,11 @@ export enum EVENT_TYPE {
     CHAMPIONSHIP = 'championship'
 }
 
+export enum MATCH_RESULT {
+    VICTORY = 'victory',
+    DEFEAT = 'defeat'
+}
+
 export interface EventCoefficient {
     eventId: string;
     coefficient: number;
@@ -37,14 +42,10 @@ export const coefficientPerEvent: { [key: string]: EventCoefficient[] } = {
             eventId: 'R5',
             coefficient: 1,
         },
-        {
-            eventId: 'R5',
-            coefficient: 1,
-        },
     ],
     [EVENT_TYPE.CHAMPIONSHIP]: [
         {
-            eventId: 'R1',
+            eventId: 'R2',
             coefficient: 2.2,
         },
         {

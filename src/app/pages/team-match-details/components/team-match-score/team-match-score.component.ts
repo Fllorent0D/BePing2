@@ -16,11 +16,11 @@ export class TeamMatchScoreComponent implements OnInit {
     }
 
     get homeScore(): number {
-        return Number(this.match.Score.split('-')[0]);
+        return Number(this.match.Score?.split('-')[0]);
     }
 
     get awayScore(): number {
-        return Number(this.match.Score.split('-')[1]);
+        return Number(this.match.Score?.split('-')[1]);
     }
 
     get homeScorePct() {

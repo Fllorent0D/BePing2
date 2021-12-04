@@ -5,6 +5,7 @@ import {SeasonState} from './season/season.state';
 import {TabTState} from './user/tab-t-state.service';
 import {FavoritesState} from './favorites';
 import {SettingsState} from './settings';
+import {PointsCalculatorState} from './points/points-calculator-state.service';
 
 export const states = [
     ClubsState,
@@ -13,5 +14,6 @@ export const states = [
     SeasonState,
     TabTState,
     SettingsState,
-    FavoritesState
+    FavoritesState,
+    PointsCalculatorState
 ];

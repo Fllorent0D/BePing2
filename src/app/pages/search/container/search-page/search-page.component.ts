@@ -173,7 +173,7 @@ export class SearchPageComponent implements OnInit {
     }
 
     matchClicked(teamMatchEntry: TeamMatchesEntry) {
-        this.tabNavigator.navigateTo(['team-match-details', teamMatchEntry.MatchUniqueId.toString(10)]);
+        this.tabNavigator.navigateTo(['team-match-details', teamMatchEntry?.MatchUniqueId?.toString(10)]);
         RateApp.requestReview();
     }
 
