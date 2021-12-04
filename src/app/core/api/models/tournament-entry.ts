@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { TournamentSerieEntry } from './tournament-serie-entry';
+import {TournamentSerieEntry} from './tournament-serie-entry';
+
 export interface TournamentEntry {
   DateFrom: string;
   DateTo: string;

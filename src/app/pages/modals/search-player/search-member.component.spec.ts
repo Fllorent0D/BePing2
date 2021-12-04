@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SearchMemberComponent } from './search-member.component';
+import {SearchMemberComponent} from './search-member.component';
 
 describe('SearchPlayerComponent', () => {
   let component: SearchMemberComponent;

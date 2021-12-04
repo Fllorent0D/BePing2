@@ -1,6 +1,3 @@
-import {ClubEntry} from '../../api/models/club-entry';
-import {DivisionEntry} from '../../api/models/division-entry';
-import {MemberEntry} from '../../api/models/member-entry';
 import {FavoriteItem} from './favorites.state';
 
 

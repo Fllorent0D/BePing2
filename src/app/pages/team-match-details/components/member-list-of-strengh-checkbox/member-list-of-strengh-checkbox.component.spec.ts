@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MemberListOfStrenghCheckboxComponent } from './member-list-of-strengh-checkbox.component';
+import {MemberListOfStrenghCheckboxComponent} from './member-list-of-strengh-checkbox.component';
 
 describe('MemberListOfStrenghCheckboxComponent', () => {
   let component: MemberListOfStrenghCheckboxComponent;

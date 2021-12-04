@@ -17,7 +17,6 @@ import {TeamEntry} from '../../../../core/api/models/team-entry';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {FavoritesState, ToggleDivisionFromFavorites} from '../../../../core/store/favorites';
-import {FormControl} from '@angular/forms';
 
 @Component({
     selector: 'beping-division-page',

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TeamMatchInfoListComponent } from './team-match-info-list.component';
+import {TeamMatchInfoListComponent} from './team-match-info-list.component';
 
 describe('TeamMatchInfoListComponent', () => {
   let component: TeamMatchInfoListComponent;

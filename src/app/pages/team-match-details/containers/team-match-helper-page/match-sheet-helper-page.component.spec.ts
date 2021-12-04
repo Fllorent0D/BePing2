@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MatchSheetHelperPage } from './match-sheet-helper-page.component';
+import {MatchSheetHelperPage} from './match-sheet-helper-page.component';
 
 describe('TeamMatchHelperPageComponent', () => {
   let component: MatchSheetHelperPage;

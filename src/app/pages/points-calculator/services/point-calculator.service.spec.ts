@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { PointCalculatorService } from './point-calculator.service';
+import {PointCalculatorService} from './point-calculator.service';
 
 describe('PointCalculatorService', () => {
   let service: PointCalculatorService;

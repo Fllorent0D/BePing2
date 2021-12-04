@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { Player } from './player';
+import {Player} from './player';
+
 export interface TournamentSerieResultEntry {
   AwayPlayer: Array<Player>;
   AwayPlayerMatchIndex: Array<string>;

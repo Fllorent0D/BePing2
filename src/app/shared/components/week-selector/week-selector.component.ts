@@ -1,6 +1,6 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ComponentRef, PopoverOptions} from '@ionic/core';
+import {PopoverOptions} from '@ionic/core';
 
 @Component({
     selector: 'beping-week-selector',

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { IndividualMatchPointsEditorComponent } from './individual-match-points-editor.component';
+import {IndividualMatchPointsEditorComponent} from './individual-match-points-editor.component';
 
 describe('IndividualMatchPointsEditorComponent', () => {
   let component: IndividualMatchPointsEditorComponent;

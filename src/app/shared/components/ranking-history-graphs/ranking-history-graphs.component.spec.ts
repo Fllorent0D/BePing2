@@ -1,7 +1,7 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {IonicModule} from '@ionic/angular';
 
-import { RankingHistoryGraphsComponent } from './ranking-history-graphs.component';
+import {RankingHistoryGraphsComponent} from './ranking-history-graphs.component';
 
 describe('RankingHistoryGraphsComponent', () => {
   let component: RankingHistoryGraphsComponent;

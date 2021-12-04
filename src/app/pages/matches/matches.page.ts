@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
 import {FavoriteItem, FavoritesState} from '../../core/store/favorites';
 import {combineLatest, Observable} from 'rxjs';

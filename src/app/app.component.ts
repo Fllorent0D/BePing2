@@ -1,11 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 
-import {IonRouterOutlet, Platform} from '@ionic/angular';
+import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import '@capacitor-community/firebase-analytics';
-import {App} from '@capacitor/app';
-import {BackButtonEvent} from '@ionic/core';
 
 @Component({
     selector: 'beping-root',

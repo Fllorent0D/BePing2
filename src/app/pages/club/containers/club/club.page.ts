@@ -15,7 +15,7 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
 import {add, sub} from 'date-fns';
-import {FavoriteItem, FavoritesState, ToggleClubFromFavorites, ToggleTeamsFromFavorites} from '../../../../core/store/favorites';
+import {FavoriteItem, FavoritesState, ToggleClubFromFavorites} from '../../../../core/store/favorites';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {ImpactStyle} from '@capacitor/haptics';
 import {HapticsService} from '../../../../core/services/haptics.service';

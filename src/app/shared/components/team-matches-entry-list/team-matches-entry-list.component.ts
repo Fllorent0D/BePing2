@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TeamMatchesEntry} from '../../../core/api/models/team-matches-entry';
 import {FormControl} from '@angular/forms';
 import {map, take, tap} from 'rxjs/operators';
-import {combineLatest, Observable, merge} from 'rxjs';
+import {combineLatest, merge, Observable} from 'rxjs';
 
 @Component({
     selector: 'beping-team-matches-entry-list',

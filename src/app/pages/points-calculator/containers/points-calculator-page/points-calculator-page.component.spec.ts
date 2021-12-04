@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PointsCalculatorPageComponent } from './points-calculator-page.component';
+import {PointsCalculatorPageComponent} from './points-calculator-page.component';
 
 describe('PointsCalculatorPageComponent', () => {
   let component: PointsCalculatorPageComponent;

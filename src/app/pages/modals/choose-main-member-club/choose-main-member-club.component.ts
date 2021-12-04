@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ChooseClubPage} from '../choose-club/choose-club.page';
 import {ChoosePlayerPage} from '../choose-player/choose-player.page';
-import {IonNav, IonRouterOutlet, ModalController, NavController} from '@ionic/angular';
+import {ModalController, NavController} from '@ionic/angular';
 import {Store} from '@ngxs/store';
 import {ClubEntry} from '../../../core/api/models/club-entry';
 import {MemberEntry} from '../../../core/api/models/member-entry';
 import {SetUser} from '../../../core/store/user/user.actions';
 import {finalize, tap} from 'rxjs/operators';
-import {Components} from '@ionic/core';
 
 @Component({
     selector: 'beping-choose-main-member-club',
