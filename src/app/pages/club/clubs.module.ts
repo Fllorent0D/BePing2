@@ -11,7 +11,6 @@ import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {SharedModule} from '../../shared/shared.module';
 import {TeamPage} from './containers/team/team-page.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import {VirtualScrollerModule} from 'ngx-virtual-scroller';
 import {ClubPlayerListTabComponent} from './components/club-player-list-tab/club-player-list-tab.component';
 import {ClubTeamListTabComponent} from './components/club-team-list-tab/club-team-list-tab.component';
 import {ClubPraticalInfoTabComponent} from './components/club-pratical-info-tab/club-pratical-info-tab.component';
@@ -27,7 +26,6 @@ import {TeamPlayersStatsComponent} from './components/team-players-stats/team-pl
         ClubPageRoutingModule,
         SharedModule,
         ScrollingModule,
-        VirtualScrollerModule
     ],
     declarations: [
         ClubPage,
