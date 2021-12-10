@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {coefficientPerEvent, EVENT_TYPE, MATCH_RESULT} from '../../../../core/models/points';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {takeUntil} from 'rxjs/operators';
+import {filter, map, take, takeUntil} from 'rxjs/operators';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {DialogService} from '../../../../shared/services/dialog-service.service';
@@ -13,6 +13,7 @@ import {PointsCalculatorEntry, PointsCalculatorState} from '../../../../core/sto
 import {Store} from '@ngxs/store';
 import {Add} from '@ngxs-labs/entity-state';
 import {PointCalculatorService} from '../../services/point-calculator.service';
+import {UserState} from '../../../../core/store/user/user.state';
 
 @Component({
     selector: 'beping-individual-match-points-editor',
@@ -47,7 +48,17 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
             eventType: new FormControl(null, [Validators.required]),
             eventId: new FormControl(null, [Validators.required])
         });
-
+        this.store.select(UserState.availablePlayerCategories).pipe(
+            map((categories: PLAYER_CATEGORY[]) =>
+                categories.filter(category => [PLAYER_CATEGORY.WOMEN, PLAYER_CATEGORY.MEN].includes(category))
+            ),
+            take(1),
+            filter(cats => cats.length === 1),
+            map((cats) => cats[0])
+        ).subscribe((category) => {
+            this.formGroup.get('category').setValue(category);
+            this.formGroup.get('category').disable({emitEvent: true});
+        });
         this.formGroup.get('eventType').valueChanges.pipe(
             takeUntil(this.ngUnsubscribe)
         ).subscribe(() => {

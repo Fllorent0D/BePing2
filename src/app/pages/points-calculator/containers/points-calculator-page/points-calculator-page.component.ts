@@ -12,6 +12,7 @@ import {RankingMethodName, RankingService} from '../../../../core/services/tabt/
 import {PointCalculatorService} from '../../services/point-calculator.service';
 import {Reset} from '@ngxs-labs/entity-state';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
+import {DialogService} from '../../../../shared/services/dialog-service.service';
 
 @Component({
     selector: 'beping-points-calculator-page',
@@ -33,7 +34,8 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
         private readonly tabtNavigator: TabsNavigationService,
         private readonly rankingService: RankingService,
         private readonly pointsCalculatorService: PointCalculatorService,
-        private readonly store: Store
+        private readonly store: Store,
+        private readonly dialogService: DialogService
     ) {
         super();
     }
@@ -116,8 +118,23 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
     }
 
     reset() {
-        this.store.dispatch(new Reset(PointsCalculatorState));
+        this.dialogService.showAlert({
+            header: 'Êtes-vous certains de vouloir d\'effacer les résultats encodés',
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'cancel',
+                    cssClass: 'secondary',
+                }, {
+                    text: 'Oui',
+                    handler: () => {
+                        this.store.dispatch(new Reset(PointsCalculatorState));
+                    }
+                }
+            ]
+        });
     }
+
 
     categoryChanged(event: CustomEvent) {
         this.currentCategory$.next(event.detail.value);

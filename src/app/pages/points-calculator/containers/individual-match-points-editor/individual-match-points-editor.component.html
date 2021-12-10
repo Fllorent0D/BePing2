@@ -17,7 +17,7 @@
     </ion-header>
     <form [formGroup]="formGroup">
         <ion-list>
-            <ion-radio-group formControlName="category">
+            <ion-radio-group formControlName="category" [hidden]="formGroup.get('category').disabled">
                 <ion-list-header>
                     <ion-label>{{'CALCULATOR.CATEGORY'|translate}}</ion-label>
                 </ion-list-header>
