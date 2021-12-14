@@ -4,7 +4,7 @@
         <ion-title color="clear"><span [class.shining]="isLoading$ | async"
                                        [class.white]="!(isLoading$ | async)">BePing</span></ion-title>
 
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" *ngIf="displayNumericRanking$|async">
             <ion-button (click)="openCalculator()">
                 <ion-icon name="calculator-outline" slot="icon-only"></ion-icon>
             </ion-button>

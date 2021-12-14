@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {RankingPointsEntry} from '../../api/models/ranking-points-entry';
-import {equivalenceRankingBelPos, equivalenceRankingBelPts, pivotRankingEquivalence} from '../../models/bel-ranking';
+import {equivalenceRankingBelPos, equivalenceRankingBelPts, pivotRankingEquivalence, RankingEquivalence} from '../../models/bel-ranking';
 
 export enum RankingMethodName {
     ELO = 'ELO',
@@ -41,7 +41,7 @@ export class RankingService {
             [points, equivalenceRankingBelPts] :
             [position, equivalenceRankingBelPos];
 
-        const bound = equivalenceTable.find(
+        const bound: RankingEquivalence = equivalenceTable.find(
             ({upperBound, lowerBound}) => pts >= lowerBound && pts <= upperBound
         );
 

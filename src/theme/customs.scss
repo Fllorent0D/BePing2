@@ -184,7 +184,7 @@ ion-fab-button[data-desc]::after {
 }
 
 ion-item {
-  --background: var(--ion-card-background);
+  //--background: var(--ion-card-background);
   --border-radius: 15px;
   --min-height: 45px;
   --border-style: none;
@@ -195,7 +195,7 @@ ion-item {
   --inner-padding-start: 5px;
   margin: 8px 10px;
   border-radius: 15px;
-  box-shadow: rgba(50, 50, 93, 0.05) 0 6px 12px -2px, rgba(0, 0, 0, 0.05) 0 3px 7px -3px //box-shadow: rgba(50, 50, 93, 0.1) 0px 6px 12px -2px, rgba(0, 0, 0, 0.1) 0px 3px 7px -3px
+  //box-shadow: rgba(50, 50, 93, 0.05) 0 6px 12px -2px, rgba(0, 0, 0, 0.05) 0 3px 7px -3px //box-shadow: rgba(50, 50, 93, 0.1) 0px 6px 12px -2px, rgba(0, 0, 0, 0.1) 0px 3px 7px -3px
 }
 
 ion-item.large {
@@ -255,7 +255,10 @@ ion-list {
   margin-top: var(--ion-padding, 0px);
   margin-bottom: var(--ion-padding, 0px);
 }
-
+ion-list {
+  --background: transparent !important;
+  background-color: transparent !important;
+}
 ion-popover {
   --max-height: 500px;
 

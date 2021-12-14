@@ -1,37 +1,40 @@
-<ion-grid>
-    <ion-row>
-        <ion-col>
-            <beping-victory-chart [title]="ranking" bluePct="{{victoriesPct}}"
-                                  redPct="{{defeatsPct}}"></beping-victory-chart>
-        </ion-col>
-        <ion-col>
-            <ion-grid>
-                <ion-row>
-                    <ion-col>
-                        <ion-text>{{victories}} ({{victoriesPct}}%)</ion-text>
-                        <br>
-                        <ion-text color="grey">{{'COMMON.WINS'|translate}}</ion-text>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        <ion-text>{{defeats}} ({{defeatsPct}}%)</ion-text>
-                        <br>
-                        <ion-text color="grey">{{'COMMON.DEFEATS'|translate}}</ion-text>
-                    </ion-col>
-                </ion-row>
-                <ion-row class="ion-align-items-end">
-                    <ion-col>
-                        <ion-button (click)="isOpen = !isOpen" fill="clear" size="small">
-                            {{'DASHBOARD.SEE_DETAILS'|translate}}
-                        </ion-button>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-col>
-    </ion-row>
-</ion-grid>
-<ng-container *ngIf="isOpen">
-    <beping-individual-match *ngFor="let result of completeResults" [result]="result"></beping-individual-match>
-</ng-container>
-<hr>
+<beping-card [marging]="false" [margingVertical]="false">
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <beping-victory-chart [title]="ranking" bluePct="{{victoriesPct}}"
+                                      redPct="{{defeatsPct}}"></beping-victory-chart>
+            </ion-col>
+            <ion-col>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <ion-text>{{victories}} ({{victoriesPct}}%)</ion-text>
+                            <br>
+                            <ion-text color="grey">{{'COMMON.WINS'|translate}}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <ion-text>{{defeats}} ({{defeatsPct}}%)</ion-text>
+                            <br>
+                            <ion-text color="grey">{{'COMMON.DEFEATS'|translate}}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row class="ion-align-items-end" *ngIf="!isTablet">
+                        <ion-col>
+                            <ion-button  (click)="isOpen = !isOpen" fill="clear" size="small">
+                                {{'DASHBOARD.SEE_DETAILS'|translate}}
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isOpen">
+            <beping-individual-match *ngFor="let result of completeResults" [result]="result" style="width: 100%"></beping-individual-match>
+
+        </ion-row>
+    </ion-grid>
+</beping-card>
+

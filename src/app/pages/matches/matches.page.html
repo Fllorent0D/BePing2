@@ -27,7 +27,7 @@
     </ion-button>
     <ng-container *ngIf="hasFavorites$ | async; else noFavorite">
         <ng-container *ngIf="favoritesTeam | async as teams">
-            <ion-list>
+            <ion-list *ngIf="teams.length !== 0">
                 <ion-list-header>
                     <ion-label>
                         {{'COMMON.TEAMS'|translate}}
@@ -40,17 +40,11 @@
                     </ion-label>
                     <ion-note *ngIf="team.note" slot="end">{{'PLAYER_CATEGORY.' + team.note|translate}}</ion-note>
                 </ion-item>
-                <ng-container *ngIf="teams.length === 0">
-                    <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
-                        <h3>{{'FAVORITES.NO_TEAMS'|translate}}</h3>
-                    </ion-label>
-                </ng-container>
-
             </ion-list>
 
         </ng-container>
         <ng-container *ngIf="favoritesClub | async as clubs">
-            <ion-list>
+            <ion-list *ngIf="clubs.length !== 0">
                 <ion-list-header>
                     <ion-label>
                         {{'COMMON.CLUBS'|translate}}
@@ -63,17 +57,11 @@
                     </ion-label>
                     <ion-note *ngIf="club.note" slot="end">{{club.note}}</ion-note>
                 </ion-item>
-                <ng-container *ngIf="clubs.length === 0">
-                    <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
-                        <h3>{{'FAVORITES.NO_CLUBS'|translate}}</h3>
-                    </ion-label>
-                </ng-container>
-
             </ion-list>
 
         </ng-container>
         <ng-container *ngIf="favoritesDivision | async as divisions">
-            <ion-list>
+            <ion-list *ngIf="divisions.length !== 0">
                 <ion-list-header>
                     <ion-label>
                         {{'COMMON.DIVISIONS'|translate}}
@@ -86,18 +74,13 @@
                     </ion-label>
                     <ion-note *ngIf="division.note" slot="end">{{division.note}}</ion-note>
                 </ion-item>
-                <ng-container *ngIf="divisions.length === 0">
-                    <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
-                        <h3>{{'FAVORITES.NO_PLAYERS'|translate}}</h3>
-                    </ion-label>
-                </ng-container>
 
             </ion-list>
 
 
         </ng-container>
         <ng-container *ngIf="favoritesMember | async as members">
-            <ion-list>
+            <ion-list *ngIf="members.length !== 0">
                 <ion-list-header>
                     <ion-label>
                         {{'COMMON.PLAYERS'|translate}}
@@ -110,11 +93,6 @@
                     </ion-label>
                     <ion-note *ngIf="member.note" slot="end">{{member.note}}</ion-note>
                 </ion-item>
-                <ng-container *ngIf="members.length === 0">
-                    <ion-label class="ion-marging-top ion-text-wrap ion-text-center">
-                        <h3>{{'FAVORITES.NO_PLAYERS'|translate}}</h3>
-                    </ion-label>
-                </ng-container>
 
             </ion-list>
 

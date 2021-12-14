@@ -6,7 +6,7 @@
         <ion-title>{{'COMMON.TOURNAMENTS'|translate}}</ion-title>
         <ion-buttons (click)="showFilters()" slot="primary">
             <ion-button color="secondary">
-                <ion-icon icon="options-outline" slot="icon-only"></ion-icon>
+                <ion-icon icon="filter-outline" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
@@ -27,8 +27,7 @@
                     {{ 'MONTHS.' + month.month|translate}} {{month.year}}
                 </ion-label>
             </ion-list-header>
-            <ion-item (click)="navigateToTournamentDetail(tournament)" *ngFor="let tournament of month.tournaments"
-                      detail>
+            <ion-item (click)="navigateToTournamentDetail(tournament)" *ngFor="let tournament of month.tournaments" detail="detail">
                 <ion-label class="ion-text-wrap">
                     <h3>{{tournament.Name}}</h3>
                     <p>{{tournament.DateFrom | localizedDate}} {{tournament.DateTo ? ' - ' + (tournament.DateTo | localizedDate) : ''}}</p>

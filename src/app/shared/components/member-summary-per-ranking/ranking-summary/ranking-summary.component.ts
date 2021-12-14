@@ -9,6 +9,7 @@ import {MemberEntryResultEntry} from '../../../../core/api/models/member-entry-r
 export class RankingSummaryComponent implements OnInit {
 
     @Input() ranking = '';
+    @Input() isTablet = false;
 
     victories = 0;
     victoriesPct = 0;
