@@ -13,13 +13,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 # Available Actions
 
-### bump_patch
+### build_ionic_prod
 
 ```sh
-[bundle exec] fastlane bump_patch
+[bundle exec] fastlane build_ionic_prod
 ```
 
-test lane
+build ionic app
 
 ----
 
@@ -34,10 +34,18 @@ test lane
 
 Fetch certificates and provisioning profiles
 
-### ios build
+### ios align_versioning_and_bump
 
 ```sh
-[bundle exec] fastlane ios build
+[bundle exec] fastlane ios align_versioning_and_bump
+```
+
+Align versioning
+
+### ios build_ios
+
+```sh
+[bundle exec] fastlane ios build_ios
 ```
 
 Build the iOS application.
@@ -49,14 +57,6 @@ Build the iOS application.
 ```
 
 Ship to Testflight.
-
-### ios patch
-
-```sh
-[bundle exec] fastlane ios patch
-```
-
-Patch version number.
 
 ----
 
@@ -70,6 +70,22 @@ Patch version number.
 ```
 
 Build the Android application.
+
+### android align_versioning_and_bump
+
+```sh
+[bundle exec] fastlane android align_versioning_and_bump
+```
+
+Align versioning
+
+### android build_android
+
+```sh
+[bundle exec] fastlane android build_android
+```
+
+Build android app
 
 ### android beta
 

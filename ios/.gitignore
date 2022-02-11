@@ -4,7 +4,7 @@ App/Podfile.lock
 App/App/public
 DerivedData
 xcuserdata
-
+build
 # Cordova plugins for Capacitor
 capacitor-cordova-ios-plugins
 /App/App/GoogleService-Info.plist

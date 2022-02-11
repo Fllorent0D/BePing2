@@ -1,120 +1,129 @@
 fastlane_version '2.131.0'
 
-desc 'test lane'
-lane :bump_patch do
-  print "TEST SUCCESSFUL!"
+desc 'build ionic app'
+lane :build_ionic_prod do
+    sh("ionic", "cap", "copy", "--prod")
 end
 
 platform :ios do
 
- desc 'Fetch certificates and provisioning profiles'
- lane :certificates do
-    match(type: "development")
-    match(type: "appstore")
- end
+    desc 'Fetch certificates and provisioning profiles'
+    lane :certificates do
+        match(type: "development")
+        match(type: "appstore")
+    end
 
- desc 'Build the iOS application.'
- lane :build do
-    sh("ionic", "cap", "copy", "--prod")
+    desc 'Align versioning'
+    lane :align_versioning_and_bump do
+        versionName = sh("cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | sed -e 's/^[[:space:]]*//' |tr -d '\n'")
+        increment_version_number_in_xcodeproj(
+             version_number: versionName,
+             xcodeproj: './ios/App/App.xcodeproj',
+        )
+        increment_build_number_in_xcodeproj(
+            xcodeproj: './ios/App/App.xcodeproj',
+        )
+    end
 
-    match(type: "appstore")
+    desc 'Build the iOS application.'
+    lane :build_ios do
+        build_ionic_prod
+        match(type: "appstore")
 
-    build_app(
-        scheme: 'App',
-        workspace: './ios/App/App.xcworkspace',
-        output_directory: './ios/build',
-        export_method: 'app-store'
-    )
- end
+        build_app(
+            scheme: 'App',
+            workspace: './ios/App/App.xcworkspace',
+            output_directory: './ios/build',
+            export_method: 'app-store'
+        )
+    end
 
- desc 'Ship to Testflight.'
 
- lane :beta do
-    versionName = sh("cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g'")
+    desc 'Ship to Testflight.'
+    lane :beta do
+        align_versioning_and_bump
+        build_ios
+        changelog_from_git_commits
 
-    increment_version_number_in_xcodeproj(
-         version_number: versionName
-         xcodeproj: './ios/App/App.xcodeproj',
-    )
-    increment_build_number_in_xcodeproj(
-        xcodeproj: './ios/App/App.xcodeproj',
-    )
-    build
-    changelog_from_git_commits
-
-    upload_to_testflight(
-        beta_app_feedback_email: "f.cardoen@me.com",
-        beta_app_description: "BePing beta tester build.",
-        demo_account_required: false,
-        distribute_external: true,
-        groups: ["Ping beta testers"],
-        notify_external_testers: true,
-        beta_app_review_info: {
-            contact_email: "f.cardoen@me.com",
-            contact_first_name: "Florent",
-            contact_last_name: "Cardoen",
-            demo_account_name: "",
-            demo_account_password: "",
-            notes: "Merci de la review! ❤️"
-        },
-    )
- end
-
- desc 'Patch version number.'
- lane :patch do
-    increment_version_number_in_xcodeproj(
-        bump_type: "patch",
-        xcodeproj: './ios/App/App.xcodeproj',
-    )
- end
-
+        upload_to_testflight(
+            beta_app_feedback_email: "f.cardoen@me.com",
+            beta_app_description: "BePing beta tester build.",
+            demo_account_required: false,
+            distribute_external: true,
+            groups: ["Ping beta testers"],
+            notify_external_testers: true,
+            beta_app_review_info: {
+                contact_email: "f.cardoen@me.com",
+                contact_first_name: "Florent",
+                contact_last_name: "Cardoen",
+                demo_account_name: "",
+                demo_account_password: "",
+                notes: "Merci de la review! ❤️"
+            },
+        )
+    end
 end
 
 platform :android do
 
- desc 'Build the Android application.'
- lane :build do
-    sh("ionic", "cap", "copy", "--prod")
+    desc 'Build the Android application.'
+    lane :build do
+        build_ionic_prod
 
-    gradle(
-        task: 'assemble',
-        build_type: 'Release',
-        project_dir: './android',
-        properties: {
-            "android.injected.signing.store.file" => ENV["KEYSTORE_PATH"],
-            "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
-            "android.injected.signing.key.alias" => ENV["KEYSTORE_ALIAS"],
-            "android.injected.signing.key.password" => ENV["KEYSTORE_ALIAS_PASSWORD"],
-        }
-    )
- end
+        gradle(
+            task: 'assemble',
+            build_type: 'Release',
+            project_dir: './android',
+            properties: {
+                "android.injected.signing.store.file" => ENV["KEYSTORE_PATH"],
+                "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
+                "android.injected.signing.key.alias" => ENV["KEYSTORE_ALIAS"],
+                "android.injected.signing.key.password" => ENV["KEYSTORE_ALIAS_PASSWORD"],
+            }
+        )
+    end
 
- desc 'Ship to Playstore Alpha track.'
- lane :beta do
-    sh("ionic", "cap", "copy", "--prod")
-    versionName = sh("cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g'")
-    increment_version_code(
-        gradle_file_path: "./android/app/build.gradle"
-    )
-    gradle(
-        task: 'assemble',
-        build_type: 'Release',
-        project_dir: './android',
-        properties: {
-            "android.injected.signing.store.file" => ENV["KEYSTORE_PATH"],
-            "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
-            "android.injected.signing.key.alias" => ENV["KEYSTORE_ALIAS"],
-            "android.injected.signing.key.password" => ENV["KEYSTORE_ALIAS_PASSWORD"],
-        }
-    )
-    upload_to_play_store(
-          track: 'alpha',
-          version_name: versionName,
-          package_name: 'be.floca.beping',
-          track_promote_to: 'alpha',
-          json_key_data: ENV["PLAYSTORE_JSON_KEY_DATA"],
-          apk: './android/app/build/outputs/apk/release/app-release.apk'
-    )
- end
+    desc 'Align versioning'
+    lane :align_versioning_and_bump do
+        versionName = sh("cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | sed -e 's/^[[:space:]]*//' |tr -d '\n'")
+        increment_version_name(
+            version_name: versionName,
+            gradle_file_path: "./android/app/build.gradle"
+        )
+        increment_version_code(
+            gradle_file_path: "./android/app/build.gradle"
+        )
+    end
+
+    desc 'Build android app'
+    lane :build_android do
+        build_ionic_prod
+        align_versioning_and_bump
+        gradle(
+            task: 'assemble',
+            build_type: 'Release',
+            project_dir: './android',
+            properties: {
+                "android.injected.signing.store.file" => ENV["KEYSTORE_PATH"],
+                "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
+                "android.injected.signing.key.alias" => ENV["KEYSTORE_ALIAS"],
+                "android.injected.signing.key.password" => ENV["KEYSTORE_ALIAS_PASSWORD"],
+            }
+        )
+    end
+
+    desc 'Ship to Playstore Alpha track.'
+    lane :beta do
+        align_versioning_and_bump
+        build_android
+
+        upload_to_play_store(
+              track: 'alpha',
+              package_name: 'be.floca.beping',
+              track_promote_to: 'alpha',
+              json_key_data: ENV["PLAYSTORE_JSON_KEY_DATA"],
+              apk: './android/app/build/outputs/apk/release/app-release.apk'
+        )
+    end
 
 end
