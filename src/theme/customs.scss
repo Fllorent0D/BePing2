@@ -370,3 +370,7 @@ ion-label {
 .multiline {
   white-space: pre-wrap !important;
 }
+ion-range{
+  --bar-height: 5px;
+  --bar-border-radius: 50px;
+}

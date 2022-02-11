@@ -8,6 +8,7 @@ import {ModalsModule} from '../modals/modals.module';
 import {ContactComponent} from './containers/contact/contact.component';
 import {PrivacyComponent} from './containers/privacy/privacy.component';
 import {ConditionsUsageComponent} from './containers/conditions-usage/conditions-usage.component';
+import { PremiumSubscriptionsComponent } from './containers/premium-subscriptions/premium-subscriptions.component';
 
 @NgModule({
     imports: [
@@ -15,7 +16,7 @@ import {ConditionsUsageComponent} from './containers/conditions-usage/conditions
         SharedModule,
         ModalsModule
     ],
-    declarations: [SettingsPage, ContactComponent, PrivacyComponent, ConditionsUsageComponent]
+    declarations: [SettingsPage, ContactComponent, PrivacyComponent, ConditionsUsageComponent, PremiumSubscriptionsComponent]
 })
 export class SettingsPageModule {
 }

@@ -15,7 +15,7 @@ import {HasSeenOnBoarding, SetUser} from '../../core/store/user/user.actions';
 import {AfttLoginPage} from '../../pages/modals/aftt-login/aftt-login-page.component';
 import {MembersService} from '../../core/api/services/members.service';
 import {ClubsService} from '../../core/api/services/clubs.service';
-import {DialogService} from '../../shared/services/dialog-service.service';
+import {DialogService} from '../../core/services/dialog-service.service';
 
 @Component({
     selector: 'beping-login-page',

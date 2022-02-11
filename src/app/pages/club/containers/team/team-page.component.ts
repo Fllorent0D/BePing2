@@ -12,11 +12,15 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {TeamPlayersStatsService} from '../../services/team-players-stats.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {MemberResults} from '../../../../core/api/models/member-results';
 import {FavoriteItem, FavoritesState, ToggleTeamsFromFavorites} from '../../../../core/store/favorites';
+import {CalendarService} from '../../../../core/services/calendar/calendar.service';
+import {DialogService} from '../../../../core/services/dialog-service.service';
+import {TranslateService} from '@ngx-translate/core';
+import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-teams',
@@ -37,6 +41,7 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
     club$: Observable<ClubEntry>;
 
     isFavorite$: Observable<boolean>;
+    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
 
     constructor(
         private readonly divisionsService: DivisionsService,
@@ -46,7 +51,10 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         private readonly store: Store,
         protected readonly changeDetectionRef: ChangeDetectorRef,
         private readonly tabsNavigation: TabsNavigationService,
-        private readonly teamPlayerStatsService: TeamPlayersStatsService
+        private readonly teamPlayerStatsService: TeamPlayersStatsService,
+        private readonly calendarService: CalendarService,
+        private readonly dialogService: DialogService,
+        private readonly translate: TranslateService
     ) {
         super(changeDetectionRef);
     }
@@ -154,5 +162,14 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
             } as FavoriteItem<string>))),
             switchMap((favItem) => this.store.dispatch(favItem))
         ).subscribe();
+    }
+
+    addToCalendar() {
+        this.calendar$
+            .pipe(take(1))
+            .subscribe((matches) => this.calendarService.checkPremiumAndAddTeamMatchEntries(matches, {
+                dialogMessageTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
+                dialogHeaderTranslationKey: 'CALENDAR.ADD_ALL_TEAM_MATCHES'
+            }));
     }
 }

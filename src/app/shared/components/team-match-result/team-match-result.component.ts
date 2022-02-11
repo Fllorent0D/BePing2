@@ -10,6 +10,8 @@ import {TeamEntry} from '../../../core/api/models/team-entry';
 import {Store} from '@ngxs/store';
 import {ClubsService} from '../../../core/api/services/clubs.service';
 import {StartNavigationService} from '../../../core/services/start-navigation.service';
+import {CalendarService} from '../../../core/services/calendar/calendar.service';
+import {RemoteSettingsState} from '../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-team-match-result',
@@ -28,6 +30,7 @@ export class TeamMatchResultComponent implements OnInit {
         private readonly actionSheetController: ActionSheetController,
         private readonly translate: TranslateService,
         private readonly store: Store,
+        private readonly calendarService: CalendarService,
         private readonly clubService: ClubsService,
         private readonly startNavigation: StartNavigationService,
         private readonly platform: Platform
@@ -62,6 +65,7 @@ export class TeamMatchResultComponent implements OnInit {
     }
 
     async navigateToDetails() {
+        const bepingProEnabled = this.store.selectSnapshot(RemoteSettingsState.bepingProEnabled);
         if (this.match.MatchUniqueId) {
             this.tabNavigation.navigateTo(['team-match-details', this.match?.MatchUniqueId?.toString()]);
         } else {
@@ -92,6 +96,14 @@ export class TeamMatchResultComponent implements OnInit {
                     }
                 }
             ];
+            if (bepingProEnabled) {
+                buttons.splice(buttons.length, 0, {
+                    text: this.translate.instant('CALENDAR.ADD_TO_CALENDAR'),
+                    handler: () => {
+                        this.calendarService.checkPremiumAndAddTeamMatchEntries([this.match]);
+                    }
+                });
+            }
             if (this.match.Date) {
                 const button = {
                     text: this.translate.instant('MATCH_ENTRY_SHEET.HELP_MATCH_SHEET'),

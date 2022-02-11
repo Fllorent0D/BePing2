@@ -10,14 +10,19 @@ import {map, share, shareReplay, switchMap, take} from 'rxjs/operators';
 import {FavoritesState, ToggleMemberFromFavorites} from '../../../../core/store/favorites';
 import {Select, Store} from '@ngxs/store';
 import {MembersService} from '../../../../core/api/services/members.service';
-import {DialogService} from '../../../../shared/services/dialog-service.service';
+import {DialogService} from '../../../../core/services/dialog-service.service';
 import {WeeklyNumericRanking} from '../../../../core/api/models/weekly-numeric-ranking';
 import {SettingsState} from '../../../../core/store/settings';
 import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interceptor.service';
-import {ActionSheetController} from '@ionic/angular';
+import {ActionSheetController, IonRouterOutlet} from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {Location} from '@angular/common';
+import {ModalBaseComponent} from '../../../modals/modal-base/modal-base.component';
+import {
+    IndividualMatchPointsEditorComponent
+} from '../../../points-calculator/containers/individual-match-points-editor/individual-match-points-editor.component';
+import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 
 @Component({
     selector: 'beping-other-players',
@@ -48,7 +53,9 @@ export class OtherPlayersComponent implements OnInit {
         private readonly actionSheetController: ActionSheetController,
         private readonly translate: TranslateService,
         private readonly tabNavigator: TabsNavigationService,
-        private readonly location: Location
+        private readonly location: Location,
+        private readonly ionRouterOutlet: IonRouterOutlet,
+        private readonly analyticsService: AnalyticsService,
     ) {
     }
 
@@ -135,23 +142,63 @@ export class OtherPlayersComponent implements OnInit {
     }
 
     openMenu() {
-        this.currentMemberEntry$.pipe(
+        combineLatest([
+            this.currentMemberEntry$,
+            this.currentCategory$
+        ]).pipe(
             take(1)
-        ).subscribe(async (member) => {
+        ).subscribe(async ([member, category]) => {
             const actionSheet = await this.actionSheetController.create({
-                buttons: [{
-                    text: this.translate.instant('TEAM_STAT.INFO_ABOUT_CLUB', {club: member?.Club}),
-                    handler: () => {
-                        this.tabNavigator.navigateTo(['clubs', member?.Club]);
-                    }
-                }, {
-                    text: this.translate.instant('COMMON.CANCEL'),
-                    icon: 'close',
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('Cancel clicked');
-                    }
-                }]
+                buttons: [
+                    {
+                        text: this.translate.instant('TEAM_STAT.INFO_ABOUT_CLUB', {club: member?.Club}),
+                        handler: () => {
+                            this.analyticsService.logEvent('open_club_info_from_member');
+                            this.tabNavigator.navigateTo(['clubs', member?.Club]);
+                        }
+                    },
+                    {
+                        text: this.translate.instant('CALCULATOR.ADD_RESULT_TO_CALC'),
+                        handler: async () => {
+                            this.analyticsService.logEvent('calculator_add_result_from_member_page');
+
+                            const modal = await this.dialogService.showModal({
+                                component: ModalBaseComponent,
+                                swipeToClose: true,
+                                presentingElement: this.ionRouterOutlet.nativeEl,
+                                componentProps: {
+                                    rootPage: IndividualMatchPointsEditorComponent,
+                                    pageParams: {
+                                        memberEntryPrefill: {...member, Category: category }
+                                    }
+                                }
+                            });
+                            const result = await modal.onWillDismiss<{ added: boolean }>();
+                            if (result?.data?.added) {
+                                await this.dialogService.showToast({
+                                    message: this.translate.instant('CALCULATOR.RESULT_ADDED'),
+                                    duration: 3000,
+                                    buttons: [
+                                        {
+                                            text: this.translate.instant('CALCULATOR.OPEN_CALC'),
+                                            handler: () => {
+                                                this.tabNavigator.navigateTo(['points-calculator']);
+                                            }
+                                        }
+                                    ]
+                                });
+                            }
+
+                        }
+                    },
+                    {
+                        text: this.translate.instant('COMMON.CANCEL'),
+                        icon: 'close',
+                        role: 'cancel',
+                        handler: () => {
+                            console.log('Cancel clicked');
+                        }
+                    }]
             });
             await actionSheet.present();
 

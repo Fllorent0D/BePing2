@@ -60,13 +60,15 @@
     "CATEGORY": "Catégorie",
     "VENUE": "Local",
     "SERIE": "Série",
-    "TIME": "Heure"
+    "TIME": "Heure",
+    "SPONSORED_BY": "Sponsorisé par",
+    "ADD": "Ajouter"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Se connecter avec resultats.aftt.be",
     "RANKING_ESTIMATION": "Votre estimation de classement n'apparaît pas?",
     "NO_RESULTS": "Aucunes statistiques disponibles",
-    "IN_THIS_CATEGORY": "Aucunes statistiques disponibles",
+    "IN_THIS_CATEGORY": "dans cette catégorie",
     "NO_PLAYER_SELECTED": "Pas de joueur sélectionné",
     "CHOOSE_PLAYER": "Sélectionner un joueur",
     "YOU_CAN_SEE_RESULTS_BOTTOM_NAV": "Vous pouvez consulter les résultats en utilisant la navigation dans le bas de l'écran",
@@ -298,7 +300,11 @@
     "ADVANCED": "Paramètres avancés",
     "REFRESH_BEPING": "Actualiser BePing",
     "NEED_INTERNET_TO_REFRESH": "Une connexion Internet est requise pour actualiser BePing",
-    "BEPING_REFRESHED": "BePing actualisé"
+    "BEPING_REFRESHED": "BePing actualisé",
+    "PREMIUM_SUBSCRIPTION": "Abonnement premium",
+    "NEXT_RENEW": "Prochain renouvellement",
+    "THANKS_FOR_SUPPORT": "Merci pour votre soutien!",
+    "MANAGE_SUBSCRIPTION": "Gérer l'abonnement"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaire BePing"
@@ -353,7 +359,13 @@
     "CHOOSE_DIVISION": "Choisissez une division",
     "CHOOSE_TEAM": "Choisissez une division",
     "ADD_TEAM": "Ajouter une équipe",
-    "NO_TEAM": "Pas d'équipes"
+    "NO_TEAM": "Pas d'équipes",
+    "TURN_ON_NOTIFICATION": "Turn on notifications",
+    "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Notifications are disabled for BePing. Please turn notifications on in settings to be able to receive notifications from BePing.",
+    "NOT_NOW": "",
+    "OPEN_SETTINGS": "",
+    "TURN_ON": "Turn notification on for BePing",
+    "PLEASE_TURN_ON": "To receive match result notification as they are encoded, turn on notification. You'll also receive them outside of BePing. Turm them off anytime"
   },
   "DIVISION_LEVEL": {
     "LEVEL": "Niveau",
@@ -437,22 +449,45 @@
   },
   "CALCULATOR": {
     "POINTS_CALCULATOR": "Calculateur de points",
+    "DELETE_RESULT": "Supprimer le résultat",
+    "ADD_RESULT_TO_CALC": "Ajouter un résultat au calculateur de points",
+    "RESULT_ADDED": "Résultat ajouté",
+    "OPEN_CALC": "Ouvrir calculateur de points",
+    "POINTS_OVER_PIVOT": "Il est impossible de calculer un classement équivalent lorsque le nombre de points est supérieur à {{pivot}}.\nPour les classements supérieurs à C0, ils sont attribués par rapport à la position du joueur dans le classement et non par rapport au nombre de points.",
     "EVENT_TYPE": {
       "NAME": "Type d'événement",
       "CATEGORY": "Catégorie d'événement",
-      "CHAMPIONSHIP": {
-        "R2": "SuperDivision",
-        "R5": "National 1\nNational 2",
-        "R6": "National 3\nIWB\nLandelijk",
-        "R7": "Proviciale 1",
-        "R8": "Autres provinciales"
+      "MEN": {
+        "CHAMPIONSHIP": {
+          "R2": "SuperDivision",
+          "R5": "National 1\nNational 2",
+          "R6": "National 3\nIWB\nLandelijk",
+          "R7": "Proviciale 1",
+          "R8": "Autres provinciales"
+        },
+        "TOURNAMENT": {
+          "R1": "Tableau final des Championnats de Belgique A",
+          "R2": "Poules des championnats de Belgique A\nCoupe de Belgique (1/2 finale et finale)",
+          "R3": "Championnats de Belgique : Jeunes/Vétérans/BCDE\nTournoi Série A (Série A)\nCoupe de Belgique (jusque 1/4 finale)",
+          "R4": "Tournoi série A (BCDE-NC)\nChampionnats provinciaux : Jeunes/Vétérans/BCDE\nTop 12 jeunes\nCritérium National Jeunes",
+          "R5": "Tournoi Série B & C"
+        }
       },
-      "TOURNAMENT": {
-        "R1": "Tableau final des Championnats de Belgique A",
-        "R2": "Poules des championnats de Belgique A\nCoupe de Belgique (1/2 finale et finale)",
-        "R3": "Championnats de Belgique : Jeunes/Vétérans/BCDE\nTournoi Série A (Série A)\nCoupe de Belgique (jusque 1/4 finale)",
-        "R4": "Tournoi série A (BCDE-NC)\nChampionnats provinciaux : Jeunes/Vétérans/BCDE\nTop 12 jeunes\nCritérium National Jeunes",
-        "R5": "Tournoi Série B & C"
+      "WOMEN": {
+        "CHAMPIONSHIP": {
+          "R3": "SuperDivision",
+          "R4": "National 1",
+          "R5": "National 2",
+          "R6": "National 3\nIWB\nLandelijk",
+          "R7": "Proviciale 1",
+          "R8": "Autres provinciales"
+        },
+        "TOURNAMENT": {
+          "R2": "Tableau final des Championnats de Belgique A",
+          "R3": "Poules des championnats de Belgique A\nCoupe de Belgique (jusque 1/2 finale)\nChampionnats de Belgique : Jeunes/Vétérans/BCDE\nTournoi Série A (Série A)",
+          "R4": "Coupe de Belgique (jusque 1/4 final)\nTournoi série A (BCDE-NC)\nChampionnats provinciaux : Jeunes/Vétérans/BCDE\nTop 12 jeunes\nCritérium National Jeunes",
+          "R5": "Tournoi Série B & C"
+        }
       }
     },
     "ADD_MATCH": "Ajouter un résulat",
@@ -462,5 +497,14 @@
     "OPPONENT": "Adversaire",
     "CHOOSE_OPPONENT": "Choisir adversaire",
     "MATCH_RESULT": "Résultat du match"
+  },
+  "CALENDAR": {
+    "ADD_TO_CALENDAR": "Ajouter au calendrier",
+    "ADD_ALL_DIVISION_MATCHES": "Êtes-vous sûr d'ajouter tous les matchs de la division à votre calendrier ?",
+    "ADD_ALL_TEAM_MATCHES": "Êtes-vous sûr d'ajouter tous les matchs de l'équipe à votre calendrier ?",
+    "ADD_ALL_CLUB_MATCHES": "Êtes-vous sûr d'ajouter tous les matchs du club à votre calendrier ?",
+    "MATCHES_ADDED": "Matchs ajoutés à votre calendrier !",
+    "MATCH_ADDED": "Match ajouté à votre calendrier",
+    "EVENT_DESCRIPTION": "Salle:{{venue}}\nRemarque:{{remark}}\n\nAjouté par BePing 🏓"
   }
 }

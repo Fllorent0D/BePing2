@@ -18,7 +18,6 @@
         </ion-row>
     </ion-grid>
     <beping-section-title [title]="'USER' | translate"></beping-section-title>
-
     <ion-list>
         <ion-item (click)="changeMember()" detail>
             <ion-label>
@@ -46,6 +45,13 @@
             </ion-select>
         </ion-item>
     </ion-list>
+    <ion-item (click)="openSubscription()" [disabled]="!isOnline" detail *ngIf="bepingProEnabled$|async">
+        <ion-icon icon="diamond-outline" slot="start"></ion-icon>
+
+        <ion-label>
+            {{'SETTINGS.PREMIUM_SUBSCRIPTION' | translate}}
+        </ion-label>
+    </ion-item>
     <beping-section-title [title]="'COMMON.RANKINGS' | translate"></beping-section-title>
     <ion-list>
         <ion-item>
@@ -58,7 +64,6 @@
         <ion-item>
             <ion-label>{{'SETTINGS.DISPLAY_BEL' | translate}}</ion-label>
             <ion-toggle
-                    [disabled]="(currentDatabase$|async) === 'vttl'"
                     [checked]="displayNumeric$|async"
                     (ionChange)="toggleNumericRanking($event)">
             </ion-toggle>

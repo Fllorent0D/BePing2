@@ -2,7 +2,7 @@ import {Injectable, Injector} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {DialogService} from '../../shared/services/dialog-service.service';
+import {DialogService} from '../services/dialog-service.service';
 import {environment} from '../../../environments/environment';
 import {TranslateService} from '@ngx-translate/core';
 import {CrashlyticsService} from '../services/crashlytics.service';
@@ -12,7 +12,6 @@ import {CrashlyticsService} from '../services/crashlytics.service';
 })
 export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
     constructor(
-        private readonly dialogService: DialogService,
         private readonly injector: Injector,
         private readonly crashlytics: CrashlyticsService
     ) {
@@ -24,10 +23,11 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                 if (request.url.includes(environment.tabtUrl) &&
                     err instanceof HttpErrorResponse) {
                     const translateService = this.injector.get(TranslateService);
+                    const dialogService = this.injector.get(DialogService);
                     switch (err.status) {
                         case 403:
                             this.crashlytics.recordException({message: err.message});
-                            this.dialogService.showToast({
+                            dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.FORBIDDEN'),
                                 color: 'medium',
                                 duration: 3000
@@ -35,7 +35,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                             break;
                         case 429:
                             this.crashlytics.recordException({message: err.message});
-                            this.dialogService.showToast({
+                            dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.TOO_MANY_REQUESTS'),
                                 color: 'medium',
                                 duration: 3000
@@ -43,7 +43,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                             break;
                         case 400:
                             this.crashlytics.recordException({message: err.message});
-                            this.dialogService.showToast({
+                            dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.BAD_REQUEST', {error: err.statusText}),
                                 color: 'medium',
                                 duration: 3000
@@ -55,7 +55,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                         default:
                         case 500:
                             this.crashlytics.recordException({message: err.message});
-                            this.dialogService.showToast({
+                            dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.INTERNAL', {error: err.statusText}),
                                 color: 'medium',
                                 duration: 3000

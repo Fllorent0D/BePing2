@@ -32,6 +32,9 @@ export const environment = {
         messagingSenderId: '169133988850',
         appId: '1:169133988850:web:f83e033f93de42ceb6696b',
         measurementId: 'G-NLCDC9F2GF'
+    },
+    productIds: {
+        bepingPro: 'bepingproversion'
     }
 };
 

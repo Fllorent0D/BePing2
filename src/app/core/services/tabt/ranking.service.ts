@@ -1,6 +1,16 @@
 import {Injectable} from '@angular/core';
 import {RankingPointsEntry} from '../../api/models/ranking-points-entry';
-import {equivalenceRankingBelPos, equivalenceRankingBelPts, pivotRankingEquivalence, RankingEquivalence} from '../../models/bel-ranking';
+import {
+    equivalenceRankingBelPosMen,
+    equivalenceRankingBelPosWomen,
+    equivalenceRankingBelPtsMen,
+    equivalenceRankingBelPtsWomen,
+    EquivalenceTables,
+    pivotRankingEquivalenceMen,
+    pivotRankingEquivalenceWomen,
+    RankingEquivalence
+} from '../../models/bel-ranking';
+import {PLAYER_CATEGORY} from '../../models/user';
 
 export enum RankingMethodName {
     ELO = 'ELO',
@@ -36,19 +46,42 @@ export class RankingService {
     }
 
 
-    getEquivalentRanking(points: number, position: number): string {
+    getEquivalentRanking(points: number, position: number, category: PLAYER_CATEGORY): string {
+        const {equivalenceRankingBelPos, equivalenceRankingBelPts, pivotRankingEquivalence} = this.getEquivalenceTableForCategory(category);
+
         const [pts, equivalenceTable] = points < pivotRankingEquivalence ?
-            [points, equivalenceRankingBelPts] :
+            [Math.round(points), equivalenceRankingBelPts] :
             [position, equivalenceRankingBelPos];
 
         const bound: RankingEquivalence = equivalenceTable.find(
             ({upperBound, lowerBound}) => pts >= lowerBound && pts <= upperBound
         );
 
-        if (bound.ranking === 'A') {
+        if (bound?.ranking === 'A') {
             return 'A' + position;
         }
-        return bound.ranking ?? '?';
+        return bound?.ranking ?? '?';
+    }
+
+    getEquivalenceTableForCategory(category: PLAYER_CATEGORY): EquivalenceTables {
+
+        switch (category) {
+            case PLAYER_CATEGORY.MEN:
+            case PLAYER_CATEGORY.VETERANS:
+            case PLAYER_CATEGORY.YOUTH:
+                return {
+                    equivalenceRankingBelPts: equivalenceRankingBelPtsMen,
+                    equivalenceRankingBelPos: equivalenceRankingBelPosMen,
+                    pivotRankingEquivalence: pivotRankingEquivalenceMen
+                };
+            case PLAYER_CATEGORY.VETERANS_WOMEN:
+            case PLAYER_CATEGORY.WOMEN:
+                return {
+                    equivalenceRankingBelPts: equivalenceRankingBelPtsWomen,
+                    equivalenceRankingBelPos: equivalenceRankingBelPosWomen,
+                    pivotRankingEquivalence: pivotRankingEquivalenceWomen
+                };
+        }
     }
 
     getELOPoints(rankings: RankingPointsEntry[]): string {

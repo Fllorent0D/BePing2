@@ -12,6 +12,7 @@ import {
     UpdateMainCategory,
     UpdateMemberEntries,
     UpdateMemberEntriesSuccess,
+    UpdateNumericRankingsSuccess,
     UpdateWeeklyNumericRankingSuccess
 } from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
@@ -23,9 +24,9 @@ import {TabTState} from './tab-t-state.service';
 import {MembersService} from '../../api/services/members.service';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
 import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
-import {DeepPartial} from 'chart.js/types/utils';
 import {ClubsService} from '../../api/services/clubs.service';
 import {of} from 'rxjs';
+import {DeepPartial} from 'chart.js/types/utils';
 
 export interface UserMemberEntry extends MemberEntry {
     numericRankings?: WeeklyNumericRanking[];

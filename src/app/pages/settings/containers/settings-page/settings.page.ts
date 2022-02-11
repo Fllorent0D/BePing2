@@ -33,9 +33,13 @@ import {App} from '@capacitor/app';
 import {DivisionsState, GetDivisions} from '../../../../core/store/divisions';
 import {ClubsState, GetClubs} from '../../../../core/store/clubs';
 import {Reset} from '@ngxs-labs/entity-state';
-import {DialogService} from '../../../../shared/services/dialog-service.service';
+import {DialogService} from '../../../../core/services/dialog-service.service';
 import {Network} from '@capacitor/network';
-import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interceptor.service';
+import {InAppPurchaseOrder, InAppPurchaseRestore} from '../../../../core/store/in-app-purchases/in-app-purchases.actions';
+import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchases.model';
+import {InAppPurchasesState} from '../../../../core/store/in-app-purchases/in-app-purchases.state';
+import {PremiumSubscriptionsComponent} from '../premium-subscriptions/premium-subscriptions.component';
+import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-settings',
@@ -55,9 +59,10 @@ export class SettingsPage implements OnInit, OnDestroy {
     mainPlayerCategory: FormControl;
     userState$: Observable<UserStateModel>;
 
+    @Select(InAppPurchasesState.isPro) isPro$: Observable<boolean>;
     @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
     @Select(SettingsState.displayNumericRanking) displayNumeric$: Observable<boolean>;
-    @Select(SettingsState.getCurrentDatabase) currentDatabase$: Observable<TABT_DATABASES>;
+    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
 
     version: string;
     build: string;
@@ -71,7 +76,7 @@ export class SettingsPage implements OnInit, OnDestroy {
         private readonly internalIdService: InternalIdentifiersService,
         private readonly browser: InAppBrowserService,
         private readonly analyticsService: AnalyticsService,
-        private readonly dialogService: DialogService
+        private readonly dialogService: DialogService,
     ) {
     }
 
@@ -144,6 +149,7 @@ export class SettingsPage implements OnInit, OnDestroy {
     }
 
     changeLang(event: CustomEvent) {
+        this.analyticsService.logEvent('settings-change-lang');
 
         this.store.dispatch(new UpdateCurrentLang(event.detail.value));
     }
@@ -164,6 +170,8 @@ export class SettingsPage implements OnInit, OnDestroy {
     }
 
     async resetCache() {
+        this.analyticsService.logEvent('settings-reset-cache');
+
         const loader = await this.dialogService.showLoading({
             message: this.translate.instant('SETUP.LOADING'),
             backdropDismiss: false
@@ -194,10 +202,24 @@ export class SettingsPage implements OnInit, OnDestroy {
 
 
     toggleELO(event: CustomEvent) {
+        this.analyticsService.logEvent('settings-toggle-elo', {checked: event.detail.checked});
         this.store.dispatch(new ToggleDisplayELO(event.detail.checked));
     }
 
     toggleNumericRanking(event: CustomEvent) {
+        this.analyticsService.logEvent('settings-toggle-numeric-ranking', {checked: event.detail.checked});
         this.store.dispatch(new ToggleDisplayNumericRanking(event.detail.checked));
+    }
+
+    orderBePing(): void {
+        this.store.dispatch(new InAppPurchaseOrder(BePingIAP.BEPING_PRO_LOW_PRICE));
+    }
+
+    restore() {
+        this.store.dispatch(new InAppPurchaseRestore());
+    }
+
+    openSubscription() {
+        this.ionNav.push(PremiumSubscriptionsComponent);
     }
 }

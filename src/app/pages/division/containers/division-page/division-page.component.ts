@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {DivisionsService} from '../../../../core/api/services/divisions.service';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {combineLatest, Observable} from 'rxjs';
@@ -17,6 +17,10 @@ import {TeamEntry} from '../../../../core/api/models/team-entry';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {FavoritesState, ToggleDivisionFromFavorites} from '../../../../core/store/favorites';
+import {CalendarService} from '../../../../core/services/calendar/calendar.service';
+import {DialogService} from '../../../../core/services/dialog-service.service';
+import {TranslateService} from '@ngx-translate/core';
+import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-division-page',
@@ -31,6 +35,7 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
     memberRanking$: Observable<MemberResults[]>;
     matches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
+    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
 
     constructor(
         protected readonly changeDetectionRef: ChangeDetectorRef,
@@ -39,7 +44,10 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
         protected readonly divisionService: DivisionsService,
         protected readonly matchesService: MatchesService,
         private readonly clubsService: ClubsService,
-        private readonly tabsNavigation: TabsNavigationService
+        private readonly tabsNavigation: TabsNavigationService,
+        private readonly calendarService: CalendarService,
+        private readonly dialogService: DialogService,
+        private readonly translate: TranslateService
     ) {
         super(changeDetectionRef);
     }
@@ -122,5 +130,14 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
                 }
             )))
         ).subscribe();
+    }
+
+    addToCalendar() {
+        this.matches$
+            .pipe(take(1))
+            .subscribe((matches) => this.calendarService.checkPremiumAndAddTeamMatchEntries(matches, {
+                dialogHeaderTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
+                dialogMessageTranslationKey: 'CALENDAR.ADD_ALL_DIVISION_MATCHES'
+            }));
     }
 }

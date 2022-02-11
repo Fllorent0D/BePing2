@@ -16,10 +16,9 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {AFTT_CLUB_CATEGORIES, TabtDatabaseInterceptor, VTTL_CLUB_CATEGORIES} from './interceptors/tabt-database-interceptor.service';
 import {TabtCredentialsInterceptor} from './interceptors/tabt-credentials-interceptor.service';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
-import {BepingUserAgentInterceptor} from './interceptors/beping-user-agent.interceptor';
-import {DialogService} from '../shared/services/dialog-service.service';
 import {TabtHttpErrorHandlerInterceptor} from './interceptors/tabt-http-error-handler-interceptor.service';
 import {FavoriteItem} from './store/favorites';
+import {DialogService} from './services/dialog-service.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -143,11 +142,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TabtCredentialsInterceptor,
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: BepingUserAgentInterceptor,
             multi: true
         },
         {

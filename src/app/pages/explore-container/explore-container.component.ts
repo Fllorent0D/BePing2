@@ -3,7 +3,7 @@ import {Select, Store} from '@ngxs/store';
 import {PLAYER_CATEGORY} from '../../core/models/user';
 import {iif, Observable, of, ReplaySubject} from 'rxjs';
 import {UserMemberEntry, UserState} from '../../core/store/user/user.state';
-import {delay, shareReplay, switchMap, take, takeUntil, tap} from 'rxjs/operators';
+import {delay, map, shareReplay, switchMap, take, takeUntil, tap} from 'rxjs/operators';
 import {IonRouterOutlet, LoadingController, ModalController, Platform} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
@@ -21,8 +21,12 @@ import {HapticsService} from '../../core/services/haptics.service';
 import {ImpactStyle} from '@capacitor/haptics';
 import {AnalyticsService} from '../../core/services/firebase/analytics.service';
 import {OnDestroyHook} from '../../core/on-destroy-hook';
-import {DialogService} from '../../shared/services/dialog-service.service';
+import {DialogService} from '../../core/services/dialog-service.service';
 import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
+import {InAppBrowserService} from '../../core/services/browser/in-app-browser.service';
+import {RemoteSettingsState} from '../../core/store/remote-settings';
+import {InAppPurchasesState} from '../../core/store/in-app-purchases/in-app-purchases.state';
+import {PointsCalculatorEntry, PointsCalculatorState} from '../../core/store/points/points-calculator-state.service';
 
 @Component({
     selector: 'beping-explore-container',
@@ -36,10 +40,14 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
     currentMemberEntry$: Observable<UserMemberEntry>;
     latestMatches$: Observable<TeamMatchesEntry[]>;
     isLoading$: Observable<boolean>;
+    pointsInCalculator$: Observable<number>;
+
     @Select(TabTState.isLoggedIn) isLoggedIn$: Observable<boolean>;
     @Select(SettingsState.getCurrentDatabase) database: Observable<TABT_DATABASES>;
     @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
     @Select(SettingsState.displayNumericRanking) displayNumericRanking$: Observable<boolean>;
+    @Select(InAppPurchasesState.isPro) isPro$: Observable<boolean>;
+    @Select(RemoteSettingsState.partnershipRotatio) partnershipRotatio$: Observable<boolean>;
     TABT_DATABASES = TABT_DATABASES;
 
     constructor(
@@ -55,7 +63,8 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
         private readonly hapticsService: HapticsService,
         private readonly analyticsService: AnalyticsService,
         private readonly platform: Platform,
-        private readonly tabNavigator: TabsNavigationService
+        private readonly tabNavigator: TabsNavigationService,
+        private readonly inAppBrowser: InAppBrowserService
     ) {
         super();
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
@@ -72,6 +81,10 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
             switchMap((category: PLAYER_CATEGORY) => this.store.select(UserState.getMemberEntryForCategory(category))),
             tap((a) => console.log(a)),
             shareReplay(1)
+        );
+        this.pointsInCalculator$ = this.currentCategory$.pipe(
+            switchMap((category) => this.store.select(PointsCalculatorState.pointsForPlayerCategory(category))),
+            map((points) => points.length)
         );
         this.latestMatches$ = this.currentCategory$.pipe(
             switchMap((category: PLAYER_CATEGORY) => this.store.select(UserState.getLatestMatchesForCategory(category))),
@@ -168,4 +181,5 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
     openCalculator() {
         this.tabNavigator.navigateTo('points-calculator');
     }
+
 }

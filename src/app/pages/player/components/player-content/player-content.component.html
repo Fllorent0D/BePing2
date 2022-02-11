@@ -5,32 +5,51 @@
 -->
 
 <ng-container *ngIf="currentMemberEntry">
-    <beping-member-name-ranking-info
-            [displayName]="false"
-            [displayELO]="displayELO"
-            [displayNumericRanking]="displayNumericRanking"
-            [member]="currentMemberEntry">
-    </beping-member-name-ranking-info>
-    <beping-member-victory-chart
-            [memberResultEntries]="currentMemberEntry.ResultEntries">
-    </beping-member-victory-chart>
-
-    <ng-container *ngIf="numericRankings">
-        <beping-ranking-history-graphs
-                [numericRankings]="numericRankings"
+    <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
+        <beping-member-name-ranking-info
+                [displayName]="false"
+                [category]="currentCategory"
+                [displayELO]="displayELO"
                 [displayNumericRanking]="displayNumericRanking"
-                [displayElo]="displayELO">
-        </beping-ranking-history-graphs>
-    </ng-container>
+                [member]="currentMemberEntry">
+        </beping-member-name-ranking-info>
+        <beping-member-victory-chart
+                [memberResultEntries]="currentMemberEntry.ResultEntries">
+        </beping-member-victory-chart>
 
-    <beping-tie-break-played
-            [memberResultEntries]="currentMemberEntry.ResultEntries">
-    </beping-tie-break-played>
-    <beping-member-latest-matches
-            [matches]="latestMatches">
-    </beping-member-latest-matches>
-    <beping-member-summary-per-ranking
-            [memberResultEntries]="currentMemberEntry.ResultEntries">
-    </beping-member-summary-per-ranking>
+        <ng-container *ngIf="numericRankings">
+            <beping-ranking-history-graphs
+                    [category]="currentCategory"
+                    [numericRankings]="numericRankings"
+                    [displayNumericRanking]="displayNumericRanking"
+                    [displayElo]="displayELO">
+            </beping-ranking-history-graphs>
+        </ng-container>
+
+        <beping-tie-break-played
+                [memberResultEntries]="currentMemberEntry.ResultEntries">
+        </beping-tie-break-played>
+        <beping-member-latest-matches
+                [matches]="latestMatches">
+        </beping-member-latest-matches>
+        <beping-member-summary-per-ranking
+                [memberResultEntries]="currentMemberEntry.ResultEntries">
+        </beping-member-summary-per-ranking>
+    </ng-container>
+    <ng-template #noResults>
+        <beping-card [padding]="true" class="ion-text-center">
+
+            <img src="assets/imgs/no_data.svg" alt="no data"
+                 style="width: 20vw; max-width: 100px; padding: 15px 15px 15px 0;"/>
+
+            <h3 class="ion-padding">
+                {{'DASHBOARD.NO_RESULTS'|translate}}
+                <ng-container *ngIf="categoriesAvailable?.length > 1">
+                    {{'DASHBOARD.IN_THIS_CATEGORY'|translate}}
+                </ng-container>
+            </h3>
+        </beping-card>
+    </ng-template>
+
 </ng-container>
 

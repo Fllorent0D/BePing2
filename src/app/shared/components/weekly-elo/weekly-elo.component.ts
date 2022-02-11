@@ -3,6 +3,7 @@ import {ChartData, ChartOptions} from 'chart.js';
 import {fr} from 'date-fns/locale';
 import 'chartjs-adapter-date-fns';
 import {WeeklyNumericRanking} from '../../../core/api/models/weekly-numeric-ranking';
+import {equivalenceRankingBelPtsMen} from '../../../core/models/bel-ranking';
 
 @Component({
     selector: 'beping-weekly-elo',
@@ -130,7 +131,6 @@ export class WeeklyEloComponent implements OnInit, AfterViewInit {
                     easing: 'easeInOutCubic',
                     duration: 1500,
                     delay: 1000,
-
                     from: 160
                 }
             },

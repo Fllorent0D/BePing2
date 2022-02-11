@@ -12,10 +12,10 @@ export class TeamMatchInfoListComponent {
 
 
     getDivisionNumber(divShortName: string): string {
-        return divShortName.replace(/[a-zA-Z]/g, '');
+        return divShortName?.replace(/[a-zA-Z]/g, '');
     }
 
     getDivisionSerie(divShortName: string): string {
-        return divShortName.replace(/[0-9]/g, '');
+        return divShortName?.replace(/[0-9]/g, '');
     }
 }

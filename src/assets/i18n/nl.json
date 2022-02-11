@@ -60,7 +60,9 @@
     "CATEGORY": "Categorie",
     "VENUE": "Lokaal",
     "SERIE": "Reeks",
-    "TIME": "Uur"
+    "TIME": "Uur",
+    "SPONSORED_BY": "Sponsored by",
+    "ADD": "Toevoegen"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Login to resultats.aftt.be",
@@ -301,7 +303,11 @@
     "ADVANCED": "Geavanceerde instellingen",
     "REFRESH_BEPING": "BePing vernieuwen",
     "NEED_INTERNET_TO_REFRESH": "Internetverbinding is vereist om BePing te vernieuwen",
-    "BEPING_REFRESHED": "BePing vernieuwd"
+    "BEPING_REFRESHED": "BePing vernieuwd",
+    "PREMIUM_SUBSCRIPTION": "Premium abonnement",
+    "NEXT_RENEW": "Volgende verlenging",
+    "THANKS_FOR_SUPPORT": "Bedankt voor je ondersteuning!",
+    "MANAGE_SUBSCRIPTION": "Abonnement beheren"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaar BePing"
@@ -356,7 +362,13 @@
     "CHOOSE_DIVISION": "Kies een afdeling",
     "CHOOSE_TEAM": "Kies een ploeg",
     "ADD_TEAM": "Voeg een team toe",
-    "NO_TEAM": "Geen ploegen"
+    "NO_TEAM": "Geen ploegen",
+    "TURN_ON_NOTIFICATION": "Turn on notifications",
+    "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Notifications are disabled for BePing. Please turn notifications on in settings to be able to receive notifications from BePing.",
+    "NOT_NOW": "Not now",
+    "OPEN_SETTINGS": "Settings",
+    "TURN_ON": "Turn notification on for BePing",
+    "PLEASE_TURN_ON": "To receive match result notification as they are encoded, turn on notification. You'll also receive them outside of BePing. Turm them off anytime"
   },
   "DIVISION_LEVEL": {
     "LEVEL": "Niveau",
@@ -383,7 +395,9 @@
   "REGIONAL_SHORT": "Land.",
   "PLAYER_CATEGORY": {
     "MEN": "Seniors heren",
+    "MEN_SHORT": "Heren",
     "WOMEN": "Seniors dames",
+    "WOMEN_SHORT": "Dames",
     "VETERANS": "Veteranen",
     "VETERANS_WOMEN": "Dames Veteranen",
     "YOUTH": "Jeugd"
@@ -435,5 +449,65 @@
     "BAD_REQUEST": "BePing heeft de verkeerde informatie naar de server gestuurd. Fout: {{error}}",
     "FORBIDDEN": "De BePing server staat niet toe dat u deze informatie ziet.",
     "TOO_MANY_REQUESTS": "Wacht een paar minuten voordat u het opnieuw probeert."
+  },
+  "CALCULATOR": {
+    "POINTS_CALCULATOR": "Punten rekenmachine",
+    "DELETE_RESULT": "Verwijder het resultaat",
+    "ADD_RESULT_TO_CALC": "Voeg een resultaat toe aan de puntencalculator",
+    "RESULT_ADDED": "Resultaat toegevoegd",
+    "OPEN_CALC": "Open punten rekenmachine",
+    "POINTS_OVER_PIVOT": "Waarom \"> = C0\"? BePing kan geen gelijkwaardige rangorde berekenen wanneer het aantal punten groter is dan {{pivot}}. De rangschikkingen A, B0, B2, B4, B6 worden toegewezen in relatie tot de positie van de speler in de rangschikking.",
+    "EVENT_TYPE": {
+      "NAME": "Evenementtype",
+      "CATEGORY": "Evenement categorie",
+      "MEN": {
+        "CHAMPIONSHIP": {
+          "R2": "SuperDivision",
+          "R5": "Nationaal 1\nNationaal 2",
+          "R6": "Nationaal 3\nIWB\nLandelijk",
+          "R7": "Provinciaal 1",
+          "R8": "Andere provincialen"
+        },
+        "TOURNAMENT": {
+          "R1": "Finaletafel van de Belgische A-kampioenschappen",
+          "R2": "Belgisch A Kampioenschap Pools\nBeker van België (1/2 finale en finale)",
+          "R3": "Belgische Kampioenschappen: Jeugd / Veteranen / BCDE\nSerie A-toernooi (Serie A)\nBeker van België (tot 1/4 finale)",
+          "R4": "Serie A-toernooi (BCDE-NC)\nProvinciale Kampioenschappen: Jeugd / Veteranen / BCDE\nTop 12 jongeren\nNationaal Jeugd Criterium",
+          "R5": "Toernooi Serie B & C"
+        }
+      },
+      "WOMEN": {
+        "CHAMPIONSHIP": {
+          "R3": "SuperDivision",
+          "R4": "Nationaal 1",
+          "R5": "Nationaal 2",
+          "R6": "Nationaal 3\nIWB\nLandelijk",
+          "R7": "Provinciaal 1",
+          "R8": "Andere provincialen"
+        },
+        "TOURNAMENT": {
+          "R2": "Finaletafel van de Belgische A-kampioenschappen",
+          "R3": "Belgisch A Kampioenschap Pools\nBeker van België (tot de halve finale)\nBelgische Kampioenschappen: Jeugd / Veteranen / BCDE\nSerie A-toernooi (Serie A)",
+          "R4": "Beker van België (tot 1/4 finale)\nSerie A-toernooi (BCDE-NC)\nProvinciale Kampioenschappen: Jeugd / Veteranen / BCDE\nTop 12 jongeren\nNationaal Jeugd Criterium",
+          "R5": "Toernooi Serie B & C"
+        }
+      }
+    },
+    "ADD_MATCH": "Voeg een resultaat toe",
+    "POINTS": "Punten",
+    "EQUIVALENT_RANKING": "Gelijkwaardige classificatie",
+    "CATEGORY": "Categorie",
+    "OPPONENT": "Tegenstander",
+    "CHOOSE_OPPONENT": "Kies tegenstander",
+    "MATCH_RESULT": "Wedstrijd resultaat"
+  },
+  "CALENDAR": {
+    "ADD_TO_CALENDAR": "Toevoegen aan agenda",
+    "ADD_ALL_DIVISION_MATCHES": "Weet je zeker dat je alle divisiewedstrijden aan je agenda toevoegt?",
+    "ADD_ALL_TEAM_MATCHES": "Weet je zeker dat je alle teamwedstrijden aan je agenda toevoegt?",
+    "ADD_ALL_CLUB_MATCHES": "Weet je zeker dat je alle clubwedstrijden in je agenda zet?",
+    "MATCHES_ADDED": "Wedstrijden toegevoegd aan je agenda!",
+    "MATCH_ADDED": "Wedstrijd toegevoegd aan je agenda!",
+    "EVENT_DESCRIPTION": "Evenementenlocatie:{{venue}}\nOpmerking:{{remark}}\n\nToegevoegd door BePing 🏓"
   }
 }

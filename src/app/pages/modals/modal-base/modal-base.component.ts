@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ModalBaseComponent implements OnInit {
     rootPage: any;
-
+    pageParams: any;
     constructor() {
     }
 

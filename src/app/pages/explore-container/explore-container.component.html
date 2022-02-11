@@ -2,11 +2,20 @@
     <div class="extended-gradient"></div>
     <ion-toolbar color="transparent" mode="md">
         <ion-title color="clear"><span [class.shining]="isLoading$ | async"
-                                       [class.white]="!(isLoading$ | async)">BePing</span></ion-title>
+                                       [class.white]="!(isLoading$ | async)">BePing <ion-badge *ngIf="isPro$|async"
+                                                                                               color="primary"
+                                                                                               mode="ios">Pro</ion-badge></span>
+        </ion-title>
 
-        <ion-buttons slot="end" *ngIf="displayNumericRanking$|async">
-            <ion-button (click)="openCalculator()">
+        <ion-buttons slot="end">
+            <ion-button id="cart-btn" (click)="openCalculator()" [disabled]="!(currentMemberEntry$|async)"
+                        *ngIf="displayNumericRanking$|async">
                 <ion-icon name="calculator-outline" slot="icon-only"></ion-icon>
+                <ng-container *ngIf="pointsInCalculator$|async as pointsCount">
+                    <ion-badge id="cart-badge" color="danger" mode="ios" *ngIf="pointsCount > 0">{{pointsCount}}</ion-badge>
+
+                </ng-container>
+
             </ion-button>
             <ion-button (click)="openSettings()">
                 <ion-icon name="cog-outline" slot="icon-only"></ion-icon>
@@ -24,6 +33,7 @@
     <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry; else noMember">
 
         <beping-member-name-ranking-info
+                [category]="currentCategory$|async"
                 [displayELO]="displayELO$|async"
                 [displayNumericRanking]="displayNumericRanking$|async"
                 [member]="currentMemberEntry">
@@ -36,6 +46,7 @@
 
             <ng-container *ngIf="currentMemberEntry.numericRankings">
                 <beping-ranking-history-graphs
+                        [category]="currentCategory$|async"
                         [displayElo]="displayELO$|async"
                         [displayNumericRanking]="displayNumericRanking$|async"
                         [numericRankings]="currentMemberEntry.numericRankings">
@@ -45,6 +56,7 @@
             <beping-tie-break-played
                     [memberResultEntries]="currentMemberEntry.ResultEntries">
             </beping-tie-break-played>
+            <beping-rotatio *ngIf="partnershipRotatio$|async"></beping-rotatio>
             <beping-member-latest-matches
                     [matches]="latestMatches$| async">
             </beping-member-latest-matches>
@@ -56,14 +68,15 @@
         <ng-template #noResults>
             <beping-card [padding]="true" class="ion-text-center">
 
-                <ion-icon class="ion-padding-top" name="information-circle-outline" size="large"
-                          slot="start"></ion-icon>
-                <h2 class="ion-padding">
+                <img src="assets/imgs/no_data.svg" alt="no data"
+                     style="width: 20vw; max-width: 100px; padding: 15px 15px 15px 0;"/>
+
+                <h3 class="ion-padding">
                     {{'DASHBOARD.NO_RESULTS'|translate}}
-                    <ng-container *ngIf="(categoriesAvailable$ |async)?.length > 1">
+                    <ng-container *ngIf="(categoriesAvailable$|async)?.length > 1">
                         {{'DASHBOARD.IN_THIS_CATEGORY'|translate}}
                     </ng-container>
-                </h2>
+                </h3>
             </beping-card>
         </ng-template>
 

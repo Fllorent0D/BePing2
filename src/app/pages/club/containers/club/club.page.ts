@@ -4,7 +4,7 @@ import {TabsNavigationService} from '../../../../core/services/navigation/tabs-n
 import {BehaviorSubject, combineLatest, Observable, ReplaySubject} from 'rxjs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {map, switchMap, take} from 'rxjs/operators';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
 import {ClubMembersListService} from '../../../../core/services/tabt/club-members-list.service';
@@ -20,6 +20,10 @@ import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {ImpactStyle} from '@capacitor/haptics';
 import {HapticsService} from '../../../../core/services/haptics.service';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
+import {CalendarService} from '../../../../core/services/calendar/calendar.service';
+import {DialogService} from '../../../../core/services/dialog-service.service';
+import {TranslateService} from '@ngx-translate/core';
+import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-club',
@@ -42,6 +46,7 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     loadLater: Observable<TeamMatchesEntry[]>;
     CATEGORIES = [PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN, PLAYER_CATEGORY.YOUTH, PLAYER_CATEGORY.VETERANS];
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
+    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
 
     constructor(
         private readonly activatedRoute: ActivatedRoute,
@@ -53,7 +58,10 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
         private readonly clubMembersListService: ClubMembersListService,
         protected readonly changeDetectionRef: ChangeDetectorRef,
         private readonly hapticService: HapticsService,
-        private readonly analyticsService: AnalyticsService
+        private readonly analyticsService: AnalyticsService,
+        private readonly calendarService: CalendarService,
+        private readonly dialogService: DialogService,
+        private readonly translate: TranslateService
     ) {
         super(changeDetectionRef);
 
@@ -167,6 +175,15 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
                 label: club.UniqueIndex
             } as FavoriteItem<string>)))
         ).subscribe();
+    }
+
+    addToCalendar() {
+        this.matches$
+            .pipe(take(1))
+            .subscribe((matches) => this.calendarService.checkPremiumAndAddTeamMatchEntries(matches, {
+                dialogHeaderTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
+                dialogMessageTranslationKey: 'CALENDAR.ADD_ALL_CLUB_MATCHES'
+            }));
     }
 }
 

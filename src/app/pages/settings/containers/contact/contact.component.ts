@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EmailComposer} from 'capacitor-email-composer';
-import {DialogService} from '../../../../shared/services/dialog-service.service';
+import {DialogService} from '../../../../core/services/dialog-service.service';
 
 @Component({
     selector: 'beping-contact',

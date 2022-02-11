@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import de.einfachhans.emailcomposer.EmailComposerPlugin;
 import dev.robingenz.capacitor.androiddarkmodesupport.AndroidDarkModeSupportPlugin;
+import com.getcapacitor.community.firebaserc.FirebaseRemoteConfig;
 
 public class MainActivity extends BridgeActivity {
     @Override
@@ -27,6 +28,7 @@ public class MainActivity extends BridgeActivity {
                         add(StartNavigationPlugin.class);
                         add(AndroidDarkModeSupportPlugin.class);
                         add(FirebaseAnalytics.class);
+                        add(FirebaseRemoteConfig.class);
                     }
                 }
         );

@@ -4,12 +4,11 @@ import {Observable, of} from 'rxjs';
 import {MemberEntry} from '../../../core/api/models/member-entry';
 import {MembersService} from '../../../core/api/services/members.service';
 import {catchError, debounceTime, mergeMap, tap} from 'rxjs/operators';
-import {DialogService} from '../../../shared/services/dialog-service.service';
+import {DialogService} from '../../../core/services/dialog-service.service';
 import {PLAYER_CATEGORY} from '../../../core/models/user';
 import {RankingMethodName, RankingService} from '../../../core/services/tabt/ranking.service';
 import {ModalController} from '@ionic/angular';
-import {Components} from '@ionic/core';
-import IonSearchbar = Components.IonSearchbar;
+import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
 
 @Component({
     selector: 'beping-search-player',
@@ -20,7 +19,7 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
     @Input() showNumericRanking = false;
     @Input() memberCategory: PLAYER_CATEGORY | undefined;
 
-    @ViewChild('searchbar') searchBar: IonSearchbar;
+    @ViewChild('searchbar') searchBar: any;
 
     searchBox: FormControl;
     members$: Observable<MemberEntry[]>;
@@ -31,7 +30,8 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
         private readonly membersService: MembersService,
         private readonly dialogService: DialogService,
         private readonly rankingService: RankingService,
-        private readonly modalCtrl: ModalController
+        private readonly modalCtrl: ModalController,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -46,6 +46,7 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
                 if (searchTerms === '') {
                     return of([]);
                 }
+                this.analyticsService.logEvent('search_member', {searchTerms});
 
                 return this.membersService.findAllMembers({
                     nameSearch: searchTerms,
@@ -63,14 +64,19 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
     }
 
     async closeModal() {
+        this.analyticsService.logEvent('search_member_dismiss');
         await this.modalCtrl.dismiss();
     }
 
     async playerClicked(member: MemberEntry) {
+        this.analyticsService.logEvent('search_member_select');
         await this.modalCtrl.dismiss({member});
     }
 
     ngAfterViewInit(): void {
-        this.searchBar.setFocus();
+        this.searchBar.el.setFocus();
+        setTimeout(() => {
+            this.searchBar.el.setFocus();
+        }, 10);
     }
 }

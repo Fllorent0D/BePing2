@@ -44,7 +44,7 @@ export class PlayerCategoryService {
         }
 
         return weightedCategories.reduce((acc: PLAYER_CATEGORY, playerCategory: PLAYER_CATEGORY) => {
-            if ((memberEntries[playerCategory].ResultEntries?.length ?? 0) > memberEntries[acc].ResultEntries?.length ?? 0) {
+            if ((memberEntries[playerCategory].ResultCount ?? 0) > (memberEntries[acc].ResultCount ?? 0)) {
                 return playerCategory;
             }
             return acc;

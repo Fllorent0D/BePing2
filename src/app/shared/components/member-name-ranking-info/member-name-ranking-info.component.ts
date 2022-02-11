@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {MemberEntry} from '../../../core/api/models/member-entry';
 import {Platform} from '@ionic/angular';
 import {RankingMethodName, RankingService} from '../../../core/services/tabt/ranking.service';
+import {PLAYER_CATEGORY} from '../../../core/models/user';
 
 @Component({
     selector: 'beping-member-name-ranking-info',
@@ -14,7 +15,7 @@ export class MemberNameRankingInfoComponent {
     @Input() displayName = true;
     @Input() displayELO = false;
     @Input() displayNumericRanking = false;
-
+    @Input() category: PLAYER_CATEGORY;
     constructor(
         public platform: Platform,
         private readonly rankingService: RankingService
@@ -28,7 +29,7 @@ export class MemberNameRankingInfoComponent {
     get nextRanking(): string {
         const pts = this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.BEL_POINTS);
         const position = this.rankingService.getPoints(this.member.RankingPointsEntries, RankingMethodName.BEL_RANKING);
-        return this.rankingService.getEquivalentRanking(pts, position);
+        return this.rankingService.getEquivalentRanking(pts, position, this.category);
     }
 
     get bel(): number {

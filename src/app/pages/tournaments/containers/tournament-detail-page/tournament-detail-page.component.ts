@@ -14,7 +14,7 @@ import {InAppBrowserService} from '../../../../core/services/browser/in-app-brow
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {StartNavigationService} from '../../../../core/services/start-navigation.service';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
-import {DialogService} from '../../../../shared/services/dialog-service.service';
+import {DialogService} from '../../../../core/services/dialog-service.service';
 
 @Component({
     selector: 'beping-tournament-detail-page',

@@ -12,7 +12,7 @@ import {Observable} from 'rxjs';
 import {UserState, UserStateModel} from '../../../core/store/user/user.state';
 import {InternalIdentifiersService} from '../../../core/api/services/internal-identifiers.service';
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
-import {DialogService} from '../../../shared/services/dialog-service.service';
+import {DialogService} from '../../../core/services/dialog-service.service';
 
 @Component({
     selector: 'beping-aftt-login',

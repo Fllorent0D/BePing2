@@ -1,9 +1,6 @@
 import {Component} from '@angular/core';
-
-import {Platform} from '@ionic/angular';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import '@capacitor-community/firebase-analytics';
+import {Store} from '@ngxs/store';
 
 @Component({
     selector: 'beping-root',
@@ -13,18 +10,8 @@ import '@capacitor-community/firebase-analytics';
 export class AppComponent {
 
     constructor(
-        private platform: Platform,
-        private splashScreen: SplashScreen,
-        private statusBar: StatusBar
+        private readonly state: Store,
     ) {
-        this.initializeApp();
     }
 
-    initializeApp() {
-        this.platform.ready().then(() => {
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
-        });
-
-    }
 }

@@ -14,7 +14,17 @@
   width: 100%;
   position: absolute;
 }
+#cart-btn {
+  position: relative;
+}
 
+#cart-badge {
+  position: absolute;
+  top: -7px;
+  right: -4px;
+  font-size: 9px;
+  padding: 5px;
+}
 :host {
 
   ion-toolbar {

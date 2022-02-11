@@ -9,6 +9,7 @@ android {
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
+    implementation project(':capacitor-community-fcm')
     implementation project(':capacitor-community-firebase-analytics')
     implementation project(':capacitor-community-firebase-crashlytics')
     implementation project(':capacitor-app')
@@ -17,13 +18,18 @@ dependencies {
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
     implementation project(':capacitor-network')
+    implementation project(':capacitor-push-notifications')
+    implementation project(':capacitor-splash-screen')
     implementation project(':capacitor-status-bar')
     implementation project(':capacitor-storage')
+    implementation project(':joinflux-firebase-remote-config')
     implementation project(':proteansoftware-capacitor-start-navigation')
     implementation project(':robingenz-capacitor-android-dark-mode-support')
+    implementation project(':capacitor-calendar')
     implementation project(':capacitor-email-composer')
+    implementation project(':capacitor-native-settings')
     implementation project(':capacitor-rate-app')
-
+    implementation "com.android.billingclient:billing:3.0.3"
 }
 
 

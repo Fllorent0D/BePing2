@@ -30,10 +30,12 @@ import {NgChartsModule} from 'ng2-charts';
 import {LocalDatePipe} from './pipes/local-date.pipe';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {NgPipesModule} from 'ngx-pipes';
-import {DialogService} from './services/dialog-service.service';
+import {DialogService} from '../core/services/dialog-service.service';
 import {RankingHistoryGraphsComponent} from './components/ranking-history-graphs/ranking-history-graphs.component';
 import {WeekSelectorComponent} from './components/week-selector/week-selector.component';
 import {TeamMatchesEntryListComponent} from './components/team-matches-entry-list/team-matches-entry-list.component';
+import { NumericRankingChartComponent } from './components/numeric-ranking-chart/numeric-ranking-chart.component';
+import { RotatioComponent } from './ads/rotatio/rotatio.component';
 
 const COMPONENTS = [
     RankingComponent,
@@ -57,7 +59,10 @@ const COMPONENTS = [
     MemberItemComponent,
     ClubItemComponent,
     WeeklyEloComponent,
-    RankingHistoryGraphsComponent
+    RankingHistoryGraphsComponent,
+    NumericRankingChartComponent,
+    WeekSelectorComponent,
+    TeamMatchesEntryListComponent,
 ];
 const PIPES = [
     WithLoadingPipe,
@@ -68,13 +73,20 @@ const DIRECTIVES = [
 ];
 
 @NgModule({
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    imports: [
+        CommonModule,
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule,
+        NgChartsModule,
+        SuperTabsModule
+    ],
     declarations: [
         COMPONENTS,
         DIRECTIVES,
         PIPES,
-        WeekSelectorComponent,
-        TeamMatchesEntryListComponent,
+        RotatioComponent,
     ],
     exports: [
         CommonModule,
@@ -87,21 +99,9 @@ const DIRECTIVES = [
         SuperTabsModule,
         COMPONENTS,
         PIPES,
-        WeekSelectorComponent,
-        TeamMatchesEntryListComponent,
+        RotatioComponent,
     ],
-    imports: [
-        CommonModule,
-        IonicModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TranslateModule,
-        NgChartsModule,
-        SuperTabsModule
-    ],
-    providers: [
-        DialogService
-    ]
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule {
 }

@@ -11,27 +11,21 @@
         <ion-col>
             <ion-chip>
                 <ion-label>
-                    <ion-row>
-                        <ion-col>
-                            {{member.Ranking}}
-                        </ion-col>
-                        <ion-col *ngIf="nextRanking && nextRanking !== '?'">
-                            <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </ion-col>
-                        <ion-col *ngIf="displayNumericRanking && nextRanking">
-                            {{nextRanking}}
-                        </ion-col>
-                    </ion-row>
+                    {{member.Ranking}}
+                    <span *ngIf="displayNumericRanking && nextRanking">
+                        <ion-icon name="arrow-forward-outline"></ion-icon>
+                        {{nextRanking}}
+                    </span>
                 </ion-label>
             </ion-chip>
             <ion-chip *ngIf="displayELO">
                 <ion-label>ELO {{elo}}</ion-label>
             </ion-chip>
             <ion-chip *ngIf="displayNumericRanking">
-                <ion-label>Pts {{bel}}</ion-label>
+                <ion-label>Points {{bel}}</ion-label>
             </ion-chip>
             <ion-chip *ngIf="displayNumericRanking">
-                <ion-label>Pos {{belRanking}}</ion-label>
+                <ion-label>Position {{belRanking}}</ion-label>
             </ion-chip>
 
         </ion-col>

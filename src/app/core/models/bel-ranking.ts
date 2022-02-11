@@ -1,4 +1,7 @@
-export const pivotRankingEquivalence = 1400;
+import {PLAYER_CATEGORY} from './user';
+
+export const pivotRankingEquivalenceMen = 1400;
+export const pivotRankingEquivalenceWomen = 650;
 
 export interface RankingEquivalence {
     ranking: string;
@@ -6,7 +9,7 @@ export interface RankingEquivalence {
     upperBound: number;
 }
 
-export const equivalenceRankingBelPos: RankingEquivalence[] = [
+export const equivalenceRankingBelPosMen: RankingEquivalence[] = [
     {
         ranking: 'C0',
         lowerBound: 1001,
@@ -39,7 +42,40 @@ export const equivalenceRankingBelPos: RankingEquivalence[] = [
     },
 ];
 
-export const equivalenceRankingBelPts: RankingEquivalence[] = [
+export const equivalenceRankingBelPosWomen: RankingEquivalence[] = [
+    {
+        ranking: 'C0',
+        lowerBound: 226,
+        upperBound: Infinity,
+    },
+    {
+        ranking: 'B6',
+        lowerBound: 146,
+        upperBound: 225,
+    },
+    {
+        ranking: 'B4',
+        lowerBound: 86,
+        upperBound: 145,
+    },
+    {
+        ranking: 'B2',
+        lowerBound: 40,
+        upperBound: 85,
+    },
+    {
+        ranking: 'B0',
+        lowerBound: 16,
+        upperBound: 39,
+    },
+    {
+        ranking: 'A',
+        lowerBound: 1,
+        upperBound: 15,
+    },
+];
+
+export const equivalenceRankingBelPtsMen: RankingEquivalence[] = [
     {
         ranking: 'NC',
         lowerBound: 100,
@@ -101,3 +137,62 @@ export const equivalenceRankingBelPts: RankingEquivalence[] = [
         upperBound: 1399,
     }
 ];
+
+export const equivalenceRankingBelPtsWomen: RankingEquivalence[] = [
+    {
+        ranking: 'NC',
+        lowerBound: 100,
+        upperBound: 124,
+    },
+    {
+        ranking: 'D6',
+        lowerBound: 125,
+        upperBound: 164,
+    },
+    {
+        ranking: 'D4',
+        lowerBound: 165,
+        upperBound: 214,
+    },
+    {
+        ranking: 'D2',
+        lowerBound: 215,
+        upperBound: 274,
+    },
+    {
+        ranking: 'D0',
+        lowerBound: 275,
+        upperBound: 344,
+    },
+    {
+        ranking: 'C6',
+        lowerBound: 345,
+        upperBound: 424,
+    },
+    {
+        ranking: 'C4',
+        lowerBound: 425,
+        upperBound: 519,
+    },
+    {
+        ranking: 'C2',
+        lowerBound: 520,
+        upperBound: 649,
+    },
+    {
+        ranking: 'C0',
+        lowerBound: 650,
+        upperBound: Infinity,
+    }
+];
+
+export const findBoundPts = (pts: number, category: PLAYER_CATEGORY): RankingEquivalence =>
+    (category === PLAYER_CATEGORY.MEN ? equivalenceRankingBelPtsMen : equivalenceRankingBelPtsWomen).find(
+        ({upperBound, lowerBound}) => pts >= lowerBound && pts <= upperBound
+    );
+
+export interface EquivalenceTables {
+    equivalenceRankingBelPts: RankingEquivalence[];
+    equivalenceRankingBelPos: RankingEquivalence[];
+    pivotRankingEquivalence: number;
+}

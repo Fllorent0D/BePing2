@@ -3,7 +3,7 @@ import {AlertController, LoadingController, ModalController, PopoverController, 
 import {AlertOptions, LoadingOptions, ModalOptions, PopoverOptions} from '@ionic/core';
 import {ToastOptions} from '@ionic/core/dist/types/components/toast/toast-interface';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class DialogService {
     constructor(
         private alertCtrl: AlertController,
