@@ -1,0 +1,52 @@
+<ion-list>
+    <ion-item *ngFor="let entry of pointsEntryWithPoints" (click)="showItemOption(entry)">
+        <ion-label class="ion-text-wrap">
+            <h3>
+                {{entry.opponentName | titlecase}}
+            </h3>
+            <p>
+                {{('CALCULATOR.EVENT_TYPE.'+(currentCategory)+'.' + entry.eventType.toUpperCase() + '.' + entry.eventId) | translate}}
+            </p>
+        </ion-label>
+        <ion-label slot="end" [color]="entry.pointsWon >= 0 ? 'success' : 'danger'">
+            <ng-container *ngIf="entry.pointsWon > 0">+</ng-container>
+            {{entry.pointsWon | number: '1.1-1'}}
+        </ion-label>
+    </ion-item>
+
+    <ion-item class="ion-margin-top" (click)="addEntry()">
+        <ion-label class="ion-text-center">
+            {{'CALCULATOR.ADD_MATCH'|translate}}
+            <ion-icon name="add-circle"></ion-icon>
+        </ion-label>
+    </ion-item>
+    <ng-container *ngIf="pointsEntryWithPoints?.length > 0">
+        <ion-item-divider mode="md"></ion-item-divider>
+        <ng-container *ngIf="nextRanking">
+            <ion-item>
+                <ion-label class="">{{'CALCULATOR.POINTS'|translate}}</ion-label>
+                <ion-label class="ion-text-end ion-text-wrap"
+                           [color]="nextRanking.futureBelPts >= nextRanking.currentBelPts ? 'success' : 'danger'">
+                    {{nextRanking.futureBelPts| number: '1.0-0'}}
+                    <ion-icon name="trending-up"
+                              *ngIf="nextRanking.futureBelPts > nextRanking.currentBelPts"></ion-icon>
+                    <ion-icon name="trending-down"
+                              *ngIf="nextRanking.futureBelPts < nextRanking.currentBelPts"></ion-icon>
+                </ion-label>
+            </ion-item>
+            <ion-item *ngIf="nextRanking.futureRanking">
+                <ng-container *ngIf="pivot">
+                    <ion-label class="">{{'CALCULATOR.EQUIVALENT_RANKING'|translate }}</ion-label>
+                    <ion-label class="ion-text-end ion-text-wrap">
+                        {{nextRanking.futureRanking}}
+                        <ion-icon name="help-circle" (click)="showPivot()" style="font-size: 18px"
+                                  *ngIf="nextRanking.futureBelPts >= pivot"></ion-icon>
+                    </ion-label>
+                </ng-container>
+
+            </ion-item>
+        </ng-container>
+
+    </ng-container>
+
+</ion-list>

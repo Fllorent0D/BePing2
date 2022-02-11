@@ -1,0 +1,88 @@
+<ion-header [translucent]="true" collapse="fade">
+    <ion-toolbar>
+        <ion-buttons slot="start" *ngIf="!isModal">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'SETTINGS.PREMIUM_SUBSCRIPTION'|translate}}</ion-title>
+        <ion-buttons slot="end" *ngIf="isModal">
+            <ion-button (click)="closeModal()">
+                <ion-icon icon="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ng-container *ngIf="isPro$|async; else notPro">
+        <ion-list>
+            <ion-item>
+                <ion-label>
+                    {{'SETTINGS.NEXT_RENEW' | translate}}
+                </ion-label>
+                <ion-label slot="end">{{expiryDate$|async|date}}</ion-label>
+            </ion-item>
+            {{expiryDate$|async}}
+            <ion-item>
+                <ion-label class="ion-text-wrap">
+                    <h2>{{'SETTINGS.THANKS_FOR_SUPPORT' | translate}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+
+        <hr>
+        <ion-button color="primary" fill="outline" expand="block" (click)="manageSubscription()"
+                    class="ion-padding-start ion-padding-end">
+            {{'SETTINGS.MANAGE_SUBSCRIPTION' | translate}}
+        </ion-button>
+    </ng-container>
+    <ng-template #notPro>
+        <div class="ion-padding">
+            <h1 class="ion-no-margin-vertical">Prix libre</h1>
+            <ion-text color="grey"><h5 class="ion-no-margin">Sans engagement</h5></ion-text>
+            <div style="padding: 0 20% 0 20%; text-align: center; display: flex; flex-direction: column;">
+                <img src="assets/imgs/avatar{{priceSlider.value}}.png" alt="" style="max-width: 140px; align-self: center">
+                <ion-text color="primary">
+                    <h3 *ngIf="currentProduct$|async as iap">{{iap.price}}/{{iap.billingPeriodUnit|lowercase}}</h3>
+                </ion-text>
+                <ion-text color="grey">Votre contribution aide à faire grandir le projet</ion-text>
+                <ion-range min="1" max="3" color="primary" [snaps]="true" [formControl]="priceSlider"
+                           [ticks]="false"></ion-range>
+            </div>
+            <ion-button expand="block" [disabled]="!(currentProduct$|async)?.canPurchase" (click)="order()">Devenir pro</ion-button>
+        </div>
+    </ng-template>
+
+    <div class="ion-padding">
+        <ion-text color="grey">
+            <h2>Pourquoi un abonnement</h2>
+            <p>Depuis plus de 4 ans, j’ai mis à jour BePing plus
+                de 20 fois et je souhaite vraiment continuer à
+                améliorer de plus en plus l'application.</p>
+            <p>BePing n'est pas uniquement une application. Elle requiert
+                des serveurs de traitement des informations pour
+                le traitement des statistiques, l'envoi des notifications
+                Push et ceux-ci ont besoin d'être maintenu
+                continuellement.</p>
+            <p>Au lieu de vous faire payer les futures mises à jour
+                comme d'autres développeurs ce qui
+                désavantageraient nos clients existants.
+                L'abonnement annuel vous donnera accès aux
+                dernières fonctionnalités, améliorations ainsi qu'à
+                de meilleure performance tout au long de l'année.</p>
+            <h2>Conditions de l'abonnement</h2>
+            <ol>
+                <li>L'inscription ne pourra pas être transféré à un
+                    autre compte. Cette achat complémentaire dans
+                    l'application est valable uniquement pour un seul
+                    compte.
+                </li>
+                <li>L'abonnement se renouvelle automatique
+                    chaque année, à moins de l'avoir annulé.
+                </li>
+            </ol>
+        </ion-text>
+
+    </div>
+
+</ion-content>
