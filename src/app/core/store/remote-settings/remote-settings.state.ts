@@ -13,7 +13,7 @@ export interface RemoteSettingsStateModel {
 const defaultState = {
     partnership_rotatio: false,
     current_season: 22,
-    beping_pro: false
+    beping_pro: true
 };
 
 @State<RemoteSettingsStateModel>({
@@ -35,8 +35,6 @@ export class RemoteSettingsState implements NgxsOnInit {
 
     async ngxsOnInit(ctx?: StateContext<RemoteSettingsStateModel>): Promise<void> {
         try {
-            console.log('remote config:::');
-
             FirebaseRemoteConfig.initialize({minimumFetchInterval: 86_400, fetchTimeout: 60});
             await FirebaseRemoteConfig.setDefaultConfig(defaultState);
             await FirebaseRemoteConfig.fetchAndActivate();
@@ -45,7 +43,8 @@ export class RemoteSettingsState implements NgxsOnInit {
             const bepingPro = await FirebaseRemoteConfig.getBoolean({key: 'beping_pro'});
             console.log(bepingPro);
             ctx.dispatch(new UpdateRemoteSettingKey('partnership_rotatio', rotatio.value));
-            ctx.dispatch(new UpdateRemoteSettingKey('beping_pro', bepingPro.value));
+            // ctx.dispatch(new UpdateRemoteSettingKey('beping_pro', bepingPro.value));
+            ctx.dispatch(new UpdateRemoteSettingKey('beping_pro', true));
             ctx.dispatch(new UpdateRemoteSettingKey('current_season', season.value));
 
         } catch (e) {
