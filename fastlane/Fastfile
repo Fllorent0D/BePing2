@@ -113,12 +113,26 @@ platform :android do
     end
 
     desc 'Ship to Playstore Alpha track.'
-    lane :beta do
+    lane :alpha do
         align_versioning_and_bump
         build_android
 
         upload_to_play_store(
               track: 'alpha',
+              package_name: 'be.floca.beping',
+              track_promote_to: 'alpha',
+              json_key_data: ENV["PLAYSTORE_JSON_KEY_DATA"],
+              apk: './android/app/build/outputs/apk/release/app-release.apk'
+        )
+    end
+
+    desc 'Ship to Playstore Alpha track.'
+    lane :beta do
+        align_versioning_and_bump
+        build_android
+
+        upload_to_play_store(
+              track: 'beta',
               package_name: 'be.floca.beping',
               track_promote_to: 'alpha',
               json_key_data: ENV["PLAYSTORE_JSON_KEY_DATA"],

@@ -87,6 +87,14 @@ Align versioning
 
 Build android app
 
+### android alpha
+
+```sh
+[bundle exec] fastlane android alpha
+```
+
+Ship to Playstore Alpha track.
+
 ### android beta
 
 ```sh
