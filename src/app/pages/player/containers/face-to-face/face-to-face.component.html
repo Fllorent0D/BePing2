@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'HEAD_2_HEAD.TITLE_SHORT'|translate}}</ion-title>
+
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ng-container *ngIf="head2headResults$|async as head2HeadData">
+        <beping-face-to-face-summary  [head2headData]="head2HeadData"></beping-face-to-face-summary>
+        <beping-head-2-head-per-season
+                [playersInfo]="head2HeadData.playersInfo"
+                [matchesPerSeason]="matchesPerSeason$|async"
+                (matchClicked)="goToMatchSheet($event)"
+        >
+        </beping-head-2-head-per-season>
+    </ng-container>
+</ion-content>

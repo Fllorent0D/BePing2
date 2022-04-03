@@ -1,0 +1,15 @@
+<ng-container *ngFor="let season of matchesPerSeason">
+    <ion-list>
+        <ion-list-header>
+            <ion-label>
+                {{'COMMON.SEASON' | translate}} {{season[0].season + 1999}} - {{season[0].season + 2000}}
+            </ion-label>
+        </ion-list-header>
+        <beping-individual-head-to-head
+                *ngFor="let head2head of season"
+                [result]="head2head"
+                [playersInfo]="playersInfo"
+                (matchClicked)="matchClicked.emit($event)"
+        ></beping-individual-head-to-head>
+    </ion-list>
+</ng-container>

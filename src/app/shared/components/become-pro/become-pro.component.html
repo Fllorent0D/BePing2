@@ -1,0 +1,7 @@
+<beping-card [highlighted]="true" [faded]="true" (click)="openPro.emit()">
+    <ion-icon name="ribbon-sharp" size="small" class="ion-margin-end"></ion-icon>
+    {{'BEPING_PRO.BECOME_PRO'|translate}}
+    <ion-button (click)="dismissClicked($event)" slot="end" color="clear">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+</beping-card>
