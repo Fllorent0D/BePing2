@@ -21,7 +21,7 @@
 
 </ion-header>
 
-<ion-content fullscreen="true">
+<ion-content>
     <ion-virtual-scroll [headerFn]="categoryHeader" [items]="clubsFound$ | async">
         <ion-item-divider *virtualHeader="let header" sticky>
             {{ header }}

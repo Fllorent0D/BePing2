@@ -15,6 +15,7 @@ import {TabsNavigationService} from '../../../../core/services/navigation/tabs-n
 import {StartNavigationService} from '../../../../core/services/start-navigation.service';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {DialogService} from '../../../../core/services/dialog-service.service';
+import {CalendarService} from '../../../../core/services/calendar/calendar.service';
 
 @Component({
     selector: 'beping-tournament-detail-page',
@@ -47,7 +48,8 @@ export class TournamentDetailPageComponent implements OnInit {
         private readonly tabNavigate: TabsNavigationService,
         private readonly navigation: StartNavigationService,
         private readonly dialogService: DialogService,
-        private readonly analyticsService: AnalyticsService
+        private readonly analyticsService: AnalyticsService,
+        private readonly calendarService: CalendarService
     ) {
     }
 
@@ -120,5 +122,9 @@ export class TournamentDetailPageComponent implements OnInit {
             });
         }
 
+    }
+
+    addToCalendar(tournament: TournamentEntry) {
+        this.calendarService.checkPremiumAndAddTournament([tournament]);
     }
 }

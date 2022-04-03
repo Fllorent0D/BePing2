@@ -64,6 +64,14 @@ export class InAppPurchasesService {
     }
 
     private setupListeners(ctx?: StateContext<InAppPurchasesState>) {
+        this.inAppPurchaseStore.error((err) => {
+            this.crashlytics.recordException({message: err.message, domain: 'in-app-purchase'});
+            this.toastController.create({
+                message: this.translateService.instant('ERROR_TABT.INTERNAL'),
+                duration: 3000,
+                color: 'danger'
+            });
+        });
         this.inAppPurchaseStore.when('subscription').updated((a) => {
             console.log('Subscription...', a);
             const product1 = this.inAppPurchaseStore.get(BePingIAP.BEPING_PRO_LOW_PRICE);
@@ -79,14 +87,7 @@ export class InAppPurchasesService {
                 this.store.dispatch(new IsPro(false, undefined));
             }
         });
-        this.inAppPurchaseStore.error((err) => {
-            this.crashlytics.recordException({message: err.message, domain: 'in-app-purchase'});
-            this.toastController.create({
-                message: this.translateService.instant('ERROR_TABT.INTERNAL'),
-                duration: 3000,
-                color: 'danger'
-            });
-        });
+
 
         this.inAppPurchaseStore
             .when('product')

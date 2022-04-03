@@ -222,4 +222,8 @@ export class SettingsPage implements OnInit, OnDestroy {
     openSubscription() {
         this.ionNav.push(PremiumSubscriptionsComponent);
     }
+
+    openStatus() {
+        this.browser.openBePingStatus();
+    }
 }

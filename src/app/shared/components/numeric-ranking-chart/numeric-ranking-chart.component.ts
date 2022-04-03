@@ -80,7 +80,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
                 {
                     label: this.label,
                     data: this.dataset.map(week => week.bel),
-                    tension: 0.5,
+                    tension: 0.25,
                     pointBackgroundColor: this.color,
                     pointBorderColor: this.color,
                     borderColor: this.color,
@@ -128,7 +128,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
             },
             layout: {
                 padding: {
-                    left: -200,
+                    left: -80,
                     bottom: 0
                 }
             },
@@ -172,9 +172,9 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
             animations: {
                 y: {
                     easing: 'easeInOutCubic',
-                    duration: 0,
+                    duration: 1500,
                     delay: 1000,
-                    from: 100
+                    from: 160
                 }
             },
             elements: {

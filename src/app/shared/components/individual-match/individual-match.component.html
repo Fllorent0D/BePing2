@@ -1,5 +1,5 @@
 <!--<beping-card (click)="navigateToDetails()" [marging]="false" [padding]="false">-->
-    <ion-grid>
+    <ion-grid (click)="navigateToDetails()">
         <ion-row class="ion-align-items-center">
             <ion-col class="ion-text-center border-right" size="2">
                 <ion-text style="font-size: 1.2em">{{result.Date|localizedDate:'dd'}}</ion-text>

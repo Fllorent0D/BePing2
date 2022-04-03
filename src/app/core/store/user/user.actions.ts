@@ -37,7 +37,9 @@ export class UpdateMemberEntries {
     static readonly type = '[user] Update member entries';
 
     constructor(
-        public memberUniqueIndex: number
+        public memberUniqueIndex: number,
+        // Protection against TabT bug. It will not update if the result of the update contains less results
+        public forceUpdate: boolean = false
     ) {
     }
 }

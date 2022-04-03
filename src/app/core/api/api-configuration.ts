@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 /**
  * Global configuration

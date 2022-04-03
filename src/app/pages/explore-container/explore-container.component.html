@@ -1,35 +1,35 @@
-<ion-content class="ion-padding-bottom" fullscreen>
-    <div class="extended-gradient"></div>
-    <ion-toolbar color="transparent" mode="md">
-        <ion-title color="clear"><span [class.shining]="isLoading$ | async"
-                                       [class.white]="!(isLoading$ | async)">BePing <ion-badge *ngIf="isPro$|async"
-                                                                                               color="primary"
-                                                                                               mode="ios">Pro</ion-badge></span>
+<ion-header class="ion-no-border">
+    <ion-toolbar mode="md" #toolbar style="--background: transparent;">
+        <ion-title>
+            <span [class.shining]="isLoading$ | async"
+                  [class.white]="!(isLoading$ | async)">BePing
+                <ion-badge *ngIf="isPro$|async"
+                           color="primary"
+                           mode="ios">Pro</ion-badge>
+            </span>
         </ion-title>
-
         <ion-buttons slot="end">
             <ion-button id="cart-btn" (click)="openCalculator()" [disabled]="!(currentMemberEntry$|async)"
                         *ngIf="displayNumericRanking$|async">
                 <ion-icon name="calculator-outline" slot="icon-only"></ion-icon>
                 <ng-container *ngIf="pointsInCalculator$|async as pointsCount">
-                    <ion-badge id="cart-badge" color="danger" mode="ios" *ngIf="pointsCount > 0">{{pointsCount}}</ion-badge>
+                    <ion-badge id="cart-badge" color="danger" mode="ios"
+                               *ngIf="pointsCount > 0">{{pointsCount}}</ion-badge>
 
                 </ng-container>
-
             </ion-button>
             <ion-button (click)="openSettings()">
                 <ion-icon name="cog-outline" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" [fullscreen]="true" bepingFadeHeader [toolbar]="toolbar" class="ion-padding-bottom">
     <ion-refresher #refresher (ionRefresh)="refresh($event)" slot="fixed">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <!--
-    <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
-  -->
+    <div class="extended-gradient"></div>
     <ng-container *ngIf="(currentMemberEntry$ | async) as currentMemberEntry; else noMember">
 
         <beping-member-name-ranking-info
@@ -38,6 +38,11 @@
                 [displayNumericRanking]="displayNumericRanking$|async"
                 [member]="currentMemberEntry">
         </beping-member-name-ranking-info>
+        <beping-become-pro
+                *ngIf="showProBanner$|async"
+                (openPro)="openPro()"
+                (dismiss)="dismissPro()">
+        </beping-become-pro>
 
         <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
             <beping-member-victory-chart

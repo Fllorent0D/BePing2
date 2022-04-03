@@ -18,7 +18,7 @@ export class TabtCredentialsInterceptor implements HttpInterceptor {
         if (request.url.includes(environment.tabtUrl)) {
             const afttState: TabTStateModel = this.store.selectSnapshot(TabTState);
             if (afttState?.account && afttState?.password) {
-                this.analyticsService.logEvent('tabt_call', {url: request.url, authenticated: 'yes'});
+                this.analyticsService.logEvent('tabt_call', {url: request.urlWithParams, authenticated: 'yes'});
                 const authReq = request.clone({
                     headers: request.headers
                         .set('X-Tabt-Account', afttState.account)
@@ -27,7 +27,7 @@ export class TabtCredentialsInterceptor implements HttpInterceptor {
 
                 return next.handle(authReq);
             }
-            this.analyticsService.logEvent('tabt_call', {url: request.url, authenticated: 'no'});
+            this.analyticsService.logEvent('tabt_call', {url: request.urlWithParams, authenticated: 'no'});
         }
 
         return next.handle(request);

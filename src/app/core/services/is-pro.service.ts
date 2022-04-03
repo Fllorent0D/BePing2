@@ -7,6 +7,8 @@ import {ModalOptions, OverlayEventDetail} from '@ionic/core';
 import {PremiumSubscriptionsComponent} from '../../pages/settings/containers/premium-subscriptions/premium-subscriptions.component';
 import {map, switchMap} from 'rxjs/operators';
 import {ModalController} from '@ionic/angular';
+import {ModalBaseComponent} from '../../pages/modals/modal-base/modal-base.component';
+import {AnalyticsService} from './firebase/analytics.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,27 +19,32 @@ export class IsProService {
         private readonly dialogService: DialogService,
         private readonly modalCtrl: ModalController,
         private readonly store: Store,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
-    isPro$({presentingElement}: { presentingElement?: HTMLElement }): Observable<boolean> {
+    isPro$(): Observable<boolean> {
         const isPro = this.store.selectSnapshot(InAppPurchasesState.isPro);
         if (isPro) {
             // Si déjà Premium
             console.log('isAlreadyPro');
             return of(true);
         }
+        this.analyticsService.logEvent('beping_pro_open_modal');
 
 
         return from(this.modalCtrl.getTop()).pipe(
             switchMap((topModal) => {
                 console.log('top', topModal);
                 const opts: ModalOptions = {
-                    component: PremiumSubscriptionsComponent,
+                    component: ModalBaseComponent,
                     swipeToClose: !!topModal,
                     presentingElement: topModal,
                     componentProps: {
-                        isModal: true
+                        rootPage: PremiumSubscriptionsComponent,
+                        pageParams: {
+                            isModal: true
+                        }
                     }
                 };
                 return from(this.dialogService.showModal(opts));

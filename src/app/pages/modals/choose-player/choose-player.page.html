@@ -9,7 +9,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen="true">
+<ion-content>
     <ng-container *ngIf="members$ | async as members; else loader">
         <ion-virtual-scroll [items]="members">
             <ion-item (click)="memberClicked(member)" *virtualItem="let member">

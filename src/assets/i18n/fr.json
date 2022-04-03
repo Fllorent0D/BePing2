@@ -62,7 +62,10 @@
     "SERIE": "Série",
     "TIME": "Heure",
     "SPONSORED_BY": "Sponsorisé par",
-    "ADD": "Ajouter"
+    "ADD": "Ajouter",
+    "SEASON": "Saison",
+    "SOON": "Bientôt",
+    "AND": "et"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Se connecter avec resultats.aftt.be",
@@ -301,10 +304,11 @@
     "REFRESH_BEPING": "Actualiser BePing",
     "NEED_INTERNET_TO_REFRESH": "Une connexion Internet est requise pour actualiser BePing",
     "BEPING_REFRESHED": "BePing actualisé",
-    "PREMIUM_SUBSCRIPTION": "Abonnement premium",
+    "PREMIUM_SUBSCRIPTION": "BePing Pro",
     "NEXT_RENEW": "Prochain renouvellement",
     "THANKS_FOR_SUPPORT": "Merci pour votre soutien!",
-    "MANAGE_SUBSCRIPTION": "Gérer l'abonnement"
+    "MANAGE_SUBSCRIPTION": "Gérer l'abonnement",
+    "SERVER_STATUS": "Status serveur BePing"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaire BePing"
@@ -505,6 +509,37 @@
     "ADD_ALL_CLUB_MATCHES": "Êtes-vous sûr d'ajouter tous les matchs du club à votre calendrier ?",
     "MATCHES_ADDED": "Matchs ajoutés à votre calendrier !",
     "MATCH_ADDED": "Match ajouté à votre calendrier",
-    "EVENT_DESCRIPTION": "Salle:{{venue}}\nRemarque:{{remark}}\n\nAjouté par BePing 🏓"
+    "EVENT_DESCRIPTION": "Salle: {{venue}}\nRemarque: {{remark}}\n\nAjouté par BePing 🏓",
+    "OOPS": "Oops! Quelque chose c'est mal passé"
+  },
+  "HEAD_2_HEAD": {
+    "TITLE": "Historique des rencontres",
+    "TITLE_SHORT": "Historique",
+    "VICTORY_AGAINST": "Victoires contre {{name}}",
+    "DEFEAT_AGAINST": "Défaites contre {{name}}",
+    "FIRST_VICTORY": "Première victoire",
+    "LAST_VICTORY": "Dernière victoire",
+    "LAST_DEFEAT": "Dernière défaite"
+  },
+  "BEPING_PRO": {
+    "BECOME_PRO_AND_SUPPORT": "Devenez Pro et soutenez BePing",
+    "PRICE_FREE": "Choisissez le prix que vous souhaitez payer pour accéder aux fonctionnalités Pro",
+    "FEATURES": {
+      "CONNECT_TO_CALENDAR": "Connexion à votre calendrier",
+      "CONNECT_TO_CALENDAR_TEXT": "Importez les matchs directement dans votre calendrier",
+      "NOTIFICATIONS": "Notifications des résultats des matchs",
+      "NOTIFICATIONS_TEXT": "Recevez des notifications avec les résultats des matchs de votre équipe préférée",
+      "FACE_TO_FACE": "En face à face",
+      "FACE_TO_FACE_TEXT": "Retrouvez toutes les rencontres entre vous et un autre joueur lors des saisons précédentes"
+    },
+    "NO_ENGAGEMENT": "Sans engagement",
+    "BECOME_PRO": "Devenir BePing Pro",
+    "RESTORE": "Restaurer l'achat",
+    "WHY_SUBSCRIPTION": "Pourquoi un abonnement?",
+    "WHY_SUBSCRIPTION_TEXT": "Depuis plus de 4 ans, j'ai mis à jour BePing plus de 20 fois et je souhaite vraiment continuer à améliorer l'application de plus en plus.\n\nBePing n'est pas qu'une application. Elle nécessite des serveurs de traitement de l'information pour le traitement des statistiques, l'envoi notifications push et celles-ci doivent être maintenues en permanence.\n\nAu lieu de vous faire payer pour les futures mises à jour comme d'autres développeurs, ce qui désavantagerait nos clients existants. L'abonnement annuel vous donnera accès aux dernières fonctionnalités, améliorations et meilleures performances tout au long de l'année." ,
+    "SUBSCRIPTION_CONDITION": "Conditions d'abonnement",
+    "SUBSCRIPTION_CONDITION_1": "L'inscription ne peut pas être transférée vers un autre compte. Cet achat intégré supplémentaire est valable pour un seul compte.",
+    "SUBSCRIPTION_CONDITION_2": "L'abonnement se renouvelle automatiquement chaque année sauf annulation.",
+    "YOUR_CONTRIBUTION_HELP": "Votre contribution aide à faire grandir le projet"
   }
 }

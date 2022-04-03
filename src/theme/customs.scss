@@ -16,6 +16,24 @@
   --ion-color-tint: var(--ion-color-green-tint);
 }
 
+.ion-color-green {
+  --ion-color-base: var(--ion-color-green);
+  --ion-color-base-rgb: var(--ion-color-green-rgb);
+  --ion-color-contrast: var(--ion-color-green-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-green-contrast-rgb);
+  --ion-color-shade: var(--ion-color-green);
+  --ion-color-tint: var(--ion-color-green-tint);
+}
+
+.ion-color-light-blue {
+  --ion-color-base: var(--ion-color-light-blue);
+  --ion-color-base-rgb: var(--ion-color-light-blue-rgb);
+  --ion-color-contrast: var(--ion-color-light-blue-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-light-blue-contrast-rgb);
+  --ion-color-shade: var(--ion-color-light-blue);
+  --ion-color-tint: var(--ion-color-light-blue-tint);
+}
+
 .ion-color-pink {
   --ion-color-base: var(--ion-color-pink);
   --ion-color-base-rgb: var(--ion-color-pink-rgb);

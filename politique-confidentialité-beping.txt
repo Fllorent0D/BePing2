@@ -1,119 +1,59 @@
-BePing (ci-après le "Responsable du Traitement")
-Mail : f.cardoen@me.com
+Définitions
+Vous : la personne qui avez chargé et utilisez l'application BePing
+Nous : Moi, Florent Cardoen, le concepteur de l'application BEPing
 
+Service : désigne ici les fonctionnalités fournies par une application
 
-BePing établit la présente Politique de confidentialité dont l'objet est d'informer en toute transparence les Utilisateurs de l'application mobile, (ci-après l'"Application"), de la manière dont les données personnelles sont récoltées et traitées par BePing.
-Le terme "Utilisateur" fait référence à tout utilisateur, soit toute personne physique ou morale, qui visite ou interagit d'une quelconque manière avec l'Application.
-A ce titre, BePing détermine tous les moyens et finalités techniques, juridiques et organisationnelles du traitement des données personnelles des Utilisateurs. BePing s'engage à cet effet à prendre toutes les mesures nécessaires pour garantir un traitement des données personnelles conforme à la loi du 30 juillet 2018, relative à la protection des personnes physiques à l'égard des traitements des données à caractère personnel (ci-après, "la Loi") et au Règlement européen du 26 avril 2016 relatif à la protection des données des personnes physiques à l'égard du traitement des données à caractère personnel et à la libre circulation de ces données (ci-après le "Règlement").
-BePing est libre de choisir toute personne physique ou morale qui traite les données personnelles des utilisateurs à sa demande et pour son compte (ci-après le "Sous-traitant"). Le cas échéant, BePing s'engage à sélectionner un Sous-traitant offrant des garanties suffisantes quant aux mesures de sécurité techniques et organisationnelles du traitement des données personnelles, au regard de la Loi et du Règlement.
+# Politique de confidentialité
+Nus avons conçu l'application BePing en tant qu'application Freemium. Ce service vous est fourni gratuitement et est destiné à être utilisé tel quel.
 
-2. Traitement des données personnelles
-L'utilisation de l'Application par les Utilisateurs pourra entraîner la communication de données personnelles. Le traitement de ces données par BePing, en sa qualité de Responsable du traitement, ou par les prestataires agissant au nom et pour le compte de BePing, sera conforme à la Loi et au Règlement.
-Les données à caractère personnel seront traitées par BePing, conformément aux finalités citées plus bas, via :
-    a. L'application demandera à l'utilisateur de s'identifier à partir des listes de force de clubs mis à disposition par l'AFTT et la VTTL. L'identifiant unique de l'Utilisateur est ensuite stocké sur l'appareil de l'Utilisateur. Cette information n'est pas traitée à des fins commerciales.
+Cette page est utilisée pour informer les visiteurs de notre politique en matière de collecte, d'utilisation et de divulgation des informations personnelles si quelqu'un décide d'utiliser notre service.
 
-3. Finalité du traitement des données personnelles
-Conformément à l'article 13 du Règlement, les finalités du traitement des données personnelles sont communiquées à l'Utilisateur et sont les suivantes :
-    a. Afficher à l'Utilisateur des statistiques correspondant à l'identité du joueur (victoires, défaites, derniers matchs,...).
-    b. Afficher des données plus rapidement à l'Utilisateur.
+Si vous choisissez d'utiliser notre service, vous acceptez la collecte et l'utilisation d'informations en rapport avec cette politique. Les informations personnelles que nous collectons sont utilisées pour fournir et améliorer le service. Nous n'utiliserons ni ne partagerons vos informations avec qui que ce soit, sauf tel que décrit dans la présente politique de confidentialité.
 
-4. Données personnelles susceptibles d'être traitées
-L'Utilisateur consent, lors de la visite et lors de l'utilisation de l'Application, que BePing recueille et traite, selon les modalités et principes décrits dans la présente Politique de confidentialité, les données à caractère personnel suivantes :
+Les termes utilisés dans cette politique de confidentialité ont la même signification que dans nos conditions générales, qui sont accessibles sur BePing, sauf indication contraire dans la présente politique de confidentialité.
 
-Lorsque l'Application obtient des données mise à disposition par l'AFTT ou la VTTL. Celles-ci sont stockés dans une mémoire cache sur le serveur de BePing. Chaque type de données à une longévité différente dans la mémoire cache, cela va de 1 heure à 1 jour. 
+# Informations disponibles sur BePing
+Les données présentes dans l'application telles que noms de joueurs, noms de clubs, tournois ou résultats de matchs ne sont pas gérées par nous. Ces informations sont mises en libre disposition par l'Aile Francophone de Tennis de Table et la Vlaamse Tafeltennisliga. Nous ne pouvons donc pas être tenus responsables de la publication de ces informations. Si des changements doivent être effectués, vous devez vous adresser à l'entité responsable.
 
-En ce qui concerne chacune des visites des utilisateurs sur l'Application, les informations automatiquement recueillies sont;
-    a. l'adresse IP, le type et le modèle de navigateur, le fuseau horaire, le système d'exploitation;
-    b. l'ensemble de l'information concernant les vues/pages que l'Utilisateur a consultées sur l'Application, notamment le nom de la vue, le temps de navigation...
+# Collecte et utilisation des informations
+Pour une meilleure expérience, lors de l'utilisation de notre service, nous pouvons vous demander de nous fournir certaines informations personnellement identifiables, y compris, mais sans s'y limiter, vos identifiants pour votre compte AFTT/VTTL et votre profil de joueur dans les listes de force de club. Les informations que nous demandons sont conservées sur votre appareil et ne sont collectées qu'à des fins d'analyse d'utilisation de l'application.
 
-5. Consentement
-En accédant à l'Application et en l'utilisant, l'Utilisateur déclare avoir pris connaissance et marqué son accord de façon libre, spécifique, éclairée et univoque au traitement des données à caractère personnel la concernant. Cet accord porte sur le contenu de la présente Politique de confidentialité.
-Le consentement est donné par l'acte positif par lequel l'Utilisateur a coché la case proposant la Politique de confidentialité en lien hypertexte. Ce consentement est une condition indispensable pour effectuer certaines opérations sur l'Application ou pour permettre à l'Utilisateur d'entrer en relation contractuelle avec BePing. Tout contrat liant BePing et un Utilisateur portant sur les services et biens proposés sur l'Application est subordonné à l'acceptation de la Politique de confidentialité par l'Utilisateur.
-L'Utilisateur consent à ce que le Responsable du Traitement traite et recueille, conformément aux modalités et principes compris dans la présente Politique de confidentialité, ses données à caractère personnel qu'il communique sur l'Application ou à l'occasion des services proposés par BePing, pour les finalités indiquées plus haut.
-L'Utilisateur a le droit de retirer son consentement à tout moment. Le retrait du consentement ne compromet pas la licéité du traitement fondé sur le consentement préalablement donné.
+L'application utilise des services tiers qui peuvent collecter des informations utilisées pour vous identifier.
 
-6. Durée de conservation des données personnelles des Utilisateurs
-Conformément à l'article 13 §2 du Règlement et de la Loi, le Responsable du Traitement ne conserve les données à caractère personnel que pendant le temps raisonnablement nécessaire pour permettre l'accomplissement des finalités pour lesquelles elles sont traitées.
+Liens vers la politique de confidentialité des fournisseurs de services tiers utilisés par l'application :
+	•	Services Google Play
+	•	Google Analytics pour Firebase
+	•	Firebase Crashlytics
 
-Cette durée est dans tous les cas inférieure à : 1 jour
+# Données de journal
+Nous tenons à vous vous informer que, en cas d'erreur dans l'application, nous collectons – via des produits tiers – des données et des informations sur votre téléphone appelées Données de Journal. Ces données de journal peuvent inclure des informations telles que l'adresse IP de votre appareil, le nom de l'appareil, la version du système d'exploitation, la configuration de l'application lors de l'utilisation de notre service, l'heure et la date de l'utilisation du service ainsi que d'autres statistiques.
 
-7. Destinataires des données et divulgation à des tiers
-Les données personnelles peuvent être transmises aux préposés, collaborateurs, sous-traitants ou fournisseurs de BePing qui offrent des garanties de sécurité des données adéquates, et qui collaborent avec le BePing dans le cadre de la commercialisation de produits ou de la fourniture de services. Ils agissent sous l'autorité directe de BePing, et sont notamment responsables de recueillir, de traiter ou de sous-traiter ces données.
-Dans tous les cas, les destinataires des données et ceux à qui ces données ont été divulguées respectent le contenu de la présente Politique de confidentialité. BePing assure qu'ils traiteront ces données aux seules finalités prévues, de façon discrète et sécurisée.
-Dans l'hypothèse où les données seraient divulguées à des tiers à des fins de marketing direct ou de prospection, l'Utilisateur en sera préalablement informé pour qu'il exprime son consentement à l'utilisation de ces données personnels.
+# Cookies
+Les cookies sont des fichiers contenant une petite quantité de données qui sont couramment utilisés comme identifiants uniques anonymes. Ceux-ci sont envoyés à votre navigateur à partir des sites Web que vous visitez et sont stockés dans la mémoire interne de votre appareil.
 
-8. Droits des Utilisateurs
+Ce service n'utilise pas explicitement ces cookies. Cependant, l'application peut utiliser du code et des bibliothèques tierces qui utilisent des cookies pour collecter des informations et améliorer leurs services. Vous avez la possibilité d'accepter ou de refuser ces cookies et de savoir quand un cookie est envoyé à votre appareil. Si vous choisissez de refuser nos cookies, vous ne pourrez peut-être pas utiliser certaines parties de ce service.
 
-A tout moment, l'Utilisateur peut exercer ses droits en envoyant un message par courrier électronique à l'adresse suivante : f.cardoen@me.com.
+# Les fournisseurs de services
+Nous  pouvons employer des sociétés tierces et des particuliers pour les raisons suivantes :
+	•	pour faciliter notre service;
+	•	pour fournir le service en notre nom ;
+	•	pour effectuer des services liés au service ; ou
+	•	pour nous aider à analyser comment notre service est utilisé.
 
-a. Droit d'accès
+Nous tenons à vous informer que ces tiers ont accès à vos informations personnelles. Cela est dû au fait que ces tiers effectuent les tâches qui leur sont confiées en notre nom. Cependant, ils sont tenus de ne pas divulguer ou utiliser les informations à d'autres fins.
 
-Conformément à l'article 15 du Règlement, BePing garantit le droit d'accès à l'Utilisateur à ses données personnelles. L'Utilisateur a le droit d'obtenir l'accès auxdites données à caractère personnel ainsi que les informations suivantes:
+# Sécurité
+Nous apprécions votre confiance en nous fournissant vos informations personnelles. C'est la raison pour laquelle nous nous efforçons d'utiliser des moyens commercialement acceptables pour les protéger. Mais soyez conscient qu'aucune méthode de transmission sur internet ou méthode de stockage électronique n'est sûre et fiable à 100% et que, dès lors, nous ne pouvons pas garantir sa sécurité absolue.
 
-les finalités du traitement ;
-les catégories de données à caractère personnel concernées ;
-les destinataires ou catégories de destinataires auxquels les données à caractère personnel ont été ou seront communiquées, en particulier les destinataires qui sont établis dans des pays tiers ou les organisations internationales ;
-lorsque cela est possible, la durée de conservation des données à caractère personnel envisagée ou, lorsque ce n'est pas possible, les critères utilisés pour déterminer cette durée ;
-l'existence d'une prise de décision automatisée, y compris un profilage, visée à l'article 22, paragraphes 1 et 4 du Règlement, et, au moins en pareils cas, des informations utiles concernant la logique sous-jacente, ainsi que l'importance et les conséquences prévues de ce traitement pour la personne concernée
-Le Responsable du Traitement peut exiger le paiement de frais raisonnables basés sur les coûts administratifs pour toute copie supplémentaire demandée par l'Utilisateur.
+# Liens vers d'autres sites
+Ce service peut contenir des liens vers d'autres sites. Si vous cliquez sur un lien tiers, vous serez dirigé vers ce site. Notez que ces sites externes ne sont pas exploités par nous. Par conséquent, nous vous conseillons fortement de consulter la politique de confidentialité de ces sites web. Nous n'avons aucun contrôle et n'assumons aucune responsabilité quant au contenu, aux politiques de confidentialité ou aux pratiques de tout site ou service tiers.
+# Confidentialité des enfants
+Ces services ne s'adressent pas aux personnes de moins de 13 ans. Nous ne collectons pas sciemment d'informations personnellement identifiables auprès d'enfants de moins de 13 ans. Si vous êtes parent ou tuteur et que vous savez que votre enfant nous a fourni des informations personnelles, veuillez nous contacter afin que nous puissions prendre les mesures nécessaires.
+Modifications apportées à cette politique de confidentialité
+Nous pouvons mettre à jour notre politique de confidentialité de temps à autre. Ainsi, il vous est conseillé de consulter cette page périodiquement pour tout changement. Nous vous informerons de tout changement en publiant la nouvelle politique de confidentialité sur cette page.
+Cette politique est effective à partir du 05/03/2022.
 
-Lorsque l'Utilisateur introduit cette demande par voie électronique (par le biais de l'adresse électronique par exemple), les informations sont fournies sous une forme électronique d'usage courant, à moins que l'Utilisateur ne demande qu'il en soit autrement.
+# Nous contacter
+Si vous avez des questions ou des suggestions concernant notre politique de confidentialité, n'hésitez pas à nous contacter à f.cardoen@me.com.
 
-La copie de ses données sera communiquée à l'Utilisateur au plus tard dans le mois après la réception de la demande.
-
-b. Droit de rectification
-
-BePing garantit le droit de rectification et d'effacement des données personnelles à l'utilisateur.
-Conformément à l'article 16 du Règlement, les données incorrectes, inexactes ou non-pertinentes peuvent être corrigées ou effacées à tout moment. L'Utilisateur procède d'abord lui-même aux modifications nécessaires depuis son compte utilisateur/autre, sauf si celles-ci ne peuvent être effectuées de manière autonome, dans quel cas la demande peut en être faite auprès de BePing.
-Conformément à l'article 19 du Règlement, le Responsable du traitement notifie à chaque destinataire auquel les données à caractère personnel ont été communiquées toute rectification des données à caractère personnel, à moins qu'une telle communication se révèle impossible ou exige des efforts disproportionnés. Le responsable du traitement fournit à la personne concernée des informations sur ces destinataires si celle-ci en fait la demande.
-
-c. Droit à l'effacement
-
-L'Utilisateur a le droit d'obtenir l'effacement de ses données personnelles dans les meilleurs délais dans les hypothèses énumérées à l'article 17 du Règlement.
-Lorsque le Responsable de Traitement a rendu publiques les données à caractère personnel et qu'il est tenu de les effacer en vertu du paragraphe précédent, le Responsable du traitement, compte tenu des technologies disponibles et des coûts de mise en œuvre, prend des mesures raisonnables, y compris d'ordre technique, pour informer les autres responsables du traitement qui traitent ces données à caractère personnel que la personne concernée a demandé l'effacement par ces responsables du traitement de tout lien vers ces données à caractère personnel, ou de toute copie ou reproduction de celles-ci.
-Les deux paragraphes précédents ne s'appliquent pas dans la mesure où ce traitement est nécessaire:
-
-à l'exercice du droit à la liberté d'expression et d'information;
-pour respecter une obligation légale qui requiert le traitement prévue par le droit de l'Union ou par le droit de l'État membre auquel le responsable du traitement est soumis, ou pour exécuter une mission d'intérêt public ou relevant de l'exercice de l'autorité publique dont est investi le responsable du traitement;
-à la constatation, à l'exercice ou à la défense de droits en justice.
-Conformément à l'article 19 du Règlement, le Responsable du traitement notifie à chaque destinataire auquel les données à caractère personnel ont été communiquées tout effacement de données à caractère personnel ou toute limitation du traitement effectué, à moins qu'une telle communication se révèle impossible ou exige des efforts disproportionnés. Le responsable du traitement fournit à la personne concernée des informations sur ces destinataires si celle-ci en fait la demande.
-
-d. Droit de limitation du traitement
-
-L'Utilisateur a le droit d'obtenir la limitation du traitement de ses données personnelles dans les hypothèses énumérées à l'article 19 du Règlement.
-Conformément à l'article 19 du Règlement, le Responsable du traitement notifie à chaque destinataire auquel les données à caractère personnel ont été communiquées toute limitation du traitement effectué, à moins qu'une telle communication se révèle impossible ou exige des efforts disproportionnés. Le responsable du traitement fournit à la personne concernée des informations sur ces destinataires si celle-ci en fait la demande.
-
-e. Droit de portabilité des données
-
-Conformément à l'article 20 du Règlement, les Utilisateurs ont le droit de recevoir de BePing les données à caractère personnel les concernant dans un format structuré, couramment utilisé et lisible par machine. Les Utilisateurs ont le droit de transmettre ces données à un autre responsable du traitement sans que BePing y fasse obstacle dans les cas prévus par le Règlement.
-Lorsque l'Utilisateur exerce son droit à la portabilité des données en application du paragraphe précédent, elle a le droit d'obtenir que les données à caractère personnel soient transmises directement d'un responsable du traitement à un autre, lorsque cela est techniquement possible.
-L'exercice du droit de portabilité des données s'entend sans préjudice du droit à l'effacement. Ce droit ne s'applique pas au traitement nécessaire à l'exécution d'une mission d'intérêt public ou relevant de l'exercice de l'autorité publique dont est investi le responsable du traitement.
-Le droit de portabilité des données ne porte pas atteinte aux droits et libertés de tiers.
-
-f. Droit d'opposition et prise de décision individuelle automatisée
-L'Utilisateur dispose à tout moment du droit de s'opposer au traitement de ses données personnelles en raison de sa situation particulière, y compris l'automatisation des données effectuée par BePing. Conformément à l'article 21 du Règlement, BePing ne traitera plus les données à caractère personnel, à moins qu'il existe des motifs légitimes et impérieux pour le traitement qui prévalent sur les intérêts et les droits et libertés de l'Utilisateur, ou pour la constatation, l'exercice ou la défense de droits en justice.
-Lorsque les données à caractère personnel sont traitées à des fins de prospection, l'Utilisateur a le droit de s'opposer à tout moment au traitement des données à caractère personnel la concernant à de telles fins de prospection, y compris au profilage dans la mesure où il est lié à une telle prospection.
-Lorsque la personne concernée s'oppose au traitement à des fins de prospection, les données à caractère personnel ne sont plus traitées à ces fins.
-
-g. Droit de plainte
-L'Utilisateur dispose du droit d'introduire une plainte concernant le traitement de ses données personnelles par BePing auprès de l'Autorité de Protection des Données, compétente pour le territoire belge. De plus amples informations peuvent être trouvées sur le site internet: https://www.autoriteprotectiondonnees.be.
-L'introduction d'une plainte se fait aux adresses suivantes:
-
-Autorité de Protection des Données
-Rue de la Presse 35, 1000 Bruxelles
-Tél. + 32 2 274 48 00
-Fax. + 32 2 274 48 35
-E-mail: contact@apd-gba.be
-
-L'Utilisateur peut également introduire une plainte auprès du tribunal de première instance de son domicile.
-
-9. Limitation de responsabilité du Responsable de traitement
-L'Application peut contenir des liens vers d'autres sites internet détenus par des tiers non liés à BePing. Le contenu de ces sites et le respect de ceux-ci au regard de la Loi et du Règlement ne relèvent pas de la responsabilité de BePing.
-Le titulaire de l'autorité parentale doit donner son consentement exprès pour que le mineur de moins de 16 ans puisse divulguer des informations ou données personnelles sur le site Internet. BePing conseille vivement aux personnes exerçant l'autorité parentale sur des mineurs de promouvoir une utilisation responsable et sécurisée d'Internet. Le Responsable de traitement ne peut être tenu responsable pour avoir collecté et traité des informations et données personnelles de mineurs de moins de 16 ans dont le consentement n'est pas effectivement couvert par celui de leurs parents légaux ou pour des données incorrectes -notamment concernant l'âge- introduites par des mineurs. En aucun cas, des données personnelles ne seront traitées par le Responsable de traitement si l'Utilisateur précise qu'il est âgé de moins de 16 ans.
-BePing n'est pas responsable de la perte, de la corruption ou du vol de données personnelles causés notamment par la présence de virus ou suite à des attaques informatiques.
-
-12. Droit applicable et juridiction compétente
-La présente Politique de confidentialité est exclusivement régie par le droit belge. Tout litige sera porté devant les tribunaux de l'arrondissement judiciaire du siège social de BePing.
-
-13. Contact
-Pour toute question ou réclamation relative à la présente Politique de confidentialité, l'Utilisateur peut contacter le Responsable du traitement via l'adresse suivante : f.cardoen@me.com

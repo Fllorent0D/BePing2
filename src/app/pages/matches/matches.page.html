@@ -3,16 +3,7 @@
         <ion-title>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-buttons slot="start">
-                <ion-back-button></ion-back-button>
-            </ion-buttons>
-            <ion-title size="large">{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-title>
-        </ion-toolbar>
-    </ion-header>
-
+<ion-content>
     <ion-button
             *ngIf="memberClub | async as club"
             (click)="navigateToURI(['clubs', club.UniqueIndex])"

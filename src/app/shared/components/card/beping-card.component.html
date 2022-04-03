@@ -1,3 +1,10 @@
-<ion-item [style.height]="height" [class.ion-no-margin-horizontal]="!marging" [color]="highlighted? 'primary': '' " [class.ion-no-margin-vertical]="!margingVertical" [class.ion-no-padding]="!padding">
+<ion-item
+        [style.height]="height"
+        [class.ion-no-margin-horizontal]="!marging"
+        [color]="highlighted? 'dark': '' "
+        [class.ion-no-margin-vertical]="!margingVertical"
+        [class.ion-no-padding]="!padding"
+        [style.opacity]="faded ? '50%' : '100%'"
+>
     <ng-content></ng-content>
 </ion-item>

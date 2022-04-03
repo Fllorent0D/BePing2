@@ -110,13 +110,13 @@ export class PlayerCategoryService {
             )
             // @ts-ignore
             .flat();
-
         return combineLatest(
             clubIndexes.map(clubIndex => this.matchesService.findAllMatches({club: clubIndex}))
         ).pipe(
-            map((matches: TeamMatchesEntry[][]) =>
-                // @ts-ignore
-                matches.flat().filter((match) => matchIds.includes(match.MatchId))
+            map((matches: TeamMatchesEntry[][]) => matches
+                .flat()
+                .filter((match) => matchIds.includes(match.MatchId))
+                .sort((a, b) => b.Date.localeCompare(a.Date))
             ),
             map((matches: TeamMatchesEntry[]) =>
                 Object.entries(members).reduce((acc, [category, member]) => {

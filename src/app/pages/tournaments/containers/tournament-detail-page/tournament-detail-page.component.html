@@ -6,16 +6,7 @@
         <ion-title>{{(tournament$|async)?.Name}}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-buttons slot="start">
-                <ion-back-button></ion-back-button>
-            </ion-buttons>
-            <ion-title size="large">{{(tournament$|async)?.Name}}</ion-title>
-        </ion-toolbar>
-    </ion-header>
-
+<ion-content>
     <div (leafletMapReady)="onMapReady($event)"
          [leafletOptions]="options"
          leaflet
@@ -33,6 +24,8 @@
                 <span *ngIf="registrationClosed(tournament) && isPast(tournament)">{{'TOURNAMENTS.TOURNAMENT_ENDED'|translate}}</span>
                 <span *ngIf="!registrationClosed(tournament)">{{'TOURNAMENTS.REGISTER'|translate}}</span>
             </ion-button>
+
+            <beping-add-to-calendar-btn (addToCalendarClicked)="addToCalendar(tournament)"></beping-add-to-calendar-btn>
         </div>
 
         <hr>

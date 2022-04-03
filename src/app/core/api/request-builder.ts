@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import {HttpHeaders, HttpParameterCodec, HttpParams, HttpRequest} from '@angular/common/http';
+import { HttpRequest, HttpParameterCodec, HttpParams, HttpHeaders } from '@angular/common/http';
 
 /**
  * Custom parameter codec to correctly handle the plus sign in parameter

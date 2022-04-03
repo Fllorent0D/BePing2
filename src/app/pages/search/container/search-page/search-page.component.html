@@ -10,16 +10,7 @@
         <ion-searchbar [formControl]="searchControl" [placeholder]="'SEARCH.PLACEHOLDER'|translate"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-buttons slot="start">
-                <ion-back-button></ion-back-button>
-            </ion-buttons>
-            <ion-title size="large">{{'SEARCH.SEARCH'|translate}}</ion-title>
-        </ion-toolbar>
-    </ion-header>
-
+<ion-content>
     <ng-container *ngIf="clubsFound$ | async as clubs">
         <ion-list *ngIf="clubs.results?.length > 0">
             <ion-list-header>

@@ -62,7 +62,10 @@
     "SERIE": "Reeks",
     "TIME": "Uur",
     "SPONSORED_BY": "Sponsored by",
-    "ADD": "Toevoegen"
+    "ADD": "Toevoegen",
+    "SEASON": "Seizoen",
+    "SOON": "Binnenkort",
+    "AND": "en"
   },
   "DASHBOARD": {
     "LOGIN_TO_AFTT": "Login to resultats.aftt.be",
@@ -304,10 +307,11 @@
     "REFRESH_BEPING": "BePing vernieuwen",
     "NEED_INTERNET_TO_REFRESH": "Internetverbinding is vereist om BePing te vernieuwen",
     "BEPING_REFRESHED": "BePing vernieuwd",
-    "PREMIUM_SUBSCRIPTION": "Premium abonnement",
+    "PREMIUM_SUBSCRIPTION": "BePing Pro",
     "NEXT_RENEW": "Volgende verlenging",
     "THANKS_FOR_SUPPORT": "Bedankt voor je ondersteuning!",
-    "MANAGE_SUBSCRIPTION": "Abonnement beheren"
+    "MANAGE_SUBSCRIPTION": "Abonnement beheren",
+    "SERVER_STATUS": "BePing-serverstatus"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaar BePing"
@@ -508,6 +512,37 @@
     "ADD_ALL_CLUB_MATCHES": "Weet je zeker dat je alle clubwedstrijden in je agenda zet?",
     "MATCHES_ADDED": "Wedstrijden toegevoegd aan je agenda!",
     "MATCH_ADDED": "Wedstrijd toegevoegd aan je agenda!",
-    "EVENT_DESCRIPTION": "Evenementenlocatie:{{venue}}\nOpmerking:{{remark}}\n\nToegevoegd door BePing 🏓"
+    "EVENT_DESCRIPTION": "Evenementenlocatie: {{venue}}\nOpmerking: {{remark}}\n\nToegevoegd door BePing 🏓",
+    "OOPS": "Oops something wrong happened"
+  },
+  "HEAD_2_HEAD": {
+    "TITLE": "Wedstrijdgeschiedenis",
+    "TITLE_SHORT": "History",
+    "VICTORY_AGAINST": "Wins tegen {{name}}",
+    "DEFEAT_AGAINST": "Nederlaag tegen {{name}}",
+    "FIRST_VICTORY": "Eerste gewonnen",
+    "LAST_VICTORY": "Laatste gewonnen",
+    "LAST_DEFEAT": "Laatste verloren"
+  },
+  "BEPING_PRO": {
+    "BECOME_PRO_AND_SUPPORT": "Pro worden en BePing ondersteunen",
+    "PRICE_FREE": "Kies de prijs die u wilt betalen voor toegang tot Pro functies",
+    "FEATURES": {
+      "CONNECT_TO_CALENDAR": "Verbinding maken met uw agenda",
+      "CONNECT_TO_CALENDAR_TEXT": "Importeer wedstrijden rechtstreeks in je agenda",
+      "NOTIFICATIONS": "Meldingen van wedstrijdresultaten",
+      "NOTIFICATIONS_TEXT": "Ontvang meldingen met de resultaten van de wedstrijden van je favoriete team",
+      "FACE_TO_FACE": "Van aangezicht tot aangezicht",
+      "FACE_TO_FACE_TEXT": "Vind alle ontmoetingen tussen jou en een andere speler in voorgaande seizoenen"
+    },
+    "NO_ENGAGEMENT": "Zonder verloving",
+    "BECOME_PRO": "Word BePing Pro",
+    "RESTORE": "Herstel aankoop",
+    "WHY_SUBSCRIPTION": "Waarom een abonnement?",
+    "WHY_SUBSCRIPTION_TEXT": "Al meer dan 4 jaar heb ik BePing meer dan 20 keer geüpdatet en ik wil de applicatie echt steeds meer blijven verbeteren.\n\nBePing is niet zomaar een app. Het vereist informatieverwerkingsservers voor het verwerken van statistieken, het verzenden van pushmeldingen en deze moeten continu worden onderhouden.\n\nIn plaats van u te laten betalen voor toekomstige updates zoals andere ontwikkelaars die onze bestaande klanten zouden benadelen. Het jaarabonnement geeft u toegang tot de nieuwste functies, verbeteringen en betere prestaties gedurende het hele jaar." ,
+    "SUBSCRIPTION_CONDITION": "Abonnementsvoorwaarden",
+    "SUBSCRIPTION_CONDITION_1": "Registratie kan niet worden overgedragen naar een ander account. Deze aanvullende in-app-aankoop is slechts geldig voor één account.",
+    "SUBSCRIPTION_CONDITION_2": "Abonnement wordt elk jaar automatisch verlengd, tenzij opgezegd.",
+    "YOUR_CONTRIBUTION_HELP": "Jouw bijdrage helpt het project te laten groeien"
   }
 }

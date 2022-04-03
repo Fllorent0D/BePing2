@@ -1,17 +1,18 @@
 /* tslint:disable */
 /* eslint-disable */
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {BaseService} from '../base-service';
-import {ApiConfiguration} from '../api-configuration';
-import {StrictHttpResponse} from '../strict-http-response';
-import {RequestBuilder} from '../request-builder';
-import {Observable} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { BaseService } from '../base-service';
+import { ApiConfiguration } from '../api-configuration';
+import { StrictHttpResponse } from '../strict-http-response';
+import { RequestBuilder } from '../request-builder';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
-import {MemberEntry} from '../models/member-entry';
-import {WeeklyElo} from '../models/weekly-elo';
-import {WeeklyNumericRanking} from '../models/weekly-numeric-ranking';
+import { MemberEntry } from '../models/member-entry';
+import { WeeklyElo } from '../models/weekly-elo';
+import { WeeklyNumericRanking } from '../models/weekly-numeric-ranking';
+import { WeeklyNumericRankingV2 } from '../models/weekly-numeric-ranking-v-2';
 
 @Injectable({
   providedIn: 'root',
@@ -143,6 +144,95 @@ export class MembersService extends BaseService {
 
     return this.findAllMembers$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberEntry>>) => r.body as Array<MemberEntry>)
+    );
+  }
+
+  /**
+   * Path part for operation findAllMembersLookup
+   */
+  static readonly FindAllMembersLookupPath = '/v1/members/lookup';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findAllMembersLookup()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllMembersLookup$Response(params: {
+    query: string;
+  }): Observable<StrictHttpResponse<Array<MemberEntry>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MembersService.FindAllMembersLookupPath, 'get');
+    if (params) {
+      rb.query('query', params.query, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<MemberEntry>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findAllMembersLookup$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findAllMembersLookup(params: {
+    query: string;
+  }): Observable<Array<MemberEntry>> {
+
+    return this.findAllMembersLookup$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<MemberEntry>>) => r.body as Array<MemberEntry>)
+    );
+  }
+
+  /**
+   * Path part for operation memberControllerIndex
+   */
+  static readonly MemberControllerIndexPath = '/v1/members/indexnames';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `memberControllerIndex()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  memberControllerIndex$Response(params?: {
+  }): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MembersService.MemberControllerIndexPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `memberControllerIndex$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  memberControllerIndex(params?: {
+  }): Observable<void> {
+
+    return this.memberControllerIndex$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
@@ -370,6 +460,58 @@ export class MembersService extends BaseService {
 
     return this.findMemberNumericRankingsHistory$Response(params).pipe(
       map((r: StrictHttpResponse<Array<WeeklyNumericRanking>>) => r.body as Array<WeeklyNumericRanking>)
+    );
+  }
+
+  /**
+   * Path part for operation findMemberNumericRankingsHistoryV2
+   */
+  static readonly FindMemberNumericRankingsHistoryV2Path = '/v2/members/{uniqueIndex}/numeric-rankings';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findMemberNumericRankingsHistoryV2()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberNumericRankingsHistoryV2$Response(params: {
+    uniqueIndex: number;
+    season?: number;
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+  }): Observable<StrictHttpResponse<Array<WeeklyNumericRankingV2>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberNumericRankingsHistoryV2Path, 'get');
+    if (params) {
+      rb.path('uniqueIndex', params.uniqueIndex, {});
+      rb.query('season', params.season, {});
+      rb.query('category', params.category, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<WeeklyNumericRankingV2>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findMemberNumericRankingsHistoryV2$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberNumericRankingsHistoryV2(params: {
+    uniqueIndex: number;
+    season?: number;
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+  }): Observable<Array<WeeklyNumericRankingV2>> {
+
+    return this.findMemberNumericRankingsHistoryV2$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<WeeklyNumericRankingV2>>) => r.body as Array<WeeklyNumericRankingV2>)
     );
   }
 

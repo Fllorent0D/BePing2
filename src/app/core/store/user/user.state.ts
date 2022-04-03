@@ -12,7 +12,6 @@ import {
     UpdateMainCategory,
     UpdateMemberEntries,
     UpdateMemberEntriesSuccess,
-    UpdateNumericRankingsSuccess,
     UpdateWeeklyNumericRankingSuccess
 } from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
@@ -27,12 +26,14 @@ import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
 import {ClubsService} from '../../api/services/clubs.service';
 import {of} from 'rxjs';
 import {DeepPartial} from 'chart.js/types/utils';
+import {CurrentSeasonChanged} from '../season';
+import {CrashlyticsService} from '../../services/crashlytics.service';
 
 export interface UserMemberEntry extends MemberEntry {
     numericRankings?: WeeklyNumericRanking[];
 }
 
-export type UserMemberEntries = { [key: string]: UserMemberEntry };
+export type UserMemberEntries = { [key in PLAYER_CATEGORY]?: UserMemberEntry };
 
 export interface UserStateModel {
     memberEntries?: UserMemberEntries;
@@ -73,7 +74,8 @@ export class UserState implements NgxsOnInit {
         private readonly memberPlayerCategoryService: PlayerCategoryService,
         private readonly memberService: MembersService,
         private readonly clubService: ClubsService,
-        private readonly analyticsService: AnalyticsService
+        private readonly analyticsService: AnalyticsService,
+        private readonly crashlytics: CrashlyticsService
     ) {
     }
 
@@ -138,8 +140,9 @@ export class UserState implements NgxsOnInit {
             this.analyticsService.setUserProperty('club', state.club.UniqueIndex);
         }
 
+        // App initialize and need to refresh
         if (state.lastUpdated < timeThreshold.getTime() && state.memberUniqueIndex) {
-            dispatch(new UpdateMemberEntries(state.memberUniqueIndex));
+            dispatch(new UpdateMemberEntries(state.memberUniqueIndex, false));
         } else {
             console.log('no refreshing:::', state.lastUpdated, '>', timeThreshold.getTime());
         }
@@ -159,7 +162,15 @@ export class UserState implements NgxsOnInit {
             mainCategory: null,
             memberUniqueIndex: action.memberUniqueIndex
         });
-        return dispatch(new UpdateMemberEntries(action.memberUniqueIndex));
+        // Selecting a user in the settings
+        return dispatch(new UpdateMemberEntries(action.memberUniqueIndex, true));
+    }
+
+    // Force update for a new season
+    @Action(CurrentSeasonChanged)
+    updateMemberForNewSeason({dispatch, getState}: StateContext<UserStateModel>) {
+        const userState = getState();
+        return dispatch(new UpdateMemberEntries(userState.memberUniqueIndex, true));
     }
 
     @Action(ClubTransfer)
@@ -182,12 +193,31 @@ export class UserState implements NgxsOnInit {
     updateMemberEntries({dispatch, getState}: StateContext<UserStateModel>, action: UpdateMemberEntries) {
         return this.memberPlayerCategoryService.getMemberPlayerCategories(action.memberUniqueIndex).pipe(
             tap(() => dispatch(new SetLoading(true))),
-            switchMap((memberEntries) => {
+            switchMap((memberEntries: UserMemberEntries) => {
                 const state = getState();
-                const categories = Object.keys(memberEntries);
-                const actions: Array<any> = [
-                    new UpdateMemberEntriesSuccess(memberEntries)
-                ];
+                const forceUpdate = action.forceUpdate;
+                const categories: PLAYER_CATEGORY[] = Object.keys(memberEntries) as PLAYER_CATEGORY[];
+                const actions: Array<any> = [];
+
+                const shouldUpdateMemberEntries = forceUpdate || categories.reduce((acc: boolean, category: PLAYER_CATEGORY) => {
+                    const resultsStored = state.memberEntries[category].ResultEntries;
+                    const resultsReceived = memberEntries[category].ResultEntries;
+                    if (resultsStored.length > resultsReceived.length) {
+                        return false;
+                    }
+                    return acc;
+                }, true);
+
+                if (shouldUpdateMemberEntries) {
+                    actions.push(new UpdateMemberEntriesSuccess(memberEntries));
+                } else {
+                    console.error(`Avoided wrong member update for ${action.memberUniqueIndex}. Received too less matches in one of the playing category.`);
+                    this.crashlytics.recordException({
+                        message: `Avoided wrong member update for ${action.memberUniqueIndex}. Received too less matches in one of the playing category.`,
+                        domain: 'user-state'
+                    });
+                }
+
                 if (state.club.UniqueIndex !== memberEntries?.[categories?.[0]]?.Club) {
                     actions.push(new ClubTransfer(memberEntries[categories[0]].Club));
                 }

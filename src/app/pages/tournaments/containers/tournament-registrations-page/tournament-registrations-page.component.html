@@ -6,15 +6,7 @@
         <ion-title>{{'TOURNAMENTS.REGISTRATIONS'|translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-buttons slot="start">
-                <ion-back-button></ion-back-button>
-            </ion-buttons>
-            <ion-title size="large">{{'TOURNAMENTS.REGISTRATIONS'|translate}}</ion-title>
-        </ion-toolbar>
-    </ion-header>
+<ion-content>
     <ion-list>
         <ion-item (click)="registrationClicked(registration)" *ngFor="let registration of registrations" detail>
             <ion-label>

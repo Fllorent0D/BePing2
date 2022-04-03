@@ -8,11 +8,11 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
+<ion-content>
     <ion-grid>
         <ion-row>
             <ion-col class="ion-text-center">
-                <h1>{{(season$|async).Name}}</h1>
+                <h1>{{(season$|async)?.Name}}</h1>
                 <ion-text color="grey">{{'SETTINGS.CURRENT_SEASON' | translate}}</ion-text>
             </ion-col>
         </ion-row>
@@ -45,12 +45,8 @@
             </ion-select>
         </ion-item>
     </ion-list>
-    <ion-item (click)="openSubscription()" [disabled]="!isOnline" detail *ngIf="bepingProEnabled$|async">
-        <ion-icon icon="diamond-outline" slot="start"></ion-icon>
-
-        <ion-label>
-            {{'SETTINGS.PREMIUM_SUBSCRIPTION' | translate}}
-        </ion-label>
+    <ion-item  (click)="openSubscription()" [disabled]="!isOnline" detail *ngIf="bepingProEnabled$|async">
+        <ion-label>{{'SETTINGS.PREMIUM_SUBSCRIPTION' | translate}}</ion-label>
     </ion-item>
     <beping-section-title [title]="'COMMON.RANKINGS' | translate"></beping-section-title>
     <ion-list>
@@ -151,6 +147,11 @@
         <ion-item (click)="privacy()" detail>
             <ion-label>
                 {{'SETTINGS.PRIVACY_POLICY' | translate}}
+            </ion-label>
+        </ion-item>
+        <ion-item (click)="openStatus()" detail detail-icon="open-outline">
+            <ion-label>
+                {{'SETTINGS.SERVER_STATUS' | translate}}
             </ion-label>
         </ion-item>
     </ion-list>

@@ -23,6 +23,7 @@ import {
     IndividualMatchPointsEditorComponent
 } from '../../../points-calculator/containers/individual-match-points-editor/individual-match-points-editor.component';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
+import {Face2FaceService} from '../../../../core/services/face2face/face-2-face.service';
 
 @Component({
     selector: 'beping-other-players',
@@ -56,6 +57,7 @@ export class OtherPlayersComponent implements OnInit {
         private readonly location: Location,
         private readonly ionRouterOutlet: IonRouterOutlet,
         private readonly analyticsService: AnalyticsService,
+        private readonly face2FaceService: Face2FaceService
     ) {
     }
 
@@ -158,6 +160,12 @@ export class OtherPlayersComponent implements OnInit {
                         }
                     },
                     {
+                        text: this.translate.instant('HEAD_2_HEAD.TITLE'),
+                        handler: () => {
+                            this.goToFace2Face();
+                        }
+                    },
+                    {
                         text: this.translate.instant('CALCULATOR.ADD_RESULT_TO_CALC'),
                         handler: async () => {
                             this.analyticsService.logEvent('calculator_add_result_from_member_page');
@@ -169,7 +177,7 @@ export class OtherPlayersComponent implements OnInit {
                                 componentProps: {
                                     rootPage: IndividualMatchPointsEditorComponent,
                                     pageParams: {
-                                        memberEntryPrefill: {...member, Category: category }
+                                        memberEntryPrefill: {...member, Category: category}
                                     }
                                 }
                             });
@@ -207,5 +215,11 @@ export class OtherPlayersComponent implements OnInit {
         });
 
 
+    }
+
+    goToFace2Face() {
+        this.memberUniqueIndex$.pipe(take(1)).subscribe((id) => {
+            this.face2FaceService.checkIsProAndGoToFace2Face(id);
+        });
     }
 }

@@ -23,7 +23,7 @@ export class AppStateService {
             console.log('App state changed. Is active?', isActive);
             if (isActive) {
                 const state: UserStateModel = this.store.selectSnapshot(UserState);
-                this.store.dispatch(new UpdateMemberEntries(state.memberUniqueIndex));
+                this.store.dispatch(new UpdateMemberEntries(state.memberUniqueIndex, false));
             }
         });
     }

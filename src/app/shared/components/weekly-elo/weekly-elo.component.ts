@@ -58,7 +58,7 @@ export class WeeklyEloComponent implements OnInit, AfterViewInit {
                 {
                     label: this.label,
                     data: this.dataset.map(week => week[this.prop]),
-                    tension: 0.5,
+                    tension: 0.25,
                     pointBackgroundColor: this.color,
                     pointBorderColor: this.color,
                     borderColor: this.color,

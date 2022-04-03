@@ -12,10 +12,19 @@
   transition: background-image 0.5s;
   height: 30vh;
   width: 100%;
+  top: 0;
   position: absolute;
 }
+
 #cart-btn {
   position: relative;
+}
+
+beping-explore-container {
+  ion-content {
+    --offset-top: 91px !important;
+    --offset-bottom: 84px !important;
+  }
 }
 
 #cart-badge {
@@ -25,14 +34,5 @@
   font-size: 9px;
   padding: 5px;
 }
-:host {
 
-  ion-toolbar {
-    padding-top: var(--ion-safe-area-top);
-    color: white;
-  }
 
-  ion-refresher {
-    padding-top: var(--ion-safe-area-top);
-  }
-}

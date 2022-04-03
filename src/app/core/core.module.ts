@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ApiModule} from './api/api.module';
 import {environment} from '../../environments/environment';
-import {NgxsModule} from '@ngxs/store';
+import {NgxsModule, Store} from '@ngxs/store';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {states} from './store';
@@ -19,6 +19,9 @@ import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import {TabtHttpErrorHandlerInterceptor} from './interceptors/tabt-http-error-handler-interceptor.service';
 import {FavoriteItem} from './store/favorites';
 import {DialogService} from './services/dialog-service.service';
+import {ApiConfiguration} from './api/api-configuration';
+import {RemoteSettingsState} from './store/remote-settings';
+import {ApiConfigurationService} from './services/api-configuration.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -134,6 +137,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ],
     providers: [
         TranslateService,
+        {
+            provide: ApiConfiguration,
+            useClass: ApiConfigurationService
+        },
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TabtDatabaseInterceptor,

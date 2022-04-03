@@ -10,6 +10,25 @@ import {AndroidSettings, IOSSettings, NativeSettings} from 'capacitor-native-set
     providedIn: 'root'
 })
 export class NotificationsService {
+    static generateTopicForClub(clubUniqueIndex: string): string {
+        return `club-${clubUniqueIndex}`;
+    }
+
+    static generateTopicForMember(memberUniqueIndex: number): string {
+        return `member-${memberUniqueIndex.toString(10)}`;
+    }
+
+    static generateTopicForTeam(teamId: string): string {
+        return `team-${teamId}`;
+    }
+
+    static generateTopicForDivision(divisionId: number): string {
+        return `division-${divisionId.toString(10)}`;
+    }
+
+    static generateTopicForMatch(matchId: number): string {
+        return `match-${matchId.toString(10)}`;
+    }
 
     constructor(
         private readonly dialogService: DialogService
@@ -76,6 +95,7 @@ export class NotificationsService {
                     }
                 ]
             });
+            // Yea...
             if (shouldStop) {
                 return currentPerm;
             }
@@ -92,6 +112,5 @@ export class NotificationsService {
         const response = await PushNotifications.checkPermissions();
         return response.receive;
     }
-
 
 }

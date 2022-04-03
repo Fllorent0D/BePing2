@@ -46,9 +46,25 @@ export class SubscribeToTopic {
     constructor(public topic: string) {
     }
 }
+export class UnsubscribeToTopic {
+    static type = '[Notifications] Unsubscribing to topic';
+
+    constructor(public topic: string) {
+    }
+}
 
 export class SubscriptionToTopicSuccessful {
     static type = '[Notifications] successfully subscribe to topic';
+
+    constructor(
+        public topic: string,
+        public message: string,
+    ) {
+    }
+}
+
+export class UnsubscriptionToTopicSuccessful {
+    static type = '[Notifications] successfully unsubscribe to topic';
 
     constructor(
         public topic: string,

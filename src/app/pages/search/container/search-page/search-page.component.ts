@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {combineLatest, iif, Observable, of} from 'rxjs';
-import {debounceTime, map, mergeMap, share, shareReplay, startWith, take, tap} from 'rxjs/operators';
+import {catchError, debounceTime, map, mergeMap, share, shareReplay, startWith, take, tap} from 'rxjs/operators';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
@@ -14,6 +14,7 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {RateApp} from 'capacitor-rate-app';
+import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 
 interface SearchResults<T> {
     results?: T[];
@@ -50,10 +51,10 @@ export class SearchPageComponent implements OnInit {
 
     ngOnInit() {
         const matchSheetRegex = new RegExp('([a-zA-Z]+)([0-9]{2})\/([0-9]+)');
-
+        const useMemberLookup = this.store.selectSnapshot(RemoteSettingsState.useMemberLookup);
         this.searchControl = new FormControl();
         this.searchInput$ = this.searchControl.valueChanges.pipe(
-            debounceTime(1000),
+            debounceTime(300),
             tap((terms: string) => this.analyticsService.logEvent('search', {search_term: terms})),
             shareReplay(1),
             startWith('')
@@ -92,19 +93,25 @@ export class SearchPageComponent implements OnInit {
         );
 
         this.membersFound$ = this.searchInput$.pipe(
-            mergeMap(val =>
-                iif(
-                    () => !!(val?.length > 3 && !/\d/.test(val)),
-                    this.memberService.findAllMembers({
-                        nameSearch: val
-                    }).pipe(
-                        map((results) => ({isLoading: false, results})),
-                        startWith({isLoading: true})
-                    ),
-                    of({isLoading: false, results: []})
-                )
+            mergeMap(val => {
+                    console.log('useMemberLookup', useMemberLookup);
+                    return iif(
+                        () => !!(val?.length >= 3 && !/\d/.test(val)),
+                        (useMemberLookup ?
+                                this.memberService.findAllMembersLookup({query: val}) :
+                                this.memberService.findAllMembers({nameSearch: val})
+                        ).pipe(
+                            map((results) => ({isLoading: false, results})),
+                            startWith({isLoading: true})
+                        ),
+                        of({isLoading: false, results: []})
+                    );
+                }
             ),
             startWith({isLoading: false}),
+            catchError(() => {
+                return of({isLoading: false});
+            }),
             share()
         );
 

@@ -26,7 +26,9 @@ import {TabsNavigationService} from '../../core/services/navigation/tabs-navigat
 import {InAppBrowserService} from '../../core/services/browser/in-app-browser.service';
 import {RemoteSettingsState} from '../../core/store/remote-settings';
 import {InAppPurchasesState} from '../../core/store/in-app-purchases/in-app-purchases.state';
-import {PointsCalculatorEntry, PointsCalculatorState} from '../../core/store/points/points-calculator-state.service';
+import {PointsCalculatorState} from '../../core/store/points/points-calculator-state.service';
+import {IsProService} from '../../core/services/is-pro.service';
+import {DismissDashboardProPopup} from '../../core/store/in-app-purchases/in-app-purchases.actions';
 
 @Component({
     selector: 'beping-explore-container',
@@ -47,6 +49,7 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
     @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
     @Select(SettingsState.displayNumericRanking) displayNumericRanking$: Observable<boolean>;
     @Select(InAppPurchasesState.isPro) isPro$: Observable<boolean>;
+    @Select(InAppPurchasesState.showBePingProBanner) showProBanner$: Observable<boolean>;
     @Select(RemoteSettingsState.partnershipRotatio) partnershipRotatio$: Observable<boolean>;
     TABT_DATABASES = TABT_DATABASES;
 
@@ -64,7 +67,8 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
         private readonly analyticsService: AnalyticsService,
         private readonly platform: Platform,
         private readonly tabNavigator: TabsNavigationService,
-        private readonly inAppBrowser: InAppBrowserService
+        private readonly inAppBrowser: InAppBrowserService,
+        private readonly isProService: IsProService
     ) {
         super();
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
@@ -174,7 +178,7 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
         event.detail.complete();
         this.currentMemberEntry$.pipe(
             take(1),
-            switchMap((member) => this.store.dispatch(new UpdateMemberEntries(member.UniqueIndex)))
+            switchMap((member) => this.store.dispatch(new UpdateMemberEntries(member.UniqueIndex, false)))
         ).subscribe();
     }
 
@@ -182,4 +186,16 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
         this.tabNavigator.navigateTo('points-calculator');
     }
 
+    openPro() {
+        this.isProService.isPro$().subscribe((isPro: boolean) => {
+            if (isPro) {
+                this.analyticsService.logEvent('beping_pro_from_dashboard');
+            }
+        });
+    }
+
+    dismissPro() {
+        this.analyticsService.logEvent('beping_pro_dismiss_from_dashboard');
+        this.store.dispatch(new DismissDashboardProPopup());
+    }
 }

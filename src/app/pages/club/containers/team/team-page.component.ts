@@ -168,8 +168,8 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         this.calendar$
             .pipe(take(1))
             .subscribe((matches) => this.calendarService.checkPremiumAndAddTeamMatchEntries(matches, {
-                dialogMessageTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
-                dialogHeaderTranslationKey: 'CALENDAR.ADD_ALL_TEAM_MATCHES'
+                dialogHeaderTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
+                dialogMessageTranslationKey: 'CALENDAR.ADD_ALL_TEAM_MATCHES'
             }));
     }
 }

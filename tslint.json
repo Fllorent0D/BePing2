@@ -19,7 +19,7 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "beping",
       "camelCase"
     ],
     "component-selector": [

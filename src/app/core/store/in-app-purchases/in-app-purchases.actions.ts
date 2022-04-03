@@ -37,3 +37,10 @@ export class SetStoreReady {
     constructor(public ready: boolean) {
     }
 }
+
+export class DismissDashboardProPopup {
+    static readonly type = '[IAP] dismiss the popup';
+
+    constructor() {
+    }
+}

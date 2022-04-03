@@ -1,48 +1,39 @@
-Conditions Générales d’Utilisation de l'application mobile « BePing »
+# Définitions
+Vous : La personne qui avez téléchargé et utilisez l'application BePing.
+Nous : Moi, Florent Cardoen, le concepteur de l'application.
 
-L’application
-BePing
-(ci-après la « Platform »)
-Est un initiative de :
-Cardoen Florent
-E-mail: f.cardoen@me.com
-(ci-après « Cardoen Florent »)
+# Termes et conditions
+En téléchargeant ou en utilisant l'application, ces conditions s'appliqueront automatiquement à vous. Vous devez donc vous assurer de les lire attentivement avant d'utiliser l'application. Vous n'êtes pas autorisé à copier ou à modifier l'application, une partie de l'application ou nos marques de commerce de quelque manière que ce soit. Vous n'êtes pas autorisé à essayer d'extraire le code source de l'application. Vous ne devez pas non plus essayer de traduire l'application dans d'autres langues ou de créer des versions dérivées. L'application elle-même, ainsi que toutes les marques, droits d'auteur, droits de base de données et autres droits de propriété intellectuelle qui s'y rapportent, nous appartiennent toujours.
 
-Champ d'application
-Les présentes conditions générales d'utilisation (ci-après les "CGU") s'appliquent à toute visite ou utilisation de la Plateforme et de ses informations par un internaute (ci-après "Utilisateur").
-En visitant ou utilisant la Plateforme, l'Utilisateur reconnait avoir pris connaissance des présentes CGU et accepte expressément les droits et obligations qui y sont mentionnés.
-Il peut exceptionnellement être dérogé aux dispositions des CGU par un accord écrit. Ces dérogations peuvent consister en la modification, l'ajout ou la suppression des clauses auxquelles elles se rapportent et n'ont aucune incidence sur l'application des autres dispositions des CGU.
-Nous nous réservons le droit de modifier nos CGU à tout moment, sans notification préalable, mais nous nous engageons à appliquer les dispositions qui étaient en vigueur au moment où vous avez utilisé notre Plateforme.
+Nous nous engageons à ce que l'application soit la plus utile et efficace possible. Pour cette raison, nous nous réservons le droit d'apporter des modifications à l'application ou de facturer nos services, à tout moment et pour quelque raison que ce soit. Nous ne vous facturerons jamais l'application ou ses services sans vous indiquer très clairement ce pour quoi vous payez.
 
-Plateforme
-a. Accès et navigation
-Nous prenons toutes les mesures raisonnables et nécessaires pour assurer le bon fonctionnement, la sécurité et l'accessibilité de notre Plateforme. Toutefois, nous ne pouvons pas offrir de garantie d'opérabilité absolue et il faut dès lors considérer nos actions comme étant couvertes par une obligation de moyen.
-Toute utilisation de la Plateforme se fait toujours aux propres risques de l'Utilisateur. Ainsi, nous ne sommes pas responsables des dommages pouvant résulter de possibles dysfonctionnements, interruptions, défauts ou encore d'éléments nuisibles présents sur la Plateforme.
-Nous nous réservons le droit de restreindre l'accès à la Plateforme ou d'interrompre son fonctionnement à tout moment, sans obligation de notification préalable.
-b. Contenu
-Nous prenons toutes les mesures possibles pour maintenir notre Plateforme aussi complète, précise et à jour que possible, même lorsque les informations présentes sur celle-ci sont fournies par des tiers. Nous nous réservons le droit de modifier, compléter ou supprimer à tout moment la Plateforme et son contenu, sans que sa responsabilité ne puisse être engagée.
-Florent Cardoen ne peut pas offrir de garantie absolue concernant la qualité de l'information présente sur la Plateforme. Il est donc possible que cette information ne soit pas toujours complète, exacte, suffisamment précise ou à jour. Par conséquent, Florent Cardoen ne pourra pas être tenue responsable des dommages, directs ou indirects, que l'Utilisateur subirait de par l'information présente sur la Plateforme.
-Tout téléchargement à partir de la Plateforme a toujours lieu aux risques de l'Utilisateur. Florent Cardoen ne pourra pas être tenue responsable des éventuels dommages, directs ou indirects, découlant de ces téléchargements, tels qu'une perte de données ou un endommagement du système informatique de l'Utilisateur, qui relèvent entièrement et exclusivement de la responsabilité de ce dernier.
-c. Services réservés aux Utilisateurs inscrits
-1) Connexion
-L'accès à certains services est conditionné par la connexion de l'Utilisateur sur le site de résultats de l’Aile Francophone de Tennis de Table ou sur le site de résultats de Vlaamse Tafeltennisliga.
+L'application BePing stocke et traite les données personnelles que vous nous avez fournies, afin de fournir notre service. Il est de votre responsabilité de sécuriser votre téléphone et l'accès à l'application. Nous vous recommandons donc de ne pas jailbreaker ou rooter votre téléphone, c'est-à-dire à supprimer les restrictions et limitations logicielles imposées par le système d'exploitation officiel de votre appareil. Cette manœuvre pourrait rendre votre téléphone vulnérable aux logiciels virus/programmes malveillants, pourrait compromettre les fonctionnalités de sécurité de votre téléphone et pourrait avoir pour conséquence que l'application BePing ne fonctionne pas correctement ou pas du tout.
 
-Liens vers d'autres sites internet
-La Plateforme pourrait contenir des liens ou hyperliens renvoyant vers des sites internet externes. De tels liens ne signifient pas de manière automatique qu'il existe une relation entre Florent Cardoen et le site internet externe ou même qu'un accord implicite existe avec le contenu de ces sites externes.
-Florent Cardoen n'exerce aucun contrôle sur les sites internet externes. Nous ne sommes donc pas responsables du fonctionnement sûr et correct des hyperliens et de leur destination finale. Dès l'instant où l'Utilisateur clique sur l'hyperlien, il quitte la Plateforme. Nous ne pouvons dès lors pas être tenus responsables en cas de dommage ultérieur.
+L'application utilise des services tiers qui déclarent leurs propres conditions générales.
 
-Propriété intellectuelle
-La structuration de la Plateforme, mais aussi les textes, graphiques, images, photographies, sons, vidéos, bases de données, applications informatiques, etc. qui le composent ou qui sont accessibles via la Plateforme sont la propriété de l'éditeur et sont protégés comme tels par les lois en vigueur au titre de la propriété intellectuelle.
-Toute représentation, reproduction, adaptation ou exploitation partielle ou totale des contenus, marques déposées et services proposés par la Plateforme, par quelque procédé que ce soit, sans l'autorisation préalable, expresse et écrite de l'éditeur, est strictement interdite, à l'exception des éléments expressément désignés comme libres de droits sur la Plateforme.
-L'Utilisateur de la Plateforme se voit octroyer un droit limité d'accès, d'utilisation et d'affichage de la Plateforme et de son contenu. Ce droit est accordé à titre non exclusif, non transférable et ne peut être utilisé que moyennant un usage personnel et non commercial. Sauf accord préalable et écrit, les Utilisateurs ne sont pas autorisés à modifier, reproduire, traduire, distribuer, vendre, communiquer au public, en tout ou en partie, les éléments protégés.
-Il est interdit à l'Utilisateur d'introduire des données sur la Plateforme qui modifieraient ou qui seraient susceptibles d'en modifier le contenu ou l'apparence.
+Liens vers les conditions générales des fournisseurs de services tiers utilisés par l'application :
+	•	TabT
+	•	Services Google Play
+	•	Google Analytics pour Firebase
+	•	Firebase Crashlytics
+# Conditions d'abonnement BePing Pro</h2>
+L'abonnement ne peut être utilisé qu'avec un seul compte Apple et ne peut pas être transféré. Cet achat intégré ne peut être utilisé que pour un seul compte.
+Vous pouvez utiliser un nombre illimité d'appareils iOS ou Mac avec votre compte. L'abonnement se renouvelle automatiquement chaque année sauf annulation.
+Vous pouvez accéder aux fonctionnalités pro : tête à tête et connexion au calendrier.
+Je m'efforce de fournir un accès continu aux données de tennis de table des entités officielles. Je ne peux pas garantir sa disponibilité en raison d'éventuelles limites ou restrictions imposées par des tiers.
+Vous devez savoir qu'il y a certaines choses dont nous ne sommes pas responsables. Certaines fonctions de l'application nécessitent que l'application dispose d'une connexion internet active. La connexion peut être de type Wi-Fi ou fournie par votre fournisseur de réseau mobile, mais nous ne pouvons être tenus responsable du fait que l'application ne fonctionne pas à pleine capacité si vous n'avez pas accès au Wi-Fi ou que vous n'ayez plus de données mobile dans votre forfait.
 
-Protection des données personnelles
-Les données personnelles fournies par l'Utilisateur lors de sa visite ou de l'utilisation de la Plateforme sont collectées et traitées par Florent Cardoen exclusivement à des fins internes. Florent Cardoen assure à ses utilisateurs qu'elle attache la plus grande importance à la protection de leur vie privée et de leurs données personnelles, et qu'elle s'engage toujours à communiquer de manière claire et transparente sur ce point.
-Florent Cardoen s'engage à respecter la législation applicable en la matière, à savoir la Loi du 8 décembre 1992 relative à la protection de la vie privée à l'égard des traitements de données à caractère personnel ainsi que le Règlement européen du 27 avril 2016 relatif à la protection des personnes physiques à l'égard du traitement des données à caractère personnel et à la libre circulation de ces données.
-Les données personnelles de l'Utilisateur sont traitées conformément à la Charte de Vie Privée disponible sur la Plateforme.
+Si vous utilisez l'application en dehors d'une zone Wi-Fi, vous devez vous rappeler que les conditions de votre contrat avec votre fournisseur de réseau mobile s'appliqueront toujours. En conséquence, votre opérateur de téléphonie mobile peut vous facturer le coût des données pendant la durée de la connexion lors de l'accès à l'application, ou d'autres frais de tiers. En utilisant l'application, vous acceptez la responsabilité de ces frais, y compris les frais de données en itinérance si vous utilisez l'application en dehors de votre territoire d'origine (région ou pays) sans désactiver l'itinérance des données. Si vous n'êtes pas le payeur de la facture de l'appareil sur lequel vous utilisez l'application, sachez que nous supposons que vous avez reçu l'autorisation du payeur de la facture pour utiliser l'application.
 
-Dispositions générales
-Florent Cardoen se réserve la possibilité de modifier, étendre, supprimer, limiter ou interrompre la Plateforme et les services associés à tout moment, sans notification préalable, et sans engager sa responsabilité.
-En cas de violation des CGU par l'Utilisateur, Florent Cardoen se réserve le droit de prendre des mesures de sanction et de réparation adaptées. Florent Cardoen se réserve notamment le droit de refuser à l'Utilisateur tout accès à la Plateforme ou à nos services temporairement ou définitivement. Ces mesures peuvent être prises sans indication de motif et sans préavis. Elles ne peuvent pas engager la responsabilité de Florent Cardoen ou donner lieu à une quelconque forme d'indemnisation.
-L'illégalité ou la nullité totale ou partielle d'une disposition de nos CGU n'aura aucun impact sur la validité et l'application des autres dispositions. Nous disposons, dans un tel cas, du droit de remplacer la disposition par une autre disposition valable et de portée similaire.
+Dans le même ordre d'idées, nous ne pouvons pas toujours assumer la responsabilité de la façon dont vous utilisez l'application, c'est-à-dire que vous devez vous assurer que votre appareil reste chargé. Nous déclinons toute responsabilité si votre appareil est à court de batterie et que vous ne puissiez pas l'allumer pour profiter du service.
+
+En ce qui concerne notre responsabilité lorsque vous utilisez l'application, il est important de garder à l'esprit que, même si nous nous efforçons de garantir que celle-ci soit mise à jour et correcte à tout moment, nous comptons sur des tiers pour pouvoir vous fournir les informations. Nous n'acceptons aucune responsabilité pour toute perte, directe ou indirecte, que vous pourriez subir en vous fiant entièrement aux fonctionnalités de l'application.
+
+Il peut arriver que l'application doive être mise à jour à un moment ou l'autre. L'application étant actuellement disponible sur Android et iOS, les exigences pour les deux systèmes – ainsi que pour tous les systèmes supplémentaires auxquels nous décidons d'étendre la disponibilité de l'application - peuvent changer. Dans ce cas, il vous appartiendra de télécharger les mises à jour si vous souhaitez continuer à utiliser l'application. Nous ne pouvons pas promettre de toujours mettre à jour l'application de sorte qu'elle soit pertinente pour vous et/ou fonctionne avec la version Android et iOS que vous avez installée sur votre appareil. Cependant, vous vous engagez à toujours accepter les mises à jour de l'application lorsque celles-ci vous sont proposées. Nous pouvons également décider d'arrêter de fournir l'application et de mettre fin à son utilisation à tout moment sans vous donner un préavis de résiliation. Sauf indication contraire de notre part, en cas de résiliation, (a) les droits et licences qui vous sont accordés dans les présentes conditions prendront fin ; (b) vous devez cesser d'utiliser l'application et, si nécessaire, la supprimer de votre appareil.
+
+Modifications apportées à ces conditions générales
+
+Nous pouvons mettre à jour nos conditions générales de temps à autre. Dès lors, il vous est conseillé de consulter cette page périodiquement pour vous tenir au courant des changements éventuels. Nous vous informerons de tout changement en publiant les nouvelles conditions générales sur cette page. Ces termes et conditions sont en vigueur à partir du 05/03/12
+
+# Nous contacter
+Si vous avez des questions ou des suggestions concernant nos conditions générales, n'hésitez pas à nous contacter via f.cardoen@me.com.

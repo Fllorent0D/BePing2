@@ -5,8 +5,8 @@
                 <ion-text><p class="ion-no-margin ">{{victories}} ({{victoriesPct}}%)</p></ion-text>
                 <ion-text color="grey"><p class="ion-no-margin">{{'COMMON.WINS'|translate}}</p></ion-text>
             </ion-col>
-            <ion-col [sizeXl]="2" size="6">
-                <beping-victory-chart [bluePct]="victoriesPct" [redPct]="defeatsPct" [subtitle]="'matches'"
+            <ion-col [sizeXl]="2" size="6" class="ion-text-center">
+                <beping-victory-chart [bluePct]="victoriesPct" [redPct]="defeatsPct" [subtitle]="'matchs'"
                                       [title]="total.toString()"></beping-victory-chart>
             </ion-col>
             <ion-col [hidden]="defeats === 0" [sizeXl]="5" class="ion-text-center" size="3">

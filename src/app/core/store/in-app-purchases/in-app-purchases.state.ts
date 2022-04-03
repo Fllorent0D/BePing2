@@ -1,22 +1,31 @@
-import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {InAppPurchase2} from '@ionic-native/in-app-purchase-2/ngx';
-import {InAppPurchaseManageSubscriptions, InAppPurchaseOrder, InAppPurchaseRestore, IsPro} from './in-app-purchases.actions';
+import {
+    DismissDashboardProPopup,
+    InAppPurchaseManageSubscriptions,
+    InAppPurchaseOrder,
+    InAppPurchaseRestore,
+    IsPro
+} from './in-app-purchases.actions';
+import {sub} from 'date-fns';
 
 export interface InAppPurchaseStateModel {
     isPro: boolean;
     expiryDate: Date | undefined;
+    dashboardPopupDismissedDate: number | undefined;
 }
 
 @State<InAppPurchaseStateModel>({
     name: 'inapppurchase',
     defaults: {
         isPro: false,
-        expiryDate: null
+        expiryDate: null,
+        dashboardPopupDismissedDate: null,
     }
 })
 @Injectable()
-export class InAppPurchasesState  {
+export class InAppPurchasesState {
 
     @Selector([InAppPurchasesState])
     static isPro(state: InAppPurchaseStateModel): boolean {
@@ -28,6 +37,13 @@ export class InAppPurchasesState  {
         return state.expiryDate;
     }
 
+    @Selector([InAppPurchasesState])
+    static showBePingProBanner(state: InAppPurchaseStateModel): boolean {
+        const timeThreshold = sub(Date.now(), {weeks: 2});
+
+        return !state.isPro && (!state.dashboardPopupDismissedDate || state.dashboardPopupDismissedDate < timeThreshold.getTime());
+    }
+
     constructor(
         private inAppPurchaseStore: InAppPurchase2
     ) {
@@ -36,6 +52,13 @@ export class InAppPurchasesState  {
     @Action([InAppPurchaseOrder])
     order(_, action: InAppPurchaseOrder) {
         this.inAppPurchaseStore.order(action.productId);
+    }
+
+    @Action([DismissDashboardProPopup])
+    dismissDashboardPopup(ctx: StateContext<InAppPurchaseStateModel>) {
+        return ctx.patchState({
+            dashboardPopupDismissedDate: new Date().getTime()
+        });
     }
 
     @Action([IsPro])

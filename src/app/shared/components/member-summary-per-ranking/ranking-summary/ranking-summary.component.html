@@ -1,22 +1,22 @@
 <beping-card [marging]="false" [margingVertical]="false">
     <ion-grid>
         <ion-row>
-            <ion-col>
+            <ion-col class="ion-text-end">
                 <beping-victory-chart [title]="ranking" bluePct="{{victoriesPct}}"
                                       redPct="{{defeatsPct}}"></beping-victory-chart>
             </ion-col>
-            <ion-col>
+            <ion-col class="ion-align-self-center">
                 <ion-grid>
                     <ion-row>
                         <ion-col>
-                            <ion-text>{{victories}} ({{victoriesPct}}%)</ion-text>
+                            <ion-text><b>{{victories}} ({{victoriesPct}}%)</b></ion-text>
                             <br>
                             <ion-text color="grey">{{'COMMON.WINS'|translate}}</ion-text>
                         </ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <ion-text>{{defeats}} ({{defeatsPct}}%)</ion-text>
+                            <ion-text><b>{{defeats}} ({{defeatsPct}}%)</b></ion-text>
                             <br>
                             <ion-text color="grey">{{'COMMON.DEFEATS'|translate}}</ion-text>
                         </ion-col>

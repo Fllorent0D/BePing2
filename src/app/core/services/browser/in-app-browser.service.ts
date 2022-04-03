@@ -77,8 +77,12 @@ export class InAppBrowserService {
         await this.openInAppBrowser(url.href);
     }
 
-    async openRotatio(){
-        await this.openInAppBrowser('https://www.rotatio.be');
+    async openRotatio() {
+        await this.openInAppBrowser(environment.rotatioUrl);
+    }
+
+    async openBePingStatus() {
+        await this.openInAppBrowser(environment.bepingStatus);
     }
 
 }

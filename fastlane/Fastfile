@@ -29,7 +29,7 @@ platform :ios do
     lane :build_ios do
         build_ionic_prod
         match(type: "appstore")
-        sh("cd ../ios/App && pod install")
+        #sh("cd ../ios/App && arch -x86_64  pod install")
         build_app(
             scheme: 'App',
             workspace: './ios/App/App.xcworkspace',
@@ -126,13 +126,27 @@ platform :android do
         )
     end
 
-    desc 'Ship to Playstore Alpha track.'
+    desc 'Ship to Playstore beta track.'
     lane :beta do
         align_versioning_and_bump
         build_android
 
         upload_to_play_store(
               track: 'beta',
+              package_name: 'be.floca.beping',
+              track_promote_to: 'beta',
+              json_key_data: ENV["PLAYSTORE_JSON_KEY_DATA"],
+              apk: './android/app/build/outputs/apk/release/app-release.apk'
+        )
+    end
+
+    desc 'Ship to Playstore Internal track.'
+    lane :internal do
+        align_versioning_and_bump
+        build_android
+
+        upload_to_play_store(
+              track: 'internal',
               package_name: 'be.floca.beping',
               track_promote_to: 'alpha',
               json_key_data: ENV["PLAYSTORE_JSON_KEY_DATA"],

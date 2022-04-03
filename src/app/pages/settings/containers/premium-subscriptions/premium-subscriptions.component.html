@@ -1,9 +1,8 @@
-<ion-header [translucent]="true" collapse="fade">
-    <ion-toolbar>
+<ion-header class="ion-no-border">
+    <ion-toolbar style="--background: transparent" #toolbar>
         <ion-buttons slot="start" *ngIf="!isModal">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>{{'SETTINGS.PREMIUM_SUBSCRIPTION'|translate}}</ion-title>
         <ion-buttons slot="end" *ngIf="isModal">
             <ion-button (click)="closeModal()">
                 <ion-icon icon="close-outline"></ion-icon>
@@ -13,7 +12,7 @@
 
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [scrollEvents]="true" [fullscreen]="true" bepingFadeHeader [toolbar]="toolbar" >
     <ng-container *ngIf="isPro$|async; else notPro">
         <ion-list>
             <ion-item>
@@ -38,50 +37,71 @@
     </ng-container>
     <ng-template #notPro>
         <div class="ion-padding">
-            <h1 class="ion-no-margin-vertical">Prix libre</h1>
-            <ion-text color="grey"><h5 class="ion-no-margin">Sans engagement</h5></ion-text>
+            <h1 class="ion-no-margin ion-margin-bottom">{{'BEPING_PRO.BECOME_PRO_AND_SUPPORT'|translate}}</h1>
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="2" class="ion-text-center">
+                        <ion-icon name="calendar-number-outline" size="large" color="grey" class="ion-padding-top"></ion-icon>
+                    </ion-col>
+                    <ion-col size="10">
+                        <h5>{{'BEPING_PRO.FEATURES.CONNECT_TO_CALENDAR'|translate}}</h5>
+                        <p><ion-text color="grey">{{'BEPING_PRO.FEATURES.CONNECT_TO_CALENDAR_TEXT'|translate}}</ion-text></p>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size="2" class="ion-text-center">
+                        <ion-icon name="notifications-outline" size="large" color="grey"
+                                  class="ion-padding-top"></ion-icon>
+                    </ion-col>
+                    <ion-col size="10">
+                        <h5>{{'BEPING_PRO.FEATURES.NOTIFICATIONS'|translate}} <ion-badge>{{'COMMON.SOON'|translate}}</ion-badge></h5>
+                        <p><ion-text color="grey">{{'BEPING_PRO.FEATURES.NOTIFICATIONS_TEXT'|translate}}</ion-text></p>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col size="2" class="ion-text-center">
+                        <ion-icon name="people-outline" size="large" color="grey"
+                                  class="ion-padding-top"></ion-icon>
+                    </ion-col>
+                    <ion-col size="10">
+                        <h5>{{'BEPING_PRO.FEATURES.FACE_TO_FACE'|translate}}</h5>
+                        <p><ion-text color="grey">{{'BEPING_PRO.FEATURES.FACE_TO_FACE_TEXT'|translate}}</ion-text></p>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+
+            <h1 class="ion-no-margin-vertical">{{'BEPING_PRO.PRICE_FREE'|translate}}</h1>
+            <ion-text color="grey"><h5 class="ion-no-margin">{{'BEPING_PRO.NO_ENGAGEMENT'|translate}}</h5></ion-text>
+
             <div style="padding: 0 20% 0 20%; text-align: center; display: flex; flex-direction: column;">
-                <img src="assets/imgs/avatar{{priceSlider.value}}.png" alt="" style="max-width: 140px; align-self: center">
+                <img src="assets/imgs/avatar{{priceSlider.value}}.png" alt=""
+                     style="max-width: 140px; align-self: center">
                 <ion-text color="primary">
                     <h3 *ngIf="currentProduct$|async as iap">{{iap.price}}/{{iap.billingPeriodUnit|lowercase}}</h3>
                 </ion-text>
-                <ion-text color="grey">Votre contribution aide à faire grandir le projet</ion-text>
+                <ion-text color="grey" class="ion-padding-top">{{'BEPING_PRO.YOUR_CONTRIBUTION_HELP'|translate}}</ion-text>
                 <ion-range min="1" max="3" color="primary" [snaps]="true" [formControl]="priceSlider"
                            [ticks]="false"></ion-range>
             </div>
-            <ion-button expand="block" [disabled]="!(currentProduct$|async)?.canPurchase" (click)="order()">Devenir pro</ion-button>
+            <ion-button expand="block" [disabled]="!(currentProduct$|async)?.canPurchase" (click)="order()">
+                {{'BEPING_PRO.BECOME_PRO'|translate}}
+            </ion-button>
+            <div class="ion-text-center">
+                <ion-button class="ion-margin-top" size="small" fill="outline" shape="round" (click)="restore()">
+                    {{'BEPING_PRO.RESTORE'|translate}}
+                </ion-button>
+                <div class="ion-margin-top"><ion-text color="primary" (click)="goToTermsOfUse()">{{'SETTINGS.TERMS_AND_CONDITIONS'|translate}}</ion-text> {{'COMMON.AND'|translate}} <ion-text color="primary" (click)="goToPrivacy()">{{'SETTINGS.PRIVACY_POLICY'|translate}}</ion-text></div>
+            </div>
+
         </div>
     </ng-template>
 
     <div class="ion-padding">
-        <ion-text color="grey">
-            <h2>Pourquoi un abonnement</h2>
-            <p>Depuis plus de 4 ans, j’ai mis à jour BePing plus
-                de 20 fois et je souhaite vraiment continuer à
-                améliorer de plus en plus l'application.</p>
-            <p>BePing n'est pas uniquement une application. Elle requiert
-                des serveurs de traitement des informations pour
-                le traitement des statistiques, l'envoi des notifications
-                Push et ceux-ci ont besoin d'être maintenu
-                continuellement.</p>
-            <p>Au lieu de vous faire payer les futures mises à jour
-                comme d'autres développeurs ce qui
-                désavantageraient nos clients existants.
-                L'abonnement annuel vous donnera accès aux
-                dernières fonctionnalités, améliorations ainsi qu'à
-                de meilleure performance tout au long de l'année.</p>
-            <h2>Conditions de l'abonnement</h2>
-            <ol>
-                <li>L'inscription ne pourra pas être transféré à un
-                    autre compte. Cette achat complémentaire dans
-                    l'application est valable uniquement pour un seul
-                    compte.
-                </li>
-                <li>L'abonnement se renouvelle automatique
-                    chaque année, à moins de l'avoir annulé.
-                </li>
-            </ol>
-        </ion-text>
+        <h1>{{'BEPING_PRO.WHY_SUBSCRIPTION'|translate}}</h1>
+        <p style="white-space: pre-line">{{'BEPING_PRO.WHY_SUBSCRIPTION_TEXT'|translate}}</p>
 
     </div>
 

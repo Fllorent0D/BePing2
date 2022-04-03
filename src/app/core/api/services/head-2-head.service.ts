@@ -1,14 +1,15 @@
 /* tslint:disable */
 /* eslint-disable */
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {BaseService} from '../base-service';
-import {ApiConfiguration} from '../api-configuration';
-import {StrictHttpResponse} from '../strict-http-response';
-import {RequestBuilder} from '../request-builder';
-import {Observable} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { BaseService } from '../base-service';
+import { ApiConfiguration } from '../api-configuration';
+import { StrictHttpResponse } from '../strict-http-response';
+import { RequestBuilder } from '../request-builder';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
+import { Head2HeadData } from '../models/head-2-head-data';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,7 @@ export class Head2HeadService extends BaseService {
   findHead2HeadMatches$Response(params: {
     playerUniqueIndex: number;
     opponentUniqueIndex: number;
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<Head2HeadData>> {
 
     const rb = new RequestBuilder(this.rootUrl, Head2HeadService.FindHead2HeadMatchesPath, 'get');
     if (params) {
@@ -44,12 +45,12 @@ export class Head2HeadService extends BaseService {
     }
 
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Head2HeadData>;
       })
     );
   }
@@ -63,10 +64,10 @@ export class Head2HeadService extends BaseService {
   findHead2HeadMatches(params: {
     playerUniqueIndex: number;
     opponentUniqueIndex: number;
-  }): Observable<void> {
+  }): Observable<Head2HeadData> {
 
     return this.findHead2HeadMatches$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<Head2HeadData>) => r.body as Head2HeadData)
     );
   }
 

@@ -1,7 +1,1 @@
-<cdk-virtual-scroll-viewport
-        itemSize="90"
-        maxBufferPx="1350"
-        minBufferPx="900">
-    <beping-team-match-result *cdkVirtualFor="let match of matches" [match]="match">
-    </beping-team-match-result>
-</cdk-virtual-scroll-viewport>
+<beping-team-match-result *ngFor="let match of matches" [match]="match"></beping-team-match-result>

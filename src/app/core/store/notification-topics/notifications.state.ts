@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Action, NgxsOnInit, State, StateContext} from '@ngxs/store';
+import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {NotificationsService} from '../../services/firebase/notifications.service';
 import {
     PermissionStateChanged,
@@ -9,9 +9,12 @@ import {
     SubscribeToMember,
     SubscribeToTeam,
     SubscribeToTopic,
-    SubscriptionToTopicSuccessful
+    SubscriptionToTopicSuccessful,
+    UnsubscribeToTopic,
+    UnsubscriptionToTopicSuccessful
 } from './notifications.actions';
 import {PermissionState} from '@capacitor/core';
+import {CurrentSeasonChanged} from '../season';
 
 export interface NotificationsStateModel {
     permission: PermissionState | null;
@@ -27,6 +30,11 @@ export interface NotificationsStateModel {
 })
 @Injectable({providedIn: 'root'})
 export class NotificationsState implements NgxsOnInit {
+
+    @Selector([NotificationsState])
+    static topics(state: NotificationsStateModel): string[] {
+        return state.topics;
+    }
 
     constructor(
         private readonly notificationsService: NotificationsService
@@ -69,27 +77,53 @@ export class NotificationsState implements NgxsOnInit {
 
     @Action([SubscribeToMember])
     subscribeToMember(ctx: StateContext<NotificationsStateModel>, {memberEntry}: SubscribeToMember) {
-        ctx.dispatch(new SubscribeToTopic(`member-${memberEntry.UniqueIndex}`));
+        ctx.dispatch(new SubscribeToTopic(NotificationsService.generateTopicForMember(memberEntry.UniqueIndex)));
     }
 
     @Action([SubscribeToTeam])
     subscribeToTeam(ctx: StateContext<NotificationsStateModel>, {teamEntry}: SubscribeToTeam) {
-        ctx.dispatch(new SubscribeToTopic(`team-${teamEntry.TeamId}`));
+        ctx.dispatch(new SubscribeToTopic(NotificationsService.generateTopicForTeam(teamEntry.TeamId)));
     }
 
     @Action([SubscribeToClub])
     subscribeToClub(ctx: StateContext<NotificationsStateModel>, {clubEntry}: SubscribeToClub) {
-        ctx.dispatch(new SubscribeToTopic(`club-${clubEntry.UniqueIndex}`));
+        ctx.dispatch(new SubscribeToTopic(NotificationsService.generateTopicForClub(clubEntry.UniqueIndex)));
     }
 
     @Action([SubscribeToDivision])
     subscribeToDivision(ctx: StateContext<NotificationsStateModel>, {divisionEntry}: SubscribeToDivision) {
-        ctx.dispatch(new SubscribeToTopic(`division-${divisionEntry.DivisionId}`));
+        ctx.dispatch(new SubscribeToTopic(NotificationsService.generateTopicForDivision(divisionEntry.DivisionId)));
     }
 
     @Action([SubscribeToMatch])
     subscribeToMatch(ctx: StateContext<NotificationsStateModel>, {teamMatchesEntry}: SubscribeToMatch) {
-        ctx.dispatch(new SubscribeToTopic(`match-${teamMatchesEntry.MatchId}`));
+        ctx.dispatch(new SubscribeToTopic(NotificationsService.generateTopicForMatch(teamMatchesEntry.MatchUniqueId)));
+    }
+
+    @Action([UnsubscribeToTopic])
+    async unsubscribeToTopic(ctx: StateContext<NotificationsStateModel>, {topic}: UnsubscribeToTopic) {
+        const response = await this.notificationsService.unsubscribeToTopic(topic);
+        return ctx.dispatch(new UnsubscriptionToTopicSuccessful(topic, response));
+    }
+
+    @Action([UnsubscriptionToTopicSuccessful])
+    unsubscribeToTopicSuccessful(ctx: StateContext<NotificationsStateModel>, {topic, message}: UnsubscriptionToTopicSuccessful) {
+        const state = ctx.getState();
+        return ctx.patchState({
+            topics: state.topics.filter(t => t !== topic)
+        });
+    }
+
+    @Action([CurrentSeasonChanged])
+    resetOnNewSeason(ctx: StateContext<NotificationsStateModel>) {
+        const actions = [];
+        const subscriptions = ctx.getState().topics;
+
+        for (const topic of subscriptions) {
+            actions.push(new UnsubscribeToTopic(topic));
+        }
+
+        ctx.dispatch(actions);
     }
 
 }

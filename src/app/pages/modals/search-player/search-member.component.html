@@ -21,14 +21,13 @@
 
 </ion-header>
 
-<ion-content fullscreen="true">
+<ion-content>
     <div [hidden]="loading">
         <ion-item (click)="playerClicked(member)" *ngFor="let member of members$|async">
             <ion-label>
                 {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
             </ion-label>
-            <ion-label slot="end" *ngIf="showNumericRanking">{{belRanking(member)}} points</ion-label>
-            <ion-label slot="end" *ngIf="!showNumericRanking">{{member.Ranking}}</ion-label>
+            <ion-label slot="end">{{member.Ranking}}</ion-label>
         </ion-item>
     </div>
 

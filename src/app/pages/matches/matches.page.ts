@@ -6,6 +6,7 @@ import {Select} from '@ngxs/store';
 import {map} from 'rxjs/operators';
 import {UserState} from '../../core/store/user/user.state';
 import {ClubEntry} from '../../core/api/models/club-entry';
+import {NotificationsState} from '../../core/store/notification-topics/notifications.state';
 
 @Component({
     selector: 'beping-matches',
@@ -20,6 +21,8 @@ export class MatchesPage implements OnInit {
     @Select(FavoritesState.favoriteTeams) favoritesTeam: Observable<FavoriteItem<string>[]>;
 
     @Select(UserState.getMemberClub) memberClub: Observable<ClubEntry | void>;
+
+    @Select(NotificationsState.topics) topics$: Observable<string[]>;
     hasFavorites$: Observable<boolean>;
 
     constructor(
@@ -31,9 +34,14 @@ export class MatchesPage implements OnInit {
         this.hasFavorites$ = combineLatest([
             this.favoritesMember,
             this.favoritesDivision,
-            this.favoritesClub
+            this.favoritesClub,
+            this.favoritesTeam
         ]).pipe(
-            map(([members, division, clubs]) => members.length > 0 || division.length > 0 || clubs.length > 0)
+            map(([
+                     members,
+                     division,
+                     clubs,
+                     teams]) => members.length > 0 || division.length > 0 || clubs.length > 0 || teams.length > 0)
         );
     }
 

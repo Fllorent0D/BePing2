@@ -10,6 +10,7 @@ export const environment = {
         basePath: '/static/',
         registerRedirect: 'redirect-register.html'
     },
+    bepingStatus: 'http://status.beping.be',
     tabtLinks: {
         aftt: {
             domain: 'resultats.aftt.be',
@@ -23,6 +24,7 @@ export const environment = {
             resetPassword: 'https://auth.vttl.be/mail.pl'
         }
     },
+    rotatioUrl: 'https://www.rotatio.be',
     firebaseConfig: {
         apiKey: 'putakeyhere',
         authDomain: 'beping-196714.firebaseapp.com',
