@@ -100,8 +100,7 @@
             "production": {
               "browserTarget": "app:build:production"
             },
-            "ci": {
-            },
+            "ci": {},
             "hmr": {
               "hmr": true,
               "browserTarget": "app:build:hmr"
@@ -197,12 +196,21 @@
             "watch": true,
             "headless": false
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "defaultCollection": "@datorama/akita",
+    "defaultCollection": "@angular-eslint/schematics",
     "analytics": false
   },
   "schematics": {

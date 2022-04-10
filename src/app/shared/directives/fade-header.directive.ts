@@ -6,7 +6,7 @@ import {DomController} from '@ionic/angular';
 })
 export class FadeHeaderDirective {
 
-    @Input('toolbar') toolbar: any;
+    @Input() toolbar: any;
     private toolbarHeight = 44;
 
     constructor(
