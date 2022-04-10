@@ -18,6 +18,7 @@ import {CrashlyticsService} from './core/services/crashlytics.service';
 import {InAppPurchase2} from '@ionic-native/in-app-purchase-2/ngx';
 import {InAppPurchasesService} from './core/services/in-app-purchases.service';
 import {Device} from '@capacitor/device';
+import {AppStateService} from './core/services/app-state.service';
 
 registerLocaleData(localFR);
 registerLocaleData(localNL);
@@ -44,19 +45,21 @@ registerLocaleData(localNL);
             useFactory: (
                 analyticsService: AnalyticsService,
                 crashlytics: CrashlyticsService,
-                iAPService: InAppPurchasesService
+                iAPService: InAppPurchasesService,
+                appState: AppStateService
             ) => async () => {
                 const deviceInfo = await Device.getInfo();
                 const initTasks = [
                     analyticsService.initFb(),
                     crashlytics.init(),
+                    appState.init()
                 ];
                 if (deviceInfo.platform !== 'web') {
                     initTasks.push(iAPService.init());
                 }
                 await Promise.all(initTasks);
             },
-            deps: [AnalyticsService, CrashlyticsService, InAppPurchasesService],
+            deps: [AnalyticsService, CrashlyticsService, InAppPurchasesService, AppStateService],
             multi: true
         },
         InAppPurchase2,

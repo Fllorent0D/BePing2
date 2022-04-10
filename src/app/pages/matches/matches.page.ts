@@ -7,6 +7,9 @@ import {map} from 'rxjs/operators';
 import {UserState} from '../../core/store/user/user.state';
 import {ClubEntry} from '../../core/api/models/club-entry';
 import {NotificationsState} from '../../core/store/notification-topics/notifications.state';
+import {IonRouterOutlet, ModalController} from '@ionic/angular';
+import {NotificationsComponent} from '../modals/notifications/notifications.component';
+import {ModalBaseComponent} from '../modals/modal-base/modal-base.component';
 
 @Component({
     selector: 'beping-matches',
@@ -27,6 +30,8 @@ export class MatchesPage implements OnInit {
 
     constructor(
         private readonly tabsNavigationService: TabsNavigationService,
+        private readonly modalCtrl: ModalController,
+        private readonly routerOutlet: IonRouterOutlet
     ) {
     }
 
@@ -49,4 +54,15 @@ export class MatchesPage implements OnInit {
         this.tabsNavigationService.navigateTo(uri);
     }
 
+    async openNotificationsModal() {
+        const modal = await this.modalCtrl.create({
+            component: ModalBaseComponent,
+            componentProps: {
+                rootPage: NotificationsComponent
+            },
+            presentingElement: this.routerOutlet.nativeEl,
+            swipeToClose: true
+        });
+        modal.present();
+    }
 }

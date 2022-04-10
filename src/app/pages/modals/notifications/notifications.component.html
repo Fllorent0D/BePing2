@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Notifications</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">
+                <ion-icon icon="close-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item class="ion-color-grey">
+        <p>
+            Recevez des notifications avec les résultats de vos clubs, équipes ou divisions préférés
+        </p>
+    </ion-item>
+    <ng-container *ngIf="topics$ | async as topics">
+        <ng-container *ngIf="clubsTopics$ | async as clubs">
+            <ion-list *ngIf="clubs.length !== 0">
+                <ion-list-header>
+                    <ion-label>
+                        {{'COMMON.CLUBS'|translate}}
+                    </ion-label>
+                </ion-list-header>
+                <beping-notification-item
+                        *ngFor="let club of clubs"
+                        [label]="club.note"
+                        [topic]="club.topic"
+                ></beping-notification-item>
+            </ion-list>
+
+        </ng-container>
+        <ng-container *ngIf="divisionsTopics$ | async as divisions">
+            <ion-list *ngIf="divisions.length !== 0">
+                <ion-list-header>
+                    <ion-label>
+                        {{'COMMON.DIVISIONS'|translate}}
+                    </ion-label>
+                </ion-list-header>
+                <beping-notification-item
+                        *ngFor="let division of divisions"
+                        [label]="division.label"
+                        [topic]="division.topic"
+                ></beping-notification-item>
+            </ion-list>
+
+        </ng-container>
+        <ng-container *ngIf="clubTeamsTopics$ | async as teams">
+            <ion-list *ngIf="teams.length !== 0">
+                <ion-list-header>
+                    <ion-label>
+                        {{'COMMON.TEAMS'|translate}}
+                    </ion-label>
+                </ion-list-header>
+                <beping-notification-item
+                        *ngFor="let team of teams"
+                        [label]="team.label"
+                        [topic]="team.topic"
+                ></beping-notification-item>
+            </ion-list>
+
+        </ng-container>
+
+    </ng-container>
+
+</ion-content>

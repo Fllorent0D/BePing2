@@ -1,7 +1,13 @@
-<ion-header [translucent]="true" collapse="fade">
+<ion-header collapse="fade">
     <ion-toolbar>
         <ion-title>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="openNotificationsModal()">
+                <ion-icon icon="notifications-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
+
 </ion-header>
 <ion-content>
     <ion-button
@@ -44,9 +50,9 @@
                 <ion-item (click)="navigateToURI(club.uri)" *ngFor="let club of clubs"
                           detail>
                     <ion-label class="ion-text-wrap">
-                        <h3>{{club.label}}</h3>
+                        <h3>{{club.note}}</h3>
                     </ion-label>
-                    <ion-note *ngIf="club.note" slot="end">{{club.note}}</ion-note>
+                    <ion-note *ngIf="club.label" slot="end">{{club.label}}</ion-note>
                 </ion-item>
             </ion-list>
 
@@ -92,8 +98,10 @@
     <ng-template #noFavorite>
         <div class="no-result-container ion-padding">
             <ion-icon [color]="'grey'" name="star-outline" size="large"></ion-icon>
-            <ion-label [color]="'grey'" class="ion-margin-top"><h1>{{'FAVORITES.NO_FAVORITE'|translate}}</h1></ion-label>
-            <ion-label [color]="'grey'" class="ion-margin-top"><h1>{{'FAVORITES.INSTRUCTIONS'|translate}}</h1></ion-label>
+            <ion-label [color]="'grey'" class="ion-margin-top"><h1>{{'FAVORITES.NO_FAVORITE'|translate}}</h1>
+            </ion-label>
+            <ion-label [color]="'grey'" class="ion-margin-top"><h1>{{'FAVORITES.INSTRUCTIONS'|translate}}</h1>
+            </ion-label>
         </div>
     </ng-template>
 

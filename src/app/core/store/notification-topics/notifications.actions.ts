@@ -12,6 +12,13 @@ export class SubscribeToClub {
     }
 }
 
+export class CheckPermissions {
+    static type = '[Notifications] check permissions';
+
+    constructor() {
+    }
+}
+
 export class SubscribeToTeam {
     static type = '[Notifications] Subscribing to team';
 
@@ -77,5 +84,12 @@ export class PermissionStateChanged {
     static type = '[Notifications] permission state changed';
 
     constructor(public state: PermissionState) {
+    }
+}
+
+export class UnsubscribeAll {
+    static type = '[Notifications] unsubscribe all';
+
+    constructor() {
     }
 }

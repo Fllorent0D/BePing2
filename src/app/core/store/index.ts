@@ -8,6 +8,7 @@ import {SettingsState} from './settings';
 import {PointsCalculatorState} from './points/points-calculator-state.service';
 import {RemoteSettingsState} from './remote-settings';
 import {InAppPurchasesState} from './in-app-purchases/in-app-purchases.state';
+import {NotificationsState} from './notification-topics/notifications.state';
 
 export const states = [
     ClubsState,
@@ -19,5 +20,6 @@ export const states = [
     FavoritesState,
     PointsCalculatorState,
     RemoteSettingsState,
-    InAppPurchasesState
+    InAppPurchasesState,
+    NotificationsState
 ];
