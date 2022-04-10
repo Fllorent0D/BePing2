@@ -40,7 +40,6 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.skeletonRows = [...Array(16).keys()].map(() => Math.floor(Math.random() * 40) + 30);
-        const useMemberLookup = this.store.selectSnapshot(RemoteSettingsState.useMemberLookup);
         this.searchBox = new FormControl('');
         this.members$ = this.searchBox.valueChanges.pipe(
             filter((text) => text?.length >= 3 || text.length === 0),
@@ -50,13 +49,10 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
                 if (searchTerms === '') {
                     return of([]);
                 }
-                this.analyticsService.logEvent('search_member', {searchTerms, useMemberLookup});
+                this.analyticsService.logEvent('search_member', {searchTerms});
 
-                const search = useMemberLookup ? this.membersService.findAllMembersLookup({
+                const search = this.membersService.findAllMembersLookup({
                     query: searchTerms,
-                }) : this.membersService.findAllMembers({
-                    nameSearch: searchTerms,
-                    playerCategory: this.memberCategory
                 });
 
                 return search.pipe(

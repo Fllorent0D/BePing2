@@ -170,7 +170,9 @@ export class UserState implements NgxsOnInit {
     @Action(CurrentSeasonChanged)
     updateMemberForNewSeason({dispatch, getState}: StateContext<UserStateModel>) {
         const userState = getState();
-        return dispatch(new UpdateMemberEntries(userState.memberUniqueIndex, true));
+        if (userState.memberUniqueIndex) {
+            dispatch(new UpdateMemberEntries(userState.memberUniqueIndex, true));
+        }
     }
 
     @Action(ClubTransfer)

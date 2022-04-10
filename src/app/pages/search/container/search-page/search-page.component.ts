@@ -97,10 +97,7 @@ export class SearchPageComponent implements OnInit {
                     console.log('useMemberLookup', useMemberLookup);
                     return iif(
                         () => !!(val?.length >= 3 && !/\d/.test(val)),
-                        (useMemberLookup ?
-                                this.memberService.findAllMembersLookup({query: val}) :
-                                this.memberService.findAllMembers({nameSearch: val})
-                        ).pipe(
+                        this.memberService.findAllMembers({nameSearch: val}).pipe(
                             map((results) => ({isLoading: false, results})),
                             startWith({isLoading: true})
                         ),

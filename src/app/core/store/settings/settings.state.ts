@@ -87,6 +87,7 @@ export class SettingsState implements NgxsOnInit {
             });
         } else {
             this.translateService.setDefaultLang(state.lang);
+            this.translateService.use(state.lang);
         }
     }
 
