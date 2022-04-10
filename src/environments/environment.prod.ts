@@ -1,3 +1,5 @@
+import {firebaseConfig} from './firebase.config';
+
 export const environment = {
     production: true,
     hmr: false,
@@ -21,16 +23,7 @@ export const environment = {
         }
     },
     rotatioUrl: 'https://www.rotatio.be',
-    firebaseConfig: {
-        apiKey: 'putakeyhere',
-        authDomain: 'beping-196714.firebaseapp.com',
-        databaseURL: 'https://beping-196714.firebaseio.com',
-        projectId: 'beping-196714',
-        storageBucket: 'beping-196714.appspot.com',
-        messagingSenderId: '169133988850',
-        appId: '1:169133988850:web:f83e033f93de42ceb6696b',
-        measurementId: 'G-NLCDC9F2GF'
-    },
+    firebaseConfig,
     productIds: {
         bepingPro: 'bepingproversion'
     }
