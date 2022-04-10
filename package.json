@@ -9,6 +9,8 @@
     "start:hmr": "ng serve --configuration hmr",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
+    "ionic:sync": "ionic cap sync",
+    "ionic:sync:prod": "ionic cap sync --prod",
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
