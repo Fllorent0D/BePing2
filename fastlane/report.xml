@@ -5,43 +5,63 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying fastlane version" time="0.000264">
+      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000252">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: Switch to ios align_versioning_and_bump lane" time="8.2e-05">
+      <testcase classname="fastlane.lanes" name="01: Switch to ios align_versioning_and_bump lane" time="0.000208">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[&quot;,]//g' | sed -e 's/^[[:space:]]*//' |tr -d '
-'" time="0.00811">
+      <testcase classname="fastlane.lanes" name="02: cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[&quot;,]//g' | sed -e 's/^[[:space:]]*//' |tr -d '
+'" time="0.008479">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: increment_version_number_in_xcodeproj" time="0.026043">
+      <testcase classname="fastlane.lanes" name="03: increment_version_number_in_xcodeproj" time="0.036495">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: increment_build_number_in_xcodeproj" time="0.012253">
+      <testcase classname="fastlane.lanes" name="04: increment_build_number_in_xcodeproj" time="0.01322">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: Switch to ios build_ios lane" time="8.7e-05">
+      <testcase classname="fastlane.lanes" name="05: Switch to ios build_ios lane" time="0.000132">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: Switch to ios build_ionic_prod lane" time="6.1e-05">
+      <testcase classname="fastlane.lanes" name="06: Switch to ios build_ionic_prod lane" time="6.6e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: ionic cap copy --prod" time="0.38442">
+      <testcase classname="fastlane.lanes" name="07: ionic cap copy --prod" time="13.10799">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="08: match" time="24.69344">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="09: build_app" time="74.119504">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: changelog_from_git_commits" time="0.040449">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: upload_to_testflight" time="1441.541679">
         
       </testcase>
     
