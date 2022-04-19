@@ -27,12 +27,12 @@ export class VictoryChartComponent {
 
 
     get blueDashArray(): string {
-        return `${this.bluePct - 4}, ${100 - this.bluePct + 4}`;
+        return `${(this.bluePct - 4 <= 0) ? 0 : this.bluePct - 4}, ${100 - this.bluePct + 4}`;
     }
 
 
     get redDashArray(): string {
-        return `${this.redPct - 4}, ${100 - this.redPct + 4}`;
+        return `${(this.redPct - 4 <= 0) ? 0 : this.redPct - 4}, ${100 - this.redPct + 4}`;
     }
 
 }

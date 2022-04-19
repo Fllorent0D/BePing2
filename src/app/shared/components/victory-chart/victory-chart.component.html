@@ -1,16 +1,16 @@
-<svg class="donut" style="max-height: {{small ? 70 : 200}}px" viewBox="0 0 42 42">
+<svg class="donut" [style.max-height]="small ? 70 : 200" viewBox="0 0 42 42">
     <circle class="donut-hole" cx="21" cy="22" fill="transparent" r="15.91549430918954"></circle>
     <circle class="donut-ring" cx="21" cy="22" fill="transparent" r="15.91549430918954" stroke="transparent"
             stroke-width="2"></circle>
 
 
-    <circle #redCircle *ngIf="redPct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 23.4,strokeOffset:23.4}}" [attr.stroke-dasharray]="redDashArray" class="donut-segment path" cx="21"
+    <circle #redCircle *ngIf="redPct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 24,strokeOffset:24}}" [attr.stroke-dasharray]="redDashArray" class="donut-segment path" cx="21"
             cy="22" fill="transparent" id="redCircle"
-            r="15.91549430918954" stroke="#F09694" stroke-dashoffset="23.4" stroke-linecap="round"
+            r="15.91549430918954" stroke="#F09694" stroke-dashoffset="24" stroke-linecap="round"
             stroke-width="3">
         >
     </circle>
-    <circle #blueCircle *ngIf="bluePct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 23.25), strokeOffsetStart: 27.6}}" [attr.stroke-dasharray]="blueDashArray" [attr.stroke-dashoffset]="100 - redPct + 23.25" class="donut-segment"
+    <circle #blueCircle *ngIf="bluePct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 24), strokeOffsetStart: 27.6}}" [attr.stroke-dasharray]="blueDashArray" [attr.stroke-dashoffset]="100 - redPct + 24" class="donut-segment"
             cx="21" cy="22" fill="transparent"
             r="15.91549430918954"
             stroke="#5B8BF7"
