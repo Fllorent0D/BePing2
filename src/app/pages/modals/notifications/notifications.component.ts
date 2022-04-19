@@ -42,25 +42,25 @@ export class NotificationsComponent implements OnInit {
         this.clubsTopics$ = this.store.select(FavoritesState.favoriteClubs).pipe(
             map((favs) => favs.map(fav => ({
                 ...fav,
-                topic: NotificationsService.generateTopicForClub(fav.uniqueIndex, this.translateService.currentLang)
+                topic: NotificationsService.generateTopicForClub(fav.uniqueIndex)
             })))
         );
         this.clubTeamsTopics$ = this.store.select(FavoritesState.favoriteTeams).pipe(
             map((favs) => favs.map(fav => ({
                 ...fav,
-                topic: NotificationsService.generateTopicForTeam(fav.uniqueIndex, this.translateService.currentLang)
+                topic: NotificationsService.generateTopicForTeam(fav.uniqueIndex)
             })))
         );
         this.membersTopics$ = this.store.select(FavoritesState.favoriteMembers).pipe(
             map((favs) => favs.map(fav => ({
                 ...fav,
-                topic: NotificationsService.generateTopicForMember(fav.uniqueIndex, this.translateService.currentLang)
+                topic: NotificationsService.generateTopicForMember(fav.uniqueIndex)
             })))
         );
         this.divisionsTopics$ = this.store.select(FavoritesState.favoriteDivision).pipe(
             map((favs) => favs.map(fav => ({
                 ...fav,
-                topic: NotificationsService.generateTopicForDivision(fav.uniqueIndex, this.translateService.currentLang)
+                topic: NotificationsService.generateTopicForDivision(fav.uniqueIndex)
             })))
         );
 

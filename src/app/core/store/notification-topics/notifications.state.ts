@@ -67,8 +67,17 @@ export class NotificationsState implements NgxsOnInit {
         const permissionsState = await this.notificationsService.requestPermission();
 
         if (permissionsState === 'granted') {
+            const state = ctx.getState();
+            const actions = [];
+            if (state.topics.every(t => t.indexOf('lang-') === -1) && topic.indexOf('lang-') !== 0) {
+                // Try to subscribe to a topic and did not subscribe to a lang channel earlier
+                // Second check is to avoid infinite loop
+                actions.push(new SubscribeToTopic(NotificationsService.generateTopicForLang(this.translateService.currentLang)));
+            }
+
             const response = await this.notificationsService.subscribeToTopic(topic);
-            ctx.dispatch(new SubscriptionToTopicSuccessful(topic, response));
+            actions.push(new SubscriptionToTopicSuccessful(topic, response));
+            return ctx.dispatch(actions);
         }
     }
 
@@ -95,7 +104,7 @@ export class NotificationsState implements NgxsOnInit {
     @Action([SubscribeToMember])
     subscribeToMember(ctx: StateContext<NotificationsStateModel>, {memberEntry}: SubscribeToMember) {
         ctx.dispatch(
-            new SubscribeToTopic(NotificationsService.generateTopicForMember(memberEntry.UniqueIndex, this.translateService.currentLang))
+            new SubscribeToTopic(NotificationsService.generateTopicForMember(memberEntry.UniqueIndex))
         );
     }
 
@@ -108,28 +117,28 @@ export class NotificationsState implements NgxsOnInit {
     @Action([SubscribeToTeam])
     subscribeToTeam(ctx: StateContext<NotificationsStateModel>, {teamEntry}: SubscribeToTeam) {
         ctx.dispatch(
-            new SubscribeToTopic(NotificationsService.generateTopicForTeam(teamEntry.TeamId, this.translateService.currentLang))
+            new SubscribeToTopic(NotificationsService.generateTopicForTeam(teamEntry.TeamId))
         );
     }
 
     @Action([SubscribeToClub])
     subscribeToClub(ctx: StateContext<NotificationsStateModel>, {clubEntry}: SubscribeToClub) {
         ctx.dispatch(
-            new SubscribeToTopic(NotificationsService.generateTopicForClub(clubEntry.UniqueIndex, this.translateService.currentLang))
+            new SubscribeToTopic(NotificationsService.generateTopicForClub(clubEntry.UniqueIndex))
         );
     }
 
     @Action([SubscribeToDivision])
     subscribeToDivision(ctx: StateContext<NotificationsStateModel>, {divisionEntry}: SubscribeToDivision) {
         ctx.dispatch(
-            new SubscribeToTopic(NotificationsService.generateTopicForDivision(divisionEntry.DivisionId, this.translateService.currentLang))
+            new SubscribeToTopic(NotificationsService.generateTopicForDivision(divisionEntry.DivisionId))
         );
     }
 
     @Action([SubscribeToMatch])
     subscribeToMatch(ctx: StateContext<NotificationsStateModel>, {teamMatchesEntry}: SubscribeToMatch) {
         ctx.dispatch(
-            new SubscribeToTopic(NotificationsService.generateTopicForMatch(teamMatchesEntry.MatchUniqueId, this.translateService.currentLang))
+            new SubscribeToTopic(NotificationsService.generateTopicForMatch(teamMatchesEntry.MatchUniqueId))
         );
     }
 
@@ -149,20 +158,17 @@ export class NotificationsState implements NgxsOnInit {
 
     @Action([UpdateCurrentLang])
     reSubscribeToCorrectLang(ctx: StateContext<NotificationsStateModel>, {lang}: UpdateCurrentLang) {
-        const existingTopics = ctx.getState().topics;
-        const actions: (UnsubscribeToTopic | SubscribeToTopic)[] = [];
-        // unsubscribe all current topic of old lang
-        actions.push(...existingTopics.map(topic => new UnsubscribeToTopic(topic)));
+        const state = ctx.getState();
+        if (!state?.permission) {
+            return;
+        }
+        const existingTopics = state.topics;
 
-        // resubscribe to the correct lang
-        actions.push(...existingTopics
-            .map(topic => {
-                const topicParts = topic.split('-');
-                topicParts[topicParts.length - 1] = lang;
-                return topicParts.join('-');
-            })
-            .map((t) => new SubscribeToTopic(t))
-        );
+        const actions = [new SubscribeToTopic(NotificationsService.generateTopicForLang(lang))];
+        const currentLangTopic = existingTopics.find(topic => topic.indexOf('lang-') === 0);
+        if (currentLangTopic) {
+            actions.push(new UnsubscribeToTopic(currentLangTopic));
+        }
         return ctx.dispatch(actions);
     }
 

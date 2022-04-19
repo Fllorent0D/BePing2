@@ -10,24 +10,28 @@ import {AndroidSettings, IOSSettings, NativeSettings} from 'capacitor-native-set
     providedIn: 'root'
 })
 export class NotificationsService {
-    static generateTopicForClub(clubUniqueIndex: string, lang: string): string {
-        return `club-${clubUniqueIndex}-${lang}`;
+    static generateTopicForClub(clubUniqueIndex: string): string {
+        return `club-${clubUniqueIndex}`;
     }
 
-    static generateTopicForMember(memberUniqueIndex: number, lang: string): string {
-        return `member-${memberUniqueIndex.toString(10)}-${lang}`;
+    static generateTopicForMember(memberUniqueIndex: number): string {
+        return `member-${memberUniqueIndex.toString(10)}`;
     }
 
-    static generateTopicForTeam(teamId: string, lang: string): string {
-        return `team-${teamId}-${lang}`;
+    static generateTopicForTeam(teamId: string): string {
+        return `team-${teamId}`;
     }
 
-    static generateTopicForDivision(divisionId: number, lang: string): string {
-        return `division-${divisionId.toString(10)}-${lang}`;
+    static generateTopicForDivision(divisionId: number): string {
+        return `division-${divisionId.toString(10)}`;
     }
 
-    static generateTopicForMatch(matchId: number, lang: string): string {
-        return `match-${matchId.toString(10)}-${lang}`;
+    static generateTopicForMatch(matchId: number): string {
+        return `match-${matchId.toString(10)}`;
+    }
+
+    static generateTopicForLang(lang: string): string {
+        return `lang-${lang}`;
     }
 
     constructor(

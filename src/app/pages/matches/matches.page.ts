@@ -10,6 +10,7 @@ import {NotificationsState} from '../../core/store/notification-topics/notificat
 import {IonRouterOutlet, ModalController} from '@ionic/angular';
 import {NotificationsComponent} from '../modals/notifications/notifications.component';
 import {ModalBaseComponent} from '../modals/modal-base/modal-base.component';
+import {DialogService} from '../../core/services/dialog-service.service';
 
 @Component({
     selector: 'beping-matches',
@@ -30,7 +31,7 @@ export class MatchesPage implements OnInit {
 
     constructor(
         private readonly tabsNavigationService: TabsNavigationService,
-        private readonly modalCtrl: ModalController,
+        private readonly dialogService: DialogService,
         private readonly routerOutlet: IonRouterOutlet
     ) {
     }
@@ -55,7 +56,7 @@ export class MatchesPage implements OnInit {
     }
 
     async openNotificationsModal() {
-        const modal = await this.modalCtrl.create({
+        await this.dialogService.showModal({
             component: ModalBaseComponent,
             componentProps: {
                 rootPage: NotificationsComponent
@@ -63,6 +64,5 @@ export class MatchesPage implements OnInit {
             presentingElement: this.routerOutlet.nativeEl,
             swipeToClose: true
         });
-        modal.present();
     }
 }
