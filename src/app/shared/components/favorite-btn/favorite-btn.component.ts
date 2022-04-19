@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {createAnimation, IonIcon} from '@ionic/angular';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AnimationController, createAnimation, IonIcon} from '@ionic/angular/';
 
 @Component({
     selector: 'beping-favorite-btn',
@@ -11,9 +11,11 @@ export class FavoriteBtnComponent implements OnInit {
     @Input() enabled = false;
     @Output() clicked: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    @ViewChild('starIcon') starIcon: IonIcon;
+    @ViewChild('starIcon', {read: ElementRef, static: true}) starIcon: ElementRef;
 
-    constructor() {
+    constructor(
+        private animationCtrl: AnimationController
+    ) {
     }
 
     ngOnInit() {
@@ -27,9 +29,8 @@ export class FavoriteBtnComponent implements OnInit {
         const rotation = 60;
         const rotationCnt = 1;
 
-        const squareA = createAnimation()
-            // @ts-ignore
-            .addElement(this.starIcon.el)
+        const squareA = this.animationCtrl.create()
+            .addElement(this.starIcon.nativeElement)
             .duration(200)
             .easing('ease-in-out')
             .keyframes([
