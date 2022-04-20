@@ -1,5 +1,8 @@
 <ion-header class="ion-no-border">
     <ion-toolbar mode="md" #toolbar style="--background: transparent;">
+        <ion-buttons slot="start">
+            <ion-img src="/assets/imgs/icon.png" class="beping-icon"></ion-img>
+        </ion-buttons>
         <ion-title>
             <span [class.shining]="isLoading$ | async"
                   [class.white]="!(isLoading$ | async)">BePing
