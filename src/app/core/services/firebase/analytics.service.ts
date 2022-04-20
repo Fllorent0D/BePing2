@@ -6,6 +6,8 @@ import {filter, switchMap} from 'rxjs/operators';
 import {FirebaseAnalytics} from '@capacitor-community/firebase-analytics';
 import {Device} from '@capacitor/device';
 import {BehaviorSubject, from} from 'rxjs';
+import {Store} from '@ngxs/store';
+import {InAppPurchasesState} from '../../store/in-app-purchases/in-app-purchases.state';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +15,10 @@ import {BehaviorSubject, from} from 'rxjs';
 export class AnalyticsService {
     private analyticsReady = new BehaviorSubject(false);
 
-    constructor(private readonly router: Router) {
+    constructor(
+        private readonly router: Router,
+        private readonly store: Store
+    ) {
     }
 
     async initFb(): Promise<void> {
@@ -29,7 +34,12 @@ export class AnalyticsService {
         this.router.events.pipe(
             filter((e: RouterEvent) => e instanceof NavigationEnd))
             .subscribe(async (event: RouterEvent) => {
-                await this.setScreenName(event.url);
+                    await this.setScreenName(event.url);
+                }
+            );
+        this.store.select(InAppPurchasesState.isPro)
+            .subscribe((isPro) => {
+                this.setUserProperty('isPro', `${isPro}`);
             });
     }
 
