@@ -2,15 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
 import {FavoriteItem, FavoritesState} from '../../core/store/favorites';
 import {combineLatest, Observable} from 'rxjs';
-import {Select} from '@ngxs/store';
-import {map} from 'rxjs/operators';
+import {Select, Store} from '@ngxs/store';
+import {filter, map, take} from 'rxjs/operators';
 import {UserState} from '../../core/store/user/user.state';
 import {ClubEntry} from '../../core/api/models/club-entry';
 import {NotificationsState} from '../../core/store/notification-topics/notifications.state';
-import {IonRouterOutlet, ModalController} from '@ionic/angular';
+import {IonRouterOutlet} from '@ionic/angular';
 import {NotificationsComponent} from '../modals/notifications/notifications.component';
 import {ModalBaseComponent} from '../modals/modal-base/modal-base.component';
 import {DialogService} from '../../core/services/dialog-service.service';
+import {RemoteSettingsState} from '../../core/store/remote-settings';
+import {IsProService} from '../../core/services/is-pro.service';
 
 @Component({
     selector: 'beping-matches',
@@ -28,11 +30,14 @@ export class MatchesPage implements OnInit {
 
     @Select(NotificationsState.topics) topics$: Observable<string[]>;
     hasFavorites$: Observable<boolean>;
+    showNotificationsButton$: Observable<boolean>;
 
     constructor(
         private readonly tabsNavigationService: TabsNavigationService,
         private readonly dialogService: DialogService,
-        private readonly routerOutlet: IonRouterOutlet
+        private readonly routerOutlet: IonRouterOutlet,
+        private readonly isPro: IsProService,
+        private readonly store: Store
     ) {
     }
 
@@ -49,6 +54,14 @@ export class MatchesPage implements OnInit {
                      clubs,
                      teams]) => members.length > 0 || division.length > 0 || clubs.length > 0 || teams.length > 0)
         );
+
+        this.showNotificationsButton$ = combineLatest([
+            this.hasFavorites$,
+            this.store.select(RemoteSettingsState.notificationsEnabled)
+        ]).pipe(
+            map(([hasFavorite, isEnabled]) => hasFavorite && isEnabled)
+        );
+
     }
 
     navigateToURI(uri: string[]) {
@@ -56,13 +69,18 @@ export class MatchesPage implements OnInit {
     }
 
     async openNotificationsModal() {
-        await this.dialogService.showModal({
-            component: ModalBaseComponent,
-            componentProps: {
-                rootPage: NotificationsComponent
-            },
-            presentingElement: this.routerOutlet.nativeEl,
-            swipeToClose: true
+        this.isPro.isPro$(this.routerOutlet.nativeEl).pipe(
+            take(1),
+            filter((isPro) => isPro)
+        ).subscribe(isPro => {
+            this.dialogService.showModal({
+                component: ModalBaseComponent,
+                componentProps: {
+                    rootPage: NotificationsComponent
+                },
+                presentingElement: this.routerOutlet.nativeEl,
+                swipeToClose: true
+            });
         });
     }
 }

@@ -9,6 +9,7 @@ import {ChooseMainMemberClubComponent} from './choose-main-member-club/choose-ma
 import {SearchMemberComponent} from './search-player/search-member.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationItemComponent } from './notifications/notification-item/notification-item.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NotificationItemComponent } from './notifications/notification-item/not
         ChooseMainMemberClubComponent,
         SearchMemberComponent,
         NotificationsComponent,
-        NotificationItemComponent
+        NotificationItemComponent,
+        MaintenanceComponent
     ],
     imports: [
         SharedModule

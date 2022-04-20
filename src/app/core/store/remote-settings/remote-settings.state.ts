@@ -12,6 +12,8 @@ export interface RemoteSettingsStateModel {
     tabt_url: string;
     beping_pro: boolean;
     use_member_lookup: boolean;
+    maintenance: boolean;
+    notifications: boolean;
 }
 
 const defaultState = {
@@ -19,7 +21,9 @@ const defaultState = {
     current_season: 22,
     tabt_url: 'https://tabt-rest.floca.be',
     beping_pro: true,
-    use_member_lookup: false
+    use_member_lookup: false,
+    maintenance: false,
+    notifications: false
 };
 
 @State<RemoteSettingsStateModel>({
@@ -50,6 +54,16 @@ export class RemoteSettingsState implements NgxsOnInit {
         return state.tabt_url;
     }
 
+    @Selector([RemoteSettingsState])
+    static notificationsEnabled(state: RemoteSettingsStateModel): boolean {
+        return !environment.production || state.notifications;
+    }
+
+    @Selector([RemoteSettingsState])
+    static maintenanceMode(state: RemoteSettingsStateModel): boolean {
+        return true;
+    }
+
     constructor(
         private readonly crashlytics: CrashlyticsService
     ) {
@@ -65,12 +79,16 @@ export class RemoteSettingsState implements NgxsOnInit {
             const bepingPro = await FirebaseRemoteConfig.getBoolean({key: 'beping_pro'});
             const tabtUrl = await FirebaseRemoteConfig.getString({key: 'tabt_url'});
             const memberLookup = await FirebaseRemoteConfig.getBoolean({key: 'use_member_lookup'});
+            const maintenance = await FirebaseRemoteConfig.getBoolean({key: 'maintenance'});
+            const notifications = await FirebaseRemoteConfig.getBoolean({key: 'notifications'});
             // console.log(bepingPro);
             ctx.dispatch(new UpdateRemoteSettingKey('partnership_rotatio', rotatio.value));
             ctx.dispatch(new UpdateRemoteSettingKey('beping_pro', bepingPro.value));
             ctx.dispatch(new UpdateRemoteSettingKey('tabt_url', tabtUrl.value));
             ctx.dispatch(new UpdateRemoteSettingKey('current_season', season.value));
             ctx.dispatch(new UpdateRemoteSettingKey('use_member_lookup', memberLookup.value));
+            ctx.dispatch(new UpdateRemoteSettingKey('maintenance', maintenance.value));
+            ctx.dispatch(new UpdateRemoteSettingKey('notifications', notifications.value));
 
         } catch (e) {
             this.crashlytics.recordException({message: 'Impossible to refresh remote config: ' + e?.message, stacktrace: e?.stack});

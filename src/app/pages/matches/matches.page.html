@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="openNotificationsModal()">
+            <ion-button (click)="openNotificationsModal()" *ngIf="showNotificationsButton$ | async">
                 <ion-icon icon="notifications-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
