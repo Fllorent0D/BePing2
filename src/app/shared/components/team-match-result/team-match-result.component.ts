@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {TeamMatchesEntry} from '../../../core/api/models/team-matches-entry';
 import {TabsNavigationService} from '../../../core/services/navigation/tabs-navigation.service';
-import {ActionSheetController, Platform} from '@ionic/angular';
+import {ActionSheetController, IonRouterOutlet, Platform} from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import {ClubsState} from '../../../core/store/clubs';
 import {map, switchMap, take} from 'rxjs/operators';
@@ -33,7 +33,8 @@ export class TeamMatchResultComponent implements OnInit {
         private readonly calendarService: CalendarService,
         private readonly clubService: ClubsService,
         private readonly startNavigation: StartNavigationService,
-        private readonly platform: Platform
+        private readonly platform: Platform,
+        private readonly ionRouter: IonRouterOutlet
     ) {
         this.isTablet = this.platform.is('tablet') || this.platform.is('desktop');
     }
@@ -100,7 +101,7 @@ export class TeamMatchResultComponent implements OnInit {
                 buttons.splice(buttons.length, 0, {
                     text: this.translate.instant('CALENDAR.ADD_TO_CALENDAR'),
                     handler: () => {
-                        this.calendarService.checkPremiumAndAddTeamMatchEntries([this.match]);
+                        this.calendarService.checkPremiumAndAddTeamMatchEntries([this.match], null, this.ionRouter.nativeEl);
                     }
                 });
             }

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {IsProService} from '../is-pro.service';
 import {TabsNavigationService} from '../navigation/tabs-navigation.service';
+import {IonRouterOutlet} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -9,12 +10,12 @@ export class Face2FaceService {
 
     constructor(
         private readonly isPro: IsProService,
-        private readonly tabNavigator: TabsNavigationService
+        private readonly tabNavigator: TabsNavigationService,
     ) {
     }
 
-    async checkIsProAndGoToFace2Face(opponentUniqueIndex: number): Promise<void> {
-        const isPro = await this.isPro.isPro$().toPromise();
+    async checkIsProAndGoToFace2Face(opponentUniqueIndex: number, presentingElement: HTMLElement): Promise<void> {
+        const isPro = await this.isPro.isPro$(presentingElement).toPromise();
         if (isPro) {
             await this.tabNavigator.navigateTo(['player', 'face2face', opponentUniqueIndex.toString(10)]);
         }

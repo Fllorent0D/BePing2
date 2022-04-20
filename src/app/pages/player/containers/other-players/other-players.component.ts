@@ -219,7 +219,7 @@ export class OtherPlayersComponent implements OnInit {
 
     goToFace2Face() {
         this.memberUniqueIndex$.pipe(take(1)).subscribe((id) => {
-            this.face2FaceService.checkIsProAndGoToFace2Face(id);
+            this.face2FaceService.checkIsProAndGoToFace2Face(id, this.ionRouterOutlet.nativeEl);
         });
     }
 }

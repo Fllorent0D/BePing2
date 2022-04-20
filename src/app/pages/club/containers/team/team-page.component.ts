@@ -21,6 +21,7 @@ import {CalendarService} from '../../../../core/services/calendar/calendar.servi
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
+import {IonRouterOutlet} from '@ionic/angular';
 
 @Component({
     selector: 'beping-teams',
@@ -54,7 +55,8 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         private readonly teamPlayerStatsService: TeamPlayersStatsService,
         private readonly calendarService: CalendarService,
         private readonly dialogService: DialogService,
-        private readonly translate: TranslateService
+        private readonly translate: TranslateService,
+        private readonly ionRouterOutlet: IonRouterOutlet
     ) {
         super(changeDetectionRef);
     }
@@ -170,6 +172,6 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
             .subscribe((matches) => this.calendarService.checkPremiumAndAddTeamMatchEntries(matches, {
                 dialogHeaderTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
                 dialogMessageTranslationKey: 'CALENDAR.ADD_ALL_TEAM_MATCHES'
-            }));
+            }, this.ionRouterOutlet.nativeEl));
     }
 }

@@ -187,7 +187,7 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
     }
 
     openPro() {
-        this.isProService.isPro$().subscribe((isPro: boolean) => {
+        this.isProService.isPro$(this.ionRouterOutlet.nativeEl).subscribe((isPro: boolean) => {
             if (isPro) {
                 this.analyticsService.logEvent('beping_pro_from_dashboard');
             }

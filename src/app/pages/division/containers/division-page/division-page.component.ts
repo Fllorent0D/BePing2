@@ -21,6 +21,7 @@ import {CalendarService} from '../../../../core/services/calendar/calendar.servi
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
+import {IonRouterOutlet} from '@ionic/angular';
 
 @Component({
     selector: 'beping-division-page',
@@ -47,7 +48,8 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
         private readonly tabsNavigation: TabsNavigationService,
         private readonly calendarService: CalendarService,
         private readonly dialogService: DialogService,
-        private readonly translate: TranslateService
+        private readonly translate: TranslateService,
+        private readonly ionRouter: IonRouterOutlet
     ) {
         super(changeDetectionRef);
     }
@@ -138,6 +140,6 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
             .subscribe((matches) => this.calendarService.checkPremiumAndAddTeamMatchEntries(matches, {
                 dialogHeaderTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
                 dialogMessageTranslationKey: 'CALENDAR.ADD_ALL_DIVISION_MATCHES'
-            }));
+            }, this.ionRouter.nativeEl));
     }
 }

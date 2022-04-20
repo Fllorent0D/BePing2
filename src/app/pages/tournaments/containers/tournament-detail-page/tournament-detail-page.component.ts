@@ -125,6 +125,6 @@ export class TournamentDetailPageComponent implements OnInit {
     }
 
     addToCalendar(tournament: TournamentEntry) {
-        this.calendarService.checkPremiumAndAddTournament([tournament]);
+        this.calendarService.checkPremiumAndAddTournament([tournament], null, this.ionRouter.nativeEl);
     }
 }

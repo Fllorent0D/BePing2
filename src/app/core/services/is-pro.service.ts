@@ -23,7 +23,7 @@ export class IsProService {
     ) {
     }
 
-    isPro$(): Observable<boolean> {
+    isPro$(presentingElement?: HTMLElement): Observable<boolean> {
         const isPro = this.store.selectSnapshot(InAppPurchasesState.isPro);
         if (isPro) {
             // Si déjà Premium
@@ -38,8 +38,8 @@ export class IsProService {
                 console.log('top', topModal);
                 const opts: ModalOptions = {
                     component: ModalBaseComponent,
-                    swipeToClose: !!topModal,
-                    presentingElement: topModal,
+                    swipeToClose: !!(topModal || presentingElement),
+                    presentingElement: topModal || presentingElement,
                     componentProps: {
                         rootPage: PremiumSubscriptionsComponent,
                         pageParams: {

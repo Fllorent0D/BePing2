@@ -48,21 +48,29 @@ export class CalendarService {
         }
     }
 
-    async checkPremiumAndAddTeamMatchEntries(teamMatchEntries: TeamMatchesEntry[], opts?: AddToCalendarOpts): Promise<void> {
-        const isPro = await this.isProService.isPro$().toPromise();
+    async checkPremiumAndAddTeamMatchEntries(
+        teamMatchEntries: TeamMatchesEntry[],
+        opts?: AddToCalendarOpts,
+        presentingElement?: HTMLElement
+    ): Promise<void> {
+        const isPro = await this.isProService.isPro$(presentingElement).toPromise();
         if (isPro) {
             await this.addTeamMatchEntries(teamMatchEntries, opts);
         }
     }
 
-    async checkPremiumAndAddTournament(tournaments: TournamentEntry[], opts?: AddToCalendarOpts): Promise<void> {
-        const isPro = await this.isProService.isPro$().toPromise();
+    async checkPremiumAndAddTournament(
+        tournaments: TournamentEntry[],
+        opts?: AddToCalendarOpts,
+        presentingElement?: HTMLElement
+    ): Promise<void> {
+        const isPro = await this.isProService.isPro$(presentingElement).toPromise();
         if (isPro) {
             await this.addTournaments(tournaments, opts);
         }
     }
 
-    async addTeamMatchEntries(teamMatchEntries: TeamMatchesEntry[], opts?: AddToCalendarOpts): Promise<void> {
+    private async addTeamMatchEntries(teamMatchEntries: TeamMatchesEntry[], opts?: AddToCalendarOpts): Promise<void> {
         if (teamMatchEntries.length > 1) {
             const shouldContinue = await this.askConfirmation(opts);
             if (!shouldContinue) {
@@ -87,7 +95,7 @@ export class CalendarService {
         });
     }
 
-    async addTournaments(tournaments: TournamentEntry[], opts?: AddToCalendarOpts): Promise<void> {
+    private async addTournaments(tournaments: TournamentEntry[], opts?: AddToCalendarOpts): Promise<void> {
         if (tournaments.length > 1) {
             const shouldContinue = await this.askConfirmation(opts);
             if (!shouldContinue) {
