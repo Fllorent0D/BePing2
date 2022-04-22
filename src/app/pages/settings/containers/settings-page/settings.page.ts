@@ -40,6 +40,7 @@ import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchase
 import {InAppPurchasesState} from '../../../../core/store/in-app-purchases/in-app-purchases.state';
 import {PremiumSubscriptionsComponent} from '../premium-subscriptions/premium-subscriptions.component';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
+import {ContributorsComponent} from '../contributors/contributors.component';
 
 @Component({
     selector: 'beping-settings',
@@ -225,5 +226,9 @@ export class SettingsPage implements OnInit, OnDestroy {
 
     openStatus() {
         this.browser.openBePingStatus();
+    }
+
+    contributors() {
+        this.ionNav.push(ContributorsComponent);
     }
 }

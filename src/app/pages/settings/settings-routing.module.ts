@@ -5,6 +5,7 @@ import {SettingsPage} from './containers/settings-page/settings.page';
 import {AfttLoginPage} from '../modals/aftt-login/aftt-login-page.component';
 import {ContactComponent} from './containers/contact/contact.component';
 import {PremiumSubscriptionsComponent} from './containers/premium-subscriptions/premium-subscriptions.component';
+import {ContributorsComponent} from './containers/contributors/contributors.component';
 
 const routes: Routes = [
     {
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
         path: 'premium-subscription',
         component: PremiumSubscriptionsComponent
+    },
+    {
+        path: 'contributors',
+        component: ContributorsComponent
     }
 ];
 

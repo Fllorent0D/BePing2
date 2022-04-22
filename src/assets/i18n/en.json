@@ -308,7 +308,16 @@
     "NEXT_RENEW": "Next renewal",
     "THANKS_FOR_SUPPORT": "Thanks for your support!",
     "MANAGE_SUBSCRIPTION": "Manage the subscription",
-    "SERVER_STATUS": "BePing servers status"
+    "SERVER_STATUS": "BePing servers status",
+    "CONTRIBUTORS": {
+      "CONTRIBUTORS": "Contributors",
+      "THANKS": "Thanks for your help 🙌",
+      "WANNA_HELP": "Do you want to contribute to the development?",
+      "BEPING_MOBILE": "BePing mobile",
+      "MOBILE_APP_REPO": "Mobile app repository",
+      "TABT_REST": "TabT-Rest",
+      "BACKEND_REPO": "Backend repository"
+    }
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "BePing comment"

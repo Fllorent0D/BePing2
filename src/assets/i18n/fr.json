@@ -308,7 +308,16 @@
     "NEXT_RENEW": "Prochain renouvellement",
     "THANKS_FOR_SUPPORT": "Merci pour votre soutien!",
     "MANAGE_SUBSCRIPTION": "Gérer l'abonnement",
-    "SERVER_STATUS": "Status serveur BePing"
+    "SERVER_STATUS": "Status serveur BePing",
+    "CONTRIBUTORS": {
+      "CONTRIBUTORS": "Contributeurs",
+      "THANKS": "Merci de votre aide 🙌",
+      "WANNA_HELP": "Voulez vous participer au dévelopment?",
+      "BEPING_MOBILE": "BePing mobile",
+      "MOBILE_APP_REPO": "Dépôt de l'application mobile",
+      "TABT_REST": "TabT-Rest",
+      "BACKEND_REPO": "Dépôt de la partie serveur"
+    }
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaire BePing"

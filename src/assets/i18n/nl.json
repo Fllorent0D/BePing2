@@ -311,7 +311,16 @@
     "NEXT_RENEW": "Volgende verlenging",
     "THANKS_FOR_SUPPORT": "Bedankt voor je ondersteuning!",
     "MANAGE_SUBSCRIPTION": "Abonnement beheren",
-    "SERVER_STATUS": "BePing-serverstatus"
+    "SERVER_STATUS": "BePing-serverstatus",
+    "CONTRIBUTORS": {
+      "CONTRIBUTORS": "Bijdragers",
+      "THANKS": "Bedankt voor je hulp 🙌",
+      "WANNA_HELP": "Wil je bijdragen aan de ontwikkeling?",
+      "BEPING_MOBILE": "BePing mobile",
+      "MOBILE_APP_REPO": "Mobile app repository",
+      "TABT_REST": "TabT-Rest",
+      "BACKEND_REPO": "Backend repository"
+    }
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaar BePing"
