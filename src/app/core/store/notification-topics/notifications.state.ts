@@ -40,6 +40,11 @@ export class NotificationsState implements NgxsOnInit {
         return state.topics;
     }
 
+    @Selector([NotificationsState])
+    static currentPermission(state: NotificationsStateModel): PermissionState | null {
+        return state.permission;
+    }
+
     constructor(
         private readonly notificationsService: NotificationsService,
         private readonly translateService: TranslateService

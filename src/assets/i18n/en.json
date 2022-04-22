@@ -375,10 +375,11 @@
     "NO_TEAM": "No teams",
     "TURN_ON_NOTIFICATION": "Turn on notifications",
     "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Notifications are disabled for BePing. Please turn notifications on in settings to be able to receive notifications from BePing.",
-    "NOT_NOW": "",
-    "OPEN_SETTINGS": "",
+    "NOT_NOW": "Not now",
+    "OPEN_SETTINGS": "Open settings",
+    "ALLOW": "Allow",
     "TURN_ON": "Turn notification on for BePing",
-    "PLEASE_TURN_ON": "To receive match result notification as they are encoded, turn on notification. You'll also receive them outside of BePing. Turm them off anytime"
+    "PLEASE_TURN_ON": "To receive notifications as they are happen, turn on notification. You'll also receive them outside of BePing. Turm them off anytime"
   },
   "DIVISION_LEVEL": {
     "LEVEL": "Level",
@@ -550,5 +551,8 @@
     "SUBSCRIPTION_CONDITION_1": "Registration cannot be transferred to another account. This additional in-app purchase is valid for one account only.",
     "SUBSCRIPTION_CONDITION_2": "Subscription automatically renews each year unless cancelled.",
     "YOUR_CONTRIBUTION_HELP": "Your contribution helps to grow the project"
+  },
+  "NOTIFICATIONS": {
+
   }
 }

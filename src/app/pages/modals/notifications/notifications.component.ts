@@ -7,8 +7,8 @@ import {Observable} from 'rxjs';
 import {NotificationsState} from '../../../core/store/notification-topics/notifications.state';
 import {NotificationsService} from '../../../core/services/firebase/notifications.service';
 import {map} from 'rxjs/operators';
-import {SubscribeToTopic, UnsubscribeToTopic} from '../../../core/store/notification-topics/notifications.actions';
 import {TranslateService} from '@ngx-translate/core';
+import {NativeSettingsService} from '../../../core/services/native-settings.service';
 
 export interface FavoriteWithTopic extends FavoriteItem<string | number> {
     topic: string;
@@ -28,13 +28,15 @@ export class NotificationsComponent implements OnInit {
     matchesTopics$: Observable<FavoriteWithTopic[]>;
     @Select(NotificationsState.topics) topics$: Observable<string[]>;
 
+    notificationsPermIsDenied$: Observable<boolean>;
 
     constructor(
         private readonly modalCtrl: ModalController,
         private readonly analyticsService: AnalyticsService,
         private readonly notificationsService: NotificationsService,
         private readonly translateService: TranslateService,
-        private readonly store: Store
+        private readonly store: Store,
+        private readonly nativeSettingsService: NativeSettingsService
     ) {
     }
 
@@ -63,11 +65,17 @@ export class NotificationsComponent implements OnInit {
                 topic: NotificationsService.generateTopicForDivision(fav.uniqueIndex)
             })))
         );
-
+        this.notificationsPermIsDenied$ = this.store.select(NotificationsState.currentPermission).pipe(
+            map((permission) => permission === 'denied')
+        );
     }
 
     async closeModal() {
         this.analyticsService.logEvent('notifications_dismiss');
         await this.modalCtrl.dismiss();
+    }
+
+    openSettings() {
+        this.nativeSettingsService.openNativeSettings();
     }
 }

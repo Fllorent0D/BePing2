@@ -3,8 +3,8 @@ import {FCM} from '@capacitor-community/fcm';
 import {PushNotifications} from '@capacitor/push-notifications';
 import {PermissionState} from '@capacitor/core';
 import {DialogService} from '../dialog-service.service';
-import {Device} from '@capacitor/device';
-import {AndroidSettings, IOSSettings, NativeSettings} from 'capacitor-native-settings';
+import {NativeSettingsService} from '../native-settings.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root'
@@ -35,7 +35,9 @@ export class NotificationsService {
     }
 
     constructor(
-        private readonly dialogService: DialogService
+        private readonly dialogService: DialogService,
+        private readonly translate: TranslateService,
+        private readonly nativeSettingsService: NativeSettingsService
     ) {
     }
 
@@ -50,26 +52,19 @@ export class NotificationsService {
     }
 
     async showAlertToAcceptNotifications(): Promise<void> {
-        const platform = await Device.getInfo();
         const dialog = await this.dialogService.showAlert({
-            header: 'NOTIFICATIONS.TURN_ON_NOTIFICATION',
-            message: 'NOTIFICATIONS.NOTIFICATION_ARE_OFF_PLEASE_TURN_ON',
+            header: this.translate.instant('NOTIFICATIONS.TURN_ON_NOTIFICATION'),
+            message: this.translate.instant('NOTIFICATIONS.NOTIFICATION_ARE_OFF_PLEASE_TURN_ON'),
             buttons: [
                 {
                     id: 'not-now-notifications',
                     role: 'cancel',
-                    text: 'NOTIFICATIONS.NOT_NOW',
+                    text: this.translate.instant('NOTIFICATIONS.NOT_NOW'),
                 },
                 {
                     id: 'open-settings',
-                    text: 'NOTIFICATIONS.OPEN_SETTINGS',
-                    handler: () => {
-                        if (platform.platform === 'ios') {
-                            NativeSettings.openIOS({option: IOSSettings.App});
-                        } else if (platform.platform === 'android') {
-                            NativeSettings.openAndroid({option: AndroidSettings.Application});
-                        }
-                    }
+                    text: this.translate.instant('NOTIFICATIONS.OPEN_SETTINGS'),
+                    handler: () => this.nativeSettingsService.openNativeSettings()
                 },
             ]
         });
@@ -87,18 +82,18 @@ export class NotificationsService {
         if (['prompt-with-rationale', 'prompt'].includes(currentPerm)) {
             let shouldStop = false;
             const alert = await this.dialogService.showAlert({
-                header: 'NOTIFICATIONS.TURN_ON',
-                message: 'NOTIFICATIONS.PLEASE_TURN_ON',
+                header: this.translate.instant('NOTIFICATIONS.TURN_ON'),
+                message: this.translate.instant('NOTIFICATIONS.PLEASE_TURN_ON'),
                 buttons: [
                     {
-                        text: 'COMMON.CANCEL',
+                        text: this.translate.instant('COMMON.CANCEL'),
                         role: 'cancel',
                         handler: () => {
                             shouldStop = true;
                         }
                     },
                     {
-                        text: 'NOTIFICATIONS.ALLOW',
+                        text: this.translate.instant('NOTIFICATIONS.ALLOW'),
                         handler: () => {
                             shouldStop = false;
                         }

@@ -376,12 +376,13 @@
     "CHOOSE_TEAM": "Kies een ploeg",
     "ADD_TEAM": "Voeg een team toe",
     "NO_TEAM": "Geen ploegen",
-    "TURN_ON_NOTIFICATION": "Turn on notifications",
-    "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Notifications are disabled for BePing. Please turn notifications on in settings to be able to receive notifications from BePing.",
-    "NOT_NOW": "Not now",
-    "OPEN_SETTINGS": "Settings",
-    "TURN_ON": "Turn notification on for BePing",
-    "PLEASE_TURN_ON": "To receive match result notification as they are encoded, turn on notification. You'll also receive them outside of BePing. Turm them off anytime"
+    "TURN_ON_NOTIFICATION": "Zet meldingen aan",
+    "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Notificaties zijn uitgeschakeld voor BePing. Zet notificaties aan in instellingen om notificaties van BePing te kunnen ontvangen.",
+    "NOT_NOW": "Niet nu",
+    "OPEN_SETTINGS": "Open instellingen",
+    "ALLOW": "Toestaan",
+    "TURN_ON": "Zet melding aan voor BePing",
+    "PLEASE_TURN_ON": "Om meldingen te ontvangen als ze gebeuren, zet je notificatie aan. U zult ze ook buiten BePing ontvangen. Zet ze op elk moment uit."
   },
   "DIVISION_LEVEL": {
     "LEVEL": "Niveau",

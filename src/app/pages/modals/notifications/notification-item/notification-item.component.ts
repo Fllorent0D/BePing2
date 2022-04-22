@@ -6,6 +6,11 @@ import {catchError, finalize, map, take, takeUntil} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {SubscribeToTopic, UnsubscribeToTopic} from '../../../../core/store/notification-topics/notifications.actions';
+import {DialogService} from '../../../../core/services/dialog-service.service';
+import {TranslateService} from '@ngx-translate/core';
+
+class Translate {
+}
 
 @Component({
     selector: 'beping-notification-item',
@@ -23,7 +28,9 @@ export class NotificationItemComponent extends OnDestroyHook implements OnInit {
     loading = false;
 
     constructor(
-        private readonly store: Store
+        private readonly store: Store,
+        private readonly translate: TranslateService,
+        private readonly dialogService: DialogService
     ) {
         super();
     }
@@ -49,6 +56,10 @@ export class NotificationItemComponent extends OnDestroyHook implements OnInit {
             this.store.dispatch(new SubscribeToTopic(this.topic)).pipe(
                 catchError((e) => {
                     console.log('error', e);
+                    this.dialogService.showToast({
+                        message: this.translate.instant('ERROR_TABT.INTERNAL', {error: e.message}),
+                        duration: 3_000
+                    });
                     this.isSubscribe.setValue(false, {emitEvent: false});
                     return of();
                 }),
@@ -61,6 +72,10 @@ export class NotificationItemComponent extends OnDestroyHook implements OnInit {
             this.store.dispatch(new UnsubscribeToTopic(this.topic)).pipe(
                 catchError((e) => {
                     console.log('error', e);
+                    this.dialogService.showToast({
+                        message: this.translate.instant('ERROR_TABT.INTERNAL', {error: e.message}),
+                        duration: 3_000
+                    });
                     this.isSubscribe.setValue(true, {emitEvent: false});
                     return of();
                 }),
