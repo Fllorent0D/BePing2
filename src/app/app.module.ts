@@ -19,6 +19,7 @@ import {InAppPurchase2} from '@ionic-native/in-app-purchase-2/ngx';
 import {InAppPurchasesService} from './core/services/in-app-purchases.service';
 import {Device} from '@capacitor/device';
 import {AppStateService} from './core/services/app-state.service';
+import {RemoteConfigService} from './core/services/remote-config.service';
 
 registerLocaleData(localFR);
 registerLocaleData(localNL);
@@ -46,20 +47,22 @@ registerLocaleData(localNL);
                 analyticsService: AnalyticsService,
                 crashlytics: CrashlyticsService,
                 iAPService: InAppPurchasesService,
-                appState: AppStateService
+                appState: AppStateService,
+                remoteSettings: RemoteConfigService
             ) => async () => {
                 const deviceInfo = await Device.getInfo();
                 const initTasks = [
                     analyticsService.initFb(),
                     crashlytics.init(),
-                    appState.init()
+                    appState.init(),
+                    remoteSettings.refreshRemoteConfig(),
                 ];
                 if (deviceInfo.platform !== 'web') {
                     initTasks.push(iAPService.init());
                 }
                 await Promise.all(initTasks);
             },
-            deps: [AnalyticsService, CrashlyticsService, InAppPurchasesService, AppStateService],
+            deps: [AnalyticsService, CrashlyticsService, InAppPurchasesService, AppStateService, RemoteConfigService],
             multi: true
         },
         InAppPurchase2,

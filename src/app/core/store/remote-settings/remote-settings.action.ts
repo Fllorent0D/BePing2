@@ -7,3 +7,10 @@ export class UpdateRemoteSettingKey {
     ) {
     }
 }
+
+export class RefreshRemoteConfig {
+    static readonly type = '[Remote settings] refresh';
+
+    constructor() {
+    }
+}

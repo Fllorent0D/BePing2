@@ -1,6 +1,6 @@
 import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {UpdateRemoteSettingKey} from './remote-settings.action';
+import {RefreshRemoteConfig, UpdateRemoteSettingKey} from './remote-settings.action';
 import {FirebaseRemoteConfig} from '@joinflux/firebase-remote-config';
 import {environment} from '../../../../environments/environment';
 import {CrashlyticsService} from '../../services/crashlytics.service';
@@ -74,25 +74,30 @@ export class RemoteSettingsState implements NgxsOnInit {
             FirebaseRemoteConfig.initialize({minimumFetchInterval: 43_200, fetchTimeout: 60});
             await FirebaseRemoteConfig.setDefaultConfig(defaultState);
             await FirebaseRemoteConfig.fetchAndActivate();
-            const rotatio = await FirebaseRemoteConfig.getBoolean({key: 'partnership_rotatio'});
-            const season = await FirebaseRemoteConfig.getNumber({key: 'current_season'});
-            const bepingPro = await FirebaseRemoteConfig.getBoolean({key: 'beping_pro'});
-            const tabtUrl = await FirebaseRemoteConfig.getString({key: 'tabt_url'});
-            const memberLookup = await FirebaseRemoteConfig.getBoolean({key: 'use_member_lookup'});
-            const maintenance = await FirebaseRemoteConfig.getBoolean({key: 'maintenance'});
-            const notifications = await FirebaseRemoteConfig.getBoolean({key: 'notifications'});
-            // console.log(bepingPro);
-            ctx.dispatch(new UpdateRemoteSettingKey('partnership_rotatio', rotatio.value));
-            ctx.dispatch(new UpdateRemoteSettingKey('beping_pro', bepingPro.value));
-            ctx.dispatch(new UpdateRemoteSettingKey('tabt_url', tabtUrl.value));
-            ctx.dispatch(new UpdateRemoteSettingKey('current_season', season.value));
-            ctx.dispatch(new UpdateRemoteSettingKey('use_member_lookup', memberLookup.value));
-            ctx.dispatch(new UpdateRemoteSettingKey('maintenance', maintenance.value));
-            ctx.dispatch(new UpdateRemoteSettingKey('notifications', notifications.value));
+
 
         } catch (e) {
             this.crashlytics.recordException({message: 'Impossible to refresh remote config: ' + e?.message, stacktrace: e?.stack});
         }
+    }
+
+    @Action([RefreshRemoteConfig])
+    async updateValues({dispatch}: StateContext<RemoteSettingsStateModel>) {
+        const rotatio = await FirebaseRemoteConfig.getBoolean({key: 'partnership_rotatio'});
+        const season = await FirebaseRemoteConfig.getNumber({key: 'current_season'});
+        const bepingPro = await FirebaseRemoteConfig.getBoolean({key: 'beping_pro'});
+        const tabtUrl = await FirebaseRemoteConfig.getString({key: 'tabt_url'});
+        const memberLookup = await FirebaseRemoteConfig.getBoolean({key: 'use_member_lookup'});
+        const maintenance = await FirebaseRemoteConfig.getBoolean({key: 'maintenance'});
+        const notifications = await FirebaseRemoteConfig.getBoolean({key: 'notifications'});
+        console.log('notifications:::', notifications);
+        dispatch(new UpdateRemoteSettingKey('partnership_rotatio', rotatio.value));
+        dispatch(new UpdateRemoteSettingKey('beping_pro', bepingPro.value));
+        dispatch(new UpdateRemoteSettingKey('tabt_url', tabtUrl.value));
+        dispatch(new UpdateRemoteSettingKey('current_season', season.value));
+        dispatch(new UpdateRemoteSettingKey('use_member_lookup', memberLookup.value));
+        dispatch(new UpdateRemoteSettingKey('maintenance', maintenance.value));
+        dispatch(new UpdateRemoteSettingKey('notifications', notifications.value));
     }
 
     @Action([UpdateRemoteSettingKey])
