@@ -1,5 +1,5 @@
 import {Component, OnInit, Optional} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Select, Store} from '@ngxs/store';
 import {Login} from '../../../core/store/user/aftt.actions';
 import {finalize, take} from 'rxjs/operators';
@@ -28,7 +28,6 @@ export class AfttLoginPage implements OnInit {
     @Select(UserState) userState$: Observable<UserStateModel>;
 
     constructor(
-        private readonly formBuilder: FormBuilder,
         private readonly store: Store,
         private readonly dialogService: DialogService,
         @Optional() public readonly ionNav: IonNav,
@@ -41,9 +40,9 @@ export class AfttLoginPage implements OnInit {
     }
 
     async ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            username: ['', [Validators.required]],
-            password: ['', [Validators.required]]
+        this.loginForm = new FormGroup({
+            username: new FormControl('', [Validators.required]),
+            password: new FormControl('', [Validators.required])
         });
     }
 

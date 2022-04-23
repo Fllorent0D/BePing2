@@ -52,21 +52,21 @@
                 </ion-col>
             </ion-row>
             <ion-item *ngIf="(lang$|async) === 'fr'" class="ion-color-grey">
-                <p>
+                <ion-label class="ion-text-wrap">
                     Attention, l'identifiant demandé n'est pas celui de votre espace personnel! BePing a besoin des
                     identifiants du site
                     https://resultats.aftt.be/
-                </p>
+                </ion-label>
             </ion-item>
             <ion-item class="ion-color-grey">
-                <p>
+                <ion-label class="ion-text-wrap">
                     {{'SETTINGS.BEPING_NOT_AFFILIATE' | translate}}
-                </p>
+                </ion-label>
             </ion-item>
             <ion-item class="ion-color-grey">
-                <p>
+                <ion-label class="ion-text-wrap">
                     {{'SETTINGS.BEPING_NOT_OFFICIAL' | translate}}
-                </p>
+                </ion-label>
             </ion-item>
 
         </form>
