@@ -376,7 +376,9 @@
     "TURN_ON_NOTIFICATION": "Activer les notifications",
     "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Les notifications sont désactivées pour BePing. Veuillez activer les notifications dans les paramètres pour pouvoir recevoir des notifications de BePing.",
     "NOT_NOW": "Pas maintenant",
+    "INTRO_TEXT": "Recevez des notifications sur les résultats de vos clubs, équipes ou divisions préférés.",
     "OPEN_SETTINGS": "Ouvrir Réglages",
+    "ALLOW": "Autoriser",
     "TURN_ON": "Activer les notifications pour BePing",
     "PLEASE_TURN_ON": "Pour recevoir des notifications de résultats de match au fur et à mesure qu'ils sont encodés, activez la notification. Vous les recevrez également en dehors de BePing. Désactivez-les à tout moment."
   },

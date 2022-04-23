@@ -376,6 +376,7 @@
     "TURN_ON_NOTIFICATION": "Turn on notifications",
     "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Notifications are disabled for BePing. Please turn notifications on in settings to be able to receive notifications from BePing.",
     "NOT_NOW": "Not now",
+    "INTRO_TEXT": "Receive notifications with the results of your favorite clubs, teams or divisions.",
     "OPEN_SETTINGS": "Open settings",
     "ALLOW": "Allow",
     "TURN_ON": "Turn notification on for BePing",

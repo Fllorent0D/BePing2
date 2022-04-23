@@ -11,7 +11,7 @@
 
 <ion-content>
     <ion-item class="ion-color-grey">
-        <ion-label class="ion-text-wrap">Recevez des notifications avec les résultats de vos clubs, équipes ou divisions préférés</ion-label>
+        <ion-label class="ion-text-wrap">{{'NOTIFICATIONS.INTRO_TEXT'|translate}}</ion-label>
     </ion-item>
     <ion-item color="warning" detail (click)="openSettings()" *ngIf="notificationsPermIsDenied$|async">
         <ion-icon slot="start" icon="warning-outline"></ion-icon>

@@ -29,8 +29,8 @@ export class MatchesPage implements OnInit {
     @Select(UserState.getMemberClub) memberClub: Observable<ClubEntry | void>;
 
     @Select(NotificationsState.topics) topics$: Observable<string[]>;
+    @Select(RemoteSettingsState.notificationsEnabled) notifications$: Observable<boolean>;
     hasFavorites$: Observable<boolean>;
-    showNotificationsButton$: Observable<boolean>;
 
     constructor(
         private readonly tabsNavigationService: TabsNavigationService,
@@ -54,14 +54,6 @@ export class MatchesPage implements OnInit {
                      clubs,
                      teams]) => members.length > 0 || division.length > 0 || clubs.length > 0 || teams.length > 0)
         );
-
-        this.showNotificationsButton$ = combineLatest([
-            this.hasFavorites$,
-            this.store.select(RemoteSettingsState.notificationsEnabled)
-        ]).pipe(
-            map(([hasFavorite, isEnabled]) => hasFavorite && isEnabled)
-        );
-
     }
 
     navigateToURI(uri: string[]) {
