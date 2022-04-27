@@ -20,6 +20,7 @@ class Translate {
 export class NotificationItemComponent extends OnDestroyHook implements OnInit {
 
     @Input() label: string;
+    @Input() subtitle: string;
     @Input() topic: string;
     @Output() subscribe: EventEmitter<string> = new EventEmitter<string>();
     @Output() unsubscribe: EventEmitter<string> = new EventEmitter<string>();

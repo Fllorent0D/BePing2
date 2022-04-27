@@ -30,6 +30,7 @@
                 <beping-notification-item
                         *ngFor="let club of clubs"
                         [label]="club.note"
+                        [subtitle]="club.label"
                         [topic]="club.topic"
                 ></beping-notification-item>
             </ion-list>
@@ -45,6 +46,7 @@
                 <beping-notification-item
                         *ngFor="let division of divisions"
                         [label]="division.label"
+                        [subtitle]="division.note"
                         [topic]="division.topic"
                 ></beping-notification-item>
             </ion-list>
@@ -60,6 +62,7 @@
                 <beping-notification-item
                         *ngFor="let team of teams"
                         [label]="team.label"
+                        [subtitle]="'PLAYER_CATEGORY.' + team.note|translate"
                         [topic]="team.topic"
                 ></beping-notification-item>
             </ion-list>
