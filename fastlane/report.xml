@@ -5,23 +5,23 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000234">
+      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000245">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: Switch to android align_versioning_and_bump lane" time="6.8e-05">
+      <testcase classname="fastlane.lanes" name="01: Switch to android align_versioning_and_bump lane" time="0.000212">
         
       </testcase>
     
       
       <testcase classname="fastlane.lanes" name="02: cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[&quot;,]//g' | sed -e 's/^[[:space:]]*//' |tr -d '
-'" time="0.011617">
+'" time="0.00759">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: increment_version_name" time="0.004562">
+      <testcase classname="fastlane.lanes" name="03: increment_version_name" time="0.004615">
         
       </testcase>
     
@@ -31,48 +31,48 @@
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: Switch to android build_android lane" time="6.9e-05">
+      <testcase classname="fastlane.lanes" name="05: Switch to android build_android lane" time="6.8e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: Switch to android build_ionic_prod lane" time="7.6e-05">
+      <testcase classname="fastlane.lanes" name="06: Switch to android build_ionic_prod lane" time="6.7e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: ionic cap copy --prod" time="10.704674">
+      <testcase classname="fastlane.lanes" name="07: ionic cap copy --prod" time="11.364893">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="08: Switch to android align_versioning_and_bump lane" time="0.00013">
+      <testcase classname="fastlane.lanes" name="08: Switch to android align_versioning_and_bump lane" time="0.000151">
         
       </testcase>
     
       
       <testcase classname="fastlane.lanes" name="09: cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[&quot;,]//g' | sed -e 's/^[[:space:]]*//' |tr -d '
-'" time="0.009032">
+'" time="0.020825">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="10: increment_version_name" time="0.000719">
+      <testcase classname="fastlane.lanes" name="10: increment_version_name" time="0.000807">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="11: increment_version_code" time="0.000534">
+      <testcase classname="fastlane.lanes" name="11: increment_version_code" time="0.00047">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="12: assembleRelease" time="28.539043">
+      <testcase classname="fastlane.lanes" name="12: assembleRelease" time="14.021311">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="13: upload_to_play_store" time="17.400506">
+      <testcase classname="fastlane.lanes" name="13: upload_to_play_store" time="12.917473">
         
       </testcase>
     

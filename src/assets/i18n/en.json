@@ -465,8 +465,10 @@
   "CALCULATOR": {
     "POINTS_CALCULATOR": "Points calculator",
     "DELETE_RESULT": "Delete result",
+    "EDIT_RESULT": "Edit result",
     "ADD_RESULT_TO_CALC": "Add result to points calculator",
     "RESULT_ADDED": "Result added",
+    "RESET": "Are you sure you want to delete the encoded results?",
     "OPEN_CALC": "Open points calculator",
     "POINTS_OVER_PIVOT": "Why \"> = C0\"? BePing is not able to calculate an equivalent ranking when the number of points is greater than {{pivot}}. The rankings A, B0, B2, B4, B6 are assigned in relation to the player's position in the ranking.",
     "EVENT_TYPE": {

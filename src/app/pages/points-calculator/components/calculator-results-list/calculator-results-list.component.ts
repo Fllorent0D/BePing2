@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {PointsCalculatorEntryWithPoints, PointsCalculatorState} from '../../../../core/store/points/points-calculator-state.service';
+import {PointsCalculatorEntryWithPoints} from '../../../../core/store/points/points-calculator-state.service';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Remove} from '@ngxs-labs/entity-state';
 import {ActionSheetController} from '@ionic/angular';
 
 @Component({
@@ -21,6 +20,7 @@ export class CalculatorResultsListComponent {
 
     @Output() add: EventEmitter<void> = new EventEmitter<void>();
     @Output() delete: EventEmitter<PointsCalculatorEntryWithPoints> = new EventEmitter<PointsCalculatorEntryWithPoints>();
+    @Output() edit: EventEmitter<PointsCalculatorEntryWithPoints> = new EventEmitter<PointsCalculatorEntryWithPoints>();
 
     constructor(
         private readonly analyticsService: AnalyticsService,
@@ -32,26 +32,35 @@ export class CalculatorResultsListComponent {
 
     async showItemOption(entry: PointsCalculatorEntryWithPoints) {
         const actionSheet = await this.actionSheetCtrl.create({
-            buttons: [{
-                text: this.translateService.instant('CALCULATOR.DELETE_RESULT'),
-                role: 'destructive',
-                icon: 'trash',
-                id: 'delete-button',
-                data: {
-                    type: 'delete'
-                },
-                handler: () => {
-                    this.analyticsService.logEvent('calculator_delete_item');
-                    this.delete.emit(entry);
-                }
-            }, {
-                text: this.translateService.instant('COMMON.CANCEL'),
-                icon: 'close',
-                role: 'cancel',
-                handler: () => {
-                    console.log('Cancel clicked');
-                }
-            }]
+            buttons: [
+                {
+                    text: this.translateService.instant('CALCULATOR.EDIT_RESULT'),
+                    icon: 'pencil',
+                    id: 'edit-button',
+                    handler: () => {
+                        this.analyticsService.logEvent('calculator_edit_item');
+                        this.edit.emit(entry);
+                    }
+                }, {
+                    text: this.translateService.instant('CALCULATOR.DELETE_RESULT'),
+                    role: 'destructive',
+                    icon: 'trash',
+                    id: 'delete-button',
+                    data: {
+                        type: 'delete'
+                    },
+                    handler: () => {
+                        this.analyticsService.logEvent('calculator_delete_item');
+                        this.delete.emit(entry);
+                    }
+                }, {
+                    text: this.translateService.instant('COMMON.CANCEL'),
+                    icon: 'close',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }]
         });
         await actionSheet.present();
         await actionSheet.onDidDismiss();

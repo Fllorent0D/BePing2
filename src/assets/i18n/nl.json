@@ -468,8 +468,10 @@
   "CALCULATOR": {
     "POINTS_CALCULATOR": "Punten rekenmachine",
     "DELETE_RESULT": "Verwijder het resultaat",
+    "EDIT_RESULT": "Bewerk het resultaat",
     "ADD_RESULT_TO_CALC": "Voeg een resultaat toe aan de puntencalculator",
     "RESULT_ADDED": "Resultaat toegevoegd",
+    "RESET": "Weet u zeker dat u de gecodeerde resultaten wilt verwijderen?",
     "OPEN_CALC": "Open punten rekenmachine",
     "POINTS_OVER_PIVOT": "Waarom \"> = C0\"? BePing kan geen gelijkwaardige rangorde berekenen wanneer het aantal punten groter is dan {{pivot}}. De rangschikkingen A, B0, B2, B4, B6 worden toegewezen in relatie tot de positie van de speler in de rangschikking.",
     "EVENT_TYPE": {

@@ -56,7 +56,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                         case 500:
                             this.crashlytics.recordException({message: err.message});
                             dialogService.showToast({
-                                message: translateService.instant('ERROR_TABT.INTERNAL', {error: err.statusText}),
+                                message: translateService.instant('ERROR_TABT.INTERNAL', {error: err.message}),
                                 color: 'medium',
                                 duration: 3000
                             });

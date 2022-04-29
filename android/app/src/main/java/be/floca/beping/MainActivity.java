@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.Plugin;
+import com.getcapacitor.community.fcm.FCMPlugin;
 import com.getcapacitor.community.firebaseanalytics.FirebaseAnalytics;
 import com.getcapacitor.community.firebasecrashlytics.FirebaseCrashlyticsPlugin;
 import com.servicesight.capacitor.startnavigation.StartNavigationPlugin;
@@ -29,6 +30,7 @@ public class MainActivity extends BridgeActivity {
                         add(AndroidDarkModeSupportPlugin.class);
                         add(FirebaseAnalytics.class);
                         add(FirebaseRemoteConfig.class);
+                        add(FCMPlugin.class);
                     }
                 }
         );

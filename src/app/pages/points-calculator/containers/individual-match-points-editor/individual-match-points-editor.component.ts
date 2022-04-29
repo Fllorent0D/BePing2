@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Optional} from '@angular/core';
 import {EVENT_TYPE, EventCoefficient, MATCH_RESULT} from '../../../../core/models/points';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
 import {filter, map, take, takeUntil} from 'rxjs/operators';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
@@ -11,7 +11,7 @@ import {MemberEntry} from '../../../../core/api/models/member-entry';
 import {RankingMethodName, RankingService} from '../../../../core/services/tabt/ranking.service';
 import {PointsCalculatorEntry, PointsCalculatorState} from '../../../../core/store/points/points-calculator-state.service';
 import {Store} from '@ngxs/store';
-import {Add} from '@ngxs-labs/entity-state';
+import {Add, Update} from '@ngxs-labs/entity-state';
 import {PointCalculatorService} from '../../services/point-calculator.service';
 import {UserState} from '../../../../core/store/user/user.state';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
@@ -30,6 +30,7 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
     formGroup: FormGroup;
 
     @Input() memberEntryPrefill: MemberEntry | undefined;
+    @Input() entry: PointsCalculatorEntry;
 
     constructor(
         private readonly dialogService: DialogService,
@@ -45,13 +46,14 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
     }
 
     ngOnInit(): void {
+        console.log(this.entry);
         this.formGroup = new FormGroup({
-            category: new FormControl(null, [Validators.required]),
-            opponentName: new FormControl(null, [Validators.required]),
-            opponentRanking: new FormControl(null, [Validators.required]),
-            matchResult: new FormControl(null, [Validators.required]),
-            eventType: new FormControl(null, [Validators.required]),
-            eventId: new FormControl(null, [Validators.required])
+            category: new FormControl(this.entry?.category, [Validators.required]),
+            opponentName: new FormControl(this.entry?.opponentName, [Validators.required]),
+            opponentRanking: new FormControl(this.entry?.opponentRanking, [Validators.required]),
+            matchResult: new FormControl(this.entry?.victory, [Validators.required]),
+            eventType: new FormControl(this.entry?.eventType, [Validators.required]),
+            eventId: new FormControl(this.entry?.eventId, [Validators.required])
         });
         if (this.memberEntryPrefill) {
             this.setMemberInForm(this.memberEntryPrefill, true);
@@ -134,8 +136,11 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
             category: resultEntry.category,
             matchResult: resultEntry.victory
         });
-
-        this.store.dispatch(new Add(PointsCalculatorState, resultEntry));
+        if (this.entry) {
+            this.store.dispatch(new Update(PointsCalculatorState, this.entry.id, resultEntry));
+        } else {
+            this.store.dispatch(new Add(PointsCalculatorState, resultEntry));
+        }
         if (this.ionRouterOutlet) {
             this.ionNav.back();
         } else {
@@ -146,5 +151,9 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
     async closeModal(): Promise<void> {
         this.analyticsService.logEvent('calculator_dismiss_modal');
         await this.modalCtrl.dismiss({added: false});
+    }
+
+    getControl(control: string): FormControl {
+        return this.formGroup.get(control) as FormControl;
     }
 }

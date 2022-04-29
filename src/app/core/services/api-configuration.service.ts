@@ -3,6 +3,7 @@ import {ApiConfigurationParams} from '../api/api-configuration';
 import {environment} from '../../../environments/environment';
 import {Store} from '@ngxs/store';
 import {RemoteSettingsState} from '../store/remote-settings';
+import {Environment} from '@angular/cli/lib/config/workspace-schema';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,7 @@ export class ApiConfigurationService implements ApiConfigurationParams {
         private readonly store: Store
     ) {
         this.store.select(RemoteSettingsState.tabtUrl).subscribe(url => {
-            if (url) {
+            if (url && environment.production) {
                 this.rootUrl = url;
             } else {
                 this.rootUrl = environment.tabtUrl;

@@ -465,8 +465,10 @@
   "CALCULATOR": {
     "POINTS_CALCULATOR": "Calculateur de points",
     "DELETE_RESULT": "Supprimer le résultat",
+    "EDIT_RESULT": "Editer le résultat",
     "ADD_RESULT_TO_CALC": "Ajouter un résultat au calculateur de points",
     "RESULT_ADDED": "Résultat ajouté",
+    "RESET": "Êtes-vous certains de vouloir d'effacer les résultats encodés?",
     "OPEN_CALC": "Ouvrir calculateur de points",
     "POINTS_OVER_PIVOT": "Il est impossible de calculer un classement équivalent lorsque le nombre de points est supérieur à {{pivot}}.\nPour les classements supérieurs à C0, ils sont attribués par rapport à la position du joueur dans le classement et non par rapport au nombre de points.",
     "EVENT_TYPE": {

@@ -45,7 +45,7 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
         private readonly actionSheetCtrl: ActionSheetController,
         private readonly analyticsService: AnalyticsService,
         private readonly changeDetectorRef: ChangeDetectorRef,
-        private readonly ionRouter: IonRouterOutlet
+        private readonly ionRouter: IonRouterOutlet,
     ) {
         super();
     }
@@ -157,10 +157,10 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
         this.analyticsService.logEvent('calculator_reset');
 
         this.dialogService.showAlert({
-            header: 'Êtes-vous certains de vouloir d\'effacer les résultats encodés',
+            header: this.translateService.instant('CALCULATOR.RESET'),
             buttons: [
                 {
-                    text: 'Annuler',
+                    text: this.translateService.instant('COMMON.CANCEL'),
                     role: 'cancel',
                     cssClass: 'secondary',
                 }, {
@@ -178,9 +178,16 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
         this.currentCategory$.next(event.detail.value);
     }
 
-    async showItemOption(item: PointsCalculatorEntryWithPoints) {
 
+    editEntry(entry: PointsCalculatorEntryWithPoints) {
+        this.dialogService.showModal({
+            component: IndividualMatchPointsEditorComponent,
+            swipeToClose: true,
+            handle: true,
+            componentProps: {
+                entry
+            },
+            presentingElement: this.ionRouter.nativeEl
+        });
     }
-
-
 }

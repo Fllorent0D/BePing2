@@ -28,6 +28,7 @@
             [pivot]="pivot$|async"
             [currentCategory]="currentCategory$|async"
             (add)="addEntry()"
+            (edit)="editEntry($event)"
             (delete)="delete($event)"
     ></beping-calculator-results-list>
 </ion-content>

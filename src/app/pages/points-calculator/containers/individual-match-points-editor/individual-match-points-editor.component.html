@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>{{'CALCULATOR.ADD_MATCH'|translate}}</ion-title>
+        <ion-title>{{ (entry ? 'CALCULATOR.EDIT_RESULT' : 'CALCULATOR.ADD_MATCH')|translate}}</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="closeModal()" *ngIf="!ionRouterOutlet">
                 <ion-icon icon="close-outline"></ion-icon>
@@ -14,7 +14,7 @@
 <ion-content>
     <form [formGroup]="formGroup">
         <ion-list>
-            <ion-radio-group formControlName="category">
+            <ion-radio-group formControlName="category" *ngIf="formGroup.get('category')">
                 <ion-list-header>
                     <ion-label>{{'CALCULATOR.CATEGORY'|translate}}</ion-label>
                 </ion-list-header>
@@ -47,28 +47,28 @@
                 </ion-item>
             </ion-radio-group>
 
-            <ion-radio-group formControlName="matchResult">
+            <ion-radio-group formControlName="matchResult" *ngIf="formGroup.get('matchResult')">
                 <ion-list-header>
                     <ion-label>{{'CALCULATOR.MATCH_RESULT'|translate}}</ion-label>
                 </ion-list-header>
                 <ion-item>
                     <ion-label>{{'COMMON.WIN'|translate}}</ion-label>
-                    <ion-radio slot="start" color="success" [value]="MATCH_RESULT.VICTORY"></ion-radio>
+                    <ion-radio slot="start" color="success" [value]="'victory'"></ion-radio>
                 </ion-item>
 
                 <ion-item>
                     <ion-label>{{'COMMON.DEFEAT'|translate}}</ion-label>
-                    <ion-radio slot="start" color="danger" [value]="MATCH_RESULT.DEFEAT"></ion-radio>
+                    <ion-radio slot="start" color="danger" [value]="'defeat'"></ion-radio>
                 </ion-item>
             </ion-radio-group>
 
-            <ion-radio-group formControlName="eventType">
+            <ion-radio-group formControlName="eventType" *ngIf="formGroup.get('eventType')">
                 <ion-list-header>
                     <ion-label>{{'CALCULATOR.EVENT_TYPE.NAME'|translate}}</ion-label>
                 </ion-list-header>
                 <ion-item>
                     <ion-label>{{'COMMON.CHAMPIONSHIP'|translate}}</ion-label>
-                    <ion-radio slot="start" [value]="EVENT_TYPE.CHAMPIONSHIP"></ion-radio>
+                    <ion-radio checked="true" slot="start" [value]="EVENT_TYPE.CHAMPIONSHIP"></ion-radio>
                 </ion-item>
 
                 <ion-item>
