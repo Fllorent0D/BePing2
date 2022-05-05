@@ -21,11 +21,13 @@
 
                 <ion-item>
                     <ion-label>{{'PLAYER_CATEGORY.MEN_SHORT' |translate}}</ion-label>
-                    <ion-radio [disabled]="formGroup.get('category').disabled" slot="start" [value]="PLAYER_CATEGORY.MEN"></ion-radio>
+                    <ion-radio [disabled]="formGroup.get('category').disabled" slot="start"
+                               [value]="PLAYER_CATEGORY.MEN"></ion-radio>
                 </ion-item>
                 <ion-item>
                     <ion-label>{{'PLAYER_CATEGORY.WOMEN_SHORT' |translate}}</ion-label>
-                    <ion-radio [disabled]="formGroup.get('category').disabled" slot="start" [value]="PLAYER_CATEGORY.WOMEN"></ion-radio>
+                    <ion-radio [disabled]="formGroup.get('category').disabled" slot="start"
+                               [value]="PLAYER_CATEGORY.WOMEN"></ion-radio>
                 </ion-item>
             </ion-radio-group>
 
@@ -101,7 +103,7 @@
                     color="success"
                     [disabled]="formGroup.invalid"
                     (click)="save()">
-                <ion-label>{{'CALCULATOR.ADD_MATCH'|translate}}</ion-label>
+                <ion-label>{{(entry ? 'CALCULATOR.EDIT_RESULT' : 'CALCULATOR.ADD_MATCH') |translate}}</ion-label>
             </ion-item>
 
         </ion-list>
