@@ -164,7 +164,7 @@ export class NotificationsState implements NgxsOnInit {
     @Action([UpdateCurrentLang])
     reSubscribeToCorrectLang(ctx: StateContext<NotificationsStateModel>, {lang}: UpdateCurrentLang) {
         const state = ctx.getState();
-        if (!state?.permission) {
+        if (state?.permission === 'granted') {
             return;
         }
         const existingTopics = state.topics;
