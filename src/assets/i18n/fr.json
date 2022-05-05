@@ -554,5 +554,6 @@
     "SUBSCRIPTION_CONDITION_1": "L'inscription ne peut pas être transférée vers un autre compte. Cet achat intégré supplémentaire est valable pour un seul compte.",
     "SUBSCRIPTION_CONDITION_2": "L'abonnement se renouvelle automatiquement chaque année sauf annulation.",
     "YOUR_CONTRIBUTION_HELP": "Votre contribution aide à faire grandir le projet"
-  }
+  },
+  "CONNECTIVITY_ISSUE": "BePing est indisponible temporairement. Nous rencontrons des soucis pour nous connecter au serveur de la fédération. Ceci est indépendant de notre volonté.\nVeuillez nous excuser du désagrément."
 }

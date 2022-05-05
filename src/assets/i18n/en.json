@@ -557,5 +557,6 @@
   },
   "NOTIFICATIONS": {
 
-  }
+  },
+  "CONNECTIVITY_ISSUE": "BePing is temporarily unavailable. We are having problems connecting to the federation server. This is beyond our control.\nWe apologize for the inconvenience."
 }

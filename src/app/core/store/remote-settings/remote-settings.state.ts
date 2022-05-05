@@ -14,6 +14,7 @@ export interface RemoteSettingsStateModel {
     use_member_lookup: boolean;
     maintenance: boolean;
     notifications: boolean;
+    connectivity_issue: boolean;
 }
 
 const defaultState = {
@@ -23,7 +24,8 @@ const defaultState = {
     beping_pro: true,
     use_member_lookup: false,
     maintenance: false,
-    notifications: false
+    notifications: false,
+    connectivity_issue: false
 };
 
 @State<RemoteSettingsStateModel>({
@@ -64,6 +66,11 @@ export class RemoteSettingsState implements NgxsOnInit {
         return true;
     }
 
+    @Selector([RemoteSettingsState])
+    static connectivityIssue(state: RemoteSettingsStateModel): boolean {
+        return state.connectivity_issue;
+    }
+
     constructor(
         private readonly crashlytics: CrashlyticsService
     ) {
@@ -90,6 +97,7 @@ export class RemoteSettingsState implements NgxsOnInit {
         const memberLookup = await FirebaseRemoteConfig.getBoolean({key: 'use_member_lookup'});
         const maintenance = await FirebaseRemoteConfig.getBoolean({key: 'maintenance'});
         const notifications = await FirebaseRemoteConfig.getBoolean({key: 'notifications'});
+        const connectivityIssue = await FirebaseRemoteConfig.getBoolean({key: 'connectivity_issue'});
         console.log('notifications:::', notifications);
         dispatch(new UpdateRemoteSettingKey('partnership_rotatio', rotatio.value));
         dispatch(new UpdateRemoteSettingKey('beping_pro', bepingPro.value));
@@ -98,6 +106,7 @@ export class RemoteSettingsState implements NgxsOnInit {
         dispatch(new UpdateRemoteSettingKey('use_member_lookup', memberLookup.value));
         dispatch(new UpdateRemoteSettingKey('maintenance', maintenance.value));
         dispatch(new UpdateRemoteSettingKey('notifications', notifications.value));
+        dispatch(new UpdateRemoteSettingKey('connectivity_issue', connectivityIssue.value));
     }
 
     @Action([UpdateRemoteSettingKey])

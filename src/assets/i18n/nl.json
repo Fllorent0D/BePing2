@@ -557,5 +557,6 @@
     "SUBSCRIPTION_CONDITION_1": "Registratie kan niet worden overgedragen naar een ander account. Deze aanvullende in-app-aankoop is slechts geldig voor één account.",
     "SUBSCRIPTION_CONDITION_2": "Abonnement wordt elk jaar automatisch verlengd, tenzij opgezegd.",
     "YOUR_CONTRIBUTION_HELP": "Jouw bijdrage helpt het project te laten groeien"
-  }
+  },
+  "CONNECTIVITY_ISSUE": "BePing is tijdelijk niet beschikbaar. We hebben problemen om verbinding te maken met de federatie server. Dit is buiten onze controle.\nWij verontschuldigen ons voor het ongemak."
 }

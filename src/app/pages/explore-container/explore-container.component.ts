@@ -51,6 +51,7 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
     @Select(InAppPurchasesState.isPro) isPro$: Observable<boolean>;
     @Select(InAppPurchasesState.showBePingProBanner) showProBanner$: Observable<boolean>;
     @Select(RemoteSettingsState.partnershipRotatio) partnershipRotatio$: Observable<boolean>;
+    @Select(RemoteSettingsState.connectivityIssue) connectivityIssue$: Observable<boolean>;
     TABT_DATABASES = TABT_DATABASES;
 
     constructor(
