@@ -25,7 +25,6 @@ export class PointCalculatorService {
         const isExpected = (result.opponentRanking > basePoint && result.victory === MATCH_RESULT.DEFEAT)
             || (result.opponentRanking < basePoint && result.victory === MATCH_RESULT.VICTORY);
         const pointsLimits: PointsBounding = this.findBoundingPointsForPointDiff(diff, category);
-        console.log('pointslimits', pointsLimits, isExpected, result, category, basePoint, diff);
         const points: number = isExpected ? pointsLimits.expectedResult : pointsLimits.unexpectedResult;
         const {coefficient}: EventCoefficient = this.findCoefficientEvent(result.eventType, result.eventId, category);
 
