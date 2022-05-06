@@ -118,7 +118,7 @@
     "karma-coverage-istanbul-reporter": "3.0.3",
     "karma-jasmine": "3.3.1",
     "karma-jasmine-html-reporter": "1.7.0",
-    "ng-openapi-gen": "0.19.2",
+    "ng-openapi-gen": "0.20.0",
     "protractor": "7.0.0",
     "ts-node": "8.3.0",
     "tslint": "6.1.3",
