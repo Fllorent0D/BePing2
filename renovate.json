@@ -3,6 +3,7 @@
     "config:base"
   ],
   "commitMessagePrefix": ":arrow_up: ",
+  "automergeType": "pr",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
