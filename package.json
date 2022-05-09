@@ -109,7 +109,7 @@
     "@wdio/spec-reporter": "7.19.7",
     "chromedriver": "101.0.0",
     "codelyzer": "6.0.2",
-    "cypress": "9.6.0",
+    "cypress": "9.6.1",
     "eslint": "8.14.0",
     "jasmine-core": "4.1.0",
     "jasmine-spec-reporter": "7.0.0",
