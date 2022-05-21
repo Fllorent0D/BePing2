@@ -16,6 +16,7 @@ import {ClubTeamListTabComponent} from './components/club-team-list-tab/club-tea
 import {ClubPraticalInfoTabComponent} from './components/club-pratical-info-tab/club-pratical-info-tab.component';
 import {TeamResultTabComponent} from './components/team-result-tab/team-result-tab.component';
 import {TeamPlayersStatsComponent} from './components/team-players-stats/team-players-stats.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import {TeamPlayersStatsComponent} from './components/team-players-stats/team-pl
         ClubPageRoutingModule,
         SharedModule,
         ScrollingModule,
+        SwiperModule,
     ],
     declarations: [
         ClubPage,

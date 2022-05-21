@@ -7,6 +7,7 @@ import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {DivisionsPageComponent} from './containers/divisions-page/divisions-page.component';
 import {RegionsDivisionComponent} from './containers/regions-division/regions-division.component';
+import { SwiperModule } from 'swiper/angular';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {RegionsDivisionComponent} from './containers/regions-division/regions-di
         SharedModule,
         DivisionRoutingModule,
         SuperTabsModule,
-        ScrollingModule
+        ScrollingModule,
+        SwiperModule
     ]
 })
 export class DivisionModule {

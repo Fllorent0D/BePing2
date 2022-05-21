@@ -25,3 +25,45 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import '~swiper/scss';
+@import '~swiper/scss/scrollbar';
+
+.beping-swiper {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.beping-swiper-scrollbar {
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  position: relative;
+  > div.segment {
+    height: 100%;
+    width: 33.3%;
+    text-transform: capitalize;
+    color: var(--ion-color-medium);
+    font-size: .85em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.beping-swiper-segment-active {
+  color: var(--ion-color-primary);
+}
+
+.beping-swiper-scrollbar-drag {
+    height: 2px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: 2px;
+    background: var(--ion-color-primary);
+  }
+
+

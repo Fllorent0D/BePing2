@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Select, Store} from '@ngxs/store';
@@ -22,13 +22,16 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {IonRouterOutlet} from '@ionic/angular';
+import SwiperCore, { SwiperOptions, Scrollbar } from 'swiper';
+import { SwiperComponent } from 'swiper/angular';
+SwiperCore.use([Scrollbar]);
 
 @Component({
     selector: 'beping-division-page',
     templateUrl: './division-page.component.html',
     styleUrls: ['./division-page.component.scss']
 })
-export class DivisionPageComponent extends AbstractPageTabsComponent implements OnInit {
+export class DivisionPageComponent extends AbstractPageTabsComponent implements OnInit, AfterViewInit {
 
     divisionId$: Observable<number>;
     ranking$: Observable<RankingEntry[]>;
@@ -37,6 +40,20 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
     matches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
     @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
+
+    @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
+    activeSwiperIndex = 0;
+
+    swiperConfig: SwiperOptions = {
+        speed: 150,
+        scrollbar: {
+            draggable: true,
+            hide: false,
+            dragClass: 'beping-swiper-scrollbar-drag',
+            el: '.beping-swiper-scrollbar',
+        },
+    };
+    
 
     constructor(
         protected readonly changeDetectionRef: ChangeDetectorRef,
@@ -49,7 +66,8 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
         private readonly calendarService: CalendarService,
         private readonly dialogService: DialogService,
         private readonly translate: TranslateService,
-        private readonly ionRouter: IonRouterOutlet
+        private readonly ionRouter: IonRouterOutlet,
+        private readonly ngZone: NgZone,
     ) {
         super(changeDetectionRef);
     }
@@ -84,6 +102,14 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
         );
 
 
+    }
+
+    ngAfterViewInit(): void {
+        this.swiper.updateSwiper({});
+    }
+
+    slideChange([swiper]) {
+        this.ngZone.run(() => this.activeSwiperIndex = swiper.activeIndex);
     }
 
     isSameTeam(rankingEntry: RankingEntry, team: TeamEntry, club: ClubEntry, divisionId: number): boolean {
