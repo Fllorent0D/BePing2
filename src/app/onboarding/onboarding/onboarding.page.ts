@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {IonRouterOutlet, IonSlides, NavController} from '@ionic/angular';
+import {IonRouterOutlet, NavController} from '@ionic/angular';
 import {Select, Store} from '@ngxs/store';
 import {ClubsState, GetClubs} from '../../core/store/clubs';
 import {combineLatest, Observable} from 'rxjs';
@@ -14,6 +14,8 @@ import {DialogService} from '../../core/services/dialog-service.service';
 import {PrivacyComponent} from '../../pages/settings/containers/privacy/privacy.component';
 import {ConditionsUsageComponent} from '../../pages/settings/containers/conditions-usage/conditions-usage.component';
 import {Network} from '@capacitor/network';
+import {SwiperComponent} from 'swiper/angular';
+import {SwiperOptions} from 'swiper';
 
 @Component({
     selector: 'beping-onboarding',
@@ -21,10 +23,17 @@ import {Network} from '@capacitor/network';
     styleUrls: ['./onboarding.page.scss']
 })
 export class OnboardingPage implements OnInit, OnDestroy {
-    slideOpts = {
-        autoplay: false
+
+    @ViewChild('swiper', {static: false}) swiperComponent: SwiperComponent;
+
+    swiperConfig: SwiperOptions = {
+        speed: 150,
+        scrollbar: {
+            draggable: true,
+            hide: true,
+        },
     };
-    @ViewChild('slider') slider: IonSlides;
+
     @Select(ClubsState.loading) clubsLoading$: Observable<boolean>;
     @Select(ClubsState.error) clubsError$: Observable<Error | null>;
 
@@ -96,12 +105,12 @@ export class OnboardingPage implements OnInit, OnDestroy {
     }
 
     async goToEnd() {
-        const indexCnt = await this.slider.length();
-        this.slider.slideTo(indexCnt);
+        const indexCnt = this.swiperComponent.swiperRef.slides.length;
+        this.swiperComponent.swiperRef.slideTo(indexCnt);
     }
 
     next() {
-        this.slider.slideNext();
+        this.swiperComponent.swiperRef.slideNext();
     }
 
     start() {
