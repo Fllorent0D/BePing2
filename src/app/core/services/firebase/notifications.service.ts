@@ -72,8 +72,6 @@ export class NotificationsService {
     }
 
     async requestPermission(): Promise<PermissionState> {
-        console.log('request perms');
-
         const currentPerm = await this.checkPermissionStatus();
         if (currentPerm === 'denied') {
             await this.showAlertToAcceptNotifications();
@@ -101,18 +99,15 @@ export class NotificationsService {
                 ]
             });
             await alert.onWillDismiss();
-            console.log('show alert passed');
+
             // Yea...
             if (shouldStop) {
                 throw new Error('Stopping flow');
-                return currentPerm;
             }
         }
 
         const response = await PushNotifications.requestPermissions();
         if (response.receive === 'granted') {
-            console.log('perms granted');
-
             await PushNotifications.register();
         }
         return response.receive;
