@@ -1,4 +1,4 @@
-import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {BehaviorSubject, combineLatest, Observable, ReplaySubject} from 'rxjs';
@@ -25,8 +25,8 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {IonRouterOutlet} from '@ionic/angular';
-import SwiperCore, { SwiperOptions, Scrollbar } from 'swiper';
-import { SwiperComponent } from 'swiper/angular';
+import SwiperCore, {Scrollbar} from 'swiper';
+
 SwiperCore.use([Scrollbar]);
 
 @Component({
@@ -35,7 +35,7 @@ SwiperCore.use([Scrollbar]);
     styleUrls: ['./club.page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClubPage extends AbstractPageTabsComponent implements OnInit, AfterViewInit {
+export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     club$: Observable<ClubEntry>;
     members$: Observable<MemberEntry[]>;
     venues$: Observable<VenueEntry[]>;
@@ -52,19 +52,6 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit, After
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
     @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
 
-    @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
-    activeSwiperIndex = 0;
-
-    swiperConfig: SwiperOptions = {
-        speed: 150,
-        scrollbar: {
-            draggable: true,
-            hide: false,
-            dragClass: 'beping-swiper-scrollbar-drag',
-            el: '.beping-swiper-scrollbar',
-        },
-    };
-
     constructor(
         private readonly activatedRoute: ActivatedRoute,
         private readonly router: Router,
@@ -80,9 +67,9 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit, After
         private readonly dialogService: DialogService,
         private readonly translate: TranslateService,
         private readonly ionRouter: IonRouterOutlet,
-        private readonly ngZone: NgZone
+        protected readonly ngZone: NgZone
     ) {
-        super(changeDetectionRef);
+        super(changeDetectionRef, ngZone);
 
         this.from$ = new BehaviorSubject<Date>(sub(new Date(), {weeks: 2}));
         this.to$ = new BehaviorSubject<Date>(new Date());
@@ -120,14 +107,6 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit, After
             map((members: MemberEntry[]) => this.clubMembersListService.transformToClubMembersList(members))
         );
 
-    }
-
-    ngAfterViewInit(): void {
-        this.swiper.updateSwiper({});
-    }
-
-    slideChange([swiper]) {
-        this.ngZone.run(() => this.activeSwiperIndex = swiper.activeIndex);
     }
 
     async categoryClicked(category: PLAYER_CATEGORY) {

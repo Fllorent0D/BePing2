@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
 import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
 import {combineLatest, Observable} from 'rxjs';
 import {RankingEntry} from '../../../../core/api/models/ranking-entry';
@@ -22,8 +22,8 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {IonRouterOutlet} from '@ionic/angular';
-import SwiperCore, { SwiperOptions, Scrollbar } from 'swiper';
-import { SwiperComponent } from 'swiper/angular';
+import SwiperCore, {Scrollbar} from 'swiper';
+
 SwiperCore.use([Scrollbar]);
 
 @Component({
@@ -47,19 +47,6 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
     isFavorite$: Observable<boolean>;
     @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
 
-    @ViewChild('swiper', { static: false }) swiper?: SwiperComponent;
-    activeSwiperIndex = 0;
-
-    swiperConfig: SwiperOptions = {
-        speed: 150,
-        scrollbar: {
-            draggable: true,
-            hide: false,
-            dragClass: 'beping-swiper-scrollbar-drag',
-            el: '.beping-swiper-scrollbar',
-        },
-    };
-
     constructor(
         private readonly divisionsService: DivisionsService,
         private readonly clubsService: ClubsService,
@@ -73,9 +60,9 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         private readonly dialogService: DialogService,
         private readonly translate: TranslateService,
         private readonly ionRouterOutlet: IonRouterOutlet,
-        private readonly ngZone: NgZone
+        protected readonly ngZone: NgZone
     ) {
-        super(changeDetectionRef);
+        super(changeDetectionRef, ngZone);
     }
 
     ngOnInit() {
@@ -135,14 +122,6 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
             switchMap((team: TeamEntry) => this.divisionsService.findDivisionRanking({divisionId: team.DivisionId})),
             shareReplay(1)
         );
-    }
-
-    ngAfterViewInit(): void {
-        this.swiper.updateSwiper({});
-    }
-
-    slideChange([swiper]) {
-        this.ngZone.run(() => this.activeSwiperIndex = swiper.activeIndex);
     }
 
     navigateToPlayer(uniqueIndex: number) {

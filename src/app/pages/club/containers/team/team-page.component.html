@@ -19,7 +19,7 @@
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar>
-        <div class="beping-swiper-scrollbar">
+        <div class="beping-swiper-scrollbar" #scrollbar>
             <div class="segment">
                 <ion-text [class.beping-swiper-segment-active]="activeSwiperIndex === 0">{{'TEAM_STAT.RANKING' | translate}}</ion-text>
             </div>
@@ -38,6 +38,7 @@
         #swiper
         [config]="swiperConfig"
         class="beping-swiper"
+        (afterInit)="onSwiper($event)"
         (slideChange)="slideChange($event)"
     >
         <ng-template swiperSlide>
