@@ -40,9 +40,9 @@ export class AfttLoginPage implements OnInit {
     }
 
     async ngOnInit() {
-        this.loginForm = new FormGroup({
-            username: new FormControl('', [Validators.required]),
-            password: new FormControl('', [Validators.required])
+        this.loginForm = new FormGroup<any>({
+            username: new FormControl<string>('', [Validators.required]),
+            password: new FormControl<string>('', [Validators.required])
         });
     }
 
@@ -53,26 +53,28 @@ export class AfttLoginPage implements OnInit {
         this.store.dispatch(action).pipe(
             take(1),
             finalize(() => this.loading = false)
-        ).subscribe(async () => {
-            if (this.modalCtrl) {
-                this.modalCtrl.dismiss({logged: true});
-            } else {
+        ).subscribe({
+            next: () => {
+                if (this.modalCtrl) {
+                    this.modalCtrl.dismiss({logged: true});
+                } else {
+                    this.dialogService.showToast({
+                        message: 'Connecté avec l\'AFTT',
+                        position: 'bottom',
+                        color: 'success',
+                        duration: 2000
+                    });
+                    this.ionNav.pop();
+                }
+            },
+            error: () => {
                 this.dialogService.showToast({
-                    message: 'Connecté avec l\'AFTT',
+                    message: 'Login invalide',
                     position: 'bottom',
-                    color: 'success',
+                    color: 'danger',
                     duration: 2000
                 });
-                this.ionNav.pop();
             }
-
-        }, async () => {
-            this.dialogService.showToast({
-                message: 'Login invalide',
-                position: 'bottom',
-                color: 'danger',
-                duration: 2000
-            });
         });
     }
 

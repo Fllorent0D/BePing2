@@ -10,7 +10,7 @@ import {
     InAppPurchaseRestore
 } from '../../../../core/store/in-app-purchases/in-app-purchases.actions';
 import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchases.model';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, UntypedFormControl, Validators} from '@angular/forms';
 import {filter, shareReplay, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {DialogService} from '../../../../core/services/dialog-service.service';
@@ -34,7 +34,7 @@ export class PremiumSubscriptionsComponent extends OnDestroyHook implements OnIn
     bepingProMidPrice$: Observable<IAPProduct>;
     bepingProHighPrice$: Observable<IAPProduct>;
     currentProduct$: Observable<IAPProduct>;
-    priceSlider: FormControl;
+    priceSlider: FormControl<number>;
 
     constructor(
         private readonly inAppPurchasesService: InAppPurchasesService,

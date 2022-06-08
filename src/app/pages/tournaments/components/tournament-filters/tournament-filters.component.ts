@@ -22,8 +22,8 @@ export class TournamentFiltersComponent implements OnInit {
 
     ngOnInit() {
         this.formGroup = new FormGroup({
-            levelsToDisplay: new FormControl(this.filter?.levelsToDisplay),
-            showPastTournaments: new FormControl(this.filter?.showPastTournaments)
+            levelsToDisplay: new FormControl<string[]>(this.filter?.levelsToDisplay),
+            showPastTournaments: new FormControl<boolean>(this.filter?.showPastTournaments)
         });
     }
 

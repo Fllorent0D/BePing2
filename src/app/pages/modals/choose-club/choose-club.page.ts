@@ -4,7 +4,7 @@ import {ModalController} from '@ionic/angular';
 import {ClubsState} from '../../../core/store/clubs';
 import {Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {FormControl} from '@angular/forms';
+import {FormControl, UntypedFormControl} from '@angular/forms';
 import {distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
 
 import {Capacitor} from '@capacitor/core';
@@ -18,7 +18,7 @@ import {Keyboard} from '@capacitor/keyboard';
 })
 export class ChooseClubPage implements OnInit {
 
-    searchBox: FormControl;
+    searchBox: FormControl<string>;
     clubsFound$: Observable<ClubEntry[]>;
     terms$: Observable<string>;
 
@@ -26,12 +26,12 @@ export class ChooseClubPage implements OnInit {
         private readonly modalCtrl: ModalController,
         private readonly store: Store
     ) {
-        this.searchBox = new FormControl();
+        this.searchBox = new FormControl<string>('');
     }
 
 
     ngOnInit() {
-        this.terms$ = this.clubsFound$ = this.searchBox.valueChanges.pipe(
+        this.terms$ = this.searchBox.valueChanges.pipe(
             distinctUntilChanged(),
             startWith('')
         );

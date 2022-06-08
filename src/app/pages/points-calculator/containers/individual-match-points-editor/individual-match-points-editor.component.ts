@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Optional} from '@angular/core';
 import {EVENT_TYPE, EventCoefficient, MATCH_RESULT} from '../../../../core/models/points';
-import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Form, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {filter, map, take, takeUntil} from 'rxjs/operators';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
@@ -153,7 +153,7 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
         await this.modalCtrl.dismiss({added: false});
     }
 
-    getControl(control: string): FormControl {
-        return this.formGroup.get(control) as FormControl;
+    getControl(control: string): UntypedFormControl {
+        return this.formGroup.get(control) as UntypedFormControl;
     }
 }

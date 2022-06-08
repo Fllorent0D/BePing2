@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TeamMatchesEntry} from '../../../core/api/models/team-matches-entry';
-import {FormControl} from '@angular/forms';
+import {FormControl, UntypedFormControl} from '@angular/forms';
 import {map, take, tap} from 'rxjs/operators';
 import {combineLatest, merge, Observable} from 'rxjs';
 import {groupBy} from '../../../core/utils/group-by';
@@ -14,7 +14,7 @@ export class TeamMatchesEntryListComponent implements OnInit {
 
     @Input() teamMatchEntries$: Observable<TeamMatchesEntry[]>;
 
-    weekSelected: FormControl;
+    weekSelected: FormControl<number>;
     currentWeekNameSelected$: Observable<number>;
     teamMatchofSelectedWeek$: Observable<TeamMatchesEntry[]>;
     maxWeekName$: Observable<number>;
@@ -24,7 +24,7 @@ export class TeamMatchesEntryListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.weekSelected = new FormControl(1);
+        this.weekSelected = new FormControl<number>(1);
 
         this.predictedWeekName$ = this.teamMatchEntries$.pipe(
             map((matches) => {

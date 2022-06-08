@@ -4,7 +4,7 @@ import {TabsNavigationService} from '../../../../core/services/navigation/tabs-n
 import {map, shareReplay, switchMap, takeUntil} from 'rxjs/operators';
 import {UserState} from '../../../../core/store/user/user.state';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
-import {FormControl} from '@angular/forms';
+import {FormControl, UntypedFormControl} from '@angular/forms';
 import {PointsCalculatorEntryWithPoints, PointsCalculatorState} from '../../../../core/store/points/points-calculator-state.service';
 import {combineLatest, Observable, ReplaySubject} from 'rxjs';
 import {MemberEntry} from '../../../../core/api/models/member-entry';
@@ -29,7 +29,6 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
 
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
     pivot$: Observable<number>;
-    playerCategorySelectedFormControl: FormControl;
     currentMemberEntry$: Observable<MemberEntry>;
     playerCategories$: Observable<PLAYER_CATEGORY[]>;
     pointsEntryWithPoints$: Observable<PointsCalculatorEntryWithPoints[]>;
@@ -51,8 +50,6 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
     }
 
     ngOnInit(): void {
-        this.playerCategorySelectedFormControl = new FormControl();
-
         this.playerCategories$ = this.store.select(UserState.availablePlayerCategories).pipe(
             map((categories: PLAYER_CATEGORY[]) =>
                 categories.filter(category => [PLAYER_CATEGORY.WOMEN, PLAYER_CATEGORY.MEN].includes(category))
