@@ -51,7 +51,7 @@
     "@ionic-native/in-app-purchase-2": "5.36.0",
     "@ionic-super-tabs/angular": "7.0.8",
     "@ionic/angular": "6.1.9",
-    "@ionic/core": "6.1.8",
+    "@ionic/core": "6.1.9",
     "@joinflux/firebase-remote-config": "0.5.1",
     "@ngx-translate/core": "14.0.0",
     "@ngx-translate/http-loader": "7.0.0",
