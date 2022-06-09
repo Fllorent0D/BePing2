@@ -14,6 +14,11 @@ import {InternalIdentifiersService} from '../../../core/api/services/internal-id
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
 import {DialogService} from '../../../core/services/dialog-service.service';
 
+interface AfttLoginFormGroup {
+    username: FormControl<string>;
+    password: FormControl<string>;
+}
+
 @Component({
     selector: 'beping-aftt-login',
     templateUrl: './aftt-login-page.component.html',
@@ -21,7 +26,7 @@ import {DialogService} from '../../../core/services/dialog-service.service';
 })
 export class AfttLoginPage implements OnInit {
 
-    loginForm: FormGroup;
+    loginForm: FormGroup<AfttLoginFormGroup>;
     loading = false;
 
     @Select(SettingsState.getCurrentLang) lang$: Observable<LANG>;
@@ -40,7 +45,7 @@ export class AfttLoginPage implements OnInit {
     }
 
     async ngOnInit() {
-        this.loginForm = new FormGroup<any>({
+        this.loginForm = new FormGroup<AfttLoginFormGroup>({
             username: new FormControl<string>('', [Validators.required]),
             password: new FormControl<string>('', [Validators.required])
         });

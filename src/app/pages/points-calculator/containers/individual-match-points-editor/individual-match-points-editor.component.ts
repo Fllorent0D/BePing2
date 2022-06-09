@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Optional} from '@angular/core';
 import {EVENT_TYPE, EventCoefficient, MATCH_RESULT} from '../../../../core/models/points';
-import {Form, FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, UntypedFormControl, Validators} from '@angular/forms';
 import {filter, map, take, takeUntil} from 'rxjs/operators';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
@@ -16,6 +16,15 @@ import {PointCalculatorService} from '../../services/point-calculator.service';
 import {UserState} from '../../../../core/store/user/user.state';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 
+interface IndividualMatchPointsEditorFormGroup {
+    category: FormControl<PLAYER_CATEGORY>;
+    opponentName: FormControl<string>;
+    opponentRanking: FormControl<number>;
+    matchResult: FormControl<MATCH_RESULT>;
+    eventType: FormControl<EVENT_TYPE>;
+    eventId: FormControl<string>;
+}
+
 @Component({
     selector: 'beping-individual-match-points-editor',
     templateUrl: './individual-match-points-editor.component.html',
@@ -27,7 +36,7 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
     MATCH_RESULT = MATCH_RESULT;
     coefficientPerEvent: { [key: string]: EventCoefficient[] };
     PLAYER_CATEGORY = PLAYER_CATEGORY;
-    formGroup: FormGroup;
+    formGroup: FormGroup<IndividualMatchPointsEditorFormGroup>;
 
     @Input() memberEntryPrefill: MemberEntry | undefined;
     @Input() entry: PointsCalculatorEntry;
@@ -47,7 +56,7 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
 
     ngOnInit(): void {
         console.log(this.entry);
-        this.formGroup = new FormGroup({
+        this.formGroup = new FormGroup<IndividualMatchPointsEditorFormGroup>({
             category: new FormControl(this.entry?.category, [Validators.required]),
             opponentName: new FormControl(this.entry?.opponentName, [Validators.required]),
             opponentRanking: new FormControl(this.entry?.opponentRanking, [Validators.required]),
@@ -109,7 +118,7 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
 
     setMemberInForm(memberEntry: MemberEntry, disableCategory: boolean) {
         if (disableCategory) {
-            this.formGroup.get('category').setValue(memberEntry.Category, {emitEvent: false});
+            this.formGroup.get('category').setValue(memberEntry.Category as PLAYER_CATEGORY, {emitEvent: false});
             this.formGroup.get('category').disable({emitEvent: false});
             this.formGroup.get('opponentName').disable();
 
@@ -126,8 +135,8 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
             eventId: this.formGroup.get('eventId').value,
             opponentName: this.formGroup.get('opponentName').value,
             opponentRanking: this.formGroup.get('opponentRanking').value,
-            victory: this.formGroup.get('matchResult').value as MATCH_RESULT,
-            category: this.formGroup.get('category').value as PLAYER_CATEGORY,
+            victory: this.formGroup.get('matchResult').value,
+            category: this.formGroup.get('category').value,
             eventType: this.formGroup.get('eventType').value,
         };
         this.analyticsService.logEvent('calculator_save_result', {
