@@ -99,7 +99,7 @@
     "@ngxs/hmr-plugin": "3.7.3",
     "@types/jasmine": "4.0.3",
     "@types/jasminewd2": "2.0.10",
-    "@types/leaflet": "1.7.10",
+    "@types/leaflet": "1.7.11",
     "@types/node": "16.11.39",
     "@typescript-eslint/eslint-plugin": "5.27.1",
     "@typescript-eslint/parser": "5.27.1",
