@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Platform, ToastController} from '@ionic/angular';
 import {IAPProduct, InAppPurchase2} from '@ionic-native/in-app-purchase-2/ngx';
 import {BePingIAP} from '../store/in-app-purchases/in-app-purchases.model';

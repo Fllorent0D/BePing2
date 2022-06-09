@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IsProService} from '../is-pro.service';
 import {TabsNavigationService} from '../navigation/tabs-navigation.service';
-import {IonRouterOutlet} from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'

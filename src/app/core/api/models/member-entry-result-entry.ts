@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { RankingEvaluationEntry } from './ranking-evaluation-entry';
+import {RankingEvaluationEntry} from './ranking-evaluation-entry';
+
 export interface MemberEntryResultEntry {
   Club: string;
   CompetitionType: 'C' | 'T';

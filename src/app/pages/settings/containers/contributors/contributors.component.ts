@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {InAppBrowserService} from '../../../../core/services/browser/in-app-browser.service';
 
 @Component({

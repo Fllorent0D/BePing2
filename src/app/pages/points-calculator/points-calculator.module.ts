@@ -4,7 +4,7 @@ import {PointsCalculatorPageComponent} from './containers/points-calculator-page
 import {SharedModule} from '../../shared/shared.module';
 import {IndividualMatchPointsEditorComponent} from './containers/individual-match-points-editor/individual-match-points-editor.component';
 import {ModalsModule} from '../modals/modals.module';
-import { CalculatorResultsListComponent } from './components/calculator-results-list/calculator-results-list.component';
+import {CalculatorResultsListComponent} from './components/calculator-results-list/calculator-results-list.component';
 
 
 @NgModule({

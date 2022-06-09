@@ -4,7 +4,6 @@ import {TabsNavigationService} from '../../../../core/services/navigation/tabs-n
 import {map, shareReplay, switchMap, takeUntil} from 'rxjs/operators';
 import {UserState} from '../../../../core/store/user/user.state';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
-import {FormControl, UntypedFormControl} from '@angular/forms';
 import {PointsCalculatorEntryWithPoints, PointsCalculatorState} from '../../../../core/store/points/points-calculator-state.service';
 import {combineLatest, Observable, ReplaySubject} from 'rxjs';
 import {MemberEntry} from '../../../../core/api/models/member-entry';

@@ -3,7 +3,6 @@ import {ApiConfigurationParams} from '../api/api-configuration';
 import {environment} from '../../../environments/environment';
 import {Store} from '@ngxs/store';
 import {RemoteSettingsState} from '../store/remote-settings';
-import {Environment} from '@angular/cli/lib/config/workspace-schema';
 
 @Injectable({
     providedIn: 'root'

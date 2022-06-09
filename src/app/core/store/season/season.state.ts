@@ -6,7 +6,6 @@ import {of} from 'rxjs';
 import {CurrentSeasonChanged, GetCurrentSeason, GetCurrentSeasonFailure, SetSeasonLoading} from './season.actions';
 import {SeasonsService} from '../../api/services/seasons.service';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
-import {DialogService} from '../../services/dialog-service.service';
 import {UpdateRemoteSettingKey} from '../remote-settings';
 
 export interface SeasonStateModel {

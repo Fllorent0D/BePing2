@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TeamMatchesEntry} from '../../../core/api/models/team-matches-entry';
-import {FormControl, UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {map, take, tap} from 'rxjs/operators';
 import {combineLatest, merge, Observable} from 'rxjs';
 import {groupBy} from '../../../core/utils/group-by';

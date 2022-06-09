@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Optional} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {InAppPurchasesState} from '../../../../core/store/in-app-purchases/in-app-purchases.state';
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
@@ -10,11 +10,11 @@ import {
     InAppPurchaseRestore
 } from '../../../../core/store/in-app-purchases/in-app-purchases.actions';
 import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchases.model';
-import {FormControl, UntypedFormControl, Validators} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {filter, shareReplay, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {DialogService} from '../../../../core/services/dialog-service.service';
-import {IonNav, IonRouterOutlet, ModalController} from '@ionic/angular';
+import {IonNav, ModalController} from '@ionic/angular';
 import {PrivacyComponent} from '../privacy/privacy.component';
 import {ConditionsUsageComponent} from '../conditions-usage/conditions-usage.component';
 

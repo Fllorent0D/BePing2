@@ -3,7 +3,7 @@ import {of} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {NotificationsState} from '../../../../core/store/notification-topics/notifications.state';
 import {catchError, finalize, map, take, takeUntil} from 'rxjs/operators';
-import {FormControl, UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {SubscribeToTopic, UnsubscribeToTopic} from '../../../../core/store/notification-topics/notifications.actions';
 import {DialogService} from '../../../../core/services/dialog-service.service';

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { IndividualHeadToHeadComponent } from './individual-head-to-head.component';
+import {IndividualHeadToHeadComponent} from './individual-head-to-head.component';
 
 describe('IndividualHeadToHeadComponent', () => {
   let component: IndividualHeadToHeadComponent;

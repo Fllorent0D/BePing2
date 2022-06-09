@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { PremiumSubscriptionsComponent } from './premium-subscriptions.component';
+import {PremiumSubscriptionsComponent} from './premium-subscriptions.component';
 
 describe('PremiumSubscriptionsComponent', () => {
   let component: PremiumSubscriptionsComponent;

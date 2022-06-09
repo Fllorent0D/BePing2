@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {combineLatest, iif, Observable, of} from 'rxjs';
 import {catchError, debounceTime, map, mergeMap, share, shareReplay, startWith, take, tap} from 'rxjs/operators';
 import {ClubEntry} from '../../../../core/api/models/club-entry';

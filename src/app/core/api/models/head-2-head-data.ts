@@ -1,7 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-import { MatchEntryHistory } from './match-entry-history';
-import { PlayersInfo } from './players-info';
+import {MatchEntryHistory} from './match-entry-history';
+import {PlayersInfo} from './players-info';
+
 export interface Head2HeadData {
   defeatCount: number;
   firstVictory?: string;

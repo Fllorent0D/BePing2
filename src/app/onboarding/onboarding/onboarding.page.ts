@@ -8,7 +8,7 @@ import {DivisionsState, GetDivisions} from '../../core/store/divisions';
 import {GetCurrentSeason, SeasonState} from '../../core/store/season';
 import {map} from 'rxjs/operators';
 import {HasSeenOnBoarding} from '../../core/store/user/user.actions';
-import {FormControl, UntypedFormControl, Validators} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {AnalyticsService} from '../../core/services/firebase/analytics.service';
 import {DialogService} from '../../core/services/dialog-service.service';
 import {PrivacyComponent} from '../../pages/settings/containers/privacy/privacy.component';

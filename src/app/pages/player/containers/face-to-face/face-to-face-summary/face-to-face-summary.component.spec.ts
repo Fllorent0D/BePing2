@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FaceToFaceSummaryComponent } from './face-to-face-summary.component';
+import {FaceToFaceSummaryComponent} from './face-to-face-summary.component';
 
 describe('FaceToFaceSummaryComponent', () => {
   let component: FaceToFaceSummaryComponent;

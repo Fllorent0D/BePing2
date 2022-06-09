@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { Face2FaceService } from './face-2-face.service';
+import {Face2FaceService} from './face-2-face.service';
 
 describe('Face2FaceService', () => {
   let service: Face2FaceService;

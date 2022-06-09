@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FormControl, UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {MemberEntry} from '../../../core/api/models/member-entry';
 import {MembersService} from '../../../core/api/services/members.service';
@@ -10,7 +10,6 @@ import {RankingMethodName, RankingService} from '../../../core/services/tabt/ran
 import {ModalController} from '@ionic/angular';
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
 import {Store} from '@ngxs/store';
-import {RemoteSettingsState} from '../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-search-player',

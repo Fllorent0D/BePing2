@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NumericRankingChartComponent } from './numeric-ranking-chart.component';
+import {NumericRankingChartComponent} from './numeric-ranking-chart.component';
 
 describe('NumericRankingChartComponent', () => {
   let component: NumericRankingChartComponent;

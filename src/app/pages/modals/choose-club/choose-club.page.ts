@@ -4,7 +4,7 @@ import {ModalController} from '@ionic/angular';
 import {ClubsState} from '../../../core/store/clubs';
 import {Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
-import {FormControl, UntypedFormControl} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {distinctUntilChanged, startWith, switchMap} from 'rxjs/operators';
 
 import {Capacitor} from '@capacitor/core';

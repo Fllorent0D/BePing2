@@ -9,7 +9,6 @@ import {TabTState, TabTStateModel} from '../../../../core/store/user/tab-t-state
 import {Logout} from '../../../../core/store/user/aftt.actions';
 import {finalize, map, switchMap} from 'rxjs/operators';
 import {AfttLoginPage} from '../../../modals/aftt-login/aftt-login-page.component';
-import {UntypedFormControl} from '@angular/forms';
 import {UpdateMainCategory} from '../../../../core/store/user/user.actions';
 import {TranslateService} from '@ngx-translate/core';
 import {LANG} from '../../../../core/models/langs';

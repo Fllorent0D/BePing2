@@ -30,15 +30,14 @@ import {NgChartsModule} from 'ng2-charts';
 import {LocalDatePipe} from './pipes/local-date.pipe';
 import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {NgPipesModule} from 'ngx-pipes';
-import {DialogService} from '../core/services/dialog-service.service';
 import {RankingHistoryGraphsComponent} from './components/ranking-history-graphs/ranking-history-graphs.component';
 import {WeekSelectorComponent} from './components/week-selector/week-selector.component';
 import {TeamMatchesEntryListComponent} from './components/team-matches-entry-list/team-matches-entry-list.component';
-import { NumericRankingChartComponent } from './components/numeric-ranking-chart/numeric-ranking-chart.component';
-import { RotatioComponent } from './ads/rotatio/rotatio.component';
-import { FadeHeaderDirective } from './directives/fade-header.directive';
-import { AddToCalendarBtnComponent } from './components/add-to-calendar-btn/add-to-calendar-btn.component';
-import { BecomeProComponent } from './components/become-pro/become-pro.component';
+import {NumericRankingChartComponent} from './components/numeric-ranking-chart/numeric-ranking-chart.component';
+import {RotatioComponent} from './ads/rotatio/rotatio.component';
+import {FadeHeaderDirective} from './directives/fade-header.directive';
+import {AddToCalendarBtnComponent} from './components/add-to-calendar-btn/add-to-calendar-btn.component';
+import {BecomeProComponent} from './components/become-pro/become-pro.component';
 
 const COMPONENTS = [
     RankingComponent,

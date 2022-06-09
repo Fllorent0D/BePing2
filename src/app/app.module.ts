@@ -38,11 +38,17 @@ registerLocaleData(localNL);
         ScrollingModule,
     ],
     providers: [
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         // {provide: ErrorHandler, useClass: GlobalErrorHandlerService},
         {
             provide: APP_INITIALIZER,
-            useFactory: (analyticsService: AnalyticsService, crashlytics: CrashlyticsService, iAPService: InAppPurchasesService, appState: AppStateService, remoteSettings: RemoteConfigService) => async () => {
+            useFactory: (
+                analyticsService: AnalyticsService,
+                crashlytics: CrashlyticsService,
+                iAPService: InAppPurchasesService,
+                appState: AppStateService,
+                remoteSettings: RemoteConfigService
+            ) => async () => {
                 const deviceInfo = await Device.getInfo();
                 const initTasks = [
                     analyticsService.initFb(),
