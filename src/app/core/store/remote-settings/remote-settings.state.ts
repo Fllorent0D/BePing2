@@ -4,6 +4,7 @@ import {RefreshRemoteConfig, UpdateRemoteSettingKey} from './remote-settings.act
 import {FirebaseRemoteConfig} from '@joinflux/firebase-remote-config';
 import {environment} from '../../../../environments/environment';
 import {CrashlyticsService} from '../../services/crashlytics.service';
+import {InAppPurchasesState, InAppPurchaseStateModel} from '../in-app-purchases/in-app-purchases.state';
 
 
 export interface RemoteSettingsStateModel {
@@ -46,9 +47,9 @@ export class RemoteSettingsState implements NgxsOnInit {
         return !environment.production || state.use_member_lookup;
     }
 
-    @Selector([RemoteSettingsState])
-    static bepingProEnabled(state: RemoteSettingsStateModel): boolean {
-        return !environment.production || state.beping_pro;
+    @Selector([RemoteSettingsState, InAppPurchasesState])
+    static bepingProEnabled(remoteSettingsStateModel: RemoteSettingsStateModel, inAppPurchaseStateModel: InAppPurchaseStateModel): boolean {
+        return !environment.production || inAppPurchaseStateModel.isPro || remoteSettingsStateModel.beping_pro;
     }
 
     @Selector([RemoteSettingsState])
