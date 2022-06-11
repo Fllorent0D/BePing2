@@ -40,6 +40,7 @@ export class AbstractPageTabsComponent implements ViewDidEnter, ViewDidLeave {
 
     ionViewDidEnter(): void {
         this.swiper.updateSwiper({});
+        this.selectTab(this.activeSwiperIndex);
     }
 
     ionViewDidLeave(): void {
