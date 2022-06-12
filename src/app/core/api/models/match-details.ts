@@ -1,7 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
-import { IndividualMatchResult } from './individual-match-result';
-import { Players } from './players';
+import {IndividualMatchResult} from './individual-match-result';
+import {Players} from './players';
+
 export interface MatchDetails {
   AwayCaptain: number;
   AwayPlayers: Players;

@@ -18,7 +18,7 @@ import {Keyboard} from '@capacitor/keyboard';
 })
 export class ChooseClubPage implements OnInit {
 
-    searchBox: FormControl;
+    searchBox: FormControl<string>;
     clubsFound$: Observable<ClubEntry[]>;
     terms$: Observable<string>;
 
@@ -26,12 +26,12 @@ export class ChooseClubPage implements OnInit {
         private readonly modalCtrl: ModalController,
         private readonly store: Store
     ) {
-        this.searchBox = new FormControl();
+        this.searchBox = new FormControl<string>('');
     }
 
 
     ngOnInit() {
-        this.terms$ = this.clubsFound$ = this.searchBox.valueChanges.pipe(
+        this.terms$ = this.searchBox.valueChanges.pipe(
             distinctUntilChanged(),
             startWith('')
         );

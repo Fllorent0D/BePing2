@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ApiModule} from './api/api.module';
 import {environment} from '../../environments/environment';
-import {NgxsModule, Store} from '@ngxs/store';
+import {NgxsModule} from '@ngxs/store';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {states} from './store';
@@ -20,7 +20,6 @@ import {TabtHttpErrorHandlerInterceptor} from './interceptors/tabt-http-error-ha
 import {FavoriteItem} from './store/favorites';
 import {DialogService} from './services/dialog-service.service';
 import {ApiConfiguration} from './api/api-configuration';
-import {RemoteSettingsState} from './store/remote-settings';
 import {ApiConfigurationService} from './services/api-configuration.service';
 
 export function HttpLoaderFactory(http: HttpClient) {

@@ -28,7 +28,7 @@ interface SearchResults<T> {
 })
 export class SearchPageComponent implements OnInit {
 
-    searchControl: FormControl;
+    searchControl: FormControl<string>;
 
     searchInput$: Observable<string>;
     clubsFound$: Observable<SearchResults<ClubEntry>>;
@@ -52,7 +52,7 @@ export class SearchPageComponent implements OnInit {
     ngOnInit() {
         const matchSheetRegex = new RegExp('([a-zA-Z]+)([0-9]{2})\/([0-9]+)');
         const useMemberLookup = this.store.selectSnapshot(RemoteSettingsState.useMemberLookup);
-        this.searchControl = new FormControl();
+        this.searchControl = new FormControl<string>('');
         this.searchInput$ = this.searchControl.valueChanges.pipe(
             debounceTime(300),
             tap((terms: string) => this.analyticsService.logEvent('search', {search_term: terms})),

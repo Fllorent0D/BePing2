@@ -43,7 +43,7 @@ export class OnboardingPage implements OnInit, OnDestroy {
     @Select(SeasonState.loading) seasonLoading$: Observable<boolean>;
     @Select(DivisionsState.error) seasonError$: Observable<Error | null>;
 
-    acceptTermControl: FormControl = new FormControl(false, [Validators.required]);
+    acceptTermControl: FormControl<boolean> = new FormControl<boolean>(false, [Validators.required]);
 
     isLoading$: Observable<boolean>;
     hasError$: Observable<boolean>;

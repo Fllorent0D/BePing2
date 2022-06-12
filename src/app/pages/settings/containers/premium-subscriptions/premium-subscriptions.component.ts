@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Optional} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {InAppPurchasesState} from '../../../../core/store/in-app-purchases/in-app-purchases.state';
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
@@ -14,7 +14,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {filter, shareReplay, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {DialogService} from '../../../../core/services/dialog-service.service';
-import {IonNav, IonRouterOutlet, ModalController} from '@ionic/angular';
+import {IonNav, ModalController} from '@ionic/angular';
 import {PrivacyComponent} from '../privacy/privacy.component';
 import {ConditionsUsageComponent} from '../conditions-usage/conditions-usage.component';
 
@@ -34,7 +34,7 @@ export class PremiumSubscriptionsComponent extends OnDestroyHook implements OnIn
     bepingProMidPrice$: Observable<IAPProduct>;
     bepingProHighPrice$: Observable<IAPProduct>;
     currentProduct$: Observable<IAPProduct>;
-    priceSlider: FormControl;
+    priceSlider: FormControl<number>;
 
     constructor(
         private readonly inAppPurchasesService: InAppPurchasesService,

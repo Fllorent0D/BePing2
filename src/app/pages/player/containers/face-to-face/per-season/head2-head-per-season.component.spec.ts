@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { Head2HeadPerSeasonComponent } from './head2-head-per-season.component';
+import {Head2HeadPerSeasonComponent} from './head2-head-per-season.component';
 
 describe('PerSeasonComponent', () => {
   let component: Head2HeadPerSeasonComponent;

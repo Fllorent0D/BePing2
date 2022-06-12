@@ -14,7 +14,7 @@ export class TeamMatchesEntryListComponent implements OnInit {
 
     @Input() teamMatchEntries$: Observable<TeamMatchesEntry[]>;
 
-    weekSelected: FormControl;
+    weekSelected: FormControl<number>;
     currentWeekNameSelected$: Observable<number>;
     teamMatchofSelectedWeek$: Observable<TeamMatchesEntry[]>;
     maxWeekName$: Observable<number>;
@@ -24,7 +24,7 @@ export class TeamMatchesEntryListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.weekSelected = new FormControl(1);
+        this.weekSelected = new FormControl<number>(1);
 
         this.predictedWeekName$ = this.teamMatchEntries$.pipe(
             map((matches) => {

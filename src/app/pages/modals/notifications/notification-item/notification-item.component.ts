@@ -25,7 +25,7 @@ export class NotificationItemComponent extends OnDestroyHook implements OnInit {
     @Output() subscribe: EventEmitter<string> = new EventEmitter<string>();
     @Output() unsubscribe: EventEmitter<string> = new EventEmitter<string>();
 
-    isSubscribe: FormControl = new FormControl();
+    isSubscribe: FormControl<boolean> = new FormControl<boolean>(false);
     loading = false;
 
     constructor(

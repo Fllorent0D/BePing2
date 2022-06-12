@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BecomeProComponent } from './become-pro.component';
+import {BecomeProComponent} from './become-pro.component';
 
 describe('BecomeProComponent', () => {
   let component: BecomeProComponent;

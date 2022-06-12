@@ -4,6 +4,11 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {ModalController} from '@ionic/angular';
 import {Level} from 'src/app/core/models/level';
 
+interface TournamentsFilterFormGroup {
+    levelsToDisplay: FormControl<string[]>;
+    showPastTournaments: FormControl<boolean>;
+}
+
 @Component({
     selector: 'beping-tournament-filters',
     templateUrl: './tournament-filters.component.html',
@@ -13,7 +18,7 @@ export class TournamentFiltersComponent implements OnInit {
 
     @Input() filter: TournamentsFilter;
     levels = Object.values(Level);
-    formGroup: FormGroup;
+    formGroup: FormGroup<TournamentsFilterFormGroup>;
 
     constructor(
         private readonly modalCtrl: ModalController
@@ -22,8 +27,8 @@ export class TournamentFiltersComponent implements OnInit {
 
     ngOnInit() {
         this.formGroup = new FormGroup({
-            levelsToDisplay: new FormControl(this.filter?.levelsToDisplay),
-            showPastTournaments: new FormControl(this.filter?.showPastTournaments)
+            levelsToDisplay: new FormControl<string[]>(this.filter?.levelsToDisplay),
+            showPastTournaments: new FormControl<boolean>(this.filter?.showPastTournaments)
         });
     }
 

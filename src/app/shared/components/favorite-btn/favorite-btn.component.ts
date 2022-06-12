@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {AnimationController, createAnimation, IonIcon} from '@ionic/angular/';
+import {AnimationController} from '@ionic/angular/';
 
 @Component({
     selector: 'beping-favorite-btn',

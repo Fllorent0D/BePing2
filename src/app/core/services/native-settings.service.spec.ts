@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { NativeSettingsService } from './native-settings.service';
+import {NativeSettingsService} from './native-settings.service';
 
 describe('NativeSettingsService', () => {
   let service: NativeSettingsService;

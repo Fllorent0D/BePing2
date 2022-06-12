@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Platform, ToastController} from '@ionic/angular';
 import {IAPProduct, InAppPurchase2} from '@ionic-native/in-app-purchase-2/ngx';
 import {BePingIAP} from '../store/in-app-purchases/in-app-purchases.model';
@@ -10,6 +10,7 @@ import {AnalyticsService} from './firebase/analytics.service';
 import {IsPro} from '../store/in-app-purchases/in-app-purchases.actions';
 import {CrashlyticsService} from './crashlytics.service';
 import {TranslateService} from '@ngx-translate/core';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -41,7 +42,7 @@ export class InAppPurchasesService {
 
     async init(): Promise<void> {
         await this.platform.ready();
-        this.inAppPurchaseStore.verbosity = this.inAppPurchaseStore.DEBUG;
+        this.inAppPurchaseStore.verbosity = environment.production ?  this.inAppPurchaseStore.DEBUG : this.inAppPurchaseStore.INFO;
         this.setupListeners();
         this.registerProduct();
         this.inAppPurchaseStore?.refresh();
@@ -73,7 +74,6 @@ export class InAppPurchasesService {
             });
         });
         this.inAppPurchaseStore.when('subscription').updated((a) => {
-            console.log('Subscription...', a);
             const product1 = this.inAppPurchaseStore.get(BePingIAP.BEPING_PRO_LOW_PRICE);
             const product2 = this.inAppPurchaseStore.get(BePingIAP.BEPING_PRO_MID_PRICE);
             const product3 = this.inAppPurchaseStore.get(BePingIAP.BEPING_PRO_HIGH_PRICE);
@@ -81,7 +81,6 @@ export class InAppPurchasesService {
             this.productsSubject$.next(products);
 
             if (products.some(product => product?.owned)) {
-                console.log(`PRODUCT ${products.find(product => product?.owned).id} IS OWNED`, products.find(product => product?.owned));
                 this.store.dispatch(new IsPro(true, products.find(product => product?.owned)?.expiryDate));
             } else {
                 this.store.dispatch(new IsPro(false, undefined));

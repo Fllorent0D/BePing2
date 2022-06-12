@@ -28,7 +28,6 @@ registerLocaleData(localNL);
     declarations: [
         AppComponent
     ],
-    entryComponents: [],
     imports: [
         HttpClientModule,
         BrowserModule,

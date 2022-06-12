@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import '@capacitor-community/firebase-analytics';
-import {Store} from '@ngxs/store';
 
 @Component({
     selector: 'beping-root',

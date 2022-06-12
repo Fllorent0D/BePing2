@@ -5,7 +5,6 @@ import {MatchesService} from '../../../../core/api/services/matches.service';
 import {MembersService} from '../../../../core/api/services/members.service';
 import {MemberEntry} from '../../../../core/api/models/member-entry';
 import {Location} from '@angular/common';
-import {PLAYER_CATEGORY} from '../../../../core/models/user';
 
 @Component({
     selector: 'beping-team-match-helper-page',

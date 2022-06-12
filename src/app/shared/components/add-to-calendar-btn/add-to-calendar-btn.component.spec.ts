@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddToCalendarBtnComponent } from './add-to-calendar-btn.component';
+import {AddToCalendarBtnComponent} from './add-to-calendar-btn.component';
 
 describe('AddToCalendarBtnComponent', () => {
   let component: AddToCalendarBtnComponent;

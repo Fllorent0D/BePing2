@@ -10,7 +10,6 @@ import {RankingMethodName, RankingService} from '../../../core/services/tabt/ran
 import {ModalController} from '@ionic/angular';
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
 import {Store} from '@ngxs/store';
-import {RemoteSettingsState} from '../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-search-player',
@@ -23,7 +22,7 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
 
     @ViewChild('searchbar') searchBar: any;
 
-    searchBox: FormControl;
+    searchBox: FormControl<string>;
     members$: Observable<MemberEntry[]>;
     loading = false;
     skeletonRows: number[];
@@ -40,7 +39,7 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
 
     ngOnInit(): void {
         this.skeletonRows = [...Array(16).keys()].map(() => Math.floor(Math.random() * 40) + 30);
-        this.searchBox = new FormControl('');
+        this.searchBox = new FormControl<string>('');
         this.members$ = this.searchBox.valueChanges.pipe(
             filter((text) => text?.length >= 3 || text.length === 0),
             debounceTime(500),

@@ -9,7 +9,6 @@ import {TabTState, TabTStateModel} from '../../../../core/store/user/tab-t-state
 import {Logout} from '../../../../core/store/user/aftt.actions';
 import {finalize, map, switchMap} from 'rxjs/operators';
 import {AfttLoginPage} from '../../../modals/aftt-login/aftt-login-page.component';
-import {FormControl} from '@angular/forms';
 import {UpdateMainCategory} from '../../../../core/store/user/user.actions';
 import {TranslateService} from '@ngx-translate/core';
 import {LANG} from '../../../../core/models/langs';
@@ -57,7 +56,6 @@ export class SettingsPage implements OnInit, OnDestroy {
     mainCategory$: Observable<PLAYER_CATEGORY>;
     currentLang$: Observable<LANG>;
     currentTheme$: Observable<THEME>;
-    mainPlayerCategory: FormControl;
     userState$: Observable<UserStateModel>;
 
     @Select(InAppPurchasesState.isPro) isPro$: Observable<boolean>;
