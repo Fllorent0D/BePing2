@@ -15,6 +15,7 @@ import {Add, Update} from '@ngxs-labs/entity-state';
 import {PointCalculatorService} from '../../services/point-calculator.service';
 import {UserState} from '../../../../core/store/user/user.state';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
 interface IndividualMatchPointsEditorFormGroup {
     category: FormControl<PLAYER_CATEGORY>;
@@ -25,12 +26,13 @@ interface IndividualMatchPointsEditorFormGroup {
     eventId: FormControl<string>;
 }
 
+@UntilDestroy()
 @Component({
     selector: 'beping-individual-match-points-editor',
     templateUrl: './individual-match-points-editor.component.html',
     styleUrls: ['./individual-match-points-editor.component.css']
 })
-export class IndividualMatchPointsEditorComponent extends OnDestroyHook implements OnInit {
+export class IndividualMatchPointsEditorComponent implements OnInit {
 
     EVENT_TYPE = EVENT_TYPE;
     MATCH_RESULT = MATCH_RESULT;
@@ -51,7 +53,6 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
         private readonly analyticsService: AnalyticsService,
         @Optional() public readonly ionRouterOutlet: IonRouterOutlet,
     ) {
-        super();
     }
 
     ngOnInit(): void {
@@ -81,13 +82,13 @@ export class IndividualMatchPointsEditorComponent extends OnDestroyHook implemen
             this.formGroup.get('category').disable({emitEvent: true});
         });
         this.formGroup.get('eventType').valueChanges.pipe(
-            takeUntil(this.ngUnsubscribe)
+            untilDestroyed(this)
         ).subscribe(() => {
             this.formGroup.get('eventId').reset();
         });
 
         this.formGroup.get('category').valueChanges.pipe(
-            takeUntil(this.ngUnsubscribe)
+            untilDestroyed(this)
         ).subscribe((category) => {
             this.coefficientPerEvent = this.pointsCalculator.getCoefficentEventForCategory(category as PLAYER_CATEGORY);
             this.formGroup.get('opponentName').reset();

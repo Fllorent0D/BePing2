@@ -8,16 +8,18 @@ import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {SubscribeToTopic, UnsubscribeToTopic} from '../../../../core/store/notification-topics/notifications.actions';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
 class Translate {
 }
 
+@UntilDestroy()
 @Component({
     selector: 'beping-notification-item',
     templateUrl: './notification-item.component.html',
     styleUrls: ['./notification-item.component.css']
 })
-export class NotificationItemComponent extends OnDestroyHook implements OnInit {
+export class NotificationItemComponent implements OnInit {
 
     @Input() label: string;
     @Input() subtitle: string;
@@ -33,18 +35,17 @@ export class NotificationItemComponent extends OnDestroyHook implements OnInit {
         private readonly translate: TranslateService,
         private readonly dialogService: DialogService
     ) {
-        super();
     }
 
     ngOnInit(): void {
         this.store.select(NotificationsState.topics).pipe(
             map((topics: string[]) => topics.includes(this.topic)),
-            takeUntil(this.ngUnsubscribe)
+            untilDestroyed(this)
         ).subscribe((subscribed) => {
             this.isSubscribe.setValue(subscribed, {emitEvent: false});
         });
         this.isSubscribe.valueChanges.pipe(
-            takeUntil(this.ngUnsubscribe)
+            untilDestroyed(this)
         ).subscribe(value => {
             this.toggleClicked(value);
         });

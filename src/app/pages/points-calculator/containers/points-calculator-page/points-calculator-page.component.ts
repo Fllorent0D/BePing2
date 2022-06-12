@@ -17,13 +17,15 @@ import {TranslateService} from '@ngx-translate/core';
 import {pivotRankingEquivalenceMen, pivotRankingEquivalenceWomen} from '../../../../core/models/bel-ranking';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {IndividualMatchPointsEditorComponent} from '../individual-match-points-editor/individual-match-points-editor.component';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
     selector: 'beping-points-calculator-page',
     templateUrl: './points-calculator-page.component.html',
     styleUrls: ['./points-calculator-page.component.css']
 })
-export class PointsCalculatorPageComponent extends OnDestroyHook implements OnInit {
+export class PointsCalculatorPageComponent implements OnInit {
     PLAYER_CATEGORY = PLAYER_CATEGORY;
 
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
@@ -45,7 +47,6 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
         private readonly changeDetectorRef: ChangeDetectorRef,
         private readonly ionRouter: IonRouterOutlet,
     ) {
-        super();
     }
 
     ngOnInit(): void {
@@ -56,7 +57,7 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
         );
 
         this.store.select(UserState.getMainPlayerCategory).pipe(
-            takeUntil(this.ngUnsubscribe)
+            untilDestroyed(this)
         ).subscribe((mainCategory: PLAYER_CATEGORY) => {
             switch (mainCategory) {
                 case PLAYER_CATEGORY.MEN:
@@ -97,7 +98,7 @@ export class PointsCalculatorPageComponent extends OnDestroyHook implements OnIn
             }),
             shareReplay(1)
         );
-        // this.pointsEntryWithPoints$.pipe(takeUntil(this.ngUnsubscribe), delay(100)).subscribe(() => this.changeDetectorRef.markForCheck());
+
         this.pivot$ = this.currentCategory$.pipe(
             map((category: PLAYER_CATEGORY) => category === PLAYER_CATEGORY.MEN ?
                 pivotRankingEquivalenceMen :

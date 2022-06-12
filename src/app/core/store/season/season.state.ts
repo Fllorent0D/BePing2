@@ -21,11 +21,11 @@ const defaultState: SeasonStateModel = {
 };
 
 
-@Injectable()
 @State<SeasonStateModel>({
     name: 'season',
     defaults: defaultState
 })
+@Injectable()
 export class SeasonState {
 
     constructor(

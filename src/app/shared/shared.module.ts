@@ -82,7 +82,6 @@ const DIRECTIVES = [
         ReactiveFormsModule,
         TranslateModule,
         NgChartsModule,
-        SuperTabsModule
     ],
     declarations: [
         COMPONENTS,
@@ -101,7 +100,6 @@ const DIRECTIVES = [
         TranslateModule,
         NgChartsModule,
         NgPipesModule,
-        SuperTabsModule,
         COMPONENTS,
         PIPES,
         RotatioComponent,

@@ -3,11 +3,10 @@ import {CommonModule} from '@angular/common';
 import {SharedModule} from '../../shared/shared.module';
 import {DivisionPageComponent} from './containers/division-page/division-page.component';
 import {DivisionRoutingModule} from './division-routing.module';
-import {SuperTabsModule} from '@ionic-super-tabs/angular';
-import {ScrollingModule} from '@angular/cdk/scrolling';
 import {DivisionsPageComponent} from './containers/divisions-page/divisions-page.component';
 import {RegionsDivisionComponent} from './containers/regions-division/regions-division.component';
-import { SwiperModule } from 'swiper/angular';
+import {SwiperModule} from 'swiper/angular';
+import {IonicModule} from '@ionic/angular';
 
 
 @NgModule({
@@ -18,10 +17,9 @@ import { SwiperModule } from 'swiper/angular';
     ],
     imports: [
         CommonModule,
+        IonicModule,
         SharedModule,
         DivisionRoutingModule,
-        SuperTabsModule,
-        ScrollingModule,
         SwiperModule
     ]
 })
