@@ -3,10 +3,6 @@ import {SwiperComponent} from 'swiper/angular';
 import Swiper, {SwiperOptions} from 'swiper';
 import {ViewDidEnter, ViewDidLeave} from '@ionic/angular';
 
-@Component({
-    selector: 'beping-abstract-page-tab',
-    template: '<h1>test</h1>'
-})
 export class AbstractPageTabsComponent implements ViewDidEnter, ViewDidLeave {
 
     @ViewChild('swiper', {static: false}) swiper?: SwiperComponent;
