@@ -19,17 +19,17 @@
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar>
-        <div class="beping-swiper-scrollbar">
-            <div class="segment">
-                <ion-text [class.beping-swiper-segment-active]="activeSwiperIndex === 0">{{'TEAM_STAT.RANKING' | translate}}</ion-text>
-            </div>
-            <div class="segment">
-                <ion-text [class.beping-swiper-segment-active]="activeSwiperIndex === 1">{{'COMMON.CALENDAR' | translate}}</ion-text>
-            </div>
-            <div class="segment">
-                <ion-text [class.beping-swiper-segment-active]="activeSwiperIndex === 2">{{'COMMON.PLAYERS' | translate}}</ion-text>
-            </div>
-        </div>   
+        <ion-segment [value]="activeSwiperIndex" (ionChange)="selectTab($event.detail.value)">
+            <ion-segment-button id="segment-0" [value]="0">
+                <ion-label class="ion-text-capitalize">{{'TEAM_STAT.RANKING' | translate}}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button id="segment-1" [value]="1">
+                <ion-label class="ion-text-capitalize">{{'COMMON.CALENDAR' | translate}}</ion-label>
+            </ion-segment-button>
+            <ion-segment-button id="segment-2" [value]="2">
+                <ion-label class="ion-text-capitalize">{{'COMMON.PLAYERS' | translate}}</ion-label>
+            </ion-segment-button>
+        </ion-segment>
     </ion-toolbar>
 </ion-header>
 

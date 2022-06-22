@@ -273,10 +273,12 @@ ion-list {
   margin-top: var(--ion-padding, 0px);
   margin-bottom: var(--ion-padding, 0px);
 }
+
 ion-list {
   --background: transparent !important;
   background-color: transparent !important;
 }
+
 ion-popover {
   --max-height: 500px;
 
@@ -388,10 +390,12 @@ ion-label {
 .multiline {
   white-space: pre-wrap !important;
 }
-ion-range{
+
+ion-range {
   --bar-height: 5px;
   --bar-border-radius: 50px;
 }
-beping-explore-container{
+
+beping-explore-container {
   background-color: var(--ion-color-primary);
 }

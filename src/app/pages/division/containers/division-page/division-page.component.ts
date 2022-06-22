@@ -1,5 +1,4 @@
-import {AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
-import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
+import {ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Select, Store} from '@ngxs/store';
 import {DivisionsService} from '../../../../core/api/services/divisions.service';
@@ -22,17 +21,20 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {IonRouterOutlet} from '@ionic/angular';
-import SwiperCore, {Scrollbar} from 'swiper';
-
-SwiperCore.use([Scrollbar]);
+import Swiper, {SwiperOptions} from 'swiper';
+import {SwiperComponent} from 'swiper/angular';
 
 @Component({
     selector: 'beping-division-page',
     templateUrl: './division-page.component.html',
     styleUrls: ['./division-page.component.scss']
 })
-export class DivisionPageComponent extends AbstractPageTabsComponent implements OnInit {
-
+export class DivisionPageComponent implements OnInit {
+    swiperConfig: SwiperOptions = {
+        speed: 150,
+        effect: 'cube',
+    };
+    activeSwiperIndex = 0;
     divisionId$: Observable<number>;
     ranking$: Observable<RankingEntry[]>;
     division$: Observable<DivisionEntry>;
@@ -40,6 +42,7 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
     matches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
     @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
+    @ViewChild('swiper', {static: false}) swiper?: SwiperComponent;
 
     constructor(
         protected readonly changeDetectionRef: ChangeDetectorRef,
@@ -55,7 +58,6 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
         private readonly ionRouter: IonRouterOutlet,
         protected readonly ngZone: NgZone,
     ) {
-        super(changeDetectionRef, ngZone);
     }
 
     ngOnInit() {
@@ -88,6 +90,14 @@ export class DivisionPageComponent extends AbstractPageTabsComponent implements 
         );
 
 
+    }
+
+    slideChange([swiper]: [Swiper]) {
+        this.ngZone.run(() => this.activeSwiperIndex = swiper.activeIndex);
+    }
+
+    selectTab(index) {
+        this.swiper.swiperRef.slideTo(index);
     }
 
     isSameTeam(rankingEntry: RankingEntry, team: TeamEntry, club: ClubEntry, divisionId: number): boolean {

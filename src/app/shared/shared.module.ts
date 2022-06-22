@@ -28,7 +28,6 @@ import {ClubItemComponent} from './components/club-item/club-item.component';
 import {WeeklyEloComponent} from './components/weekly-elo/weekly-elo.component';
 import {NgChartsModule} from 'ng2-charts';
 import {LocalDatePipe} from './pipes/local-date.pipe';
-import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {NgPipesModule} from 'ngx-pipes';
 import {RankingHistoryGraphsComponent} from './components/ranking-history-graphs/ranking-history-graphs.component';
 import {WeekSelectorComponent} from './components/week-selector/week-selector.component';
@@ -38,6 +37,7 @@ import {RotatioComponent} from './ads/rotatio/rotatio.component';
 import {FadeHeaderDirective} from './directives/fade-header.directive';
 import {AddToCalendarBtnComponent} from './components/add-to-calendar-btn/add-to-calendar-btn.component';
 import {BecomeProComponent} from './components/become-pro/become-pro.component';
+import {SwiperModule} from 'swiper/angular';
 
 const COMPONENTS = [
     RankingComponent,
@@ -82,6 +82,7 @@ const DIRECTIVES = [
         ReactiveFormsModule,
         TranslateModule,
         NgChartsModule,
+        SwiperModule,
     ],
     declarations: [
         COMPONENTS,
@@ -106,6 +107,7 @@ const DIRECTIVES = [
         FadeHeaderDirective,
         AddToCalendarBtnComponent,
         BecomeProComponent,
+        SwiperModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -1,5 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit} from '@angular/core';
-import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {combineLatest, Observable} from 'rxjs';
 import {RankingEntry} from '../../../../core/api/models/ranking-entry';
 import {MemberEntry} from '../../../../core/api/models/member-entry';
@@ -22,9 +21,9 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {IonRouterOutlet} from '@ionic/angular';
-import SwiperCore, {Scrollbar} from 'swiper';
+import Swiper, {SwiperOptions} from 'swiper';
+import {SwiperComponent} from 'swiper/angular';
 
-SwiperCore.use([Scrollbar]);
 
 @Component({
     selector: 'beping-teams',
@@ -32,7 +31,14 @@ SwiperCore.use([Scrollbar]);
     styleUrls: ['./team-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TeamPage extends AbstractPageTabsComponent implements OnInit {
+export class TeamPage implements OnInit {
+    swiperConfig: SwiperOptions = {
+        speed: 150,
+        effect: 'cube',
+    };
+    activeSwiperIndex = 0;
+
+    @ViewChild('swiper', {static: false}) swiper?: SwiperComponent;
 
     ranking$: Observable<RankingEntry[]>;
     players$: Observable<MemberEntry[]>;
@@ -62,7 +68,14 @@ export class TeamPage extends AbstractPageTabsComponent implements OnInit {
         private readonly ionRouterOutlet: IonRouterOutlet,
         protected readonly ngZone: NgZone
     ) {
-        super(changeDetectionRef, ngZone);
+    }
+
+    slideChange([swiper]: [Swiper]) {
+        this.ngZone.run(() => this.activeSwiperIndex = swiper.activeIndex);
+    }
+
+    selectTab(index) {
+        this.swiper.swiperRef.slideTo(index);
     }
 
     ngOnInit() {
