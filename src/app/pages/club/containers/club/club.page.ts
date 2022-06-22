@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {BehaviorSubject, combineLatest, Observable, ReplaySubject} from 'rxjs';
@@ -13,7 +13,6 @@ import {VenueEntry} from '../../../../core/api/models/venue-entry';
 import {TeamEntry} from '../../../../core/api/models/team-entry';
 import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
-import {AbstractPageTabsComponent} from '../../../../shared/helpers/abstract-page-tabs/abstract-page-tabs.component';
 import {add, sub} from 'date-fns';
 import {FavoriteItem, FavoritesState, ToggleClubFromFavorites} from '../../../../core/store/favorites';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
@@ -25,6 +24,11 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {IonRouterOutlet} from '@ionic/angular';
+import SwiperCore from 'swiper';
+import Swiper, {Scrollbar, SwiperOptions} from 'swiper';
+import {SwiperComponent} from 'swiper/angular';
+
+SwiperCore.use([Scrollbar]);
 
 @Component({
     selector: 'beping-club',
@@ -32,7 +36,15 @@ import {IonRouterOutlet} from '@ionic/angular';
     styleUrls: ['./club.page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClubPage extends AbstractPageTabsComponent implements OnInit {
+export class ClubPage implements OnInit {
+    swiperConfig: SwiperOptions = {
+        speed: 150,
+        effect: 'cube',
+        autoHeight: true,
+    };
+    activeSwiperIndex = 0;
+
+
     club$: Observable<ClubEntry>;
     members$: Observable<MemberEntry[]>;
     venues$: Observable<VenueEntry[]>;
@@ -48,6 +60,7 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
     CATEGORIES = [PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN, PLAYER_CATEGORY.YOUTH, PLAYER_CATEGORY.VETERANS];
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
     @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
+    @ViewChild('swiper', {static: false}) swiper?: SwiperComponent;
 
     constructor(
         private readonly activatedRoute: ActivatedRoute,
@@ -63,12 +76,19 @@ export class ClubPage extends AbstractPageTabsComponent implements OnInit {
         private readonly calendarService: CalendarService,
         private readonly dialogService: DialogService,
         private readonly translate: TranslateService,
-        private readonly ionRouter: IonRouterOutlet
+        private readonly ionRouter: IonRouterOutlet,
+        protected readonly ngZone: NgZone
     ) {
-        super(changeDetectionRef);
-
         this.from$ = new BehaviorSubject<Date>(sub(new Date(), {weeks: 2}));
         this.to$ = new BehaviorSubject<Date>(new Date());
+    }
+
+    slideChange([swiper]: [Swiper]) {
+        this.ngZone.run(() => this.activeSwiperIndex = swiper.activeIndex);
+    }
+
+    selectTab(index) {
+        this.swiper.swiperRef.slideTo(index);
     }
 
     ngOnInit() {

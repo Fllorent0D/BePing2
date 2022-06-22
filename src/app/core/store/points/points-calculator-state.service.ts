@@ -19,11 +19,11 @@ export interface PointsCalculatorEntryWithPoints extends PointsCalculatorEntry {
     basePoints: number;
 }
 
-@Injectable()
 @State<EntityStateModel<PointsCalculatorEntry>>({
     name: 'pointsCalculator',
     defaults: defaultEntityState()
 })
+@Injectable()
 export class PointsCalculatorState extends EntityState<PointsCalculatorEntry> {
     constructor() {
         super(PointsCalculatorState, 'id', IdStrategy.UUIDGenerator);

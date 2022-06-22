@@ -17,11 +17,11 @@ const defaultState: TabTStateModel = {
 };
 
 
-@Injectable()
 @State<TabTStateModel>({
     name: 'tabt',
     defaults: defaultState
 })
+@Injectable()
 export class TabTState {
 
     constructor(

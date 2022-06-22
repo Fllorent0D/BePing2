@@ -1,6 +1,6 @@
 <ion-content [scrollX]="false">
-    <ion-slides #slider [options]="slideOpts" class="is-slider-page">
-        <ion-slide>
+    <swiper class="beping-swiper" #swiper [config]="swiperConfig">
+        <ng-template swiperSlide>
             <ion-grid class="onboarding-slide ion-no-padding">
                 <ion-row class="ion-justify-content-center">
                     <ion-grid class="photo-white-container">
@@ -28,8 +28,8 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
             <ion-grid class="onboarding-slide ion-no-padding">
                 <ion-row class="ion-justify-content-center">
                     <ion-grid class="photo-white-container">
@@ -57,8 +57,8 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
             <ion-grid class="onboarding-slide ion-no-padding">
                 <ion-row class="ion-justify-content-center">
                     <ion-grid class="photo-white-container">
@@ -87,8 +87,8 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
             <ion-grid class="onboarding-slide ion-no-padding">
                 <ion-row class="ion-justify-content-center">
                     <ion-grid class="photo-white-container">
@@ -117,8 +117,8 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
             <ion-grid class="onboarding-slide ion-no-padding">
                 <ion-row class="ion-justify-content-center">
                     <ion-grid class="photo-white-container">
@@ -147,8 +147,8 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-        </ion-slide>
-        <ion-slide>
+        </ng-template>
+        <ng-template swiperSlide>
             <ion-grid class="onboarding-slide ion-no-padding">
                 <ion-row class="ion-justify-content-center">
                     <ion-grid class="photo-white-container">
@@ -226,8 +226,6 @@
                     <ion-text color="danger">{{'ONBOARDING.INTERNET_NEEDED'|translate}}</ion-text>
                 </ion-row>
             </ion-grid>
-        </ion-slide>
-
-
-    </ion-slides>
+        </ng-template>
+    </swiper>
 </ion-content>

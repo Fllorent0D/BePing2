@@ -8,7 +8,6 @@ import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {states} from './store';
 import {NgxsAsyncStoragePluginModule} from '@ngxs-labs/async-storage-plugin';
 import {NgxsStorageService} from './services/store/ngxs-storage.service';
-import {SuperTabsModule} from '@ionic-super-tabs/angular';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
@@ -33,7 +32,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         ApiModule.forRoot({
             rootUrl: environment.tabtUrl
         }),
-        SuperTabsModule.forRoot(),
         NgxsAsyncStoragePluginModule.forRoot(NgxsStorageService, {
             migrations: [
                 {

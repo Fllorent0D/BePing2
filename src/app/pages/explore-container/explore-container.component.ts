@@ -3,7 +3,7 @@ import {Select, Store} from '@ngxs/store';
 import {PLAYER_CATEGORY} from '../../core/models/user';
 import {iif, Observable, of, ReplaySubject} from 'rxjs';
 import {UserMemberEntry, UserState} from '../../core/store/user/user.state';
-import {delay, map, shareReplay, switchMap, take, takeUntil, tap} from 'rxjs/operators';
+import {delay, map, shareReplay, switchMap, take, tap} from 'rxjs/operators';
 import {IonRouterOutlet, LoadingController, ModalController, Platform} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
@@ -20,7 +20,6 @@ import {TABT_DATABASES} from '../../core/interceptors/tabt-database-interceptor.
 import {HapticsService} from '../../core/services/haptics.service';
 import {ImpactStyle} from '@capacitor/haptics';
 import {AnalyticsService} from '../../core/services/firebase/analytics.service';
-import {OnDestroyHook} from '../../core/on-destroy-hook';
 import {DialogService} from '../../core/services/dialog-service.service';
 import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
 import {InAppBrowserService} from '../../core/services/browser/in-app-browser.service';
@@ -29,13 +28,14 @@ import {InAppPurchasesState} from '../../core/store/in-app-purchases/in-app-purc
 import {PointsCalculatorState} from '../../core/store/points/points-calculator-state.service';
 import {IsProService} from '../../core/services/is-pro.service';
 import {DismissDashboardProPopup} from '../../core/store/in-app-purchases/in-app-purchases.actions';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
 @Component({
     selector: 'beping-explore-container',
     templateUrl: './explore-container.component.html',
     styleUrls: ['./explore-container.component.scss']
 })
-export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
+export class ExploreContainerComponent implements OnInit {
 
     categoriesAvailable$: Observable<PLAYER_CATEGORY[]>;
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
@@ -71,16 +71,15 @@ export class ExploreContainerComponent extends OnDestroyHook implements OnInit {
         private readonly inAppBrowser: InAppBrowserService,
         private readonly isProService: IsProService
     ) {
-        super();
+
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
         this.isLoading$ = this.store.select(UserState.isLoading).pipe(
             switchMap((loading) => {
                 return iif(() => loading, of(loading), of(loading).pipe(delay(2_000)));
             })
         );
-        this.store.select(UserState.getMainPlayerCategory).pipe(
-            takeUntil(this.ngUnsubscribe)
-        ).subscribe((category) => this.currentCategory$.next(category));
+        this.store.select(UserState.getMainPlayerCategory)
+            .subscribe((category) => this.currentCategory$.next(category));
 
         this.currentMemberEntry$ = this.currentCategory$.pipe(
             switchMap((category: PLAYER_CATEGORY) => this.store.select(UserState.getMemberEntryForCategory(category))),

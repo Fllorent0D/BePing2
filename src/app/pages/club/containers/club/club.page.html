@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button ></ion-back-button>
+            <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>{{(club$ |async).UniqueIndex}} - {{(club$ |async).LongName}}</ion-title>
         <ion-buttons slot="end">
@@ -19,51 +19,54 @@
         </ion-buttons>
     </ion-toolbar>
     <ion-toolbar>
-        <ion-segment scrollable swipe-gesture [value]="tabIndex" (ionChange)="selectTab($event.detail.value)">
-            <ion-segment-button id="segment-0" [value]="0">
+        <ion-segment [value]="activeSwiperIndex" (ionChange)="selectTab($event.detail.value)">
+            <ion-segment-button [value]="0">
                 <ion-label class="ion-text-capitalize">{{'CLUB_DETAILS.LIST_OF_STRENGTH' | translate}}</ion-label>
             </ion-segment-button>
-            <ion-segment-button id="segment-1" [value]="1">
+            <ion-segment-button [value]="1">
                 <ion-label class="ion-text-capitalize">{{'COMMON.CALENDAR' | translate}}</ion-label>
             </ion-segment-button>
-            <ion-segment-button id="segment-2" [value]="2">
+            <ion-segment-button [value]="2">
                 <ion-label class="ion-text-capitalize">{{'COMMON.TEAMS' | translate}}</ion-label>
             </ion-segment-button>
-            <ion-segment-button id="segment-3" [value]="3">
+            <ion-segment-button [value]="3">
                 <ion-label class="ion-text-capitalize">{{'CLUB_DETAILS.INFOS' | translate}}</ion-label>
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
 </ion-header>
 <ion-content scroll-y="false">
-    <super-tabs #superTabs>
-        <super-tabs-container>
-            <super-tab>
-                <beping-club-player-list-tab
-                        (memberClicked)="navigateToPlayer($event)"
-                        [members]="members$ | async"
-                >
-                </beping-club-player-list-tab>
-            </super-tab>
-            <super-tab>
-                <beping-team-matches-entry-list [teamMatchEntries$]="matches$">
-                </beping-team-matches-entry-list>
-            </super-tab>
-            <super-tab>
-                <beping-club-team-list-tab
-                        [club]="club$|async"
-                        [teams]="teams$|async"
-                ></beping-club-team-list-tab>
-            </super-tab>
-            <super-tab>
-                <beping-club-pratical-info-tab
-                        [venues]="venues$|async"
-                >
-                </beping-club-pratical-info-tab>
-            </super-tab>
-        </super-tabs-container>
-    </super-tabs>
-    <ion-fab [hidden]="tabIndex !== 0" horizontal="end" slot="fixed" vertical="bottom">
+    <swiper
+        #swiper
+        [config]="swiperConfig"
+        class="beping-swiper"
+        (slideChange)="slideChange($event)"
+    >
+        <ng-template swiperSlide>
+            <beping-club-player-list-tab
+                    (memberClicked)="navigateToPlayer($event)"
+                    [members]="members$ | async"
+            >
+            </beping-club-player-list-tab>
+        </ng-template>
+        <ng-template swiperSlide>
+            <beping-team-matches-entry-list [teamMatchEntries$]="matches$">
+            </beping-team-matches-entry-list>
+        </ng-template>
+        <ng-template swiperSlide>
+            <beping-club-team-list-tab
+                    [club]="club$|async"
+                    [teams]="teams$|async"
+            ></beping-club-team-list-tab>
+        </ng-template>
+        <ng-template swiperSlide>
+            <beping-club-pratical-info-tab
+                    [venues]="venues$|async"
+            >
+            </beping-club-pratical-info-tab>
+        </ng-template>
+    </swiper>
+    <ion-fab [hidden]="activeSwiperIndex !== 0" horizontal="end" slot="fixed" vertical="bottom">
         <ion-fab-button>
             <ion-icon [name]="getIcon(currentCategory$ | async)"></ion-icon>
         </ion-fab-button>

@@ -62,12 +62,12 @@ const defaultState: UserStateModel = {
 };
 
 
-@Injectable()
 @State<UserStateModel>({
     name: 'user',
     defaults: defaultState,
     children: [TabTState]
 })
+@Injectable()
 export class UserState implements NgxsOnInit {
 
     constructor(

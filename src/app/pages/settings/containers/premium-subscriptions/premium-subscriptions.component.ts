@@ -17,13 +17,15 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {IonNav, ModalController} from '@ionic/angular';
 import {PrivacyComponent} from '../privacy/privacy.component';
 import {ConditionsUsageComponent} from '../conditions-usage/conditions-usage.component';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
     selector: 'beping-premium-subscriptions',
     templateUrl: './premium-subscriptions.component.html',
     styleUrls: ['./premium-subscriptions.component.css']
 })
-export class PremiumSubscriptionsComponent extends OnDestroyHook implements OnInit {
+export class PremiumSubscriptionsComponent implements OnInit {
 
     @Input() isModal = false;
 
@@ -43,7 +45,6 @@ export class PremiumSubscriptionsComponent extends OnDestroyHook implements OnIn
         private readonly modalCtrl: ModalController,
         private readonly ionNav: IonNav,
     ) {
-        super();
     }
 
     ngOnInit(): void {
@@ -66,7 +67,7 @@ export class PremiumSubscriptionsComponent extends OnDestroyHook implements OnIn
         );
         if (this.isModal) {
             this.store.select(InAppPurchasesState.isPro).pipe(
-                takeUntil(this.ngUnsubscribe),
+                untilDestroyed(this),
                 filter((isPro: boolean) => !!isPro)
             ).subscribe(() => {
                 this.closeModal(true);
