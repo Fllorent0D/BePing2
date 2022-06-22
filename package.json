@@ -50,7 +50,6 @@
     "@capacitor/storage": "1.2.5",
     "@ionic-native/core": "5.36.0",
     "@ionic-native/in-app-purchase-2": "5.36.0",
-    "@ionic-super-tabs/angular": "7.0.8",
     "@ionic/angular": "6.1.9",
     "@ionic/core": "6.1.9",
     "@joinflux/firebase-remote-config": "0.5.1",
