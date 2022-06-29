@@ -50,7 +50,7 @@
     "@capacitor/storage": "1.2.5",
     "@ionic-native/core": "5.36.0",
     "@ionic-native/in-app-purchase-2": "5.36.0",
-    "@ionic/angular": "6.1.11",
+    "@ionic/angular": "6.1.12",
     "@ionic/core": "6.1.11",
     "@joinflux/firebase-remote-config": "0.5.1",
     "@ngneat/until-destroy": "9.2.1",
