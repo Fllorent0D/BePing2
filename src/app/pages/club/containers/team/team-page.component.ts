@@ -34,6 +34,7 @@ import {SwiperComponent} from 'swiper/angular';
 export class TeamPage implements OnInit {
     swiperConfig: SwiperOptions = {
         speed: 150,
+        autoHeight: true,
         effect: 'cube',
     };
     activeSwiperIndex = 0;

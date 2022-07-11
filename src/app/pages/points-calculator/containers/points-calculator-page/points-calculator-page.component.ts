@@ -10,7 +10,6 @@ import {MemberEntry} from '../../../../core/api/models/member-entry';
 import {RankingMethodName, RankingService} from '../../../../core/services/tabt/ranking.service';
 import {PointCalculatorService} from '../../services/point-calculator.service';
 import {Remove, Reset} from '@ngxs-labs/entity-state';
-import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {ActionSheetController, IonRouterOutlet} from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';

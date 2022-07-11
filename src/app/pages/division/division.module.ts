@@ -4,6 +4,7 @@ import {DivisionPageComponent} from './containers/division-page/division-page.co
 import {DivisionRoutingModule} from './division-routing.module';
 import {DivisionsPageComponent} from './containers/divisions-page/divisions-page.component';
 import {RegionsDivisionComponent} from './containers/regions-division/regions-division.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {RegionsDivisionComponent} from './containers/regions-division/regions-di
     ],
     imports: [
         SharedModule,
+        ScrollingModule,
         DivisionRoutingModule,
     ]
 })

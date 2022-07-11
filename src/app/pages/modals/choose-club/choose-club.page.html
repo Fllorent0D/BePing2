@@ -21,14 +21,18 @@
 
 </ion-header>
 
-<ion-content>
-    <ion-virtual-scroll [headerFn]="categoryHeader" [items]="clubsFound$ | async">
+<ion-content scroll-y="false">
+    <cdk-virtual-scroll-viewport itemSize="45" minBufferPx="900" maxBufferPx="1350">
+        <ion-item (click)="clubClicked(club)" *cdkVirtualFor="let club of clubsFound$ | async">
+            <ion-label>{{club.UniqueIndex}} - {{club.LongName}}</ion-label>
+        </ion-item>
+    </cdk-virtual-scroll-viewport>
+<!--
+    <ion-virtual-scroll [headerFn]="categoryHeader" [items]="">
         <ion-item-divider *virtualHeader="let header" sticky>
             {{ header }}
         </ion-item-divider>
-        <ion-item (click)="clubClicked(club)" *virtualItem="let club">
-            <ion-label>{{club.UniqueIndex}} - {{club.LongName}}</ion-label>
-        </ion-item>
-    </ion-virtual-scroll>
 
+    </ion-virtual-scroll>
+-->
 </ion-content>

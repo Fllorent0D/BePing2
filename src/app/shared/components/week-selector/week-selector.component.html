@@ -1,7 +1,7 @@
 <ion-grid>
     <ion-row>
         <ion-col size="3">
-            <ion-button size="small" fill="clear" expand="block" (click)="previousWeek()" [disabled]="value === currentMin">
+            <ion-button size="small" fill="clear" expand="block" (click)="previousWeek($event)" [disabled]="value === currentMin">
                 <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-col>
@@ -14,7 +14,7 @@
             </ion-select>
         </ion-col>
         <ion-col size="3">
-            <ion-button size="small" fill="clear" expand="block" (click)="nextWeek()" [disabled]="value === currentMax">
+            <ion-button size="small" fill="clear" expand="block" (click)="nextWeek($event)" [disabled]="value === currentMax">
                 <ion-icon name="arrow-forward-outline" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-col>

@@ -43,7 +43,7 @@ export class WeekSelectorComponent implements ControlValueAccessor {
     }
 
     initWeeks() {
-        this.weeks = Array((this.currentMax - this.currentMin + 1)).fill(null).map((u, i) => i + this.currentMin);
+        this.weeks = Array(((this.currentMax ?? 22) - this.currentMin + 1)).fill(null).map((u, i) => i + this.currentMin);
     }
 
     constructor() {
@@ -66,7 +66,8 @@ export class WeekSelectorComponent implements ControlValueAccessor {
         this.value = Number(obj);
     }
 
-    nextWeek() {
+    nextWeek(event: Event) {
+        event.preventDefault();
         if (this.max && this.max < (this.value + 1)) {
             return;
         }
@@ -74,7 +75,8 @@ export class WeekSelectorComponent implements ControlValueAccessor {
         this.updateValue(this.value + 1);
     }
 
-    previousWeek() {
+    previousWeek(event: Event) {
+        event.preventDefault();
         if (this.min > (this.value - 1)) {
             return;
         }

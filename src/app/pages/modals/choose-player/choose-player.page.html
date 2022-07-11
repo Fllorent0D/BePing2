@@ -11,12 +11,10 @@
 
 <ion-content>
     <ng-container *ngIf="members$ | async as members; else loader">
-        <ion-virtual-scroll [items]="members">
-            <ion-item (click)="memberClicked(member)" *virtualItem="let member">
-                <ion-label>{{member.FirstName | titlecase}} {{member.LastName | titlecase}}</ion-label>
-                <ion-note slot="end">{{member.Ranking}}</ion-note>
-            </ion-item>
-        </ion-virtual-scroll>
+        <ion-item (click)="memberClicked(member)" *ngFor="let member of members">
+            <ion-label>{{member.FirstName | titlecase}} {{member.LastName | titlecase}}</ion-label>
+            <ion-note slot="end">{{member.Ranking}}</ion-note>
+        </ion-item>
     </ng-container>
     <ng-template #loader>
         <ion-item *ngFor="let t of skeletonRows">

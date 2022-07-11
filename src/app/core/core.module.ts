@@ -20,6 +20,7 @@ import {FavoriteItem} from './store/favorites';
 import {DialogService} from './services/dialog-service.service';
 import {ApiConfiguration} from './api/api-configuration';
 import {ApiConfigurationService} from './services/api-configuration.service';
+import {TabtSeasonInterceptorService} from './interceptors/tabt-season-interceptor.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -151,6 +152,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TabtHttpErrorHandlerInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TabtSeasonInterceptorService,
             multi: true
         },
         DialogService

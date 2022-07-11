@@ -22,7 +22,7 @@ const defaultState = {
     partnership_rotatio: false,
     current_season: 22,
     tabt_url: 'https://tabt-rest.floca.be',
-    beping_pro: true,
+    beping_pro: false,
     use_member_lookup: false,
     maintenance: false,
     notifications: false,

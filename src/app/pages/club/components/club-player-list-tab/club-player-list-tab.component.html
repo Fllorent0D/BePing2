@@ -1,41 +1,39 @@
-<ion-content>
-    <ion-virtual-scroll [items]="members" approxItemHeight="60px">
-        <ion-item (click)="memberClicked.emit(member.UniqueIndex)" *virtualItem="let member; let index = index">
-            <ion-grid class="ion-no-padding">
-                <ion-row>
-                    <ion-col class="ion-text-end border-right"
-                             size="1"
-                             style="padding-right: 6px">
-                        <ion-label>
-                            <ion-text class="ion-text-nowrap">
-                                <p>{{member.Position}}</p>
-                            </ion-text>
-                        </ion-label>
-                    </ion-col>
-                    <ion-col size="1" style="padding-left: 6px">
-                        <ion-label>
-                            <ion-text class="ion-text-nowrap">
-                                <p>{{member.RankingIndex}}</p>
-                            </ion-text>
-                        </ion-label>
-                    </ion-col>
-                    <ion-col offset="1" size="7">
-                        <ion-label>
-                            <ion-text>
-                                {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
-                            </ion-text>
-                        </ion-label>
-                    </ion-col>
-                    <ion-col size="1">
-                        <ion-label>
-                            <ion-text class="ion-text-nowrap">
-                                {{member.Ranking}}
-                            </ion-text>
-                        </ion-label>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-item>
-    </ion-virtual-scroll>
+<ng-container *ngFor="let member of members">
+    <ion-item (click)="memberClicked.emit(member.UniqueIndex)">
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col class="ion-text-end border-right"
+                         size="1"
+                         style="padding-right: 6px">
+                    <ion-label>
+                        <ion-text class="ion-text-nowrap">
+                            <p>{{member.Position}}</p>
+                        </ion-text>
+                    </ion-label>
+                </ion-col>
+                <ion-col size="1" style="padding-left: 6px">
+                    <ion-label>
+                        <ion-text class="ion-text-nowrap">
+                            <p>{{member.RankingIndex}}</p>
+                        </ion-text>
+                    </ion-label>
+                </ion-col>
+                <ion-col offset="1" size="7">
+                    <ion-label>
+                        <ion-text>
+                            {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
+                        </ion-text>
+                    </ion-label>
+                </ion-col>
+                <ion-col size="1">
+                    <ion-label>
+                        <ion-text class="ion-text-nowrap">
+                            {{member.Ranking}}
+                        </ion-text>
+                    </ion-label>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-item>
+</ng-container>
 
-</ion-content>

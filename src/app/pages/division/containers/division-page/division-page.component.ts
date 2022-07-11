@@ -33,6 +33,7 @@ export class DivisionPageComponent implements OnInit {
     swiperConfig: SwiperOptions = {
         speed: 150,
         effect: 'cube',
+        autoHeight: true,
     };
     activeSwiperIndex = 0;
     divisionId$: Observable<number>;

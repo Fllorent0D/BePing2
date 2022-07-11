@@ -28,6 +28,7 @@ export class OnboardingPage implements OnInit, OnDestroy {
 
     swiperConfig: SwiperOptions = {
         speed: 150,
+        edgeSwipeDetection: false,
         scrollbar: {
             draggable: true,
             hide: true,

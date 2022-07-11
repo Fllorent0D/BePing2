@@ -38,6 +38,7 @@ import {FadeHeaderDirective} from './directives/fade-header.directive';
 import {AddToCalendarBtnComponent} from './components/add-to-calendar-btn/add-to-calendar-btn.component';
 import {BecomeProComponent} from './components/become-pro/become-pro.component';
 import {SwiperModule} from 'swiper/angular';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 const COMPONENTS = [
     RankingComponent,
@@ -83,6 +84,7 @@ const DIRECTIVES = [
         TranslateModule,
         NgChartsModule,
         SwiperModule,
+        ScrollingModule
     ],
     declarations: [
         COMPONENTS,
@@ -107,7 +109,8 @@ const DIRECTIVES = [
         FadeHeaderDirective,
         AddToCalendarBtnComponent,
         BecomeProComponent,
-        SwiperModule
+        SwiperModule,
+        ScrollingModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

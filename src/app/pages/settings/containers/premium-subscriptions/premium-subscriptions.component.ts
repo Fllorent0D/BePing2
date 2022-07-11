@@ -12,7 +12,6 @@ import {
 import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchases.model';
 import {FormControl, Validators} from '@angular/forms';
 import {filter, shareReplay, startWith, switchMap, takeUntil} from 'rxjs/operators';
-import {OnDestroyHook} from '../../../../core/on-destroy-hook';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {IonNav, ModalController} from '@ionic/angular';
 import {PrivacyComponent} from '../privacy/privacy.component';

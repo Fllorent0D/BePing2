@@ -117,70 +117,67 @@
             <beping-team-matches-entry-list [teamMatchEntries$]="matches$"></beping-team-matches-entry-list>
         </ng-template>
         <ng-template swiperSlide>
-            <cdk-virtual-scroll-viewport itemSize="70" maxBufferPx="1350"
-                                             minBufferPx="900">
-                    <ion-header>
-                        <ion-grid class="ion-no-padding">
-                            <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
-                                <ion-col size="5">
-                                    <ion-text
-                                            class="ion-text-wrap">{{'TEAM_STAT.NAME_THREE_LETTERS'|translate}}</ion-text>
-                                </ion-col>
-                                <ion-col class="" size="2">
-                                    <ion-text
-                                            class="ion-text-nowrap">{{'TEAM_STAT.RANKING_THREE_LETTERS'|translate}}</ion-text>
-                                </ion-col>
-                                <ion-col class="" size="2">
-                                    <ion-text
-                                            class="ion-text-nowrap">{{'TEAM_STAT.PLAYED_FIRST_LETTER'|translate}}</ion-text>
-                                </ion-col>
-                                <ion-col class="ion-text-center" size="2">
-                                    <ion-text
-                                            class="ion-text-nowrap">{{'TEAM_STAT.PERCENT_THREE_LETTERS'|translate}}</ion-text>
-                                </ion-col>
-                            </ion-row>
-                        </ion-grid>
+            <ion-header>
+                <ion-grid class="ion-no-padding">
+                    <ion-row style="font-size: 0.8rem;color: #9B9B9B; padding: 15px 30px 5px 30px;">
+                        <ion-col size="5">
+                            <ion-text
+                                    class="ion-text-wrap">{{'TEAM_STAT.NAME_THREE_LETTERS'|translate}}</ion-text>
+                        </ion-col>
+                        <ion-col class="" size="2">
+                            <ion-text
+                                    class="ion-text-nowrap">{{'TEAM_STAT.RANKING_THREE_LETTERS'|translate}}</ion-text>
+                        </ion-col>
+                        <ion-col class="" size="2">
+                            <ion-text
+                                    class="ion-text-nowrap">{{'TEAM_STAT.PLAYED_FIRST_LETTER'|translate}}</ion-text>
+                        </ion-col>
+                        <ion-col class="ion-text-center" size="2">
+                            <ion-text
+                                    class="ion-text-nowrap">{{'TEAM_STAT.PERCENT_THREE_LETTERS'|translate}}</ion-text>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
 
-                    </ion-header>
-                    <ion-list>
-                        <ion-item (click)="navigateToPlayer(stat.uniqueIndex)"
-                                  *cdkVirtualFor="let stat of memberRanking$|async"
-                                  detail>
-                            <ion-grid>
-                                <ion-row class="ion-align-items-center">
-                                    <ion-col class="" size="6">
-                                        <ion-label>
-                                            <ion-text class="ion-text-wrap">
-                                                <h2>{{stat.firstName | titlecase}} {{stat.lastName | titlecase}}</h2>
-                                            </ion-text>
-                                        </ion-label>
-                                    </ion-col>
-                                    <ion-col class="" size="2">
-                                        <ion-label class="ion-text-wrap">
-                                            <h2>{{stat.ranking}}</h2>
-                                        </ion-label>
-                                    </ion-col>
-                                    <ion-col class="" size="2">
-                                        <ion-label class="ion-text-wrap">
-                                            <h2>{{stat.played}}</h2>
-                                        </ion-label>
-                                    </ion-col>
-                                    <ion-col class="ion-text-center ion-no-padding" size="2">
-                                        <beping-victory-chart
-                                                [bluePct]="stat.winPourcentage"
-                                                [redPct]="stat.losePourcentage"
-                                                [small]="true"
-                                                [title]="stat.winPourcentage + '%'"
-                                        >
-                                        </beping-victory-chart>
-                                    </ion-col>
-                                </ion-row>
-                            </ion-grid>
+            </ion-header>
+            <ion-list>
+                <ion-item (click)="navigateToPlayer(stat.uniqueIndex)"
+                          *ngFor="let stat of memberRanking$|async"
+                          detail>
+                    <ion-grid>
+                        <ion-row class="ion-align-items-center">
+                            <ion-col class="" size="6">
+                                <ion-label>
+                                    <ion-text class="ion-text-wrap">
+                                        <h2>{{stat.firstName | titlecase}} {{stat.lastName | titlecase}}</h2>
+                                    </ion-text>
+                                </ion-label>
+                            </ion-col>
+                            <ion-col class="" size="2">
+                                <ion-label class="ion-text-wrap">
+                                    <h2>{{stat.ranking}}</h2>
+                                </ion-label>
+                            </ion-col>
+                            <ion-col class="" size="2">
+                                <ion-label class="ion-text-wrap">
+                                    <h2>{{stat.played}}</h2>
+                                </ion-label>
+                            </ion-col>
+                            <ion-col class="ion-text-center ion-no-padding" size="2">
+                                <beping-victory-chart
+                                        [bluePct]="stat.winPourcentage"
+                                        [redPct]="stat.losePourcentage"
+                                        [small]="true"
+                                        [title]="stat.winPourcentage + '%'"
+                                >
+                                </beping-victory-chart>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
 
-                        </ion-item>
-                    </ion-list>
+                </ion-item>
+            </ion-list>
 
-                </cdk-virtual-scroll-viewport>
         </ng-template>
     </swiper>
 </ion-content>

@@ -1,9 +1,8 @@
-<ion-content>
     <beping-card (click)="navigateToVenue(venue)" *ngFor="let venue of venues" [padding]="true">
         <ion-grid>
             <ion-row class="ion-align-items-center">
                 <ion-col size="11">
-                    <ion-text class="text-strong">{{venue.Name}}</ion-text>
+                    <ion-text class="text-strong">{{venue.Name | titlecase}}</ion-text>
                     <br>
                     <ion-text color="grey">{{venue.Street}} {{venue.Town}}</ion-text>
                     <br>
@@ -16,4 +15,3 @@
             </ion-row>
         </ion-grid>
     </beping-card>
-</ion-content>

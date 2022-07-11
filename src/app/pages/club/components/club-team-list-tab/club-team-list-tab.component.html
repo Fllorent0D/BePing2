@@ -1,13 +1,11 @@
-<ion-content>
-    <ion-virtual-scroll [items]="teams" approxItemHeight="50px">
-        <ion-item
-                *virtualItem="let team"
-                [routerLink]="['team', team.TeamId]"
-                detail>
-            <ion-label class="ion-padding-vertical">
-                <h2>{{club.Name}} {{team.Team}}</h2>
-                <p>{{team.DivisionName}}</p>
-            </ion-label>
-        </ion-item>
-    </ion-virtual-scroll>
-</ion-content>
+<ion-list>
+    <ion-item
+            *ngFor="let team of teams"
+            [routerLink]="['team', team.TeamId]"
+            detail>
+        <ion-label class="ion-padding-vertical">
+            <h2>{{club.Name}} {{team.Team}}</h2>
+            <p>{{team.DivisionName}}</p>
+        </ion-label>
+    </ion-item>
+</ion-list>
