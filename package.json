@@ -95,7 +95,7 @@
     "@angular/language-service": "14.0.6",
     "@capacitor/cli": "3.6.0",
     "@cypress/schematic": "2.0.0",
-    "@ionic/angular-toolkit": "6.1.0",
+    "@ionic/angular-toolkit": "7.0.0",
     "@ngxs/devtools-plugin": "3.7.4",
     "@ngxs/hmr-plugin": "3.7.4",
     "@types/jasmine": "4.0.3",
