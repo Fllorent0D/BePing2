@@ -23,24 +23,25 @@ import {CalendarService} from '../../../../core/services/calendar/calendar.servi
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
-import {IonRouterOutlet} from '@ionic/angular';
+import {IonRouterOutlet, ViewDidEnter} from '@ionic/angular';
 import SwiperCore from 'swiper';
 import Swiper, {Scrollbar, SwiperOptions} from 'swiper';
 import {SwiperComponent} from 'swiper/angular';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
-SwiperCore.use([Scrollbar]);
 
+@UntilDestroy()
 @Component({
     selector: 'beping-club',
     templateUrl: './club.page.html',
     styleUrls: ['./club.page.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClubPage implements OnInit {
+export class ClubPage implements OnInit, ViewDidEnter {
     swiperConfig: SwiperOptions = {
         speed: 150,
         effect: 'cube',
-        autoHeight: true,
+        autoHeight: true
     };
     activeSwiperIndex = 0;
 
@@ -82,6 +83,11 @@ export class ClubPage implements OnInit {
         this.from$ = new BehaviorSubject<Date>(sub(new Date(), {weeks: 2}));
         this.to$ = new BehaviorSubject<Date>(new Date());
     }
+    ionViewDidEnter(): void {
+        setTimeout(() => {
+            this.swiper.swiperRef.updateAutoHeight(0);
+        }, 1000);
+    }
 
     slideChange([swiper]: [Swiper]) {
         this.ngZone.run(() => this.activeSwiperIndex = swiper.activeIndex);
@@ -122,6 +128,18 @@ export class ClubPage implements OnInit {
             switchMap(([category, club]) => this.clubService.findClubMembers({clubIndex: club.UniqueIndex, playerCategory: category})),
             map((members: MemberEntry[]) => this.clubMembersListService.transformToClubMembersList(members))
         );
+
+        combineLatest([
+            this.matches$,
+            this.club$,
+            this.teams$,
+            this.matches$
+        ]).pipe(
+            untilDestroyed(this)
+        ).subscribe({
+            next: () => this.swiper.swiperRef.updateAutoHeight(0)
+        });
+
 
     }
 

@@ -20,6 +20,7 @@ import {InAppPurchasesService} from './core/services/in-app-purchases.service';
 import {Device} from '@capacitor/device';
 import {AppStateService} from './core/services/app-state.service';
 import {RemoteConfigService} from './core/services/remote-config.service';
+import {SplashScreen} from '@capacitor/splash-screen';
 
 registerLocaleData(localFR);
 registerLocaleData(localNL);
@@ -58,6 +59,7 @@ registerLocaleData(localNL);
                 ];
                 if (deviceInfo.platform !== 'web') {
                     initTasks.push(iAPService.init());
+                    await SplashScreen.hide();
                 }
                 await Promise.all(initTasks);
             },

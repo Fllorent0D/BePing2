@@ -16,6 +16,8 @@ import {StartNavigationService} from '../../../../core/services/start-navigation
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {CalendarService} from '../../../../core/services/calendar/calendar.service';
+import {Select} from '@ngxs/store';
+import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-tournament-detail-page',
@@ -36,6 +38,7 @@ export class TournamentDetailPageComponent implements OnInit {
     map: Map;
     Level = Level;
     osmAddress: OSMAddress;
+    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
 
 
     constructor(

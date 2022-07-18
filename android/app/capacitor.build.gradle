@@ -29,7 +29,7 @@ dependencies {
     implementation project(':capacitor-email-composer')
     implementation project(':capacitor-native-settings')
     implementation project(':capacitor-rate-app')
-    implementation "com.android.billingclient:billing:4.1.0"
+    implementation "com.android.billingclient:billing:4.0.0"
 }
 
 

@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Select, Store} from '@ngxs/store';
 import {DivisionsService} from '../../../../core/api/services/divisions.service';
 import {MatchesService} from '../../../../core/api/services/matches.service';
-import {combineLatest, Observable} from 'rxjs';
+import {combineLatest, concat, concatAll, Observable} from 'rxjs';
 import {RankingEntry} from '../../../../core/api/models/ranking-entry';
 import {map, share, shareReplay, switchMap, take} from 'rxjs/operators';
 import {DivisionEntry} from '../../../../core/api/models/division-entry';
@@ -20,20 +20,22 @@ import {CalendarService} from '../../../../core/services/calendar/calendar.servi
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
-import {IonRouterOutlet} from '@ionic/angular';
+import {IonContent, IonRouterOutlet, ViewDidEnter} from '@ionic/angular';
 import Swiper, {SwiperOptions} from 'swiper';
 import {SwiperComponent} from 'swiper/angular';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
     selector: 'beping-division-page',
     templateUrl: './division-page.component.html',
     styleUrls: ['./division-page.component.scss']
 })
-export class DivisionPageComponent implements OnInit {
+export class DivisionPageComponent implements OnInit, ViewDidEnter {
     swiperConfig: SwiperOptions = {
         speed: 150,
         effect: 'cube',
-        autoHeight: true,
+        autoHeight: true
     };
     activeSwiperIndex = 0;
     divisionId$: Observable<number>;
@@ -42,8 +44,10 @@ export class DivisionPageComponent implements OnInit {
     memberRanking$: Observable<MemberResults[]>;
     matches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
+
     @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
     @ViewChild('swiper', {static: false}) swiper?: SwiperComponent;
+    @ViewChild('ionContent', {static: false}) ionContent?: IonContent;
 
     constructor(
         protected readonly changeDetectionRef: ChangeDetectorRef,
@@ -59,6 +63,12 @@ export class DivisionPageComponent implements OnInit {
         private readonly ionRouter: IonRouterOutlet,
         protected readonly ngZone: NgZone,
     ) {
+    }
+
+    ionViewDidEnter(): void {
+        setTimeout(() => {
+            this.swiper.swiperRef.updateAutoHeight(0);
+        }, 1000);
     }
 
     ngOnInit() {
@@ -90,6 +100,15 @@ export class DivisionPageComponent implements OnInit {
             shareReplay(1)
         );
 
+        combineLatest([
+            this.matches$,
+            this.division$,
+            this.matches$
+        ]).pipe(
+            untilDestroyed(this)
+        ).subscribe({
+            next: () => this.swiper.swiperRef.updateAutoHeight(0)
+        });
 
     }
 

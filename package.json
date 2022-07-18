@@ -1,6 +1,6 @@
 {
   "name": "beping2",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -11,6 +11,8 @@
     "build:prod": "ng build --configuration production",
     "ionic:sync": "ionic cap sync",
     "ionic:sync:prod": "ionic cap sync --prod",
+    "capactior:open:ios": "ionic cap open ios",
+    "capactior:open:android": "ionic cap open android",
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",

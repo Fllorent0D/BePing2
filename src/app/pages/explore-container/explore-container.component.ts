@@ -174,12 +174,9 @@ export class ExploreContainerComponent implements OnInit {
 
     refresh(event: CustomEvent) {
         this.analyticsService.logEvent('refresh_dashboard');
-
         event.detail.complete();
-        this.currentMemberEntry$.pipe(
-            take(1),
-            switchMap((member) => this.store.dispatch(new UpdateMemberEntries(member.UniqueIndex, false)))
-        ).subscribe();
+        const memberUniqueIndex = this.store.selectSnapshot(UserState).memberUniqueIndex;
+        this.store.dispatch(new UpdateMemberEntries(memberUniqueIndex, false));
     }
 
     openCalculator() {

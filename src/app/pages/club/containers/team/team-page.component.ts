@@ -20,18 +20,19 @@ import {CalendarService} from '../../../../core/services/calendar/calendar.servi
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
-import {IonRouterOutlet} from '@ionic/angular';
+import {IonRouterOutlet, ViewDidEnter} from '@ionic/angular';
 import Swiper, {SwiperOptions} from 'swiper';
 import {SwiperComponent} from 'swiper/angular';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 
-
+@UntilDestroy()
 @Component({
     selector: 'beping-teams',
     templateUrl: './team-page.component.html',
     styleUrls: ['./team-page.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TeamPage implements OnInit {
+export class TeamPage implements OnInit, ViewDidEnter {
     swiperConfig: SwiperOptions = {
         speed: 150,
         autoHeight: true,
@@ -69,6 +70,12 @@ export class TeamPage implements OnInit {
         private readonly ionRouterOutlet: IonRouterOutlet,
         protected readonly ngZone: NgZone
     ) {
+    }
+
+    ionViewDidEnter(): void {
+        setTimeout(() => {
+            this.swiper.swiperRef.updateAutoHeight(0);
+        }, 1000);
     }
 
     slideChange([swiper]: [Swiper]) {
@@ -136,6 +143,17 @@ export class TeamPage implements OnInit {
             switchMap((team: TeamEntry) => this.divisionsService.findDivisionRanking({divisionId: team.DivisionId})),
             shareReplay(1)
         );
+
+        combineLatest([
+            this.memberRanking$,
+            this.ranking$,
+            this.calendar$
+        ]).pipe(
+            untilDestroyed(this)
+        ).subscribe({
+            next: () => this.swiper.swiperRef.updateAutoHeight(0)
+        });
+
     }
 
     navigateToPlayer(uniqueIndex: number) {
