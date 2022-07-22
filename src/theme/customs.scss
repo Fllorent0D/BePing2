@@ -169,34 +169,6 @@ ion-fab-button[data-desc]::after {
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
 
-.scrollmenu {
-  overflow: auto;
-  background-color: var(--ion-background-color);
-  white-space: nowrap;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-
-  ion-chip {
-    display: inline-block;
-    font-size: 1rem;
-    padding-top: 10px;
-    padding-bottom: 25px;
-    margin-right: 8px;
-  }
-
-  ion-chip.act {
-    background-color: #4A8DFF;
-    color: white;
-    transition: background-color 0.2s;
-  }
-}
-
-.scrollmenu::-webkit-scrollbar {
-  display: none;
-}
-
-
 .text-bold {
   font-weight: 800;
 }
@@ -307,11 +279,11 @@ ion-popover {
   text-align: center;
 
   h3 {
-    font-size: 23px;
+    //font-size: 23px;
   }
 
   ion-icon {
-    font-size: 35px;
+    //font-size: 35px;
   }
 }
 
@@ -326,11 +298,11 @@ ion-popover {
   text-align: center;
 
   h3 {
-    font-size: 20px;
+    //font-size: 20px;
   }
 
   ion-icon {
-    font-size: 35px;
+    // font-size: 35px;
   }
 }
 

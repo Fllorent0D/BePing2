@@ -39,6 +39,8 @@ import {AddToCalendarBtnComponent} from './components/add-to-calendar-btn/add-to
 import {BecomeProComponent} from './components/become-pro/become-pro.component';
 import {SwiperModule} from 'swiper/angular';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import { AlertFullPageComponent } from './components/alert-full-page/alert-full-page.component';
+import { LocalizedBackBtnComponent } from './components/localized-back-btn/localized-back-btn.component';
 
 const COMPONENTS = [
     RankingComponent,
@@ -94,6 +96,8 @@ const DIRECTIVES = [
         FadeHeaderDirective,
         AddToCalendarBtnComponent,
         BecomeProComponent,
+        AlertFullPageComponent,
+        LocalizedBackBtnComponent,
     ],
     exports: [
         CommonModule,
@@ -110,7 +114,10 @@ const DIRECTIVES = [
         AddToCalendarBtnComponent,
         BecomeProComponent,
         SwiperModule,
-        ScrollingModule
+        ScrollingModule,
+        AlertFullPageComponent,
+        LocalizedBackBtnComponent,
+
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

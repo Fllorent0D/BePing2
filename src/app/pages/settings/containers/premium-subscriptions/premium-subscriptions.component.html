@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
     <ion-toolbar style="--background: transparent" #toolbar>
         <ion-buttons slot="start" *ngIf="!isModal">
-            <ion-back-button></ion-back-button>
+            <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
         <ion-buttons slot="end" *ngIf="isModal">
             <ion-button (click)="closeModal()">

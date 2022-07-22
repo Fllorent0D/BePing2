@@ -17,7 +17,7 @@ export class IndividualMatchesListComponent implements OnInit {
     }
 
     getPlayerWithId(uniqueIndex: number[]): Player[] {
-        return [...this.match.MatchDetails.AwayPlayers.Players, ...this.match.MatchDetails.HomePlayers.Players]
+        return [...this.match?.MatchDetails?.AwayPlayers?.Players ?? [], ...this.match?.MatchDetails?.HomePlayers?.Players ?? []]
             .filter((player) => uniqueIndex?.includes(player.UniqueIndex));
     }
 

@@ -11,10 +11,22 @@
 
 <ion-content>
     <ng-container *ngIf="members$ | async as members; else loader">
-        <ion-item (click)="memberClicked(member)" *ngFor="let member of members">
-            <ion-label>{{member.FirstName | titlecase}} {{member.LastName | titlecase}}</ion-label>
-            <ion-note slot="end">{{member.Ranking}}</ion-note>
-        </ion-item>
+        <ng-container *ngIf="members.length > 0">
+            <ion-item (click)="memberClicked(member)" *ngFor="let member of members">
+                <ion-label>
+                    <h3>
+                        {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
+                    </h3>
+                </ion-label>
+                <ion-note slot="end">{{member.Ranking}}</ion-note>
+            </ion-item>
+        </ng-container>
+        <ng-container *ngIf="members.length === 0">
+            <beping-alert-full-page
+                    [title]="'SEARCH.NO_RESULT'|translate"
+            >
+            </beping-alert-full-page>
+        </ng-container>
     </ng-container>
     <ng-template #loader>
         <ion-item *ngFor="let t of skeletonRows">

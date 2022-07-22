@@ -25,7 +25,9 @@
     <div [hidden]="loading">
         <ion-item (click)="playerClicked(member)" *ngFor="let member of members$|async">
             <ion-label>
-                {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
+                <h3>
+                    {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
+                </h3>
             </ion-label>
             <ion-label slot="end">{{member.Ranking}}</ion-label>
         </ion-item>

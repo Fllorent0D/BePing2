@@ -1,17 +1,9 @@
-    <beping-card (click)="navigateToVenue(venue)" *ngFor="let venue of venues" [padding]="true">
-        <ion-grid>
-            <ion-row class="ion-align-items-center">
-                <ion-col size="11">
-                    <ion-text class="text-strong">{{venue.Name | titlecase}}</ion-text>
-                    <br>
-                    <ion-text color="grey">{{venue.Street}} {{venue.Town}}</ion-text>
-                    <br>
-                    <ion-text color="grey">{{venue.Phone}}</ion-text>
-                </ion-col>
-                <ion-col class="ion-text-end" size="1">
-                    <ion-icon class="ion" color="primary" name="navigate-circle-outline"
-                              size="large"></ion-icon>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </beping-card>
+<beping-card (click)="navigateToVenue(venue)" *ngFor="let venue of venues" [padding]="true">
+    <ion-label>
+        <h3>{{venue.Name | titlecase}}</h3>
+        <p>{{venue.Street}} {{venue.Town}}</p>
+        <p>{{venue.Phone}}</p>
+    </ion-label>
+    <ion-icon slot="end" class="ion" color="primary" name="navigate-circle-outline"
+              size="large"></ion-icon>
+</beping-card>

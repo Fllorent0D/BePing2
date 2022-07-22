@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
         <ion-title>{{'SETTINGS.CONTRIBUTORS.CONTRIBUTORS' | translate}}</ion-title>
 
@@ -18,6 +18,14 @@
             <ion-label>
                 <h2>Florent Cardoen</h2>
                 <p>@Fllorent0D</p>
+            </ion-label>
+        </ion-item>
+        <ion-item detail-icon="open-outline" detail (click)="openGithub('https://github.com/RaphaelFelten')">
+            <ion-avatar slot="start">
+                <img src="https://avatars.githubusercontent.com/u/22978583?v=4">
+            </ion-avatar>
+            <ion-label>
+                <h2>@RaphaelFelten</h2>
             </ion-label>
         </ion-item>
         <ion-item detail-icon="open-outline" detail (click)="openGithub('https://github.com/RaphaelFelten')">

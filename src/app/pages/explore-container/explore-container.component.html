@@ -84,20 +84,11 @@
             </beping-member-summary-per-ranking>
         </ng-container>
         <ng-template #noResults>
-            <beping-card [padding]="true" class="ion-text-center">
-
-                <img src="assets/imgs/no_data.svg" alt="no data"
-                     style="width: 20vw; max-width: 100px; padding: 15px 15px 15px 0;"/>
-
-                <h3 class="ion-padding">
-                    {{'DASHBOARD.NO_RESULTS'|translate}}
-                    <ng-container *ngIf="(categoriesAvailable$|async)?.length > 1">
-                        {{'DASHBOARD.IN_THIS_CATEGORY'|translate}}
-                    </ng-container>
-                </h3>
-            </beping-card>
+            <beping-alert-full-page
+                    icon="information-circle-outline"
+                    [title]="'DASHBOARD.NO_RESULTS'|translate">
+            </beping-alert-full-page>
         </ng-template>
-
     </ng-container>
     <ng-template #noMember>
         <beping-card [marging]="true" [padding]="true">

@@ -5,6 +5,8 @@ import {AnalyticsService} from '../../../../core/services/firebase/analytics.ser
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ActionSheetController} from '@ionic/angular';
+import {MemberEntry} from '../../../../core/api/models/member-entry';
+import {RankingMethodName, RankingService} from '../../../../core/services/tabt/ranking.service';
 
 @Component({
     selector: 'beping-calculator-results-list',
@@ -16,6 +18,7 @@ export class CalculatorResultsListComponent {
     @Input() pointsEntryWithPoints: PointsCalculatorEntryWithPoints[];
     @Input() nextRanking: { futureBelPts: number; futureRanking: string, currentBelPts: number, currentRanking: string };
     @Input() currentCategory: PLAYER_CATEGORY;
+    @Input() hasPoints: boolean;
     @Input() pivot: number;
 
     @Output() add: EventEmitter<void> = new EventEmitter<void>();
@@ -26,7 +29,8 @@ export class CalculatorResultsListComponent {
         private readonly analyticsService: AnalyticsService,
         private readonly dialogService: DialogService,
         private readonly translateService: TranslateService,
-        private readonly actionSheetCtrl: ActionSheetController
+        private readonly actionSheetCtrl: ActionSheetController,
+        private readonly rankingService: RankingService
     ) {
     }
 
@@ -69,6 +73,7 @@ export class CalculatorResultsListComponent {
     addEntry() {
         this.add.emit();
     }
+
 
     showPivot() {
         this.analyticsService.logEvent('calculator_show_pivot_info');

@@ -2,7 +2,7 @@
     <ion-grid>
         <ion-row class="ion-align-items-center">
             <ion-col class="ion-text-center border-right" size="2">
-                <ion-text style="font-size: 1.2em">{{result.date|localizedDate:'dd'}}</ion-text>
+                <ion-text>{{result.date|localizedDate:'dd'}}</ion-text>
                 <br>
                 <ion-text>{{result.date|localizedDate:'MMM'}}</ion-text>
             </ion-col>
@@ -17,7 +17,7 @@
                     [class.is-color-danger]="setAgainst === 3"
                     [class.is-color-primary]="setFor === 3"
                     class="ion-text-center ion-no-padding" size="3">
-                <ion-text class="ion-no-margin small" style="font-size: 1.3em">{{result.score}}</ion-text>
+                <ion-text class="ion-no-margin small">{{result.score}}</ion-text>
                 <br>
                 <ion-text
                         class="ion-text-wrap">{{(setFor === 3 ? 'COMMON.WIN' : 'COMMON.DEFEAT')|translate}}</ion-text>

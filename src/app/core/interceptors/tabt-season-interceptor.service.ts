@@ -16,8 +16,9 @@ export class TabtSeasonInterceptorService implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        if (request.url.includes(environment.tabtUrl)) {
-            const seasonState: SeasonStateModel = this.store.selectSnapshot(SeasonState);
+        const seasonState: SeasonStateModel = this.store.selectSnapshot(SeasonState);
+
+        if (request.url.includes(environment.tabtUrl) && seasonState?.currentSeason?.Season) {
             const authReq = request.clone({
                 headers: request.headers
                     .set('X-Tabt-Season', seasonState.currentSeason.Season.toString(10))

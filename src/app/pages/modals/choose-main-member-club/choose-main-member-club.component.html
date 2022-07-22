@@ -2,7 +2,7 @@
 
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
         <ion-title>{{'SETTINGS.ACTIVE_USER' | translate}}</ion-title>
         <ion-buttons slot="end">
@@ -20,16 +20,16 @@
             <ion-icon *ngIf="!selectedClub" name="ellipse-outline" slot="start"></ion-icon>
             <ion-icon *ngIf="selectedClub" color="success" name="checkmark-circle" slot="start"></ion-icon>
             <ion-label>
-                <h2 *ngIf="!selectedClub">{{'SETTINGS.WHICH_CLUB'|translate}}</h2>
-                <h2 *ngIf="selectedClub">{{selectedClub.UniqueIndex}} - {{selectedClub.LongName}}</h2>
+                <h3 *ngIf="!selectedClub">{{'SETTINGS.WHICH_CLUB'|translate}}</h3>
+                <h3 *ngIf="selectedClub">{{selectedClub.UniqueIndex}} - {{selectedClub.LongName}}</h3>
             </ion-label>
         </ion-item>
         <ion-item (click)="choosePlayer()" [disabled]="!selectedClub" button>
             <ion-icon *ngIf="!selectedMember" name="ellipse-outline" slot="start"></ion-icon>
             <ion-icon *ngIf="selectedMember" color="success" name="checkmark-circle" slot="start"></ion-icon>
             <ion-label>
-                <h2 *ngIf="!selectedMember">{{'SETTINGS.WHO_ARE_YOU'|translate}}</h2>
-                <h2 *ngIf="selectedMember">{{selectedMember.FirstName | titlecase}} {{selectedMember.LastName | titlecase}}</h2>
+                <h3 *ngIf="!selectedMember">{{'SETTINGS.WHO_ARE_YOU'|translate}}</h3>
+                <h3 *ngIf="selectedMember">{{selectedMember.FirstName | titlecase}} {{selectedMember.LastName | titlecase}}</h3>
             </ion-label>
         </ion-item>
         <ion-item (click)="select()" [disabled]="!(selectedMember && selectedClub) || isLoading" class="ion-text-center"

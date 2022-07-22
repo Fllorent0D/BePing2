@@ -1,7 +1,7 @@
-<ion-header [translucent]="true">
+ <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
         <ion-title>{{(club$ |async).UniqueIndex}} - {{(club$ |async).LongName}}</ion-title>
         <ion-buttons slot="end">

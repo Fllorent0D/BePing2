@@ -13,6 +13,7 @@ export const environment = {
         registerRedirect: 'redirect-register.html'
     },
     bepingStatus: 'http://status.beping.be',
+    tt_manager: 'https://tt-manager.be/',
     tabtLinks: {
         aftt: {
             domain: 'resultats.aftt.be',

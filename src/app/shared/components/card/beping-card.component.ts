@@ -13,6 +13,7 @@ export class BepingCardComponent implements OnInit {
     @Input() height;
     @Input() margingVertical = true;
     @Input() highlighted = false;
+    @Input() center = false;
 
     constructor() {
     }

@@ -1,10 +1,10 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
         <ion-title>{{'CALCULATOR.POINTS_CALCULATOR'|translate}}</ion-title>
-        <ion-buttons slot="end">
+        <ion-buttons slot="end" *ngIf="hasPoints$|async">
             <ion-button (click)="reset()">
                 <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
             </ion-button>
@@ -23,6 +23,7 @@
 </ion-header>
 <ion-content>
     <beping-calculator-results-list
+            *ngIf="hasPoints$|async; else noPoints"
             [pointsEntryWithPoints]="pointsEntryWithPoints$|async"
             [nextRanking]="nextRanking$|async"
             [pivot]="pivot$|async"
@@ -31,4 +32,12 @@
             (edit)="editEntry($event)"
             (delete)="delete($event)"
     ></beping-calculator-results-list>
+    <ng-template #noPoints>
+        <beping-alert-full-page
+                [icon]="'alert-outline'"
+                [title]="'CALCULATOR.NO_POINTS_AVAILABLE_TITLE'|translate"
+                [message]="'CALCULATOR.NO_POINTS_AVAILABLE_MSG'|translate">
+        </beping-alert-full-page>
+    </ng-template>
+
 </ion-content>

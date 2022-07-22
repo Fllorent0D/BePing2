@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
         <ion-title>{{'SEARCH.SEARCH'|translate}}</ion-title>
 
@@ -102,16 +102,16 @@
         </ion-list>
     </ng-container>
     <ng-container *ngIf="noResult$ | async">
-        <div class="no-result-container ion-padding">
-            <ion-icon [color]="'grey'" name="information-circle-outline" size="large"></ion-icon>
-            <ion-label [color]="'grey'"><h1>{{ 'SEARCH.NO_RESULT'|translate }}</h1></ion-label>
-
-        </div>
+        <beping-alert-full-page
+                [icon]="'information-circle-outline'"
+                [title]="'SEARCH.NO_RESULT'|translate">
+        </beping-alert-full-page>
     </ng-container>
     <ng-container *ngIf="introScreen$ | async">
-        <div class="no-result-container ion-padding">
-            <ion-icon [color]="'grey'" name="search-outline" size="large"></ion-icon>
-            <ion-label [color]="'grey'"><h1>{{'SEARCH.SEARCH_EXPLANATION'|translate}}</h1></ion-label>
-        </div>
+        <beping-alert-full-page
+                [icon]="'search-outline'"
+                [title]="'SEARCH.SEARCH_TITLE'|translate"
+                [message]="'SEARCH.SEARCH_TITLE_MSG'|translate">
+        </beping-alert-full-page>
     </ng-container>
 </ion-content>

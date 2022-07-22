@@ -29,6 +29,7 @@ export class PointsCalculatorPageComponent implements OnInit {
 
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
     pivot$: Observable<number>;
+    hasPoints$: Observable<boolean>;
     currentMemberEntry$: Observable<MemberEntry>;
     playerCategories$: Observable<PLAYER_CATEGORY[]>;
     pointsEntryWithPoints$: Observable<PointsCalculatorEntryWithPoints[]>;
@@ -73,8 +74,15 @@ export class PointsCalculatorPageComponent implements OnInit {
 
         this.currentMemberEntry$ = this.currentCategory$.pipe(
             switchMap((playerCategory: PLAYER_CATEGORY) => this.store.select(UserState.getMemberEntryForCategory(playerCategory))),
+            shareReplay(1)
         );
 
+        this.hasPoints$ = this.currentMemberEntry$.pipe(
+            map((currentMemberEntry: MemberEntry) => {
+                return !!(this.rankingService.getPoints(currentMemberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS) &&
+                    this.rankingService.getPoints(currentMemberEntry.RankingPointsEntries, RankingMethodName.BEL_RANKING));
+            })
+        );
 
         this.pointsEntryWithPoints$ = combineLatest([
             this.currentMemberEntry$,
@@ -115,14 +123,6 @@ export class PointsCalculatorPageComponent implements OnInit {
             this.currentCategory$
         ]).pipe(
             map(([lastPoints, memberEntry, pivot, category]) => {
-                console.log('next ranking', {
-                    futureBelPts: lastPoints?.basePoints,
-                    futureRanking: lastPoints?.basePoints < pivot ?
-                        this.rankingService.getEquivalentRanking(lastPoints?.basePoints, 0, category) :
-                        '>= C0',
-                    currentBelPts: this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS),
-                    currentRanking: memberEntry.Ranking
-                });
                 return ({
                     futureBelPts: lastPoints?.basePoints,
                     futureRanking: lastPoints?.basePoints < pivot ?
@@ -173,7 +173,6 @@ export class PointsCalculatorPageComponent implements OnInit {
     categoryChanged(event: CustomEvent) {
         this.currentCategory$.next(event.detail.value);
     }
-
 
     editEntry(entry: PointsCalculatorEntryWithPoints) {
         this.dialogService.showModal({

@@ -2,34 +2,26 @@
     <ion-item (click)="memberClicked.emit(member.UniqueIndex)">
         <ion-grid class="ion-no-padding">
             <ion-row>
-                <ion-col class="ion-text-end border-right"
-                         size="1"
-                         style="padding-right: 6px">
-                    <ion-label>
-                        <ion-text class="ion-text-nowrap">
-                            <p>{{member.Position}}</p>
-                        </ion-text>
+                <ion-col class="ion-text-end border-right ion-padding-end"
+                         size="3">
+                    <ion-label class="ion-text-wrap">
+                        <h3>
+                            {{member.Position}}/{{member.RankingIndex}}
+                        </h3>
                     </ion-label>
                 </ion-col>
-                <ion-col size="1" style="padding-left: 6px">
-                    <ion-label>
-                        <ion-text class="ion-text-nowrap">
-                            <p>{{member.RankingIndex}}</p>
-                        </ion-text>
-                    </ion-label>
-                </ion-col>
-                <ion-col offset="1" size="7">
-                    <ion-label>
-                        <ion-text>
+                <ion-col size="7" class="ion-padding-start">
+                    <ion-label class="ion-text-wrap">
+                        <h3>
                             {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
-                        </ion-text>
+                        </h3>
                     </ion-label>
                 </ion-col>
                 <ion-col size="1">
-                    <ion-label>
-                        <ion-text class="ion-text-nowrap">
+                    <ion-label class="ion-text-wrap">
+                        <h3>
                             {{member.Ranking}}
-                        </ion-text>
+                        </h3>
                     </ion-label>
                 </ion-col>
             </ion-row>

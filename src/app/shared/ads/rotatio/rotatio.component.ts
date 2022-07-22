@@ -16,7 +16,6 @@ export class RotatioComponent {
     }
 
     openRotatio() {
-        this.analytics.logEvent('open_rotatio');
         this.inAppBrowser.openRotatio();
     }
 

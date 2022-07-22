@@ -228,7 +228,8 @@
     "NAME_OR_AFFILIATE_INDEX": "Name or index",
     "NO_RESULT": "No results",
     "CLUB_MAP": "Club map",
-    "SEARCH_EXPLANATION": "You can search for clubs, players, match sheets or divisions",
+    "SEARCH_TITLE_MSG": "You can search for clubs, players, match sheets or divisions",
+    "SEARCH_TITLE": "Quick search",
     "PLACEHOLDER": "Club, division, player, match sheet"
   },
   "TEAM_STAT": {
@@ -317,6 +318,13 @@
       "MOBILE_APP_REPO": "Mobile app repository",
       "TABT_REST": "TabT-Rest",
       "BACKEND_REPO": "Backend repository"
+    },
+    "PARTNERSHIP": {
+      "TITLE": "Partners",
+      "ROTATIO": "Rotatio",
+      "ROTATIO_SUBTITLE": "A foolproof equipment",
+      "TTMANAGER": "TT Manager",
+      "TTMANAGER_SUBTITLE": "Club, team and interclub match sheet manager"
     }
   },
   "EMAIL": {
@@ -470,6 +478,8 @@
     "RESULT_ADDED": "Result added",
     "RESET": "Are you sure you want to delete the encoded results?",
     "OPEN_CALC": "Open points calculator",
+    "NO_POINTS_AVAILABLE_TITLE": "No numeric ranking available",
+    "NO_POINTS_AVAILABLE_MSG": "Impossible to use the calculator without numeric ranking.\nPlease try again later",
     "POINTS_OVER_PIVOT": "Why \"> = C0\"? BePing is not able to calculate an equivalent ranking when the number of points is greater than {{pivot}}. The rankings A, B0, B2, B4, B6 are assigned in relation to the player's position in the ranking.",
     "EVENT_TYPE": {
       "NAME": "Event type",

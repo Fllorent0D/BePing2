@@ -1,28 +1,35 @@
 <!--<beping-card (click)="navigateToDetails()" [marging]="false" [padding]="false">-->
-    <ion-grid (click)="navigateToDetails()">
-        <ion-row class="ion-align-items-center">
-            <ion-col class="ion-text-center border-right" size="2">
-                <ion-text style="font-size: 1.2em">{{result.Date|localizedDate:'dd'}}</ion-text>
-                <br>
-                <ion-text>{{result.Date|localizedDate:'MMM'}}</ion-text>
-            </ion-col>
-            <ion-col class="ion-no-padding ion-padding-start" size="7">
-                <ion-text>
-                    <ion-text>{{result.FirstName |titlecase}} {{result.LastName |titlecase}}</ion-text>
-                    <br>
-                    <ion-text color="grey">{{result.Club}}
-                        - {{result.CompetitionType === 'C' ? result.MatchId : result.TournamentName}}</ion-text>
-                </ion-text>
-            </ion-col>
-            <ion-col [class.is-color-danger]="result.SetAgainst === 3" [class.is-color-primary]="result.SetFor === 3"
-                     class="ion-text-center ion-no-padding" size="3">
-                <ion-text class="ion-no-margin small" style="font-size: 1.3em">{{result.SetFor}}
-                    - {{result.SetAgainst}}</ion-text>
-                <br>
-                <ion-text
-                        class="ion-text-wrap">{{(result.SetFor === 3 ? 'COMMON.WIN' : 'COMMON.DEFEAT')|translate}}</ion-text>
-            </ion-col>
-        </ion-row>
+<ion-grid (click)="navigateToDetails()">
+    <ion-row class="ion-align-items-center">
+        <ion-col class="ion-text-center border-right ion-no-padding" size="2">
+            <ion-label class="ion-text-wrap">
+                <h3>
+                    {{result.Date|localizedDate:'dd'}}
+                </h3>
+            </ion-label>
+            <ion-label class="ion-text-wrap">
+                <h3>
+                    {{result.Date|localizedDate:'MMM'}}
+                </h3>
+            </ion-label>
+        </ion-col>
+        <ion-col class="ion-no-padding ion-padding-start" size="7">
+            <ion-label class="ion-text-wrap">
+                <h3>
+                    {{result.FirstName |titlecase}} {{result.LastName |titlecase}}
+                </h3>
+            </ion-label>
+            <ion-label class="ion-text-wrap" color="grey">{{result.Club}}
+                - {{result.CompetitionType === 'C' ? result.MatchId : result.TournamentName}}</ion-label>
+        </ion-col>
+        <ion-col [class.is-color-danger]="result.SetAgainst === 3" [class.is-color-primary]="result.SetFor === 3"
+                 class="ion-text-center ion-no-padding" size="3">
+            <ion-label class="ion-no-margin small">{{result.SetFor}}
+                - {{result.SetAgainst}}</ion-label>
+            <ion-label
+                    class="ion-text-wrap">{{(result.SetFor === 3 ? 'COMMON.WIN' : 'COMMON.DEFEAT')|translate}}</ion-label>
+        </ion-col>
+    </ion-row>
 
-    </ion-grid>
+</ion-grid>
 <!--</beping-card>-->

@@ -92,7 +92,6 @@ export class AfttLoginPage implements OnInit {
     }
 
     register() {
-        this.analyticsService.logEvent('register');
         const user: UserStateModel = this.store.selectSnapshot(UserState);
 
         if (user.memberUniqueIndex) {

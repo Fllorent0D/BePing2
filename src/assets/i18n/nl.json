@@ -228,7 +228,8 @@
     "NAME_OR_AFFILIATE_INDEX": "Naam of index",
     "NO_RESULT": "Geen resultaat",
     "CLUB_MAP": "Map van de clubs",
-    "SEARCH_EXPLANATION": "U kunt zoeken naar spelers, afdelingen, clubs of wedstrijdverslagen",
+    "SEARCH_TITLE_MSG": "U kunt zoeken naar spelers, afdelingen, clubs of wedstrijdverslagen",
+    "SEARCH_TITLE": "Snel zoeken",
     "PLACEHOLDER": "Club, afdeling, speler, wedstrijd"
   },
   "TEAM_STAT": {
@@ -320,6 +321,13 @@
       "MOBILE_APP_REPO": "Mobile app repository",
       "TABT_REST": "TabT-Rest",
       "BACKEND_REPO": "Backend repository"
+    },
+    "PARTNERSHIP": {
+      "TITLE": "Partners",
+      "ROTATIO": "Rotatio",
+      "ROTATIO_SUBTITLE": "Een onfeilbare uitrusting",
+      "TTMANAGER": "TT Manager",
+      "TTMANAGER_SUBTITLE": "Club-, team- en interclub wedstrijdbladmanager"
     }
   },
   "EMAIL": {
@@ -473,6 +481,8 @@
     "RESULT_ADDED": "Resultaat toegevoegd",
     "RESET": "Weet u zeker dat u de gecodeerde resultaten wilt verwijderen?",
     "OPEN_CALC": "Open punten rekenmachine",
+    "NO_POINTS_AVAILABLE_TITLE": "Geen numerieke rangschikking beschikbaar",
+    "NO_POINTS_AVAILABLE_MSG": "Onmogelijk om de rekenmachine te gebruiken zonder numerieke classificatie.\nProbeer het later opnieuw",
     "POINTS_OVER_PIVOT": "Waarom \"> = C0\"? BePing kan geen gelijkwaardige rangorde berekenen wanneer het aantal punten groter is dan {{pivot}}. De rangschikkingen A, B0, B2, B4, B6 worden toegewezen in relatie tot de positie van de speler in de rangschikking.",
     "EVENT_TYPE": {
       "NAME": "Evenementtype",

@@ -15,7 +15,8 @@ export class InAppBrowserService {
     constructor(
         private readonly store: Store,
         private readonly internalIdService: InternalIdentifiersService,
-        private readonly analyticsService: AnalyticsService
+        private readonly analyticsService: AnalyticsService,
+        private readonly analytics: AnalyticsService
     ) {
     }
 
@@ -27,6 +28,7 @@ export class InAppBrowserService {
     async openRegister(): Promise<void>;
     async openRegister(playerUniqueIndex: number, clubUniqueIndex: string): Promise<void>;
     async openRegister(playerUniqueIndex?: number, clubUniqueIndex?: string): Promise<void> {
+        this.analyticsService.logEvent('register');
         const database: TABT_DATABASES = this.store.selectSnapshot(SettingsState.getCurrentDatabase);
 
         if (playerUniqueIndex && clubUniqueIndex) {
@@ -48,6 +50,8 @@ export class InAppBrowserService {
     }
 
     async openForgotPwd() {
+        this.analyticsService.logEvent('open_forgot_pwd');
+
         const database: TABT_DATABASES = this.store.selectSnapshot(SettingsState.getCurrentDatabase);
         if (database === TABT_DATABASES.VTTL) {
             return this.openInAppBrowser(environment.tabtLinks.vttl.resetPassword);
@@ -66,6 +70,7 @@ export class InAppBrowserService {
     }
 
     async openTournamentRegistration(tournamentId: number): Promise<void> {
+        this.analyticsService.logEvent('tournament_registration_open', {tournament: tournamentId});
         const database: TABT_DATABASES = this.store.selectSnapshot(SettingsState.getCurrentDatabase);
         const urls = environment.tabtLinks[database];
         const url = new URL(window.location.href);
@@ -73,16 +78,22 @@ export class InAppBrowserService {
         url.port = '';
         url.host = urls.domain;
         url.pathname = urls.tournamentRegisterPath + '/' + tournamentId;
-        console.log(url.href);
         await this.openInAppBrowser(url.href);
     }
 
     async openRotatio() {
+        this.analytics.logEvent('open_rotatio');
         await this.openInAppBrowser(environment.rotatioUrl);
     }
 
     async openBePingStatus() {
+        this.analytics.logEvent('open_beping_status');
         await this.openInAppBrowser(environment.bepingStatus);
+    }
+
+    async openTTManager() {
+        this.analytics.logEvent('open_tt_manager');
+        await this.openInAppBrowser(environment.tt_manager);
     }
 
 }

@@ -85,7 +85,7 @@ export class RankingService {
     }
 
     getELOPoints(rankings: RankingPointsEntry[]): string {
-        const ranking = rankings.find(r => r.MethodName === RankingMethodName.ELO);
+        const ranking = rankings?.find(r => r.MethodName === RankingMethodName.ELO);
         if (ranking) {
             return ranking.Value;
         }
@@ -93,7 +93,7 @@ export class RankingService {
     }
 
     getPoints(rankings: RankingPointsEntry[], rankingMethod: RankingMethodName): number {
-        const ranking = rankings.find(r => r.MethodName === rankingMethod);
+        const ranking = rankings?.find(r => r.MethodName === rankingMethod);
         if (ranking) {
             return Number(ranking.Value);
         }
@@ -101,7 +101,7 @@ export class RankingService {
     }
 
     getNextRanking(rankings: RankingPointsEntry[]): string {
-        const ranking = rankings.find(r => r.MethodName === RankingMethodName.AILE_FRANCOPHONE);
+        const ranking = rankings?.find(r => r.MethodName === RankingMethodName.AILE_FRANCOPHONE);
         if (ranking) {
             return ranking.Value;
         }

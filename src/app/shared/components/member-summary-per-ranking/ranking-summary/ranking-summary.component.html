@@ -1,38 +1,23 @@
 <beping-card [marging]="false" [margingVertical]="false">
-    <ion-grid>
+    <ion-grid class="ion-no-padding">
         <ion-row>
-            <ion-col class="ion-text-end">
+            <ion-col class="ion-text-center">
                 <beping-victory-chart [title]="ranking" bluePct="{{victoriesPct}}"
                                       redPct="{{defeatsPct}}"></beping-victory-chart>
             </ion-col>
-            <ion-col class="ion-align-self-center">
-                <ion-grid>
-                    <ion-row>
-                        <ion-col>
-                            <ion-text><b>{{victories}} ({{victoriesPct}}%)</b></ion-text>
-                            <br>
-                            <ion-text color="grey">{{'COMMON.WINS'|translate}}</ion-text>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>
-                            <ion-text><b>{{defeats}} ({{defeatsPct}}%)</b></ion-text>
-                            <br>
-                            <ion-text color="grey">{{'COMMON.DEFEATS'|translate}}</ion-text>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row class="ion-align-items-end" *ngIf="!isTablet">
-                        <ion-col>
-                            <ion-button  (click)="isOpen = !isOpen" fill="clear" size="small">
-                                {{'DASHBOARD.SEE_DETAILS'|translate}}
-                            </ion-button>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
+            <ion-col class="ion-padding">
+                <ion-label class="ion-text-wrap">{{victories}} ({{victoriesPct}}%)</ion-label>
+                <ion-label class="ion-text-wrap" color="grey">{{'COMMON.WINS'|translate}}</ion-label>
+                <ion-label class="ion-padding-top ion-text-wrap">{{defeats}} ({{defeatsPct}}%)</ion-label>
+                <ion-label class="ion-text-wrap" color="grey">{{'COMMON.DEFEATS'|translate}}</ion-label>
+                <ion-button class="ion-text-center ion-text-wrap" (click)="isOpen = !isOpen" fill="clear" size="small">
+                    {{'DASHBOARD.SEE_DETAILS'|translate}}
+                </ion-button>
             </ion-col>
         </ion-row>
         <ion-row *ngIf="isOpen">
-            <beping-individual-match *ngFor="let result of completeResults" [result]="result" style="width: 100%"></beping-individual-match>
+            <beping-individual-match *ngFor="let result of completeResults" [result]="result"
+                                     style="width: 100%"></beping-individual-match>
 
         </ion-row>
     </ion-grid>

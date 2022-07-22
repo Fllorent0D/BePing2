@@ -158,7 +158,6 @@ export class SettingsPage implements OnInit, OnDestroy {
     }
 
     register() {
-        this.analyticsService.logEvent('register');
         const user: UserStateModel = this.store.selectSnapshot(UserState);
 
         if (user.memberUniqueIndex) {
@@ -228,5 +227,13 @@ export class SettingsPage implements OnInit, OnDestroy {
 
     contributors() {
         this.ionNav.push(ContributorsComponent);
+    }
+
+    openRotatio() {
+        this.browser.openRotatio();
+    }
+
+    openTTManager() {
+        this.browser.openTTManager();
     }
 }

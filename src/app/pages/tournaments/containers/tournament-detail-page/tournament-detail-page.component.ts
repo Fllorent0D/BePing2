@@ -101,11 +101,13 @@ export class TournamentDetailPageComponent implements OnInit {
     }
 
     register(tournament: TournamentEntry): void {
-        this.analyticsService.logEvent('tournament_registration_open', {tournament: tournament.UniqueIndex});
         this.inAppBrowser.openTournamentRegistration(tournament.UniqueIndex);
     }
 
     seriesClicked(tournament: TournamentEntry): void {
+        if (tournament.SerieCount === 0) {
+            return;
+        }
         this.tabNavigate.navigateTo(
             ['tournaments', tournament.UniqueIndex.toString(10), 'series'],
             {state: {series: tournament.SerieEntries}}

@@ -228,7 +228,8 @@
     "NAME_OR_AFFILIATE_INDEX": "Nom ou numéro d'affilié",
     "NO_RESULT": "Aucun résultat",
     "CLUB_MAP": "Carte des clubs",
-    "SEARCH_EXPLANATION": "Vous pouvez chercher joueurs, divisions, clubs ou feuilles de match",
+    "SEARCH_TITLE_MSG": "Vous pouvez chercher joueurs, divisions, clubs ou feuilles de match",
+    "SEARCH_TITLE": "Recherche rapide",
     "PLACEHOLDER": "Club, division, joueur, match"
   },
   "TEAM_STAT": {
@@ -317,6 +318,13 @@
       "MOBILE_APP_REPO": "Dépôt de l'application mobile",
       "TABT_REST": "TabT-Rest",
       "BACKEND_REPO": "Dépôt de la partie serveur"
+    },
+    "PARTNERSHIP": {
+      "TITLE": "Partenaires",
+      "ROTATIO": "Rotatio",
+      "ROTATIO_SUBTITLE": "Un équipement à tout épreuve",
+      "TTMANAGER": "TT Manager",
+      "TTMANAGER_SUBTITLE": "Gestionnaire de clubs, équipes et feuilles de matchs interclubs"
     }
   },
   "EMAIL": {
@@ -470,6 +478,8 @@
     "RESULT_ADDED": "Résultat ajouté",
     "RESET": "Êtes-vous certains de vouloir d'effacer les résultats encodés?",
     "OPEN_CALC": "Ouvrir calculateur de points",
+    "NO_POINTS_AVAILABLE_TITLE": "Pas classement numérique disponible",
+    "NO_POINTS_AVAILABLE_MSG": "Impossible d'utiliser la calculette sans classement numérique.\nVeuillez réessayer plus tard.",
     "POINTS_OVER_PIVOT": "Il est impossible de calculer un classement équivalent lorsque le nombre de points est supérieur à {{pivot}}.\nPour les classements supérieurs à C0, ils sont attribués par rapport à la position du joueur dans le classement et non par rapport au nombre de points.",
     "EVENT_TYPE": {
       "NAME": "Type d'événement",

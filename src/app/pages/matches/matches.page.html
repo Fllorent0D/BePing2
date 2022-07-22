@@ -35,8 +35,8 @@
                           detail>
                     <ion-label class="ion-text-wrap">
                         <h3>{{team.label}}</h3>
+                        <p *ngIf="team.note">{{'PLAYER_CATEGORY.' + team.note|translate}}</p>
                     </ion-label>
-                    <ion-note *ngIf="team.note" slot="end">{{'PLAYER_CATEGORY.' + team.note|translate}}</ion-note>
                 </ion-item>
             </ion-list>
 
@@ -52,8 +52,8 @@
                           detail>
                     <ion-label class="ion-text-wrap">
                         <h3>{{club.note}}</h3>
+                        <p *ngIf="club.label">{{club.label}}</p>
                     </ion-label>
-                    <ion-note *ngIf="club.label" slot="end">{{club.label}}</ion-note>
                 </ion-item>
             </ion-list>
 
@@ -69,8 +69,8 @@
                           detail>
                     <ion-label class="ion-text-wrap">
                         <h3>{{division.label}}</h3>
+                        <p *ngIf="division.note">{{division.note}}</p>
                     </ion-label>
-                    <ion-note *ngIf="division.note" slot="end">{{division.note}}</ion-note>
                 </ion-item>
 
             </ion-list>
@@ -97,13 +97,11 @@
         </ng-container>
     </ng-container>
     <ng-template #noFavorite>
-        <div class="no-result-container ion-padding">
-            <ion-icon [color]="'grey'" name="star-outline" size="large"></ion-icon>
-            <ion-label [color]="'grey'" class="ion-margin-top"><h1>{{'FAVORITES.NO_FAVORITE'|translate}}</h1>
-            </ion-label>
-            <ion-label [color]="'grey'" class="ion-margin-top"><h1>{{'FAVORITES.INSTRUCTIONS'|translate}}</h1>
-            </ion-label>
-        </div>
+        <beping-alert-full-page
+                [icon]="'star-outline'"
+                [title]="'FAVORITES.NO_FAVORITE'|translate"
+                [message]="'FAVORITES.INSTRUCTIONS'|translate">
+        </beping-alert-full-page>
     </ng-template>
 
 </ion-content>

@@ -22,6 +22,7 @@ import {RemoteSettingsState} from '../../../core/store/remote-settings';
 export class TeamMatchResultComponent implements OnInit {
 
     @Input() match: TeamMatchesEntry;
+    @Input() displayScoreRedIfHomeTeamDefeat: boolean;
     @Output() matchClicked: EventEmitter<TeamMatchesEntry> = new EventEmitter<TeamMatchesEntry>();
     isTablet: boolean;
 
@@ -140,4 +141,16 @@ export class TeamMatchResultComponent implements OnInit {
         });
     }
 
+    chipColor(): string {
+        if (this.displayScoreRedIfHomeTeamDefeat) {
+            const [home, away] = this.match.Score.split('-');
+            if (home > away) {
+                return 'primary';
+            } else if (home < away) {
+                return 'danger';
+            }
+            return 'warning';
+        }
+        return 'primary';
+    }
 }
