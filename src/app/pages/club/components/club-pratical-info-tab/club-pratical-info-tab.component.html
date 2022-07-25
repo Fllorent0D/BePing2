@@ -1,9 +1,12 @@
-<beping-card (click)="navigateToVenue(venue)" *ngFor="let venue of venues" [padding]="true">
-    <ion-label>
-        <h3>{{venue.Name | titlecase}}</h3>
-        <p>{{venue.Street}} {{venue.Town}}</p>
-        <p>{{venue.Phone}}</p>
-    </ion-label>
-    <ion-icon slot="end" class="ion" color="primary" name="navigate-circle-outline"
-              size="large"></ion-icon>
-</beping-card>
+<ion-list [inset]="true">
+    <ion-item (click)="navigateToVenue(venue)" *ngFor="let venue of venues">
+        <ion-label>
+            {{venue.Name | titlecase}}
+            <p>{{venue.Street}} {{venue.Town}}</p>
+            <p>{{venue.Phone}}</p>
+        </ion-label>
+        <ion-icon slot="end" class="ion" color="primary" name="navigate-circle-outline"
+                  size="large"></ion-icon>
+    </ion-item>
+
+</ion-list>

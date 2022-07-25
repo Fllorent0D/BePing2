@@ -1,6 +1,6 @@
 <ion-item>
     <ion-label class="ion-text-wrap">
-        <h3>{{label}}</h3>
+        {{label}}
         <p *ngIf="subtitle">{{subtitle}}</p>
     </ion-label>
     <ion-toggle slot="end" [disabled]="loading" [formControl]="isSubscribe"></ion-toggle>

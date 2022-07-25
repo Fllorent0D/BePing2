@@ -39,7 +39,6 @@ export class CalculatorResultsListComponent {
             buttons: [
                 {
                     text: this.translateService.instant('CALCULATOR.EDIT_RESULT'),
-                    icon: 'pencil',
                     id: 'edit-button',
                     handler: () => {
                         this.analyticsService.logEvent('calculator_edit_item');
@@ -48,7 +47,6 @@ export class CalculatorResultsListComponent {
                 }, {
                     text: this.translateService.instant('CALCULATOR.DELETE_RESULT'),
                     role: 'destructive',
-                    icon: 'trash',
                     id: 'delete-button',
                     data: {
                         type: 'delete'
@@ -59,7 +57,6 @@ export class CalculatorResultsListComponent {
                     }
                 }, {
                     text: this.translateService.instant('COMMON.CANCEL'),
-                    icon: 'close',
                     role: 'cancel',
                     handler: () => {
                         console.log('Cancel clicked');

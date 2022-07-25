@@ -10,7 +10,7 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding-top">
     <ion-button
             *ngIf="memberClub | async as club"
             (click)="navigateToURI(['clubs', club.UniqueIndex])"
@@ -25,74 +25,69 @@
     </ion-button>
     <ng-container *ngIf="hasFavorites$ | async; else noFavorite">
         <ng-container *ngIf="favoritesTeam | async as teams">
-            <ion-list *ngIf="teams.length !== 0">
-                <ion-list-header>
-                    <ion-label>
-                        {{'COMMON.TEAMS'|translate}}
-                    </ion-label>
-                </ion-list-header>
-                <ion-item (click)="navigateToURI(team.uri)" *ngFor="let team of teams"
-                          detail>
-                    <ion-label class="ion-text-wrap">
-                        <h3>{{team.label}}</h3>
-                        <p *ngIf="team.note">{{'PLAYER_CATEGORY.' + team.note|translate}}</p>
-                    </ion-label>
-                </ion-item>
-            </ion-list>
+            <ng-container *ngIf="teams.length !== 0">
+                <beping-section-title [title]="'COMMON.TEAMS'|translate"></beping-section-title>
+                <ion-list [inset]="true">
+                    <ion-item (click)="navigateToURI(team.uri)" *ngFor="let team of teams"
+                              detail>
+                        <ion-label class="ion-text-wrap">
+                            {{team.label}}
+                            <p *ngIf="team.note">{{'PLAYER_CATEGORY.' + team.note|translate}}</p>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ng-container>
+
 
         </ng-container>
         <ng-container *ngIf="favoritesClub | async as clubs">
-            <ion-list *ngIf="clubs.length !== 0">
-                <ion-list-header>
-                    <ion-label>
-                        {{'COMMON.CLUBS'|translate}}
-                    </ion-label>
-                </ion-list-header>
-                <ion-item (click)="navigateToURI(club.uri)" *ngFor="let club of clubs"
-                          detail>
-                    <ion-label class="ion-text-wrap">
-                        <h3>{{club.note}}</h3>
-                        <p *ngIf="club.label">{{club.label}}</p>
-                    </ion-label>
-                </ion-item>
-            </ion-list>
+            <ng-container *ngIf="clubs.length !== 0">
+                <beping-section-title [title]="'COMMON.CLUBS'|translate"></beping-section-title>
+                <ion-list [inset]="true">
+
+                    <ion-item (click)="navigateToURI(club.uri)" *ngFor="let club of clubs"
+                              detail>
+                        <ion-label class="ion-text-wrap">
+                            {{club.note}}
+                            <p *ngIf="club.label">{{club.label}}</p>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+
+            </ng-container>
 
         </ng-container>
         <ng-container *ngIf="favoritesDivision | async as divisions">
-            <ion-list *ngIf="divisions.length !== 0">
-                <ion-list-header>
-                    <ion-label>
-                        {{'COMMON.DIVISIONS'|translate}}
-                    </ion-label>
-                </ion-list-header>
-                <ion-item (click)="navigateToURI(division.uri)" *ngFor="let division of divisions"
-                          detail>
-                    <ion-label class="ion-text-wrap">
-                        <h3>{{division.label}}</h3>
-                        <p *ngIf="division.note">{{division.note}}</p>
-                    </ion-label>
-                </ion-item>
+            <ng-container *ngIf="divisions.length !== 0">
+                <beping-section-title [title]="'COMMON.DIVISIONS'|translate"></beping-section-title>
 
-            </ion-list>
+                <ion-list [inset]="true">
+                    <ion-item (click)="navigateToURI(division.uri)" *ngFor="let division of divisions"
+                              detail>
+                        <ion-label class="ion-text-wrap">
+                            {{division.label}}
+                            <p *ngIf="division.note">{{division.note}}</p>
+                        </ion-label>
+                    </ion-item>
+
+                </ion-list>
+            </ng-container>
 
 
         </ng-container>
         <ng-container *ngIf="favoritesMember | async as members">
-            <ion-list *ngIf="members.length !== 0">
-                <ion-list-header>
-                    <ion-label>
-                        {{'COMMON.PLAYERS'|translate}}
-                    </ion-label>
-                </ion-list-header>
-                <ion-item (click)="navigateToURI(member.uri)" *ngFor="let member of members"
-                          detail>
-                    <ion-label class="ion-text-wrap">
-                        <h3>{{member.label | titlecase}}</h3>
-                    </ion-label>
-                    <ion-note *ngIf="member.note" slot="end">{{member.note}}</ion-note>
-                </ion-item>
-
-            </ion-list>
+            <ng-container *ngIf="members.length !== 0">
+                <beping-section-title [title]="'COMMON.PLAYERS'|translate"></beping-section-title>
+                <ion-list>
+                    <ion-item (click)="navigateToURI(member.uri)" *ngFor="let member of members"
+                              detail>
+                        <ion-label class="ion-text-wrap">
+                            {{member.label | titlecase}}
+                        </ion-label>
+                        <ion-note *ngIf="member.note" slot="end">{{member.note}}</ion-note>
+                    </ion-item>
+                </ion-list>
+            </ng-container>
 
         </ng-container>
     </ng-container>

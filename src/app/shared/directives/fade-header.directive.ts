@@ -22,12 +22,12 @@ export class FadeHeaderDirective {
         if (scrollTop >= scrollDist) {
             scrollTop = scrollDist;
         }
-        //const hexDist = scrollTop.toString(16);
+        // const hexDist = scrollTop.toString(16);
         this.domCtrl.write(() => {
             const color = getComputedStyle(this.toolbar.el).getPropertyValue('--ion-toolbar-background');
-            //Unfortunately, not all browsers/devices currently support hex color with transparancy
-            //So it's best to work with rgba instead of hexadecimal
-            //this.toolbar.el.style.setProperty('--background', `${color}${hexDist}`);
+            // Unfortunately, not all browsers/devices currently support hex color with transparancy
+            // So it's best to work with rgba instead of hexadecimal
+            // this.toolbar.el.style.setProperty('--background', `${color}${hexDist}`);
             const [r, g, b] = this.hexToRgb(color);
             const opacity = (scrollTop / scrollDist).toFixed(2);
             const rgba = `rgba(${r},${g},${b},${opacity})`;

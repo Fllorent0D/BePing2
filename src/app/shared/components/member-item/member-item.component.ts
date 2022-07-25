@@ -9,7 +9,6 @@ import {MemberEntry} from '../../../core/api/models/member-entry';
 export class MemberItemComponent implements OnInit {
 
     @Input() member: MemberEntry;
-    @Input() detail: boolean;
     @Output() memberClicked: EventEmitter<MemberEntry> = new EventEmitter<MemberEntry>();
 
     constructor() {

@@ -258,6 +258,7 @@
     "CANT_LOAD_TEAMS": "Onmogelijk de ploegen te downloaden"
   },
   "SETTINGS": {
+    "CHANGE_MEMBER": "Hoofdspeler wijzigen",
     "CHANGE_USER": "Wijzig gebruiker",
     "ACTIVE_USER": "Active user",
     "CANT_LOAD_TRANSLATIONS": "Onmogelijk om vertalingen van divisies te downloaden",
@@ -271,10 +272,10 @@
     "SETTINGS": "Instellingen",
     "WANNA_HELP": "Wil je helpen?",
     "DONATION_GOAL": "BePing is een gratis app en zal gratis blijven. Een app beheren en updaten brengt wat kosten met zich mee. De giften worden volledig gebruikt om de ontwikkeling te blijven ondersteunen 😊",
-    "CHANGE_LANGUAGE": "Wijzig de taal",
+    "CHANGE_LANGUAGE": "Taal",
     "DUTCH": "Nederlands",
-    "DISPLAY_ELO": "ELO-ranglijst weergeven",
-    "DISPLAY_BEL": "AFTT-genummerde rangschikking weergeven",
+    "DISPLAY_ELO": "ELO-ranglijst",
+    "DISPLAY_BEL": "AFTT-genummerde rangschikking",
     "FRENCH": "Français",
     "ENGLISH": "English",
     "WHICH_CLUB": "In welke club speel je?",

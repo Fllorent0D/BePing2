@@ -1,10 +1,10 @@
-<ion-list>
+<ion-list [inset]="true">
     <ion-item
             *ngFor="let team of teams"
             [routerLink]="['team', team.TeamId]"
             detail>
         <ion-label class="ion-padding-vertical">
-            <h3>{{club.Name}} {{team.Team}}</h3>
+            {{club.Name}} {{team.Team}}
             <p>{{team.DivisionName}}</p>
         </ion-label>
     </ion-item>

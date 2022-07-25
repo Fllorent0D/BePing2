@@ -17,23 +17,23 @@
     </ion-grid>
 
 </ion-header>
-<ion-list>
-    <ion-item (click)="playerClicked.emit(stat.uniqueIndex)" *ngFor="let stat of stats" detail>
+<ion-list [inset]="true">
+    <ion-item (click)="playerClicked.emit(stat.uniqueIndex)" *ngFor="let stat of stats" detail class="no-start-padding">
         <ion-grid>
             <ion-row class="ion-align-items-center">
                 <ion-col class="" size="6">
                     <ion-label class="ion-text-wrap">
-                        <h3>{{stat.firstName | titlecase}} {{stat.lastName | titlecase}}</h3>
+                        {{stat.firstName | titlecase}} {{stat.lastName | titlecase}}
                     </ion-label>
                 </ion-col>
                 <ion-col class="" size="2">
                     <ion-label class="ion-text-wrap">
-                        <h3>{{stat.ranking}}</h3>
+                        {{stat.ranking}}
                     </ion-label>
                 </ion-col>
                 <ion-col class="" size="2">
                     <ion-label class="ion-text-wrap">
-                        <h3>{{stat.played}}</h3>
+                        {{stat.played}}
                     </ion-label>
                 </ion-col>
                 <ion-col class="ion-text-center ion-no-padding" size="2">

@@ -21,23 +21,29 @@
 
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding-top">
     <div [hidden]="loading">
-        <ion-item (click)="playerClicked(member)" *ngFor="let member of members$|async">
-            <ion-label>
-                <h3>
-                    {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
-                </h3>
-            </ion-label>
-            <ion-label slot="end">{{member.Ranking}}</ion-label>
-        </ion-item>
+        <ion-list [inset]="true">
+            <ion-item (click)="playerClicked(member)" *ngFor="let member of members$|async">
+                <ion-label>
+
+                        {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
+
+                </ion-label>
+                <ion-label slot="end">{{member.Ranking}}</ion-label>
+            </ion-item>
+        </ion-list>
+
     </div>
 
     <div *ngIf="loading">
-        <ion-item *ngFor="let t of skeletonRows">
-            <ion-label>
-                <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated="animated"></ion-skeleton-text>
-            </ion-label>
-        </ion-item>
+        <ion-list [inset]="true">
+            <ion-item *ngFor="let t of skeletonRows">
+                <ion-label>
+                    <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated="animated"></ion-skeleton-text>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+
     </div>
 </ion-content>

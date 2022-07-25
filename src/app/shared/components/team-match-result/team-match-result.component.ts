@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {TeamMatchesEntry} from '../../../core/api/models/team-matches-entry';
 import {TabsNavigationService} from '../../../core/services/navigation/tabs-navigation.service';
 import {ActionSheetController, IonRouterOutlet, Platform} from '@ionic/angular';
@@ -17,7 +17,6 @@ import {RemoteSettingsState} from '../../../core/store/remote-settings';
     selector: 'beping-team-match-result',
     templateUrl: './team-match-result.component.html',
     styleUrls: ['./team-match-result.component.scss'],
-    encapsulation: ViewEncapsulation.None
 })
 export class TeamMatchResultComponent implements OnInit {
 
@@ -25,7 +24,7 @@ export class TeamMatchResultComponent implements OnInit {
     @Input() displayScoreRedIfHomeTeamDefeat: boolean;
     @Output() matchClicked: EventEmitter<TeamMatchesEntry> = new EventEmitter<TeamMatchesEntry>();
     isTablet: boolean;
-
+    @HostBinding('class') class = 'full-width';
     constructor(
         private readonly tabNavigation: TabsNavigationService,
         private readonly actionSheetController: ActionSheetController,

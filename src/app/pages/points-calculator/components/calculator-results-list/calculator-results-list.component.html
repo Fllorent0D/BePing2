@@ -1,70 +1,74 @@
-<ion-list>
+<ion-list [inset]="true">
     <ion-item *ngFor="let entry of pointsEntryWithPoints" (click)="showItemOption(entry)">
         <ion-label class="ion-text-wrap">
-            <h3>
+
                 {{entry.opponentName | titlecase}}
-            </h3>
+
             <p>
                 {{('CALCULATOR.EVENT_TYPE.' + (currentCategory) + '.' + entry.eventType.toUpperCase() + '.' + entry.eventId) | translate}}
             </p>
         </ion-label>
         <ion-label slot="end" [color]="entry.pointsWon >= 0 ? 'success' : 'danger'">
-            <h3>
+
                 <ng-container *ngIf="entry.pointsWon > 0">+</ng-container>
                 {{entry.pointsWon | number: '1.1-1'}}
-            </h3>
+
         </ion-label>
     </ion-item>
-
-    <ion-item class="ion-margin-top" (click)="addEntry()">
+</ion-list>
+<ion-list [inset]="true">
+    <ion-item (click)="addEntry()">
         <ion-label class="ion-text-center">
-            <h3>
+
                 {{'CALCULATOR.ADD_MATCH'|translate}}
                 <ion-icon name="add-circle"></ion-icon>
-            </h3>
+
         </ion-label>
     </ion-item>
-    <ng-container *ngIf="pointsEntryWithPoints?.length > 0">
-        <ion-item-divider mode="md"></ion-item-divider>
-        <ng-container *ngIf="nextRanking">
+</ion-list>
+<ng-container *ngIf="pointsEntryWithPoints?.length > 0">
+    <ion-item-divider mode="md"></ion-item-divider>
+    <ng-container *ngIf="nextRanking">
+        <ion-list [inset]="true">
             <ion-item>
                 <ion-label class="">
-                    <h3>
+
                         {{'CALCULATOR.POINTS'|translate}}
-                    </h3>
+
                 </ion-label>
                 <ion-label class="ion-text-end ion-text-wrap"
                            [color]="nextRanking.futureBelPts >= nextRanking.currentBelPts ? 'success' : 'danger'">
-                    <h3>
+
                         {{nextRanking.futureBelPts| number: '1.0-0'}}
                         <ion-icon name="trending-up"
                                   *ngIf="nextRanking.futureBelPts > nextRanking.currentBelPts"></ion-icon>
                         <ion-icon name="trending-down"
                                   *ngIf="nextRanking.futureBelPts < nextRanking.currentBelPts"></ion-icon>
-                    </h3>
+
 
                 </ion-label>
             </ion-item>
             <ion-item *ngIf="nextRanking.futureRanking">
                 <ng-container *ngIf="pivot">
                     <ion-label class="">
-                        <h3>
+
                             {{'CALCULATOR.EQUIVALENT_RANKING'|translate }}
-                        </h3>
+
                     </ion-label>
                     <ion-label class="ion-text-end ion-text-wrap">
-                        <h3>
+
                             {{nextRanking.futureRanking}}
                             <ion-icon name="help-circle" (click)="showPivot()"
                                       *ngIf="nextRanking.futureBelPts >= pivot"></ion-icon>
-                        </h3>
+
 
                     </ion-label>
                 </ng-container>
 
             </ion-item>
-        </ng-container>
+        </ion-list>
 
     </ng-container>
 
-</ion-list>
+</ng-container>
+

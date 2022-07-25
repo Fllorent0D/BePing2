@@ -258,6 +258,7 @@
     "CANT_LOAD_TEAMS": "Impossible de charger les équipes"
   },
   "SETTINGS": {
+    "CHANGE_MEMBER": "Changer de joueur principal",
     "CHANGE_USER": "Changer d'utilisateur",
     "ACTIVE_USER": "Joueur principal",
     "CANT_LOAD_TRANSLATIONS": "Impossible de télécharger les traductions des divisions",
@@ -271,10 +272,10 @@
     "SETTINGS": "Réglages",
     "WANNA_HELP": "Voulez-vous aider ?",
     "DONATION_GOAL": "BePing est une application gratuite et restera gratuite. Maintenir une application en vie coûte un peu argent. Les dons seront entièrement consacrés à l'amélioration de l'application 😊",
-    "CHANGE_LANGUAGE": "Changer de langue",
+    "CHANGE_LANGUAGE": "Langue",
     "DUTCH": "Dutch",
-    "DISPLAY_ELO": "Afficher le classement ELO",
-    "DISPLAY_BEL": "Afficher le classement numérique de l'AFTT",
+    "DISPLAY_ELO": "Classement ELO",
+    "DISPLAY_BEL": "Classement numérique de l'AFTT",
     "FRENCH": "Français",
     "ENGLISH": "English",
     "WHICH_CLUB": "Dans quel club jouez-vous?",

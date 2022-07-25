@@ -7,7 +7,7 @@
 
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding-top">
     <ng-container *ngIf="head2headResults$|async as head2HeadData">
         <beping-face-to-face-summary  [head2headData]="head2HeadData"></beping-face-to-face-summary>
         <beping-head-2-head-per-season

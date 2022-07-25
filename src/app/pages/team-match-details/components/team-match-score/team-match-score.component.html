@@ -1,6 +1,6 @@
-<ion-grid class="ion-padding-start ion-padding-end">
+<ion-grid class="ion-padding-horizontal ion-padding-vertical">
     <ion-row class="ion-text-center ion-align-items-center">
-        <ion-col size="5">
+        <ion-col size="6">
             <ion-label *ngIf="!match.IsAwayForfeited">
                 <h1>{{homeScore}}</h1>
             </ion-label>
@@ -19,10 +19,8 @@
                 </ion-label>
             </ion-button>
         </ion-col>
-        <ion-col size="2">
-            <h1>VS</h1>
-        </ion-col>
-        <ion-col size="5">
+
+        <ion-col size="6">
             <ion-label *ngIf="!match.IsAwayForfeited">
                 <h1>{{awayScore}}</h1>
             </ion-label>

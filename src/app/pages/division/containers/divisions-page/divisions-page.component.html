@@ -6,11 +6,11 @@
         <ion-title>{{('DIVISION_LEVEL.' + (level$|async)) |translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
-    <ion-list>
+<ion-content class="ion-padding-top">
+    <ion-list [lines]="'full'" [inset]="true">
         <ion-item (click)="divisionClicked(div)" *ngFor="let div of divisions$ | async" detail>
             <ion-label class="ion-text-wrap">
-                <h3>{{div.DivisionName.split('-')[0] | titlecase}}</h3>
+                {{div.DivisionName.split('-')[0] | titlecase}}
                 <p *ngIf="div.DivisionCategory">{{'PLAYER_CATEGORY.' + div.DivisionCategory | translate | titlecase}}</p>
             </ion-label>
         </ion-item>

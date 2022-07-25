@@ -13,135 +13,135 @@
 </ion-header>
 <ion-content class="ion-padding-bottom">
     <form [formGroup]="formGroup">
-        <ion-list>
-            <ion-radio-group formControlName="category" *ngIf="formGroup.get('category')">
-                <ion-list-header>
-                    <ion-label>{{'CALCULATOR.CATEGORY'|translate}}</ion-label>
-                </ion-list-header>
+        <ion-item-divider>
+            <ion-label>{{'CALCULATOR.CATEGORY'|translate}}</ion-label>
+        </ion-item-divider>
 
+        <ion-list [inset]="true">
+            <ion-radio-group formControlName="category" *ngIf="formGroup.get('category')">
                 <ion-item>
                     <ion-label>
-                        <h3>
-                            {{'PLAYER_CATEGORY.MEN_SHORT' |translate}}
-                        </h3>
+
+                        {{'PLAYER_CATEGORY.MEN_SHORT' |translate}}
+
                     </ion-label>
                     <ion-radio [disabled]="formGroup.get('category').disabled" slot="start"
                                [value]="PLAYER_CATEGORY.MEN"></ion-radio>
                 </ion-item>
                 <ion-item>
                     <ion-label>
-                        <h3>
-                            {{'PLAYER_CATEGORY.WOMEN_SHORT' |translate}}
-                        </h3>
+
+                        {{'PLAYER_CATEGORY.WOMEN_SHORT' |translate}}
+
                     </ion-label>
                     <ion-radio [disabled]="formGroup.get('category').disabled" slot="start"
                                [value]="PLAYER_CATEGORY.WOMEN"></ion-radio>
                 </ion-item>
             </ion-radio-group>
-
+        </ion-list>
+        <ion-item-divider>
+            <ion-label>{{'CALCULATOR.OPPONENT'|translate}}</ion-label>
+        </ion-item-divider>
+        <ion-list [inset]="true">
             <ion-radio-group>
-                <ion-list-header>
-                    <ion-label>{{'CALCULATOR.OPPONENT'|translate}}</ion-label>
-                </ion-list-header>
-
                 <ion-item [detail]="!formGroup.get('opponentName').value" (click)="chooseMember()"
                           [disabled]="formGroup.get('category').invalid || formGroup.get('opponentName').disabled">
                     <ion-label
                             *ngIf="!formGroup.get('opponentName').value">
-                        <h3>
-                            {{'CALCULATOR.CHOOSE_OPPONENT'|translate}}
-                        </h3>
+
+                        {{'CALCULATOR.CHOOSE_OPPONENT'|translate}}
+
                     </ion-label>
                     <ion-label *ngIf="formGroup.get('opponentName').value">
-                        <h3>
-                            {{formGroup.get('opponentName').value | titlecase}}
-                        </h3>
+
+                        {{formGroup.get('opponentName').value | titlecase}}
+
                     </ion-label>
                     <ion-label *ngIf="formGroup.get('opponentRanking').value" slot="end">
-                        <h3>
-                            {{formGroup.get('opponentRanking').value}} points
-                        </h3>
+
+                        {{formGroup.get('opponentRanking').value}} points
+
                     </ion-label>
                 </ion-item>
             </ion-radio-group>
-
+        </ion-list>
+        <ion-item-divider>
+            <ion-label>{{'CALCULATOR.MATCH_RESULT'|translate}}</ion-label>
+        </ion-item-divider>
+        <ion-list [inset]="true">
             <ion-radio-group formControlName="matchResult" *ngIf="formGroup.get('matchResult')">
-                <ion-list-header>
-                    <ion-label>{{'CALCULATOR.MATCH_RESULT'|translate}}</ion-label>
-                </ion-list-header>
                 <ion-item>
                     <ion-label>
-                        <h3>
-                            {{'COMMON.WIN'|translate}}
-                        </h3>
+
+                        {{'COMMON.WIN'|translate}}
+
                     </ion-label>
                     <ion-radio slot="start" color="success" [value]="'victory'"></ion-radio>
                 </ion-item>
 
                 <ion-item>
                     <ion-label>
-                        <h3>
-                            {{'COMMON.DEFEAT'|translate}}
-                        </h3>
+
+                        {{'COMMON.DEFEAT'|translate}}
+
                     </ion-label>
                     <ion-radio slot="start" color="danger" [value]="'defeat'"></ion-radio>
                 </ion-item>
             </ion-radio-group>
-
+        </ion-list>
+        <ion-item-divider>
+            <ion-label>{{'CALCULATOR.EVENT_TYPE.NAME'|translate}}</ion-label>
+        </ion-item-divider>
+        <ion-list [inset]="true">
             <ion-radio-group formControlName="eventType" *ngIf="formGroup.get('eventType')">
-                <ion-list-header>
-                    <ion-label>{{'CALCULATOR.EVENT_TYPE.NAME'|translate}}</ion-label>
-                </ion-list-header>
+
                 <ion-item>
                     <ion-label>
-                        <h3>
-                            {{'COMMON.CHAMPIONSHIP'|translate}}
-                        </h3>
+
+                        {{'COMMON.CHAMPIONSHIP'|translate}}
+
                     </ion-label>
                     <ion-radio checked="true" slot="start" [value]="EVENT_TYPE.CHAMPIONSHIP"></ion-radio>
                 </ion-item>
 
                 <ion-item>
                     <ion-label>
-                        <h3>
-                            {{'COMMON.TOURNAMENT'|translate}}
-                        </h3>
+
+                        {{'COMMON.TOURNAMENT'|translate}}
+
                     </ion-label>
                     <ion-radio slot="start" [value]="EVENT_TYPE.TOURNAMENT"></ion-radio>
                 </ion-item>
             </ion-radio-group>
-            <br>
-            <ion-list-header *ngIf="formGroup.get('eventType').value">
-                <ion-label>{{'CALCULATOR.EVENT_TYPE.CATEGORY'|translate}}</ion-label>
-            </ion-list-header>
+        </ion-list>
+        <ion-item-divider *ngIf="formGroup.get('eventType').value">
+            <ion-label>{{'CALCULATOR.EVENT_TYPE.CATEGORY'|translate}}</ion-label>
+        </ion-item-divider>
+        <ion-list [inset]="true">
             <ion-radio-group formControlName="eventId">
                 <ng-container *ngIf="formGroup.get('eventType').value === EVENT_TYPE.CHAMPIONSHIP">
                     <ion-item *ngFor="let event of coefficientPerEvent[EVENT_TYPE.CHAMPIONSHIP]">
-                        <ion-label
-                                class="multiline">
-                            <h3>{{('CALCULATOR.EVENT_TYPE.' + this.formGroup.get('category').value?.toUpperCase() + '.CHAMPIONSHIP.' + event.eventId) | translate}}</h3>
-                        </ion-label>
+                        <ion-label class="multiline">{{('CALCULATOR.EVENT_TYPE.' + this.formGroup.get('category').value?.toUpperCase() + '.CHAMPIONSHIP.' + event.eventId) | translate}}</ion-label>
                         <ion-radio slot="start" [value]="event.eventId"></ion-radio>
                     </ion-item>
                 </ng-container>
                 <ng-container *ngIf="formGroup.get('eventType').value === EVENT_TYPE.TOURNAMENT">
                     <ion-item *ngFor="let event of coefficientPerEvent[EVENT_TYPE.TOURNAMENT]">
-                        <ion-label class="multiline">
-                            <h3>{{('CALCULATOR.EVENT_TYPE.' + this.formGroup.get('category').value?.toUpperCase() + '.TOURNAMENT.' + event.eventId) | translate}}</h3>
-                        </ion-label>
+                        <ion-label class="multiline">{{('CALCULATOR.EVENT_TYPE.' + this.formGroup.get('category').value?.toUpperCase() + '.TOURNAMENT.' + event.eventId) | translate}}</ion-label>
                         <ion-radio slot="start" [value]="event.eventId"></ion-radio>
                     </ion-item>
                 </ng-container>
             </ion-radio-group>
-            <ion-item
-                    class="ion-margin-top ion-text-center ion-margin-bottom"
+        </ion-list>
+
+        <ion-button (click)="save()"
+                    expand="block"
+                    shape="round"
                     color="success"
                     [disabled]="formGroup.invalid"
-                    (click)="save()">
-                <ion-label>{{(entry ? 'CALCULATOR.EDIT_RESULT' : 'CALCULATOR.ADD_MATCH') |translate}}</ion-label>
-            </ion-item>
-
-        </ion-list>
+                    class="ion-margin-top ion-text-center ion-margin-bottom ion-margin-horizontal">
+            {{(entry ? 'CALCULATOR.EDIT_RESULT' : 'CALCULATOR.ADD_MATCH') |translate}}
+        </ion-button>
     </form>
 
 </ion-content>

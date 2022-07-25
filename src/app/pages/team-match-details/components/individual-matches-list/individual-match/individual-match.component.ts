@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {IndividualMatchResult} from '../../../../../core/api/models/individual-match-result';
 import {Player} from '../../../../../core/api/models/player';
 import {RankingService} from '../../../../../core/services/tabt/ranking.service';
@@ -6,7 +6,7 @@ import {RankingService} from '../../../../../core/services/tabt/ranking.service'
 @Component({
     selector: 'beping-team-match-individual-match',
     templateUrl: './individual-match.component.html',
-    styleUrls: ['./individual-match.component.scss']
+    styleUrls: ['./individual-match.component.scss'],
 })
 export class TeamMatchIndividualMatchComponent implements OnInit {
     @Input() individualMatch: IndividualMatchResult;

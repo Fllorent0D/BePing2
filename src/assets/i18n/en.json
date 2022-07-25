@@ -258,6 +258,7 @@
     "CANT_LOAD_TEAMS": "Impossible to load teams"
   },
   "SETTINGS": {
+    "CHANGE_MEMBER": "Change main player",
     "CHANGE_USER": "Change current user",
     "ACTIVE_USER": "Active player",
     "CANT_LOAD_TRANSLATIONS": "Impossible to load division translations",
@@ -271,10 +272,10 @@
     "SETTINGS": "Settings",
     "WANNA_HELP": "Wanna help?",
     "DONATION_GOAL": "BePing is a free application and will remain free. Keeping an application alive costs some money. All donations will be used to improve the application 😊",
-    "CHANGE_LANGUAGE": "Change language",
+    "CHANGE_LANGUAGE": "Language",
     "DUTCH": "Dutch",
-    "DISPLAY_ELO": "Display ELO ranking",
-    "DISPLAY_BEL": "Display AFTT numbered ranking",
+    "DISPLAY_ELO": "ELO ranking",
+    "DISPLAY_BEL": "AFTT numbered ranking",
     "FRENCH": "Français",
     "ENGLISH": "English",
     "WHICH_CLUB": "In which club are you playing ?",

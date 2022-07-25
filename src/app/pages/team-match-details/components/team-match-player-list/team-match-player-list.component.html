@@ -1,13 +1,11 @@
-<beping-section-title [title]="'COMMON.PLAYERS'|translate"></beping-section-title>
 
 <ion-grid class="ion-no-padding">
     <ion-row>
         <ion-col size-sm="6" size-xs="12">
-            <ion-label class="ion-padding-start" color="grey">
-                {{match.HomeTeam}}
-            </ion-label>
-            <ion-list>
-                <ion-item *ngFor="let player of match.MatchDetails.HomePlayers.Players">
+            <beping-section-title [title]="match.HomeTeam"></beping-section-title>
+
+            <ion-list [inset]="true">
+                <ion-item *ngFor="let player of match.MatchDetails.HomePlayers.Players" detail>
                     <beping-team-match-player-item
                             (playerClicked)="playerClicked.emit(player.UniqueIndex)"
                             [player]="player"
@@ -17,11 +15,9 @@
 
         </ion-col>
         <ion-col size-sm="6" size-xs="12">
-            <ion-label class="ion-padding-start" color="grey">
-                {{match.AwayTeam}}
-            </ion-label>
-            <ion-list>
-                <ion-item *ngFor="let player of match.MatchDetails.AwayPlayers.Players">
+            <beping-section-title [title]="match.AwayTeam"></beping-section-title>
+            <ion-list [inset]="true">
+                <ion-item *ngFor="let player of match.MatchDetails.AwayPlayers.Players" detail>
                     <beping-team-match-player-item
                             (playerClicked)="playerClicked.emit(player.UniqueIndex)"
                             [player]="player"

@@ -93,9 +93,9 @@
     <ng-template #noMember>
         <beping-card [marging]="true" [padding]="true">
             <ion-grid>
-                <ion-row><h3 class="ion-text-center ion-padding">
+                <ion-row>
                     {{'DASHBOARD.NO_PLAYER_SELECTED'|translate}}
-                </h3></ion-row>
+                </ion-row>
                 <ion-row>
                     <ion-button (click)="chooseMainMember()" class="ion-margin"
                                 expand="block">{{'DASHBOARD.CHOOSE_PLAYER'|translate}}
@@ -107,9 +107,10 @@
 
         </beping-card>
         <beping-card [marging]="true" [padding]="true">
-            <h3 class="ion-text-center ion-padding">
+            <div class="ion-text-center ion-padding">
                 {{'DASHBOARD.YOU_CAN_SEE_RESULTS_BOTTOM_NAV'|translate}}
-            </h3>
+            </div>
+
         </beping-card>
     </ng-template>
 

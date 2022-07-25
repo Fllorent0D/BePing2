@@ -11,24 +11,21 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content>
-    <ion-list>
-        <ng-container *ngFor="let month of tournamentsFiltered$ | async">
-            <ion-list-header>
-                <ion-label>
-                    {{ 'MONTHS.' + month.month|translate}} {{month.year}}
-                </ion-label>
-            </ion-list-header>
-            <ion-item (click)="navigateToTournamentDetail(tournament)" *ngFor="let tournament of month.tournaments" detail="detail">
+<ion-content class="ion-padding-top">
+    <ng-container *ngFor="let month of tournamentsFiltered$ | async">
+        <beping-section-title [title]="('MONTHS.' + month.month|translate) + ' ' + month.year"></beping-section-title>
+        <ion-list [inset]="true">
+            <ion-item (click)="navigateToTournamentDetail(tournament)" *ngFor="let tournament of month.tournaments"
+                      detail="detail">
                 <ion-label class="ion-text-wrap">
-                    <h3>{{tournament.Name}}</h3>
+                    {{tournament.Name}}
                     <p>{{tournament.DateFrom | localizedDate}} {{tournament.DateTo ? ' - ' + (tournament.DateTo | localizedDate) : ''}}</p>
                 </ion-label>
                 <ion-note *ngIf="isPast(tournament)" slot="end">
                     <ion-icon color="success" icon="checkmark-circle"></ion-icon>
                 </ion-note>
             </ion-item>
-        </ng-container>
+        </ion-list>
+    </ng-container>
 
-    </ion-list>
 </ion-content>

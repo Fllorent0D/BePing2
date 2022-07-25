@@ -17,7 +17,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
 
     type = 'line';
     data: ChartData;
-    options: ChartOptions;
+    options: ChartOptions = {};
     viewInit = false;
     @Input() label: string;
     @Input() color: string;

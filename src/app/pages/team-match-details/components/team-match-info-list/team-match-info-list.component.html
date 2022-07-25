@@ -1,9 +1,5 @@
-<ion-list>
-    <ion-list-header>
-        <ion-label>
-            {{ 'MATCH_ENTRY_SHEET.MATCH_DETAILS' | translate }}
-        </ion-label>
-    </ion-list-header>
+<beping-section-title [title]="'MATCH_ENTRY_SHEET.MATCH_DETAILS' | translate"></beping-section-title>
+<ion-list [inset]="true">
     <ion-item>
         <ion-label>{{'COMMON.HOME_TEAM'|translate}}</ion-label>
         <ion-label class="ion-text-end ion-text-wrap">{{match.HomeTeam}} [{{match.HomeClub}}]</ion-label>

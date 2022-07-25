@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
             <beping-localized-back-btn></beping-localized-back-btn>
@@ -67,54 +67,57 @@
                 </ion-row>
             </ion-grid>
             <ng-container *ngIf="ranking$ | async as ranking">
-                <ion-item (click)="navigateToTeam(rankingEntry)"
-                          *ngFor="let rankingEntry of ranking; let index = index"
-                          style="--padding-start: 0px; --padding-end: 0px;"
-                >
-                    <ion-grid style="padding-top: 7px; padding-bottom: 7px">
-                        <ion-row class="ion-align-items-center">
-                            <ion-col class="ion-text-wrap" size="1">
-                                <ion-label class="ion-text-wrap">
-                                    <h3>
-                                        {{rankingEntry.Position}}
-                                    </h3>
-                                </ion-label>
-                            </ion-col>
-                            <ion-col size="5">
-                                <ion-label class="ion-text-wrap">
-                                    <h3>
-                                        {{rankingEntry.Team}}
-                                    </h3>
-                                </ion-label>
-                            </ion-col>
-                            <ion-col class="border-right ion-text-center" size="1">
-                                <ion-label class="ion-text-wrap" color="grey">
-                                    {{rankingEntry.GamesPlayed}}
-                                </ion-label>
-                            </ion-col>
-                            <ion-col class="border-right ion-text-center" size="1">
-                                <ion-label class="ion-text-wrap" color="grey">
-                                    {{rankingEntry.GamesWon}}
-                                </ion-label>
-                            </ion-col>
-                            <ion-col class="border-right ion-text-center" size="1">
-                                <ion-label class="ion-text-wrap" color="grey">
-                                    {{rankingEntry.GamesLost}}
-                                </ion-label>
-                            </ion-col>
-                            <ion-col class="border-right ion-text-center" size="1">
-                                <ion-label class="ion-text-wrap" color="grey">
-                                    {{rankingEntry.GamesDraw}}
-                                </ion-label>
-                            </ion-col>
-                            <ion-col class="ion-text-center text-bold" size="2">
-                                <ion-label class="ion-text-wrap">
-                                    {{rankingEntry.Points}}
-                                </ion-label>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-item>
+                <ion-list [inset]="true" [lines]="'inset'">
+                    <ion-item (click)="navigateToTeam(rankingEntry)"
+                              *ngFor="let rankingEntry of ranking; let index = index"
+                              style="--padding-start: 0px; --padding-end: 0px;"
+                    >
+                        <ion-grid style="padding-top: 7px; padding-bottom: 7px">
+                            <ion-row class="ion-align-items-center">
+                                <ion-col class="ion-text-wrap" size="1">
+                                    <ion-label class="ion-text-wrap">
+
+                                            {{rankingEntry.Position}}
+
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <ion-label class="ion-text-wrap">
+
+                                            {{rankingEntry.Team}}
+
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="border-right ion-text-center" size="1">
+                                    <ion-label class="ion-text-wrap" color="grey">
+                                        {{rankingEntry.GamesPlayed}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="border-right ion-text-center" size="1">
+                                    <ion-label class="ion-text-wrap" color="grey">
+                                        {{rankingEntry.GamesWon}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="border-right ion-text-center" size="1">
+                                    <ion-label class="ion-text-wrap" color="grey">
+                                        {{rankingEntry.GamesLost}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="border-right ion-text-center" size="1">
+                                    <ion-label class="ion-text-wrap" color="grey">
+                                        {{rankingEntry.GamesDraw}}
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="ion-text-center text-bold" size="2">
+                                    <ion-label class="ion-text-wrap">
+                                        {{rankingEntry.Points}}
+                                    </ion-label>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                </ion-list>
+
             </ng-container>
         </ng-template>
         <ng-template swiperSlide>
@@ -144,7 +147,7 @@
                 </ion-grid>
 
             </ion-header>
-            <ion-list>
+            <ion-list [inset]="true" lines="inset">
                 <ion-item (click)="navigateToPlayer(stat.uniqueIndex)"
                           *ngFor="let stat of memberRanking$|async"
                           detail>
@@ -152,19 +155,23 @@
                         <ion-row class="ion-align-items-center">
                             <ion-col class="" size="6">
                                 <ion-label class="ion-text-wrap">
-                                    <h3>
+
                                         {{stat.firstName | titlecase}} {{stat.lastName | titlecase}}
-                                    </h3>
+
                                 </ion-label>
                             </ion-col>
                             <ion-col class="" size="2">
                                 <ion-label class="ion-text-wrap">
-                                    {{stat.ranking}}
+
+                                        {{stat.ranking}}
+
                                 </ion-label>
                             </ion-col>
                             <ion-col class="" size="2">
                                 <ion-label class="ion-text-wrap">
-                                    {{stat.played}}
+
+                                        {{stat.played}}
+
                                 </ion-label>
                             </ion-col>
                             <ion-col class="ion-text-center ion-no-padding" size="2">

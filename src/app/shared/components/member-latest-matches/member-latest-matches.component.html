@@ -1,3 +1,7 @@
 <beping-section-title *ngIf="matches?.length" [title]="'DASHBOARD.LATEST_MATCHES'|translate"></beping-section-title>
-<beping-team-match-result *ngFor="let match of matches" [match]="match"></beping-team-match-result>
+<ion-list [inset]="true">
+    <ion-item *ngFor="let match of matches" class="no-start-padding">
+        <beping-team-match-result [match]="match"></beping-team-match-result>
+    </ion-item>
+</ion-list>
 

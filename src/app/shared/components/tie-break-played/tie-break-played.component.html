@@ -1,38 +1,41 @@
-<beping-card>
-    <ion-grid>
-        <ion-row class="border-bottom">
-            <ion-col>
-                <ion-label class="ion-text-wrap">
-                    {{'DASHBOARD.DECISIVE_SETS_PLAYED'|translate}}
-                </ion-label>
-            </ion-col>
-            <ion-col class="ion-text-end">
-                <ion-label class="ion-text-wrap">{{totalTieBreak}}
-                    <ng-container *ngIf="totalTieBreak > 0">({{totalTieBreakPct}}%)</ng-container>
-                </ion-label>
-            </ion-col>
-        </ion-row>
-        <ion-row *ngIf="totalTieBreak > 0">
-            <ion-grid style="padding: 0">
-                <ion-row>
-                    <ion-col>
-                        <ion-label class="ion-text-wrap">{{victories}} ({{victoriesPct}}%)</ion-label>
-                        <ion-label class="ion-text-wrap" color="grey">{{'COMMON.WINS'|translate}}</ion-label>
-                    </ion-col>
-                    <ion-col class="ion-text-end">
-                        <ion-label class="ion-text-wrap">{{defeats}} ({{defeatsPct}}%)</ion-label>
-                        <ion-label class="ion-text-wrap" color="grey">{{'COMMON.DEFEATS'|translate}}</ion-label>
-                    </ion-col>
-                </ion-row>
-                <ion-row>
-                    <ion-col>
-                        <div class="progress-bar">
-                            <span [ngStyle]="{'width': victoriesPct-0.7 + '%'}"></span>
-                            <span [ngStyle]="{'width': defeatsPct-0.7 + '%'}"></span>
-                        </div>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-row>
-    </ion-grid>
-</beping-card>
+<ion-list [inset]="true">
+    <ion-item class="no-start-padding">
+        <ion-grid>
+            <ion-row class="border-bottom">
+                <ion-col>
+                    <ion-label class="ion-text-wrap">
+                        {{'DASHBOARD.DECISIVE_SETS_PLAYED'|translate}}
+                    </ion-label>
+                </ion-col>
+                <ion-col class="ion-text-end">
+                    <ion-label class="ion-text-wrap">{{totalTieBreak}}
+                        <ng-container *ngIf="totalTieBreak > 0">({{totalTieBreakPct}}%)</ng-container>
+                    </ion-label>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngIf="totalTieBreak > 0">
+                <ion-grid style="padding: 0">
+                    <ion-row>
+                        <ion-col>
+                            <ion-label class="ion-text-wrap">{{victories}} ({{victoriesPct}}%)</ion-label>
+                            <ion-label class="ion-text-wrap" color="grey">{{'COMMON.WINS'|translate}}</ion-label>
+                        </ion-col>
+                        <ion-col class="ion-text-end">
+                            <ion-label class="ion-text-wrap">{{defeats}} ({{defeatsPct}}%)</ion-label>
+                            <ion-label class="ion-text-wrap" color="grey">{{'COMMON.DEFEATS'|translate}}</ion-label>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <div class="progress-bar">
+                                <span [ngStyle]="{'width': victoriesPct-0.7 + '%'}"></span>
+                                <span [ngStyle]="{'width': defeatsPct-0.7 + '%'}"></span>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-row>
+        </ion-grid>
+    </ion-item>
+
+</ion-list>

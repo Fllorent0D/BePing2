@@ -108,6 +108,11 @@ export class UserState implements NgxsOnInit {
     }
 
     @Selector([UserState])
+    static getPlayerClubName(state: UserStateModel): string {
+        return state.club.LongName;
+    }
+
+    @Selector([UserState])
     static getMainPlayerCategory(state: UserStateModel): PLAYER_CATEGORY {
         return state.mainCategory;
     }

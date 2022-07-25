@@ -1,10 +1,13 @@
-<beping-card  [padding]="false" [margingVertical]="marginVertical">
-    <canvas #canvasElement
-            [data]="data"
-            [legend]="true"
-            [options]="options"
-            [type]="'line'"
-            baseChart
-            style="height: 200px; max-height: 350px">
-    </canvas>
-</beping-card>
+<ion-list [inset]="true" class="ion-no-margin-vertical">
+    <ion-item class="no-start-padding">
+        <canvas #canvasElement
+                [data]="data"
+                [legend]="true"
+                [options]="options"
+                [type]="'line'"
+                baseChart
+                style="height: 200px; max-height: 350px">
+        </canvas>
+    </ion-item>
+
+</ion-list>

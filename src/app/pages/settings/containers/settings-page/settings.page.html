@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header collapse="fade">
     <ion-toolbar>
         <ion-title>{{'SIDEMENU.SETTINGS'|translate}}</ion-title>
         <ion-buttons slot="end">
@@ -8,30 +8,32 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content>
-    <ion-grid>
-        <ion-row>
-            <ion-col class="ion-text-center">
-                <h1>{{(season$|async)?.Name}}</h1>
-                <ion-text color="grey">{{'SETTINGS.CURRENT_SEASON' | translate}}</ion-text>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-    <beping-section-title [title]="'USER' | translate"></beping-section-title>
-    <ion-list>
-        <ion-item (click)="changeMember()" detail>
+<ion-content class="ion-padding-top">
+    <ion-list [inset]="true" [lines]="'inset'">
+        <ion-item class="large">
+            <ion-icon name="person-circle-outline" size="large" slot="start"></ion-icon>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.ACTIVE_USER' | translate}}
-                </h3>
+                {{playerName$|async|titlecase}}
+                <p>{{clubName$|async}}</p>
             </ion-label>
-            <ion-label class="ion-text-end" slot="end">{{playerName$|async|titlecase}}</ion-label>
         </ion-item>
+        <ion-item (click)="changeMember()" detail class="large">
+            <ion-label>
+                {{'SETTINGS.CHANGE_MEMBER' | translate}}
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-list [inset]="true" [lines]="'inset'">
+        <ion-item>
+            <ion-label>
+                {{'SETTINGS.CURRENT_SEASON' | translate}}
+            </ion-label>
+            <ion-label class="ion-text-end" slot="end">{{(season$|async)?.Name}}</ion-label>
+        </ion-item>
+
         <ion-item *ngIf="(playerCategories$ | async)?.length > 1">
             <ion-label>
-                <h3>
-                    {{'SETTINGS.DISPLAY_RANKING' | translate}}
-                </h3>
+                {{'SETTINGS.DISPLAY_RANKING' | translate}}
             </ion-label>
             <ion-select (ionChange)="mainCategoryChanged($event)" [interface]="'popover'" [value]="mainCategory$|async"
                         placeholder="Select One">
@@ -43,9 +45,7 @@
         </ion-item>
         <ion-item>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.CHANGE_LANGUAGE' | translate}} {{currentLang$|async}}
-                </h3>
+                {{'SETTINGS.CHANGE_LANGUAGE' | translate}}
             </ion-label>
             <ion-select (ionChange)="changeLang($event )" [interface]="'popover'" [value]="currentLang$|async"
                         placeholder="Select One">
@@ -55,20 +55,54 @@
             </ion-select>
         </ion-item>
     </ion-list>
-    <ion-item (click)="openSubscription()" [disabled]="!isOnline" detail *ngIf="bepingProEnabled$|async">
-        <ion-label>
-            <h3>
+    <ion-list [inset]="true">
+        <ion-item (click)="openSubscription()" [disabled]="!isOnline" detail *ngIf="bepingProEnabled$|async">
+            <ion-label>
                 {{'SETTINGS.PREMIUM_SUBSCRIPTION' | translate}}
-            </h3>
-        </ion-label>
-    </ion-item>
-    <beping-section-title [title]="'COMMON.RANKINGS' | translate"></beping-section-title>
-    <ion-list>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+
+    <beping-section-title [title]="'SETTINGS.CONNECT_TO_FEDERATION'|translate"></beping-section-title>
+    <ng-container *ngIf="isLoggedIn|async; else anonymous">
+        <ion-list [inset]="true">
+            <ion-item>
+                <ion-icon color="success" icon="checkmark-circle-outline" slot="start"></ion-icon>
+                <ion-label *ngIf="(account$|async) as account"
+                           class="ion-text-wrap">
+                    {{'SETTINGS.YOU_ARE_CONNECTED' | translate:{username: account} }}
+                </ion-label>
+            </ion-item>
+            <ion-item (click)="logout()">
+                <ion-icon icon="log-out-outline" slot="start" color="danger"></ion-icon>
+                <ion-label class="ion-text-wrap" color="danger">
+                    {{'SETTINGS.LOGOUT' |translate }}
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ng-container>
+
+    <ng-template #anonymous>
+        <ion-list [inset]="true">
+            <ion-item (click)="login()" detail>
+                <ion-icon color="primary" icon="link-outline" slot="start"></ion-icon>
+                <ion-label>
+                    {{'SETTINGS.LOGIN' | translate}}
+                </ion-label>
+            </ion-item>
+            <ion-item (click)="register()" detail>
+                <ion-icon icon="log-in-outline" slot="start"></ion-icon>
+                <ion-label>
+                    {{'SETTINGS.REGISTER' | translate}}
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </ng-template>
+    <beping-section-title [title]="'SETTINGS.ADVANCED'|translate"></beping-section-title>
+    <ion-list [inset]="true">
         <ion-item>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.DISPLAY_ELO' | translate}}
-                </h3>
+                {{'SETTINGS.DISPLAY_ELO' | translate}}
             </ion-label>
             <ion-toggle
                     [checked]="displayELO$|async"
@@ -77,9 +111,7 @@
         </ion-item>
         <ion-item>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.DISPLAY_BEL' | translate}}
-                </h3>
+                {{'SETTINGS.DISPLAY_BEL' | translate}}
             </ion-label>
             <ion-toggle
                     [checked]="displayNumeric$|async"
@@ -87,56 +119,10 @@
             </ion-toggle>
         </ion-item>
     </ion-list>
-    <beping-section-title [title]="'SETTINGS.CONNECT_TO_FEDERATION'|translate"></beping-section-title>
-    <ng-container *ngIf="isLoggedIn|async; else anonymous">
-        <ion-list class="ion-margin-bottom">
-            <ion-item>
-                <ion-icon color="success" icon="checkmark-circle" slot="start"></ion-icon>
-                <ion-label *ngIf="(account$|async) as account"
-                           class="ion-text-wrap">
-                    <h3>
-                        {{'SETTINGS.YOU_ARE_CONNECTED' | translate:{username: account} }}
-                    </h3>
-                </ion-label>
-            </ion-item>
-            <ion-item (click)="logout()" color="danger">
-                <ion-icon icon="log-out-outline" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">
-                    <h3>
-                        {{'SETTINGS.LOGOUT' |translate }}
-                    </h3>
-                </ion-label>
-            </ion-item>
-        </ion-list>
-    </ng-container>
-
-    <ng-template #anonymous>
-        <ion-list class="ion-margin-bottom">
-            <ion-item (click)="login()" detail>
-                <ion-icon color="primary" icon="link-outline" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">
-                    <h3>
-                        {{'SETTINGS.LOGIN' | translate}}
-                    </h3>
-                </ion-label>
-            </ion-item>
-            <ion-item (click)="register()" detail>
-                <ion-icon icon="log-in-outline" slot="start"></ion-icon>
-                <ion-label class="ion-text-wrap">
-                    <h3>
-                        {{'SETTINGS.REGISTER' | translate}}
-                    </h3>
-                </ion-label>
-            </ion-item>
-        </ion-list>
-    </ng-template>
-    <beping-section-title [title]="'SETTINGS.ADVANCED'|translate"></beping-section-title>
-    <ion-list>
+    <ion-list [inset]="true">
         <ion-item (click)="resetCache()" [disabled]="!isOnline" detail detail-icon="refresh">
             <ion-label>
-                <h3>
-                    {{'SETTINGS.REFRESH_BEPING' | translate}}
-                </h3>
+                {{'SETTINGS.REFRESH_BEPING' | translate}}
             </ion-label>
         </ion-item>
 
@@ -173,54 +159,42 @@
         </ion-list>
         --->
     <beping-section-title [title]="'SETTINGS.MORE_INFO'|translate"></beping-section-title>
-    <ion-list>
+    <ion-list [inset]="true">
         <ion-item (click)="contact()" detail>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.CONTACT_DEVELOPER' | translate}}
-                </h3>
+                {{'SETTINGS.CONTACT_DEVELOPER' | translate}}
             </ion-label>
         </ion-item>
         <ion-item (click)="contributors()" detail>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.CONTRIBUTORS.CONTRIBUTORS' | translate}}
-                </h3>
+                {{'SETTINGS.CONTRIBUTORS.CONTRIBUTORS' | translate}}
             </ion-label>
         </ion-item>
         <ion-item (click)="cgu()" detail>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.TERMS_AND_CONDITIONS' | translate}}
-                </h3>
+                {{'SETTINGS.TERMS_AND_CONDITIONS' | translate}}
             </ion-label>
         </ion-item>
         <ion-item (click)="privacy()" detail>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.PRIVACY_POLICY' | translate}}
-                </h3>
+                {{'SETTINGS.PRIVACY_POLICY' | translate}}
             </ion-label>
         </ion-item>
         <ion-item (click)="openStatus()" detail detail-icon="open-outline">
             <ion-label>
-                <h3>
-                    {{'SETTINGS.SERVER_STATUS' | translate}}
-                </h3>
+                {{'SETTINGS.SERVER_STATUS' | translate}}
             </ion-label>
         </ion-item>
     </ion-list>
 
     <beping-section-title [title]="'SETTINGS.PARTNERSHIP.TITLE'|translate"></beping-section-title>
-    <ion-list>
+    <ion-list [inset]="true">
         <ion-item (click)="openRotatio()" detail detail-icon="open-outline">
             <ion-avatar slot="start">
                 <img src="/assets/icon/rotation-logo.jpeg" alt="rotation logo"/>
             </ion-avatar>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.PARTNERSHIP.ROTATIO' | translate}}
-                </h3>
+                {{'SETTINGS.PARTNERSHIP.ROTATIO' | translate}}
                 <p class="ion-text-wrap">
                     {{'SETTINGS.PARTNERSHIP.ROTATIO_SUBTITLE' | translate}}
                 </p>
@@ -231,9 +205,7 @@
                 <img src="/assets/icon/tt-manager.png" alt="tt-manager logo" style="border-radius: 0"/>
             </ion-avatar>
             <ion-label>
-                <h3>
-                    {{'SETTINGS.PARTNERSHIP.TTMANAGER' | translate}}
-                </h3>
+                {{'SETTINGS.PARTNERSHIP.TTMANAGER' | translate}}
                 <p class="ion-text-wrap">
                     {{'SETTINGS.PARTNERSHIP.TTMANAGER_SUBTITLE' | translate}}
                 </p>

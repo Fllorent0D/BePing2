@@ -113,7 +113,7 @@ export class TournamentsPageComponent implements OnInit {
             component: TournamentFiltersComponent,
             swipeToClose: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
-            initialBreakpoint: 0.3,
+            initialBreakpoint: 0.5,
             backdropDismiss: true,
             showBackdrop: true,
             componentProps: {

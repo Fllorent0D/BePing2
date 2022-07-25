@@ -7,28 +7,30 @@
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content>
-    <ion-list>
-        <form [formGroup]="formGroup">
+<ion-content class="ion-padding-top">
+    <form [formGroup]="formGroup">
+        <ion-list [inset]="true">
             <ion-item>
 
                 <ion-label class="ion-text-wrap">{{'DIVISION_LEVEL.LEVEL'|translate}}</ion-label>
                 <ion-select formControlName="levelsToDisplay"
                             multiple="true">
-                    <ion-select-option *ngFor="let level of levels" [value]="level">{{('DIVISION_LEVEL.'+level)|translate}}</ion-select-option>
+                    <ion-select-option *ngFor="let level of levels"
+                                       [value]="level">{{('DIVISION_LEVEL.' + level)|translate}}</ion-select-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label class="ion-text-wrap">{{'TOURNAMENTS.DISPLAY_FINISHED'|translate}}</ion-label>
                 <ion-toggle formControlName="showPastTournaments"></ion-toggle>
             </ion-item>
-
-            <ion-item (click)="submit()" button class="ion-margin-top text-center" color="primary">
+        </ion-list>
+        <ion-list [inset]="true">
+            <ion-item (click)="submit()" button class="text-center" color="primary">
                 <ion-icon name="search" slot="start"></ion-icon>
                 {{"SETTINGS.APPLY"|translate}}
             </ion-item>
-        </form>
 
-    </ion-list>
+        </ion-list>
+    </form>
 
 </ion-content>

@@ -49,6 +49,7 @@ import {ContributorsComponent} from '../contributors/contributors.component';
 export class SettingsPage implements OnInit, OnDestroy {
 
     playerName$: Observable<string>;
+    clubName$: Observable<string>;
     playerCategories$: Observable<PLAYER_CATEGORY[]>;
     season$: Observable<SeasonEntry>;
     isLoggedIn: Observable<boolean>;
@@ -81,6 +82,7 @@ export class SettingsPage implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.playerName$ = this.store.select(UserState.getPlayerName);
+        this.clubName$ = this.store.select(UserState.getPlayerClubName);
         this.userState$ = this.store.select(UserState);
         this.playerCategories$ = this.store.select(UserState.availablePlayerCategories);
         this.season$ = this.store.select(SeasonState.getCurrentSeason);

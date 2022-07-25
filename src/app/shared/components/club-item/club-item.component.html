@@ -1,10 +1,8 @@
-<ion-item (click)="clubClicked.emit(club)" [detail]="detail">
+<ng-container (click)="clubClicked.emit(club)">
     <ion-label>
-        <h3>
-            {{club.UniqueIndex}} - {{club.LongName}}
-        </h3>
+        {{club.UniqueIndex}} - {{club.LongName}}
         <p>
             {{club.CategoryName}}
         </p>
     </ion-label>
-</ion-item>
+</ng-container>

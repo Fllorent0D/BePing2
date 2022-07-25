@@ -1,10 +1,12 @@
 <beping-section-title [title]="'COMMON.MATCHES'|translate"></beping-section-title>
 
-<ion-list>
-    <beping-team-match-individual-match
-            *ngFor="let individualMatch of match.MatchDetails.IndividualMatchResults"
-            [awayPlayer]="getPlayerWithId(individualMatch.AwayPlayerUniqueIndex)"
-            [homePlayer]="getPlayerWithId(individualMatch.HomePlayerUniqueIndex)"
-            [individualMatch]="individualMatch">
-    </beping-team-match-individual-match>
+<ion-list [inset]="true" [lines]="'inset'">
+    <ion-item *ngFor="let individualMatch of match.MatchDetails.IndividualMatchResults" class="no-start-padding">
+        <beping-team-match-individual-match
+                class="full-width"
+                [awayPlayer]="getPlayerWithId(individualMatch.AwayPlayerUniqueIndex)"
+                [homePlayer]="getPlayerWithId(individualMatch.HomePlayerUniqueIndex)"
+                [individualMatch]="individualMatch">
+        </beping-team-match-individual-match>
+    </ion-item>
 </ion-list>

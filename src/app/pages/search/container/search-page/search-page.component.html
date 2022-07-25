@@ -10,96 +10,89 @@
         <ion-searchbar [formControl]="searchControl" [placeholder]="'SEARCH.PLACEHOLDER'|translate"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding-top">
     <ng-container *ngIf="clubsFound$ | async as clubs">
-        <ion-list *ngIf="clubs.results?.length > 0">
-            <ion-list-header>
-                <ion-label>
-                    {{ 'COMMON.CLUBS' | translate }}
-                </ion-label>
-            </ion-list-header>
-            <beping-club-item
-                    (clubClicked)="clubClicked($event)"
-                    *ngFor="let club of clubs.results"
-                    [club]="club"
-                    [detail]="true"
-            ></beping-club-item>
-        </ion-list>
+        <ng-container *ngIf="clubs.results?.length > 0">
+            <beping-section-title [title]="'COMMON.CLUBS' | translate"></beping-section-title>
+            <ion-list [inset]="true" [lines]="'inset'">
+                <ion-item *ngFor="let club of clubs.results" (click)="clubClicked(club)">
+                    <ion-label>
+                        {{club.UniqueIndex}} - {{club.LongName}}
+                        <p>
+                            {{club.CategoryName}}
+                        </p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ng-container>
     </ng-container>
 
     <ng-container *ngIf="divisionsFound$ | async as divisions">
-        <ion-list *ngIf="divisions.results?.length > 0">
-            <ion-list-header>
-                <ion-label>
-                    {{ 'COMMON.DIVISIONS'| translate }}
-                </ion-label>
-            </ion-list-header>
-            <ion-item (click)="divisionClicked(div)" *ngFor="let div of divisions.results" detail>
-                <ion-label class="ion-text-wrap">
-                    <h3>{{div.DivisionName.split('-')[0] | titlecase}}</h3>
-                    <p>{{'DIVISION_LEVEL.' + div.Level | translate}}
-                        - {{'PLAYER_CATEGORY.' + div.DivisionCategory | translate | titlecase}}</p>
-                </ion-label>
-            </ion-item>
-        </ion-list>
+        <ng-container *ngIf="divisions.results?.length > 0">
+            <beping-section-title [title]="'COMMON.DIVISIONS' | translate"></beping-section-title>
+            <ion-list [inset]="true">
+                <ion-item (click)="divisionClicked(div)" *ngFor="let div of divisions.results" detail>
+                    <ion-label class="ion-text-wrap">
+                        {{div.DivisionName.split('-')[0] | titlecase}}
+                        <p>{{'DIVISION_LEVEL.' + div.Level | translate}}
+                            - {{'PLAYER_CATEGORY.' + div.DivisionCategory | translate | titlecase}}</p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ng-container>
     </ng-container>
 
     <ng-container *ngIf="membersFound$ | async as membersSearchResults">
-        <ion-list *ngIf="membersSearchResults.results?.length > 0">
-            <ion-list-header>
-                <ion-label>
-                    {{ 'COMMON.PLAYERS'| translate }}
-                </ion-label>
-            </ion-list-header>
-            <beping-member-item
-                    (memberClicked)="memberClicked($event)"
-                    *ngFor="let player of membersSearchResults.results"
-                    [detail]="true"
-                    [member]="player"
-            ></beping-member-item>
-        </ion-list>
-        <ion-list *ngIf="membersSearchResults.isLoading">
-            <ion-list-header>
-                <ion-label>
-                    {{ 'COMMON.PLAYERS'|translate }}
-                </ion-label>
-            </ion-list-header>
-            <ion-item>
-                <ion-spinner slot="start"></ion-spinner>
-                <ion-label>
-                    {{'SEARCH.SEARCHING_PLAYERS'|translate}}
-                </ion-label>
-            </ion-item>
-        </ion-list>
+        <ng-container *ngIf="membersSearchResults.results?.length > 0">
+            <beping-section-title [title]="'COMMON.PLAYERS' | translate"></beping-section-title>
+            <ion-list [inset]="true">
+                <ion-item *ngFor="let player of membersSearchResults.results" (click)="memberClicked(player)">
+                    <ion-label>
+                        {{player.FirstName | titlecase}} {{player.LastName | titlecase}}
+                        <p>{{player.Club}}</p>
+                    </ion-label>
+                    <ion-note slot="end">{{player.Ranking}}</ion-note>
+                </ion-item>
+            </ion-list>
+        </ng-container>
+        <ng-container *ngIf="membersSearchResults.isLoading">
+            <beping-section-title [title]="'COMMON.PLAYERS' | translate"></beping-section-title>
+            <ion-list [inset]="true">
+                <ion-item>
+                    <ion-spinner slot="start"></ion-spinner>
+                    <ion-label>
+                        {{'SEARCH.SEARCHING_PLAYERS'|translate}}
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ng-container>
     </ng-container>
 
 
     <ng-container *ngIf="matchesFound$ | async as matches">
-        <ion-list *ngIf="matches.results?.length > 0">
-            <ion-list-header>
-                <ion-label>
-                    {{ 'COMMON.MATCHES'|translate }}
-                </ion-label>
-            </ion-list-header>
-            <beping-team-match-result
-                    *ngFor="let matchesEntry of matches.results" [match]="matchesEntry"
+        <ng-container *ngIf="matches.results?.length > 0">
+            <beping-section-title [title]="'COMMON.MATCHES' | translate"></beping-section-title>
+            <ion-list *ngIf="matches.results?.length > 0" [inset]="true">
+                <ion-item *ngFor="let matchesEntry of matches.results" class="no-start-padding">
+                    <beping-team-match-result
+                            [match]="matchesEntry">
+                    </beping-team-match-result>
+                </ion-item>
+            </ion-list>
+        </ng-container>
+        <ng-container *ngIf="matches.isLoading">
+            <beping-section-title [title]="'COMMON.MATCHES' | translate"></beping-section-title>
+            <ion-list [inset]="true">
+                <ion-item>
+                    <ion-spinner slot="start"></ion-spinner>
+                    <ion-label>
+                        {{ 'SEARCH.SEARCHING_MATCHES'|translate }}
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ng-container>
 
-            >
-            </beping-team-match-result>
-        </ion-list>
-        <ion-list *ngIf="matches.isLoading">
-            <ion-list-header>
-                <ion-label>
-                    {{ 'COMMON.MATCHES'|translate }}
-                </ion-label>
-            </ion-list-header>
-            <ion-item>
-                <ion-spinner slot="start"></ion-spinner>
-                <ion-label>
-                    {{ 'SEARCH.SEARCHING_MATCHES'|translate }}
-                </ion-label>
-            </ion-item>
-        </ion-list>
+
     </ng-container>
     <ng-container *ngIf="noResult$ | async">
         <beping-alert-full-page

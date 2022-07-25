@@ -6,7 +6,7 @@
         <ion-title>{{'MATCH_ENTRY_SHEET.MATCH_ENTRY_SHEET'|translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-padding-top">
     <ng-container *ngIf="match$ | async as match">
         <beping-team-match-score
                 (awayTeamClicked)="navigateToTeamPage(match.AwayClub, match.AwayTeam, match.DivisionId)"
