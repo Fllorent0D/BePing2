@@ -67,7 +67,7 @@
     "capacitor-email-composer": "1.1.3",
     "capacitor-native-settings": "0.2.1",
     "capacitor-rate-app": "2.0.0",
-    "chart.js": "3.8.2",
+    "chart.js": "3.9.0",
     "chartjs-adapter-date-fns": "2.0.0",
     "chartjs-plugin-annotation": "1.4.0",
     "cordova-plugin-purchase": "11.0.0",
