@@ -61,7 +61,7 @@
     "@ngxs/logger-plugin": "3.7.5",
     "@ngxs/storage-plugin": "3.7.5",
     "@ngxs/store": "3.7.5",
-    "@proteansoftware/capacitor-start-navigation": "3.1.2",
+    "@proteansoftware/capacitor-start-navigation": "4.0.0",
     "@robingenz/capacitor-android-dark-mode-support": "1.0.1",
     "capacitor-calendar": "1.0.6",
     "capacitor-email-composer": "1.1.3",
