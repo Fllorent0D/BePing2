@@ -71,4 +71,8 @@ export class TeamMatchesEntryListComponent implements OnInit {
         return 1;
     }
 
+    identify(index: number, item: TeamMatchesEntry){
+        return item.MatchUniqueId;
+    }
+
 }

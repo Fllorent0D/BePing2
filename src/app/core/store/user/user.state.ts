@@ -74,7 +74,7 @@ export class UserState implements NgxsOnInit {
         private readonly memberPlayerCategoryService: PlayerCategoryService,
         private readonly memberService: MembersService,
         private readonly clubService: ClubsService,
-        private readonly analyticsService: AnalyticsService,
+        // private readonly analyticsService: AnalyticsService,
         private readonly crashlytics: CrashlyticsService
     ) {
     }
@@ -113,6 +113,11 @@ export class UserState implements NgxsOnInit {
     }
 
     @Selector([UserState])
+    static getPlayerUniqueIndex(state: UserStateModel): number {
+        return state.memberUniqueIndex;
+    }
+
+    @Selector([UserState])
     static getMainPlayerCategory(state: UserStateModel): PLAYER_CATEGORY {
         return state.mainCategory;
     }
@@ -138,12 +143,6 @@ export class UserState implements NgxsOnInit {
         const state = getState();
         const timeThreshold = sub(Date.now(), {minutes: 30});
 
-        if (state.memberUniqueIndex) {
-            this.analyticsService.setUser(state.memberUniqueIndex.toString(10));
-        }
-        if (state.club) {
-            this.analyticsService.setUserProperty('club', state.club.UniqueIndex);
-        }
 
         // App initialize and need to refresh
         if (state.lastUpdated < timeThreshold.getTime() && state.memberUniqueIndex) {
@@ -156,12 +155,13 @@ export class UserState implements NgxsOnInit {
 
     @Action(SetUser)
     setUser({patchState, dispatch}: StateContext<UserStateModel>, action: SetUser) {
-        this.analyticsService.setUser(action.memberUniqueIndex.toString(10));
-        this.analyticsService.setUserProperty('club_id', action.club.UniqueIndex);
+        /*
         this.analyticsService.logEvent('choose_main_player', {
             memberUniqueIndex: action.memberUniqueIndex,
             clubUniqueIndex: action.club.UniqueIndex
         });
+
+         */
         patchState({
             club: action.club,
             mainCategory: null,
@@ -182,7 +182,6 @@ export class UserState implements NgxsOnInit {
 
     @Action(ClubTransfer)
     clubTransfer({patchState, dispatch}: StateContext<UserStateModel>, action: ClubTransfer) {
-        this.analyticsService.setUserProperty('club_id', action.newClubIndex);
         return this.clubService.findClubById({clubIndex: action.newClubIndex}).pipe(
             map((club) => dispatch(new UpdateClubEntry(club)))
         );
@@ -291,7 +290,7 @@ export class UserState implements NgxsOnInit {
 
     @Action(HasSeenOnBoarding)
     hasSeenOnboarding({patchState}: StateContext<UserStateModel>) {
-        this.analyticsService.logEvent('onboarding_complete');
+        // this.analyticsService.logEvent('onboarding_complete');
 
         return patchState({
             hasSeeOnBoarding: true
@@ -307,7 +306,7 @@ export class UserState implements NgxsOnInit {
 
     @Action(UpdateMainCategory)
     updateMainCategory({patchState}: StateContext<UserStateModel>, action: UpdateMainCategory) {
-        this.analyticsService.logEvent('main_member_category_changed', {main_category: action.category});
+        // this.analyticsService.logEvent('main_member_category_changed', {main_category: action.category});
 
         return patchState({
             mainCategory: action.category

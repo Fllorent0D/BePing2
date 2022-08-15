@@ -11,7 +11,6 @@ import {NavController} from '@ionic/angular';
 export class HasSeenOnboardingGuard implements CanActivate {
 
     constructor(
-        private readonly router: Router,
         private readonly store: Store,
         private readonly navCtrl: NavController
     ) {
@@ -27,7 +26,6 @@ export class HasSeenOnboardingGuard implements CanActivate {
         }
 
         return true;
-
     }
 
 }

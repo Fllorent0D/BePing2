@@ -48,7 +48,23 @@ export class RegionsDivisionComponent implements OnInit {
         }
     }
 
-    navigateSuperWomen() {
+    navigateSuperMen(): void {
+        this.store.select(DivisionsState.entities).pipe(
+            map((divisions) => divisions.find((div: DivisionEntry) => div.DivisionCategory === 'MEN' && div.DivisionName.includes('SUPER'))),
+            take(1)
+        ).subscribe(division => {
+            if (division) {
+                this.tabRouting.navigateTo(['divisions', division.DivisionId.toString(10)]);
+            } else {
+                this.dialogService.showToast({
+                    message: 'Not found',
+                    color: 'danger'
+                });
+            }
+        });
+    }
+
+    navigateSuperWomen(): void {
         this.store.select(DivisionsState.entities).pipe(
             map((divisions) =>
                 divisions.find((div: DivisionEntry) => div.DivisionCategory === 'WOMEN' && div.DivisionName.includes('SUPER'))),

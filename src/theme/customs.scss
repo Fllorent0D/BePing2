@@ -228,7 +228,7 @@ ion-popover {
   align-items: center;
   justify-content: center;
   width: 80%;
-  height: 70%;
+  height: 80%;
   margin: auto;
   text-align: center;
 
@@ -306,4 +306,14 @@ hr {
 
 beping-explore-container {
   background-color: var(--ion-color-primary);
+}
+.list-md.list-inset ion-item:first-child{
+  --border-width: 0px;
+}
+.list-md.list-inset ion-item:last-child{
+  --inner-border-width: 0px;
+}
+.list-ios.list-inset ion-item:first-of-type{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }

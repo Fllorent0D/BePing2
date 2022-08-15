@@ -10,6 +10,7 @@ import {RankingMethodName, RankingService} from '../../../core/services/tabt/ran
 import {ModalController} from '@ionic/angular';
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
 import {Store} from '@ngxs/store';
+import {Keyboard} from '@capacitor/keyboard';
 
 @Component({
     selector: 'beping-search-player',
@@ -93,5 +94,9 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
             this.searchBar.el.setFocus();
         }, 10);
+    }
+
+    hideKeyboard() {
+        Keyboard.hide();
     }
 }

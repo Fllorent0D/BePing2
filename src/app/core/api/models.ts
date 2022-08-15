@@ -25,7 +25,6 @@ export { RegisterTournament } from './models/register-tournament';
 export { SeasonEntry } from './models/season-entry';
 export { WeeklyElo } from './models/weekly-elo';
 export { WeeklyNumericRanking } from './models/weekly-numeric-ranking';
-export { WeeklyNumericRankingV2 } from './models/weekly-numeric-ranking-v-2';
 export { MatchSystemEntry } from './models/match-system-entry';
 export { MatchEntryHistory } from './models/match-entry-history';
 export { PlayersInfo } from './models/players-info';

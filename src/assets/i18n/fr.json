@@ -115,6 +115,7 @@
     "NO_TEAMS": "Aucune équipe en favoris",
     "NO_DIVISIONS": "Aucune division en favoris",
     "NO_FAVORITE": "Aucun favori",
+    "ADD_OWN_CLUB": "Ajouter {{clubname}}",
     "INSTRUCTIONS": "Vous pouvez ajouter des favoris lorsque vous naviguez sur la page d'un club, d’un joueur ou d’une division"
   },
   "CALENDAR_CLUB": {
@@ -349,7 +350,8 @@
     "TOURNAMENT_ENDED": "Tournoi terminé",
     "REGISTER_ENDED": "Inscriptions terminées",
     "REGISTRATIONS": "Inscriptions",
-    "REGISTERED_ON": "Inscription le"
+    "REGISTERED_ON": "Inscription le",
+    "NO_TOURNAMENT": "Aucun tournoi trouvé"
   },
   "NAVIGATION": {
     "NAVIGATE_TO_MATCH": "Itinéraire jusqu'au match",

@@ -21,7 +21,7 @@
     </ion-item>
     <ng-container *ngIf="topics$ | async as topics">
         <ng-container *ngIf="clubsTopics$ | async as clubs">
-            <ion-list *ngIf="clubs.length !== 0">
+            <ion-list *ngIf="clubs.length !== 0" [inset]="true" [lines]="'inset'">
                 <ion-list-header>
                     <ion-label>
                         {{'COMMON.CLUBS'|translate}}
@@ -37,7 +37,7 @@
 
         </ng-container>
         <ng-container *ngIf="divisionsTopics$ | async as divisions">
-            <ion-list *ngIf="divisions.length !== 0">
+            <ion-list *ngIf="divisions.length !== 0" [inset]="true" [lines]="'inset'">
                 <ion-list-header>
                     <ion-label>
                         {{'COMMON.DIVISIONS'|translate}}
@@ -53,7 +53,7 @@
 
         </ng-container>
         <ng-container *ngIf="clubTeamsTopics$ | async as teams">
-            <ion-list *ngIf="teams.length !== 0">
+            <ion-list *ngIf="teams.length !== 0" [inset]="true" [lines]="'inset'">
                 <ion-list-header>
                     <ion-label>
                         {{'COMMON.TEAMS'|translate}}

@@ -38,7 +38,7 @@ export class IsProService {
                 console.log('top', topModal);
                 const opts: ModalOptions = {
                     component: ModalBaseComponent,
-                    swipeToClose: !!(topModal || presentingElement),
+                    canDismiss: !!(topModal || presentingElement),
                     presentingElement: topModal || presentingElement,
                     componentProps: {
                         rootPage: PremiumSubscriptionsComponent,

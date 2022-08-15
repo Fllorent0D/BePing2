@@ -11,23 +11,11 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-top">
-    <ion-button
-            *ngIf="memberClub | async as club"
-            (click)="navigateToURI(['clubs', club.UniqueIndex])"
-            class="ion-margin-top ion-padding-horizontal"
-            size="medium"
-            fill="outline"
-            expand="block">
-        <ion-icon name="star-outline" slot="start"></ion-icon>
-        <ion-label>
-            {{club.UniqueIndex}} - {{club.LongName}}
-        </ion-label>
-    </ion-button>
     <ng-container *ngIf="hasFavorites$ | async; else noFavorite">
         <ng-container *ngIf="favoritesTeam | async as teams">
             <ng-container *ngIf="teams.length !== 0">
                 <beping-section-title [title]="'COMMON.TEAMS'|translate"></beping-section-title>
-                <ion-list [inset]="true">
+                <ion-list [inset]="true" [lines]="'inset'">
                     <ion-item (click)="navigateToURI(team.uri)" *ngFor="let team of teams"
                               detail>
                         <ion-label class="ion-text-wrap">
@@ -43,7 +31,7 @@
         <ng-container *ngIf="favoritesClub | async as clubs">
             <ng-container *ngIf="clubs.length !== 0">
                 <beping-section-title [title]="'COMMON.CLUBS'|translate"></beping-section-title>
-                <ion-list [inset]="true">
+                <ion-list [inset]="true" [lines]="'inset'">
 
                     <ion-item (click)="navigateToURI(club.uri)" *ngFor="let club of clubs"
                               detail>
@@ -61,7 +49,7 @@
             <ng-container *ngIf="divisions.length !== 0">
                 <beping-section-title [title]="'COMMON.DIVISIONS'|translate"></beping-section-title>
 
-                <ion-list [inset]="true">
+                <ion-list [inset]="true" [lines]="'inset'">
                     <ion-item (click)="navigateToURI(division.uri)" *ngFor="let division of divisions"
                               detail>
                         <ion-label class="ion-text-wrap">
@@ -78,7 +66,7 @@
         <ng-container *ngIf="favoritesMember | async as members">
             <ng-container *ngIf="members.length !== 0">
                 <beping-section-title [title]="'COMMON.PLAYERS'|translate"></beping-section-title>
-                <ion-list>
+                <ion-list [inset]="true" [lines]="'inset'">
                     <ion-item (click)="navigateToURI(member.uri)" *ngFor="let member of members"
                               detail>
                         <ion-label class="ion-text-wrap">
@@ -93,10 +81,22 @@
     </ng-container>
     <ng-template #noFavorite>
         <beping-alert-full-page
+                *ngIf="memberClub|async as club"
                 [icon]="'star-outline'"
                 [title]="'FAVORITES.NO_FAVORITE'|translate"
-                [message]="'FAVORITES.INSTRUCTIONS'|translate">
+                [message]="'FAVORITES.INSTRUCTIONS'|translate"
+                [actionLabel]="'FAVORITES.ADD_OWN_CLUB'|translate:{clubname: club.Name}"
+                (actionClicked)="addCurrentClubToFavorite()"
+        >
         </beping-alert-full-page>
+        <beping-alert-full-page
+                *ngIf="!(memberClub|async)"
+                [icon]="'star-outline'"
+                [title]="'FAVORITES.NO_FAVORITE'|translate"
+                [message]="'FAVORITES.INSTRUCTIONS'|translate"
+        >
+        </beping-alert-full-page>
+
     </ng-template>
 
 </ion-content>

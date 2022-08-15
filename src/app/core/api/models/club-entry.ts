@@ -1,7 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import {VenueEntry} from './venue-entry';
-
+import { VenueEntry } from './venue-entry';
 export interface ClubEntry {
   Category: number;
   CategoryName: string;

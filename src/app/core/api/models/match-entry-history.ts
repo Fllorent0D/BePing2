@@ -1,7 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-import {TeamMatchesEntry} from './team-matches-entry';
-
+import { TeamMatchesEntry } from './team-matches-entry';
 export interface MatchEntryHistory {
   date: string;
   matchEntry: TeamMatchesEntry;

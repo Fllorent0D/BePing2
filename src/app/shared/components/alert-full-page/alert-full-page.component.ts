@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
     selector: 'beping-alert-full-page',
@@ -10,6 +10,8 @@ export class AlertFullPageComponent implements OnInit {
     @Input() title: string;
     @Input() message: string;
     @Input() icon = 'alert-outline';
+    @Input() actionLabel: string;
+    @Output() actionClicked: EventEmitter<void> = new EventEmitter<void>();
 
     constructor() {
     }

@@ -21,6 +21,7 @@ import {Device} from '@capacitor/device';
 import {AppStateService} from './core/services/app-state.service';
 import {RemoteConfigService} from './core/services/remote-config.service';
 import {SplashScreen} from '@capacitor/splash-screen';
+import {Store} from '@ngxs/store';
 
 registerLocaleData(localFR);
 registerLocaleData(localNL);
@@ -48,22 +49,24 @@ registerLocaleData(localNL);
                 crashlytics: CrashlyticsService,
                 iAPService: InAppPurchasesService,
                 appState: AppStateService,
-                remoteSettings: RemoteConfigService
+                store: Store
             ) => async () => {
                 const deviceInfo = await Device.getInfo();
                 const initTasks = [
-                    analyticsService.initFb(),
-                    crashlytics.init(),
+                    analyticsService.init(),
                     appState.init(),
-                    remoteSettings.refreshRemoteConfig(),
                 ];
                 if (deviceInfo.platform !== 'web') {
                     initTasks.push(iAPService.init());
-                    await SplashScreen.hide();
                 }
                 await Promise.all(initTasks);
+                // Doing it later for analytics to start
+
+                if (deviceInfo.platform !== 'web') {
+                    await SplashScreen.hide();
+                }
             },
-            deps: [AnalyticsService, CrashlyticsService, InAppPurchasesService, AppStateService, RemoteConfigService],
+            deps: [AnalyticsService, InAppPurchasesService, AppStateService, Store],
             multi: true
         },
         InAppPurchase2,

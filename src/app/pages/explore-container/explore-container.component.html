@@ -29,7 +29,7 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true" [fullscreen]="true" bepingFadeHeader [toolbar]="toolbar" class="ion-padding-bottom">
-    <ion-refresher #refresher (ionRefresh)="refresh($event)" slot="fixed">
+    <ion-refresher #refresher (ionRefresh)="refresh($event)" slot="fixed" [disabled]="!(currentMemberEntry$ | async)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <div class="extended-gradient"></div>
@@ -91,27 +91,14 @@
         </ng-template>
     </ng-container>
     <ng-template #noMember>
-        <beping-card [marging]="true" [padding]="true">
-            <ion-grid>
-                <ion-row>
-                    {{'DASHBOARD.NO_PLAYER_SELECTED'|translate}}
-                </ion-row>
-                <ion-row>
-                    <ion-button (click)="chooseMainMember()" class="ion-margin"
-                                expand="block">{{'DASHBOARD.CHOOSE_PLAYER'|translate}}
-                    </ion-button>
-                </ion-row>
-            </ion-grid>
-            <br>
-
-
-        </beping-card>
-        <beping-card [marging]="true" [padding]="true">
-            <div class="ion-text-center ion-padding">
-                {{'DASHBOARD.YOU_CAN_SEE_RESULTS_BOTTOM_NAV'|translate}}
-            </div>
-
-        </beping-card>
+        <beping-alert-full-page
+                icon="ellipsis-horizontal-outline"
+                [title]="'DASHBOARD.NO_PLAYER_SELECTED'|translate"
+                [message]="'DASHBOARD.YOU_CAN_SEE_RESULTS_BOTTOM_NAV'|translate"
+                [actionLabel]="'DASHBOARD.CHOOSE_PLAYER'|translate"
+                (actionClicked)="chooseMainMember()"
+        >
+        </beping-alert-full-page>
     </ng-template>
 
 

@@ -85,7 +85,7 @@ export class LoginPage implements OnInit {
     async chooseClub() {
         const modal = await this.dialogService.showModal({
             component: ChooseClubPage,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: this.ionRouterOutlet.nativeEl
         });
         const result = await modal.onWillDismiss();
@@ -99,7 +99,7 @@ export class LoginPage implements OnInit {
     async choosePlayer() {
         const modal = await this.dialogService.showModal({
             component: ChoosePlayerPage,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
             componentProps: {
                 title: 'Qui êtes-vous?',
@@ -127,7 +127,7 @@ export class LoginPage implements OnInit {
     async loginWithAFTT() {
         const modal = await this.dialogService.showModal({
             component: AfttLoginPage,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
             componentProps: {}
         });

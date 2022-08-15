@@ -15,6 +15,7 @@ import {TabsNavigationService} from '../../../../core/services/navigation/tabs-n
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {RateApp} from 'capacitor-rate-app';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
+import {Keyboard} from '@capacitor/keyboard';
 
 interface SearchResults<T> {
     results?: T[];
@@ -181,4 +182,7 @@ export class SearchPageComponent implements OnInit {
         RateApp.requestReview();
     }
 
+    hideKeyboard() {
+        Keyboard.hide();
+    }
 }

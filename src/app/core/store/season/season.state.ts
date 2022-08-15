@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {SeasonEntry} from '../../api/models/season-entry';
-import {catchError, finalize, switchMap} from 'rxjs/operators';
+import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
-import {CurrentSeasonChanged, GetCurrentSeason, GetCurrentSeasonFailure, SetSeasonLoading} from './season.actions';
+import {CurrentSeasonChanged, GetCurrentSeason, GetCurrentSeasonFailure, LoadSpecificSeason, SetSeasonLoading} from './season.actions';
 import {SeasonsService} from '../../api/services/seasons.service';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
 import {UpdateRemoteSettingKey} from '../remote-settings';
@@ -80,6 +80,19 @@ export class SeasonState {
                     return dispatch(new CurrentSeasonChanged(seasonEntry));
                 }
                 return of();
+            }),
+            catchError((err: Error) => of(dispatch(new GetCurrentSeasonFailure(err)))),
+            finalize(() => dispatch(new SetSeasonLoading(false)))
+        );
+    }
+
+    @Action(LoadSpecificSeason)
+    setSpecificSeason({dispatch}: StateContext<SeasonStateModel>, action: LoadSpecificSeason) {
+        return dispatch(new SetSeasonLoading(true)).pipe(
+            switchMap(() => this.seasonsService.findSeasonById({seasonId: action.seasonId})),
+            switchMap((season: SeasonEntry) => {
+                this.analyticsService.logEvent('season_changed', {newSeason: season.Name});
+                return dispatch(new CurrentSeasonChanged(season));
             }),
             catchError((err: Error) => of(dispatch(new GetCurrentSeasonFailure(err)))),
             finalize(() => dispatch(new SetSeasonLoading(false)))

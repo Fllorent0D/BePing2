@@ -17,7 +17,7 @@
             <ion-label>{{'CALCULATOR.CATEGORY'|translate}}</ion-label>
         </ion-item-divider>
 
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-radio-group formControlName="category" *ngIf="formGroup.get('category')">
                 <ion-item>
                     <ion-label>
@@ -42,7 +42,7 @@
         <ion-item-divider>
             <ion-label>{{'CALCULATOR.OPPONENT'|translate}}</ion-label>
         </ion-item-divider>
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-radio-group>
                 <ion-item [detail]="!formGroup.get('opponentName').value" (click)="chooseMember()"
                           [disabled]="formGroup.get('category').invalid || formGroup.get('opponentName').disabled">

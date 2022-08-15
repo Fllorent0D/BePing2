@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Storage} from '@capacitor/storage';
+import {Preferences} from '@capacitor/preferences';
 
 
 @Injectable({
@@ -10,27 +10,27 @@ export class StorageService {
     }
 
     async set(key: string, value: any): Promise<void> {
-        await Storage.set({key, value: JSON.stringify(value)});
+        await Preferences.set({key, value: JSON.stringify(value)});
     }
 
     async get(key: string): Promise<{ value: any }> {
-        const ret = await Storage.get({key});
+        const ret = await Preferences.get({key});
         return JSON.parse(ret.value);
     }
 
     async keys(): Promise<string[]> {
-        return Storage.keys().then(({keys}) => keys);
+        return Preferences.keys().then(({keys}) => keys);
     }
 
     async remove(key: string) {
-        await Storage.remove({key});
+        await Preferences.remove({key});
     }
 
     async clear() {
-        await Storage.clear();
+        await Preferences.clear();
     }
 
     async length(): Promise<number> {
-        return Storage.keys().then(({keys}) => keys.length);
+        return Preferences.keys().then(({keys}) => keys.length);
     }
 }

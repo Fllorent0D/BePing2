@@ -10,7 +10,7 @@
 </ion-header>
 <ion-content class="ion-padding-top">
     <ion-list [inset]="true" [lines]="'inset'">
-        <ion-item class="large">
+        <ion-item class="large" *ngIf="playerName$|async">
             <ion-icon name="person-circle-outline" size="large" slot="start"></ion-icon>
             <ion-label>
                 {{playerName$|async|titlecase}}
@@ -55,7 +55,7 @@
             </ion-select>
         </ion-item>
     </ion-list>
-    <ion-list [inset]="true">
+    <ion-list [inset]="true" [lines]="'inset'">
         <ion-item (click)="openSubscription()" [disabled]="!isOnline" detail *ngIf="bepingProEnabled$|async">
             <ion-label>
                 {{'SETTINGS.PREMIUM_SUBSCRIPTION' | translate}}
@@ -65,7 +65,7 @@
 
     <beping-section-title [title]="'SETTINGS.CONNECT_TO_FEDERATION'|translate"></beping-section-title>
     <ng-container *ngIf="isLoggedIn|async; else anonymous">
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item>
                 <ion-icon color="success" icon="checkmark-circle-outline" slot="start"></ion-icon>
                 <ion-label *ngIf="(account$|async) as account"
@@ -83,7 +83,7 @@
     </ng-container>
 
     <ng-template #anonymous>
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item (click)="login()" detail>
                 <ion-icon color="primary" icon="link-outline" slot="start"></ion-icon>
                 <ion-label>
@@ -99,7 +99,7 @@
         </ion-list>
     </ng-template>
     <beping-section-title [title]="'SETTINGS.ADVANCED'|translate"></beping-section-title>
-    <ion-list [inset]="true">
+    <ion-list [inset]="true" [lines]="'inset'">
         <ion-item>
             <ion-label>
                 {{'SETTINGS.DISPLAY_ELO' | translate}}
@@ -119,7 +119,7 @@
             </ion-toggle>
         </ion-item>
     </ion-list>
-    <ion-list [inset]="true">
+    <ion-list [inset]="true" [lines]="'inset'">
         <ion-item (click)="resetCache()" [disabled]="!isOnline" detail detail-icon="refresh">
             <ion-label>
                 {{'SETTINGS.REFRESH_BEPING' | translate}}

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MemberEntry} from '../../../../core/api/models/member-entry';
+import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 
 @Component({
     selector: 'beping-club-player-list-tab',
@@ -15,6 +16,10 @@ export class ClubPlayerListTabComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    identify(index: number, item: MemberEntry) {
+        return item.UniqueIndex;
     }
 
 }

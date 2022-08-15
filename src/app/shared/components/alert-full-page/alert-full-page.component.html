@@ -1,5 +1,8 @@
 <div class="no-result-container ion-padding">
     <ion-icon [color]="'grey'" [name]="icon" size="large"></ion-icon>
     <ion-label [color]="'grey'" class="ion-padding-vertical" *ngIf="title"><h1>{{ title }}</h1></ion-label>
-    <ion-label [color]="'grey'" class="multiline" *ngIf="message"><p>{{message}}</p></ion-label>
+    <ion-label [color]="'grey'" *ngIf="message" class="ion-margin-bottom"><p>{{message}}</p></ion-label>
+    <ion-button shape="round" fill="outline" class="ion-margin-top ion-padding-horizontal" color="grey" (click)="actionClicked.emit()" *ngIf="actionLabel">
+        {{actionLabel}} <ion-icon icon="chevron-forward-outline"></ion-icon>
+    </ion-button>
 </div>

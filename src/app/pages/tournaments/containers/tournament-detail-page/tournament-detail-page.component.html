@@ -31,7 +31,7 @@
         </div>
 
         <hr>
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item *ngIf="!isPast(tournament)">
                 <ion-icon icon="time-outline" slot="start"></ion-icon>
                 <ion-label class="ion-text-wrap">{{'TOURNAMENTS.END_REGISTRATION_DATE'|translate}}

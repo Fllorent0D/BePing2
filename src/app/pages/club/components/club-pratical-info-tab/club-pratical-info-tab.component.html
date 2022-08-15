@@ -1,4 +1,4 @@
-<ion-list [inset]="true">
+<ion-list [inset]="true" [lines]="'inset'">
     <ion-item (click)="navigateToVenue(venue)" *ngFor="let venue of venues">
         <ion-label>
             {{venue.Name | titlecase}}

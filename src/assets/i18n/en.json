@@ -115,6 +115,7 @@
     "NO_TEAMS": "No favorite teams",
     "NO_DIVISIONS": "No favorite divisions",
     "NO_FAVORITE": "No favorites",
+    "ADD_OWN_CLUB": "Add {{clubname}}",
     "INSTRUCTIONS": "Favorites can be added in the club/division/player page"
   },
   "CALENDAR_CLUB": {
@@ -349,7 +350,9 @@
     "TOURNAMENT_ENDED": "Tournament is over",
     "REGISTER_ENDED": "Registration ended",
     "REGISTRATIONS": "Registrations",
-    "REGISTERED_ON": "Registered on"
+    "REGISTERED_ON": "Registered on",
+    "NO_TOURNAMENT": "No tournaments found"
+
   },
   "NAVIGATION": {
     "NAVIGATE_TO_MATCH": "Navigate to match",

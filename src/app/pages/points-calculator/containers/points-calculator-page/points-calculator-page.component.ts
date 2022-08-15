@@ -139,7 +139,7 @@ export class PointsCalculatorPageComponent implements OnInit {
         this.analyticsService.logEvent('calculator_go_to_create_result');
         this.dialogService.showModal({
             component: IndividualMatchPointsEditorComponent,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: this.ionRouter.nativeEl
         });
         // this.tabtNavigator.navigateTo(['points-calculator', 'edition']);
@@ -177,7 +177,7 @@ export class PointsCalculatorPageComponent implements OnInit {
     editEntry(entry: PointsCalculatorEntryWithPoints) {
         this.dialogService.showModal({
             component: IndividualMatchPointsEditorComponent,
-            swipeToClose: true,
+            canDismiss: true,
             handle: true,
             componentProps: {
                 entry

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
-import {FavoriteItem, FavoritesState} from '../../core/store/favorites';
+import {FavoriteItem, FavoritesState, ToggleClubFromFavorites} from '../../core/store/favorites';
 import {combineLatest, Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
-import {filter, map, take} from 'rxjs/operators';
+import {filter, map, switchMap, take} from 'rxjs/operators';
 import {UserState} from '../../core/store/user/user.state';
 import {ClubEntry} from '../../core/api/models/club-entry';
 import {NotificationsState} from '../../core/store/notification-topics/notifications.state';
@@ -31,7 +31,7 @@ export class MatchesPage implements OnInit {
     @Select(NotificationsState.topics) topics$: Observable<string[]>;
     @Select(RemoteSettingsState.notificationsEnabled) notifications$: Observable<boolean>;
     hasFavorites$: Observable<boolean>;
-
+    clubName$: Observable<string>;
     constructor(
         private readonly tabsNavigationService: TabsNavigationService,
         private readonly dialogService: DialogService,
@@ -71,8 +71,20 @@ export class MatchesPage implements OnInit {
                     rootPage: NotificationsComponent
                 },
                 presentingElement: this.routerOutlet.nativeEl,
-                swipeToClose: true
+                canDismiss: true
             });
         });
+    }
+
+    addCurrentClubToFavorite(): void {
+        this.memberClub.pipe(
+            take(1),
+            switchMap((club: ClubEntry) => this.store.dispatch(new ToggleClubFromFavorites({
+                uniqueIndex: club.UniqueIndex,
+                uri: ['clubs', club.UniqueIndex],
+                note: club.LongName,
+                label: club.UniqueIndex
+            } as FavoriteItem<string>)))
+        ).subscribe();
     }
 }

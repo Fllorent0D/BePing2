@@ -30,3 +30,12 @@ export class SetSeasonLoading {
     ) {
     }
 }
+
+export class LoadSpecificSeason {
+    static readonly type = '[season] set specific season loading';
+
+    constructor(
+        public seasonId: number
+    ) {
+    }
+}

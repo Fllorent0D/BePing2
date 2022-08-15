@@ -6,7 +6,7 @@
     </beping-week-selector>
 </ion-toolbar>
 <ion-list [inset]="true" [lines]="'inset'">
-    <ion-item *ngFor="let match of teamMatchofSelectedWeek$|async" class="no-start-padding">
+    <ion-item *ngFor="let match of teamMatchofSelectedWeek$|async; trackBy: identify" class="no-start-padding">
         <beping-team-match-result class="full-width" [match]="match"></beping-team-match-result>
     </ion-item>
 </ion-list>

@@ -115,6 +115,7 @@
     "NO_TEAMS": "Geen favoriete ploeg",
     "NO_DIVISIONS": "Geen favoriete afdelingen",
     "NO_FAVORITE": "Geen favorieten",
+    "ADD_OWN_CLUB": "Voeg {{clubname}} toe",
     "INSTRUCTIONS": "U kunt favorieten toevoegen wanneer u de pagina van een club, speler of afdelingen bekijkt"
   },
   "CALENDAR_CLUB": {
@@ -352,7 +353,8 @@
     "TOURNAMENT_ENDED": "Toernooi afgelopen",
     "REGISTER_ENDED": "Inschrijving beëindigd",
     "REGISTRATIONS": "Registraties",
-    "REGISTERED_ON": "Geregistreerd op"
+    "REGISTERED_ON": "Geregistreerd op",
+    "NO_TOURNAMENT": "Geen toernooi gevonden"
   },
   "NAVIGATION": {
     "NAVIGATE_TO_MATCH": "Wegbeschrijvng naar wedstrijd",

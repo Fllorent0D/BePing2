@@ -1,10 +1,9 @@
 /* tslint:disable */
 /* eslint-disable */
-import {Address} from './address';
-import {MemberEntryResultEntry} from './member-entry-result-entry';
-import {Phone} from './phone';
-import {RankingPointsEntry} from './ranking-points-entry';
-
+import { Address } from './address';
+import { MemberEntryResultEntry } from './member-entry-result-entry';
+import { Phone } from './phone';
+import { RankingPointsEntry } from './ranking-points-entry';
 export interface MemberEntry {
   Address?: Address;
   BirthDate?: string;

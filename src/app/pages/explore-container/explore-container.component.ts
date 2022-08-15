@@ -130,7 +130,7 @@ export class ExploreContainerComponent implements OnInit {
 
         this.dialogService.showModal({
             component: ModalBaseComponent,
-            swipeToClose: true,
+            canDismiss: true,
             componentProps: {
                 rootPage: SettingsPage
             },
@@ -143,7 +143,7 @@ export class ExploreContainerComponent implements OnInit {
 
         const modal = await this.dialogService.showModal({
             component: AfttLoginPage,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
             componentProps: {}
         });
@@ -164,7 +164,10 @@ export class ExploreContainerComponent implements OnInit {
 
         await this.dialogService.showModal({
             component: ModalBaseComponent,
-            swipeToClose: true,
+            canDismiss: true,
+            initialBreakpoint: 0.5,
+            breakpoints: [0, 0.5],
+            handle: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
             componentProps: {
                 rootPage: ChooseMainMemberClubComponent

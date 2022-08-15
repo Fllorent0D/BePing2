@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title>{{title}}</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="closeModal()">
+            <ion-button (click)="closeModal()" *ngIf="!ionRouterOutlet">
                 <ion-icon icon="close-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -12,7 +12,7 @@
 <ion-content class="ion-padding-top">
     <ng-container *ngIf="members$ | async as members; else loader">
         <ng-container *ngIf="members.length > 0">
-            <ion-list [inset]="true">
+            <ion-list [inset]="true" [lines]="'inset'">
                 <ion-item (click)="memberClicked(member)" *ngFor="let member of members">
                     <ion-label>
 
@@ -31,7 +31,7 @@
         </ng-container>
     </ng-container>
     <ng-template #loader>
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item *ngFor="let t of skeletonRows">
                 <ion-label>
                     <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated></ion-skeleton-text>

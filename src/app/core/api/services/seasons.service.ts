@@ -1,15 +1,15 @@
 /* tslint:disable */
 /* eslint-disable */
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {BaseService} from '../base-service';
-import {ApiConfiguration} from '../api-configuration';
-import {StrictHttpResponse} from '../strict-http-response';
-import {RequestBuilder} from '../request-builder';
-import {Observable} from 'rxjs';
-import {filter, map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { BaseService } from '../base-service';
+import { ApiConfiguration } from '../api-configuration';
+import { StrictHttpResponse } from '../strict-http-response';
+import { RequestBuilder } from '../request-builder';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
-import {SeasonEntry} from '../models/season-entry';
+import { SeasonEntry } from '../models/season-entry';
 
 @Injectable({
   providedIn: 'root',
@@ -62,6 +62,52 @@ export class SeasonsService extends BaseService {
 
     return this.findAllSeason$Response(params).pipe(
       map((r: StrictHttpResponse<Array<SeasonEntry>>) => r.body as Array<SeasonEntry>)
+    );
+  }
+
+  /**
+   * Path part for operation findSeasonById
+   */
+  static readonly FindSeasonByIdPath = '/v1/seasons/{seasonId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findSeasonById()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findSeasonById$Response(params: {
+    seasonId: number;
+  }): Observable<StrictHttpResponse<SeasonEntry>> {
+
+    const rb = new RequestBuilder(this.rootUrl, SeasonsService.FindSeasonByIdPath, 'get');
+    if (params) {
+      rb.path('seasonId', params.seasonId, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<SeasonEntry>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findSeasonById$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findSeasonById(params: {
+    seasonId: number;
+  }): Observable<SeasonEntry> {
+
+    return this.findSeasonById$Response(params).pipe(
+      map((r: StrictHttpResponse<SeasonEntry>) => r.body as SeasonEntry)
     );
   }
 

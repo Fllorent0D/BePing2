@@ -4,9 +4,14 @@ import {TournamentEntry} from '../../../../core/api/models/tournament-entry';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {IonRouterOutlet, ModalController, PopoverController} from '@ionic/angular';
 import {TournamentFiltersComponent} from '../../components/tournament-filters/tournament-filters.component';
-import {map} from 'rxjs/operators';
+import {map, take, takeUntil, tap} from 'rxjs/operators';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {Level} from '../../../../core/models/level';
+import {FormControl, FormGroup} from '@angular/forms';
+import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {until} from 'protractor';
+import {SelectOption} from '../../../../shared/components/selection-ion-list/selection-ion-list.component';
+import {levelOpts} from './level-opts';
 
 interface TournamentByMonth {
     month: number;
@@ -19,15 +24,23 @@ export interface TournamentsFilter {
     showPastTournaments: boolean;
 }
 
+interface TournamentsFilterFormGroup {
+    levelsToDisplay: FormControl<string[]>;
+    showPastTournaments: FormControl<boolean>;
+}
 
+@UntilDestroy()
 @Component({
     selector: 'beping-tournaments-page',
     templateUrl: './tournaments-page.component.html',
     styleUrls: ['./tournaments-page.component.scss']
 })
 export class TournamentsPageComponent implements OnInit {
+    formGroup: FormGroup<TournamentsFilterFormGroup>;
+    options$: Observable<SelectOption[]>;
     tournaments$: Observable<TournamentByMonth[]>;
     tournamentsFiltered$: Observable<TournamentByMonth[]>;
+    levelOpts = levelOpts;
     private defaultFilter: TournamentsFilter = {
         levelsToDisplay: Object.values(Level),
         showPastTournaments: false
@@ -44,6 +57,11 @@ export class TournamentsPageComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.formGroup = new FormGroup({
+            levelsToDisplay: new FormControl<string[]>(this.defaultFilter.levelsToDisplay),
+            showPastTournaments: new FormControl<boolean>(this.defaultFilter.showPastTournaments)
+        });
         this.tournaments$ = this.tournamentService.findAllTournamentsV2().pipe(
             map((tournaments: TournamentEntry[]) => {
                 return tournaments.reduce<TournamentByMonth[]>((acc: TournamentByMonth[], tournament: TournamentEntry) => {
@@ -105,17 +123,37 @@ export class TournamentsPageComponent implements OnInit {
             }),
             map((tournaments: TournamentByMonth[]) => tournaments.filter((tMonth) => tMonth.tournaments.length))
         );
+        this.options$ = this.tournamentsFilter$.pipe(
+            map((tournamentsFilters: TournamentsFilter) => {
+                return tournamentsFilters.levelsToDisplay.map((level) => ({
+                    labelKey: 'DIVISION_LEVEL.' + level,
+                    value: level
+                }));
+            }),
+            tap((a) => console.log(JSON.stringify(a)))
+        );
 
+        this.tournamentsFilter$.pipe(
+            take(1)
+        ).subscribe((filter: TournamentsFilter) => {
+            console.log(filter);
+            this.formGroup.get('levelsToDisplay').setValue(filter.levelsToDisplay);
+            this.formGroup.get('showPastTournaments').setValue(filter.showPastTournaments);
+        });
+        this.formGroup.valueChanges.subscribe((value) => {
+            console.log(value);
+            this.tournamentsFilter$.next(value as TournamentsFilter);
+        });
     }
 
     async showFilters() {
         const modal = await this.modalCtrl.create({
             component: TournamentFiltersComponent,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: this.ionRouterOutlet.nativeEl,
-            initialBreakpoint: 0.5,
-            backdropDismiss: true,
-            showBackdrop: true,
+            initialBreakpoint: 0.35,
+            breakpoints: [0, 0.35, 0.5, 0.75],
+            handle: true,
             componentProps: {
                 filter: this.tournamentsFilter$.getValue()
             }

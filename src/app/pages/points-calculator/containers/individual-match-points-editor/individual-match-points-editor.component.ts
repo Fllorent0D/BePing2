@@ -101,7 +101,7 @@ export class IndividualMatchPointsEditorComponent implements OnInit {
         const topModal = await this.modalCtrl.getTop();
         const modal = await this.dialogService.showModal({
             component: SearchMemberComponent,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: topModal,
             componentProps: {
                 showNumericRanking: true,

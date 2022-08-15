@@ -4,17 +4,20 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-top">
-    <beping-section-title [title]="'FRBTT'"></beping-section-title>
 
     <ion-list [inset]="true" [lines]="'inset'">
-        <ion-item (click)="navigateToDivisionList(Level.SUPER_DIVISION)" detail>
+        <ion-item-divider>
+            <ion-label>
+                FRBTT
+            </ion-label>
+        </ion-item-divider>
+
+        <ion-item (click)="navigateSuperMen()" detail>
             <ion-avatar slot="start">
                 <ion-icon color="primary" name="star" size="large"></ion-icon>
             </ion-avatar>
             <ion-label class="ion-padding-vertical">
-
-                    {{'DIVISION_LEVEL.SUPER_DIVISION_MEN'|translate}}
-
+                {{'DIVISION_LEVEL.SUPER_DIVISION_MEN'|translate}}
             </ion-label>
         </ion-item>
         <ion-item (click)="navigateSuperWomen()" detail>
@@ -23,7 +26,7 @@
             </ion-avatar>
             <ion-label class="ion-padding-vertical">
 
-                    {{'DIVISION_LEVEL.SUPER_DIVISION_WOMEN'|translate}}
+                {{'DIVISION_LEVEL.SUPER_DIVISION_WOMEN'|translate}}
 
             </ion-label>
         </ion-item>
@@ -37,9 +40,7 @@
 
             </ion-avatar>
             <ion-label class="ion-padding-vertical">
-
-                    {{'DIVISION_LEVEL.NATIONAL'|translate}}
-
+                {{'DIVISION_LEVEL.NATIONAL'|translate}}
             </ion-label>
         </ion-item>
 
@@ -63,7 +64,7 @@
                 </ion-avatar>
                 <ion-label class="ion-padding-vertical">
 
-                        {{'REGIONAL'|translate}} {{'DIVISION_LEVEL.IWB'|translate}}
+                    {{'REGIONAL'|translate}} {{'DIVISION_LEVEL.IWB'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -77,7 +78,7 @@
                 </ion-avatar>
                 <ion-label class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIEGE'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIEGE'|translate}}
 
 
                 </ion-label>
@@ -95,7 +96,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.HAINAUT'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.HAINAUT'|translate}}
 
 
                 </ion-label>
@@ -113,7 +114,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.BRUSSELS_BRABANT_WALLON'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.BRUSSELS_BRABANT_WALLON'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -129,7 +130,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.NAMUR'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.NAMUR'|translate}}
 
                 </ion-label>
 
@@ -146,7 +147,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LUXEMBOURG'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LUXEMBOURG'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -167,7 +168,7 @@
                 </ion-avatar>
                 <ion-label class="ion-padding-vertical">
 
-                        {{'DIVISION_LEVEL.REGION_VTTL'|translate}}
+                    {{'DIVISION_LEVEL.REGION_VTTL'|translate}}
 
                 </ion-label>
 
@@ -183,7 +184,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.VLAAMS_BRABANT_BR'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.VLAAMS_BRABANT_BR'|translate}}
 
                 </ion-label>
 
@@ -201,7 +202,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.OOST_VLANDEREN'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.OOST_VLANDEREN'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -216,7 +217,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.ANTWERP'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.ANTWERP'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -231,7 +232,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.WEST_VLAANDEREN'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.WEST_VLAANDEREN'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -248,7 +249,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                        {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIMBURG'|translate}}
+                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIMBURG'|translate}}
 
                 </ion-label>
             </ion-item>

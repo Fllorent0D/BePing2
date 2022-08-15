@@ -63,7 +63,9 @@ export function HttpLoaderFactory(http: HttpClient) {
                         if (!state) {
                             return;
                         }
-
+                        if (!state.favorites) {
+                            state.favorites = {};
+                        }
                         console.log('Running migration to version 2');
 
                         if (state?.favorites?.clubs?.length) {
@@ -95,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
                                 });
                         }
                         if (!state?.favorites?.teams) {
+
                             state.favorites.teams = [];
                         }
 

@@ -64,7 +64,7 @@ export class ChooseClubPage implements OnInit {
         return null;
     }
 
-    private async hideKeyboard() {
+    async hideKeyboard() {
         if (Capacitor.getPlatform() !== 'web') {
             await Keyboard.hide();
         }

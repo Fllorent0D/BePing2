@@ -5,6 +5,7 @@ import {FirebaseRemoteConfig} from '@joinflux/firebase-remote-config';
 import {environment} from '../../../../environments/environment';
 import {CrashlyticsService} from '../../services/crashlytics.service';
 import {InAppPurchasesState, InAppPurchaseStateModel} from '../in-app-purchases/in-app-purchases.state';
+import {CurrentSeasonChanged, LoadSpecificSeason} from '../season';
 
 
 export interface RemoteSettingsStateModel {
@@ -82,10 +83,8 @@ export class RemoteSettingsState implements NgxsOnInit {
             FirebaseRemoteConfig.initialize({minimumFetchInterval: 43_200, fetchTimeout: 60});
             await FirebaseRemoteConfig.setDefaultConfig(defaultState);
             await FirebaseRemoteConfig.fetchAndActivate();
-
-
         } catch (e) {
-            this.crashlytics.recordException({message: 'Impossible to refresh remote config: ' + e?.message, stacktrace: e?.stack});
+            this.crashlytics.recordException({message: 'Impossible to refresh remote config: ' + e?.message, domain: 'remote-config'});
         }
     }
 
@@ -111,11 +110,28 @@ export class RemoteSettingsState implements NgxsOnInit {
     }
 
     @Action([UpdateRemoteSettingKey])
-    updateConf({patchState}: StateContext<RemoteSettingsStateModel>, {key, value}: UpdateRemoteSettingKey) {
+    updateConf({patchState, getState}: StateContext<RemoteSettingsStateModel>, {key, value}: UpdateRemoteSettingKey) {
+        const state = getState();
+        if (state[key] === value) {
+            console.log('Not updating remote config', key, value);
+            return;
+        }
         console.log('UPDATE KEY', key, value);
+
         return patchState({
             [key]: value
         });
+    }
+
+    @Action([UpdateRemoteSettingKey])
+    updateSeason({dispatch, getState}: StateContext<RemoteSettingsStateModel>, {key, value}: UpdateRemoteSettingKey) {
+        const state = getState();
+
+        if (key !== 'current_season' && state.current_season !== value) {
+            return;
+        }
+        console.log('Set new season', key, value);
+        return dispatch(new LoadSpecificSeason(value));
     }
 
 

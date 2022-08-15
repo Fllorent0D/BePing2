@@ -33,7 +33,7 @@ export class ChooseMainMemberClubComponent implements OnInit {
     async chooseClub() {
         const modal = await this.modalCtrl.create({
             component: ChooseClubPage,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: await this.modalCtrl.getTop()
         });
         await modal.present();
@@ -49,7 +49,7 @@ export class ChooseMainMemberClubComponent implements OnInit {
     async choosePlayer() {
         const modal = await this.modalCtrl.create({
             component: ChoosePlayerPage,
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: await this.modalCtrl.getTop(),
             componentProps: {
                 title: 'Qui êtes-vous?',

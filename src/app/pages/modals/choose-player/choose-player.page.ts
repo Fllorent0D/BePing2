@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Optional} from '@angular/core';
 import {MemberEntry} from '../../../core/api/models/member-entry';
-import {ModalController} from '@ionic/angular';
+import {IonRouterOutlet, ModalController} from '@ionic/angular';
 import {ClubEntry} from '../../../core/api/models/club-entry';
 import {ClubsService} from '../../../core/api/services/clubs.service';
 import {Observable} from 'rxjs';
@@ -21,7 +21,9 @@ export class ChoosePlayerPage implements OnInit {
 
     constructor(
         private readonly modalCtrl: ModalController,
-        private readonly clubsService: ClubsService
+        private readonly clubsService: ClubsService,
+        @Optional() public readonly ionRouterOutlet: IonRouterOutlet,
+
     ) {
     }
 

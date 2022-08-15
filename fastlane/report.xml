@@ -5,65 +5,74 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000252">
+      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000484">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: Switch to ios align_versioning_and_bump lane" time="0.000156">
+      <testcase classname="fastlane.lanes" name="01: Switch to android align_versioning_and_bump lane" time="9.8e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: cat ../package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[&quot;,]//g' | sed -e 's/^[[:space:]]*//' |tr -d '
-'" time="0.007965">
+      <testcase classname="fastlane.lanes" name="02: cat ../package.json | grep version | head -1 | awk -F: &apos;{ print $2 }&apos; | sed &apos;s/[&quot;,]//g&apos; | sed -e &apos;s/^[[:space:]]*//&apos; |tr -d &apos;
+&apos;" time="0.009178">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: increment_version_number_in_xcodeproj" time="0.028255">
+      <testcase classname="fastlane.lanes" name="03: increment_version_name" time="0.001325">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: increment_build_number_in_xcodeproj" time="0.011546">
+      <testcase classname="fastlane.lanes" name="04: increment_version_code" time="0.000457">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: Switch to ios build_ios lane" time="8.6e-05">
+      <testcase classname="fastlane.lanes" name="05: Switch to android build_android lane" time="6.5e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: Switch to ios build_ionic_prod lane" time="0.004465">
+      <testcase classname="fastlane.lanes" name="06: Switch to android build_ionic_prod lane" time="6.3e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: ionic cap copy --prod" time="13.125237">
+      <testcase classname="fastlane.lanes" name="07: ionic cap copy --prod" time="12.734746">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="08: match" time="8.509984">
+      <testcase classname="fastlane.lanes" name="08: Switch to android align_versioning_and_bump lane" time="0.00063">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="09: build_app" time="62.922679">
+      <testcase classname="fastlane.lanes" name="09: cat ../package.json | grep version | head -1 | awk -F: &apos;{ print $2 }&apos; | sed &apos;s/[&quot;,]//g&apos; | sed -e &apos;s/^[[:space:]]*//&apos; |tr -d &apos;
+&apos;" time="0.014419">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="10: changelog_from_git_commits" time="0.037876">
+      <testcase classname="fastlane.lanes" name="10: increment_version_name" time="0.001243">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="11: upload_to_testflight" time="28363.82744">
+      <testcase classname="fastlane.lanes" name="11: increment_version_code" time="0.000592">
         
-          <failure message="/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/runner.rb:229:in `chdir'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/runner.rb:229:in `execute_action'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing'&#10;Fastfile:48:in `block (2 levels) in parsing_binding'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/lane.rb:33:in `call'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/runner.rb:49:in `block in execute'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/runner.rb:45:in `chdir'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/runner.rb:45:in `execute'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/lane_manager.rb:47:in `cruise_lane'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/commands_generator.rb:108:in `block (2 levels) in run'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:178:in `call'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-fastlane-4.4.6/lib/commander/command.rb:153:in `run'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-fastlane-4.4.6/lib/commander/runner.rb:476:in `run_active_command'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:76:in `run!'&#10;/Library/Ruby/Gems/2.6.0/gems/commander-fastlane-4.4.6/lib/commander/delegates.rb:15:in `run!'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/commands_generator.rb:352:in `run'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/commands_generator.rb:41:in `start'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/fastlane/lib/fastlane/cli_tools_distributor.rb:122:in `take_off'&#10;/Library/Ruby/Gems/2.6.0/gems/fastlane-2.176.0/bin/fastlane:23:in `&lt;top (required)&gt;'&#10;/usr/local/bin/fastlane:23:in `load'&#10;/usr/local/bin/fastlane:23:in `&lt;main&gt;'&#10;&#10;Authentication credentials are missing or invalid. - No valid credentials found in the request." />
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="12: assembleRelease" time="7.245904">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="13: upload_to_play_store" time="15.814392">
         
       </testcase>
     

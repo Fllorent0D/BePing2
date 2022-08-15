@@ -24,6 +24,9 @@ import {MaintenanceComponent} from './maintenance/maintenance.component';
         NotificationItemComponent,
         MaintenanceComponent
     ],
+    exports: [
+        ChooseMainMemberClubComponent
+    ],
     imports: [
         SharedModule,
     ]

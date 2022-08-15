@@ -139,7 +139,7 @@ export class OnboardingPage implements OnInit, OnDestroy {
             componentProps: {
                 isModal: true
             },
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: this.ionRouter.nativeEl
         });
     }
@@ -151,7 +151,7 @@ export class OnboardingPage implements OnInit, OnDestroy {
             componentProps: {
                 isModal: true
             },
-            swipeToClose: true,
+            canDismiss: true,
             presentingElement: this.ionRouter.nativeEl
         });
     }

@@ -172,7 +172,7 @@ export class OtherPlayersComponent implements OnInit {
 
                             const modal = await this.dialogService.showModal({
                                 component: ModalBaseComponent,
-                                swipeToClose: true,
+                                canDismiss: true,
                                 presentingElement: this.ionRouterOutlet.nativeEl,
                                 componentProps: {
                                     rootPage: IndividualMatchPointsEditorComponent,

@@ -17,7 +17,7 @@
     </ion-grid>
 
 </ion-header>
-<ion-list [inset]="true">
+<ion-list [inset]="true" [lines]="'inset'">
     <ion-item (click)="playerClicked.emit(stat.uniqueIndex)" *ngFor="let stat of stats" detail class="no-start-padding">
         <ion-grid>
             <ion-row class="ion-align-items-center">

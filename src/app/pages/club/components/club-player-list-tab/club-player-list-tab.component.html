@@ -1,6 +1,6 @@
 
-<ion-list [inset]="true">
-    <ion-item *ngFor="let member of members" (click)="memberClicked.emit(member.UniqueIndex)">
+<ion-list [inset]="true" [lines]="'inset'">
+    <ion-item *ngFor="let member of members; trackBy: identify" (click)="memberClicked.emit(member.UniqueIndex)">
         <ion-grid class="ion-no-padding">
             <ion-row>
                 <ion-col class="border-right ion-padding-end"

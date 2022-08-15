@@ -1,18 +1,18 @@
 /* tslint:disable */
 /* eslint-disable */
-import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {ApiConfiguration, ApiConfigurationParams} from './api-configuration';
+import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import {DivisionsService} from './services/divisions.service';
-import {ClubsService} from './services/clubs.service';
-import {TournamentsService} from './services/tournaments.service';
-import {SeasonsService} from './services/seasons.service';
-import {MembersService} from './services/members.service';
-import {MatchesService} from './services/matches.service';
-import {Head2HeadService} from './services/head-2-head.service';
-import {HealthService} from './services/health.service';
-import {InternalIdentifiersService} from './services/internal-identifiers.service';
+import { DivisionsService } from './services/divisions.service';
+import { ClubsService } from './services/clubs.service';
+import { TournamentsService } from './services/tournaments.service';
+import { SeasonsService } from './services/seasons.service';
+import { MembersService } from './services/members.service';
+import { MatchesService } from './services/matches.service';
+import { Head2HeadService } from './services/head-2-head.service';
+import { HealthService } from './services/health.service';
+import { InternalIdentifiersService } from './services/internal-identifiers.service';
 
 /**
  * Module that provides all services and configuration.

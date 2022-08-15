@@ -41,6 +41,8 @@ import {SwiperModule} from 'swiper/angular';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { AlertFullPageComponent } from './components/alert-full-page/alert-full-page.component';
 import { LocalizedBackBtnComponent } from './components/localized-back-btn/localized-back-btn.component';
+import { SelectionIonListComponent } from './components/selection-ion-list/selection-ion-list.component';
+import {TrackByPropertyDirective} from './directives/track-by-property.directive';
 
 const COMPONENTS = [
     RankingComponent,
@@ -74,7 +76,8 @@ const PIPES = [
     LocalDatePipe
 ];
 const DIRECTIVES = [
-    AppearDirective
+    AppearDirective,
+    TrackByPropertyDirective
 ];
 
 @NgModule({
@@ -98,6 +101,7 @@ const DIRECTIVES = [
         BecomeProComponent,
         AlertFullPageComponent,
         LocalizedBackBtnComponent,
+        SelectionIonListComponent,
     ],
     exports: [
         CommonModule,
@@ -117,6 +121,8 @@ const DIRECTIVES = [
         ScrollingModule,
         AlertFullPageComponent,
         LocalizedBackBtnComponent,
+        SelectionIonListComponent,
+        TrackByPropertyDirective
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

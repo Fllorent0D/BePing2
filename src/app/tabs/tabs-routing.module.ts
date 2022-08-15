@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {TabsPage} from './tabs.page';
+import {HasSeenOnboardingGuard} from '../shared/guards/has-seen-onboarding.guard';
 
 const routes: Routes = [
     {
@@ -31,6 +32,7 @@ const routes: Routes = [
     {
         path: '',
         component: TabsPage,
+        canActivate: [HasSeenOnboardingGuard],
         children: [
             {
                 path: 'homeTab',

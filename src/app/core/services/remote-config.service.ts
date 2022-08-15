@@ -13,6 +13,6 @@ export class RemoteConfigService {
     }
 
     refreshRemoteConfig() {
-        this.store.dispatch(new RefreshRemoteConfig());
+        return this.store.dispatch(new RefreshRemoteConfig());
     }
 }

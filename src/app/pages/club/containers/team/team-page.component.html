@@ -70,7 +70,7 @@
                 </ion-row>
             </ion-grid>
             <ng-container *ngIf="team$ | async as team">
-                <ion-list [inset]="true">
+                <ion-list [inset]="true" [lines]="'inset'">
                     <ion-item (click)="teamSelected(rankingEntry)"
                               *ngFor="let rankingEntry of ranking$ | async; let index = index"
                               [class.is-color-primary]="isSameTeam(rankingEntry, team, club$|async, team.DivisionId)"
@@ -79,7 +79,7 @@
                         <ion-grid style="padding-top: 7px; padding-bottom: 7px">
                             <ion-row class="ion-align-items-center">
                                 <ion-col class="ion-text-wrap" size="1">
-                                    <ion-label class="ion-text-wrap">
+                                    <ion-label class="ion-text-wrap border-right">
 
                                             {{rankingEntry.Position}}
 

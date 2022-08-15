@@ -3,7 +3,7 @@ import {IonNav, ModalController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {UserState, UserStateModel} from '../../../../core/store/user/user.state';
-import {SeasonState} from '../../../../core/store/season';
+import {GetCurrentSeason, SeasonState} from '../../../../core/store/season';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {TabTState, TabTStateModel} from '../../../../core/store/user/tab-t-state.service';
 import {Logout} from '../../../../core/store/user/aftt.actions';
@@ -110,7 +110,7 @@ export class SettingsPage implements OnInit, OnDestroy {
         /*
         const modal = await this.modalCtrl.create({
             component: ModalBaseComponent,
-            swipeToClose: true,
+            canDismiss: true,
             componentProps: {
                 rootPage: ChooseMainMemberClubComponent
             }
@@ -182,7 +182,7 @@ export class SettingsPage implements OnInit, OnDestroy {
         ]).pipe(
             switchMap(() => this.store.dispatch([
                 new GetDivisions(),
-                new GetClubs()
+                new GetClubs(),
             ])),
             finalize(() => loader.dismiss())
         ).subscribe(() => {

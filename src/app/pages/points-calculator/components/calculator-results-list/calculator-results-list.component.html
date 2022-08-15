@@ -1,4 +1,4 @@
-<ion-list [inset]="true">
+<ion-list [inset]="true" [lines]="'inset'">
     <ion-item *ngFor="let entry of pointsEntryWithPoints" (click)="showItemOption(entry)">
         <ion-label class="ion-text-wrap">
 
@@ -16,7 +16,7 @@
         </ion-label>
     </ion-item>
 </ion-list>
-<ion-list [inset]="true">
+<ion-list [inset]="true" [lines]="'inset'">
     <ion-item (click)="addEntry()">
         <ion-label class="ion-text-center">
 
@@ -29,7 +29,7 @@
 <ng-container *ngIf="pointsEntryWithPoints?.length > 0">
     <ion-item-divider mode="md"></ion-item-divider>
     <ng-container *ngIf="nextRanking">
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item>
                 <ion-label class="">
 

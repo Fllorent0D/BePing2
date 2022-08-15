@@ -7,7 +7,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-top">
-    <ion-list [lines]="'full'" [inset]="true">
+    <ion-list [lines]="'inset'" [inset]="true">
         <ion-item (click)="divisionClicked(div)" *ngFor="let div of divisions$ | async" detail>
             <ion-label class="ion-text-wrap">
                 {{div.DivisionName.split('-')[0] | titlecase}}

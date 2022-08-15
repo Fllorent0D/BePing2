@@ -4,12 +4,12 @@
 		"classpath": "com.getcapacitor.community.fcm.FCMPlugin"
 	},
 	{
-		"pkg": "@capacitor-community/firebase-analytics",
-		"classpath": "com.getcapacitor.community.firebaseanalytics.FirebaseAnalytics"
+		"pkg": "@capacitor-firebase/analytics",
+		"classpath": "io.capawesome.capacitorjs.plugins.firebase.analytics.FirebaseAnalyticsPlugin"
 	},
 	{
-		"pkg": "@capacitor-community/firebase-crashlytics",
-		"classpath": "com.getcapacitor.community.firebasecrashlytics.FirebaseCrashlyticsPlugin"
+		"pkg": "@capacitor-firebase/crashlytics",
+		"classpath": "io.capawesome.capacitorjs.plugins.firebase.crashlytics.FirebaseCrashlyticsPlugin"
 	},
 	{
 		"pkg": "@capacitor/app",
@@ -36,6 +36,10 @@
 		"classpath": "com.capacitorjs.plugins.network.NetworkPlugin"
 	},
 	{
+		"pkg": "@capacitor/preferences",
+		"classpath": "com.capacitorjs.plugins.preferences.PreferencesPlugin"
+	},
+	{
 		"pkg": "@capacitor/push-notifications",
 		"classpath": "com.capacitorjs.plugins.pushnotifications.PushNotificationsPlugin"
 	},
@@ -48,8 +52,8 @@
 		"classpath": "com.capacitorjs.plugins.statusbar.StatusBarPlugin"
 	},
 	{
-		"pkg": "@capacitor/storage",
-		"classpath": "com.capacitorjs.plugins.storage.StoragePlugin"
+		"pkg": "@capacitor/text-zoom",
+		"classpath": "com.capacitorjs.plugins.textzoom.TextZoomPlugin"
 	},
 	{
 		"pkg": "@joinflux/firebase-remote-config",
@@ -58,10 +62,6 @@
 	{
 		"pkg": "@proteansoftware/capacitor-start-navigation",
 		"classpath": "com.servicesight.capacitor.startnavigation.StartNavigationPlugin"
-	},
-	{
-		"pkg": "@robingenz/capacitor-android-dark-mode-support",
-		"classpath": "dev.robingenz.capacitor.androiddarkmodesupport.AndroidDarkModeSupportPlugin"
 	},
 	{
 		"pkg": "capacitor-calendar",

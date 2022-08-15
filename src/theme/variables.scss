@@ -130,13 +130,19 @@
     }
   }
 
+  //font-size: 1em;
   ion-item {
-    font-size: 0.95em;
+    //font-size: 1em;
     --background: #ffffff;
   }
 
   ion-item.ios.no-start-padding::part(native) {
     padding-left: 10px;
+  }
+
+  ion-item.no-start-padding-all::part(native) {
+    --inner-padding-end: 0px;
+    padding-left: 0;
   }
 
   ion-item.md.item-select::part(native) {

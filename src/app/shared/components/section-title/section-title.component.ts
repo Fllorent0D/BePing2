@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'beping-section-title',
     templateUrl: './section-title.component.html',
-    styleUrls: ['./section-title.component.scss']
+    styleUrls: ['./section-title.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class SectionTitleComponent implements OnInit {
 

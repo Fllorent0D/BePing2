@@ -26,7 +26,6 @@ export class TabTState {
 
     constructor(
         private readonly testService: HealthService,
-        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -43,10 +42,8 @@ export class TabTState {
         }).pipe(
             map((response: TestOutput) => {
                 if (!response.IsValidAccount) {
-                    this.analyticsService.logEvent('login_failure', {account: action.account});
                     throw new Error('Invalid login');
                 }
-                this.analyticsService.logEvent('login_success', {account: action.account});
                 return response;
             }),
             tap((response: TestOutput) => {
@@ -61,7 +58,6 @@ export class TabTState {
 
     @Action(Logout)
     async logout({patchState}: StateContext<TabTStateModel>) {
-        this.analyticsService.logEvent('logout');
         return patchState({
             account: null,
             password: null

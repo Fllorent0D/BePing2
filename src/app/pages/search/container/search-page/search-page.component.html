@@ -7,7 +7,13 @@
 
     </ion-toolbar>
     <ion-toolbar>
-        <ion-searchbar [formControl]="searchControl" [placeholder]="'SEARCH.PLACEHOLDER'|translate"></ion-searchbar>
+        <ion-searchbar
+                [formControl]="searchControl"
+                [placeholder]="'SEARCH.PLACEHOLDER'|translate"
+                [enterkeyhint]="'search'"
+                (keydown.enter)="hideKeyboard()"
+                [showClearButton]="true"
+        ></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-top">

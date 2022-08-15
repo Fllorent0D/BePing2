@@ -12,7 +12,9 @@
             #searchbar
             [formControl]="searchBox"
             debounce="500"
-            enterkeyhint="search"
+            [enterkeyhint]="'search'"
+            (keydown.enter)="hideKeyboard()"
+            [showClearButton]="true"
             id="search-member"
             placeholder="{{'SEARCH.SEARCH'|translate}}"
             type="search"
@@ -23,7 +25,7 @@
 
 <ion-content class="ion-padding-top">
     <div [hidden]="loading">
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item (click)="playerClicked(member)" *ngFor="let member of members$|async">
                 <ion-label>
 
@@ -37,7 +39,7 @@
     </div>
 
     <div *ngIf="loading">
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item *ngFor="let t of skeletonRows">
                 <ion-label>
                     <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated="animated"></ion-skeleton-text>

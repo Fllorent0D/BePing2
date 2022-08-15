@@ -4,17 +4,12 @@
             <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
         <ion-title>{{'SETTINGS.CONNECT_TO_FEDERATION'|translate}}</ion-title>
-        <ion-buttons slot="end">
-            <ion-button (click)="closeModal()">
-                <ion-icon icon="close-outline"></ion-icon>
-            </ion-button>
-        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding-top">
     <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item>
                 <ion-input
                         [formControlName]="'username'"
@@ -47,7 +42,7 @@
         <ion-button (click)="forgot()" color="primary"
                     fill="clear">{{'SETTINGS.FORGOT_PASSWORD' | translate}}</ion-button>
         <ion-button (click)="register()" color="primary" fill="clear">{{'SETTINGS.REGISTER' | translate}}</ion-button>
-        <ion-list [inset]="true">
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item *ngIf="(lang$|async) === 'fr'" class="ion-color-grey">
                 <ion-label class="ion-text-wrap">
 

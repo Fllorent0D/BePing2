@@ -36,7 +36,6 @@ export interface SettingsStateModel {
 export class SettingsState implements NgxsOnInit {
     constructor(
         private readonly translateService: TranslateService,
-        private readonly analyticsService: AnalyticsService
     ) {
     }
 
@@ -93,7 +92,6 @@ export class SettingsState implements NgxsOnInit {
 
     @Action(UpdateCurrentLang)
     updateCurrentLang({patchState, dispatch}: StateContext<SettingsStateModel>, action: UpdateCurrentLang) {
-        this.analyticsService.setUserProperty('lang', action.lang);
         this.translateService.use(action.lang);
 
         patchState({

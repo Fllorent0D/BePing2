@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-list [inset]="true">
+    <ion-list [inset]="true" [lines]="'inset'">
         <ion-item detail-icon="open-outline" detail (click)="openGithub('https://github.com/Fllorent0D')">
             <ion-avatar slot="start">
                 <img src="https://avatars.githubusercontent.com/u/13313104?v=4">
@@ -33,7 +33,7 @@
         {{'SETTINGS.CONTRIBUTORS.THANKS'|translate}}
     </p>
     <beping-section-title [title]="'SETTINGS.CONTRIBUTORS.WANNA_HELP' | translate"></beping-section-title>
-    <ion-list [inset]="true">
+    <ion-list [inset]="true" [lines]="'inset'">
         <ion-item detail-icon="open-outline" detail (click)="openGithub('https://github.com/Fllorent0D/BePing2')">
             <ion-label>
                 {{'SETTINGS.CONTRIBUTORS.BEPING_MOBILE'|translate}}
