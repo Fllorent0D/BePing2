@@ -72,7 +72,7 @@
     "capacitor-rate-app": "3.0.0",
     "chart.js": "3.9.1",
     "chartjs-adapter-date-fns": "2.0.0",
-    "chartjs-plugin-annotation": "2.0.0",
+    "chartjs-plugin-annotation": "2.0.1",
     "cordova-plugin-purchase": "11.0.0",
     "date-fns": "2.29.2",
     "firebase": "9.9.3",
