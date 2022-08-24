@@ -105,7 +105,7 @@
     "@types/jasmine": "4.3.0",
     "@types/jasminewd2": "2.0.10",
     "@types/leaflet": "1.7.11",
-    "@types/node": "16.11.55",
+    "@types/node": "16.11.56",
     "@typescript-eslint/eslint-plugin": "5.33.1",
     "@typescript-eslint/parser": "5.33.1",
     "@wdio/appium-service": "7.23.0",
