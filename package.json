@@ -65,7 +65,7 @@
     "@ngxs/storage-plugin": "3.7.5",
     "@ngxs/store": "3.7.5",
     "@proteansoftware/capacitor-start-navigation": "4.0.0",
-    "@trapezedev/configure": "5.0.1",
+    "@trapezedev/configure": "5.0.2",
     "capacitor-calendar": "1.0.6",
     "capacitor-email-composer": "1.2.1",
     "capacitor-native-settings": "4.0.0",
