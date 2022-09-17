@@ -1,0 +1,7 @@
+ion-list{
+    --background: transparent;
+}
+ion-item{
+    --background: rgba(255, 255, 255, .05) !important;
+    backdrop-filter: blur(50px);
+}
