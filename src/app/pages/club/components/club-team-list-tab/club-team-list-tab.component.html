@@ -1,4 +1,4 @@
-<ion-list [inset]="true" [lines]="'inset'">
+<ion-list [inset]="true" [lines]="'inset'" *ngIf="teams; else loading">
     <ion-item
             *ngFor="let team of teams"
             [routerLink]="['team', team.TeamId]"
@@ -9,3 +9,6 @@
         </ion-label>
     </ion-item>
 </ion-list>
+<ng-template #loading>
+    <beping-skeleton-item-list-component [rows]="12"></beping-skeleton-item-list-component>
+</ng-template>

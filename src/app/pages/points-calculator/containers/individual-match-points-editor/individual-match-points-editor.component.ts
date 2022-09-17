@@ -15,6 +15,7 @@ import {PointCalculatorService} from '../../services/point-calculator.service';
 import {UserState} from '../../../../core/store/user/user.state';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {TranslateService} from '@ngx-translate/core';
 
 interface IndividualMatchPointsEditorFormGroup {
     category: FormControl<PLAYER_CATEGORY>;
@@ -47,6 +48,7 @@ export class IndividualMatchPointsEditorComponent implements OnInit {
         private readonly modalCtrl: ModalController,
         private readonly rankingService: RankingService,
         private readonly ionNav: NavController,
+        private readonly translate: TranslateService,
         private readonly pointsCalculator: PointCalculatorService,
         private readonly store: Store,
         private readonly analyticsService: AnalyticsService,
@@ -117,6 +119,13 @@ export class IndividualMatchPointsEditorComponent implements OnInit {
     }
 
     setMemberInForm(memberEntry: MemberEntry, disableCategory: boolean) {
+        const points = Number(this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS));
+        if (!points) {
+            this.dialogService.showErrorAlert({
+                message: this.translate.instant('CALCULATOR.PLAYER_NO_BEL_POINTS')
+            });
+            return;
+        }
         if (disableCategory) {
             this.formGroup.get('category').setValue(memberEntry.Category as PLAYER_CATEGORY, {emitEvent: false});
             this.formGroup.get('category').disable({emitEvent: false});
@@ -125,9 +134,7 @@ export class IndividualMatchPointsEditorComponent implements OnInit {
             this.coefficientPerEvent = this.pointsCalculator.getCoefficentEventForCategory(memberEntry.Category as PLAYER_CATEGORY);
         }
         this.formGroup.get('opponentName').patchValue(`${memberEntry.FirstName} ${memberEntry.LastName}`);
-        this.formGroup.get('opponentRanking').patchValue(
-            Number(this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS))
-        );
+        this.formGroup.get('opponentRanking').patchValue(points);
     }
 
     save() {

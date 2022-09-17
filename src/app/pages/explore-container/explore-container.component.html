@@ -41,7 +41,6 @@
                 [displayNumericRanking]="displayNumericRanking$|async"
                 [member]="currentMemberEntry">
         </beping-member-name-ranking-info>
-
         <ion-card *ngIf="connectivityIssue$|async" [color]="'danger'" class="ion-padding">
             <ion-icon name="cloud-offline-outline" size="small" class="ion-margin-end"></ion-icon>
 
@@ -52,7 +51,7 @@
 
 
         <beping-become-pro
-                *ngIf="false"
+                *ngIf="showProBanner$|async"
                 (openPro)="openPro()"
                 (dismiss)="dismissPro()">
         </beping-become-pro>

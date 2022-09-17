@@ -1,17 +1,15 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title>{{'COMMON.DIVISIONS'|translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-top">
-
+    <ion-item-divider>
+        <ion-label>
+            FRBTT
+        </ion-label>
+    </ion-item-divider>
     <ion-list [inset]="true" [lines]="'inset'">
-        <ion-item-divider>
-            <ion-label>
-                FRBTT
-            </ion-label>
-        </ion-item-divider>
-
         <ion-item (click)="navigateSuperMen()" detail>
             <ion-avatar slot="start">
                 <ion-icon color="primary" name="star" size="large"></ion-icon>

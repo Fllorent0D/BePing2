@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="openNotificationsModal()"
@@ -16,13 +16,19 @@
             <ng-container *ngIf="teams.length !== 0">
                 <beping-section-title [title]="'COMMON.TEAMS'|translate"></beping-section-title>
                 <ion-list [inset]="true" [lines]="'inset'">
-                    <ion-item (click)="navigateToURI(team.uri)" *ngFor="let team of teams"
-                              detail>
-                        <ion-label class="ion-text-wrap">
-                            {{team.label}}
-                            <p *ngIf="team.note">{{'PLAYER_CATEGORY.' + team.note|translate}}</p>
-                        </ion-label>
-                    </ion-item>
+                    <ion-item-sliding *ngFor="let team of teams">
+                        <ion-item (click)="navigateToURI(team.uri)"
+                                  detail>
+                            <ion-label class="ion-text-wrap">
+                                {{team.label}}
+                                <p *ngIf="team.note">{{'PLAYER_CATEGORY.' + team.note|translate}}</p>
+                            </ion-label>
+                        </ion-item>
+                        <ion-item-options side="end">
+                            <ion-item-option color="danger" (click)="deleteFromFavorite(team, 'team')"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
+
                 </ion-list>
             </ng-container>
 
@@ -32,14 +38,18 @@
             <ng-container *ngIf="clubs.length !== 0">
                 <beping-section-title [title]="'COMMON.CLUBS'|translate"></beping-section-title>
                 <ion-list [inset]="true" [lines]="'inset'">
+                    <ion-item-sliding  *ngFor="let club of clubs">
+                        <ion-item detail (click)="navigateToURI(club.uri)">
+                            <ion-label class="ion-text-wrap">
+                                {{club.note}}
+                                <p *ngIf="club.label">{{club.label}}</p>
+                            </ion-label>
+                        </ion-item>
+                        <ion-item-options side="end">
+                            <ion-item-option color="danger" (click)="deleteFromFavorite(club, 'club')"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
 
-                    <ion-item (click)="navigateToURI(club.uri)" *ngFor="let club of clubs"
-                              detail>
-                        <ion-label class="ion-text-wrap">
-                            {{club.note}}
-                            <p *ngIf="club.label">{{club.label}}</p>
-                        </ion-label>
-                    </ion-item>
                 </ion-list>
 
             </ng-container>
@@ -50,13 +60,18 @@
                 <beping-section-title [title]="'COMMON.DIVISIONS'|translate"></beping-section-title>
 
                 <ion-list [inset]="true" [lines]="'inset'">
-                    <ion-item (click)="navigateToURI(division.uri)" *ngFor="let division of divisions"
-                              detail>
-                        <ion-label class="ion-text-wrap">
-                            {{division.label}}
-                            <p *ngIf="division.note">{{division.note}}</p>
-                        </ion-label>
-                    </ion-item>
+                    <ion-item-sliding  *ngFor="let division of divisions">
+                        <ion-item detail (click)="navigateToURI(division.uri)">
+                            <ion-label class="ion-text-wrap">
+                                {{division.label}}
+                                <p *ngIf="division.note">{{division.note}}</p>
+                            </ion-label>
+                        </ion-item>
+
+                        <ion-item-options side="end">
+                            <ion-item-option color="danger" (click)="deleteFromFavorite(division, 'division')"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
 
                 </ion-list>
             </ng-container>
@@ -67,13 +82,19 @@
             <ng-container *ngIf="members.length !== 0">
                 <beping-section-title [title]="'COMMON.PLAYERS'|translate"></beping-section-title>
                 <ion-list [inset]="true" [lines]="'inset'">
-                    <ion-item (click)="navigateToURI(member.uri)" *ngFor="let member of members"
-                              detail>
-                        <ion-label class="ion-text-wrap">
-                            {{member.label | titlecase}}
-                        </ion-label>
-                        <ion-note *ngIf="member.note" slot="end">{{member.note}}</ion-note>
-                    </ion-item>
+                    <ion-item-sliding  *ngFor="let member of members">
+                        <ion-item (click)="navigateToURI(member.uri)" detail>
+                            <ion-label class="ion-text-wrap">
+                                {{member.label | titlecase}}
+                            </ion-label>
+                            <ion-note *ngIf="member.note" slot="end">{{member.note}}</ion-note>
+                        </ion-item>
+
+                        <ion-item-options side="end">
+                            <ion-item-option color="danger" expandable (click)="deleteFromFavorite(member, 'member')"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
+                        </ion-item-options>
+                    </ion-item-sliding>
+
                 </ion-list>
             </ng-container>
 
@@ -86,6 +107,8 @@
                 [title]="'FAVORITES.NO_FAVORITE'|translate"
                 [message]="'FAVORITES.INSTRUCTIONS'|translate"
                 [actionLabel]="'FAVORITES.ADD_OWN_CLUB'|translate:{clubname: club.Name}"
+                [actionLabelIcon]="'add-outline'"
+                [actionLabelIconSlot]="'start'"
                 (actionClicked)="addCurrentClubToFavorite()"
         >
         </beping-alert-full-page>

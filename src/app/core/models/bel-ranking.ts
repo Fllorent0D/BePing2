@@ -1,7 +1,7 @@
 import {PLAYER_CATEGORY} from './user';
 
-export const pivotRankingEquivalenceMen = 1400;
-export const pivotRankingEquivalenceWomen = 650;
+export const pivotRankingEquivalenceMen = 1575;
+export const pivotRankingEquivalenceWomen = 745;
 
 export interface RankingEquivalence {
     ranking: string;
@@ -45,28 +45,28 @@ export const equivalenceRankingBelPosMen: RankingEquivalence[] = [
 export const equivalenceRankingBelPosWomen: RankingEquivalence[] = [
     {
         ranking: 'C0',
-        lowerBound: 226,
+        lowerBound: 121,
         upperBound: Infinity,
     },
     {
         ranking: 'B6',
-        lowerBound: 146,
-        upperBound: 225,
+        lowerBound: 86,
+        upperBound: 120,
     },
     {
         ranking: 'B4',
-        lowerBound: 86,
-        upperBound: 145,
+        lowerBound: 56,
+        upperBound: 85,
     },
     {
         ranking: 'B2',
-        lowerBound: 40,
-        upperBound: 85,
+        lowerBound: 36,
+        upperBound: 55,
     },
     {
         ranking: 'B0',
         lowerBound: 16,
-        upperBound: 39,
+        upperBound: 35,
     },
     {
         ranking: 'A',
@@ -84,57 +84,62 @@ export const equivalenceRankingBelPtsMen: RankingEquivalence[] = [
     {
         ranking: 'E6',
         lowerBound: 125,
-        upperBound: 174,
-    },
-    {
-        ranking: 'E4',
-        lowerBound: 175,
         upperBound: 249,
     },
     {
-        ranking: 'E2',
+        ranking: 'E4',
         lowerBound: 250,
-        upperBound: 349,
+        upperBound: 374,
+    },
+    {
+        ranking: 'E2',
+        lowerBound: 375,
+        upperBound: 499,
     },
     {
         ranking: 'E0',
-        lowerBound: 350,
-        upperBound: 449,
+        lowerBound: 500,
+        upperBound: 624
     },
     {
         ranking: 'D6',
-        lowerBound: 450,
-        upperBound: 574,
+        lowerBound: 625,
+        upperBound: 749,
     },
     {
         ranking: 'D4',
-        lowerBound: 575,
-        upperBound: 699,
+        lowerBound: 750,
+        upperBound: 874,
     },
     {
         ranking: 'D2',
-        lowerBound: 700,
-        upperBound: 824,
+        lowerBound: 875,
+        upperBound: 999,
     },
     {
         ranking: 'D0',
-        lowerBound: 825,
-        upperBound: 949,
+        lowerBound: 1000,
+        upperBound: 1124,
     },
     {
         ranking: 'C6',
-        lowerBound: 950,
-        upperBound: 1099,
+        lowerBound: 1125,
+        upperBound: 1274,
     },
     {
         ranking: 'C4',
-        lowerBound: 1100,
-        upperBound: 1249,
+        lowerBound: 1275,
+        upperBound: 1424,
     },
     {
         ranking: 'C2',
-        lowerBound: 1250,
-        upperBound: 1399,
+        lowerBound: 1425,
+        upperBound: 1574,
+    },
+    {
+        ranking: 'C0',
+        lowerBound: pivotRankingEquivalenceMen,
+        upperBound: Infinity,
     }
 ];
 
@@ -147,41 +152,41 @@ export const equivalenceRankingBelPtsWomen: RankingEquivalence[] = [
     {
         ranking: 'D6',
         lowerBound: 125,
-        upperBound: 164,
+        upperBound: 204,
     },
     {
         ranking: 'D4',
-        lowerBound: 165,
-        upperBound: 214,
+        lowerBound: 205,
+        upperBound: 284,
     },
     {
         ranking: 'D2',
-        lowerBound: 215,
-        upperBound: 274,
+        lowerBound: 285,
+        upperBound: 364,
     },
     {
         ranking: 'D0',
-        lowerBound: 275,
-        upperBound: 344,
+        lowerBound: 365,
+        upperBound: 444,
     },
     {
         ranking: 'C6',
-        lowerBound: 345,
-        upperBound: 424,
+        lowerBound: 445,
+        upperBound: 544,
     },
     {
         ranking: 'C4',
-        lowerBound: 425,
-        upperBound: 519,
+        lowerBound: 545,
+        upperBound: 644,
     },
     {
         ranking: 'C2',
-        lowerBound: 520,
-        upperBound: 649,
+        lowerBound: 645,
+        upperBound: 744,
     },
     {
         ranking: 'C0',
-        lowerBound: 650,
+        lowerBound: pivotRankingEquivalenceWomen,
         upperBound: Infinity,
     }
 ];

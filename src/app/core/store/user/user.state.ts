@@ -208,7 +208,7 @@ export class UserState implements NgxsOnInit {
                 const shouldUpdateMemberEntries = forceUpdate || categories.reduce((acc: boolean, category: PLAYER_CATEGORY) => {
                     const resultsStored = state.memberEntries[category].ResultEntries;
                     const resultsReceived = memberEntries[category].ResultEntries;
-                    if (resultsStored.length > resultsReceived.length) {
+                    if (resultsStored?.length > resultsReceived?.length) {
                         return false;
                     }
                     return acc;

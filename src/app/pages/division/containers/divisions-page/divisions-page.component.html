@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
@@ -7,12 +7,30 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-top">
-    <ion-list [lines]="'inset'" [inset]="true">
-        <ion-item (click)="divisionClicked(div)" *ngFor="let div of divisions$ | async" detail>
-            <ion-label class="ion-text-wrap">
-                {{div.DivisionName.split('-')[0] | titlecase}}
-                <p *ngIf="div.DivisionCategory">{{'PLAYER_CATEGORY.' + div.DivisionCategory | translate | titlecase}}</p>
-            </ion-label>
-        </ion-item>
-    </ion-list>
+    <ng-container *ngIf="divisions$ | async as divisions">
+        <ng-container *ngFor="let div of divisions">
+            <ion-item-divider>
+                <ion-label>
+                    {{"PLAYER_CATEGORY." + div.category | translate}}
+                </ion-label>
+            </ion-item-divider>
+            <ion-list [lines]="'inset'" [inset]="true">
+                <ion-item (click)="divisionClicked(div)" detail *ngFor="let div of div.divisions">
+                    <ion-label class="ion-text-wrap">
+                        {{div.DivisionName.split('-')[0] | titlecase}}
+                    </ion-label>
+                </ion-item>
+            </ion-list>
+        </ng-container>
+
+
+        <beping-alert-full-page
+                *ngIf="!divisions.length"
+                [title]="'COMMON.NO_INFO'|translate"
+                [icon]="'information-circle-outline'"
+        >
+
+        </beping-alert-full-page>
+    </ng-container>
+
 </ion-content>

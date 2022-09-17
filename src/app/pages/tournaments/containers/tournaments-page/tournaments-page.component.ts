@@ -167,7 +167,8 @@ export class TournamentsPageComponent implements OnInit {
     }
 
     isPast(tournament: TournamentEntry): boolean {
-        return new Date(tournament.DateTo ?? tournament.DateFrom).getTime() < Date.now();
+        const yesterday = new Date(Date.now() - 86400000).getTime();
+        return new Date(tournament.DateTo ?? tournament.DateFrom).getTime() < yesterday;
     }
 
     navigateToTournamentDetail(tournament: TournamentEntry) {

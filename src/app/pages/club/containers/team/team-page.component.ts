@@ -24,6 +24,7 @@ import {IonRouterOutlet, ViewDidEnter} from '@ionic/angular';
 import Swiper, {SwiperOptions} from 'swiper';
 import {SwiperComponent} from 'swiper/angular';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {ShareService} from '../../../../core/services/share.service';
 
 @UntilDestroy()
 @Component({
@@ -68,7 +69,8 @@ export class TeamPage implements OnInit, ViewDidEnter {
         private readonly dialogService: DialogService,
         private readonly translate: TranslateService,
         private readonly ionRouterOutlet: IonRouterOutlet,
-        protected readonly ngZone: NgZone
+        protected readonly ngZone: NgZone,
+        private readonly shareService: ShareService
     ) {
     }
 
@@ -209,5 +211,21 @@ export class TeamPage implements OnInit, ViewDidEnter {
                 dialogHeaderTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
                 dialogMessageTranslationKey: 'CALENDAR.ADD_ALL_TEAM_MATCHES'
             }, this.ionRouterOutlet.nativeEl));
+    }
+
+    share() {
+        combineLatest([
+            this.team$,
+            this.club$
+        ]).pipe(
+            take(1),
+            switchMap(([team, club]) =>
+                this.shareService.shareUrl(
+                    '/club/' + club.UniqueIndex + '/' + team.TeamId,
+                    club.UniqueIndex + ' ' + team.Team,
+                    this.translate.instant('SHARE.SHARE_TEAM_ON_BEPING', {team: club.Name + ' ' + team.Team})
+                )
+            )
+        ).subscribe();
     }
 }

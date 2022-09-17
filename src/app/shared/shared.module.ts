@@ -43,6 +43,13 @@ import { AlertFullPageComponent } from './components/alert-full-page/alert-full-
 import { LocalizedBackBtnComponent } from './components/localized-back-btn/localized-back-btn.component';
 import { SelectionIonListComponent } from './components/selection-ion-list/selection-ion-list.component';
 import {TrackByPropertyDirective} from './directives/track-by-property.directive';
+import {
+    TeamMatchesEntryListPerCategoryComponent
+} from './components/team-matches-entry-list-per-category/team-matches-entry-list-per-category.component';
+import { SkeletonItemListComponentComponent } from './components/skeleton-item-list-component/skeleton-item-list-component.component';
+import {
+    SkeletonLargeItemListComponentComponent
+} from './components/skeleton-large-item-list-component/skeleton-large-item-list-component.component';
 
 const COMPONENTS = [
     RankingComponent,
@@ -70,6 +77,8 @@ const COMPONENTS = [
     NumericRankingChartComponent,
     WeekSelectorComponent,
     TeamMatchesEntryListComponent,
+    TeamMatchesEntryListPerCategoryComponent,
+    SkeletonLargeItemListComponentComponent
 ];
 const PIPES = [
     WithLoadingPipe,
@@ -102,6 +111,7 @@ const DIRECTIVES = [
         AlertFullPageComponent,
         LocalizedBackBtnComponent,
         SelectionIonListComponent,
+        SkeletonItemListComponentComponent,
     ],
     exports: [
         CommonModule,
@@ -122,7 +132,8 @@ const DIRECTIVES = [
         AlertFullPageComponent,
         LocalizedBackBtnComponent,
         SelectionIonListComponent,
-        TrackByPropertyDirective
+        TrackByPropertyDirective,
+        SkeletonItemListComponentComponent
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

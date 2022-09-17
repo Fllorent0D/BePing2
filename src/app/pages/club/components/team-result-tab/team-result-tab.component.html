@@ -1,5 +1,8 @@
-<ion-list [inset]="true" [lines]="'inset'">
+<ion-list [inset]="true" [lines]="'inset'" *ngIf="matches; else loading">
     <ion-item *ngFor="let match of matches" class="no-start-padding">
         <beping-team-match-result [match]="match"></beping-team-match-result>
     </ion-item>
 </ion-list>
+<ng-template #loading>
+    <beping-skeleton-item-list-component [rows]="12"></beping-skeleton-item-list-component>
+</ng-template>

@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title>{{'NOTEBOOK.SEARCH_PLAYER'|translate}}</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="closeModal()">
@@ -7,7 +7,7 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-searchbar
             #searchbar
             [formControl]="searchBox"
@@ -24,28 +24,27 @@
 </ion-header>
 
 <ion-content class="ion-padding-top">
-    <div [hidden]="loading">
-        <ion-list [inset]="true" [lines]="'inset'">
-            <ion-item (click)="playerClicked(member)" *ngFor="let member of members$|async">
-                <ion-label>
-
+    <ng-container *ngIf="members$|async as members">
+        <div [hidden]="loading">
+            <ion-list [inset]="true" [lines]="'inset'" *ngIf="members.length">
+                <ion-item (click)="playerClicked(member)" *ngFor="let member of members">
+                    <ion-label>
                         {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
+                    </ion-label>
+                    <ion-label slot="end">{{member.Ranking}}</ion-label>
+                </ion-item>
+            </ion-list>
 
-                </ion-label>
-                <ion-label slot="end">{{member.Ranking}}</ion-label>
-            </ion-item>
-        </ion-list>
+        </div>
+        <beping-alert-full-page
+                *ngIf="!members.length"
+                [icon]="'information-circle-outline'"
+                [title]="'SEARCH.NO_RESULT'|translate">
+        </beping-alert-full-page>
+        <div *ngIf="loading">
+            <beping-skeleton-item-list-component></beping-skeleton-item-list-component>
+        </div>
 
-    </div>
+    </ng-container>
 
-    <div *ngIf="loading">
-        <ion-list [inset]="true" [lines]="'inset'">
-            <ion-item *ngFor="let t of skeletonRows">
-                <ion-label>
-                    <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated="animated"></ion-skeleton-text>
-                </ion-label>
-            </ion-item>
-        </ion-list>
-
-    </div>
 </ion-content>

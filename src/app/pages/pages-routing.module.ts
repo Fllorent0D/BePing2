@@ -19,7 +19,17 @@ const routes: Routes = [
         loadChildren: () => import('./matches/matches.module').then(m => m.MatchesPageModule)
     },
     {
+        path: 'matches',
+        outlet: 'modal-outlet',
+        loadChildren: () => import('./matches/matches.module').then(m => m.MatchesPageModule)
+    },
+    {
         path: 'team-match-details',
+        loadChildren: () => import('./team-match-details/team-match-details.module').then(m => m.TeamMatchDetailsModule)
+    },
+    {
+        path: 'team-match-details',
+        outlet: 'modal-outlet',
         loadChildren: () => import('./team-match-details/team-match-details.module').then(m => m.TeamMatchDetailsModule)
     },
     {

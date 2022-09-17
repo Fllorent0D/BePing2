@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {NavigationEnd, Router, RouterEvent} from '@angular/router';
-import {combineLatestWith, distinctUntilChanged, filter, first, switchMap, take} from 'rxjs/operators';
+import {combineLatestWith, distinctUntilChanged, filter, first, switchMap, take, tap} from 'rxjs/operators';
 
 import {FirebaseAnalytics} from '@capacitor-firebase/analytics';
 import {Device} from '@capacitor/device';
@@ -32,22 +32,24 @@ export class AnalyticsService {
         const screenNameEvent$ = this.router.events.pipe(
             filter((e: RouterEvent) => e instanceof NavigationEnd),
             switchMap((event: RouterEvent) => this.setScreenName(event.url))
-        );
+        ).subscribe();
 
         const isProEvent$ = this.store.select(InAppPurchasesState.isPro).pipe(
             distinctUntilChanged(),
+            filter((isPro) => isPro !== null),
             switchMap((isPro: boolean) => this.setUserProperty('isPro', `${isPro}`))
-        );
+        ).subscribe();
 
         const currentLangEvent$ = this.store.select(SettingsState.getCurrentLang).pipe(
             distinctUntilChanged(),
             switchMap((lang: LANG) => this.setUserProperty('lang', lang))
-        );
+        ).subscribe();
 
         const playerUniqueIndexEvent$ = this.store.select(UserState.getPlayerUniqueIndex).pipe(
             distinctUntilChanged(),
+            filter((uniqueIndex) => !!uniqueIndex),
             switchMap((uniqueIndex: number) => this.setUser(uniqueIndex.toString(10)))
-        );
+        ).subscribe();
 
         const clubUniqueIndexEvent$ = this.store.select(UserState.getMemberClub).pipe(
             distinctUntilChanged((a: ClubEntry | undefined, b: ClubEntry | undefined) => a?.UniqueIndex === b?.UniqueIndex),
@@ -60,8 +62,7 @@ export class AnalyticsService {
             playerUniqueIndexEvent$,
             clubUniqueIndexEvent$
         ]).pipe(
-            take(1),
-            switchMap(() => this.remoteConfigService.refreshRemoteConfig())
+            tap(() => this.remoteConfigService.refreshRemoteConfig())
         ).subscribe(() => {
             console.log('refreshed remote config');
         });

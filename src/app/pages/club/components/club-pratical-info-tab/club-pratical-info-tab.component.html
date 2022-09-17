@@ -1,4 +1,4 @@
-<ion-list [inset]="true" [lines]="'inset'">
+<ion-list [inset]="true" [lines]="'inset'" *ngIf="venues; else loading">
     <ion-item (click)="navigateToVenue(venue)" *ngFor="let venue of venues">
         <ion-label>
             {{venue.Name | titlecase}}
@@ -8,5 +8,7 @@
         <ion-icon slot="end" class="ion" color="primary" name="navigate-circle-outline"
                   size="large"></ion-icon>
     </ion-item>
-
 </ion-list>
+<ng-template #loading>
+    <beping-skeleton-item-list-component [rows]="12"></beping-skeleton-item-list-component>
+</ng-template>

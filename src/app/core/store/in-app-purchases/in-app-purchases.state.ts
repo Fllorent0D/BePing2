@@ -39,7 +39,7 @@ export class InAppPurchasesState {
 
     @Selector([InAppPurchasesState])
     static showBePingProBanner(state: InAppPurchaseStateModel): boolean {
-        const timeThreshold = sub(Date.now(), {weeks: 2});
+        const timeThreshold = sub(Date.now(), {months: 1});
 
         return !state.isPro && (!state.dashboardPopupDismissedDate || state.dashboardPopupDismissedDate < timeThreshold.getTime());
     }

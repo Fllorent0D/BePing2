@@ -63,7 +63,7 @@ export class MatchesService extends BaseService {
     divisionId?: number;
     club?: string;
     team?: string;
-    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
     weekName?: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: string;
@@ -149,7 +149,7 @@ export class MatchesService extends BaseService {
     divisionId?: number;
     club?: string;
     team?: string;
-    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
     weekName?: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: string;
@@ -412,7 +412,7 @@ export class MatchesService extends BaseService {
     divisionId?: number;
     club?: string;
     team?: string;
-    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
     weekName?: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: string;
@@ -498,7 +498,7 @@ export class MatchesService extends BaseService {
     divisionId?: number;
     club?: string;
     team?: string;
-    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
     weekName?: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: string;

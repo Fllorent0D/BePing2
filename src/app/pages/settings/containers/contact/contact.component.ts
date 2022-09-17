@@ -4,6 +4,11 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {App} from '@capacitor/app';
 import {Device} from '@capacitor/device';
 import {Store} from '@ngxs/store';
+import {environment} from '../../../../../environments/environment';
+import {Buffer} from 'buffer';
+import {Network} from '@capacitor/network';
+import {FirebaseAnalytics} from '@capacitor-firebase/analytics';
+import {FirebaseCrashlytics} from '@capacitor-firebase/crashlytics';
 
 @Component({
     selector: 'beping-contact',
@@ -23,25 +28,38 @@ export class ContactComponent implements OnInit {
     async sendEmail() {
         const info = await App.getInfo();
         const deviceInfo = await Device.getInfo();
-        const id = 1;
+        const networkInfo = await Network.getStatus();
+        const email = environment.bepingContactEmail;
         const completeStore = JSON.parse(JSON.stringify(this.store.selectSnapshot((s) => s)));
         delete completeStore.user.tabt;
-        delete completeStore.divisions;
-        delete completeStore.clubs;
-        const storeB64 = btoa(JSON.stringify(completeStore));
+        const deviceInfos = `${deviceInfo.manufacturer} ${deviceInfo.model}\n${deviceInfo.operatingSystem} ${deviceInfo.osVersion}\n${deviceInfo.webViewVersion}\n${deviceInfo.name}\nConnected to internet: ${networkInfo.connected}\nConnection type: ${networkInfo.connectionType}`;
+        const storeB64 = Buffer.from(JSON.stringify(completeStore), 'utf-8').toString('base64');
+        const deviceInfoB64 = Buffer.from(deviceInfos, 'utf-8').toString('base64');
         try {
             const open = await EmailComposer.hasAccount();
             if (open.hasAccount) {
                 EmailComposer.open({
                     subject: `Support ${info.name} ${info.version}(${info.build})`,
-                    body: `\n\n\n\n\n---- Ne pas retirer ----  Niet terugtrekken  ----  Do not remove ----------\n${deviceInfo.manufacturer} ${deviceInfo.model} - ${deviceInfo.operatingSystem} ${deviceInfo.osVersion} - ${deviceInfo.webViewVersion}\n\n\n ---- Ceci contient l'état actuel de l'application ---- Dit bevat de huidige status van de app ---- This contains current state of the app ---- \n\n${storeB64}`,
-                    to: ['f.cardoen@me.com']
+                    body: ``,
+                    to: [email],
+                    attachments: [
+                        {
+                            type: 'base64',
+                            path: storeB64,
+                            name: 'snapshop-beping.txt'
+                        },
+                        {
+                            type: 'base64',
+                            path: deviceInfoB64,
+                            name: 'device-infos.txt'
+                        }
+                    ]
                 });
             } else {
-                this.dialogService.showErrorAlert({message: 'Aucun compte email configuré. Envoyé un mail à f.cardoen@me.com'});
+                this.dialogService.showErrorAlert({message: 'Aucun compte email configuré. Envoyé un mail à ' + email});
             }
         } catch (e) {
-            this.dialogService.showErrorAlert({message: 'Impossible to open an email composer. Please send a mail to f.cardoen@me.com'});
+            this.dialogService.showErrorAlert({message: 'Impossible to open an email composer. Please send a mail to ' + email});
         }
 
     }

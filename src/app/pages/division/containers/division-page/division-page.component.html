@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
@@ -12,13 +12,20 @@
                         slot="icon-only">
                 </ion-icon>
             </ion-button>
+            <ion-button (click)="share()">
+                <ion-icon
+                        size="small"
+                        [name]="'share-outline'"
+                        slot="icon-only">
+                </ion-icon>
+            </ion-button>
             <beping-favorite-btn
                     (clicked)="toggleFavorite()"
                     [enabled]="isFavorite$|async"
             ></beping-favorite-btn>
         </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-segment [value]="activeSwiperIndex" (ionChange)="selectTab($event.detail.value)">
             <ion-segment-button id="segment-0" [value]="0">
                 <ion-label class="ion-text-capitalize">{{'TEAM_STAT.RANKING' | translate}}</ion-label>
@@ -66,7 +73,7 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-            <ng-container *ngIf="ranking$ | async as ranking">
+            <ng-container *ngIf="ranking$ | async as ranking; else loading">
                 <ion-list [inset]="true" [lines]="'inset'">
                     <ion-item (click)="navigateToTeam(rankingEntry)"
                               *ngFor="let rankingEntry of ranking; let index = index"
@@ -77,15 +84,13 @@
                                 <ion-col class="ion-text-wrap" size="1">
                                     <ion-label class="ion-text-wrap">
 
-                                            {{rankingEntry.Position}}
+                                        {{rankingEntry.Position}}
 
                                     </ion-label>
                                 </ion-col>
                                 <ion-col size="5">
                                     <ion-label class="ion-text-wrap">
-
-                                            {{rankingEntry.Team}}
-
+                                        {{rankingEntry.Team}}
                                     </ion-label>
                                 </ion-col>
                                 <ion-col class="border-right ion-text-center" size="1">
@@ -147,50 +152,56 @@
                 </ion-grid>
 
             </ion-header>
-            <ion-list [inset]="true" lines="inset">
-                <ion-item (click)="navigateToPlayer(stat.uniqueIndex)"
-                          *ngFor="let stat of memberRanking$|async"
-                          detail>
-                    <ion-grid>
-                        <ion-row class="ion-align-items-center">
-                            <ion-col class="" size="6">
-                                <ion-label class="ion-text-wrap">
+            <ng-container *ngIf="memberRanking$|async as memberResults; else loading" style="height: 100vh">
+                <beping-alert-full-page
+                        *ngIf="memberResults.length === 0"
+                        [title]="'COMMON.NO_INFO'|translate"
+                        [icon]="'information-circle-outline'">
+                </beping-alert-full-page>
+                <ion-list [inset]="true" lines="inset" *ngIf="memberResults.length">
+                    <ion-item (click)="navigateToPlayer(stat.uniqueIndex)" *ngFor="let stat of memberResults" detail>
+                        <ion-grid>
+                            <ion-row class="ion-align-items-center">
+                                <ion-col class="" size="6">
+                                    <ion-label class="ion-text-wrap">
 
                                         {{stat.firstName | titlecase}} {{stat.lastName | titlecase}}
 
-                                </ion-label>
-                            </ion-col>
-                            <ion-col class="" size="2">
-                                <ion-label class="ion-text-wrap">
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="" size="2">
+                                    <ion-label class="ion-text-wrap">
 
                                         {{stat.ranking}}
 
-                                </ion-label>
-                            </ion-col>
-                            <ion-col class="" size="2">
-                                <ion-label class="ion-text-wrap">
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="" size="2">
+                                    <ion-label class="ion-text-wrap">
 
                                         {{stat.played}}
 
-                                </ion-label>
-                            </ion-col>
-                            <ion-col class="ion-text-center ion-no-padding" size="2">
-                                <beping-victory-chart
-                                        [bluePct]="stat.winPourcentage"
-                                        [redPct]="stat.losePourcentage"
-                                        [small]="true"
-                                        [title]="stat.winPourcentage + '%'"
-                                >
-                                </beping-victory-chart>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-
-                </ion-item>
-            </ion-list>
-
+                                    </ion-label>
+                                </ion-col>
+                                <ion-col class="ion-text-center ion-no-padding" size="2">
+                                    <beping-victory-chart
+                                            [bluePct]="stat.winPourcentage"
+                                            [redPct]="stat.losePourcentage"
+                                            [small]="true"
+                                            [title]="stat.winPourcentage + '%'"
+                                    >
+                                    </beping-victory-chart>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                </ion-list>
+            </ng-container>
         </ng-template>
     </swiper>
+    <ng-template #loading>
+        <beping-skeleton-item-list-component [rows]="12"></beping-skeleton-item-list-component>
+    </ng-template>
 </ion-content>
 
 

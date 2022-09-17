@@ -9,6 +9,7 @@ import {
 import {HapticsService} from '../../services/haptics.service';
 import {ImpactStyle} from '@capacitor/haptics';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
+import {CurrentSeasonChanged} from '../season';
 
 export interface FavoriteItem<T = string | number> {
     uniqueIndex: T;
@@ -85,6 +86,12 @@ export class FavoritesState {
         return state.members;
     }
 
+    @Action([CurrentSeasonChanged])
+    cleanDivisionsOnSeasonChanged({patchState}: StateContext<FavoritesStateModel>) {
+        return patchState({
+            divisions: []
+        });
+    }
 
     @Action([ToggleClubFromFavorites])
     toggleClubFromFavorites({getState, patchState}: StateContext<FavoritesStateModel>, {payload}: ToggleClubFromFavorites) {

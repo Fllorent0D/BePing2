@@ -1,0 +1,21 @@
+<ion-toolbar color="clear">
+    <beping-week-selector
+            [max]="maxWeekName$|async"
+            [min]="1"
+            [formControl]="weekSelected">
+    </beping-week-selector>
+</ion-toolbar>
+<ng-container *ngFor="let category of teamMatchofSelectedWeek$|async">
+    <ion-item-divider>
+        <ion-label>
+            {{"PLAYER_CATEGORY." + category.category | translate}}
+        </ion-label>
+    </ion-item-divider>
+    <ion-list [lines]="'inset'" [inset]="true">
+        <ion-item *ngFor="let match of category.teamMatches" class="no-start-padding">
+            <beping-team-match-result class="full-width" [match]="match"></beping-team-match-result>
+        </ion-item>
+    </ion-list>
+</ng-container>
+
+

@@ -20,6 +20,11 @@ export interface EventCoefficient {
     coefficient: number;
 }
 
+export const loosingFactors: { [key: string]: number } = {
+    [EVENT_TYPE.CHAMPIONSHIP]: 0.8,
+    [EVENT_TYPE.TOURNAMENT]: 0.5
+};
+
 export const coefficientPerEventMen: { [key: string]: EventCoefficient[] } = {
     [EVENT_TYPE.TOURNAMENT]: [
         {
@@ -79,7 +84,7 @@ export const coefficientPerEventWomen: { [key: string]: EventCoefficient[] } = {
         },
         {
             eventId: 'R4',
-            coefficient: 1.5,
+            coefficient: 1.2,
         },
         {
             eventId: 'R5',

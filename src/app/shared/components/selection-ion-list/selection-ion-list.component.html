@@ -1,0 +1,7 @@
+<ion-list [inset]="true">
+
+    <ion-item *ngFor="let opt of options" (click)="toggleItem(opt.value)">
+        <ion-icon [name]="value.includes(opt.value) ? 'checkmark-outline' : ''" slot="start" size="small"></ion-icon>
+        <ion-label class="ion-text-wrap">{{opt.labelKey|translate}}</ion-label>
+    </ion-item>
+</ion-list>

@@ -6,7 +6,7 @@ import {
     coefficientPerEventMen,
     coefficientPerEventWomen,
     EVENT_TYPE,
-    EventCoefficient,
+    EventCoefficient, loosingFactors,
     MATCH_RESULT,
     PointsBounding
 } from '../../../core/models/points';
@@ -24,11 +24,19 @@ export class PointCalculatorService {
         const diff = Math.round(Math.max(basePoint, result.opponentRanking) - Math.min(basePoint, result.opponentRanking));
         const isExpected = (result.opponentRanking > basePoint && result.victory === MATCH_RESULT.DEFEAT)
             || (result.opponentRanking < basePoint && result.victory === MATCH_RESULT.VICTORY);
+        // Getting points from the diffenrence of bel ranking between players
         const pointsLimits: PointsBounding = this.findBoundingPointsForPointDiff(diff, category);
         const points: number = isExpected ? pointsLimits.expectedResult : pointsLimits.unexpectedResult;
+
+        // Getting the coef from the event type
         const {coefficient}: EventCoefficient = this.findCoefficientEvent(result.eventType, result.eventId, category);
 
-        return points * coefficient * (result.victory === MATCH_RESULT.VICTORY ? 1 : -0.8);
+        // x1 for victory
+        // 0.8 or 0.5 for defeat
+        // adding minus in defeat to turn the result negative
+        const matchResultFactor: number = (result.victory === MATCH_RESULT.VICTORY ? 1 : -loosingFactors[result.eventType]);
+
+        return points * coefficient * matchResultFactor;
     }
 
     findBoundingPointsForPointDiff(pointDiff: number, category: PLAYER_CATEGORY): PointsBounding {

@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <beping-localized-back-btn ></beping-localized-back-btn>
         </ion-buttons>
@@ -12,13 +12,20 @@
                         slot="icon-only">
                 </ion-icon>
             </ion-button>
+            <ion-button (click)="share()">
+                <ion-icon
+                        size="small"
+                        [name]="'share-outline'"
+                        slot="icon-only">
+                </ion-icon>
+            </ion-button>
             <beping-favorite-btn
                     (clicked)="toggleFavorite()"
                     [enabled]="isFavorite$|async"
             ></beping-favorite-btn>
         </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-segment [value]="activeSwiperIndex" (ionChange)="selectTab($event.detail.value)">
             <ion-segment-button [value]="0">
                 <ion-label class="ion-text-capitalize">{{'TEAM_STAT.RANKING' | translate}}</ion-label>
@@ -69,7 +76,7 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
-            <ng-container *ngIf="team$ | async as team">
+            <ng-container *ngIf="team$ | async as team; else loading">
                 <ion-list [inset]="true" [lines]="'inset'">
                     <ion-item (click)="teamSelected(rankingEntry)"
                               *ngFor="let rankingEntry of ranking$ | async; let index = index"
@@ -123,15 +130,27 @@
             </ng-container>
         </ng-template>
         <ng-template swiperSlide>
-            <beping-team-result-tab [matches]="calendar$|async"></beping-team-result-tab>
+            <beping-team-result-tab *ngIf="calendar$|async as calendar; else loading" [matches]="calendar"></beping-team-result-tab>
         </ng-template>
         <ng-template swiperSlide>
-            <beping-team-players-stats
-                    (playerClicked)="navigateToPlayer($event)"
-                    [stats]="memberRanking$|async"
-            ></beping-team-players-stats>
+            <ng-container *ngIf="memberRanking$|async as memberResults; else loading">
+                <beping-alert-full-page
+                        *ngIf="memberResults.length === 0"
+                        [title]="'COMMON.NO_INFO'|translate"
+                        [icon]="'information-circle-outline'">
+                </beping-alert-full-page>
+                <beping-team-players-stats
+                        *ngIf="memberResults.length"
+                        (playerClicked)="navigateToPlayer($event)"
+                        [stats]="memberResults"
+                ></beping-team-players-stats>
+            </ng-container>
+
         </ng-template>
     </swiper>
+    <ng-template #loading>
+        <beping-skeleton-item-list-component [rows]="14"></beping-skeleton-item-list-component>
+    </ng-template>
 </ion-content>
 
 

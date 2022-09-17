@@ -22,6 +22,7 @@ import {AppStateService} from './core/services/app-state.service';
 import {RemoteConfigService} from './core/services/remote-config.service';
 import {SplashScreen} from '@capacitor/splash-screen';
 import {Store} from '@ngxs/store';
+import {DeepLinkService} from './core/services/deep-link.service';
 
 registerLocaleData(localFR);
 registerLocaleData(localNL);
@@ -46,27 +47,30 @@ registerLocaleData(localNL);
             provide: APP_INITIALIZER,
             useFactory: (
                 analyticsService: AnalyticsService,
-                crashlytics: CrashlyticsService,
                 iAPService: InAppPurchasesService,
                 appState: AppStateService,
-                store: Store
+                store: Store,
+                deeplink: DeepLinkService,
+                remoteConfig: RemoteConfigService
             ) => async () => {
                 const deviceInfo = await Device.getInfo();
                 const initTasks = [
                     analyticsService.init(),
                     appState.init(),
+                    deeplink.init(),
+                    remoteConfig.init()
                 ];
                 if (deviceInfo.platform !== 'web') {
                     initTasks.push(iAPService.init());
                 }
-                await Promise.all(initTasks);
+                await Promise.all(initTasks).catch(() => console.log('something failed at startup'));
                 // Doing it later for analytics to start
 
                 if (deviceInfo.platform !== 'web') {
                     await SplashScreen.hide();
                 }
             },
-            deps: [AnalyticsService, InAppPurchasesService, AppStateService, Store],
+            deps: [AnalyticsService, InAppPurchasesService, AppStateService, Store, DeepLinkService, RemoteConfigService],
             multi: true
         },
         InAppPurchase2,

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IonNav, ModalController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
@@ -9,7 +9,7 @@ import {TabTState, TabTStateModel} from '../../../../core/store/user/tab-t-state
 import {Logout} from '../../../../core/store/user/aftt.actions';
 import {finalize, map, switchMap} from 'rxjs/operators';
 import {AfttLoginPage} from '../../../modals/aftt-login/aftt-login-page.component';
-import {UpdateMainCategory} from '../../../../core/store/user/user.actions';
+import {UpdateMainCategory, UpdateMemberEntries} from '../../../../core/store/user/user.actions';
 import {TranslateService} from '@ngx-translate/core';
 import {LANG} from '../../../../core/models/langs';
 import {
@@ -40,6 +40,7 @@ import {InAppPurchasesState} from '../../../../core/store/in-app-purchases/in-ap
 import {PremiumSubscriptionsComponent} from '../premium-subscriptions/premium-subscriptions.component';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {ContributorsComponent} from '../contributors/contributors.component';
+import {AnimationController} from '@ionic/angular/';
 
 @Component({
     selector: 'beping-settings',
@@ -67,6 +68,8 @@ export class SettingsPage implements OnInit, OnDestroy {
     version: string;
     build: string;
     isOnline: boolean;
+    @ViewChild('refreshIcon') refreshIconElement: ElementRef;
+    isRefreshing: boolean;
 
     constructor(
         private readonly modalCtrl: ModalController,
@@ -77,6 +80,7 @@ export class SettingsPage implements OnInit, OnDestroy {
         private readonly browser: InAppBrowserService,
         private readonly analyticsService: AnalyticsService,
         private readonly dialogService: DialogService,
+        private readonly animationCtrl: AnimationController,
     ) {
     }
 
@@ -150,7 +154,7 @@ export class SettingsPage implements OnInit, OnDestroy {
     }
 
     changeLang(event: CustomEvent) {
-        this.analyticsService.logEvent('settings-change-lang');
+        this.analyticsService.logEvent('settings_change_lang');
 
         this.store.dispatch(new UpdateCurrentLang(event.detail.value));
     }
@@ -171,20 +175,30 @@ export class SettingsPage implements OnInit, OnDestroy {
 
     async resetCache() {
         this.analyticsService.logEvent('settings-reset-cache');
+        /*
+                const loader = await this.dialogService.showLoading({
+                    message: this.translate.instant('SETUP.LOADING'),
+                    backdropDismiss: false
+                });
 
-        const loader = await this.dialogService.showLoading({
-            message: this.translate.instant('SETUP.LOADING'),
-            backdropDismiss: false
-        });
+         */
+        this.isRefreshing = true;
+        const memberId = this.store.selectSnapshot(UserState.getPlayerUniqueIndex);
         this.store.dispatch([
             new Reset(DivisionsState),
-            new Reset(ClubsState)
+            new Reset(ClubsState),
         ]).pipe(
-            switchMap(() => this.store.dispatch([
-                new GetDivisions(),
-                new GetClubs(),
-            ])),
-            finalize(() => loader.dismiss())
+            switchMap(() => {
+                const actions = [new GetDivisions(),
+                    new GetClubs(),
+                    new GetCurrentSeason()
+                ];
+                if (memberId) {
+                    actions.push(new UpdateMemberEntries(memberId, true));
+                }
+                return this.store.dispatch(actions);
+            }),
+            finalize(() => this.isRefreshing = false)
         ).subscribe(() => {
             this.dialogService.showToast({
                 duration: 3000,

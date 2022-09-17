@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-title>{{title}}</ion-title>
         <ion-buttons slot="end">
             <ion-button (click)="closeModal()" *ngIf="!ionRouterOutlet">
@@ -13,7 +13,7 @@
     <ng-container *ngIf="members$ | async as members; else loader">
         <ng-container *ngIf="members.length > 0">
             <ion-list [inset]="true" [lines]="'inset'">
-                <ion-item (click)="memberClicked(member)" *ngFor="let member of members">
+                <ion-item (click)="memberClicked(member)" *ngFor="let member of members; trackBy: identify">
                     <ion-label>
 
                             {{member.FirstName | titlecase}} {{member.LastName | titlecase}}
@@ -25,8 +25,7 @@
         </ng-container>
         <ng-container *ngIf="members.length === 0">
             <beping-alert-full-page
-                    [title]="'SEARCH.NO_RESULT'|translate"
-            >
+                    [title]="'SEARCH.NO_RESULT'|translate">
             </beping-alert-full-page>
         </ng-container>
     </ng-container>

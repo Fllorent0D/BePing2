@@ -28,6 +28,8 @@ import SwiperCore from 'swiper';
 import Swiper, {Scrollbar, SwiperOptions} from 'swiper';
 import {SwiperComponent} from 'swiper/angular';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {ShareService} from '../../../../core/services/share.service';
+import {firstValueFrom} from 'rxjs';
 
 
 @UntilDestroy()
@@ -78,11 +80,13 @@ export class ClubPage implements OnInit, ViewDidEnter {
         private readonly dialogService: DialogService,
         private readonly translate: TranslateService,
         private readonly ionRouter: IonRouterOutlet,
-        protected readonly ngZone: NgZone
+        protected readonly ngZone: NgZone,
+        private readonly shareService: ShareService
     ) {
         this.from$ = new BehaviorSubject<Date>(sub(new Date(), {weeks: 2}));
         this.to$ = new BehaviorSubject<Date>(new Date());
     }
+
     ionViewDidEnter(): void {
         setTimeout(() => {
             this.swiper.swiperRef.updateAutoHeight(0);
@@ -224,6 +228,19 @@ export class ClubPage implements OnInit, ViewDidEnter {
                 dialogHeaderTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
                 dialogMessageTranslationKey: 'CALENDAR.ADD_ALL_CLUB_MATCHES'
             }, this.ionRouter.nativeEl));
+    }
+
+    share() {
+        this.club$.pipe(
+            take(1),
+            switchMap((club) =>
+                this.shareService.shareUrl(
+                    '/club/' + club.UniqueIndex,
+                    club.LongName,
+                    this.translate.instant('SHARE.SHARE_CLUB_ON_BEPING', {club: club.LongName})
+                )
+            )
+        ).subscribe();
     }
 }
 

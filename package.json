@@ -1,6 +1,6 @@
 {
   "name": "beping2",
-  "version": "2.6.0",
+  "version": "2.6.8",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -48,6 +48,7 @@
     "@capacitor/network": "4.0.1",
     "@capacitor/preferences": "4.0.1",
     "@capacitor/push-notifications": "4.1.0",
+    "@capacitor/share": "^4.0.1",
     "@capacitor/splash-screen": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
     "@capacitor/text-zoom": "4.0.1",
@@ -66,6 +67,7 @@
     "@ngxs/store": "3.7.5",
     "@proteansoftware/capacitor-start-navigation": "4.0.1",
     "@trapezedev/configure": "5.0.3",
+    "buffer": "^6.0.3",
     "capacitor-calendar": "1.0.6",
     "capacitor-email-composer": "1.2.1",
     "capacitor-native-settings": "4.0.0",

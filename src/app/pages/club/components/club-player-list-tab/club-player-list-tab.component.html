@@ -1,14 +1,12 @@
 
-<ion-list [inset]="true" [lines]="'inset'">
+<ion-list [inset]="true" [lines]="'inset'" *ngIf="members ; else loading">
     <ion-item *ngFor="let member of members; trackBy: identify" (click)="memberClicked.emit(member.UniqueIndex)">
         <ion-grid class="ion-no-padding">
             <ion-row>
                 <ion-col class="border-right ion-padding-end"
                          size="3">
                     <ion-label class="ion-text-wrap">
-
                             {{member.Position}}/{{member.RankingIndex}}
-
                     </ion-label>
                 </ion-col>
                 <ion-col size="8" class="ion-padding-start">
@@ -29,3 +27,6 @@
         </ion-grid>
     </ion-item>
 </ion-list>
+<ng-template #loading>
+    <beping-skeleton-item-list-component [rows]="12"></beping-skeleton-item-list-component>
+</ng-template>

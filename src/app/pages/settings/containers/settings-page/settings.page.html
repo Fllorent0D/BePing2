@@ -120,10 +120,12 @@
         </ion-item>
     </ion-list>
     <ion-list [inset]="true" [lines]="'inset'">
-        <ion-item (click)="resetCache()" [disabled]="!isOnline" detail detail-icon="refresh">
+        <ion-item (click)="resetCache()" [disabled]="!isOnline">
             <ion-label>
                 {{'SETTINGS.REFRESH_BEPING' | translate}}
             </ion-label>
+            <ion-spinner name="lines-small" *ngIf="isRefreshing"></ion-spinner>
+
         </ion-item>
 
         <ion-grid *ngIf="!isOnline">

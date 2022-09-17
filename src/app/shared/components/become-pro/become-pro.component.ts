@@ -3,7 +3,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 @Component({
     selector: 'beping-become-pro',
     templateUrl: './become-pro.component.html',
-    styleUrls: ['./become-pro.component.css']
+    styleUrls: ['./become-pro.component.scss']
 })
 export class BecomeProComponent implements OnInit {
 

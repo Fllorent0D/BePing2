@@ -24,6 +24,9 @@ import {
 } from '../../../points-calculator/containers/individual-match-points-editor/individual-match-points-editor.component';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {Face2FaceService} from '../../../../core/services/face2face/face-2-face.service';
+import {ShareService} from '../../../../core/services/share.service';
+import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchases.model';
+import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-other-players',
@@ -57,7 +60,8 @@ export class OtherPlayersComponent implements OnInit {
         private readonly location: Location,
         private readonly ionRouterOutlet: IonRouterOutlet,
         private readonly analyticsService: AnalyticsService,
-        private readonly face2FaceService: Face2FaceService
+        private readonly face2FaceService: Face2FaceService,
+        private readonly shareService: ShareService
     ) {
     }
 
@@ -150,64 +154,70 @@ export class OtherPlayersComponent implements OnInit {
         ]).pipe(
             take(1)
         ).subscribe(async ([member, category]) => {
-            const actionSheet = await this.actionSheetController.create({
-                buttons: [
-                    {
-                        text: this.translate.instant('TEAM_STAT.INFO_ABOUT_CLUB', {club: member?.Club}),
-                        handler: () => {
-                            this.analyticsService.logEvent('open_club_info_from_member');
-                            this.tabNavigator.navigateTo(['clubs', member?.Club]);
-                        }
-                    },
-                    {
-                        text: this.translate.instant('HEAD_2_HEAD.TITLE'),
-                        handler: () => {
-                            this.goToFace2Face();
-                        }
-                    },
-                    {
-                        text: this.translate.instant('CALCULATOR.ADD_RESULT_TO_CALC'),
-                        handler: async () => {
-                            this.analyticsService.logEvent('calculator_add_result_from_member_page');
+            const isProEnabled = this.store.selectSnapshot(RemoteSettingsState.bepingProEnabled);
+            const buttons = [
+                {
+                    text: this.translate.instant('TEAM_STAT.INFO_ABOUT_CLUB', {club: member?.Club}),
+                    handler: () => {
+                        this.analyticsService.logEvent('open_club_info_from_member');
+                        this.tabNavigator.navigateTo(['clubs', member?.Club]);
+                    }
+                },
+                {
+                    text: this.translate.instant('CALCULATOR.ADD_RESULT_TO_CALC'),
+                    handler: async () => {
+                        this.analyticsService.logEvent('calculator_add_result_from_member_page');
 
-                            const modal = await this.dialogService.showModal({
-                                component: ModalBaseComponent,
-                                canDismiss: true,
-                                presentingElement: this.ionRouterOutlet.nativeEl,
-                                componentProps: {
-                                    rootPage: IndividualMatchPointsEditorComponent,
-                                    pageParams: {
-                                        memberEntryPrefill: {...member, Category: category}
-                                    }
+                        const modal = await this.dialogService.showModal({
+                            component: ModalBaseComponent,
+                            canDismiss: true,
+                            presentingElement: this.ionRouterOutlet.nativeEl,
+                            componentProps: {
+                                rootPage: IndividualMatchPointsEditorComponent,
+                                pageParams: {
+                                    memberEntryPrefill: {...member, Category: category}
                                 }
-                            });
-                            const result = await modal.onWillDismiss<{ added: boolean }>();
-                            if (result?.data?.added) {
-                                await this.dialogService.showToast({
-                                    message: this.translate.instant('CALCULATOR.RESULT_ADDED'),
-                                    duration: 3000,
-                                    buttons: [
-                                        {
-                                            text: this.translate.instant('CALCULATOR.OPEN_CALC'),
-                                            handler: () => {
-                                                this.tabNavigator.navigateTo(['points-calculator']);
-                                            }
-                                        }
-                                    ]
-                                });
                             }
+                        });
+                        const result = await modal.onWillDismiss<{ added: boolean }>();
+                        if (result?.data?.added) {
+                            await this.dialogService.showToast({
+                                message: this.translate.instant('CALCULATOR.RESULT_ADDED'),
+                                duration: 3000,
+                                buttons: [
+                                    {
+                                        text: this.translate.instant('CALCULATOR.OPEN_CALC'),
+                                        handler: () => {
+                                            this.tabNavigator.navigateTo(['points-calculator']);
+                                        }
+                                    }
+                                ]
+                            });
+                        }
 
-                        }
-                    },
-                    {
-                        text: this.translate.instant('COMMON.CANCEL'),
-                        icon: 'close',
-                        role: 'cancel',
-                        handler: () => {
-                            console.log('Cancel clicked');
-                        }
-                    }]
+                    }
+                },
+                {
+                    text: this.translate.instant('COMMON.CANCEL'),
+                    icon: 'close',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }
+            ];
+            if (isProEnabled) {
+                buttons.splice(1, 0, {
+                    text: this.translate.instant('HEAD_2_HEAD.TITLE'),
+                    handler: () => {
+                        this.goToFace2Face();
+                    }
+                });
+            }
+            const actionSheet = await this.actionSheetController.create({
+                buttons
             });
+
             await actionSheet.present();
 
             const {role} = await actionSheet.onDidDismiss();
@@ -221,5 +231,17 @@ export class OtherPlayersComponent implements OnInit {
         this.memberUniqueIndex$.pipe(take(1)).subscribe((id) => {
             this.face2FaceService.checkIsProAndGoToFace2Face(id, this.ionRouterOutlet.nativeEl);
         });
+    }
+
+    share() {
+        this.currentMemberEntry$.pipe(
+            take(1),
+            switchMap((member) =>
+                this.shareService.shareUrl(
+                    '/player/' + member.UniqueIndex,
+                    member.FirstName + ' ' + member.LastName,
+                    this.translate.instant('SHARE.SHARE_PLAYER_ON_BEPING', {player: member.FirstName + ' ' + member.LastName})
+                ))
+        ).subscribe();
     }
 }

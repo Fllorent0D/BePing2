@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
@@ -10,7 +10,7 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-segment (ionChange)="segmentChanged($event)" [value]="lang$|async">
             <ion-segment-button value="fr">
                 <ion-label>{{'SETTINGS.FRENCH'|translate}}</ion-label>

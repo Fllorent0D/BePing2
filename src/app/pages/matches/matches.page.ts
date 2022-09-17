@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
-import {FavoriteItem, FavoritesState, ToggleClubFromFavorites} from '../../core/store/favorites';
+import {
+    FavoriteItem,
+    FavoritesState,
+    ToggleClubFromFavorites,
+    ToggleDivisionFromFavorites,
+    ToggleMemberFromFavorites, ToggleTeamsFromFavorites
+} from '../../core/store/favorites';
 import {combineLatest, Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
 import {filter, map, switchMap, take} from 'rxjs/operators';
@@ -32,6 +38,7 @@ export class MatchesPage implements OnInit {
     @Select(RemoteSettingsState.notificationsEnabled) notifications$: Observable<boolean>;
     hasFavorites$: Observable<boolean>;
     clubName$: Observable<string>;
+
     constructor(
         private readonly tabsNavigationService: TabsNavigationService,
         private readonly dialogService: DialogService,
@@ -86,5 +93,23 @@ export class MatchesPage implements OnInit {
                 label: club.UniqueIndex
             } as FavoriteItem<string>)))
         ).subscribe();
+    }
+
+    deleteFromFavorite(item: FavoriteItem<any>, type: 'club' | 'division' | 'member' | 'team') {
+        switch (type) {
+            case 'member':
+                this.store.dispatch(new ToggleMemberFromFavorites(item));
+                break;
+            case 'division':
+                this.store.dispatch(new ToggleDivisionFromFavorites(item));
+                break;
+            case 'club':
+                this.store.dispatch(new ToggleClubFromFavorites(item));
+                break;
+            case 'team':
+                this.store.dispatch(new ToggleTeamsFromFavorites(item));
+                break;
+        }
+
     }
 }

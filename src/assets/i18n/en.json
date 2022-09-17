@@ -1,4 +1,11 @@
 {
+  "SHARE": {
+    "SHARE_CLUB_ON_BEPING": "Find {{club}} sur BePing !",
+    "SHARE_TEAM_ON_BEPING": "Find {{team}} sur BePing !",
+    "SHARE_MATCH_ON_BEPING": "Find the details of {{match}} on BePing !",
+    "SHARE_DIVISION_ON_BEPING": "Find the division {{division}} on BePing !",
+    "SHARE_PLAYER_ON_BEPING": "Find {{player}}'s results on BePing !"
+  },
   "SIDEMENU": {
     "HOME": "Home",
     "CALENDAR_OF_CLUB": "Calendar of {{club}}",
@@ -274,7 +281,7 @@
     "WANNA_HELP": "Wanna help?",
     "DONATION_GOAL": "BePing is a free application and will remain free. Keeping an application alive costs some money. All donations will be used to improve the application 😊",
     "CHANGE_LANGUAGE": "Language",
-    "DUTCH": "Dutch",
+    "DUTCH": "Nederlands",
     "DISPLAY_ELO": "ELO ranking",
     "DISPLAY_BEL": "AFTT numbered ranking",
     "FRENCH": "Français",
@@ -419,12 +426,15 @@
   "REGIONAL_SHORT": "Regional",
   "PLAYER_CATEGORY": {
     "MEN": "Senior Men",
+    "MEN_POST_23": "Senior Men",
     "MEN_SHORT": "Men",
     "WOMEN": "Senior Women",
+    "WOMEN_POST_23": "Senior Women",
     "WOMEN_SHORT": "Women",
     "VETERANS": "Senior",
     "VETERANS_WOMEN": "Seniors",
-    "YOUTH": "Youth"
+    "YOUTH": "Youth",
+    "YOUTH_POST_23": "Youth"
   },
   "MONTHS": {
     "0": "January",
@@ -475,6 +485,7 @@
     "TOO_MANY_REQUESTS": "Please wait a few minutes before you try again"
   },
   "CALCULATOR": {
+    "PLAYER_NO_BEL_POINTS": "The selected player does not have a numerical ranking. Impossible to simulate a result without numerical ranking.",
     "POINTS_CALCULATOR": "Points calculator",
     "DELETE_RESULT": "Delete result",
     "EDIT_RESULT": "Edit result",

@@ -1,4 +1,11 @@
 {
+  "SHARE": {
+    "SHARE_CLUB_ON_BEPING": "Vind {{club}} op BePing!",
+    "SHARE_TEAM_ON_BEPING": "Vind {{team}} op BePing!",
+    "SHARE_MATCH_ON_BEPING": "Vind {{match}} wedstrijddetails op BePing!",
+    "SHARE_DIVISION_ON_BEPING": "Vind de {{division}} divisie op BePing!",
+    "SHARE_PLAYER_ON_BEPING": "Vind de resultaten van {{player}} op BePing!"
+  },
   "SIDEMENU": {
     "HOME": "Home",
     "CALENDAR_OF_CLUB": "Kalender van {{club}}",
@@ -421,12 +428,15 @@
   "REGIONAL_SHORT": "Land.",
   "PLAYER_CATEGORY": {
     "MEN": "Seniors heren",
+    "MEN_POST_23": "Seniors heren",
     "MEN_SHORT": "Heren",
     "WOMEN": "Seniors dames",
+    "WOMEN_POST_23": "Seniors dames",
     "WOMEN_SHORT": "Dames",
     "VETERANS": "Veteranen",
     "VETERANS_WOMEN": "Dames Veteranen",
-    "YOUTH": "Jeugd"
+    "YOUTH": "Jeugd",
+    "YOUTH_POST_23": "Jeugd"
   },
   "MONTHS": {
     "0": "Januari",
@@ -477,6 +487,7 @@
     "TOO_MANY_REQUESTS": "Wacht een paar minuten voordat u het opnieuw probeert."
   },
   "CALCULATOR": {
+    "PLAYER_NO_BEL_POINTS": "De geselecteerde speler heeft geen numerieke rating. Onmogelijk om een resultaat te simuleren zonder numerieke beoordeling.",
     "POINTS_CALCULATOR": "Punten rekenmachine",
     "DELETE_RESULT": "Verwijder het resultaat",
     "EDIT_RESULT": "Bewerk het resultaat",

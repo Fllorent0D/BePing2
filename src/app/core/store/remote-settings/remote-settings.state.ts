@@ -19,10 +19,10 @@ export interface RemoteSettingsStateModel {
     connectivity_issue: boolean;
 }
 
-const defaultState = {
+export const remoteConfigDefaultState = {
     partnership_rotatio: false,
-    current_season: 22,
-    tabt_url: 'https://tabt-rest.floca.be',
+    current_season: 23,
+    tabt_url: environment.tabtUrl,
     beping_pro: false,
     use_member_lookup: false,
     maintenance: false,
@@ -32,10 +32,10 @@ const defaultState = {
 
 @State<RemoteSettingsStateModel>({
     name: 'remoteSettings',
-    defaults: defaultState
+    defaults: remoteConfigDefaultState
 })
 @Injectable()
-export class RemoteSettingsState implements NgxsOnInit {
+export class RemoteSettingsState {
     isWeb = false;
 
     @Selector([RemoteSettingsState])
@@ -76,16 +76,6 @@ export class RemoteSettingsState implements NgxsOnInit {
     constructor(
         private readonly crashlytics: CrashlyticsService
     ) {
-    }
-
-    async ngxsOnInit(ctx?: StateContext<RemoteSettingsStateModel>): Promise<void> {
-        try {
-            FirebaseRemoteConfig.initialize({minimumFetchInterval: 43_200, fetchTimeout: 60});
-            await FirebaseRemoteConfig.setDefaultConfig(defaultState);
-            await FirebaseRemoteConfig.fetchAndActivate();
-        } catch (e) {
-            this.crashlytics.recordException({message: 'Impossible to refresh remote config: ' + e?.message, domain: 'remote-config'});
-        }
     }
 
     @Action([RefreshRemoteConfig])

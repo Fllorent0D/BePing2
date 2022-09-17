@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
@@ -12,7 +12,7 @@
          leaflet
          style="height: 25vh;">
     </div>
-    <div *ngIf="tournament$|async as tournament">
+    <div *ngIf="tournament$|async as tournament; else loading">
         <div class="ion-padding">
             <ion-text>{{tournament.DateFrom | localizedDate}} <span
                     *ngIf="tournament.DateTo">- {{tournament.DateTo |date}}</span>
@@ -58,5 +58,15 @@
 
         </ion-list>
     </div>
-
+    <ng-template #loading>
+        <div class="ion-padding">
+            <ion-skeleton-text [ngStyle]="{width: '30%'}" animated="animated" class="ion-margin-vertical"></ion-skeleton-text>
+            <ion-button [expand]="'block'">
+                <ion-skeleton-text [ngStyle]="{width: '100%'}" animated="animated"></ion-skeleton-text>
+            </ion-button>
+            <ion-skeleton-text [ngStyle]="{width: '100%'}" animated="animated" class="ion-margin-vertical"></ion-skeleton-text>
+        </div>
+        <hr>
+        <beping-skeleton-item-list-component [rows]="5"></beping-skeleton-item-list-component>
+    </ng-template>
 </ion-content>

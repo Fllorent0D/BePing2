@@ -5,8 +5,12 @@
             [formControl]="weekSelected">
     </beping-week-selector>
 </ion-toolbar>
-<ion-list [inset]="true" [lines]="'inset'">
-    <ion-item *ngFor="let match of teamMatchofSelectedWeek$|async; trackBy: identify" class="no-start-padding">
+<ion-list [inset]="true" [lines]="'inset'" *ngIf="teamMatchofSelectedWeek$|async as teamMatchesEntries; else loading">
+    <ion-item *ngFor="let match of teamMatchesEntries; trackBy: identify" class="no-start-padding">
         <beping-team-match-result class="full-width" [match]="match"></beping-team-match-result>
     </ion-item>
+
 </ion-list>
+<ng-template #loading>
+    <beping-skeleton-large-item-list-component></beping-skeleton-large-item-list-component>
+</ng-template>

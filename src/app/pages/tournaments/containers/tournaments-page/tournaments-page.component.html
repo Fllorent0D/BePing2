@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
@@ -12,7 +12,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding-top">
-    <ng-container *ngIf="tournamentsFiltered$ | async as tournamentsPerMonth">
+    <ng-container *ngIf="tournamentsFiltered$ | async as tournamentsPerMonth; else loading">
         <ng-container *ngIf="tournamentsPerMonth.length >0">
             <ng-container *ngFor="let month of tournamentsPerMonth">
                 <beping-section-title
@@ -70,4 +70,8 @@
         </ng-template>
 
     </ion-modal>
+    <ng-template #loading>
+        <beping-skeleton-item-list-component [rows]="12"></beping-skeleton-item-list-component>
+    </ng-template>
+
 </ion-content>

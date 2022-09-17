@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {Observable, of} from 'rxjs';
+import {firstValueFrom, Observable, of} from 'rxjs';
 import {MemberEntry} from '../../../core/api/models/member-entry';
 import {MembersService} from '../../../core/api/services/members.service';
 import {catchError, debounceTime, filter, switchMap, tap} from 'rxjs/operators';
@@ -11,6 +11,7 @@ import {ModalController} from '@ionic/angular';
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
 import {Store} from '@ngxs/store';
 import {Keyboard} from '@capacitor/keyboard';
+import {RemoteSettingsState} from '../../../core/store/remote-settings';
 
 @Component({
     selector: 'beping-search-player',
@@ -26,7 +27,6 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
     searchBox: FormControl<string>;
     members$: Observable<MemberEntry[]>;
     loading = false;
-    skeletonRows: number[];
 
     constructor(
         private readonly membersService: MembersService,
@@ -39,7 +39,6 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.skeletonRows = [...Array(16).keys()].map(() => Math.floor(Math.random() * 40) + 30);
         this.searchBox = new FormControl<string>('');
         this.members$ = this.searchBox.valueChanges.pipe(
             filter((text) => text?.length >= 3 || text.length === 0),
@@ -50,15 +49,18 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
                     return of([]);
                 }
                 this.analyticsService.logEvent('search_member', {searchTerms});
+                const useLookup = this.store.selectSnapshot(RemoteSettingsState.useMemberLookup);
+                if (useLookup) {
+                    return this.membersService.findAllMembersLookup({
+                        query: searchTerms,
+                    }).pipe(
+                        catchError(() => of([]))
+                    );
+                }
 
-                const search = this.membersService.findAllMembersLookup({
-                    query: searchTerms,
-                });
-
-                return search.pipe(
+                return this.membersService.findAllMembers({nameSearch: searchTerms}).pipe(
                     catchError(() => of([]))
                 );
-
             }),
             tap(() => this.loading = false),
             catchError(() => of([])),
@@ -77,11 +79,11 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
     async playerClicked(member: MemberEntry) {
         this.analyticsService.logEvent('search_member_select');
         try {
-            const memberFromCat = await this.membersService.findMemberById({
+            const memberFromCat = await firstValueFrom(this.membersService.findMemberById({
                 uniqueIndex: member.UniqueIndex,
                 playerCategory: this.memberCategory,
                 rankingPointsInformation: true
-            }).toPromise();
+            }));
             await this.modalCtrl.dismiss({member: memberFromCat});
         } catch (e) {
             await this.dialogService.showErrorAlert({message: 'Something went wrong when downloading player profile. Please retry'});

@@ -49,6 +49,14 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                                 duration: 3000
                             });
                             break;
+                        case 0:
+                            this.crashlytics.recordException({message: err.message});
+                            dialogService.showToast({
+                                message: translateService.instant('SETTINGS.NEED_INTERNET_TO_REFRESH', {error: err.statusText}),
+                                color: 'medium',
+                                duration: 3000
+                            });
+                            break;
                         case 404:
                             console.log('not found but not specially an error');
                             break;

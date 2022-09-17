@@ -50,7 +50,7 @@ export class RegionsDivisionComponent implements OnInit {
 
     navigateSuperMen(): void {
         this.store.select(DivisionsState.entities).pipe(
-            map((divisions) => divisions.find((div: DivisionEntry) => div.DivisionCategory === 'MEN' && div.DivisionName.includes('SUPER'))),
+            map((divisions) => divisions.find((div: DivisionEntry) => div.DivisionCategory.startsWith('MEN') && div.DivisionName.includes('SUPER'))),
             take(1)
         ).subscribe(division => {
             if (division) {
@@ -67,7 +67,7 @@ export class RegionsDivisionComponent implements OnInit {
     navigateSuperWomen(): void {
         this.store.select(DivisionsState.entities).pipe(
             map((divisions) =>
-                divisions.find((div: DivisionEntry) => div.DivisionCategory === 'WOMEN' && div.DivisionName.includes('SUPER'))),
+                divisions.find((div: DivisionEntry) => div.DivisionCategory.startsWith('WOMEN') && div.DivisionName.includes('SUPER'))),
             take(1)
         ).subscribe(division => {
             if (division) {

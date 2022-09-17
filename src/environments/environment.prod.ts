@@ -3,7 +3,8 @@ import {firebaseConfig} from './firebase.config';
 export const environment = {
     production: true,
     hmr: false,
-    tabtUrl: 'https://tabt-rest.floca.be',
+    tabtUrl: 'https://api.beping.be',
+    bepingUrl: 'https://beping.be',
     internalPages: {
         basePath: '/static/',
         registerRedirect: 'redirect-register.html'
@@ -27,5 +28,6 @@ export const environment = {
     firebaseConfig,
     productIds: {
         bepingPro: 'bepingproversion'
-    }
+    },
+    bepingContactEmail: 'contact@beping.be'
 };

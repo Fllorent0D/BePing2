@@ -264,7 +264,7 @@ export class ClubsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
     uniqueIndex?: number;
     nameSearch?: string;
     extendedInformation?: boolean;
@@ -334,7 +334,7 @@ export class ClubsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
     uniqueIndex?: number;
     nameSearch?: string;
     extendedInformation?: boolean;

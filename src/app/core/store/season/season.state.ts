@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Action, Selector, State, StateContext} from '@ngxs/store';
+import {Action, NgxsAfterBootstrap, NgxsOnChanges, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {SeasonEntry} from '../../api/models/season-entry';
 import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
@@ -7,15 +7,21 @@ import {CurrentSeasonChanged, GetCurrentSeason, GetCurrentSeasonFailure, LoadSpe
 import {SeasonsService} from '../../api/services/seasons.service';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
 import {UpdateRemoteSettingKey} from '../remote-settings';
+import {EntityStateModel} from '@ngxs-labs/entity-state';
+import {ClubEntry} from '../../api/models/club-entry';
+import {sub} from 'date-fns';
+import {GetClubs} from '../clubs';
 
 export interface SeasonStateModel {
     currentSeason: SeasonEntry | null;
     loading: boolean;
+    lastUpdated: number;
     error: Error | null;
 }
 
 const defaultState: SeasonStateModel = {
     currentSeason: null,
+    lastUpdated: 0,
     loading: false,
     error: null
 };
@@ -26,7 +32,7 @@ const defaultState: SeasonStateModel = {
     defaults: defaultState
 })
 @Injectable()
-export class SeasonState {
+export class SeasonState implements NgxsAfterBootstrap{
 
     constructor(
         private readonly seasonsService: SeasonsService,
@@ -49,7 +55,15 @@ export class SeasonState {
         return state.error;
     }
 
-    @Action(UpdateRemoteSettingKey)
+    ngxsAfterBootstrap(ctx?: StateContext<SeasonStateModel>): void {
+        const state = ctx.getState();
+        const timeThreshold = sub(Date.now(), {days: 2});
+
+        if (!state.currentSeason || state.lastUpdated < timeThreshold.getTime() || state.error) {
+            ctx.dispatch(new GetCurrentSeason());
+        }
+    }
+
     checkIsSeasonChanged({getState, dispatch}: StateContext<SeasonStateModel>, action: UpdateRemoteSettingKey) {
         if (action.key !== 'current_season') {
             return;
@@ -63,7 +77,7 @@ export class SeasonState {
                     this.analyticsService.logEvent('season_changed', {newSeason: newSeason.Name});
                     return dispatch(new CurrentSeasonChanged(newSeason));
                 }
-                return of();
+                return of(null);
             });
             // dispatch(new GetCurrentSeason());
         }
@@ -74,12 +88,13 @@ export class SeasonState {
         const state = getState();
         return dispatch(new SetSeasonLoading(true)).pipe(
             switchMap(() => this.seasonsService.findCurrentSeason()),
-            switchMap((seasonEntry: SeasonEntry) => {
-                if (seasonEntry.Name !== state.currentSeason?.Name) {
-                    this.analyticsService.logEvent('season_changed', {newSeason: seasonEntry.Name});
-                    return dispatch(new CurrentSeasonChanged(seasonEntry));
+            switchMap((activeSeason: SeasonEntry) => {
+                if (activeSeason.Name !== state.currentSeason?.Name) {
+                    this.analyticsService.logEvent('season_changed', {newSeason: activeSeason.Name});
+                    return dispatch(new CurrentSeasonChanged(activeSeason));
                 }
-                return of();
+                patchState({lastUpdated: Date.now()});
+                return of([]);
             }),
             catchError((err: Error) => of(dispatch(new GetCurrentSeasonFailure(err)))),
             finalize(() => dispatch(new SetSeasonLoading(false)))
@@ -101,13 +116,17 @@ export class SeasonState {
 
     @Action(CurrentSeasonChanged)
     async setCurrentSeason(ctx: StateContext<SeasonStateModel>, action: CurrentSeasonChanged) {
-        return ctx.patchState({currentSeason: action.season});
+        return ctx.patchState({currentSeason: action.season, lastUpdated: Date.now(), error: null});
     }
 
     @Action(SetSeasonLoading)
     setLoading(ctx: StateContext<SeasonStateModel>, action: SetSeasonLoading) {
-
         return ctx.patchState({loading: action.loading});
+    }
+
+    @Action(GetCurrentSeasonFailure)
+    setCurrentSeasonFailure(ctx: StateContext<SeasonStateModel>, action: GetCurrentSeasonFailure) {
+        return ctx.patchState({error: action.error, lastUpdated: Date.now()});
     }
 
 

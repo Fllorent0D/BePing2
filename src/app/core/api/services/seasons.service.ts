@@ -66,6 +66,49 @@ export class SeasonsService extends BaseService {
   }
 
   /**
+   * Path part for operation findCurrentSeason
+   */
+  static readonly FindCurrentSeasonPath = '/v1/seasons/current';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findCurrentSeason()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findCurrentSeason$Response(params?: {
+  }): Observable<StrictHttpResponse<SeasonEntry>> {
+
+    const rb = new RequestBuilder(this.rootUrl, SeasonsService.FindCurrentSeasonPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<SeasonEntry>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findCurrentSeason$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findCurrentSeason(params?: {
+  }): Observable<SeasonEntry> {
+
+    return this.findCurrentSeason$Response(params).pipe(
+      map((r: StrictHttpResponse<SeasonEntry>) => r.body as SeasonEntry)
+    );
+  }
+
+  /**
    * Path part for operation findSeasonById
    */
   static readonly FindSeasonByIdPath = '/v1/seasons/{seasonId}';
@@ -107,49 +150,6 @@ export class SeasonsService extends BaseService {
   }): Observable<SeasonEntry> {
 
     return this.findSeasonById$Response(params).pipe(
-      map((r: StrictHttpResponse<SeasonEntry>) => r.body as SeasonEntry)
-    );
-  }
-
-  /**
-   * Path part for operation findCurrentSeason
-   */
-  static readonly FindCurrentSeasonPath = '/v1/seasons/current';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findCurrentSeason()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findCurrentSeason$Response(params?: {
-  }): Observable<StrictHttpResponse<SeasonEntry>> {
-
-    const rb = new RequestBuilder(this.rootUrl, SeasonsService.FindCurrentSeasonPath, 'get');
-    if (params) {
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<SeasonEntry>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `findCurrentSeason$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  findCurrentSeason(params?: {
-  }): Observable<SeasonEntry> {
-
-    return this.findCurrentSeason$Response(params).pipe(
       map((r: StrictHttpResponse<SeasonEntry>) => r.body as SeasonEntry)
     );
   }

@@ -56,7 +56,6 @@ export class SearchPageComponent implements OnInit {
         this.searchControl = new FormControl<string>('');
         this.searchInput$ = this.searchControl.valueChanges.pipe(
             debounceTime(300),
-            tap((terms: string) => this.analyticsService.logEvent('search', {search_term: terms})),
             shareReplay(1),
             startWith('')
         );
@@ -95,12 +94,15 @@ export class SearchPageComponent implements OnInit {
 
         this.membersFound$ = this.searchInput$.pipe(
             mergeMap(val => {
-                    console.log('useMemberLookup', useMemberLookup);
                     return iif(
                         () => !!(val?.length >= 3 && !/\d/.test(val)),
                         this.memberService.findAllMembers({nameSearch: val}).pipe(
+                            tap(() => this.analyticsService.logEvent('search', {search_term: val})),
                             map((results) => ({isLoading: false, results})),
-                            startWith({isLoading: true})
+                            startWith({isLoading: true}),
+                            catchError(() => {
+                                return of({isLoading: false});
+                            }),
                         ),
                         of({isLoading: false, results: []})
                     );

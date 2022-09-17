@@ -1,32 +1,42 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
         <ion-title
                 *ngIf="currentMemberEntry$|async as memberEntry">{{memberEntry.FirstName | titlecase}} {{memberEntry.LastName | titlecase}}</ion-title>
         <ion-buttons slot="end">
+            <ion-button (click)="share()">
+                <ion-icon
+                        size="small"
+                        [name]="'share-outline'"
+                        slot="icon-only">
+                </ion-icon>
+            </ion-button>
             <beping-favorite-btn
                     (clicked)="toggleFavorite()"
                     [enabled]="isFavorite$|async"
             ></beping-favorite-btn>
             <ion-button (click)="openMenu()">
-                <ion-icon slot="icon-only" icon="ellipsis-vertical"></ion-icon>
+                <ion-icon slot="icon-only" icon="ellipsis-vertical" size="small"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding-top">
-    <beping-player-content
-            [categoriesAvailable]="categoriesAvailable$|async"
-            [currentCategory]="currentCategory$|async"
-            [currentMemberEntry]="currentMemberEntry$|async"
-            [latestMatches]="latestMatches$|async"
-            [displayELO]="displayELO$|async"
-            [displayNumericRanking]="displayNumericRanking$|async"
-            [database]="database$|async"
-            [numericRankings]="numericRankings$|async">
-    </beping-player-content>
+<ion-content>
+    <ng-container *ngIf="(currentMemberEntry$|async); else loading">
+        <beping-player-content
+                [categoriesAvailable]="categoriesAvailable$|async"
+                [currentCategory]="currentCategory$|async"
+                [currentMemberEntry]="currentMemberEntry$|async"
+                [latestMatches]="latestMatches$|async"
+                [displayELO]="displayELO$|async"
+                [displayNumericRanking]="displayNumericRanking$|async"
+                [database]="database$|async"
+                [numericRankings]="numericRankings$|async">
+        </beping-player-content>
+    </ng-container>
+
     <ng-container *ngIf="categoriesAvailable$|async as playercategories">
         <ion-fab *ngIf="playercategories.length > 1" horizontal="end" slot="fixed" vertical="bottom">
             <ion-fab-button>
@@ -44,5 +54,47 @@
         </ion-fab>
 
     </ng-container>
+    <ng-template #loading>
+        <ion-toolbar color="light" class="ion-text-center">
+            <ion-chip>
+                <ion-skeleton-text style="width: 40px" [animated]="true"></ion-skeleton-text>
+            </ion-chip>
+            <ion-chip>
+                <ion-skeleton-text style="width: 40px" [animated]="true"></ion-skeleton-text>
+            </ion-chip>
+            <ion-chip>
+                <ion-skeleton-text style="width: 40px" [animated]="true"></ion-skeleton-text>
+            </ion-chip>
+        </ion-toolbar>
+        <ion-list [inset]="true" [lines]="'inset'">
+            <ion-item>
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 10px">
+                    <ion-skeleton-text [animated]="true" class="ion-margin-horizontal"
+                                       style="width: 30%; height: 30px"></ion-skeleton-text>
+                    <ion-skeleton-text style="width: 40%; height: 100px"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true" class="ion-margin-horizontal"
+                                       style="width: 30%; height: 30px"></ion-skeleton-text>
+                </div>
+            </ion-item>
+        </ion-list>
+        <ion-list [inset]="true" [lines]="'inset'">
+            <ion-item>
+                <ion-skeleton-text style="width: 100%; height: 200px; margin: 20px 0 20px 0"></ion-skeleton-text>
+            </ion-item>
+        </ion-list>
+        <beping-skeleton-item-list-component [rows]="3"></beping-skeleton-item-list-component>
+        <ion-list [inset]="true" [lines]="'inset'">
+            <ion-item>
+                <ion-thumbnail style="width: 150px; height: 150px">
+                    <ion-skeleton-text ></ion-skeleton-text>
+                </ion-thumbnail>
+                <ion-label class="ion-padding-start" style="display: flex; flex-direction: column">
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                    <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+                </ion-label>
 
+            </ion-item>
+        </ion-list>
+    </ng-template>
 </ion-content>

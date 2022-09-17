@@ -23,7 +23,7 @@ import {AnalyticsService} from '../../core/services/firebase/analytics.service';
 import {DialogService} from '../../core/services/dialog-service.service';
 import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
 import {InAppBrowserService} from '../../core/services/browser/in-app-browser.service';
-import {RemoteSettingsState} from '../../core/store/remote-settings';
+import {RemoteSettingsState, UpdateRemoteSettingKey} from '../../core/store/remote-settings';
 import {InAppPurchasesState} from '../../core/store/in-app-purchases/in-app-purchases.state';
 import {PointsCalculatorState} from '../../core/store/points/points-calculator-state.service';
 import {IsProService} from '../../core/services/is-pro.service';

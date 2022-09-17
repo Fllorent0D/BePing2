@@ -15,10 +15,11 @@ export class TabtCredentialsInterceptor implements HttpInterceptor {
     }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        if (request.url.includes(environment.tabtUrl)) {
+        if (request.url.includes('tabt-rest.floca.be') || request.url.includes('api.beping.be')) {
             const afttState: TabTStateModel = this.store.selectSnapshot(TabTState);
+            const pathname = new URL(request.urlWithParams).pathname;
             if (afttState?.account && afttState?.password) {
-                this.analyticsService.logEvent('tabt_call', {url: request.urlWithParams, authenticated: 'yes'});
+                this.analyticsService.logEvent('tabt_call', {tabt_url: pathname, authenticated: 'yes'});
                 const authReq = request.clone({
                     headers: request.headers
                         .set('X-Tabt-Account', afttState.account)
@@ -27,7 +28,7 @@ export class TabtCredentialsInterceptor implements HttpInterceptor {
 
                 return next.handle(authReq);
             }
-            this.analyticsService.logEvent('tabt_call', {url: request.urlWithParams, authenticated: 'no'});
+            this.analyticsService.logEvent('tabt_call', {pathname, authenticated: 'no'});
         }
 
         return next.handle(request);

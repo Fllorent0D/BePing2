@@ -106,6 +106,26 @@ export function HttpLoaderFactory(http: HttpClient) {
                             version: 2
                         };
                     }
+                },
+                {
+                    version: 2,
+                    migrate: (state) => {
+                        console.log('Running migration to version 3');
+                        if (state?.season && !state.season.lastUpdated) {
+                            return {
+                                ...state,
+                                season: {
+                                    ...state.season,
+                                    lastUpdated: 0
+                                },
+                                version: 3
+                            };
+                        }
+                        return {
+                            ...state,
+                            version: 3
+                        };
+                    }
                 }
 
             ]

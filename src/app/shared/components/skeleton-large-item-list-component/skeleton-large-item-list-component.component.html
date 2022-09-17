@@ -1,0 +1,7 @@
+<ion-list [inset]="true" [lines]="'inset'">
+    <ion-item *ngFor="let t of skeletonRows">
+        <ion-label class="ion-padding-vertical">
+            <ion-skeleton-text [ngStyle]="{width: t+'%'}" animated="animated"></ion-skeleton-text>
+        </ion-label>
+    </ion-item>
+</ion-list>

@@ -8,6 +8,7 @@ export const environment = {
     production: false,
     hmr: false,
     tabtUrl: 'http://localhost:3004',
+    bepingUrl: 'https://beping.be',
     internalPages: {
         basePath: '/static/',
         registerRedirect: 'redirect-register.html'
@@ -31,7 +32,8 @@ export const environment = {
     firebaseConfig,
     productIds: {
         bepingPro: 'bepingproversion'
-    }
+    },
+    bepingContactEmail: 'contact@beping.be'
 };
 
 /*

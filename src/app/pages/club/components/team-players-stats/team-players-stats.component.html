@@ -17,7 +17,7 @@
     </ion-grid>
 
 </ion-header>
-<ion-list [inset]="true" [lines]="'inset'">
+<ion-list [inset]="true" [lines]="'inset'" *ngIf="stats; else loading">
     <ion-item (click)="playerClicked.emit(stat.uniqueIndex)" *ngFor="let stat of stats" detail class="no-start-padding">
         <ion-grid>
             <ion-row class="ion-align-items-center">
@@ -51,3 +51,6 @@
     </ion-item>
 </ion-list>
 
+<ng-template #loading>
+    <beping-skeleton-item-list-component [rows]="12"></beping-skeleton-item-list-component>
+</ng-template>

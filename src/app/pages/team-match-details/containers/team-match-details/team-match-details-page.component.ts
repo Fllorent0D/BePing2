@@ -10,6 +10,8 @@ import {TeamMatchesEntry} from '../../../../core/api/models/team-matches-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
 import {TeamEntry} from '../../../../core/api/models/team-entry';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
+import {ShareService} from '../../../../core/services/share.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
     selector: 'beping-team-match-details',
@@ -25,7 +27,9 @@ export class TeamMatchDetailsPage implements OnInit {
         private readonly matchesService: MatchesService,
         private readonly tabsNavigation: TabsNavigationService,
         private readonly clubService: ClubsService,
-        private readonly store: Store
+        private readonly store: Store,
+        private readonly shareService: ShareService,
+        private readonly translate: TranslateService
     ) {
     }
 
@@ -56,4 +60,15 @@ export class TeamMatchDetailsPage implements OnInit {
     }
 
 
+    share() {
+        this.match$.pipe(
+            take(1),
+            switchMap((match) =>
+                this.shareService.shareUrl(
+                    '/match/' + match.MatchUniqueId,
+                    match.MatchId,
+                    this.translate.instant('SHARE.SHARE_MATCH_ON_BEPING', {match: match.MatchId})
+                ))
+        ).subscribe();
+    }
 }

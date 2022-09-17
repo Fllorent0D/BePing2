@@ -24,6 +24,7 @@ import {IonContent, IonRouterOutlet, ViewDidEnter} from '@ionic/angular';
 import Swiper, {SwiperOptions} from 'swiper';
 import {SwiperComponent} from 'swiper/angular';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {ShareService} from '../../../../core/services/share.service';
 
 @UntilDestroy()
 @Component({
@@ -62,6 +63,7 @@ export class DivisionPageComponent implements OnInit, ViewDidEnter {
         private readonly translate: TranslateService,
         private readonly ionRouter: IonRouterOutlet,
         protected readonly ngZone: NgZone,
+        private readonly shareService: ShareService
     ) {
     }
 
@@ -175,5 +177,17 @@ export class DivisionPageComponent implements OnInit, ViewDidEnter {
                 dialogHeaderTranslationKey: 'CALENDAR.ADD_TO_CALENDAR',
                 dialogMessageTranslationKey: 'CALENDAR.ADD_ALL_DIVISION_MATCHES'
             }, this.ionRouter.nativeEl));
+    }
+
+    share() {
+        this.division$.pipe(
+            take(1),
+            switchMap((division) =>
+                this.shareService.shareUrl(
+                    '/division/' + division.DivisionId,
+                    division.DivisionName,
+                    this.translate.instant('SHARE.SHARE_DIVISION_ON_BEPING', {division: division.DivisionName})
+                ))
+        ).subscribe();
     }
 }

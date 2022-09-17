@@ -5,13 +5,16 @@
 -->
 
 <ng-container *ngIf="currentMemberEntry">
-    <beping-member-name-ranking-info
-            [displayName]="false"
-            [category]="currentCategory"
-            [displayELO]="displayELO"
-            [displayNumericRanking]="displayNumericRanking"
-            [member]="currentMemberEntry">
-    </beping-member-name-ranking-info>
+    <ion-toolbar color="light">
+        <beping-member-name-ranking-info
+                [displayName]="false"
+                [category]="currentCategory"
+                [displayELO]="displayELO"
+                [displayNumericRanking]="displayNumericRanking"
+                [member]="currentMemberEntry">
+        </beping-member-name-ranking-info>
+    </ion-toolbar>
+
     <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
 
         <beping-member-victory-chart

@@ -11,6 +11,8 @@ export class AlertFullPageComponent implements OnInit {
     @Input() message: string;
     @Input() icon = 'alert-outline';
     @Input() actionLabel: string;
+    @Input() actionLabelIcon = 'chevron-forward-outline';
+    @Input() actionLabelIconSlot = 'end';
     @Output() actionClicked: EventEmitter<void> = new EventEmitter<void>();
 
     constructor() {
