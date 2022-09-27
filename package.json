@@ -70,7 +70,7 @@
     "buffer": "6.0.3",
     "capacitor-calendar": "1.0.6",
     "capacitor-email-composer": "1.2.1",
-    "capacitor-native-settings": "4.0.0",
+    "capacitor-native-settings": "4.0.1",
     "capacitor-rate-app": "3.0.0",
     "chart.js": "3.9.1",
     "chartjs-adapter-date-fns": "2.0.0",
