@@ -54,7 +54,7 @@
     "@capacitor/text-zoom": "4.0.1",
     "@ionic-native/core": "5.36.0",
     "@ionic-native/in-app-purchase-2": "5.36.0",
-    "@ionic/angular": "6.3.1",
+    "@ionic/angular": "6.3.2",
     "@ionic/core": "6.3.1",
     "@joinflux/firebase-remote-config": "0.5.2",
     "@ngneat/until-destroy": "9.2.2",
