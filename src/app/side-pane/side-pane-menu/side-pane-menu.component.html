@@ -1,0 +1,47 @@
+<ion-menu contentId="main" #menu>
+    <ion-header class="ion-no-border">
+        <ion-toolbar #toolbar mode="md" style="--background: transparent;">
+
+            <ion-title>
+                <span>BePing<ion-badge color="primary" mode="ios">Pro</ion-badge></span>
+            </ion-title>
+
+        </ion-toolbar>
+    </ion-header>
+    <ion-content [scrollY]="false">
+        <ion-list [lines]="'none'">
+            <div>
+                <ion-item detail-icon="" [routerLinkActive]="'active'" [routerLink]="['/side-pane/homeTab']" [routerDirection]="'root'">
+                    <ion-icon name="home-outline" slot="start"></ion-icon>
+                    <ion-label>Accueil</ion-label>
+                </ion-item>
+                <ion-item detail-icon="" [routerLinkActive]="'active'" [routerLink]="['/side-pane/divisionsTab']" [routerDirection]="'root'">
+                    <ion-icon name="list-outline" slot="start"></ion-icon>
+                    <ion-label>Divisions</ion-label>
+                </ion-item>
+                <ion-item detail-icon="" [routerLinkActive]="'active'" [routerLink]="['/side-pane/favoritesTab']" [routerDirection]="'root'">
+                    <ion-icon name="star-outline" slot="start"></ion-icon>
+                    <ion-label>Favoris</ion-label>
+                </ion-item>
+                <ion-item detail-icon="" [routerLinkActive]="'active'" [routerLink]="['/side-pane/tournamentsTab']" [routerDirection]="'root'">
+                    <ion-icon name="trophy-outline" slot="start"></ion-icon>
+                    <ion-label>Tournois</ion-label>
+                </ion-item>
+                <ion-item detail-icon="" [routerLinkActive]="'active'" [routerLink]="['/side-pane/searchTab']" [routerDirection]="'root'">
+                    <ion-icon name="search-outline" slot="start"></ion-icon>
+                    <ion-label>Recherche</ion-label>
+                </ion-item>
+                <ion-item detail-icon="" [routerLinkActive]="'active'" [routerLink]="['/side-pane/calculatorTab/points-calculator']" [routerDirection]="'root'">
+                    <ion-icon name="calculator-outline" slot="start"></ion-icon>
+                    <ion-label>Calculette</ion-label>
+                </ion-item>
+            </div>
+
+            <ion-item detail-icon="" [routerLinkActive]="'active'" [routerLink]="['/side-pane/settingsTab/settings']" [routerDirection]="'root'">
+                <ion-icon name="cog-outline" slot="start"></ion-icon>
+                <ion-label>Réglages</ion-label>
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</ion-menu>

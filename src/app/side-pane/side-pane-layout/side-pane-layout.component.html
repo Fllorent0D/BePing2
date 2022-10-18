@@ -1,0 +1,73 @@
+<ion-split-pane [when]="landscape"  contentId="main">
+    <!--  the side menu  -->
+    <ng-container *ngTemplateOutlet="menu"></ng-container>
+
+    <!-- the main content -->
+    <ion-router-outlet id="main"></ion-router-outlet>
+</ion-split-pane>
+
+
+<ng-template #menu>
+    <ion-menu #ionMenu contentId="main" type="overlay">
+        <ion-header class="ion-no-border">
+            <ion-toolbar #toolbar mode="md" style="--background: transparent;">
+                <ion-buttons slot="start">
+                    <ion-img class="beping-icon" src="/assets/imgs/icon.png"></ion-img>
+                </ion-buttons>
+                <ion-title>
+                    <span>BePing<ion-badge color="primary" class="ion-margin-start" mode="ios">Pro</ion-badge></span>
+                </ion-title>
+
+            </ion-toolbar>
+        </ion-header>
+        <ion-content [scrollY]="false">
+            <ion-list [lines]="'none'">
+                <div>
+                    <ion-item [routerDirection]="'root'" [routerLinkActive]="'active'"
+                              [routerLink]="['/side-pane/homeTab']"
+                              detail-icon="">
+                        <ion-icon name="home-outline" slot="start"></ion-icon>
+                        <ion-label>{{'SIDEMENU.HOME'|translate}}</ion-label>
+                    </ion-item>
+                    <ion-item [routerDirection]="'root'" [routerLinkActive]="'active'"
+                              [routerLink]="['/side-pane/divisionsTab']"
+                              detail-icon="">
+                        <ion-icon name="list-outline" slot="start"></ion-icon>
+                        <ion-label>{{'COMMON.DIVISIONS'|translate}}</ion-label>
+                    </ion-item>
+                    <ion-item [routerDirection]="'root'" [routerLinkActive]="'active'"
+                              [routerLink]="['/side-pane/favoritesTab']"
+                              detail-icon="">
+                        <ion-icon name="star-outline" slot="start"></ion-icon>
+                        <ion-label>{{'RESULTS_BY_DIVISION.FAVORITES.FAVORITES'|translate}}</ion-label>
+                    </ion-item>
+                    <ion-item [routerDirection]="'root'" [routerLinkActive]="'active'"
+                              [routerLink]="['/side-pane/tournamentsTab']"
+                              detail-icon="">
+                        <ion-icon name="trophy-outline" slot="start"></ion-icon>
+                        <ion-label>{{'COMMON.TOURNAMENTS'|translate}}</ion-label>
+                    </ion-item>
+                    <ion-item [routerDirection]="'root'" [routerLinkActive]="'active'"
+                              [routerLink]="['/side-pane/searchTab']"
+                              detail-icon="">
+                        <ion-icon name="search-outline" slot="start"></ion-icon>
+                        <ion-label>{{'SEARCH.SEARCH'|translate}}</ion-label>
+                    </ion-item>
+                    <ion-item [routerDirection]="'root'" [routerLinkActive]="'active'"
+                              [routerLink]="['/side-pane/calculatorTab/points-calculator']" detail-icon="">
+                        <ion-icon name="calculator-outline" slot="start"></ion-icon>
+                        <ion-label>{{'CALCULATOR.POINTS_CALCULATOR'|translate}}</ion-label>
+                    </ion-item>
+                </div>
+
+                <ion-item [routerDirection]="'root'" [routerLinkActive]="'active'"
+                          [routerLink]="['/side-pane/settingsTab/settings']" detail-icon="">
+                    <ion-icon name="cog-outline" slot="start"></ion-icon>
+                    <ion-label>{{'SETTINGS.SETTINGS'|translate}}</ion-label>
+                </ion-item>
+
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+
+</ng-template>

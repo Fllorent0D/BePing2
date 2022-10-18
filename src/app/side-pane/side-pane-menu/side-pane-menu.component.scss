@@ -1,0 +1,44 @@
+.beping-icon {
+    width: 2rem;
+    height: auto;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 0.4rem;
+    margin-left: 10px;
+}
+
+ion-header > ion-toolbar > ion-title {
+    padding-inline: 10px;
+}
+
+ion-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    height: 100%;
+    --background: transparent;
+
+ion-item {
+    margin-bottom: 3px;
+    --background: transparent !important;
+    margin-left: 10px;
+    margin-right: 20px;
+    border-radius: 15px;
+}
+
+ion-item.active, ion-item.active:hover {
+    --background: var(--ion-color-primary) !important;
+    color: var(--ion-color-primary-contrast);
+ion-icon{
+    color: var(--ion-color-primary-contrast);
+
+}
+}
+
+#main{
+    --ion-background-color: yellow !important;
+}
+
+}
