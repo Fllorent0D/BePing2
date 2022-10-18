@@ -24,7 +24,7 @@
         </ion-col>
     </ion-row>
 </ion-grid>
-<ion-list>
+<ion-list [inset]="true">
     <ion-item>
         <ion-label>{{'HEAD_2_HEAD.VICTORY_AGAINST'|translate:{name: head2headData.playersInfo.opponentPlayerName | titlecase} }}</ion-label>
         <ion-label class="ion-text-end ion-text-wrap">{{head2headData.victoryCount}}</ion-label>

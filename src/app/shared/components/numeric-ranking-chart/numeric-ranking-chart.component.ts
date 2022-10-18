@@ -96,7 +96,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
             maintainAspectRatio: true,
             plugins: {
                 legend: {
-                    display: false,
+                    display: true,
                     position: 'top',
                     align: 'end',
                     labels: {
@@ -114,22 +114,16 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
                         label: {
                             content: bounds.ranking,
                             font: {
-                                size: 9
+                                size: 12
                             },
                             position: 'end',
                             borderJoinStyle: 'round',
                             borderRadius: 50,
                             backgroundColor: 'rgba(0,0,0,0.36)',
-                            enabled: true,
+                            display: true,
                         },
                         borderDash: [10, 15],
                     })),
-                }
-            },
-            layout: {
-                padding: {
-                    left: -80,
-                    bottom: 0
                 }
             },
             scales: {
@@ -156,7 +150,8 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
                     },
                     ticks: {
                         mirror: false
-                    }
+                    },
+                    display: true
                 },
                 y: {
                     grid: {
@@ -165,7 +160,6 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
                     },
                     ticks: {
                         mirror: true,
-                        padding: 30
                     }
                 }
             },

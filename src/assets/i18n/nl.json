@@ -422,6 +422,18 @@
     "REGION_VTTL": "Landelijk VTTL",
     "IWB": "IWB"
   },
+  "PROVINCES": {
+    "HAINAUT": "Provincie Henegouwen",
+    "VLAAMS_BRABANT_BR": "Province Vlaams-Brabant",
+    "OOST_VLANDEREN": "Provincie Oost-Vlaanderen",
+    "ANTWERP": "Provincie Antwerpen",
+    "WEST_VLAANDEREN": "Provincie West-Vlaanderen",
+    "LIMBURG": "Provincie Limburg",
+    "BRUSSELS_BRABANT_WALLON": "Province Waals-Brabant",
+    "NAMUR": "Provincie Namen",
+    "LIEGE": "Provincie Luik",
+    "LUXEMBOURG": "Provincie Luxemburg"
+  },
   "PROVINCE": "Provincie",
   "REGIONAL": "Landelijk",
   "PROVINCE_SHORT": "Prov.",

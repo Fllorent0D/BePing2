@@ -169,13 +169,13 @@ ion-fab-button[data-desc]::after {
     height: 9px;
     transition: width 5s;
     border-radius: 50px;
-    background: #5B8BF7;
+    background: var(--ion-color-primary);
     color: #2a3137;
     display: inline-block;
   }
 
   span:last-child {
-    background: #F09694;
+    background: var(--ion-color-danger);
   }
 
 }

@@ -331,7 +331,7 @@
     "PARTNERSHIP": {
       "TITLE": "Partenaires",
       "ROTATIO": "Rotatio",
-      "ROTATIO_SUBTITLE": "Un équipement à tout épreuve",
+      "ROTATIO_SUBTITLE": "Un équipement à toute épreuve",
       "TTMANAGER": "TT Manager",
       "TTMANAGER_SUBTITLE": "Gestionnaire de clubs, équipes et feuilles de matchs interclubs"
     }
@@ -418,6 +418,18 @@
     "LUXEMBOURG": "Luxembourg",
     "REGION_VTTL": "Régional VTTL",
     "IWB": "IWB"
+  },
+  "PROVINCES": {
+    "HAINAUT": "Province du Hainaut",
+    "VLAAMS_BRABANT_BR": "Province du Brabant flamand",
+    "OOST_VLANDEREN": "Province de Flandre occidentale",
+    "ANTWERP": "Province d'Anvers",
+    "WEST_VLAANDEREN": "Province de Flandre orientale",
+    "LIMBURG": "Province de Limbourg",
+    "BRUSSELS_BRABANT_WALLON": "Province du Brabant wallon",
+    "NAMUR": "Province de Namur",
+    "LIEGE": "Province de Liège",
+    "LUXEMBOURG": "Province du Luxembourg"
   },
   "PROVINCE": "Province",
   "REGIONAL": "Régional",
@@ -531,12 +543,12 @@
         }
       }
     },
-    "ADD_MATCH": "Ajouter un résulat",
+    "ADD_MATCH": "Ajouter un résultat",
     "POINTS": "Points",
     "EQUIVALENT_RANKING": "Classement équivalent",
     "CATEGORY": "Categorie",
     "OPPONENT": "Adversaire",
-    "CHOOSE_OPPONENT": "Choisir adversaire",
+    "CHOOSE_OPPONENT": "Choisir un adversaire",
     "MATCH_RESULT": "Résultat du match"
   },
   "CALENDAR": {

@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Select, Store} from '@ngxs/store';
 import {PLAYER_CATEGORY} from '../../core/models/user';
 import {iif, Observable, of, ReplaySubject} from 'rxjs';
 import {UserMemberEntry, UserState} from '../../core/store/user/user.state';
-import {delay, map, shareReplay, switchMap, take, tap} from 'rxjs/operators';
+import {delay, map, shareReplay, switchMap, tap} from 'rxjs/operators';
 import {IonRouterOutlet, LoadingController, ModalController, Platform} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
@@ -23,12 +23,13 @@ import {AnalyticsService} from '../../core/services/firebase/analytics.service';
 import {DialogService} from '../../core/services/dialog-service.service';
 import {TabsNavigationService} from '../../core/services/navigation/tabs-navigation.service';
 import {InAppBrowserService} from '../../core/services/browser/in-app-browser.service';
-import {RemoteSettingsState, UpdateRemoteSettingKey} from '../../core/store/remote-settings';
+import {RemoteSettingsState} from '../../core/store/remote-settings';
 import {InAppPurchasesState} from '../../core/store/in-app-purchases/in-app-purchases.state';
 import {PointsCalculatorState} from '../../core/store/points/points-calculator-state.service';
 import {IsProService} from '../../core/services/is-pro.service';
 import {DismissDashboardProPopup} from '../../core/store/in-app-purchases/in-app-purchases.actions';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {isPlatform} from '@ionic/core';
+import {OrientationType, ScreenOrientation, ScreenOrientationChange} from '@capawesome/capacitor-screen-orientation';
 
 @Component({
     selector: 'beping-explore-container',
@@ -43,6 +44,8 @@ export class ExploreContainerComponent implements OnInit {
     latestMatches$: Observable<TeamMatchesEntry[]>;
     isLoading$: Observable<boolean>;
     pointsInCalculator$: Observable<number>;
+    isTablet = isPlatform('tablet');
+    landscape: boolean;
 
     @Select(TabTState.isLoggedIn) isLoggedIn$: Observable<boolean>;
     @Select(SettingsState.getCurrentDatabase) database: Observable<TABT_DATABASES>;
@@ -69,7 +72,8 @@ export class ExploreContainerComponent implements OnInit {
         private readonly platform: Platform,
         private readonly tabNavigator: TabsNavigationService,
         private readonly inAppBrowser: InAppBrowserService,
-        private readonly isProService: IsProService
+        private readonly isProService: IsProService,
+        private readonly changeDetectionRef: ChangeDetectorRef
     ) {
 
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
@@ -94,9 +98,24 @@ export class ExploreContainerComponent implements OnInit {
             switchMap((category: PLAYER_CATEGORY) => this.store.select(UserState.getLatestMatchesForCategory(category))),
             shareReplay(1)
         );
+        ScreenOrientation.getCurrentOrientation().then(orientation => this.changeOrientation(orientation.type));
+        ScreenOrientation.addListener('screenOrientationChange', (change: ScreenOrientationChange) => {
+            this.changeOrientation(change.type);
+        });
+
     }
 
     ngOnInit() {
+    }
+
+    changeOrientation(orientation: OrientationType) {
+        console.log('ORIENTATION:::', orientation);
+        this.landscape = [
+            OrientationType.LANDSCAPE_PRIMARY,
+            OrientationType.LANDSCAPE_SECONDARY,
+            OrientationType.LANDSCAPE
+        ].includes(orientation);
+        this.changeDetectionRef.detectChanges();
     }
 
     async categoryClicked(category: PLAYER_CATEGORY) {

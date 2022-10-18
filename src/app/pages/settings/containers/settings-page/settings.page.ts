@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Optional, ViewChild} from '@angular/core';
 import {IonNav, ModalController} from '@ionic/angular';
 import {Observable} from 'rxjs';
 import {Select, Store} from '@ngxs/store';
@@ -74,7 +74,7 @@ export class SettingsPage implements OnInit, OnDestroy {
     constructor(
         private readonly modalCtrl: ModalController,
         private readonly store: Store,
-        private readonly ionNav: IonNav,
+        @Optional() private readonly ionNav: IonNav,
         private readonly translate: TranslateService,
         private readonly internalIdService: InternalIdentifiersService,
         private readonly browser: InAppBrowserService,
@@ -110,7 +110,12 @@ export class SettingsPage implements OnInit, OnDestroy {
     }
 
     async changeMember() {
+        if (!this.ionNav) {
+
+            return;
+        }
         this.ionNav.push(ChooseMainMemberClubComponent);
+
         /*
         const modal = await this.modalCtrl.create({
             component: ModalBaseComponent,
@@ -189,7 +194,8 @@ export class SettingsPage implements OnInit, OnDestroy {
             new Reset(ClubsState),
         ]).pipe(
             switchMap(() => {
-                const actions = [new GetDivisions(),
+                const actions = [
+                    new GetDivisions(),
                     new GetClubs(),
                     new GetCurrentSeason()
                 ];

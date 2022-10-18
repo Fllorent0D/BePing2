@@ -26,6 +26,7 @@ def capacitor_pods
   pod 'CapacitorSplashScreen', :path => '../../node_modules/@capacitor/splash-screen'
   pod 'CapacitorStatusBar', :path => '../../node_modules/@capacitor/status-bar'
   pod 'CapacitorTextZoom', :path => '../../node_modules/@capacitor/text-zoom'
+  pod 'CapawesomeCapacitorScreenOrientation', :path => '../../node_modules/@capawesome/capacitor-screen-orientation'
   pod 'JoinfluxFirebaseRemoteConfig', :path => '../../node_modules/@joinflux/firebase-remote-config'
   pod 'ProteansoftwareCapacitorStartNavigation', :path => '../../node_modules/@proteansoftware/capacitor-start-navigation'
   pod 'CapacitorCalendar', :path => '../../node_modules/capacitor-calendar'

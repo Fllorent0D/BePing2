@@ -66,7 +66,7 @@ export class InAppPurchasesService {
 
     private setupListeners(ctx?: StateContext<InAppPurchasesState>) {
         this.inAppPurchaseStore.error((err) => {
-            this.crashlytics.recordException({message: err.message, domain: 'in-app-purchase'});
+            this.crashlytics.recordException(err.message, err);
             this.toastController.create({
                 message: this.translateService.instant('ERROR_TABT.INTERNAL'),
                 duration: 3000,

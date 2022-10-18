@@ -22,7 +22,7 @@ export class RemoteConfigService {
             await FirebaseRemoteConfig.fetchAndActivate();
             this.refreshRemoteConfig();
         } catch (e) {
-            this.crashlytics.recordException({message: 'Error when loading remote config plugin: ' + e.message});
+            this.crashlytics.recordException('Error when loading remote config plugin: ' + e.message, e);
         }
 
     }

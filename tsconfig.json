@@ -8,11 +8,11 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": false,
-    "module": "esnext",
+    "module": "ES2020",
     "moduleResolution": "node",
     "importHelpers": true,
     "skipLibCheck": true,
-    "target": "es2020",
+    "target": "ES2017",
     "lib": [
       "es2019",
       "dom"

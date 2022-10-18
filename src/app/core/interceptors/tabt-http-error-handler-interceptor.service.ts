@@ -26,7 +26,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                     const dialogService = this.injector.get(DialogService);
                     switch (err.status) {
                         case 403:
-                            this.crashlytics.recordException({message: err.message});
+                            this.crashlytics.recordException(err.message, err);
                             dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.FORBIDDEN'),
                                 color: 'medium',
@@ -34,7 +34,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                             });
                             break;
                         case 429:
-                            this.crashlytics.recordException({message: err.message});
+                            this.crashlytics.recordException(err.message, err);
                             dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.TOO_MANY_REQUESTS'),
                                 color: 'medium',
@@ -42,7 +42,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                             });
                             break;
                         case 400:
-                            this.crashlytics.recordException({message: err.message});
+                            this.crashlytics.recordException(err.message, err);
                             dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.BAD_REQUEST', {error: err.statusText}),
                                 color: 'medium',
@@ -50,7 +50,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                             });
                             break;
                         case 0:
-                            this.crashlytics.recordException({message: err.message});
+                            this.crashlytics.recordException(err.message, err);
                             dialogService.showToast({
                                 message: translateService.instant('SETTINGS.NEED_INTERNET_TO_REFRESH', {error: err.statusText}),
                                 color: 'medium',
@@ -62,7 +62,7 @@ export class TabtHttpErrorHandlerInterceptor implements HttpInterceptor {
                             break;
                         default:
                         case 500:
-                            this.crashlytics.recordException({message: err.message});
+                            this.crashlytics.recordException(err.message, err);
                             dialogService.showToast({
                                 message: translateService.instant('ERROR_TABT.INTERNAL', {error: err.message}),
                                 color: 'medium',

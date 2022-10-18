@@ -31,8 +31,13 @@ svg {
 }
 
 .only-number {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
 }
 
-
+.red-stroke{
+  stroke: var(--ion-color-danger);
+}
+.blue-stroke{
+  stroke: var(--ion-color-primary);
+}
 

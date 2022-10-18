@@ -16,18 +16,18 @@ import {
 } from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
 import {catchError, finalize, map, switchMap, tap} from 'rxjs/operators';
-import {sub} from 'date-fns';
+import {format, sub} from 'date-fns';
 import {PLAYER_CATEGORY} from '../../models/user';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
 import {TabTState} from './tab-t-state.service';
 import {MembersService} from '../../api/services/members.service';
-import {AnalyticsService} from '../../services/firebase/analytics.service';
 import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
 import {ClubsService} from '../../api/services/clubs.service';
-import {of} from 'rxjs';
-import {DeepPartial} from 'chart.js/types/utils';
 import {CurrentSeasonChanged} from '../season';
 import {CrashlyticsService} from '../../services/crashlytics.service';
+import {RankingMethodName, RankingService} from '../../services/tabt/ranking.service';
+import {DeepPartial} from 'chart.js/types/utils';
+import {of} from 'rxjs';
 
 export interface UserMemberEntry extends MemberEntry {
     numericRankings?: WeeklyNumericRanking[];
@@ -74,6 +74,7 @@ export class UserState implements NgxsOnInit {
         private readonly memberPlayerCategoryService: PlayerCategoryService,
         private readonly memberService: MembersService,
         private readonly clubService: ClubsService,
+        private readonly rankingService: RankingService,
         // private readonly analyticsService: AnalyticsService,
         private readonly crashlytics: CrashlyticsService
     ) {
@@ -205,23 +206,16 @@ export class UserState implements NgxsOnInit {
                 const categories: PLAYER_CATEGORY[] = Object.keys(memberEntries) as PLAYER_CATEGORY[];
                 const actions: Array<any> = [];
 
-                const shouldUpdateMemberEntries = forceUpdate || categories.reduce((acc: boolean, category: PLAYER_CATEGORY) => {
-                    const resultsStored = state.memberEntries[category].ResultEntries;
-                    const resultsReceived = memberEntries[category].ResultEntries;
-                    if (resultsStored?.length > resultsReceived?.length) {
-                        return false;
-                    }
-                    return acc;
-                }, true);
+                const shouldUpdateMemberEntries = forceUpdate || categories.every((category: PLAYER_CATEGORY) => {
+                    const resultsStored = state.memberEntries[category].ResultEntries?.length ?? 0;
+                    const resultsReceived = memberEntries[category].ResultEntries?.length ?? 0;
+                    return resultsStored <= resultsReceived;
+                });
 
                 if (shouldUpdateMemberEntries) {
                     actions.push(new UpdateMemberEntriesSuccess(memberEntries));
                 } else {
-                    console.error(`Avoided wrong member update for ${action.memberUniqueIndex}. Received too less matches in one of the playing category.`);
-                    this.crashlytics.recordException({
-                        message: `Avoided wrong member update for ${action.memberUniqueIndex}. Received too less matches in one of the playing category.`,
-                        domain: 'user-state'
-                    });
+                    this.crashlytics.recordException(`Avoided wrong member update for ${action.memberUniqueIndex}. Received too less matches in one of the playing category`);
                 }
 
                 if (state.club.UniqueIndex !== memberEntries?.[categories?.[0]]?.Club) {
@@ -235,6 +229,7 @@ export class UserState implements NgxsOnInit {
 
     @Action([UpdateMemberEntriesSuccess])
     updateGraphs({patchState, getState}: StateContext<UserStateModel>, action: UpdateMemberEntriesSuccess) {
+
         return this.memberPlayerCategoryService.getMemberNumericRankings(action.memberEntries).pipe(
             map((rankingsPerCategory) => {
                 const state: UserStateModel = getState();
@@ -250,13 +245,35 @@ export class UserState implements NgxsOnInit {
             }),
             catchError(() => of(null))
         );
+
+        /*
+        const state: UserStateModel = getState();
+
+        for (const [category, memberEntry] of Object.entries(action.memberEntries)) {
+            const currentDate = format(new Date(), 'yyyy-MM-dd');
+            const belPts = this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS);
+            const eloPts = this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.ELO);
+            const indexExistingRanking = (state.numericRankings ?? [])?.findIndex((results) => results.weekName === currentDate);
+            if (indexExistingRanking === -1) {
+                memberEntry.numericRankings = [...(state?.numericRankings ?? []), {weekName: currentDate, elo: eloPts, bel: belPts}];
+            } else {
+                memberEntry.numericRankings[indexExistingRanking].elo = eloPts;
+                memberEntry.numericRankings[indexExistingRanking].bel = belPts;
+            }
+
+        }
+        patchState({memberEntries: action.memberEntries});
+*/
     }
 
     @Action([UpdateMemberEntriesSuccess])
     updateLatestMatches({dispatch}: StateContext<UserStateModel>, action: UpdateMemberEntriesSuccess) {
         return this.memberPlayerCategoryService.getMemberLatestMatches(action.memberEntries).pipe(
             switchMap((matches) => dispatch(new UpdateLatestMatchesSuccess(matches))),
-            catchError(() => dispatch(new SetLoading(false)))
+            catchError((err) => {
+                this.crashlytics.recordException(`Unable to update latest matches`, err);
+                return dispatch(new SetLoading(false));
+            })
         );
     }
 

@@ -24,7 +24,7 @@ export class PointCalculatorService {
         const diff = Math.round(Math.max(basePoint, result.opponentRanking) - Math.min(basePoint, result.opponentRanking));
         const isExpected = (result.opponentRanking > basePoint && result.victory === MATCH_RESULT.DEFEAT)
             || (result.opponentRanking < basePoint && result.victory === MATCH_RESULT.VICTORY);
-        // Getting points from the diffenrence of bel ranking between players
+        // Getting points from the difference of bel ranking between players
         const pointsLimits: PointsBounding = this.findBoundingPointsForPointDiff(diff, category);
         const points: number = isExpected ? pointsLimits.expectedResult : pointsLimits.unexpectedResult;
 

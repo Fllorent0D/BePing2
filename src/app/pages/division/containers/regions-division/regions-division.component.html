@@ -1,5 +1,8 @@
 <ion-header>
     <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
         <ion-title>{{'COMMON.DIVISIONS'|translate}}</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -23,9 +26,7 @@
                 <ion-icon color="primary" name="star" size="large"></ion-icon>
             </ion-avatar>
             <ion-label class="ion-padding-vertical">
-
                 {{'DIVISION_LEVEL.SUPER_DIVISION_WOMEN'|translate}}
-
             </ion-label>
         </ion-item>
         <ion-item (click)="navigateToDivisionList(Level.NATIONAL)" detail>
@@ -61,9 +62,7 @@
                     </svg>
                 </ion-avatar>
                 <ion-label class="ion-padding-vertical">
-
                     {{'REGIONAL'|translate}} {{'DIVISION_LEVEL.IWB'|translate}}
-
                 </ion-label>
             </ion-item>
             <ion-item (click)="navigateToDivisionList(Level.LIEGE)" detail>
@@ -75,10 +74,7 @@
 </svg>
                 </ion-avatar>
                 <ion-label class="ion-padding-vertical">
-
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIEGE'|translate}}
-
-
+                    {{'PROVINCES.LIEGE'|translate}}
                 </ion-label>
             </ion-item>
             <ion-item (click)="navigateToDivisionList(Level.HAINAUT)" detail>
@@ -93,10 +89,7 @@
                 </ion-avatar>
                 <ion-label
                         class="ion-padding-vertical">
-
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.HAINAUT'|translate}}
-
-
+                    {{'PROVINCES.HAINAUT'|translate}}
                 </ion-label>
             </ion-item>
 
@@ -111,9 +104,7 @@
                 </ion-avatar>
                 <ion-label
                         class="ion-padding-vertical">
-
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.BRUSSELS_BRABANT_WALLON'|translate}}
-
+                    {{'PROVINCES.BRUSSELS_BRABANT_WALLON'|translate}}
                 </ion-label>
             </ion-item>
             <ion-item (click)="navigateToDivisionList(Level.NAMUR)" detail>
@@ -127,11 +118,8 @@
                 </ion-avatar>
                 <ion-label
                         class="ion-padding-vertical">
-
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.NAMUR'|translate}}
-
+                  {{'PROVINCES.NAMUR'|translate}}
                 </ion-label>
-
             </ion-item>
 
             <ion-item (click)="navigateToDivisionList(Level.LUXEMBOURG)" detail>
@@ -144,9 +132,7 @@
                 </ion-avatar>
                 <ion-label
                         class="ion-padding-vertical">
-
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LUXEMBOURG'|translate}}
-
+                    {{'PROVINCES.LUXEMBOURG'|translate}}
                 </ion-label>
             </ion-item>
 
@@ -165,11 +151,8 @@
                 </svg>
                 </ion-avatar>
                 <ion-label class="ion-padding-vertical">
-
                     {{'DIVISION_LEVEL.REGION_VTTL'|translate}}
-
                 </ion-label>
-
             </ion-item>
             <ion-item (click)="navigateToDivisionList(Level.VLAAMS_BRABANT_BR)" detail>
                 <ion-avatar class="region-icon" slot="start">
@@ -182,7 +165,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.VLAAMS_BRABANT_BR'|translate}}
+                    {{'PROVINCES.VLAAMS_BRABANT_BR'|translate}}
 
                 </ion-label>
 
@@ -200,7 +183,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.OOST_VLANDEREN'|translate}}
+                   {{'PROVINCES.OOST_VLANDEREN'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -215,7 +198,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.ANTWERP'|translate}}
+                     {{'PROVINCES.ANTWERP'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -230,7 +213,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.WEST_VLAANDEREN'|translate}}
+                    {{'PROVINCES.WEST_VLAANDEREN'|translate}}
 
                 </ion-label>
             </ion-item>
@@ -247,7 +230,7 @@
                 <ion-label
                         class="ion-padding-vertical">
 
-                    {{'PROVINCE_SHORT'|translate}} {{'DIVISION_LEVEL.LIMBURG'|translate}}
+                    {{'PROVINCES.LIMBURG'|translate}}
 
                 </ion-label>
             </ion-item>

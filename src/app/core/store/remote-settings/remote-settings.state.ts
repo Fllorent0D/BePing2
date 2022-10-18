@@ -117,7 +117,7 @@ export class RemoteSettingsState {
     updateSeason({dispatch, getState}: StateContext<RemoteSettingsStateModel>, {key, value}: UpdateRemoteSettingKey) {
         const state = getState();
 
-        if (key !== 'current_season' && state.current_season !== value) {
+        if (key !== 'current_season' || state.current_season === value) {
             return;
         }
         console.log('Set new season', key, value);

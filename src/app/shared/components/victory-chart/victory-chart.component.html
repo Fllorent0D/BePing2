@@ -4,21 +4,27 @@
             stroke-width="2"></circle>
 
 
-    <circle #redCircle *ngIf="redPct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 24,strokeOffset:24}}" [attr.stroke-dasharray]="redDashArray" class="donut-segment path" cx="21"
-            cy="22" fill="transparent" id="redCircle"
-            r="15.91549430918954" stroke="#F09694" stroke-dashoffset="24" stroke-linecap="round"
+    <circle #redCircle *ngIf="redPct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: redDashArray, strokeOffsetStart: 23.4,strokeOffset:23.4}}"
+            [attr.stroke-dasharray]="redDashArray"
+            class="donut-segment path red-stroke"
+            cx="21"
+            cy="22" fill="transparent"
+            id="redCircle"
+            r="15.91549430918954"
+            stroke-dashoffset="23.4"
+            stroke-linecap="round"
             stroke-width="3">
-        >
     </circle>
-    <circle #blueCircle *ngIf="bluePct > 0" [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 24), strokeOffsetStart: 27.6}}" [attr.stroke-dasharray]="blueDashArray" [attr.stroke-dashoffset]="100 - redPct + 24" class="donut-segment"
+    <circle #blueCircle *ngIf="bluePct > 0"
+            [@circleAnimation]="{value: ':enter', params: { dasharray: blueDashArray, strokeOffset: (100 - redPct + 23.25), strokeOffsetStart: 27.6}}" [attr.stroke-dasharray]="blueDashArray" [attr.stroke-dashoffset]="100 - redPct + 23.25"
+            class="donut-segment blue-stroke"
             cx="21" cy="22" fill="transparent"
             r="15.91549430918954"
-            stroke="#5B8BF7"
             stroke-linecap="round" stroke-width="3"></circle>
 
 
     <g class="chart-text">
-        <text [attr.y]="subtitle ? '55%' : '68%'" [class.only-number]="!subtitle" class="chart-number" x="50%">
+        <text [attr.y]="subtitle ? '60%' : '68%'" [class.only-number]="!subtitle" class="chart-number" x="50%">
             {{title}}
         </text>
         <text class="chart-label" x="50%" y="50%">

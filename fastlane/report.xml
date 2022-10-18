@@ -5,65 +5,74 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.00023">
+      <testcase classname="fastlane.lanes" name="00: Verifying fastlane version" time="0.000248">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: Switch to ios align_versioning_and_bump lane" time="8.5e-05">
+      <testcase classname="fastlane.lanes" name="01: Switch to android align_versioning_and_bump lane" time="9.2e-05">
         
       </testcase>
     
       
       <testcase classname="fastlane.lanes" name="02: cat ../package.json | grep version | head -1 | awk -F: &apos;{ print $2 }&apos; | sed &apos;s/[&quot;,]//g&apos; | sed -e &apos;s/^[[:space:]]*//&apos; |tr -d &apos;
-&apos;" time="0.008454">
+&apos;" time="0.015092">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: increment_version_number_in_xcodeproj" time="0.028869">
+      <testcase classname="fastlane.lanes" name="03: increment_version_name" time="0.001873">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: increment_build_number_in_xcodeproj" time="0.016864">
+      <testcase classname="fastlane.lanes" name="04: increment_version_code" time="0.001446">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: Switch to ios build_ios lane" time="9.7e-05">
+      <testcase classname="fastlane.lanes" name="05: Switch to android build_android lane" time="7.8e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: Switch to ios build_ionic_prod lane" time="5.8e-05">
+      <testcase classname="fastlane.lanes" name="06: Switch to android build_ionic_prod lane" time="6.1e-05">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: ionic cap copy --prod" time="11.777482">
+      <testcase classname="fastlane.lanes" name="07: ionic cap copy --prod" time="13.544066">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="08: match" time="7.046686">
+      <testcase classname="fastlane.lanes" name="08: Switch to android align_versioning_and_bump lane" time="0.000199">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="09: build_app" time="43.015551">
+      <testcase classname="fastlane.lanes" name="09: cat ../package.json | grep version | head -1 | awk -F: &apos;{ print $2 }&apos; | sed &apos;s/[&quot;,]//g&apos; | sed -e &apos;s/^[[:space:]]*//&apos; |tr -d &apos;
+&apos;" time="0.023039">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="10: changelog_from_git_commits" time="0.046725">
+      <testcase classname="fastlane.lanes" name="10: increment_version_name" time="0.001114">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="11: upload_to_testflight" time="8506.990017">
+      <testcase classname="fastlane.lanes" name="11: increment_version_code" time="0.000513">
         
-          <failure message="/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/actions/actions_helper.rb:67:in `execute_action&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/runner.rb:255:in `block in execute_action&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/runner.rb:229:in `chdir&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/runner.rb:229:in `execute_action&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/runner.rb:157:in `trigger_action_by_name&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/fast_file.rb:159:in `method_missing&apos;&#10;Fastfile:48:in `block (2 levels) in parsing_binding&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/lane.rb:33:in `call&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/runner.rb:49:in `block in execute&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/runner.rb:45:in `chdir&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/runner.rb:45:in `execute&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/lane_manager.rb:47:in `cruise_lane&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/command_line_handler.rb:36:in `handle&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/commands_generator.rb:110:in `block (2 levels) in run&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/commander-4.6.0/lib/commander/command.rb:187:in `call&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/commander-4.6.0/lib/commander/command.rb:157:in `run&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/commander-4.6.0/lib/commander/runner.rb:444:in `run_active_command&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane_core/lib/fastlane_core/ui/fastlane_runner.rb:124:in `run!&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/commander-4.6.0/lib/commander/delegates.rb:18:in `run!&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/commands_generator.rb:354:in `run&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/commands_generator.rb:43:in `start&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/fastlane/lib/fastlane/cli_tools_distributor.rb:123:in `take_off&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/gems/fastlane-2.209.0/bin/fastlane:23:in `&lt;top (required)&gt;&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/bin/fastlane:25:in `load&apos;&#10;/opt/homebrew/Cellar/fastlane/2.209.0/libexec/bin/fastlane:25:in `&lt;main&gt;&apos;&#10;&#10;Another build is in review. - Another build is in review." />
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="12: assembleRelease" time="6.517977">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="13: upload_to_play_store" time="15.275439">
         
       </testcase>
     

@@ -9,6 +9,7 @@ import {
     IsPro
 } from './in-app-purchases.actions';
 import {sub} from 'date-fns';
+import {environment} from '../../../../environments/environment';
 
 export interface InAppPurchaseStateModel {
     isPro: boolean;
@@ -29,7 +30,7 @@ export class InAppPurchasesState {
 
     @Selector([InAppPurchasesState])
     static isPro(state: InAppPurchaseStateModel): boolean {
-        return state.isPro;
+        return !environment.production || state.isPro;
     }
 
     @Selector([InAppPurchasesState])

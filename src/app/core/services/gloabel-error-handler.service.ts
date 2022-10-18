@@ -17,7 +17,7 @@ export class GlobalErrorHandlerService implements ErrorHandler {
     private async handle(error: unknown): Promise<void> {
         try {
             const message = this.getMessageFromUnknownError(error);
-            await this.crashlytics.recordException({message});
+            this.crashlytics.recordException(message, error as Error);
         } catch (errorHandlerError) {
             console.error(`Internal exception:`, errorHandlerError);
         }

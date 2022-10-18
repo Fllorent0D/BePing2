@@ -7,7 +7,7 @@ import {firebaseConfig} from './firebase.config';
 export const environment = {
     production: false,
     hmr: false,
-    tabtUrl: 'http://localhost:3004',
+    tabtUrl: 'https://tabt-rest.floca.be',
     bepingUrl: 'https://beping.be',
     internalPages: {
         basePath: '/static/',

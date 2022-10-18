@@ -407,8 +407,8 @@
     "HAINAUT": "Hainaut",
     "VLAAMS_BRABANT_BR": "Flemish Brabant",
     "SUPER_DIVISION": "Super Division",
-    "SUPER_DIVISION_MEN": "Super Division men",
-    "SUPER_DIVISION_WOMEN": "Super Division women",
+    "SUPER_DIVISION_MEN": "Super Division Men",
+    "SUPER_DIVISION_WOMEN": "Super Division Women",
     "OOST_VLANDEREN": "East Flanders",
     "ANTWERP": "Antwerp",
     "WEST_VLAANDEREN": "West Flanders",
@@ -419,6 +419,18 @@
     "LUXEMBOURG": "Luxembourg",
     "REGION_VTTL": "Régional VTTL",
     "IWB": "IWB"
+  },
+  "PROVINCES": {
+    "HAINAUT": "Hainaut Province",
+    "VLAAMS_BRABANT_BR": "Flemish Brabant Province",
+    "OOST_VLANDEREN": "East Flanders Province",
+    "ANTWERP": "Antwerp Province",
+    "WEST_VLAANDEREN": "West Flanders Province",
+    "LIMBURG": "Limburg Province",
+    "BRUSSELS_BRABANT_WALLON": "Walloon Brabant Province",
+    "NAMUR": "Namur Province",
+    "LIEGE": "Liège Province",
+    "LUXEMBOURG": "Luxemburg Province"
   },
   "PROVINCE": "Province",
   "REGIONAL": "Regional",
@@ -501,7 +513,7 @@
       "CATEGORY": "Event category",
       "MEN": {
         "CHAMPIONSHIP": {
-          "R2": "SuperDivision",
+          "R2": "Super Division",
           "R5": "National 1\nNational 2",
           "R6": "National 3\nIWB\nLandelijk",
           "R7": "Proviciale 1",
@@ -517,7 +529,7 @@
       },
       "WOMEN": {
         "CHAMPIONSHIP": {
-          "R3": "SuperDivision",
+          "R3": "Super Division",
           "R4": "National 1",
           "R5": "National 2",
           "R6": "National 3\nIWB\nLandelijk",

@@ -51,26 +51,41 @@ registerLocaleData(localNL);
                 appState: AppStateService,
                 store: Store,
                 deeplink: DeepLinkService,
-                remoteConfig: RemoteConfigService
+                remoteConfig: RemoteConfigService,
+                crashlytics: CrashlyticsService
             ) => async () => {
-                const deviceInfo = await Device.getInfo();
-                const initTasks = [
-                    analyticsService.init(),
-                    appState.init(),
-                    deeplink.init(),
-                    remoteConfig.init()
-                ];
-                if (deviceInfo.platform !== 'web') {
-                    initTasks.push(iAPService.init());
-                }
-                await Promise.all(initTasks).catch(() => console.log('something failed at startup'));
-                // Doing it later for analytics to start
+                try {
+                    const deviceInfo = await Device.getInfo();
+                    const initTasks = [
+                        analyticsService.init(),
+                        appState.init(),
+                        deeplink.init(),
+                        remoteConfig.init()
+                    ];
+                    if (deviceInfo.platform !== 'web') {
+                        initTasks.push(iAPService.init());
+                    }
 
-                if (deviceInfo.platform !== 'web') {
-                    await SplashScreen.hide();
+                    await Promise.all(initTasks);
+                    console.log('init tasks done');
+
+                    if (deviceInfo.platform !== 'web') {
+                        await SplashScreen.hide();
+                    }
+                } catch (e) {
+                    console.error('Error during bootstrap:::', e);
+                    await crashlytics.recordException(`Unable to run bootstrap tasks`, e);
                 }
             },
-            deps: [AnalyticsService, InAppPurchasesService, AppStateService, Store, DeepLinkService, RemoteConfigService],
+            deps: [
+                AnalyticsService,
+                InAppPurchasesService,
+                AppStateService,
+                Store,
+                DeepLinkService,
+                RemoteConfigService,
+                CrashlyticsService
+            ],
             multi: true
         },
         InAppPurchase2,

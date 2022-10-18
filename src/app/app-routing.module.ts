@@ -1,11 +1,15 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {HasSeenOnboardingGuard} from './shared/guards/has-seen-onboarding.guard';
+import {TabletGuard} from './core/guards/tablet.guard';
 
 const routes: Routes = [
     {
         path: 'tabs',
         loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    },
+    {
+        path: 'side-pane',
+        loadChildren: () => import('./side-pane/side-pane.module').then(m => m.SidePaneModule),
     },
     {
         path: 'onboarding',
@@ -20,7 +24,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules, relativeLinkResolution: 'legacy'})
+        RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules, enableTracing: true})
     ],
     exports: [RouterModule]
 })

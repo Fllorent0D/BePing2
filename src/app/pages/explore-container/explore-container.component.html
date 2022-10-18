@@ -1,23 +1,26 @@
-<ion-header class="ion-no-border">
-    <ion-toolbar mode="md" #toolbar style="--background: transparent;">
+<ion-header class="ion-no-border" [style.padding-bottom]="isTablet && landscape ? '35px' : '0px'">
+    <ion-toolbar #toolbar mode="md" style="--background: transparent;" [hidden]="(isTablet && landscape)">
         <ion-buttons slot="start">
-            <ion-img src="/assets/imgs/icon.png" class="beping-icon"></ion-img>
+            <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
-            <span [class.shining]="isLoading$ | async"
-                  [class.white]="!(isLoading$ | async)">BePing
+            <span
+                    *ngIf="!isTablet"
+                    [class.shining]="isLoading$ | async"
+                    [class.white]="!(isLoading$ | async)">BePing
                 <ion-badge *ngIf="isPro$|async"
                            color="primary"
                            mode="ios">Pro</ion-badge>
             </span>
         </ion-title>
-        <ion-buttons slot="end">
-            <ion-button id="cart-btn" (click)="openCalculator()" [disabled]="!(currentMemberEntry$|async)"
-                        *ngIf="displayNumericRanking$|async">
+        <ion-buttons *ngIf="!isTablet" slot="end">
+            <ion-button (click)="openCalculator()" *ngIf="displayNumericRanking$|async"
+                        [disabled]="!(currentMemberEntry$|async)"
+                        id="cart-btn">
                 <ion-icon name="calculator-outline" slot="icon-only"></ion-icon>
                 <ng-container *ngIf="pointsInCalculator$|async as pointsCount">
-                    <ion-badge id="cart-badge" color="danger" mode="ios"
-                               *ngIf="pointsCount > 0">{{pointsCount}}</ion-badge>
+                    <ion-badge *ngIf="pointsCount > 0" color="danger" id="cart-badge"
+                               mode="ios">{{pointsCount}}</ion-badge>
 
                 </ng-container>
             </ion-button>
@@ -28,8 +31,8 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true" [fullscreen]="true" bepingFadeHeader [toolbar]="toolbar" class="ion-padding-bottom">
-    <ion-refresher #refresher (ionRefresh)="refresh($event)" slot="fixed" [disabled]="!(currentMemberEntry$ | async)">
+<ion-content [fullscreen]="true" [scrollEvents]="true" [toolbar]="toolbar" bepingFadeHeader class="ion-padding-bottom">
+    <ion-refresher #refresher (ionRefresh)="refresh($event)" [disabled]="!(currentMemberEntry$ | async)" slot="fixed">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <div class="extended-gradient"></div>
@@ -42,7 +45,7 @@
                 [member]="currentMemberEntry">
         </beping-member-name-ranking-info>
         <ion-card *ngIf="connectivityIssue$|async" [color]="'danger'" class="ion-padding">
-            <ion-icon name="cloud-offline-outline" size="small" class="ion-margin-end"></ion-icon>
+            <ion-icon class="ion-margin-end" name="cloud-offline-outline" size="small"></ion-icon>
 
             <ion-label class="multiline">
                 {{'CONNECTIVITY_ISSUE'|translate}}
@@ -51,9 +54,9 @@
 
 
         <beping-become-pro
-                *ngIf="showProBanner$|async"
+                (dismiss)="dismissPro()"
                 (openPro)="openPro()"
-                (dismiss)="dismissPro()">
+                *ngIf="showProBanner$|async">
         </beping-become-pro>
 
         <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
@@ -84,18 +87,18 @@
         </ng-container>
         <ng-template #noResults>
             <beping-alert-full-page
-                    icon="information-circle-outline"
-                    [title]="'DASHBOARD.NO_RESULTS'|translate">
+                    [title]="'DASHBOARD.NO_RESULTS'|translate"
+                    icon="information-circle-outline">
             </beping-alert-full-page>
         </ng-template>
     </ng-container>
     <ng-template #noMember>
         <beping-alert-full-page
-                icon="ellipsis-horizontal-outline"
-                [title]="'DASHBOARD.NO_PLAYER_SELECTED'|translate"
-                [message]="'DASHBOARD.YOU_CAN_SEE_RESULTS_BOTTOM_NAV'|translate"
-                [actionLabel]="'DASHBOARD.CHOOSE_PLAYER'|translate"
                 (actionClicked)="chooseMainMember()"
+                [actionLabel]="'DASHBOARD.CHOOSE_PLAYER'|translate"
+                [message]="'DASHBOARD.YOU_CAN_SEE_RESULTS_BOTTOM_NAV'|translate"
+                [title]="'DASHBOARD.NO_PLAYER_SELECTED'|translate"
+                icon="ellipsis-horizontal-outline"
         >
         </beping-alert-full-page>
     </ng-template>

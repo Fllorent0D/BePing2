@@ -1,5 +1,5 @@
 <ng-container *ngFor="let season of matchesPerSeason">
-    <ion-list>
+    <ion-list [inset]="true">
         <ion-list-header>
             <ion-label>
                 {{'COMMON.SEASON' | translate}} {{season[0].season + 1999}} - {{season[0].season + 2000}}
