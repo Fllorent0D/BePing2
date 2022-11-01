@@ -103,7 +103,7 @@
     "@angular/compiler-cli": "14.2.8",
     "@angular/language-service": "14.2.8",
     "@capacitor/cli": "4.4.0",
-    "@cypress/schematic": "2.2.0",
+    "@cypress/schematic": "2.3.0",
     "@ionic/angular-toolkit": "7.0.0",
     "@ngxs/devtools-plugin": "3.7.5",
     "@ngxs/hmr-plugin": "3.7.5",
