@@ -121,7 +121,7 @@
     "chromedriver": "107.0.3",
     "codelyzer": "6.0.2",
     "cypress": "11.1.0",
-    "eslint": "8.27.0",
+    "eslint": "8.28.0",
     "jasmine-core": "4.5.0",
     "jasmine-spec-reporter": "7.0.0",
     "karma": "6.4.1",
