@@ -81,7 +81,7 @@
     "date-fns": "2.29.3",
     "firebase": "9.14.0",
     "leaflet": "1.9.3",
-    "ng2-charts": "4.1.0",
+    "ng2-charts": "4.1.1",
     "ngx-pipes": "3.1.0",
     "rxjs": "7.6.0",
     "smoothscroll-polyfill": "0.4.4",
