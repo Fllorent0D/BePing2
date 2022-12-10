@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {OrientationType, ScreenOrientation, ScreenOrientationChange} from '@capawesome/capacitor-screen-orientation';
-import {IonMenu} from '@ionic/angular';
+import {IonMenu, IonRouterOutlet, NavController} from '@ionic/angular';
 import {NavigationEnd, Router, RouterEvent} from '@angular/router';
 import {filter} from 'rxjs/operators';
 
@@ -17,12 +17,15 @@ export class SidePaneLayoutComponent implements OnInit {
 
     constructor(
         private readonly router: Router,
-        private readonly changeDetectionRed: ChangeDetectorRef
+        private readonly changeDetectionRed: ChangeDetectorRef,
+        private readonly ionRouterOutlet: IonRouterOutlet,
+        private readonly navCtrl: NavController
     ) {
     }
 
     ngOnInit(): void {
         // @ts-ignore
+        this.navCtrl.setTopOutlet(this.ionRouterOutlet);
         ScreenOrientation.getCurrentOrientation().then(orientation => this.changeOrientation(orientation.type));
         ScreenOrientation.addListener('screenOrientationChange', (change: ScreenOrientationChange) => {
             this.changeOrientation(change.type);

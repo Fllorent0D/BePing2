@@ -4,7 +4,8 @@ import {SidePaneLayoutComponent} from './side-pane-layout/side-pane-layout.compo
 import {SidePaneRoutingModule} from './side-pane-routing.module';
 import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
-import { SidePaneMenuComponent } from './side-pane-menu/side-pane-menu.component';
+import {SidePaneMenuComponent} from './side-pane-menu/side-pane-menu.component';
+import {IonRouterOutlet, NavController} from '@ionic/angular';
 
 
 @NgModule({
