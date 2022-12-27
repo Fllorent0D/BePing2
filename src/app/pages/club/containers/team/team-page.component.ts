@@ -54,7 +54,7 @@ export class TeamPage implements OnInit, ViewDidEnter {
     club$: Observable<ClubEntry>;
 
     isFavorite$: Observable<boolean>;
-    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
+    bepingProEnabled$: Observable<boolean>;
 
     constructor(
         private readonly divisionsService: DivisionsService,
@@ -89,6 +89,8 @@ export class TeamPage implements OnInit, ViewDidEnter {
     }
 
     ngOnInit() {
+        this.bepingProEnabled$ = this.store.select(RemoteSettingsState.bepingProEnabled);
+
         this.clubIndex$ = this.activatedRoute.paramMap.pipe(
             map((params: ParamMap) => params.get('uniqueIndex') as string)
         );

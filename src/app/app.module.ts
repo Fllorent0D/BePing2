@@ -1,8 +1,8 @@
 import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {RouteReuseStrategy} from '@angular/router';
+import {Router, RouteReuseStrategy} from '@angular/router';
 
-import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {IonicModule, IonicRouteStrategy, NavController} from '@ionic/angular';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -23,6 +23,7 @@ import {RemoteConfigService} from './core/services/remote-config.service';
 import {SplashScreen} from '@capacitor/splash-screen';
 import {Store} from '@ngxs/store';
 import {DeepLinkService} from './core/services/deep-link.service';
+import {isPlatform} from '@ionic/core';
 
 registerLocaleData(localFR);
 registerLocaleData(localNL);
@@ -52,7 +53,8 @@ registerLocaleData(localNL);
                 store: Store,
                 deeplink: DeepLinkService,
                 remoteConfig: RemoteConfigService,
-                crashlytics: CrashlyticsService
+                crashlytics: CrashlyticsService,
+                navCtrl: NavController
             ) => async () => {
                 try {
                     const deviceInfo = await Device.getInfo();
@@ -72,6 +74,10 @@ registerLocaleData(localNL);
                     if (deviceInfo.platform !== 'web') {
                         await SplashScreen.hide();
                     }
+                    if (isPlatform('tablet')) {
+                        await navCtrl.navigateRoot('/side-pane/homeTab/home', {animated: false});
+                    }
+
                 } catch (e) {
                     console.error('Error during bootstrap:::', e);
                     await crashlytics.recordException(`Unable to run bootstrap tasks`, e);
@@ -84,7 +90,8 @@ registerLocaleData(localNL);
                 Store,
                 DeepLinkService,
                 RemoteConfigService,
-                CrashlyticsService
+                CrashlyticsService,
+                NavController
             ],
             multi: true
         },

@@ -37,7 +37,7 @@
                 </ion-item>
             </div>
 
-            <ion-item detail-icon="" [routerLinkActive]="'active'" [routerLink]="['/side-pane/settingsTab/settings']" [routerDirection]="'root'">
+            <ion-item detail-icon="" (click)="openSettings()">
                 <ion-icon name="cog-outline" slot="start"></ion-icon>
                 <ion-label>Réglages</ion-label>
             </ion-item>

@@ -1,6 +1,7 @@
-<ion-header class="ion-no-border" [style.padding-bottom]="isTablet && landscape ? '35px' : '0px'">
-    <ion-toolbar #toolbar mode="md" style="--background: transparent;" [hidden]="(isTablet && landscape)">
+<ion-header [style.padding-bottom]="isTablet && landscape ? '35px' : '0px'" class="ion-no-border">
+    <ion-toolbar #toolbar [hidden]="(isTablet && landscape)" mode="md" style="--background: transparent;">
         <ion-buttons slot="start">
+            <ion-img *ngIf="!isTablet" class="beping-icon" src="/assets/imgs/icon.png"></ion-img>
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
@@ -42,6 +43,7 @@
                 [category]="currentCategory$|async"
                 [displayELO]="displayELO$|async"
                 [displayNumericRanking]="displayNumericRanking$|async"
+                [numericRanking]="numericRanking$|async"
                 [member]="currentMemberEntry">
         </beping-member-name-ranking-info>
         <ion-card *ngIf="connectivityIssue$|async" [color]="'danger'" class="ion-padding">

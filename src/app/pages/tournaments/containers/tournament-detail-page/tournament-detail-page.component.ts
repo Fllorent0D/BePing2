@@ -16,7 +16,7 @@ import {StartNavigationService} from '../../../../core/services/start-navigation
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {CalendarService} from '../../../../core/services/calendar/calendar.service';
-import {Select} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 
 @Component({
@@ -38,7 +38,7 @@ export class TournamentDetailPageComponent implements OnInit {
     map: Map;
     Level = Level;
     osmAddress: OSMAddress;
-    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
+    bepingProEnabled$: Observable<boolean>;
 
 
     constructor(
@@ -52,13 +52,15 @@ export class TournamentDetailPageComponent implements OnInit {
         private readonly navigation: StartNavigationService,
         private readonly dialogService: DialogService,
         private readonly analyticsService: AnalyticsService,
-        private readonly calendarService: CalendarService
+        private readonly calendarService: CalendarService,
+        private readonly store: Store
     ) {
     }
 
     ngOnInit(): void {
+        this.bepingProEnabled$ = this.store.select(RemoteSettingsState.bepingProEnabled);
         this.tournament$ = this.activatedRoute.params.pipe(
-            map((params: Params) => params.id),
+            map((params: Params) => params?.['id']),
             switchMap((id: string) => this.tournamentService.findTournamentByIdV2({
                 withResults: true,
                 withRegistrations: true,

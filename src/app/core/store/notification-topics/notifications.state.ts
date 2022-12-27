@@ -19,6 +19,7 @@ import {PermissionState} from '@capacitor/core';
 import {CurrentSeasonChanged} from '../season';
 import {UpdateCurrentLang} from '../settings';
 import {TranslateService} from '@ngx-translate/core';
+import {asyncScheduler, of, scheduled} from 'rxjs';
 
 export interface NotificationsStateModel {
     permission: PermissionState | null;
@@ -84,6 +85,7 @@ export class NotificationsState implements NgxsOnInit {
             actions.push(new SubscriptionToTopicSuccessful(topic, response));
             return ctx.dispatch(actions);
         }
+        return scheduled([], asyncScheduler);
     }
 
     @Action([PermissionStateChanged])
@@ -165,7 +167,7 @@ export class NotificationsState implements NgxsOnInit {
     reSubscribeToCorrectLang(ctx: StateContext<NotificationsStateModel>, {lang}: UpdateCurrentLang) {
         const state = ctx.getState();
         if (state?.permission !== 'granted') {
-            return;
+            return scheduled([], asyncScheduler);
         }
         const existingTopics = state.topics;
 

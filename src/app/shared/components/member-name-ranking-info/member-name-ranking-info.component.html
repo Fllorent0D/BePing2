@@ -11,7 +11,7 @@
             <ion-chip>
                 <ion-label>
                     {{member.Ranking}}
-                    <span *ngIf="displayNumericRanking && nextRanking">
+                    <span *ngIf="displayNumericRanking && nextRanking && numericRanking">
                         <ion-icon name="arrow-forward-outline"></ion-icon>
                         {{nextRanking}}
                     </span>

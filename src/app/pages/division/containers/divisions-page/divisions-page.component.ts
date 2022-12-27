@@ -32,7 +32,7 @@ export class DivisionsPageComponent implements OnInit {
 
     ngOnInit() {
         this.level$ = this.activatedRoute.params.pipe(
-            map((params: Params) => params.level as Level),
+            map((params: Params): Level => params?.['level'] as Level),
             shareReplay(1)
         );
         this.divisions$ = this.level$.pipe(

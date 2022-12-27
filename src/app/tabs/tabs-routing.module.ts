@@ -36,23 +36,28 @@ const routes: Routes = [
         children: [
             {
                 path: 'homeTab',
-                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
+                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule),
+                pathMatch: 'prefix'
             },
             {
                 path: 'favoritesTab',
-                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
+                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule),
+                pathMatch: 'prefix'
             },
             {
                 path: 'divisionsTab',
-                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
+                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule),
+                pathMatch: 'prefix'
             },
             {
                 path: 'tournamentsTab',
-                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
+                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule),
+                pathMatch: 'prefix'
             },
             {
                 path: 'searchTab',
-                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule)
+                loadChildren: () => import('../pages/pages.module').then(m => m.PagesModule),
+                pathMatch: 'prefix'
             },
             {
                 path: '',

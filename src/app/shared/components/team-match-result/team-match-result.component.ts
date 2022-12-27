@@ -60,6 +60,7 @@ export class TeamMatchResultComponent implements OnInit {
         if (splitted?.length === 3) {
             return `${splitted[0]}:${splitted[1]}`;
         }
+        return '';
     }
 
     ngOnInit() {

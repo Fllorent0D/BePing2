@@ -43,9 +43,9 @@ export class OtherPlayersComponent implements OnInit {
     latestMatches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
     numericRankings$: Observable<WeeklyNumericRanking[]>;
-    @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
-    @Select(SettingsState.displayNumericRanking) displayNumericRanking$: Observable<boolean>;
-    @Select(SettingsState.getCurrentDatabase) database$: Observable<TABT_DATABASES>;
+    displayELO$: Observable<boolean>;
+    displayNumericRanking$: Observable<boolean>;
+    database$: Observable<TABT_DATABASES>;
 
     constructor(
         private readonly router: Router,
@@ -66,6 +66,10 @@ export class OtherPlayersComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.displayELO$ = this.store.select(SettingsState.displayELO);
+        this.displayNumericRanking$ = this.store.select(SettingsState.displayNumericRanking);
+        this.database$ = this.store.select(SettingsState.getCurrentDatabase);
+
         const {preferredPlayerCategory} = this.location.getState() as { preferredPlayerCategory?: PLAYER_CATEGORY };
 
         this.memberUniqueIndex$ = this.activatedRoute.paramMap.pipe(

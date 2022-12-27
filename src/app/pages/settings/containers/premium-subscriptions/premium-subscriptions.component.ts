@@ -28,8 +28,8 @@ export class PremiumSubscriptionsComponent implements OnInit {
 
     @Input() isModal = false;
 
-    @Select(InAppPurchasesState.isPro) isPro$: Observable<boolean>;
-    @Select(InAppPurchasesState.expiryDate) expiryDate$: Observable<Date | undefined>;
+    isPro$: Observable<boolean>;
+    expiryDate$: Observable<Date | undefined>;
     initProduct = 2;
     bepingProLowPrice$: Observable<IAPProduct>;
     bepingProMidPrice$: Observable<IAPProduct>;
@@ -47,6 +47,8 @@ export class PremiumSubscriptionsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isPro$ = this.store.select(InAppPurchasesState.isPro);
+        this.expiryDate$ = this.store.select(InAppPurchasesState.expiryDate);
         this.priceSlider = new FormControl(this.initProduct, [Validators.required]);
         this.bepingProLowPrice$ = this.inAppPurchasesService.iapPurchase(BePingIAP.BEPING_PRO_LOW_PRICE);
         this.bepingProMidPrice$ = this.inAppPurchasesService.iapPurchase(BePingIAP.BEPING_PRO_MID_PRICE);

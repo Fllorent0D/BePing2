@@ -60,8 +60,7 @@
                     </ion-item>
                 </div>
 
-                <ion-item [routerDirection]="'root'" [routerLinkActive]="'active'"
-                          [routerLink]="['/side-pane/settingsTab/settings']" detail-icon="">
+                <ion-item button (click)="openSettings()" [fill]="'outline'" detail-icon="">
                     <ion-icon name="cog-outline" slot="start"></ion-icon>
                     <ion-label>{{'SETTINGS.SETTINGS'|translate}}</ion-label>
                 </ion-item>

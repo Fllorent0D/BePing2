@@ -6,6 +6,7 @@ import {environment} from '../../../../environments/environment';
 import {CrashlyticsService} from '../../services/crashlytics.service';
 import {InAppPurchasesState, InAppPurchaseStateModel} from '../in-app-purchases/in-app-purchases.state';
 import {CurrentSeasonChanged, LoadSpecificSeason} from '../season';
+import {asyncScheduler, scheduled} from 'rxjs';
 
 
 export interface RemoteSettingsStateModel {
@@ -104,7 +105,7 @@ export class RemoteSettingsState {
         const state = getState();
         if (state[key] === value) {
             console.log('Not updating remote config', key, value);
-            return;
+            return scheduled([], asyncScheduler);
         }
         console.log('UPDATE KEY', key, value);
 
@@ -118,7 +119,7 @@ export class RemoteSettingsState {
         const state = getState();
 
         if (key !== 'current_season' || state.current_season === value) {
-            return;
+            return scheduled([], asyncScheduler);
         }
         console.log('Set new season', key, value);
         return dispatch(new LoadSpecificSeason(value));

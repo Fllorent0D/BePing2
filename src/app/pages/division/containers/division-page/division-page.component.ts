@@ -46,7 +46,7 @@ export class DivisionPageComponent implements OnInit, ViewDidEnter {
     matches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
 
-    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
+    bepingProEnabled$: Observable<boolean>;
     @ViewChild('swiper', {static: false}) swiper?: SwiperComponent;
     @ViewChild('ionContent', {static: false}) ionContent?: IonContent;
 
@@ -74,8 +74,9 @@ export class DivisionPageComponent implements OnInit, ViewDidEnter {
     }
 
     ngOnInit() {
+        this.bepingProEnabled$ = this.store.select(RemoteSettingsState.bepingProEnabled);
         this.divisionId$ = this.activatedRouted.params.pipe(
-            map((params: Params) => Number(params.divisionId)),
+            map((params: Params) => Number(params?.['divisionId'])),
             shareReplay(1)
         );
 

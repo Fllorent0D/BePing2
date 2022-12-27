@@ -4,10 +4,8 @@
 
 # You can see what browsers were selected by your queries by running:
 #   npx browserslist
-
-> 0.5%
-last 4 versions
 Chrome >= 60
-Firefox ESR
-not dead
-not IE 9-11 # For IE 9-11 support, remove 'not'.
+Firefox >=63
+Edge >=79
+Safari >=13
+iOS >=13

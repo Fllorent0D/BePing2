@@ -1,6 +1,6 @@
 import {Component, OnInit, Optional} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {Login} from '../../../core/store/user/aftt.actions';
 import {finalize, take} from 'rxjs/operators';
 import {IonNav, ModalController} from '@ionic/angular';
@@ -29,8 +29,8 @@ export class AfttLoginPage implements OnInit {
     loginForm: FormGroup<AfttLoginFormGroup>;
     loading = false;
 
-    @Select(SettingsState.getCurrentLang) lang$: Observable<LANG>;
-    @Select(UserState) userState$: Observable<UserStateModel>;
+    lang$: Observable<LANG>;
+    userState$: Observable<UserStateModel>;
 
     constructor(
         private readonly store: Store,
@@ -45,6 +45,9 @@ export class AfttLoginPage implements OnInit {
     }
 
     async ngOnInit() {
+        this.lang$ = this.store.select(SettingsState.getCurrentLang);
+        this.userState$ = this.store.select(UserState);
+
         this.loginForm = new FormGroup<AfttLoginFormGroup>({
             username: new FormControl<string>('', [Validators.required]),
             password: new FormControl<string>('', [Validators.required])

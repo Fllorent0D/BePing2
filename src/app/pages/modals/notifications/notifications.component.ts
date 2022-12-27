@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {FavoriteItem, FavoritesState} from '../../../core/store/favorites';
 import {Observable} from 'rxjs';
 import {NotificationsState} from '../../../core/store/notification-topics/notifications.state';
@@ -26,7 +26,7 @@ export class NotificationsComponent implements OnInit {
     membersTopics$: Observable<FavoriteWithTopic[]>;
     divisionsTopics$: Observable<FavoriteWithTopic[]>;
     matchesTopics$: Observable<FavoriteWithTopic[]>;
-    @Select(NotificationsState.topics) topics$: Observable<string[]>;
+    topics$: Observable<string[]>;
 
     notificationsPermIsDenied$: Observable<boolean>;
 
@@ -41,6 +41,7 @@ export class NotificationsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.topics$ = this.store.select(NotificationsState.topics);
         this.clubsTopics$ = this.store.select(FavoritesState.favoriteClubs).pipe(
             map((favs) => favs.map(fav => ({
                 ...fav,

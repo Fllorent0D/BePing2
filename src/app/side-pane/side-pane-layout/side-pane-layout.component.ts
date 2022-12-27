@@ -3,6 +3,10 @@ import {OrientationType, ScreenOrientation, ScreenOrientationChange} from '@capa
 import {IonMenu, IonRouterOutlet, NavController} from '@ionic/angular';
 import {NavigationEnd, Router, RouterEvent} from '@angular/router';
 import {filter} from 'rxjs/operators';
+import {ModalBaseComponent} from '../../pages/modals/modal-base/modal-base.component';
+import {SettingsPage} from '../../pages/settings/containers/settings-page/settings.page';
+import {AnalyticsService} from '../../core/services/firebase/analytics.service';
+import {DialogService} from '../../core/services/dialog-service.service';
 
 @Component({
     selector: 'beping-side-pane-layout',
@@ -19,7 +23,9 @@ export class SidePaneLayoutComponent implements OnInit {
         private readonly router: Router,
         private readonly changeDetectionRed: ChangeDetectorRef,
         private readonly ionRouterOutlet: IonRouterOutlet,
-        private readonly navCtrl: NavController
+        private readonly navCtrl: NavController,
+        private readonly analyticsService: AnalyticsService,
+        private readonly dialogService: DialogService
     ) {
     }
 
@@ -46,4 +52,16 @@ export class SidePaneLayoutComponent implements OnInit {
         this.changeDetectionRed.detectChanges();
     }
 
+    openSettings(){
+        this.analyticsService.logEvent('open_settings');
+
+        this.dialogService.showModal({
+            component: ModalBaseComponent,
+            canDismiss: true,
+            componentProps: {
+                rootPage: SettingsPage
+            },
+            presentingElement: this.ionRouterOutlet.nativeEl
+        });
+    }
 }

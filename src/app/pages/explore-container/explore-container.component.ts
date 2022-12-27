@@ -30,6 +30,7 @@ import {IsProService} from '../../core/services/is-pro.service';
 import {DismissDashboardProPopup} from '../../core/store/in-app-purchases/in-app-purchases.actions';
 import {isPlatform} from '@ionic/core';
 import {OrientationType, ScreenOrientation, ScreenOrientationChange} from '@capawesome/capacitor-screen-orientation';
+import { WeeklyNumericRanking } from 'src/app/core/api/models';
 
 @Component({
     selector: 'beping-explore-container',
@@ -41,20 +42,21 @@ export class ExploreContainerComponent implements OnInit {
     categoriesAvailable$: Observable<PLAYER_CATEGORY[]>;
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
     currentMemberEntry$: Observable<UserMemberEntry>;
+    numericRanking$: Observable<WeeklyNumericRanking[]>;
     latestMatches$: Observable<TeamMatchesEntry[]>;
     isLoading$: Observable<boolean>;
     pointsInCalculator$: Observable<number>;
     isTablet = isPlatform('tablet');
     landscape: boolean;
 
-    @Select(TabTState.isLoggedIn) isLoggedIn$: Observable<boolean>;
-    @Select(SettingsState.getCurrentDatabase) database: Observable<TABT_DATABASES>;
-    @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
-    @Select(SettingsState.displayNumericRanking) displayNumericRanking$: Observable<boolean>;
-    @Select(InAppPurchasesState.isPro) isPro$: Observable<boolean>;
-    @Select(InAppPurchasesState.showBePingProBanner) showProBanner$: Observable<boolean>;
-    @Select(RemoteSettingsState.partnershipRotatio) partnershipRotatio$: Observable<boolean>;
-    @Select(RemoteSettingsState.connectivityIssue) connectivityIssue$: Observable<boolean>;
+    isLoggedIn$: Observable<boolean>;
+    database: Observable<TABT_DATABASES>;
+    displayELO$: Observable<boolean>;
+    displayNumericRanking$: Observable<boolean>;
+    isPro$: Observable<boolean>;
+    showProBanner$: Observable<boolean>;
+    partnershipRotatio$: Observable<boolean>;
+    connectivityIssue$: Observable<boolean>;
     TABT_DATABASES = TABT_DATABASES;
 
     constructor(
@@ -75,7 +77,6 @@ export class ExploreContainerComponent implements OnInit {
         private readonly isProService: IsProService,
         private readonly changeDetectionRef: ChangeDetectorRef
     ) {
-
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
         this.isLoading$ = this.store.select(UserState.isLoading).pipe(
             switchMap((loading) => {
@@ -90,6 +91,10 @@ export class ExploreContainerComponent implements OnInit {
             tap((a) => console.log(a)),
             shareReplay(1)
         );
+
+        this.numericRanking$ = this.currentMemberEntry$.pipe(
+            map((memberEntry) => memberEntry?.numericRankings ?? []),
+        )
         this.pointsInCalculator$ = this.currentCategory$.pipe(
             switchMap((category) => this.store.select(PointsCalculatorState.pointsForPlayerCategory(category))),
             map((points) => points.length)
@@ -106,6 +111,13 @@ export class ExploreContainerComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.isLoggedIn$ = this.store.select(TabTState);
+        this.database = this.store.select(SettingsState.getCurrentDatabase);
+        this.displayNumericRanking$ = this.store.select(SettingsState.displayNumericRanking);
+        this.isPro$ = this.store.select(InAppPurchasesState.isPro);
+        this.showProBanner$ = this.store.select(InAppPurchasesState.showBePingProBanner);
+        this.partnershipRotatio$ = this.store.select(RemoteSettingsState.partnershipRotatio);
+        this.connectivityIssue$ = this.store.select(RemoteSettingsState.connectivityIssue);
     }
 
     changeOrientation(orientation: OrientationType) {

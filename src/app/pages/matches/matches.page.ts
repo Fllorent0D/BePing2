@@ -27,15 +27,13 @@ import {IsProService} from '../../core/services/is-pro.service';
 })
 export class MatchesPage implements OnInit {
 
-    @Select(FavoritesState.favoriteClubs) favoritesClub: Observable<FavoriteItem<string>[]>;
-    @Select(FavoritesState.favoriteMembers) favoritesMember: Observable<FavoriteItem<number>[]>;
-    @Select(FavoritesState.favoriteDivision) favoritesDivision: Observable<FavoriteItem<number>[]>;
-    @Select(FavoritesState.favoriteTeams) favoritesTeam: Observable<FavoriteItem<string>[]>;
-
-    @Select(UserState.getMemberClub) memberClub: Observable<ClubEntry | void>;
-
-    @Select(NotificationsState.topics) topics$: Observable<string[]>;
-    @Select(RemoteSettingsState.notificationsEnabled) notifications$: Observable<boolean>;
+    favoritesClub: Observable<FavoriteItem<string>[]>;
+    favoritesMember: Observable<FavoriteItem<number>[]>;
+    favoritesDivision: Observable<FavoriteItem<number>[]>;
+    favoritesTeam: Observable<FavoriteItem<string>[]>;
+    memberClub: Observable<ClubEntry | void>;
+    topics$: Observable<string[]>;
+    notifications$: Observable<boolean>;
     hasFavorites$: Observable<boolean>;
     clubName$: Observable<string>;
 
@@ -49,6 +47,13 @@ export class MatchesPage implements OnInit {
     }
 
     ngOnInit() {
+        this.favoritesClub = this.store.select(FavoritesState.favoriteClubs);
+        this.favoritesMember = this.store.select(FavoritesState.favoriteMembers);
+        this.favoritesDivision = this.store.select(FavoritesState.favoriteDivision);
+        this.favoritesTeam = this.store.select(FavoritesState.favoriteTeams);
+        this.memberClub = this.store.select(UserState.getMemberClub);
+        this.topics$ = this.store.select(NotificationsState.topics);
+        this.notifications$ = this.store.select(RemoteSettingsState.notificationsEnabled);
         this.hasFavorites$ = combineLatest([
             this.favoritesMember,
             this.favoritesDivision,

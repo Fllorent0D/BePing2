@@ -19,7 +19,7 @@ export class RegionsDivisionComponent implements OnInit {
 
     Level = Level;
 
-    @Select(SettingsState.getCurrentDatabase) database$: Observable<TABT_DATABASES>;
+    database$: Observable<TABT_DATABASES>;
     TABT_DATABASES = TABT_DATABASES;
 
     constructor(
@@ -30,6 +30,7 @@ export class RegionsDivisionComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.database$ = this.store.select(SettingsState.getCurrentDatabase);
     }
 
     navigateToDivisionList(level: Level) {

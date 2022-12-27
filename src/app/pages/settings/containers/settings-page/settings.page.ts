@@ -60,10 +60,10 @@ export class SettingsPage implements OnInit, OnDestroy {
     currentTheme$: Observable<THEME>;
     userState$: Observable<UserStateModel>;
 
-    @Select(InAppPurchasesState.isPro) isPro$: Observable<boolean>;
-    @Select(SettingsState.displayELO) displayELO$: Observable<boolean>;
-    @Select(SettingsState.displayNumericRanking) displayNumeric$: Observable<boolean>;
-    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
+    isPro$: Observable<boolean>;
+    displayELO$: Observable<boolean>;
+    displayNumeric$: Observable<boolean>;
+    bepingProEnabled$: Observable<boolean>;
 
     version: string;
     build: string;
@@ -85,6 +85,10 @@ export class SettingsPage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.bepingProEnabled$ = this.store.select(RemoteSettingsState.bepingProEnabled);
+        this.displayNumeric$ = this.store.select(SettingsState.displayNumericRanking);
+        this.displayELO$ = this.store.select(SettingsState.displayELO);
+        this.isPro$ = this.store.select(InAppPurchasesState.isPro);
         this.playerName$ = this.store.select(UserState.getPlayerName);
         this.clubName$ = this.store.select(UserState.getPlayerClubName);
         this.userState$ = this.store.select(UserState);

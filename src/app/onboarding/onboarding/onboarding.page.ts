@@ -16,6 +16,7 @@ import {ConditionsUsageComponent} from '../../pages/settings/containers/conditio
 import {Network} from '@capacitor/network';
 import {SwiperComponent} from 'swiper/angular';
 import {SwiperOptions} from 'swiper';
+import {FavoritesState} from '../../core/store/favorites';
 
 @Component({
     selector: 'beping-onboarding',
@@ -35,14 +36,14 @@ export class OnboardingPage implements OnInit, OnDestroy {
         },
     };
 
-    @Select(ClubsState.loading) clubsLoading$: Observable<boolean>;
-    @Select(ClubsState.error) clubsError$: Observable<Error | null>;
+    clubsLoading$: Observable<boolean>;
+    clubsError$: Observable<Error | null>;
 
-    @Select(DivisionsState.error) divisionsError$: Observable<Error | null>;
-    @Select(DivisionsState.loading) divisionsLoading$: Observable<boolean>;
+    divisionsError$: Observable<Error | null>;
+    divisionsLoading$: Observable<boolean>;
 
-    @Select(SeasonState.loading) seasonLoading$: Observable<boolean>;
-    @Select(DivisionsState.error) seasonError$: Observable<Error | null>;
+    seasonLoading$: Observable<boolean>;
+    seasonError$: Observable<Error | null>;
 
     acceptTermControl: FormControl<boolean> = new FormControl<boolean>(false, [Validators.required]);
 
@@ -63,6 +64,13 @@ export class OnboardingPage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.clubsLoading$ = this.store.select(ClubsState.loading);
+        this.clubsError$ = this.store.select(ClubsState.error);
+        this.divisionsLoading$ = this.store.select(DivisionsState.loading);
+        this.divisionsError$ = this.store.select(DivisionsState.error);
+        this.seasonLoading$ = this.store.select(SeasonState.loading);
+        this.seasonError$ = this.store.select(SeasonState.error);
+
         this.isLoading$ = combineLatest([
             this.clubsLoading$,
             this.divisionsLoading$,

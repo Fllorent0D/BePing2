@@ -9,7 +9,7 @@ import {NavController} from '@ionic/angular';
     templateUrl: 'tabs.page.html',
     styleUrls: ['tabs.page.scss']
 })
-export class TabsPage implements OnInit {
+export class TabsPage {
 
     selectedTab: string;
 
@@ -18,12 +18,6 @@ export class TabsPage implements OnInit {
         private readonly router: Router,
         private readonly navCtrl: NavController
     ) {
-    }
-
-    ngOnInit() {
-        if (isPlatform('tablet')) {
-            this.navCtrl.navigateRoot('/side-pane/homeTab/home', {animated: false});
-        }
     }
 
     tabChanged({tab}: { tab: string }) {

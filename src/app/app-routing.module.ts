@@ -6,14 +6,17 @@ const routes: Routes = [
     {
         path: 'tabs',
         loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+        pathMatch: 'prefix'
     },
     {
         path: 'side-pane',
         loadChildren: () => import('./side-pane/side-pane.module').then(m => m.SidePaneModule),
+        pathMatch: 'prefix'
     },
     {
         path: 'onboarding',
-        loadChildren: () => import('./onboarding/onboarding.module').then(m => m.OnboardingPageModule)
+        loadChildren: () => import('./onboarding/onboarding.module').then(m => m.OnboardingPageModule),
+        pathMatch: 'prefix'
     },
     {
         path: '',

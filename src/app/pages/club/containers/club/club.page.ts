@@ -62,7 +62,7 @@ export class ClubPage implements OnInit, ViewDidEnter {
     loadLater: Observable<TeamMatchesEntry[]>;
     CATEGORIES = [PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN, PLAYER_CATEGORY.YOUTH, PLAYER_CATEGORY.VETERANS];
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
-    @Select(RemoteSettingsState.bepingProEnabled) bepingProEnabled$: Observable<boolean>;
+    bepingProEnabled$: Observable<boolean>;
     @ViewChild('swiper', {static: false}) swiper?: SwiperComponent;
 
     constructor(
@@ -103,7 +103,7 @@ export class ClubPage implements OnInit, ViewDidEnter {
 
     ngOnInit() {
         this.currentCategory$.next(PLAYER_CATEGORY.MEN);
-
+        this.bepingProEnabled$ = this.store.select(RemoteSettingsState.bepingProEnabled);
         this.club$ = this.activatedRoute.paramMap.pipe(
             map((params: ParamMap) => params.get('uniqueIndex') as string),
             switchMap((uniqueIndex: string) => this.store.select(ClubsState.getClubByUniqueIndex(uniqueIndex)))
