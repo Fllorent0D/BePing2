@@ -77,7 +77,7 @@
     "chartjs-adapter-date-fns": "2.0.1",
     "chartjs-plugin-annotation": "2.1.0",
     "cordova-plugin-purchase": "11.0.0",
-    "core-js": "3.27.0",
+    "core-js": "3.27.1",
     "date-fns": "2.29.3",
     "firebase": "9.15.0",
     "leaflet": "1.9.3",
