@@ -2,7 +2,7 @@
   "extends": [
     "config:base"
   ],
-  "commitMessagePrefix": "chore(deps): ",
+  "commitMessagePrefix": "chore: ",
   "automergeType": "pr",
   "packageRules": [
     {
