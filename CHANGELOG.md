@@ -1,5 +1,12 @@
 
 
+### [2.7.34](https://github.com/Fllorent0D/BePing2/compare/v2.7.33...v2.7.34) (2023-01-11)
+
+
+### Chores
+
+* Update dependency @ionic/core to v6.4.2 ([d06128b](https://github.com/Fllorent0D/BePing2/commit/d06128b1a204ac600e6903fc02e58cf210b2df3d))
+
 ### [2.7.33](https://github.com/Fllorent0D/BePing2/compare/v2.7.32...v2.7.33) (2023-01-11)
 
 
