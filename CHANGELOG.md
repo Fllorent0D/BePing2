@@ -1,5 +1,12 @@
 
 
+### [2.7.38](https://github.com/Fllorent0D/BePing2/compare/v2.7.37...v2.7.38) (2023-01-12)
+
+
+### Chores
+
+* Update dependency androidx.appcompat:appcompat to v1.6.0 ([77750fa](https://github.com/Fllorent0D/BePing2/commit/77750fa4383b2a223b17449ae7a6459b7098583f))
+
 ### [2.7.37](https://github.com/Fllorent0D/BePing2/compare/v2.7.36...v2.7.37) (2023-01-12)
 
 
