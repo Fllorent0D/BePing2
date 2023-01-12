@@ -58,7 +58,7 @@
     "@ionic/angular": "6.4.2",
     "@ionic/core": "6.4.2",
     "@joinflux/firebase-remote-config": "0.6.0",
-    "@ngneat/until-destroy": "9.2.2",
+    "@ngneat/until-destroy": "9.2.3",
     "@ngx-translate/core": "14.0.0",
     "@ngx-translate/http-loader": "7.0.0",
     "@ngxs-labs/async-storage-plugin": "0.1.1",
