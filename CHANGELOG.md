@@ -1,5 +1,12 @@
 
 
+### [2.7.42](https://github.com/Fllorent0D/BePing2/compare/v2.7.41...v2.7.42) (2023-01-13)
+
+
+### Chores
+
+* Update dependency com.android.tools.build:gradle to v7.4.0 ([aace978](https://github.com/Fllorent0D/BePing2/commit/aace97899dd42d3c1892e8de81c94f4441eaea92))
+
 ### [2.7.41](https://github.com/Fllorent0D/BePing2/compare/v2.7.40...v2.7.41) (2023-01-13)
 
 
