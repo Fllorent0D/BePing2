@@ -1,5 +1,12 @@
 
 
+### [2.7.43](https://github.com/Fllorent0D/BePing2/compare/v2.7.42...v2.7.43) (2023-01-13)
+
+
+### Chores
+
+* Update dependency chromedriver to v109 ([b4d4a1a](https://github.com/Fllorent0D/BePing2/commit/b4d4a1a4c49c820c79738ada527d8a46ee194065))
+
 ### [2.7.42](https://github.com/Fllorent0D/BePing2/compare/v2.7.41...v2.7.42) (2023-01-13)
 
 
