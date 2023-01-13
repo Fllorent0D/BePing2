@@ -1,5 +1,12 @@
 
 
+### [2.7.41](https://github.com/Fllorent0D/BePing2/compare/v2.7.40...v2.7.41) (2023-01-13)
+
+
+### Chores
+
+* Update dependency chartjs-plugin-annotation to v2.1.2 ([da618af](https://github.com/Fllorent0D/BePing2/commit/da618af3c62df5851a95b4853606391a4b9d759b))
+
 ### [2.7.40](https://github.com/Fllorent0D/BePing2/compare/v2.7.39...v2.7.40) (2023-01-13)
 
 
