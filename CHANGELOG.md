@@ -1,5 +1,12 @@
 
 
+### [2.7.40](https://github.com/Fllorent0D/BePing2/compare/v2.7.39...v2.7.40) (2023-01-13)
+
+
+### Chores
+
+* Update dependency @ngneat/until-destroy to v9.2.3 ([884a7b4](https://github.com/Fllorent0D/BePing2/commit/884a7b405807e2726396ac9974fa360b8f401339))
+
 ### [2.7.39](https://github.com/Fllorent0D/BePing2/compare/v2.7.38...v2.7.39) (2023-01-12)
 
 
