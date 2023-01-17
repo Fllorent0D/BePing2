@@ -1,5 +1,12 @@
 
 
+### [2.7.47](https://github.com/Fllorent0D/BePing2/compare/v2.7.46...v2.7.47) (2023-01-17)
+
+
+### Chores
+
+* Update dependency swiper to v8.4.6 ([a63b669](https://github.com/Fllorent0D/BePing2/commit/a63b669ac3f713c7466bc0332f7ebb887adc81eb))
+
 ### [2.7.46](https://github.com/Fllorent0D/BePing2/compare/v2.7.45...v2.7.46) (2023-01-16)
 
 
