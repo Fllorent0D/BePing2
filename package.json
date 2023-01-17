@@ -89,7 +89,7 @@
     "smoothscroll-polyfill": "0.4.4",
     "stacktrace-js": "2.0.2",
     "sw-toolbox": "3.6.0",
-    "swiper": "8.4.5",
+    "swiper": "8.4.6",
     "tslib": "2.4.1",
     "zone.js": "0.12.0"
   },
