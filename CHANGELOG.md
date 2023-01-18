@@ -1,5 +1,12 @@
 
 
+### [2.7.49](https://github.com/Fllorent0D/BePing2/compare/v2.7.48...v2.7.49) (2023-01-18)
+
+
+### Chores
+
+* Update dependency @capacitor/browser to v4.1.1 ([6ab3d28](https://github.com/Fllorent0D/BePing2/commit/6ab3d2812af3c16f667f8831ad58f23180155eb1))
+
 ### [2.7.48](https://github.com/Fllorent0D/BePing2/compare/v2.7.47...v2.7.48) (2023-01-18)
 
 
