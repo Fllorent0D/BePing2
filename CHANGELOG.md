@@ -1,5 +1,12 @@
 
 
+### [2.7.51](https://github.com/Fllorent0D/BePing2/compare/v2.7.50...v2.7.51) (2023-01-18)
+
+
+### Chores
+
+* Update dependency @capacitor/splash-screen to v4.1.3 ([635234c](https://github.com/Fllorent0D/BePing2/commit/635234cffe09b7ef0c0bd5bc705e5c5cf49dbb39))
+
 ### [2.7.50](https://github.com/Fllorent0D/BePing2/compare/v2.7.49...v2.7.50) (2023-01-18)
 
 
