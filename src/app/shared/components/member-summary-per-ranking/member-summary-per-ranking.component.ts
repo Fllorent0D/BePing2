@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {MemberEntryResultEntry} from '../../../core/api/models/member-entry-result-entry';
 import {Platform} from '@ionic/angular';
+import {SwiperOptions} from 'swiper';
 
 @Component({
     selector: 'beping-member-summary-per-ranking',
@@ -8,7 +9,9 @@ import {Platform} from '@ionic/angular';
     styleUrls: ['./member-summary-per-ranking.component.scss']
 })
 export class MemberSummaryPerRankingComponent {
-
+    swiperConfig: SwiperOptions = {
+        slidesPerView: 1.1,
+    };
     resultsPerRanking: object;
     isTablet: boolean;
 
