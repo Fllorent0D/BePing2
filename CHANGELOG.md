@@ -1,5 +1,12 @@
 
 
+### [2.7.50](https://github.com/Fllorent0D/BePing2/compare/v2.7.49...v2.7.50) (2023-01-18)
+
+
+### Chores
+
+* Update dependency @capacitor/keyboard to v4.1.1 ([af7e8c7](https://github.com/Fllorent0D/BePing2/commit/af7e8c72161219fb7fa655101f3acd26373ce534))
+
 ### [2.7.49](https://github.com/Fllorent0D/BePing2/compare/v2.7.48...v2.7.49) (2023-01-18)
 
 
