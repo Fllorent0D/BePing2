@@ -1,5 +1,12 @@
 
 
+### [2.7.56](https://github.com/Fllorent0D/BePing2/compare/v2.7.55...v2.7.56) (2023-01-19)
+
+
+### Chores
+
+* Update dependency core-js to v3.27.2 ([bff0f81](https://github.com/Fllorent0D/BePing2/commit/bff0f8187d1b19a97728c5ae74603afe42c14bdd))
+
 ### [2.7.55](https://github.com/Fllorent0D/BePing2/compare/v2.7.54...v2.7.55) (2023-01-19)
 
 
