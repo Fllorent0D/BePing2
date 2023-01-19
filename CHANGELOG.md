@@ -1,5 +1,14 @@
 
 
+## [2.8.0](https://github.com/Fllorent0D/BePing2/compare/v2.7.56...v2.8.0) (2023-01-19)
+
+
+### Features
+
+* add swiper to member-summary-per-ranking.component.ts ([8ff6585](https://github.com/Fllorent0D/BePing2/commit/8ff6585cb6292db1e4e7b501b9ac2ff0ba4cd9bb))
+* big refactoring for numeric ranking ([3b40e30](https://github.com/Fllorent0D/BePing2/commit/3b40e30d08aeff1ccad7f021cd6742d83ab6c02f))
+* big refactoring for numeric ranking ([6133920](https://github.com/Fllorent0D/BePing2/commit/6133920424600c0288238e8c1df641348afce4c3))
+
 ### [2.7.56](https://github.com/Fllorent0D/BePing2/compare/v2.7.55...v2.7.56) (2023-01-19)
 
 
