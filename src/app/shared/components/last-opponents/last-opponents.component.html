@@ -1,5 +1,7 @@
 <beping-section-title *ngIf="lastOpponents?.length" [note]="'Voir tout'"
-                      [title]="'DASHBOARD.LATEST_INDIVIDUAL_MATCHES'|translate"></beping-section-title>
+                      [title]="'DASHBOARD.LATEST_INDIVIDUAL_MATCHES'|translate"
+                        (noteClicked)="openRankingOverview()"
+></beping-section-title>
 
 <ion-list [inset]="true" [lines]="'inset'">
     <ion-item *ngFor="let opponent of lastOpponents">

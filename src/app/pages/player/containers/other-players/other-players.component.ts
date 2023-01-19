@@ -8,10 +8,9 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {PlayerCategoryService} from '../../../../core/services/tabt/player-category.service';
 import {map, share, shareReplay, switchMap, take} from 'rxjs/operators';
 import {FavoritesState, ToggleMemberFromFavorites} from '../../../../core/store/favorites';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {MembersService} from '../../../../core/api/services/members.service';
 import {DialogService} from '../../../../core/services/dialog-service.service';
-import {WeeklyNumericRanking} from '../../../../core/api/models/weekly-numeric-ranking';
 import {SettingsState} from '../../../../core/store/settings';
 import {TABT_DATABASES} from '../../../../core/interceptors/tabt-database-interceptor.service';
 import {ActionSheetController, IonRouterOutlet} from '@ionic/angular';
@@ -25,8 +24,10 @@ import {
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {Face2FaceService} from '../../../../core/services/face2face/face-2-face.service';
 import {ShareService} from '../../../../core/services/share.service';
-import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchases.model';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
+import {WeeklyNumericPointsV3} from '../../../../core/api/models/weekly-numeric-points-v-3';
+import {NumericRankingState} from '../../../../core/store/user';
+import {WeeklyNumericRankingV3} from '../../../../core/api/models/weekly-numeric-ranking-v-3';
 
 @Component({
     selector: 'beping-other-players',
@@ -42,7 +43,7 @@ export class OtherPlayersComponent implements OnInit {
     userMemberEntries$: Observable<UserMemberEntries>;
     latestMatches$: Observable<TeamMatchesEntry[]>;
     isFavorite$: Observable<boolean>;
-    numericRankings$: Observable<WeeklyNumericRanking[]>;
+    numericRankings$: Observable<WeeklyNumericRankingV3>;
     displayELO$: Observable<boolean>;
     displayNumericRanking$: Observable<boolean>;
     database$: Observable<TABT_DATABASES>;
@@ -109,13 +110,14 @@ export class OtherPlayersComponent implements OnInit {
         ]).pipe(
             switchMap(([category, memberEntry]) => {
                 if ([PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN].includes(category)) {
-                    return this.membersService.findMemberNumericRankingsHistory({
+                    return this.membersService.findMemberNumericRankingsHistoryV3({
                         uniqueIndex: memberEntry.UniqueIndex,
                         category
                     });
                 }
                 return of(null);
-            })
+            }),
+            shareReplay(1)
         );
     }
 

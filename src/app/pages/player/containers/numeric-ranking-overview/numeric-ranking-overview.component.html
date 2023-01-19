@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <beping-localized-back-btn></beping-localized-back-btn>
+        </ion-buttons>
+        <ion-title>{{'HEAD_2_HEAD.TITLE_SHORT'|translate}}</ion-title>
+
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding-top">
+    <ng-container *ngFor="let date of weeklyRanking">
+        <ion-item-divider>
+            <ion-label>
+                {{ date.date | date }}
+            </ion-label>
+
+        </ion-item-divider>
+        <ion-list [inset]="true" [lines]="'inset'" >
+            <ion-item *ngFor="let opponent of date.opponents">
+                <!--<beping-card (click)="navigateToDetails()" [marging]="false" [padding]="false">-->
+                <ion-grid class="ion-no-padding">
+                    <ion-row class="ion-align-items-center">
+                        <ion-col class="ion-no-padding" size="6">
+                            <ion-label class="ion-text-wrap">
+                                {{opponent.opponentName |titlecase}}
+                            </ion-label>
+                        </ion-col>
+                        <ion-col class="ion-text-center ion-no-padding" size="2">
+                            <ion-label class="ion-no-margin small">{{opponent.score}}</ion-label>
+
+                        </ion-col>
+                        <ion-col class="ion-text-center ion-no-padding" size="2">
+                            <ion-label class="ion-no-margin small">{{opponent.opponentRanking}}</ion-label>
+
+                        </ion-col>
+                        <ion-col [class.is-color-danger]="opponent.pointsWon < 0"
+                                 [class.is-color-primary]="opponent.pointsWon > 0"
+                                 class="ion-text-end ion-no-padding" size="2">
+                            <ion-label
+                                    class="ion-no-margin small">{{opponent.pointsWon > 0 ? '+' : ''}}{{opponent.pointsWon}}</ion-label>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <!--</beping-card>-->
+            </ion-item>
+        </ion-list>
+    </ng-container>
+
+
+</ion-content>
