@@ -3,6 +3,7 @@
 <swiper #swiper [config]="swiperConfig" class="beping-swiper">
     <ng-template *ngFor="let ranking of resultsPerRanking | keyvalue" swiperSlide>
         <beping-ranking-summary
+                class="no-margin-right-unless-last"
                 [isOpen]="isTablet"
                 [isTablet]="isTablet"
                 [ranking]="ranking.key"

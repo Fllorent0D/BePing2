@@ -13,7 +13,7 @@ import {AfttLoginPage} from '../modals/aftt-login/aftt-login-page.component';
 import {MembersService} from '../../core/api/services/members.service';
 import {ClubsService} from '../../core/api/services/clubs.service';
 import {UpdateMemberEntries} from '../../core/store/user/user.actions';
-import {TabTState} from '../../core/store/user/tab-t-state.service';
+import {TabTState} from '../../core/store/user/tabt.state';
 import {ChooseMainMemberClubComponent} from '../modals/choose-main-member-club/choose-main-member-club.component';
 import {SettingsState} from '../../core/store/settings';
 import {TABT_DATABASES} from '../../core/interceptors/tabt-database-interceptor.service';
@@ -30,7 +30,13 @@ import {IsProService} from '../../core/services/is-pro.service';
 import {DismissDashboardProPopup} from '../../core/store/in-app-purchases/in-app-purchases.actions';
 import {isPlatform} from '@ionic/core';
 import {OrientationType, ScreenOrientation, ScreenOrientationChange} from '@capawesome/capacitor-screen-orientation';
-import { WeeklyNumericRanking } from 'src/app/core/api/models';
+import {
+    NumericRankingPerWeekOpponentsV3,
+    WeeklyNumericPointsV3,
+    WeeklyNumericRanking,
+    WeeklyNumericRankingV3
+} from 'src/app/core/api/models';
+import {NumericRankingState} from '../../core/store/user';
 
 @Component({
     selector: 'beping-explore-container',
@@ -42,7 +48,7 @@ export class ExploreContainerComponent implements OnInit {
     categoriesAvailable$: Observable<PLAYER_CATEGORY[]>;
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
     currentMemberEntry$: Observable<UserMemberEntry>;
-    numericRanking$: Observable<WeeklyNumericRanking[]>;
+    numericRankingPoints$: Observable<WeeklyNumericRankingV3>;
     latestMatches$: Observable<TeamMatchesEntry[]>;
     isLoading$: Observable<boolean>;
     pointsInCalculator$: Observable<number>;
@@ -58,7 +64,7 @@ export class ExploreContainerComponent implements OnInit {
     partnershipRotatio$: Observable<boolean>;
     connectivityIssue$: Observable<boolean>;
     TABT_DATABASES = TABT_DATABASES;
-
+    lastOpponentsPlayed$: Observable<NumericRankingPerWeekOpponentsV3[]>;
     constructor(
         private store: Store,
         private readonly dialogService: DialogService,
@@ -92,9 +98,15 @@ export class ExploreContainerComponent implements OnInit {
             shareReplay(1)
         );
 
-        this.numericRanking$ = this.currentMemberEntry$.pipe(
-            map((memberEntry) => memberEntry?.numericRankings ?? []),
-        )
+        this.numericRankingPoints$ = this.currentCategory$.pipe(
+            switchMap((category: PLAYER_CATEGORY) => this.store.select(NumericRankingState.getNumericRankingyForCategory(category))),
+            shareReplay(1)
+        );
+
+        this.lastOpponentsPlayed$ = this.numericRankingPoints$.pipe(
+            map((numericRanking) => numericRanking?.perDateHistory?.[numericRanking?.perDateHistory.length - 1].opponents ?? [])
+        );
+
         this.pointsInCalculator$ = this.currentCategory$.pipe(
             switchMap((category) => this.store.select(PointsCalculatorState.pointsForPlayerCategory(category))),
             map((points) => points.length)

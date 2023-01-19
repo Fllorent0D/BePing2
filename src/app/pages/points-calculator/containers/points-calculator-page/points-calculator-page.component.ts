@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Store} from '@ngxs/store';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
-import {map, shareReplay, switchMap, takeUntil} from 'rxjs/operators';
+import {map, shareReplay, switchMap} from 'rxjs/operators';
 import {UserState} from '../../../../core/store/user/user.state';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {PointsCalculatorEntryWithPoints, PointsCalculatorState} from '../../../../core/store/points/points-calculator-state.service';
@@ -17,6 +17,8 @@ import {pivotRankingEquivalenceMen, pivotRankingEquivalenceWomen} from '../../..
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {IndividualMatchPointsEditorComponent} from '../individual-match-points-editor/individual-match-points-editor.component';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {WeeklyNumericRankingV3} from '../../../../core/api/models/weekly-numeric-ranking-v-3';
+import {NumericRankingState} from '../../../../core/store/user';
 
 @UntilDestroy()
 @Component({
@@ -26,7 +28,6 @@ import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 })
 export class PointsCalculatorPageComponent implements OnInit {
     PLAYER_CATEGORY = PLAYER_CATEGORY;
-
     currentCategory$: ReplaySubject<PLAYER_CATEGORY> = new ReplaySubject<PLAYER_CATEGORY>(1);
     pivot$: Observable<number>;
     hasPoints$: Observable<boolean>;
@@ -34,6 +35,9 @@ export class PointsCalculatorPageComponent implements OnInit {
     playerCategories$: Observable<PLAYER_CATEGORY[]>;
     pointsEntryWithPoints$: Observable<PointsCalculatorEntryWithPoints[]>;
     nextRanking$: Observable<{ futureBelPts: number; futureRanking: string, currentBelPts: number, currentRanking: string }>;
+
+    numericRanking$: Observable<WeeklyNumericRankingV3>;
+    numericRankingPoints$: Observable<number>;
 
     constructor(
         private readonly tabtNavigator: TabsNavigationService,
@@ -77,27 +81,34 @@ export class PointsCalculatorPageComponent implements OnInit {
             shareReplay(1)
         );
 
-        this.hasPoints$ = this.currentMemberEntry$.pipe(
-            map((currentMemberEntry: MemberEntry) => {
-                return !!(this.rankingService.getPoints(currentMemberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS) &&
-                    this.rankingService.getPoints(currentMemberEntry.RankingPointsEntries, RankingMethodName.BEL_RANKING));
-            })
+        this.numericRanking$ = this.currentCategory$.pipe(
+            switchMap((category: PLAYER_CATEGORY) => this.store.select(NumericRankingState.getNumericRankingyForCategory(category))),
+            shareReplay(1)
+        );
+
+        this.numericRankingPoints$ = this.currentCategory$.pipe(
+            switchMap((category: PLAYER_CATEGORY) => this.store.select(NumericRankingState.getLatestPointsForCategory(category))),
+            shareReplay(1)
+        );
+
+        this.hasPoints$ = this.numericRanking$.pipe(
+            map((numericRanking: WeeklyNumericRankingV3) => !!numericRanking.points.length)
         );
 
         this.pointsEntryWithPoints$ = combineLatest([
-            this.currentMemberEntry$,
+            this.numericRankingPoints$,
             this.currentCategory$,
         ]).pipe(
-            switchMap(([currentMemberEntry, currentCategory]) => {
-                return this.store.select(PointsCalculatorState.pointsForPlayerCategory(currentCategory)).pipe(
+            switchMap(([currentMemberEntry, currentCategory]) =>
+                this.store.select(PointsCalculatorState.pointsForPlayerCategory(currentCategory)).pipe(
                     map((resultsEntries) => [currentMemberEntry, resultsEntries, currentCategory])
-                );
-            }),
-            map(([memberEntry, resultsEntries, currentCategory]: [MemberEntry, PointsCalculatorEntryWithPoints[], PLAYER_CATEGORY]) => {
-                let basePoints = this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS);
+                )),
+            map(([basePoints, resultsEntries, currentCategory]: [number, PointsCalculatorEntryWithPoints[], PLAYER_CATEGORY]) => {
+                console.log(basePoints);
                 const resultEntriesWithPoints: PointsCalculatorEntryWithPoints[] = [];
                 for (const entry of resultsEntries) {
                     const pointsWon = this.pointsCalculatorService.calculatePoints(entry, basePoints, currentCategory);
+                    console.log(entry, pointsWon);
                     basePoints = basePoints + pointsWon;
                     resultEntriesWithPoints.push({...entry, basePoints, pointsWon});
                 }

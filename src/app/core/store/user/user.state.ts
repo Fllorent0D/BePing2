@@ -16,21 +16,22 @@ import {
 } from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
 import {catchError, finalize, map, switchMap, tap} from 'rxjs/operators';
-import {format, sub} from 'date-fns';
+import {sub} from 'date-fns';
 import {PLAYER_CATEGORY} from '../../models/user';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
-import {TabTState} from './tab-t-state.service';
+import {TabTState} from './tabt.state';
 import {MembersService} from '../../api/services/members.service';
-import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
 import {ClubsService} from '../../api/services/clubs.service';
 import {CurrentSeasonChanged} from '../season';
 import {CrashlyticsService} from '../../services/crashlytics.service';
-import {RankingMethodName, RankingService} from '../../services/tabt/ranking.service';
+import {RankingService} from '../../services/tabt/ranking.service';
 import {DeepPartial} from 'chart.js/types/utils';
 import {of} from 'rxjs';
+import {WeeklyNumericRankingV3} from '../../api/models/weekly-numeric-ranking-v-3';
+import {NumericRankingState} from './numeric-ranking/numeric-ranking.state';
 
 export interface UserMemberEntry extends MemberEntry {
-    numericRankings?: WeeklyNumericRanking[];
+    numericRankingsHistory?: WeeklyNumericRankingV3;
 }
 
 export type UserMemberEntries = { [key in PLAYER_CATEGORY]?: UserMemberEntry };
@@ -43,7 +44,6 @@ export interface UserStateModel {
     memberUniqueIndex?: number;
     mainCategory?: PLAYER_CATEGORY;
     club?: ClubEntry;
-    numericRankings?: WeeklyNumericRanking[];
     hasSeeOnBoarding: boolean;
     isLoading: boolean;
     lastUpdated: number;
@@ -55,7 +55,6 @@ const defaultState: UserStateModel = {
     mainCategory: null,
     latestMatches: null,
     club: null,
-    numericRankings: null,
     hasSeeOnBoarding: false,
     lastUpdated: 0,
     isLoading: false
@@ -65,7 +64,7 @@ const defaultState: UserStateModel = {
 @State<UserStateModel>({
     name: 'user',
     defaults: defaultState,
-    children: [TabTState]
+    children: [TabTState, NumericRankingState]
 })
 @Injectable()
 export class UserState implements NgxsOnInit {
@@ -88,11 +87,6 @@ export class UserState implements NgxsOnInit {
     @Selector([UserState])
     static isLoading(state: UserStateModel): boolean {
         return state.isLoading;
-    }
-
-    @Selector([UserState])
-    static numericRankings(state: UserStateModel): WeeklyNumericRanking[] {
-        return state.numericRankings;
     }
 
     @Selector([UserState])
@@ -228,45 +222,6 @@ export class UserState implements NgxsOnInit {
     }
 
     @Action([UpdateMemberEntriesSuccess])
-    updateGraphs({patchState, getState}: StateContext<UserStateModel>, action: UpdateMemberEntriesSuccess) {
-
-        return this.memberPlayerCategoryService.getMemberNumericRankings(action.memberEntries).pipe(
-            map((rankingsPerCategory) => {
-                const state: UserStateModel = getState();
-                const patchStateObj: DeepPartial<UserMemberEntries> = {...state.memberEntries};
-                for (const [key, rankings] of Object.entries(rankingsPerCategory)) {
-                    patchStateObj[key] = {
-                        ...state.memberEntries[key],
-                        numericRankings: rankings
-                    };
-                }
-                // @ts-ignore
-                return patchState({memberEntries: patchStateObj});
-            }),
-            catchError(() => of(null))
-        );
-
-        /*
-        const state: UserStateModel = getState();
-
-        for (const [category, memberEntry] of Object.entries(action.memberEntries)) {
-            const currentDate = format(new Date(), 'yyyy-MM-dd');
-            const belPts = this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS);
-            const eloPts = this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.ELO);
-            const indexExistingRanking = (state.numericRankings ?? [])?.findIndex((results) => results.weekName === currentDate);
-            if (indexExistingRanking === -1) {
-                memberEntry.numericRankings = [...(state?.numericRankings ?? []), {weekName: currentDate, elo: eloPts, bel: belPts}];
-            } else {
-                memberEntry.numericRankings[indexExistingRanking].elo = eloPts;
-                memberEntry.numericRankings[indexExistingRanking].bel = belPts;
-            }
-
-        }
-        patchState({memberEntries: action.memberEntries});
-*/
-    }
-
-    @Action([UpdateMemberEntriesSuccess])
     updateLatestMatches({dispatch}: StateContext<UserStateModel>, action: UpdateMemberEntriesSuccess) {
         return this.memberPlayerCategoryService.getMemberLatestMatches(action.memberEntries).pipe(
             switchMap((matches) => dispatch(new UpdateLatestMatchesSuccess(matches))),
@@ -287,13 +242,6 @@ export class UserState implements NgxsOnInit {
             memberEntries: action.memberEntries,
             lastUpdated: Date.now(),
             mainCategory: category
-        });
-    }
-
-    @Action(UpdateWeeklyNumericRankingSuccess)
-    updateWeeklyNumericRankingSuccess({patchState, getState}: StateContext<UserStateModel>, action: UpdateWeeklyNumericRankingSuccess) {
-        return patchState({
-            numericRankings: action.numericRankings
         });
     }
 

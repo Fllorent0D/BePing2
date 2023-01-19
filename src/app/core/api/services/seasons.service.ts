@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -34,7 +34,9 @@ export class SeasonsService extends BaseService {
    * This method doesn't expect any request body.
    */
   findAllSeason$Response(params?: {
-  }): Observable<StrictHttpResponse<Array<SeasonEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<SeasonEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, SeasonsService.FindAllSeasonPath, 'get');
     if (params) {
@@ -42,7 +44,8 @@ export class SeasonsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -58,7 +61,9 @@ export class SeasonsService extends BaseService {
    * This method doesn't expect any request body.
    */
   findAllSeason(params?: {
-  }): Observable<Array<SeasonEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<SeasonEntry>> {
 
     return this.findAllSeason$Response(params).pipe(
       map((r: StrictHttpResponse<Array<SeasonEntry>>) => r.body as Array<SeasonEntry>)
@@ -77,7 +82,9 @@ export class SeasonsService extends BaseService {
    * This method doesn't expect any request body.
    */
   findCurrentSeason$Response(params?: {
-  }): Observable<StrictHttpResponse<SeasonEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<SeasonEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, SeasonsService.FindCurrentSeasonPath, 'get');
     if (params) {
@@ -85,7 +92,8 @@ export class SeasonsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -101,7 +109,9 @@ export class SeasonsService extends BaseService {
    * This method doesn't expect any request body.
    */
   findCurrentSeason(params?: {
-  }): Observable<SeasonEntry> {
+    context?: HttpContext
+  }
+): Observable<SeasonEntry> {
 
     return this.findCurrentSeason$Response(params).pipe(
       map((r: StrictHttpResponse<SeasonEntry>) => r.body as SeasonEntry)
@@ -121,7 +131,9 @@ export class SeasonsService extends BaseService {
    */
   findSeasonById$Response(params: {
     seasonId: number;
-  }): Observable<StrictHttpResponse<SeasonEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<SeasonEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, SeasonsService.FindSeasonByIdPath, 'get');
     if (params) {
@@ -130,7 +142,8 @@ export class SeasonsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -147,7 +160,9 @@ export class SeasonsService extends BaseService {
    */
   findSeasonById(params: {
     seasonId: number;
-  }): Observable<SeasonEntry> {
+    context?: HttpContext
+  }
+): Observable<SeasonEntry> {
 
     return this.findSeasonById$Response(params).pipe(
       map((r: StrictHttpResponse<SeasonEntry>) => r.body as SeasonEntry)

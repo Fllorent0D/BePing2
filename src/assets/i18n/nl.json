@@ -92,6 +92,7 @@
     "SCORE_DISTRIBUTION": "Verdeling van de scores",
     "ELO_POINT": "ELO punten",
     "LATEST_MATCHES": "Laatste wedstrijden",
+    "LATEST_INDIVIDUAL_MATCHES": "Laatste wedstrijden",
     "PLAYER_CATEGORY_CHANGED": "{{category}} categorie geladen",
     "SEE_DETAILS": "Details bekijken"
   },

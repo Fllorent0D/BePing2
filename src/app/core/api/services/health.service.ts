@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -34,7 +34,9 @@ export class HealthService extends BaseService {
    * This method doesn't expect any request body.
    */
   checkHealth$Response(params?: {
-  }): Observable<StrictHttpResponse<{
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<{
 'status'?: string;
 'info'?: {
 [key: string]: {
@@ -62,7 +64,8 @@ export class HealthService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -98,7 +101,9 @@ export class HealthService extends BaseService {
    * This method doesn't expect any request body.
    */
   checkHealth(params?: {
-  }): Observable<{
+    context?: HttpContext
+  }
+): Observable<{
 'status'?: string;
 'info'?: {
 [key: string]: {
@@ -202,7 +207,9 @@ export class HealthService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<StrictHttpResponse<TestOutput>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<TestOutput>> {
 
     const rb = new RequestBuilder(this.rootUrl, HealthService.TestRequestPath, 'get');
     if (params) {
@@ -215,7 +222,8 @@ export class HealthService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -256,7 +264,9 @@ export class HealthService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<TestOutput> {
+    context?: HttpContext
+  }
+): Observable<TestOutput> {
 
     return this.testRequest$Response(params).pipe(
       map((r: StrictHttpResponse<TestOutput>) => r.body as TestOutput)
@@ -300,7 +310,9 @@ export class HealthService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<StrictHttpResponse<void>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, HealthService.ContextPath, 'get');
     if (params) {
@@ -313,7 +325,8 @@ export class HealthService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -354,7 +367,9 @@ export class HealthService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<void> {
+    context?: HttpContext
+  }
+): Observable<void> {
 
     return this.context$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)

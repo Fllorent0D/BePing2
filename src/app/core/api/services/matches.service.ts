@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -63,7 +63,7 @@ export class MatchesService extends BaseService {
     divisionId?: number;
     club?: string;
     team?: string;
-    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     weekName?: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: string;
@@ -80,7 +80,9 @@ export class MatchesService extends BaseService {
     withDetails?: boolean;
     matchId?: string;
     matchUniqueId?: string;
-  }): Observable<StrictHttpResponse<Array<TeamMatchesEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<TeamMatchesEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, MatchesService.FindAllMatchesPath, 'get');
     if (params) {
@@ -105,7 +107,8 @@ export class MatchesService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -149,7 +152,7 @@ export class MatchesService extends BaseService {
     divisionId?: number;
     club?: string;
     team?: string;
-    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     weekName?: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: string;
@@ -166,7 +169,9 @@ export class MatchesService extends BaseService {
     withDetails?: boolean;
     matchId?: string;
     matchUniqueId?: string;
-  }): Observable<Array<TeamMatchesEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<TeamMatchesEntry>> {
 
     return this.findAllMatches$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TeamMatchesEntry>>) => r.body as Array<TeamMatchesEntry>)
@@ -210,7 +215,9 @@ export class MatchesService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<StrictHttpResponse<Array<MatchSystemEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MatchSystemEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, MatchesService.FindAllMatchSystemsPath, 'get');
     if (params) {
@@ -223,7 +230,8 @@ export class MatchesService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -264,7 +272,9 @@ export class MatchesService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<Array<MatchSystemEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<MatchSystemEntry>> {
 
     return this.findAllMatchSystems$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MatchSystemEntry>>) => r.body as Array<MatchSystemEntry>)
@@ -309,7 +319,9 @@ export class MatchesService extends BaseService {
      */
     'X-Tabt-Season'?: string;
     matchSystemId: number;
-  }): Observable<StrictHttpResponse<MatchSystemEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MatchSystemEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, MatchesService.FindMatchSystemByIdPath, 'get');
     if (params) {
@@ -323,7 +335,8 @@ export class MatchesService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -365,7 +378,9 @@ export class MatchesService extends BaseService {
      */
     'X-Tabt-Season'?: string;
     matchSystemId: number;
-  }): Observable<MatchSystemEntry> {
+    context?: HttpContext
+  }
+): Observable<MatchSystemEntry> {
 
     return this.findMatchSystemById$Response(params).pipe(
       map((r: StrictHttpResponse<MatchSystemEntry>) => r.body as MatchSystemEntry)
@@ -412,7 +427,7 @@ export class MatchesService extends BaseService {
     divisionId?: number;
     club?: string;
     team?: string;
-    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     weekName?: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: string;
@@ -429,7 +444,9 @@ export class MatchesService extends BaseService {
     withDetails?: boolean;
     matchId?: string;
     matchUniqueId: number;
-  }): Observable<StrictHttpResponse<TeamMatchesEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<TeamMatchesEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, MatchesService.FindMatchByIdPath, 'get');
     if (params) {
@@ -454,7 +471,8 @@ export class MatchesService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -498,7 +516,7 @@ export class MatchesService extends BaseService {
     divisionId?: number;
     club?: string;
     team?: string;
-    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    divisionCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     weekName?: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: string;
@@ -515,7 +533,9 @@ export class MatchesService extends BaseService {
     withDetails?: boolean;
     matchId?: string;
     matchUniqueId: number;
-  }): Observable<TeamMatchesEntry> {
+    context?: HttpContext
+  }
+): Observable<TeamMatchesEntry> {
 
     return this.findMatchById$Response(params).pipe(
       map((r: StrictHttpResponse<TeamMatchesEntry>) => r.body as TeamMatchesEntry)

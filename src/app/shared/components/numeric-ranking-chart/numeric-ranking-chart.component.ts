@@ -6,6 +6,8 @@ import {WeeklyNumericRanking} from '../../../core/api/models/weekly-numeric-rank
 import {findBoundPts} from '../../../core/models/bel-ranking';
 import {RankingService} from '../../../core/services/tabt/ranking.service';
 import {PLAYER_CATEGORY} from '../../../core/models/user';
+import {WeeklyNumericRankingV3} from '../../../core/api/models/weekly-numeric-ranking-v-3';
+import {WeeklyNumericPointsV3} from '../../../core/api/models/weekly-numeric-points-v-3';
 
 @Component({
     selector: 'beping-numeric-ranking-chart',
@@ -13,7 +15,7 @@ import {PLAYER_CATEGORY} from '../../../core/models/user';
     styleUrls: ['./numeric-ranking-chart.component.scss']
 })
 export class NumericRankingChartComponent implements OnInit, AfterViewInit {
-    private dataset: WeeklyNumericRanking[];
+    private dataset: WeeklyNumericPointsV3[];
 
     type = 'line';
     data: ChartData;
@@ -26,7 +28,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
 
     @ViewChild('canvasElement') canvas: ElementRef<HTMLCanvasElement>;
 
-    @Input() set numericRankings(numericRankings: WeeklyNumericRanking[]) {
+    @Input() set numericRankings(numericRankings: WeeklyNumericPointsV3[]) {
         this.dataset = numericRankings;
         this.computeData();
     }
@@ -56,7 +58,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
         purpleOrangeGradient.addColorStop(1, 'rgba(146,146,146,0.4)');
         purpleOrangeGradient.addColorStop(0, 'rgba(234,231,234,0)');
 
-        const points = this.dataset.map((pts) => pts.bel);
+        const points = this.dataset.map((pts) => pts.points);
         const lowerPoints = Math.min(...points);
         const higherPoints = Math.max(...points);
         const lowerBoundPts = findBoundPts(lowerPoints, this.category);
@@ -79,7 +81,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
             datasets: [
                 {
                     label: this.label,
-                    data: this.dataset.map(week => week.bel),
+                    data: this.dataset.map(week => week.points),
                     tension: 0.25,
                     pointBackgroundColor: this.color,
                     pointBorderColor: this.color,

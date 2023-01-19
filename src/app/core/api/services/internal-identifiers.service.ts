@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -38,7 +38,9 @@ export class InternalIdentifiersService extends BaseService {
     clubUniqueIndex: string;
     database: string;
     playerUniqueIndex: number;
-  }): Observable<StrictHttpResponse<InternalIdentifiersDto>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<InternalIdentifiersDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, InternalIdentifiersService.GetInternalIdsPath, 'get');
     if (params) {
@@ -49,7 +51,8 @@ export class InternalIdentifiersService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -68,7 +71,9 @@ export class InternalIdentifiersService extends BaseService {
     clubUniqueIndex: string;
     database: string;
     playerUniqueIndex: number;
-  }): Observable<InternalIdentifiersDto> {
+    context?: HttpContext
+  }
+): Observable<InternalIdentifiersDto> {
 
     return this.getInternalIds$Response(params).pipe(
       map((r: StrictHttpResponse<InternalIdentifiersDto>) => r.body as InternalIdentifiersDto)
@@ -90,7 +95,9 @@ export class InternalIdentifiersService extends BaseService {
     clubUniqueIndex: string;
     database: string;
     playerUniqueIndex: number;
-  }): Observable<StrictHttpResponse<RedirectLinkDto>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<RedirectLinkDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, InternalIdentifiersService.GetRegisterLinkPath, 'get');
     if (params) {
@@ -101,7 +108,8 @@ export class InternalIdentifiersService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -120,7 +128,9 @@ export class InternalIdentifiersService extends BaseService {
     clubUniqueIndex: string;
     database: string;
     playerUniqueIndex: number;
-  }): Observable<RedirectLinkDto> {
+    context?: HttpContext
+  }
+): Observable<RedirectLinkDto> {
 
     return this.getRegisterLink$Response(params).pipe(
       map((r: StrictHttpResponse<RedirectLinkDto>) => r.body as RedirectLinkDto)

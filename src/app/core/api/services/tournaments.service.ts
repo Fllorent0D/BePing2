@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -61,7 +61,9 @@ export class TournamentsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<StrictHttpResponse<Array<TournamentEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<TournamentEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, TournamentsService.FindAllTournamentsPath, 'get');
     if (params) {
@@ -74,7 +76,8 @@ export class TournamentsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -115,7 +118,9 @@ export class TournamentsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<Array<TournamentEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<TournamentEntry>> {
 
     return this.findAllTournaments$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TournamentEntry>>) => r.body as Array<TournamentEntry>)
@@ -159,7 +164,9 @@ export class TournamentsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<StrictHttpResponse<Array<TournamentEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<TournamentEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, TournamentsService.FindAllTournamentsV2Path, 'get');
     if (params) {
@@ -172,7 +179,8 @@ export class TournamentsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -213,7 +221,9 @@ export class TournamentsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<Array<TournamentEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<TournamentEntry>> {
 
     return this.findAllTournamentsV2$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TournamentEntry>>) => r.body as Array<TournamentEntry>)
@@ -260,7 +270,9 @@ export class TournamentsService extends BaseService {
     withResults?: boolean;
     withRegistrations?: boolean;
     tournamentId: number;
-  }): Observable<StrictHttpResponse<TournamentEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<TournamentEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, TournamentsService.FindTournamentByIdPath, 'get');
     if (params) {
@@ -276,7 +288,8 @@ export class TournamentsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -320,7 +333,9 @@ export class TournamentsService extends BaseService {
     withResults?: boolean;
     withRegistrations?: boolean;
     tournamentId: number;
-  }): Observable<TournamentEntry> {
+    context?: HttpContext
+  }
+): Observable<TournamentEntry> {
 
     return this.findTournamentById$Response(params).pipe(
       map((r: StrictHttpResponse<TournamentEntry>) => r.body as TournamentEntry)
@@ -367,7 +382,9 @@ export class TournamentsService extends BaseService {
     withResults?: boolean;
     withRegistrations?: boolean;
     tournamentId: number;
-  }): Observable<StrictHttpResponse<TournamentEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<TournamentEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, TournamentsService.FindTournamentByIdV2Path, 'get');
     if (params) {
@@ -383,7 +400,8 @@ export class TournamentsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -427,7 +445,9 @@ export class TournamentsService extends BaseService {
     withResults?: boolean;
     withRegistrations?: boolean;
     tournamentId: number;
-  }): Observable<TournamentEntry> {
+    context?: HttpContext
+  }
+): Observable<TournamentEntry> {
 
     return this.findTournamentByIdV2$Response(params).pipe(
       map((r: StrictHttpResponse<TournamentEntry>) => r.body as TournamentEntry)
@@ -472,7 +492,9 @@ export class TournamentsService extends BaseService {
      */
     'X-Tabt-Season'?: string;
     tournamentId: number;
-  }): Observable<StrictHttpResponse<Array<TournamentSerieEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<TournamentSerieEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, TournamentsService.FindSeriesByTournamentPath, 'get');
     if (params) {
@@ -486,7 +508,8 @@ export class TournamentsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -528,7 +551,9 @@ export class TournamentsService extends BaseService {
      */
     'X-Tabt-Season'?: string;
     tournamentId: number;
-  }): Observable<Array<TournamentSerieEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<TournamentSerieEntry>> {
 
     return this.findSeriesByTournament$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TournamentSerieEntry>>) => r.body as Array<TournamentSerieEntry>)
@@ -574,8 +599,10 @@ export class TournamentsService extends BaseService {
     'X-Tabt-Season'?: string;
     tournamentId: number;
     serieId: number;
+    context?: HttpContext
     body: RegisterTournament
-  }): Observable<StrictHttpResponse<void>> {
+  }
+): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, TournamentsService.RegisterToSeriePath, 'post');
     if (params) {
@@ -591,7 +618,8 @@ export class TournamentsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'text',
-      accept: '*/*'
+      accept: '*/*',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -634,8 +662,10 @@ export class TournamentsService extends BaseService {
     'X-Tabt-Season'?: string;
     tournamentId: number;
     serieId: number;
+    context?: HttpContext
     body: RegisterTournament
-  }): Observable<void> {
+  }
+): Observable<void> {
 
     return this.registerToSerie$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)

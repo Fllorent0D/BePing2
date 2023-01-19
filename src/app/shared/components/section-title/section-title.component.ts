@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'beping-section-title',
@@ -6,14 +6,9 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
     styleUrls: ['./section-title.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class SectionTitleComponent implements OnInit {
+export class SectionTitleComponent {
 
     @Input() title = '';
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
-
+    @Input() note: string;
+    @Output() noteClicked = new EventEmitter<void>();
 }

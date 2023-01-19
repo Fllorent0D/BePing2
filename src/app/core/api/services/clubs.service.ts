@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -63,7 +63,9 @@ export class ClubsService extends BaseService {
      */
     'X-Tabt-Season'?: string;
     clubCategory?: 'VLAAMS_BRABANT_BR' | 'BRUSSELS_BRABANT_WALLON' | 'ANTWERP' | 'OOST_VLANDEREN' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'HAINAUT' | 'LUXEMBOURG' | 'LIEGE' | 'NAMUR' | 'VTTL' | 'AFTT' | 'FRBTT';
-  }): Observable<StrictHttpResponse<Array<ClubEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<ClubEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ClubsService.FindAllClubsPath, 'get');
     if (params) {
@@ -77,7 +79,8 @@ export class ClubsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -119,7 +122,9 @@ export class ClubsService extends BaseService {
      */
     'X-Tabt-Season'?: string;
     clubCategory?: 'VLAAMS_BRABANT_BR' | 'BRUSSELS_BRABANT_WALLON' | 'ANTWERP' | 'OOST_VLANDEREN' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'HAINAUT' | 'LUXEMBOURG' | 'LIEGE' | 'NAMUR' | 'VTTL' | 'AFTT' | 'FRBTT';
-  }): Observable<Array<ClubEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<ClubEntry>> {
 
     return this.findAllClubs$Response(params).pipe(
       map((r: StrictHttpResponse<Array<ClubEntry>>) => r.body as Array<ClubEntry>)
@@ -164,7 +169,9 @@ export class ClubsService extends BaseService {
      */
     'X-Tabt-Season'?: string;
     clubIndex: string;
-  }): Observable<StrictHttpResponse<ClubEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<ClubEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, ClubsService.FindClubByIdPath, 'get');
     if (params) {
@@ -178,7 +185,8 @@ export class ClubsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -220,7 +228,9 @@ export class ClubsService extends BaseService {
      */
     'X-Tabt-Season'?: string;
     clubIndex: string;
-  }): Observable<ClubEntry> {
+    context?: HttpContext
+  }
+): Observable<ClubEntry> {
 
     return this.findClubById$Response(params).pipe(
       map((r: StrictHttpResponse<ClubEntry>) => r.body as ClubEntry)
@@ -264,7 +274,7 @@ export class ClubsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     uniqueIndex?: number;
     nameSearch?: string;
     extendedInformation?: boolean;
@@ -272,7 +282,9 @@ export class ClubsService extends BaseService {
     withResults?: boolean;
     withOpponentRankingEvaluation?: boolean;
     clubIndex: string;
-  }): Observable<StrictHttpResponse<Array<MemberEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MemberEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ClubsService.FindClubMembersPath, 'get');
     if (params) {
@@ -293,7 +305,8 @@ export class ClubsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -334,7 +347,7 @@ export class ClubsService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     uniqueIndex?: number;
     nameSearch?: string;
     extendedInformation?: boolean;
@@ -342,7 +355,9 @@ export class ClubsService extends BaseService {
     withResults?: boolean;
     withOpponentRankingEvaluation?: boolean;
     clubIndex: string;
-  }): Observable<Array<MemberEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<MemberEntry>> {
 
     return this.findClubMembers$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberEntry>>) => r.body as Array<MemberEntry>)
@@ -388,7 +403,9 @@ export class ClubsService extends BaseService {
     'X-Tabt-Season'?: string;
     season?: number;
     clubIndex: string;
-  }): Observable<StrictHttpResponse<Array<TeamEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<TeamEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ClubsService.FindClubTeamsPath, 'get');
     if (params) {
@@ -403,7 +420,8 @@ export class ClubsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -446,7 +464,9 @@ export class ClubsService extends BaseService {
     'X-Tabt-Season'?: string;
     season?: number;
     clubIndex: string;
-  }): Observable<Array<TeamEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<TeamEntry>> {
 
     return this.findClubTeams$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TeamEntry>>) => r.body as Array<TeamEntry>)
@@ -493,7 +513,9 @@ export class ClubsService extends BaseService {
     season?: number;
     clubIndex: string;
     teamId: string;
-  }): Observable<StrictHttpResponse<Array<MemberResults>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MemberResults>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ClubsService.FindClubTeamsMemberRankingPath, 'get');
     if (params) {
@@ -509,7 +531,8 @@ export class ClubsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -553,7 +576,9 @@ export class ClubsService extends BaseService {
     season?: number;
     clubIndex: string;
     teamId: string;
-  }): Observable<Array<MemberResults>> {
+    context?: HttpContext
+  }
+): Observable<Array<MemberResults>> {
 
     return this.findClubTeamsMemberRanking$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberResults>>) => r.body as Array<MemberResults>)
@@ -599,7 +624,9 @@ export class ClubsService extends BaseService {
     'X-Tabt-Season'?: string;
     clubIndex: string;
     season?: number;
-  }): Observable<StrictHttpResponse<Array<MemberResults>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MemberResults>>> {
 
     const rb = new RequestBuilder(this.rootUrl, ClubsService.FindMembersRankingPath, 'get');
     if (params) {
@@ -614,7 +641,8 @@ export class ClubsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -657,7 +685,9 @@ export class ClubsService extends BaseService {
     'X-Tabt-Season'?: string;
     clubIndex: string;
     season?: number;
-  }): Observable<Array<MemberResults>> {
+    context?: HttpContext
+  }
+): Observable<Array<MemberResults>> {
 
     return this.findMembersRanking$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberResults>>) => r.body as Array<MemberResults>)

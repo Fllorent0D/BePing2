@@ -11,6 +11,17 @@ import {SwiperOptions} from 'swiper';
 export class MemberSummaryPerRankingComponent {
     swiperConfig: SwiperOptions = {
         slidesPerView: 1.1,
+        spaceBetween: 0,
+        breakpoints:{
+            640: {
+                slidesPerView: 2.1,
+                spaceBetween: 0
+            },
+            820: {
+                slidesPerView: 3.1,
+                spaceBetween: 0
+            }
+        }
     };
     resultsPerRanking: object;
     isTablet: boolean;

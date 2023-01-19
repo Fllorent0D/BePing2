@@ -1,20 +1,11 @@
 <ion-row class="ion-no-padding">
   <ion-col class="ion-no-padding" [attr.size-md]="graphDisplayed" size-xs="12" *ngIf="displayNumericRanking">
     <beping-numeric-ranking-chart
-            [numericRankings]="numericRankings"
+            [numericRankings]="numericRankings.points"
             [category]="category"
             [label]="'Numérique'"
             [marginVertical]="false"
             [color]="'#178ED2FF'"
     ></beping-numeric-ranking-chart>
-  </ion-col>
-  <ion-col id="eloGraph" class="ion-no-padding" [attr.size-md]="graphDisplayed" size-xs="12" *ngIf="displayElo">
-    <beping-weekly-elo
-            [numericRankings]="numericRankings"
-            [prop]="'elo'"
-            [label]="'ELO'"
-            [marginVertical]="!isTablet"
-            [color]="'#ae5bf7'"
-    ></beping-weekly-elo>
   </ion-col>
 </ion-row>

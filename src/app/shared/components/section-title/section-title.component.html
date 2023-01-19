@@ -1,5 +1,14 @@
-<ion-item-divider>
-    <ion-label>
+<ion-item-divider style="display: flex; justify-content: space-between">
+    <ion-label style="flex-grow: 1;">
         {{title}}
+
     </ion-label>
+    <ion-note style="flex:0 1 auto; align-self: flex-end" (click)="noteClicked.emit()" *ngIf="note">
+        <ion-button fill="clear" class="full-width">
+            <ion-label class="ion-text-wrap text-xsmall text-bold">
+                {{note}}
+            </ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end" class="text-xsmall text-bold"></ion-icon>
+        </ion-button>
+    </ion-note>
 </ion-item-divider>

@@ -43,7 +43,7 @@
                 [category]="currentCategory$|async"
                 [displayELO]="displayELO$|async"
                 [displayNumericRanking]="displayNumericRanking$|async"
-                [numericRanking]="numericRanking$|async"
+                [numericRanking]="(numericRankingPoints$|async)?.points"
                 [member]="currentMemberEntry">
         </beping-member-name-ranking-info>
         <ion-card *ngIf="connectivityIssue$|async" [color]="'danger'" class="ion-padding">
@@ -66,12 +66,12 @@
                     [memberResultEntries]="currentMemberEntry.ResultEntries">
             </beping-member-victory-chart>
 
-            <ng-container *ngIf="currentMemberEntry.numericRankings">
+            <ng-container *ngIf="numericRankingPoints$ | async as numericRankingV3">
                 <beping-ranking-history-graphs
                         [category]="currentCategory$|async"
                         [displayElo]="displayELO$|async"
                         [displayNumericRanking]="displayNumericRanking$|async"
-                        [numericRankings]="currentMemberEntry.numericRankings">
+                        [numericRankings]="numericRankingV3">
                 </beping-ranking-history-graphs>
             </ng-container>
 
@@ -79,10 +79,10 @@
                     [memberResultEntries]="currentMemberEntry.ResultEntries">
             </beping-tie-break-played>
             <beping-rotatio *ngIf="partnershipRotatio$|async"></beping-rotatio>
+            <beping-last-opponents [lastOpponents]="lastOpponentsPlayed$|async"></beping-last-opponents>
             <beping-member-latest-matches
                     [matches]="latestMatches$| async">
             </beping-member-latest-matches>
-
             <beping-member-summary-per-ranking
                     [memberResultEntries]="currentMemberEntry.ResultEntries">
             </beping-member-summary-per-ranking>

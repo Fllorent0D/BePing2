@@ -11,6 +11,8 @@
   //font-size: 13px;
 }
 
+
+
 .photo-white-container {
   background-color: var(--ion-background-color);
   justify-content: space-between;
@@ -42,9 +44,12 @@
     justify-content: flex-end;
     flex-direction: column;
   }
-
+  width: 40%;
+  min-width: 300px;
   display: flex;
-  align-items: flex-end;
+  /* align-items: flex-end; */
+  /* justify-items: center; */
+  align-self: center;
 }
 
 .onboarding-slide {

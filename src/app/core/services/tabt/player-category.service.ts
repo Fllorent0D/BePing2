@@ -8,6 +8,7 @@ import {MatchesService} from '../../api/services/matches.service';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
 import {UserMemberEntries} from '../../store/user/user.state';
 import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
+import {WeeklyNumericRankingV3} from '../../api/models/weekly-numeric-ranking-v-3';
 
 @Injectable({
     providedIn: 'root'
@@ -83,19 +84,19 @@ export class PlayerCategoryService {
         );
     }
 
-    getMemberNumericRankings(memberEntries: UserMemberEntries): Observable<{ [key: string]: WeeklyNumericRanking[] }> {
-        const getRankings = (uniqueIndex: number, category: MEMBER_CATEGORY_STRING) =>
-            this.membersService.findMemberNumericRankingsHistory({uniqueIndex, category});
+    getMemberNumericRankings(memberEntries: UserMemberEntries): Observable<{ [key: string]: WeeklyNumericRankingV3 }> {
+        const getRankings = (uniqueIndex: number, category: MEMBER_CATEGORY_STRING): Observable<WeeklyNumericRankingV3> => this.membersService.findMemberNumericRankingsHistoryV3({uniqueIndex, category});
         const memberEntriesArray = Object.entries(memberEntries).filter(([cat]) => ['MEN', 'WOMEN'].includes(cat));
+
         return combineLatest(
             memberEntriesArray.map(([category, memberEntry]) =>
                 getRankings(memberEntry.UniqueIndex, category as MEMBER_CATEGORY_STRING).pipe(
-                    map((rankingHistory: WeeklyNumericRanking[]) => ([category, rankingHistory])),
-                    catchError(() => of([category, []]))
+                    map((rankingHistory) => ([category, rankingHistory])),
+                    catchError(() => of([category, {points: [], perDateHistory: []}]))
                 )
             )
         ).pipe(
-            map((results: [string, WeeklyNumericRanking[]][]) => Object.fromEntries(results))
+            map((results: [string, WeeklyNumericRankingV3][]) => Object.fromEntries(results))
         );
     }
 

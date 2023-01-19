@@ -4,7 +4,7 @@ import {Platform} from '@ionic/angular';
 import {RankingMethodName, RankingService} from '../../../core/services/tabt/ranking.service';
 import {PLAYER_CATEGORY} from '../../../core/models/user';
 import { UserMemberEntry } from 'src/app/core/store/user/user.state';
-import { WeeklyNumericRanking } from 'src/app/core/api/models';
+import {WeeklyNumericPointsV3, WeeklyNumericRanking} from 'src/app/core/api/models';
 
 @Component({
     selector: 'beping-member-name-ranking-info',
@@ -18,7 +18,7 @@ export class MemberNameRankingInfoComponent {
     @Input() displayELO = false;
     @Input() displayNumericRanking = false;
     @Input() category: PLAYER_CATEGORY;
-    @Input() numericRanking: WeeklyNumericRanking[];
+    @Input() numericRanking: WeeklyNumericPointsV3[];
 
     constructor(
         public platform: Platform,
@@ -37,7 +37,7 @@ export class MemberNameRankingInfoComponent {
     }
 
     get bel(): number | null {
-        return Math.round(this.numericRanking?.[this.numericRanking.length - 1]?.bel) ?? null;
+        return Math.round(this.numericRanking?.[this.numericRanking.length - 1]?.points) ?? null;
     }
 
     get belRanking(): number {

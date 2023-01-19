@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -10,8 +10,9 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { MemberEntry } from '../models/member-entry';
-import { WeeklyElo } from '../models/weekly-elo';
 import { WeeklyNumericRanking } from '../models/weekly-numeric-ranking';
+import { WeeklyNumericRankingV2 } from '../models/weekly-numeric-ranking-v-2';
+import { WeeklyNumericRankingV3 } from '../models/weekly-numeric-ranking-v-3';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +38,7 @@ export class MembersService extends BaseService {
    */
   findAllMembers$Response(params?: {
     club?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     uniqueIndex?: number;
     nameSearch?: string;
     extendedInformation?: boolean;
@@ -69,7 +70,9 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<StrictHttpResponse<Array<MemberEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MemberEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, MembersService.FindAllMembersPath, 'get');
     if (params) {
@@ -90,7 +93,8 @@ export class MembersService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -107,7 +111,7 @@ export class MembersService extends BaseService {
    */
   findAllMembers(params?: {
     club?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     uniqueIndex?: number;
     nameSearch?: string;
     extendedInformation?: boolean;
@@ -139,7 +143,9 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<Array<MemberEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<MemberEntry>> {
 
     return this.findAllMembers$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberEntry>>) => r.body as Array<MemberEntry>)
@@ -159,7 +165,9 @@ export class MembersService extends BaseService {
    */
   findAllMembersLookup$Response(params: {
     query: string;
-  }): Observable<StrictHttpResponse<Array<MemberEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MemberEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, MembersService.FindAllMembersLookupPath, 'get');
     if (params) {
@@ -168,7 +176,8 @@ export class MembersService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -185,7 +194,9 @@ export class MembersService extends BaseService {
    */
   findAllMembersLookup(params: {
     query: string;
-  }): Observable<Array<MemberEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<MemberEntry>> {
 
     return this.findAllMembersLookup$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberEntry>>) => r.body as Array<MemberEntry>)
@@ -204,7 +215,6 @@ export class MembersService extends BaseService {
    * This method doesn't expect any request body.
    */
   findMemberCategories$Response(params?: {
-    season?: number;
     uniqueIndex?: number;
     nameSearch?: string;
     shortNameSearch?: string;
@@ -234,11 +244,12 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<StrictHttpResponse<MemberEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MemberEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberCategoriesPath, 'get');
     if (params) {
-      rb.query('season', params.season, {});
       rb.query('uniqueIndex', params.uniqueIndex, {});
       rb.query('nameSearch', params.nameSearch, {});
       rb.query('shortNameSearch', params.shortNameSearch, {});
@@ -252,7 +263,8 @@ export class MembersService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -268,7 +280,6 @@ export class MembersService extends BaseService {
    * This method doesn't expect any request body.
    */
   findMemberCategories(params?: {
-    season?: number;
     uniqueIndex?: number;
     nameSearch?: string;
     shortNameSearch?: string;
@@ -298,7 +309,9 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<MemberEntry> {
+    context?: HttpContext
+  }
+): Observable<MemberEntry> {
 
     return this.findMemberCategories$Response(params).pipe(
       map((r: StrictHttpResponse<MemberEntry>) => r.body as MemberEntry)
@@ -318,7 +331,7 @@ export class MembersService extends BaseService {
    */
   findMemberById$Response(params: {
     club?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     nameSearch?: string;
     extendedInformation?: boolean;
     rankingPointsInformation?: boolean;
@@ -350,7 +363,9 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<StrictHttpResponse<MemberEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<MemberEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberByIdPath, 'get');
     if (params) {
@@ -371,7 +386,8 @@ export class MembersService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -388,7 +404,7 @@ export class MembersService extends BaseService {
    */
   findMemberById(params: {
     club?: string;
-    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
+    playerCategory?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23' | 'YOUTH_POST_23';
     nameSearch?: string;
     extendedInformation?: boolean;
     rankingPointsInformation?: boolean;
@@ -420,63 +436,12 @@ export class MembersService extends BaseService {
      * Season name to query
      */
     'X-Tabt-Season'?: string;
-  }): Observable<MemberEntry> {
+    context?: HttpContext
+  }
+): Observable<MemberEntry> {
 
     return this.findMemberById$Response(params).pipe(
       map((r: StrictHttpResponse<MemberEntry>) => r.body as MemberEntry)
-    );
-  }
-
-  /**
-   * Path part for operation findMemberEloHistory
-   */
-  static readonly FindMemberEloHistoryPath = '/v1/members/{uniqueIndex}/elo';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `findMemberEloHistory()` instead.
-   *
-   * This method doesn't expect any request body.
-   *
-   * @deprecated
-   */
-  findMemberEloHistory$Response(params: {
-    uniqueIndex: number;
-    season?: number;
-  }): Observable<StrictHttpResponse<Array<WeeklyElo>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberEloHistoryPath, 'get');
-    if (params) {
-      rb.path('uniqueIndex', params.uniqueIndex, {});
-      rb.query('season', params.season, {});
-    }
-
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<WeeklyElo>>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `findMemberEloHistory$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   *
-   * @deprecated
-   */
-  findMemberEloHistory(params: {
-    uniqueIndex: number;
-    season?: number;
-  }): Observable<Array<WeeklyElo>> {
-
-    return this.findMemberEloHistory$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<WeeklyElo>>) => r.body as Array<WeeklyElo>)
     );
   }
 
@@ -490,12 +455,16 @@ export class MembersService extends BaseService {
    * To access only the response body, use `findMemberNumericRankingsHistory()` instead.
    *
    * This method doesn't expect any request body.
+   *
+   * @deprecated
    */
   findMemberNumericRankingsHistory$Response(params: {
     uniqueIndex: number;
     season?: number;
-    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
-  }): Observable<StrictHttpResponse<Array<WeeklyNumericRanking>>> {
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<WeeklyNumericRanking>>> {
 
     const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberNumericRankingsHistoryPath, 'get');
     if (params) {
@@ -506,7 +475,8 @@ export class MembersService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -520,15 +490,127 @@ export class MembersService extends BaseService {
    * To access the full response (for headers, for example), `findMemberNumericRankingsHistory$Response()` instead.
    *
    * This method doesn't expect any request body.
+   *
+   * @deprecated
    */
   findMemberNumericRankingsHistory(params: {
     uniqueIndex: number;
     season?: number;
-    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH' | 'MEN_POST_23' | 'WOMEN_POST_23';
-  }): Observable<Array<WeeklyNumericRanking>> {
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    context?: HttpContext
+  }
+): Observable<Array<WeeklyNumericRanking>> {
 
     return this.findMemberNumericRankingsHistory$Response(params).pipe(
       map((r: StrictHttpResponse<Array<WeeklyNumericRanking>>) => r.body as Array<WeeklyNumericRanking>)
+    );
+  }
+
+  /**
+   * Path part for operation findMemberNumericRankingsHistoryV2
+   */
+  static readonly FindMemberNumericRankingsHistoryV2Path = '/v2/members/{uniqueIndex}/numeric-rankings';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findMemberNumericRankingsHistoryV2()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberNumericRankingsHistoryV2$Response(params: {
+    uniqueIndex: number;
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<WeeklyNumericRankingV2>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberNumericRankingsHistoryV2Path, 'get');
+    if (params) {
+      rb.path('uniqueIndex', params.uniqueIndex, {});
+      rb.query('category', params.category, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<WeeklyNumericRankingV2>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findMemberNumericRankingsHistoryV2$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberNumericRankingsHistoryV2(params: {
+    uniqueIndex: number;
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    context?: HttpContext
+  }
+): Observable<Array<WeeklyNumericRankingV2>> {
+
+    return this.findMemberNumericRankingsHistoryV2$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<WeeklyNumericRankingV2>>) => r.body as Array<WeeklyNumericRankingV2>)
+    );
+  }
+
+  /**
+   * Path part for operation findMemberNumericRankingsHistoryV3
+   */
+  static readonly FindMemberNumericRankingsHistoryV3Path = '/v3/members/{uniqueIndex}/numeric-rankings';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `findMemberNumericRankingsHistoryV3()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberNumericRankingsHistoryV3$Response(params: {
+    uniqueIndex: number;
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<WeeklyNumericRankingV3>> {
+
+    const rb = new RequestBuilder(this.rootUrl, MembersService.FindMemberNumericRankingsHistoryV3Path, 'get');
+    if (params) {
+      rb.path('uniqueIndex', params.uniqueIndex, {});
+      rb.query('category', params.category, {});
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json',
+      context: params?.context
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<WeeklyNumericRankingV3>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `findMemberNumericRankingsHistoryV3$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  findMemberNumericRankingsHistoryV3(params: {
+    uniqueIndex: number;
+    category?: 'MEN' | 'WOMEN' | 'VETERANS' | 'VETERANS_WOMEN' | 'YOUTH';
+    context?: HttpContext
+  }
+): Observable<WeeklyNumericRankingV3> {
+
+    return this.findMemberNumericRankingsHistoryV3$Response(params).pipe(
+      map((r: StrictHttpResponse<WeeklyNumericRankingV3>) => r.body as WeeklyNumericRankingV3)
     );
   }
 

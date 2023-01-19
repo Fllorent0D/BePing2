@@ -2,8 +2,8 @@ import {ClubEntry} from '../../api/models/club-entry';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
 import {UserMemberEntries} from './user.state';
 import {PLAYER_CATEGORY} from '../../models/user';
-import {WeeklyElo} from '../../api/models/weekly-elo';
 import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
+import {WeeklyNumericRankingV2} from '../../api/models/weekly-numeric-ranking-v-2';
 
 export class SetUser {
     static readonly type = '[user] Set user';
@@ -67,7 +67,7 @@ export class UpdateWeeklyEloSuccess {
     static readonly type = '[user] Update weekly elo success';
 
     constructor(
-        public elo: WeeklyElo[]
+        public elo: WeeklyNumericRankingV2[]
     ) {
     }
 }

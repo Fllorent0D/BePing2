@@ -196,7 +196,7 @@
                                         (click)="start()"
                                         *ngIf="!state.hasError"
                                         [disabled]="!acceptTermControl.value"
-                                        [expand]="'block'"
+
                                         color="primary"
                                         id="onboarding-start-beping"
                                         fill="solid">
@@ -209,7 +209,6 @@
                                 <ion-button
                                         (click)="retry()"
                                         *ngIf="state.hasError"
-                                        [expand]="'block'"
                                         color="warning"
                                         fill="solid"
                                         id="onboarding-retry"

@@ -126,8 +126,20 @@ export function HttpLoaderFactory(http: HttpClient) {
                             version: 3
                         };
                     }
+                },
+                {
+                    version: 3,
+                    migrate: (state) => {
+                        console.log('Running migration to version 4');
+                        if (state?.user?.numericRankings) {
+                            delete state?.user?.numericRankings;
+                        }
+                        return {
+                            ...state,
+                            version: 4
+                        };
+                    }
                 }
-
             ]
         }),
         NgxsModule.forRoot(

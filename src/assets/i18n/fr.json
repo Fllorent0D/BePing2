@@ -91,7 +91,8 @@
     "DECISIVE_SETS_LOST": "Belles perdues",
     "SCORE_DISTRIBUTION": "Répartition des scores",
     "ELO_POINT": "Points ELO",
-    "LATEST_MATCHES": "Derniers matchs",
+    "LATEST_MATCHES": "Dernières rencontres",
+    "LATEST_INDIVIDUAL_MATCHES": "Derniers matchs",
     "PLAYER_CATEGORY_CHANGED": "Catégorie {{category}} chargée",
     "SEE_DETAILS": "Afficher détails"
   },

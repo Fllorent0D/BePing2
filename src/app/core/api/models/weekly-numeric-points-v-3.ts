@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface WeeklyElo {
-  elo: number;
+export interface WeeklyNumericPointsV3 {
+  points: number;
   weekName: string;
 }

@@ -3,6 +3,7 @@ import {ChartData, ChartOptions} from 'chart.js';
 import {fr} from 'date-fns/locale';
 import 'chartjs-adapter-date-fns';
 import {WeeklyNumericRanking} from '../../../core/api/models/weekly-numeric-ranking';
+import {WeeklyNumericPointsV3} from '../../../core/api/models/weekly-numeric-points-v-3';
 
 @Component({
     selector: 'beping-weekly-elo',
@@ -10,7 +11,7 @@ import {WeeklyNumericRanking} from '../../../core/api/models/weekly-numeric-rank
     styleUrls: ['./weekly-elo.component.scss']
 })
 export class WeeklyEloComponent implements OnInit, AfterViewInit {
-    private dataset: WeeklyNumericRanking[];
+    private dataset: WeeklyNumericPointsV3[];
 
     type = 'line';
     data: ChartData;
@@ -23,7 +24,7 @@ export class WeeklyEloComponent implements OnInit, AfterViewInit {
 
     @ViewChild('canvasElement') canvas: ElementRef<HTMLCanvasElement>;
 
-    @Input() set numericRankings(numericRankings: WeeklyNumericRanking[]) {
+    @Input() set numericRankings(numericRankings: WeeklyNumericPointsV3[]) {
         this.dataset = numericRankings;
         this.computeData();
     }

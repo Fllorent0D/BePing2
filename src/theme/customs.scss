@@ -155,7 +155,7 @@ ion-fab-button[data-desc]::after {
 }
 
 .text-bold {
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .progress-bar {
@@ -179,9 +179,14 @@ ion-fab-button[data-desc]::after {
   }
 
 }
-
+beping-side-pane-layout > ion-split-pane > ion-menu {
+  --side-max-width: 23%;
+}
 .score {
   font-weight: 700;
+}
+.text-xsmall {
+  font-size: 0.9em !important;
 }
 
 .ion-no-padding-horizontal {

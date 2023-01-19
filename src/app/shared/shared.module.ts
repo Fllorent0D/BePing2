@@ -50,6 +50,8 @@ import { SkeletonItemListComponentComponent } from './components/skeleton-item-l
 import {
     SkeletonLargeItemListComponentComponent
 } from './components/skeleton-large-item-list-component/skeleton-large-item-list-component.component';
+import { LastOpponentsComponent } from './components/last-opponents/last-opponents.component';
+import { LastOpponentComponent } from './components/last-opponents/last-opponent/last-opponent.component';
 
 const COMPONENTS = [
     RankingComponent,
@@ -112,6 +114,8 @@ const DIRECTIVES = [
         LocalizedBackBtnComponent,
         SelectionIonListComponent,
         SkeletonItemListComponentComponent,
+        LastOpponentsComponent,
+        LastOpponentComponent,
     ],
     exports: [
         CommonModule,
@@ -133,7 +137,8 @@ const DIRECTIVES = [
         LocalizedBackBtnComponent,
         SelectionIonListComponent,
         TrackByPropertyDirective,
-        SkeletonItemListComponentComponent
+        SkeletonItemListComponentComponent,
+        LastOpponentsComponent
 
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

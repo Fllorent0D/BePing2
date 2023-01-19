@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -36,7 +36,9 @@ export class Head2HeadService extends BaseService {
   findHead2HeadMatches$Response(params: {
     playerUniqueIndex: number;
     opponentUniqueIndex: number;
-  }): Observable<StrictHttpResponse<Head2HeadData>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Head2HeadData>> {
 
     const rb = new RequestBuilder(this.rootUrl, Head2HeadService.FindHead2HeadMatchesPath, 'get');
     if (params) {
@@ -46,7 +48,8 @@ export class Head2HeadService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -64,7 +67,9 @@ export class Head2HeadService extends BaseService {
   findHead2HeadMatches(params: {
     playerUniqueIndex: number;
     opponentUniqueIndex: number;
-  }): Observable<Head2HeadData> {
+    context?: HttpContext
+  }
+): Observable<Head2HeadData> {
 
     return this.findHead2HeadMatches$Response(params).pipe(
       map((r: StrictHttpResponse<Head2HeadData>) => r.body as Head2HeadData)

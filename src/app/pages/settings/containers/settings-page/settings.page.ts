@@ -5,7 +5,7 @@ import {Select, Store} from '@ngxs/store';
 import {UserState, UserStateModel} from '../../../../core/store/user/user.state';
 import {GetCurrentSeason, SeasonState} from '../../../../core/store/season';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
-import {TabTState, TabTStateModel} from '../../../../core/store/user/tab-t-state.service';
+import {TabTState, TabTStateModel} from '../../../../core/store/user/tabt.state';
 import {Logout} from '../../../../core/store/user/aftt.actions';
 import {finalize, map, switchMap} from 'rxjs/operators';
 import {AfttLoginPage} from '../../../modals/aftt-login/aftt-login-page.component';

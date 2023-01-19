@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {WeeklyNumericRanking} from '../../../core/api/models/weekly-numeric-ranking';
 import {Platform} from '@ionic/angular';
 import {PLAYER_CATEGORY} from '../../../core/models/user';
+import {WeeklyNumericRankingV3} from '../../../core/api/models/weekly-numeric-ranking-v-3';
 
 @Component({
     selector: 'beping-ranking-history-graphs',
@@ -12,7 +13,7 @@ export class RankingHistoryGraphsComponent implements OnInit {
 
     @Input() displayElo: boolean;
     @Input() displayNumericRanking: boolean;
-    @Input() numericRankings: WeeklyNumericRanking[];
+    @Input() numericRankings: WeeklyNumericRankingV3;
     @Input() category: PLAYER_CATEGORY;
     isTablet: boolean;
 

@@ -92,6 +92,7 @@
     "SCORE_DISTRIBUTION": "Score distribution",
     "ELO_POINT": "ELO",
     "LATEST_MATCHES": "Latest matches",
+    "LATEST_INDIVIDUAL_MATCHES": "Latest individual matches",
     "PLAYER_CATEGORY_CHANGED": "Category {{category}} loaded",
     "SEE_DETAILS": "See details"
   },

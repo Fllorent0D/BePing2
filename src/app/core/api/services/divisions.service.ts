@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
 import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
@@ -64,7 +64,9 @@ export class DivisionsService extends BaseService {
     'X-Tabt-Season'?: string;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: 'no' | 'yes' | 'short';
-  }): Observable<StrictHttpResponse<Array<DivisionEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<DivisionEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, DivisionsService.FindAllDivisionsPath, 'get');
     if (params) {
@@ -79,7 +81,8 @@ export class DivisionsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -122,7 +125,9 @@ export class DivisionsService extends BaseService {
     'X-Tabt-Season'?: string;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: 'no' | 'yes' | 'short';
-  }): Observable<Array<DivisionEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<DivisionEntry>> {
 
     return this.findAllDivisions$Response(params).pipe(
       map((r: StrictHttpResponse<Array<DivisionEntry>>) => r.body as Array<DivisionEntry>)
@@ -169,7 +174,9 @@ export class DivisionsService extends BaseService {
     divisionId: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: 'no' | 'yes' | 'short';
-  }): Observable<StrictHttpResponse<DivisionEntry>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<DivisionEntry>> {
 
     const rb = new RequestBuilder(this.rootUrl, DivisionsService.FindDivisionByIdPath, 'get');
     if (params) {
@@ -185,7 +192,8 @@ export class DivisionsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -229,7 +237,9 @@ export class DivisionsService extends BaseService {
     divisionId: number;
     level?: 'NATIONAL' | 'HAINAUT' | 'VLAAMS_BRABANT_BR' | 'SUPER_DIVISION' | 'OOST_VLANDEREN' | 'ANTWERP' | 'WEST_VLAANDEREN' | 'LIMBURG' | 'BRUSSELS_BRABANT_WALLON' | 'NAMUR' | 'LIEGE' | 'LUXEMBOURG' | 'REGION_VTTL' | 'IWB';
     showDivisionName?: 'no' | 'yes' | 'short';
-  }): Observable<DivisionEntry> {
+    context?: HttpContext
+  }
+): Observable<DivisionEntry> {
 
     return this.findDivisionById$Response(params).pipe(
       map((r: StrictHttpResponse<DivisionEntry>) => r.body as DivisionEntry)
@@ -276,7 +286,9 @@ export class DivisionsService extends BaseService {
     divisionId: number;
     weekName?: number;
     rankingSystem?: number;
-  }): Observable<StrictHttpResponse<Array<RankingEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<RankingEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, DivisionsService.FindDivisionRankingPath, 'get');
     if (params) {
@@ -292,7 +304,8 @@ export class DivisionsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -336,7 +349,9 @@ export class DivisionsService extends BaseService {
     divisionId: number;
     weekName?: number;
     rankingSystem?: number;
-  }): Observable<Array<RankingEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<RankingEntry>> {
 
     return this.findDivisionRanking$Response(params).pipe(
       map((r: StrictHttpResponse<Array<RankingEntry>>) => r.body as Array<RankingEntry>)
@@ -393,7 +408,9 @@ export class DivisionsService extends BaseService {
      */
     yearDateTo?: string;
     withDetails?: boolean;
-  }): Observable<StrictHttpResponse<Array<TeamMatchesEntry>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<TeamMatchesEntry>>> {
 
     const rb = new RequestBuilder(this.rootUrl, DivisionsService.FindDivisionMatchesPath, 'get');
     if (params) {
@@ -411,7 +428,8 @@ export class DivisionsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -465,7 +483,9 @@ export class DivisionsService extends BaseService {
      */
     yearDateTo?: string;
     withDetails?: boolean;
-  }): Observable<Array<TeamMatchesEntry>> {
+    context?: HttpContext
+  }
+): Observable<Array<TeamMatchesEntry>> {
 
     return this.findDivisionMatches$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TeamMatchesEntry>>) => r.body as Array<TeamMatchesEntry>)
@@ -511,7 +531,9 @@ export class DivisionsService extends BaseService {
     'X-Tabt-Season'?: string;
     divisionId: number;
     season?: number;
-  }): Observable<StrictHttpResponse<Array<MemberResults>>> {
+    context?: HttpContext
+  }
+): Observable<StrictHttpResponse<Array<MemberResults>>> {
 
     const rb = new RequestBuilder(this.rootUrl, DivisionsService.FindDivisionMembersPath, 'get');
     if (params) {
@@ -526,7 +548,8 @@ export class DivisionsService extends BaseService {
 
     return this.http.request(rb.build({
       responseType: 'json',
-      accept: 'application/json'
+      accept: 'application/json',
+      context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
@@ -569,7 +592,9 @@ export class DivisionsService extends BaseService {
     'X-Tabt-Season'?: string;
     divisionId: number;
     season?: number;
-  }): Observable<Array<MemberResults>> {
+    context?: HttpContext
+  }
+): Observable<Array<MemberResults>> {
 
     return this.findDivisionMembers$Response(params).pipe(
       map((r: StrictHttpResponse<Array<MemberResults>>) => r.body as Array<MemberResults>)
