@@ -1,5 +1,12 @@
 
 
+### [2.8.1](https://github.com/Fllorent0D/BePing2/compare/v2.8.0...v2.8.1) (2023-01-20)
+
+
+### Chores
+
+* Update dependency com.google.gms:google-services to v4.3.15 ([ea29e32](https://github.com/Fllorent0D/BePing2/commit/ea29e321ac6644ea6376a434e775fd7196b7ab64))
+
 ## [2.8.0](https://github.com/Fllorent0D/BePing2/compare/v2.7.56...v2.8.0) (2023-01-19)
 
 
