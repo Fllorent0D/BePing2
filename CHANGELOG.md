@@ -1,5 +1,12 @@
 
 
+### [2.8.3](https://github.com/Fllorent0D/BePing2/compare/v2.8.2...v2.8.3) (2023-01-20)
+
+
+### Chores
+
+* Update dependency com.android.billingclient:billing to v4.1.0 ([ff498a0](https://github.com/Fllorent0D/BePing2/commit/ff498a0392078d5ef328b0bb459bb22ce2b85706))
+
 ### [2.8.2](https://github.com/Fllorent0D/BePing2/compare/v2.8.1...v2.8.2) (2023-01-20)
 
 
