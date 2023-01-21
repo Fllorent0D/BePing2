@@ -1,5 +1,7 @@
 
 
+### [2.8.8](https://github.com/Fllorent0D/BePing2/compare/v2.8.7...v2.8.8) (2023-01-21)
+
 ### [2.8.7](https://github.com/Fllorent0D/BePing2/compare/v2.8.6...v2.8.7) (2023-01-21)
 
 ### [2.8.6](https://github.com/Fllorent0D/BePing2/compare/v2.8.5...v2.8.6) (2023-01-21)
