@@ -1,5 +1,12 @@
 
 
+### [2.8.5](https://github.com/Fllorent0D/BePing2/compare/v2.8.4...v2.8.5) (2023-01-21)
+
+
+### Chores
+
+* Update webdriverio monorepo to v8.2.1 ([1736726](https://github.com/Fllorent0D/BePing2/commit/173672667ca6c1a6e08d6ee44a253f1ca7728f7b))
+
 ### [2.8.4](https://github.com/Fllorent0D/BePing2/compare/v2.8.3...v2.8.4) (2023-01-20)
 
 
