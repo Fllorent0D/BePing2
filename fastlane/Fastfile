@@ -28,6 +28,7 @@ platform :ios do
     desc 'Build the iOS application.'
     lane :build_ios do
         build_ionic_prod
+        setup_ci if ENV['CI']
         match(type: "appstore")
         #sh("cd ../ios/App && arch -x86_64  pod install")
         build_app(
@@ -72,7 +73,7 @@ platform :android do
     desc 'Build the Android application.'
     lane :build do
         build_ionic_prod
-
+        setup_ci if ENV['CI']
         gradle(
             task: 'assemble',
             build_type: 'Release',
