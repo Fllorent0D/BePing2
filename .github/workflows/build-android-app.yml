@@ -1,4 +1,4 @@
-name: build-ios-app
+name: build-android-app
 on:
   workflow_run:
     workflows: ["Release version"]
@@ -10,6 +10,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - run: npm ci
       - run: fastlane android beta
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
