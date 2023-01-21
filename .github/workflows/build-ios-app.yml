@@ -10,6 +10,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Decode Match private key to fetch certificates
+        uses: timheuer/base64-to-file@v1
+        id: match_private_key_file
+        with:
+          fileName: ${{ secrets.MATCH_GIT_PRIVATE_KEY }}
+          encodedString: ${{ secrets.MATCH_GIT_PRIVATE_KEY_FILE_BASE64 }}
       - run: npm ci
       - run: fastlane ios beta
         env:
