@@ -1,4 +1,4 @@
-name: build-ios-app
+name: Build iOS app
 on:
   workflow_run:
     workflows: ["Release version"]

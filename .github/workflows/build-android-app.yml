@@ -1,4 +1,4 @@
-name: build-android-app
+name: Build Android app
 on:
   workflow_run:
     workflows: ["Release version"]
