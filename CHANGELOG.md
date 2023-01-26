@@ -1,5 +1,12 @@
 
 
+### [2.8.14](https://github.com/Fllorent0D/BePing2/compare/v2.8.13...v2.8.14) (2023-01-26)
+
+
+### Chores
+
+* Update angular monorepo to v15.1.2 ([b025bce](https://github.com/Fllorent0D/BePing2/commit/b025bce674070031b76d073d3b597fe8617b501a))
+
 ### [2.8.13](https://github.com/Fllorent0D/BePing2/compare/v2.8.12...v2.8.13) (2023-01-21)
 
 ### [2.8.12](https://github.com/Fllorent0D/BePing2/compare/v2.8.11...v2.8.12) (2023-01-21)
