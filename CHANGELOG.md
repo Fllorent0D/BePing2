@@ -1,5 +1,12 @@
 
 
+### [2.8.15](https://github.com/Fllorent0D/BePing2/compare/v2.8.14...v2.8.15) (2023-01-26)
+
+
+### Bug Fixes
+
+* default week displayed ([dafb334](https://github.com/Fllorent0D/BePing2/commit/dafb3344570fad2fe34a9fd6f9e58f260f327d95))
+
 ### [2.8.14](https://github.com/Fllorent0D/BePing2/compare/v2.8.13...v2.8.14) (2023-01-26)
 
 
