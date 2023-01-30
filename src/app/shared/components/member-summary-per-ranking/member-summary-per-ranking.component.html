@@ -1,13 +1,13 @@
 <beping-section-title [title]="'DASHBOARD.SUMMARY_BY_RANKING'|translate"></beping-section-title>
 
 <swiper #swiper [config]="swiperConfig" class="beping-swiper">
-    <ng-template *ngFor="let ranking of resultsPerRanking | keyvalue" swiperSlide>
+    <ng-template *ngFor="let ranking of resultsPerRanking | keyvalue; last as isLast" swiperSlide>
         <beping-ranking-summary
-                class="no-margin-right-unless-last"
                 [isOpen]="isTablet"
                 [isTablet]="isTablet"
                 [ranking]="ranking.key"
-                [results]="ranking.value">
+                [results]="ranking.value"
+                [style.margin-right]="!isLast ? '0': ''">
         </beping-ranking-summary>
     </ng-template>
 </swiper>

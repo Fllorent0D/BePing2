@@ -7,12 +7,12 @@
 <ng-container *ngIf="currentMemberEntry">
     <ion-toolbar color="light">
         <beping-member-name-ranking-info
-                [displayName]="false"
                 [category]="currentCategory"
                 [displayELO]="displayELO"
+                [displayName]="false"
                 [displayNumericRanking]="displayNumericRanking"
-                [numericRanking]="numericRankings?.points"
-                [member]="currentMemberEntry">
+                [member]="currentMemberEntry"
+                [numericRanking]="numericRankings?.points">
         </beping-member-name-ranking-info>
     </ion-toolbar>
 
@@ -25,15 +25,16 @@
         <ng-container *ngIf="numericRankings">
             <beping-ranking-history-graphs
                     [category]="currentCategory"
-                    [numericRankings]="numericRankings"
+                    [displayElo]="displayELO"
                     [displayNumericRanking]="displayNumericRanking"
-                    [displayElo]="displayELO">
+                    [numericRankings]="numericRankings">
             </beping-ranking-history-graphs>
         </ng-container>
 
         <beping-tie-break-played
                 [memberResultEntries]="currentMemberEntry.ResultEntries">
         </beping-tie-break-played>
+        <beping-last-opponents *ngIf="numericRankings?.perDateHistory" [numericRankingDetails]="numericRankings.perDateHistory"></beping-last-opponents>
         <beping-member-latest-matches
                 [matches]="latestMatches">
         </beping-member-latest-matches>
@@ -43,8 +44,8 @@
     </ng-container>
     <ng-template #noResults>
         <beping-alert-full-page
-                icon="information-circle-outline"
-                [title]="'DASHBOARD.NO_RESULTS'|translate">
+                [title]="'DASHBOARD.NO_RESULTS'|translate"
+                icon="information-circle-outline">
         </beping-alert-full-page>
     </ng-template>
 

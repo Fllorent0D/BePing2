@@ -1,34 +1,51 @@
-<beping-section-title *ngIf="lastOpponents?.length" [note]="'Voir tout'"
+<beping-section-title *ngIf="lastOpponents?.length"
                       [title]="'DASHBOARD.LATEST_INDIVIDUAL_MATCHES'|translate"
-                        (noteClicked)="openRankingOverview()"
 ></beping-section-title>
 
-<ion-list [inset]="true" [lines]="'inset'">
-    <ion-item *ngFor="let opponent of lastOpponents">
-        <!--<beping-card (click)="navigateToDetails()" [marging]="false" [padding]="false">-->
-        <ion-grid class="ion-no-padding">
-            <ion-row class="ion-align-items-center">
-                <ion-col class="ion-no-padding" size="6">
-                    <ion-label class="ion-text-wrap">
-                        {{opponent.opponentName |titlecase}}
-                    </ion-label>
-                </ion-col>
-                <ion-col class="ion-text-center ion-no-padding" size="2">
-                    <ion-label class="ion-no-margin small">{{opponent.score}}</ion-label>
+<swiper #swiper [config]="swiperConfig" class="beping-swiper">
+    <ng-template *ngFor="let weekDetails of numericRankingDetails|reverse; last as isLast" swiperSlide>
+        <ion-list [inset]="true" [lines]="'inset'" [style.margin-right]="!isLast ? '0' : ''">
+            <ion-item [lines]="'inset'" color="light">
+                <ion-label>
+                    {{weekDetails.date|localizedDate}}
+                    <p class="text-xsmall ion-text-wrap">{{weekDetails.competitionContext}}</p>
+                </ion-label>
+                <ion-label class="ion-text-end" [color]="(weekDetails.endPoints > weekDetails.basePoints || !weekDetails.endPoints) ? 'primary' : 'danger'">
+                    {{weekDetails.basePoints | round}}
+                    <ion-icon *ngIf="weekDetails.basePoints<weekDetails.endPoints" name="trending-up"></ion-icon>
+                    <ion-icon *ngIf="weekDetails.basePoints>weekDetails.endPoints" name="trending-down"></ion-icon>
+                    <span *ngIf="weekDetails.endPoints && weekDetails.basePoints !== weekDetails.endPoints"> {{weekDetails.endPoints | round}}</span>
+                </ion-label>
+            </ion-item>
+            <ion-item *ngFor="let opponent of weekDetails.opponents">
+                <!--<beping-card (click)="navigateToDetails()" [marging]="false" [padding]="false">-->
+                <ion-grid class="ion-no-padding">
+                    <ion-row class="ion-align-items-center">
+                        <ion-col class="ion-no-padding" size="6">
+                            <ion-label class="ion-text-wrap">
+                                {{opponent.opponentName |titlecase}}
+                            </ion-label>
+                        </ion-col>
+                        <ion-col class="ion-text-center ion-no-padding" size="2">
+                            <ion-label class="ion-no-margin small">{{opponent.score}}</ion-label>
 
-                </ion-col>
-                <ion-col class="ion-text-center ion-no-padding" size="2">
-                    <ion-label class="ion-no-margin small">{{opponent.opponentRanking}}</ion-label>
+                        </ion-col>
+                        <ion-col class="ion-text-center ion-no-padding" size="2">
+                            <ion-label class="ion-no-margin small">{{opponent.opponentRanking}}</ion-label>
 
-                </ion-col>
-                <ion-col [class.is-color-danger]="opponent.pointsWon < 0"
-                         [class.is-color-primary]="opponent.pointsWon > 0"
-                         class="ion-text-end ion-no-padding" size="2">
-                    <ion-label
-                            class="ion-no-margin small">{{opponent.pointsWon > 0 ? '+' : ''}}{{opponent.pointsWon}}</ion-label>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        <!--</beping-card>-->
-    </ion-item>
-</ion-list>
+                        </ion-col>
+                        <ion-col [class.is-color-danger]="opponent.pointsWon < 0"
+                                 [class.is-color-primary]="opponent.pointsWon > 0"
+                                 class="ion-text-end ion-no-padding" size="2">
+                            <ion-label
+                                    class="ion-no-margin small">{{opponent.pointsWon > 0 ? '+' : ''}}{{opponent.pointsWon}}</ion-label>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <!--</beping-card>-->
+            </ion-item>
+        </ion-list>
+
+    </ng-template>
+</swiper>
+
