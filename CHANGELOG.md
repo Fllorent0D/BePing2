@@ -1,5 +1,12 @@
 
 
+### [2.8.18](https://github.com/Fllorent0D/BePing2/compare/v2.8.17...v2.8.18) (2023-01-30)
+
+
+### Bug Fixes
+
+* list not reversing ([b82a451](https://github.com/Fllorent0D/BePing2/commit/b82a4512ff14027f513cf1f42e3be85026249f14))
+
 ### [2.8.17](https://github.com/Fllorent0D/BePing2/compare/v2.8.16...v2.8.17) (2023-01-30)
 
 
