@@ -3,7 +3,7 @@
 ></beping-section-title>
 
 <swiper #swiper [config]="swiperConfig" class="beping-swiper">
-    <ng-template *ngFor="let weekDetails of numericRankingDetails|reverse; last as isLast" swiperSlide>
+    <ng-template *ngFor="let weekDetails of numericRankingDetails.reverse(); last as isLast" swiperSlide>
         <ion-list [inset]="true" [lines]="'inset'" [style.margin-right]="!isLast ? '0' : ''">
             <ion-item [lines]="'inset'" color="light">
                 <ion-label>
