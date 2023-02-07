@@ -63,8 +63,6 @@
     </array>
     <key>IonAppId</key>
     <string>f809a222</string>
-    <key>IonChannelName</key>
-    <string>Production</string>
     <key>IonUpdateMethod</key>
     <string>background</string>
     <key>IonMaxVersions</key>
@@ -73,5 +71,7 @@
     <string>30</string>
     <key>IonApi</key>
     <string>https://api.ionicjs.com</string>
+    <key>IonChannelName</key>
+    <string>"Production"</string>
   </dict>
 </plist>

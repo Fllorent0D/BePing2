@@ -2,7 +2,10 @@ fastlane_version '2.131.0'
 
 desc 'build ionic app'
 lane :build_ionic_prod do
-    sh("../node_modules/@ionic/cli/bin/ionic", "cap", "copy", "--prod")
+    sh("npm run build")
+    sh("../node_modules/@ionic/cli/bin/ionic", "deploy", "manifest")
+    sh("arch", "-x86_64", "../node_modules/@ionic/cli/bin/ionic", "cap", "copy", "--no-build", "--prod")
+    sh("../node_modules/@ionic/cli/bin/ionic", "deploy", "configure", "--channel-name=\"Production\"")
 end
 
 platform :ios do

@@ -5,7 +5,7 @@
   <string name="package_name">be.floca.beping</string>
   <string name="custom_url_scheme">be.floca.beping</string>
   <string name="ionic_app_id">f809a222</string>
-  <string name="ionic_channel_name">Production</string>
+  <string name="ionic_channel_name">"Production"</string>
   <string name="ionic_update_method">background</string>
   <string name="ionic_max_versions">2</string>
   <string name="ionic_min_background_duration">30</string>

@@ -52,6 +52,7 @@ import {
 } from './components/skeleton-large-item-list-component/skeleton-large-item-list-component.component';
 import { LastOpponentsComponent } from './components/last-opponents/last-opponents.component';
 import { LastOpponentComponent } from './components/last-opponents/last-opponent/last-opponent.component';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 const COMPONENTS = [
     RankingComponent,
@@ -84,7 +85,8 @@ const COMPONENTS = [
 ];
 const PIPES = [
     WithLoadingPipe,
-    LocalDatePipe
+    LocalDatePipe,
+    ReversePipe
 ];
 const DIRECTIVES = [
     AppearDirective,

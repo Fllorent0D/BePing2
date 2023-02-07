@@ -17,5 +17,9 @@
 			"style": "dark"
 		}
 	},
-	"cordova": {}
+	"cordova": {
+		"preferences": {
+			"DisableDeploy": "true"
+		}
+	}
 }
