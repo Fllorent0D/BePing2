@@ -1,5 +1,12 @@
 
 
+### [2.8.19](https://github.com/Fllorent0D/BePing2/compare/v2.8.18...v2.8.19) (2023-02-07)
+
+
+### Bug Fixes
+
+* correct prod build ([c9bed16](https://github.com/Fllorent0D/BePing2/commit/c9bed1630f830c581074eb466d1db9ab5d2acc01))
+
 ### [2.8.18](https://github.com/Fllorent0D/BePing2/compare/v2.8.17...v2.8.18) (2023-01-30)
 
 
