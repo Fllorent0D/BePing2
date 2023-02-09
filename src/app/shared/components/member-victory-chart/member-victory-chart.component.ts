@@ -19,8 +19,8 @@ export class MemberVictoryChartComponent {
         if (!memberResultEntries) {
             memberResultEntries = [];
         }
-        this.victories = memberResultEntries.filter((result) => result.Result === 'V').length;
-        this.defeats = memberResultEntries.filter((result) => result.Result === 'D').length;
+        this.victories = memberResultEntries.filter((result) => result.Result.startsWith('V')).length;
+        this.defeats = memberResultEntries.filter((result) => result.Result.startsWith('D')).length;
         this.total = memberResultEntries.length;
         this.defeatsPct = Math.round((this.defeats / this.total) * 100);
         this.victoriesPct = Math.round((this.victories / this.total) * 100);

@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -c production",
+    "start": "ng serve",
     "start:hmr": "ng serve --configuration hmr",
     "build": "ng build --configuration production",
     "ionic:sync": "ionic cap sync",
