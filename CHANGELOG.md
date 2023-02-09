@@ -1,5 +1,12 @@
 
 
+### [2.8.20](https://github.com/Fllorent0D/BePing2/compare/v2.8.19...v2.8.20) (2023-02-09)
+
+
+### Bug Fixes
+
+* correct summary numbers ([7cd79cd](https://github.com/Fllorent0D/BePing2/commit/7cd79cd039799736165f4842c2c17cd1a4a85b4d))
+
 ### [2.8.19](https://github.com/Fllorent0D/BePing2/compare/v2.8.18...v2.8.19) (2023-02-07)
 
 
