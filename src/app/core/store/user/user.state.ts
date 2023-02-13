@@ -127,6 +127,10 @@ export class UserState implements NgxsOnInit {
             return userState.memberEntries[category];
         });
     }
+    @Selector([UserState])
+    static getMemberEntries(state: UserStateModel): UserMemberEntries {
+        return state.memberEntries;
+    }
 
     static getLatestMatchesForCategory(category: PLAYER_CATEGORY) {
         return createSelector([UserState], (userState: UserStateModel) => {

@@ -79,7 +79,7 @@
                     [memberResultEntries]="currentMemberEntry.ResultEntries">
             </beping-tie-break-played>
             <beping-rotatio *ngIf="partnershipRotatio$|async"></beping-rotatio>
-            <beping-last-opponents [numericRankingDetails]="(numericRankingPoints$|async).perDateHistory"></beping-last-opponents>
+            <beping-last-opponents [numericRankingDetails]="(numericRankingPoints$|async)?.perDateHistory"></beping-last-opponents>
             <beping-member-latest-matches
                     [matches]="latestMatches$| async">
             </beping-member-latest-matches>
