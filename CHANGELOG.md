@@ -1,5 +1,12 @@
 
 
+### [2.8.21](https://github.com/Fllorent0D/BePing2/compare/v2.8.20...v2.8.21) (2023-02-13)
+
+
+### Bug Fixes
+
+* correct some states ([c337513](https://github.com/Fllorent0D/BePing2/commit/c337513c35e5d1ae52c7a0e4188182136f0f0717))
+
 ### [2.8.20](https://github.com/Fllorent0D/BePing2/compare/v2.8.19...v2.8.20) (2023-02-09)
 
 
