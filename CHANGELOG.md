@@ -1,5 +1,12 @@
 
 
+### [2.8.26](https://github.com/Fllorent0D/BePing2/compare/v2.8.25...v2.8.26) (2023-03-31)
+
+
+### Chores
+
+* Update dependency @capacitor/share to v4.1.1 ([0aeab8d](https://github.com/Fllorent0D/BePing2/commit/0aeab8d6b38ae33373bb5df9cc39c2c110ec7530))
+
 ### [2.8.25](https://github.com/Fllorent0D/BePing2/compare/v2.8.24...v2.8.25) (2023-03-11)
 
 
