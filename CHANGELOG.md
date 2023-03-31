@@ -1,5 +1,12 @@
 
 
+### [2.8.28](https://github.com/Fllorent0D/BePing2/compare/v2.8.27...v2.8.28) (2023-03-31)
+
+
+### Chores
+
+* Update dependency @ionic/cli to v6.20.9 ([6c75f9b](https://github.com/Fllorent0D/BePing2/commit/6c75f9b3a140ef7619fe68e5c359da92a4926ac3))
+
 ### [2.8.27](https://github.com/Fllorent0D/BePing2/compare/v2.8.26...v2.8.27) (2023-03-31)
 
 
