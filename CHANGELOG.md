@@ -1,5 +1,12 @@
 
 
+### [2.8.27](https://github.com/Fllorent0D/BePing2/compare/v2.8.26...v2.8.27) (2023-03-31)
+
+
+### Chores
+
+* Update dependency @capawesome/capacitor-screen-orientation to v2.0.2 ([859b881](https://github.com/Fllorent0D/BePing2/commit/859b881e738979a559505d48bccd10303f08c866))
+
 ### [2.8.26](https://github.com/Fllorent0D/BePing2/compare/v2.8.25...v2.8.26) (2023-03-31)
 
 
