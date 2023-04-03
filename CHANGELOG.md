@@ -1,5 +1,12 @@
 
 
+### [2.8.33](https://github.com/Fllorent0D/BePing2/compare/v2.8.32...v2.8.33) (2023-04-03)
+
+
+### Chores
+
+* Update dependency gradle to v7.6.1 ([26c5f06](https://github.com/Fllorent0D/BePing2/commit/26c5f06dda51b871b76670e79e99b662e6d46729))
+
 ### [2.8.32](https://github.com/Fllorent0D/BePing2/compare/v2.8.31...v2.8.32) (2023-04-01)
 
 
