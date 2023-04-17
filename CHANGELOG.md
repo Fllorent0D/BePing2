@@ -1,5 +1,12 @@
 
 
+### [2.8.35](https://github.com/Fllorent0D/BePing2/compare/v2.8.34...v2.8.35) (2023-04-17)
+
+
+### Chores
+
+* Update dependency typescript to v4.9.5 ([25610af](https://github.com/Fllorent0D/BePing2/commit/25610afad05bb2f64ba5a8c8095fe5897b0da557))
+
 ### [2.8.34](https://github.com/Fllorent0D/BePing2/compare/v2.8.33...v2.8.34) (2023-04-03)
 
 
