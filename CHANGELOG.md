@@ -1,5 +1,12 @@
 
 
+### [2.8.41](https://github.com/Fllorent0D/BePing2/compare/v2.8.40...v2.8.41) (2023-04-18)
+
+
+### Chores
+
+* Update dependency @capacitor-firebase/analytics to v1.4.0 ([ea29ac5](https://github.com/Fllorent0D/BePing2/commit/ea29ac57a791e8b91cbabc8d0522e25934731deb))
+
 ### [2.8.40](https://github.com/Fllorent0D/BePing2/compare/v2.8.39...v2.8.40) (2023-04-18)
 
 
