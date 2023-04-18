@@ -1,5 +1,12 @@
 
 
+### [2.8.42](https://github.com/Fllorent0D/BePing2/compare/v2.8.41...v2.8.42) (2023-04-18)
+
+
+### Chores
+
+* Update dependency @capacitor-firebase/crashlytics to v1.4.0 ([c0a4f79](https://github.com/Fllorent0D/BePing2/commit/c0a4f796872b18932d74e2bcde6b87a5fa4b1ce2))
+
 ### [2.8.41](https://github.com/Fllorent0D/BePing2/compare/v2.8.40...v2.8.41) (2023-04-18)
 
 
