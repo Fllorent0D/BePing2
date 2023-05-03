@@ -1,5 +1,12 @@
 
 
+### [2.8.49](https://github.com/Fllorent0D/BePing2/compare/v2.8.48...v2.8.49) (2023-05-03)
+
+
+### Chores
+
+* Update dependency karma to v6.4.2 ([8731a55](https://github.com/Fllorent0D/BePing2/commit/8731a559931872fb23e66fc76b51f4149c892a9f))
+
 ### [2.8.48](https://github.com/Fllorent0D/BePing2/compare/v2.8.47...v2.8.48) (2023-05-03)
 
 
