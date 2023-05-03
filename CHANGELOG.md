@@ -1,5 +1,12 @@
 
 
+### [2.8.48](https://github.com/Fllorent0D/BePing2/compare/v2.8.47...v2.8.48) (2023-05-03)
+
+
+### Chores
+
+* Update dependency androidx.core:core-splashscreen to v1.0.1 ([8caea07](https://github.com/Fllorent0D/BePing2/commit/8caea07df5e7ece983c4954ad2d9f0a77b6b1f48))
+
 ### [2.8.47](https://github.com/Fllorent0D/BePing2/compare/v2.8.46...v2.8.47) (2023-05-03)
 
 
