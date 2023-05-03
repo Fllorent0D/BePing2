@@ -1,5 +1,12 @@
 
 
+### [2.8.50](https://github.com/Fllorent0D/BePing2/compare/v2.8.49...v2.8.50) (2023-05-03)
+
+
+### Chores
+
+* Update dependency rxjs to v7.8.1 ([d87d7a4](https://github.com/Fllorent0D/BePing2/commit/d87d7a4c52294564a8d028a82778da838fb11a1a))
+
 ### [2.8.49](https://github.com/Fllorent0D/BePing2/compare/v2.8.48...v2.8.49) (2023-05-03)
 
 
