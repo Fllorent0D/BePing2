@@ -1,5 +1,12 @@
 
 
+### [2.8.53](https://github.com/Fllorent0D/BePing2/compare/v2.8.52...v2.8.53) (2023-05-04)
+
+
+### Chores
+
+* Update dependency @angular/cdk to v15.2.9 ([07d1cac](https://github.com/Fllorent0D/BePing2/commit/07d1cacd2f5c264929899b05c8a387d5768d7b79))
+
 ### [2.8.52](https://github.com/Fllorent0D/BePing2/compare/v2.8.51...v2.8.52) (2023-05-04)
 
 
