@@ -1,5 +1,12 @@
 
 
+### [2.8.57](https://github.com/Fllorent0D/BePing2/compare/v2.8.56...v2.8.57) (2023-05-05)
+
+
+### Chores
+
+* Update dependency @proteansoftware/capacitor-start-navigation to v4.2.0 ([59205ad](https://github.com/Fllorent0D/BePing2/commit/59205ad1c5aa71411d2d7fdf2841717f76109c84))
+
 ### [2.8.56](https://github.com/Fllorent0D/BePing2/compare/v2.8.55...v2.8.56) (2023-05-05)
 
 
