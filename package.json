@@ -66,7 +66,7 @@
     "@ngxs/logger-plugin": "3.7.6",
     "@ngxs/storage-plugin": "3.7.6",
     "@ngxs/store": "3.7.6",
-    "@proteansoftware/capacitor-start-navigation": "4.0.1",
+    "@proteansoftware/capacitor-start-navigation": "4.2.0",
     "@release-it/conventional-changelog": "^5.1.1",
     "@trapezedev/configure": "5.0.10",
     "buffer": "6.0.3",
