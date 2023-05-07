@@ -1,5 +1,12 @@
 
 
+### [2.8.63](https://github.com/Fllorent0D/BePing2/compare/v2.8.62...v2.8.63) (2023-05-07)
+
+
+### Chores
+
+* Update dependency date-fns to v2.30.0 ([1a0b402](https://github.com/Fllorent0D/BePing2/commit/1a0b402960495082a713d75ab80e186c4691e16a))
+
 ### [2.8.62](https://github.com/Fllorent0D/BePing2/compare/v2.8.61...v2.8.62) (2023-05-07)
 
 
