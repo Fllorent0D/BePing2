@@ -1,5 +1,12 @@
 
 
+### [2.8.65](https://github.com/Fllorent0D/BePing2/compare/v2.8.64...v2.8.65) (2023-05-07)
+
+
+### Chores
+
+* Update dependency ngx-pipes to v3.2.2 ([23a78b6](https://github.com/Fllorent0D/BePing2/commit/23a78b66faf84c05db1092e84c174544c8c14c3a))
+
 ### [2.8.64](https://github.com/Fllorent0D/BePing2/compare/v2.8.63...v2.8.64) (2023-05-07)
 
 
