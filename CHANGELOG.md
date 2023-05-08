@@ -1,5 +1,12 @@
 
 
+### [2.8.69](https://github.com/Fllorent0D/BePing2/compare/v2.8.68...v2.8.69) (2023-05-08)
+
+
+### Chores
+
+* Update dependency karma-chrome-launcher to v3.2.0 ([786a42a](https://github.com/Fllorent0D/BePing2/commit/786a42a47e9f0e67f4068a10e7c3afaf51c17042))
+
 ### [2.8.68](https://github.com/Fllorent0D/BePing2/compare/v2.8.67...v2.8.68) (2023-05-08)
 
 
