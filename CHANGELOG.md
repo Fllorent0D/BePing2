@@ -1,5 +1,12 @@
 
 
+### [2.8.68](https://github.com/Fllorent0D/BePing2/compare/v2.8.67...v2.8.68) (2023-05-08)
+
+
+### Chores
+
+* Update dependency jasmine-core to v4.6.0 ([a02f641](https://github.com/Fllorent0D/BePing2/commit/a02f64176d711a0e7a7cdd5f9711e29d58560482))
+
 ### [2.8.67](https://github.com/Fllorent0D/BePing2/compare/v2.8.66...v2.8.67) (2023-05-08)
 
 
