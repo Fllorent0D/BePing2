@@ -1,5 +1,12 @@
 
 
+### [2.8.70](https://github.com/Fllorent0D/BePing2/compare/v2.8.69...v2.8.70) (2023-05-08)
+
+
+### Chores
+
+* Update dependency ng-openapi-gen to v0.24.1 ([a509e1a](https://github.com/Fllorent0D/BePing2/commit/a509e1a9be9e154465f86ecd3f8710ce4cf2520f))
+
 ### [2.8.69](https://github.com/Fllorent0D/BePing2/compare/v2.8.68...v2.8.69) (2023-05-08)
 
 
