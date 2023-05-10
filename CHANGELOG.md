@@ -1,5 +1,12 @@
 
 
+### [2.8.74](https://github.com/Fllorent0D/BePing2/compare/v2.8.73...v2.8.74) (2023-05-10)
+
+
+### Chores
+
+* Update dependency cypress to v12.12.0 ([da39bc8](https://github.com/Fllorent0D/BePing2/commit/da39bc83cbe431773169f45d412fcc55376857a0))
+
 ### [2.8.73](https://github.com/Fllorent0D/BePing2/compare/v2.8.72...v2.8.73) (2023-05-10)
 
 
