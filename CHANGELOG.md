@@ -1,5 +1,12 @@
 
 
+### [2.8.78](https://github.com/Fllorent0D/BePing2/compare/v2.8.77...v2.8.78) (2023-05-11)
+
+
+### Chores
+
+* Update typescript-eslint monorepo to v5.59.5 ([be2bd82](https://github.com/Fllorent0D/BePing2/commit/be2bd82cd11e1de54d4d5322d102c71adebc7c6f))
+
 ### [2.8.77](https://github.com/Fllorent0D/BePing2/compare/v2.8.76...v2.8.77) (2023-05-11)
 
 
