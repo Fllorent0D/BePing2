@@ -1,5 +1,12 @@
 
 
+### [2.8.76](https://github.com/Fllorent0D/BePing2/compare/v2.8.75...v2.8.76) (2023-05-11)
+
+
+### Chores
+
+* Update dependency wdio-chromedriver-service to v8.1.1 ([cd78881](https://github.com/Fllorent0D/BePing2/commit/cd7888135937f8a48f57a2475d3663a32da2cd4c))
+
 ### [2.8.75](https://github.com/Fllorent0D/BePing2/compare/v2.8.74...v2.8.75) (2023-05-11)
 
 
