@@ -1,5 +1,12 @@
 
 
+### [2.8.77](https://github.com/Fllorent0D/BePing2/compare/v2.8.76...v2.8.77) (2023-05-11)
+
+
+### Chores
+
+* Update ngxs-store monorepo to v3.8.0 ([790b636](https://github.com/Fllorent0D/BePing2/commit/790b6362bf1a8bc80c91178a3f3797ad2b259015))
+
 ### [2.8.76](https://github.com/Fllorent0D/BePing2/compare/v2.8.75...v2.8.76) (2023-05-11)
 
 
