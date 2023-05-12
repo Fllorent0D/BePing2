@@ -1,5 +1,12 @@
 
 
+### [2.8.81](https://github.com/Fllorent0D/BePing2/compare/v2.8.80...v2.8.81) (2023-05-12)
+
+
+### Chores
+
+* Update angular-cli monorepo to v16 ([92a9743](https://github.com/Fllorent0D/BePing2/commit/92a9743de97db6b14839398ea2f0f1c6b2f3ffda))
+
 ### [2.8.80](https://github.com/Fllorent0D/BePing2/compare/v2.8.79...v2.8.80) (2023-05-12)
 
 
