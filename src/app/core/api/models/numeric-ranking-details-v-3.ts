@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
-import { NumericRankingPerWeekOpponentsV3 } from './numeric-ranking-per-week-opponents-v-3';
+import {NumericRankingPerWeekOpponentsV3} from './numeric-ranking-per-week-opponents-v-3';
+
 export interface NumericRankingDetailsV3 {
   basePoints: number;
   competitionContext: string;

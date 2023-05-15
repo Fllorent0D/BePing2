@@ -18,7 +18,7 @@ export class MemberSummaryPerRankingComponent {
                 spaceBetween: 0
             },
             820: {
-                slidesPerView: 3.1,
+                slidesPerView: 4.2,
                 spaceBetween: 0
             }
         }

@@ -7,8 +7,6 @@ import {DivisionEntry} from '../../../../core/api/models/division-entry';
 import {DivisionsState} from '../../../../core/store/divisions';
 import {Level} from '../../../../core/models/level';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
-import {DIVISION_CATEGORY, PLAYER_CATEGORY} from 'src/app/core/models/user';
-import {group} from '@angular/animations';
 
 @Component({
     selector: 'beping-divisions-page',

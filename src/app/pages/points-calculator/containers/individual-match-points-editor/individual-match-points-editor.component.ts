@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, Optional} from '@angular/core';
 import {EVENT_TYPE, EventCoefficient, MATCH_RESULT} from '../../../../core/models/points';
 import {FormControl, FormGroup, UntypedFormControl, Validators} from '@angular/forms';
-import {filter, map, take, takeUntil} from 'rxjs/operators';
+import {filter, map, take} from 'rxjs/operators';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {IonRouterOutlet, ModalController, NavController} from '@ionic/angular';

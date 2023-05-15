@@ -1,14 +1,28 @@
-import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 import {RefreshRemoteConfig, UpdateRemoteSettingKey} from './remote-settings.action';
 import {FirebaseRemoteConfig} from '@joinflux/firebase-remote-config';
 import {environment} from '../../../../environments/environment';
 import {CrashlyticsService} from '../../services/crashlytics.service';
 import {InAppPurchasesState, InAppPurchaseStateModel} from '../in-app-purchases/in-app-purchases.state';
-import {CurrentSeasonChanged, LoadSpecificSeason} from '../season';
+import {LoadSpecificSeason} from '../season';
 import {asyncScheduler, scheduled} from 'rxjs';
 
-
+export interface ScrapperConfig {
+    canvas: {
+        MEN: string,
+        WOMEN: string
+    },
+    history: {
+        MEN: string,
+        WOMEN: string
+    },
+    actualRanking: {
+        MEN: string,
+        WOMEN: string
+    }
+    goViaClubPage: boolean
+}
 export interface RemoteSettingsStateModel {
     partnership_rotatio: boolean;
     current_season: number;
@@ -18,6 +32,7 @@ export interface RemoteSettingsStateModel {
     maintenance: boolean;
     notifications: boolean;
     connectivity_issue: boolean;
+    scrapper_config: ScrapperConfig;
 }
 
 export const remoteConfigDefaultState = {
@@ -28,7 +43,23 @@ export const remoteConfigDefaultState = {
     use_member_lookup: false,
     maintenance: false,
     notifications: false,
-    connectivity_issue: false
+    connectivity_issue: false,
+    scrapper_config: {
+        canvas: {
+            "MEN": "body > div.content > div.row > div:nth-child(2) > canvas",
+            "WOMEN": "body > div.content > div.row > div:nth-child(2) > canvas"
+        },
+        history: {
+            "MEN": "body > div.content > div.table-responsive > div.table-responsive > table",
+            "WOMEN": "body > div.content > div:nth-child(3) > table"
+        },
+        actualRanking: {
+            MEN: 'body > div.content > div.row > div:nth-child(1) > div:nth-child(1) > div.col.bg-success > h3',
+            WOMEN: 'body > div.content > div.row > div:nth-child(1) > div:nth-child(1) > div.col.bg-success > h3'
+        },
+        goViaClubPage: false
+    }
+
 };
 
 @State<RemoteSettingsStateModel>({
@@ -70,6 +101,11 @@ export class RemoteSettingsState {
     }
 
     @Selector([RemoteSettingsState])
+    static scrappeConfig(state: RemoteSettingsStateModel): ScrapperConfig {
+        return state.scrapper_config;
+    }
+
+    @Selector([RemoteSettingsState])
     static connectivityIssue(state: RemoteSettingsStateModel): boolean {
         return state.connectivity_issue;
     }
@@ -89,7 +125,9 @@ export class RemoteSettingsState {
         const maintenance = await FirebaseRemoteConfig.getBoolean({key: 'maintenance'});
         const notifications = await FirebaseRemoteConfig.getBoolean({key: 'notifications'});
         const connectivityIssue = await FirebaseRemoteConfig.getBoolean({key: 'connectivity_issue'});
-        console.log('notifications:::', notifications);
+        const scrapper_table_selector = await FirebaseRemoteConfig.getString({key: 'scrapper_table_selectors'});
+
+        dispatch(new UpdateRemoteSettingKey('scrapper_config', JSON.parse(scrapper_table_selector.value)));
         dispatch(new UpdateRemoteSettingKey('partnership_rotatio', rotatio.value));
         dispatch(new UpdateRemoteSettingKey('beping_pro', bepingPro.value));
         dispatch(new UpdateRemoteSettingKey('tabt_url', tabtUrl.value));

@@ -2,9 +2,6 @@ import {Injectable, NgZone} from '@angular/core';
 import {App, URLOpenListenerEvent} from '@capacitor/app';
 import {Router} from '@angular/router';
 import {ModalController} from '@ionic/angular';
-import {DeepLinkBaseComponent} from '../../pages/deep-link/deep-link-base-component/deep-link-base.component';
-import {ModalBaseComponent} from '../../pages/modals/modal-base/modal-base.component';
-import {TeamMatchDetailsPage} from '../../pages/team-match-details/containers/team-match-details/team-match-details-page.component';
 import {TabsNavigationService} from './navigation/tabs-navigation.service';
 
 @Injectable({

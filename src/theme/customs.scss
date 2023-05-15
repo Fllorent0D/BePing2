@@ -318,3 +318,14 @@ beping-explore-container {
 .list-md.list-inset ion-item:last-child{
   --inner-border-width: 0px;
 }
+ion-item:first-child{
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+ion-item:last-child, ion-item-sliding > ion-item{
+  border-bottom-left-radius: 15px !important;
+  border-bottom-right-radius: 15px !important;
+}
+ion-list{
+  background-color: transparent !important;
+}

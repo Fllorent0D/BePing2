@@ -35,10 +35,7 @@
         </ion-item>
 
         <ion-item *ngIf="(playerCategories$ | async)?.length > 1">
-            <ion-label>
-                {{'SETTINGS.DISPLAY_RANKING' | translate}}
-            </ion-label>
-            <ion-select (ionChange)="mainCategoryChanged($event)" [interface]="'popover'" [value]="mainCategory$|async"
+            <ion-select [label]="'SETTINGS.DISPLAY_RANKING' | translate" (ionChange)="mainCategoryChanged($event)" [interface]="'popover'" [value]="mainCategory$|async"
                         placeholder="Select One">
                 <ion-select-option
                         *ngFor="let category of playerCategories$|async"
@@ -47,10 +44,7 @@
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label>
-                {{'SETTINGS.CHANGE_LANGUAGE' | translate}}
-            </ion-label>
-            <ion-select (ionChange)="changeLang($event )" [interface]="'popover'" [value]="currentLang$|async"
+            <ion-select [label]="'SETTINGS.CHANGE_LANGUAGE' | translate" (ionChange)="changeLang($event )" [interface]="'popover'" [value]="currentLang$|async"
                         placeholder="Select One">
                 <ion-select-option value="fr">{{'SETTINGS.FRENCH' | translate}}</ion-select-option>
                 <ion-select-option value="nl">{{'SETTINGS.DUTCH' | translate}}</ion-select-option>
@@ -60,6 +54,7 @@
     </ion-list>
     <ion-list [inset]="true" [lines]="'inset'">
         <ion-item (click)="openSubscription()" [disabled]="!isOnline" detail *ngIf="bepingProEnabled$|async">
+            <ion-icon color="primary" class="shining" name="diamond-outline" slot="start"></ion-icon>
             <ion-label>
                 {{'SETTINGS.PREMIUM_SUBSCRIPTION' | translate}}
             </ion-label>
@@ -108,6 +103,7 @@
                 {{'SETTINGS.DISPLAY_ELO' | translate}}
             </ion-label>
             <ion-toggle
+                    [legacy]="true"
                     [checked]="displayELO$|async"
                     (ionChange)="toggleELO($event)">
             </ion-toggle>
@@ -117,6 +113,7 @@
                 {{'SETTINGS.DISPLAY_BEL' | translate}}
             </ion-label>
             <ion-toggle
+                    [legacy]="true"
                     [checked]="displayNumeric$|async"
                     (ionChange)="toggleNumericRanking($event)">
             </ion-toggle>
@@ -124,6 +121,8 @@
     </ion-list>
     <ion-list [inset]="true" [lines]="'inset'">
         <ion-item (click)="resetCache()" [disabled]="!isOnline">
+            <ion-icon name="reload-circle-outline" size="medium" slot="start"></ion-icon>
+
             <ion-label>
                 {{'SETTINGS.REFRESH_BEPING' | translate}}
             </ion-label>

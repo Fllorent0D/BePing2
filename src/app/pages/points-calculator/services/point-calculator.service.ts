@@ -6,7 +6,8 @@ import {
     coefficientPerEventMen,
     coefficientPerEventWomen,
     EVENT_TYPE,
-    EventCoefficient, loosingFactors,
+    EventCoefficient,
+    loosingFactors,
     MATCH_RESULT,
     PointsBounding
 } from '../../../core/models/points';

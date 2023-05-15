@@ -21,10 +21,10 @@
                 <ion-label>ELO {{elo}}</ion-label>
             </ion-chip>
             <ion-chip *ngIf="displayNumericRanking && bel">
-                <ion-label>Points {{bel}}</ion-label>
+                <ion-label>Points {{bel| number: '1.0-0':'fr'}}</ion-label>
             </ion-chip>
             <ion-chip *ngIf="displayNumericRanking && belRanking">
-                <ion-label>Position {{belRanking}}</ion-label>
+                <ion-label>Position {{belRanking| number: '1.0-0':'fr'}}</ion-label>
             </ion-chip>
 
         </ion-col>

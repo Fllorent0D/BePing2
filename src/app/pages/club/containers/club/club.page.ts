@@ -4,7 +4,7 @@ import {TabsNavigationService} from '../../../../core/services/navigation/tabs-n
 import {BehaviorSubject, combineLatest, Observable, ReplaySubject} from 'rxjs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {map, switchMap, take} from 'rxjs/operators';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubsService} from '../../../../core/api/services/clubs.service';
 import {ClubMembersListService} from '../../../../core/services/tabt/club-members-list.service';
@@ -24,12 +24,10 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {IonRouterOutlet, ViewDidEnter} from '@ionic/angular';
-import SwiperCore from 'swiper';
-import Swiper, {Scrollbar, SwiperOptions} from 'swiper';
+import Swiper, {SwiperOptions} from 'swiper';
 import {SwiperComponent} from 'swiper/angular';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {ShareService} from '../../../../core/services/share.service';
-import {firstValueFrom} from 'rxjs';
 
 
 @UntilDestroy()

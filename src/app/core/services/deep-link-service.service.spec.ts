@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { DeepLinkService } from './deep-link.service';
+import {DeepLinkService} from './deep-link.service';
 
 describe('DeepLinkServiceService', () => {
   let service: DeepLinkService;

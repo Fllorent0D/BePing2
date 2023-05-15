@@ -11,7 +11,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ClubsState} from '../../../../core/store/clubs';
 import {ClubEntry} from '../../../../core/api/models/club-entry';
 import {MatchesService} from '../../../../core/api/services/matches.service';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {TeamPlayersStatsService} from '../../services/team-players-stats.service';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {MemberResults} from '../../../../core/api/models/member-results';

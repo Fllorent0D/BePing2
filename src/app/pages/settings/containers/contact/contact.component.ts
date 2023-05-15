@@ -7,8 +7,6 @@ import {Store} from '@ngxs/store';
 import {environment} from '../../../../../environments/environment';
 import {Buffer} from 'buffer';
 import {Network} from '@capacitor/network';
-import {FirebaseAnalytics} from '@capacitor-firebase/analytics';
-import {FirebaseCrashlytics} from '@capacitor-firebase/crashlytics';
 
 @Component({
     selector: 'beping-contact',

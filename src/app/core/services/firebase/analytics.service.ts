@@ -1,18 +1,15 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../../../environments/environment';
 import {NavigationEnd, Router, RouterEvent} from '@angular/router';
-import {combineLatestWith, distinctUntilChanged, filter, first, switchMap, take, tap} from 'rxjs/operators';
+import {distinctUntilChanged, filter, switchMap, tap} from 'rxjs/operators';
 
 import {FirebaseAnalytics} from '@capacitor-firebase/analytics';
-import {Device} from '@capacitor/device';
-import {BehaviorSubject, combineLatest, firstValueFrom, from, Observable} from 'rxjs';
+import {combineLatest, from, Observable} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {InAppPurchasesState} from '../../store/in-app-purchases/in-app-purchases.state';
 import {SettingsState} from '../../store/settings';
 import {LANG} from '../../models/langs';
-import {UserState, UserStateModel} from '../../store/user/user.state';
+import {UserState} from '../../store/user/user.state';
 import {ClubEntry} from '../../api/models/club-entry';
-import {UpdateRemoteSettingKey} from '../../store/remote-settings';
 import {RemoteConfigService} from '../remote-config.service';
 import {FirebaseCrashlytics} from '@capacitor-firebase/crashlytics';
 
@@ -38,18 +35,18 @@ export class AnalyticsService {
             distinctUntilChanged(),
             filter((isPro) => isPro !== null),
             switchMap((isPro: boolean) => this.setUserProperty('isPro', `${isPro}`))
-        ).subscribe();
+        );
 
         const currentLangEvent$ = this.store.select(SettingsState.getCurrentLang).pipe(
             distinctUntilChanged(),
             switchMap((lang: LANG) => this.setUserProperty('lang', lang))
-        ).subscribe();
+        );
 
         const playerUniqueIndexEvent$ = this.store.select(UserState.getPlayerUniqueIndex).pipe(
             distinctUntilChanged(),
             filter((uniqueIndex) => !!uniqueIndex),
             switchMap((uniqueIndex: number) => this.setUser(uniqueIndex.toString(10)))
-        ).subscribe();
+        );
 
         const clubUniqueIndexEvent$ = this.store.select(UserState.getMemberClub).pipe(
             distinctUntilChanged((a: ClubEntry | undefined, b: ClubEntry | undefined) => a?.UniqueIndex === b?.UniqueIndex),

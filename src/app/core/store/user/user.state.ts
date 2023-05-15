@@ -11,8 +11,7 @@ import {
     UpdateLatestMatchesSuccess,
     UpdateMainCategory,
     UpdateMemberEntries,
-    UpdateMemberEntriesSuccess,
-    UpdateWeeklyNumericRankingSuccess
+    UpdateMemberEntriesSuccess
 } from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
 import {catchError, finalize, map, switchMap, tap} from 'rxjs/operators';
@@ -25,8 +24,6 @@ import {ClubsService} from '../../api/services/clubs.service';
 import {CurrentSeasonChanged} from '../season';
 import {CrashlyticsService} from '../../services/crashlytics.service';
 import {RankingService} from '../../services/tabt/ranking.service';
-import {DeepPartial} from 'chart.js/types/utils';
-import {of} from 'rxjs';
 import {WeeklyNumericRankingV3} from '../../api/models/weekly-numeric-ranking-v-3';
 import {NumericRankingState} from './numeric-ranking/numeric-ranking.state';
 

@@ -1,7 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonRouterOutlet} from '@ionic/angular';
-import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
 
 @Component({
   selector: 'beping-deep-link-base-component',

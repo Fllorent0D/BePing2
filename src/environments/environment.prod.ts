@@ -11,6 +11,7 @@ export const environment = {
     },
     bepingStatus: 'http://status.beping.be',
     tt_manager: 'https://tt-manager.be/',
+    dataAfftUrl: 'https://data.aftt.be',
     tabtLinks: {
         aftt: {
             domain: 'resultats.aftt.be',

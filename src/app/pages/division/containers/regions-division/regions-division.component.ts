@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Level} from '../../../../core/models/level';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {DivisionsState} from '../../../../core/store/divisions';
 import {map, take} from 'rxjs/operators';
 import {DivisionEntry} from '../../../../core/api/models/division-entry';

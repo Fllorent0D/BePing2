@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {WeeklyNumericRankingV3} from '../../../../core/api/models/weekly-numeric-ranking-v-3';
 import {NumericRankingDetailsV3} from '../../../../core/api/models/numeric-ranking-details-v-3';
 
 @Component({

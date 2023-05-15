@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TabletGuard } from './tablet.guard';
+import {TabletGuard} from './tablet.guard';
 
 describe('TabletGuard', () => {
   let guard: TabletGuard;

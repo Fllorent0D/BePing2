@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {MemberEntry} from '../../api/models/member-entry';
-import {MEMBER_CATEGORY_STRING, PLAYER_CATEGORY} from '../../models/user';
-import {combineLatest, Observable, of} from 'rxjs';
+import {PLAYER_CATEGORY} from '../../models/user';
+import {combineLatest, from, Observable, of} from 'rxjs';
 import {MembersService} from '../../api/services/members.service';
 import {catchError, map} from 'rxjs/operators';
 import {MatchesService} from '../../api/services/matches.service';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
 import {UserMemberEntries} from '../../store/user/user.state';
-import {WeeklyNumericRanking} from '../../api/models/weekly-numeric-ranking';
 import {WeeklyNumericRankingV3} from '../../api/models/weekly-numeric-ranking-v-3';
+import {DataAfttService} from '../data-aftt/data-aftt.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,8 @@ export class PlayerCategoryService {
 
     constructor(
         private readonly membersService: MembersService,
-        private readonly matchesService: MatchesService
+        private readonly matchesService: MatchesService,
+        private readonly dataAfttService: DataAfttService
     ) {
     }
 
@@ -85,12 +86,13 @@ export class PlayerCategoryService {
     }
 
     getMemberNumericRankings(memberEntries: UserMemberEntries): Observable<{ [key: string]: WeeklyNumericRankingV3 }> {
-        const getRankings = (uniqueIndex: number, category: MEMBER_CATEGORY_STRING): Observable<WeeklyNumericRankingV3> => this.membersService.findMemberNumericRankingsHistoryV3({uniqueIndex, category});
+        const getRankings = (uniqueIndex: number, category: PLAYER_CATEGORY.MEN | PLAYER_CATEGORY.WOMEN): Observable<WeeklyNumericRankingV3> =>
+            from(this.dataAfttService.getAFTTDataPage(uniqueIndex, category));
         const memberEntriesArray = Object.entries(memberEntries).filter(([cat]) => ['MEN', 'WOMEN'].includes(cat));
 
         return combineLatest(
             memberEntriesArray.map(([category, memberEntry]) =>
-                getRankings(memberEntry.UniqueIndex, category as MEMBER_CATEGORY_STRING).pipe(
+                getRankings(memberEntry.UniqueIndex, category as PLAYER_CATEGORY.MEN | PLAYER_CATEGORY.WOMEN).pipe(
                     map((rankingHistory) => ([category, rankingHistory])),
                     catchError(() => of([category, {points: [], perDateHistory: []}]))
                 )

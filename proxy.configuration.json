@@ -1,0 +1,17 @@
+{
+  "/cltnum-dames/fiche.php": {
+    "target": "https://data.aftt.be",
+    "secure": true,
+    "changeOrigin": true
+  },
+  "/cltnum-messieurs/fiche.php": {
+    "target": "https://data.aftt.be",
+    "secure": true,
+    "changeOrigin": true
+  },
+  "/cltnum-messieurs/club.php": {
+    "target": "https://data.aftt.be",
+    "secure": true,
+    "changeOrigin": true
+  }
+}

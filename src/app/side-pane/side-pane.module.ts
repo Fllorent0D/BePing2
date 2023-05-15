@@ -6,6 +6,7 @@ import {SharedModule} from '../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {SidePaneMenuComponent} from './side-pane-menu/side-pane-menu.component';
 import {IonRouterOutlet, NavController} from '@ionic/angular';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {IonRouterOutlet, NavController} from '@ionic/angular';
     imports: [
         CommonModule,
         SidePaneRoutingModule,
+        FormsModule,
         SharedModule,
         RouterModule
     ]

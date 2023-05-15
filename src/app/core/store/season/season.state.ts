@@ -1,16 +1,13 @@
 import {Injectable} from '@angular/core';
-import {Action, NgxsAfterBootstrap, NgxsOnChanges, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
+import {Action, NgxsAfterBootstrap, Selector, State, StateContext} from '@ngxs/store';
 import {SeasonEntry} from '../../api/models/season-entry';
-import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
+import {catchError, finalize, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {CurrentSeasonChanged, GetCurrentSeason, GetCurrentSeasonFailure, LoadSpecificSeason, SetSeasonLoading} from './season.actions';
 import {SeasonsService} from '../../api/services/seasons.service';
 import {AnalyticsService} from '../../services/firebase/analytics.service';
 import {UpdateRemoteSettingKey} from '../remote-settings';
-import {EntityStateModel} from '@ngxs-labs/entity-state';
-import {ClubEntry} from '../../api/models/club-entry';
 import {sub} from 'date-fns';
-import {GetClubs} from '../clubs';
 
 export interface SeasonStateModel {
     currentSeason: SeasonEntry | null;

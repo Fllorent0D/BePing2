@@ -43,7 +43,7 @@
                 [category]="currentCategory$|async"
                 [displayELO]="displayELO$|async"
                 [displayNumericRanking]="displayNumericRanking$|async"
-                [numericRanking]="(numericRankingPoints$|async)?.points"
+                [numericRanking]="(numericRankingPoints$|async)?.actualPoints"
                 [member]="currentMemberEntry">
         </beping-member-name-ranking-info>
         <ion-card *ngIf="connectivityIssue$|async" [color]="'danger'" class="ion-padding">
@@ -54,13 +54,11 @@
             </ion-label>
         </ion-card>
 
-
         <beping-become-pro
                 (dismiss)="dismissPro()"
                 (openPro)="openPro()"
                 *ngIf="showProBanner$|async">
         </beping-become-pro>
-
         <ng-container *ngIf="currentMemberEntry.ResultEntries?.length > 0; else noResults">
             <beping-member-victory-chart
                     [memberResultEntries]="currentMemberEntry.ResultEntries">

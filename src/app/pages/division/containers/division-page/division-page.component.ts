@@ -1,9 +1,9 @@
-import {AfterViewInit, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {DivisionsService} from '../../../../core/api/services/divisions.service';
 import {MatchesService} from '../../../../core/api/services/matches.service';
-import {combineLatest, concat, concatAll, Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {RankingEntry} from '../../../../core/api/models/ranking-entry';
 import {map, share, shareReplay, switchMap, take} from 'rxjs/operators';
 import {DivisionEntry} from '../../../../core/api/models/division-entry';

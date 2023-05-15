@@ -4,12 +4,11 @@ import {TournamentEntry} from '../../../../core/api/models/tournament-entry';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {IonRouterOutlet, ModalController, PopoverController} from '@ionic/angular';
 import {TournamentFiltersComponent} from '../../components/tournament-filters/tournament-filters.component';
-import {map, take, takeUntil, tap} from 'rxjs/operators';
+import {map, take, tap} from 'rxjs/operators';
 import {TabsNavigationService} from '../../../../core/services/navigation/tabs-navigation.service';
 import {Level} from '../../../../core/models/level';
 import {FormControl, FormGroup} from '@angular/forms';
-import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
-import {until} from 'protractor';
+import {UntilDestroy} from '@ngneat/until-destroy';
 import {SelectOption} from '../../../../shared/components/selection-ion-list/selection-ion-list.component';
 import {levelOpts} from './level-opts';
 

@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {PLAYER_CATEGORY} from '../../core/models/user';
 import {iif, Observable, of, ReplaySubject} from 'rxjs';
 import {UserMemberEntry, UserState} from '../../core/store/user/user.state';
@@ -30,13 +30,9 @@ import {IsProService} from '../../core/services/is-pro.service';
 import {DismissDashboardProPopup} from '../../core/store/in-app-purchases/in-app-purchases.actions';
 import {isPlatform} from '@ionic/core';
 import {OrientationType, ScreenOrientation, ScreenOrientationChange} from '@capawesome/capacitor-screen-orientation';
-import {
-    NumericRankingPerWeekOpponentsV3,
-    WeeklyNumericPointsV3,
-    WeeklyNumericRanking,
-    WeeklyNumericRankingV3
-} from 'src/app/core/api/models';
+import {NumericRankingPerWeekOpponentsV3, WeeklyNumericRankingV3} from 'src/app/core/api/models';
 import {NumericRankingState} from '../../core/store/user';
+import {DataAfttService} from '../../core/services/data-aftt/data-aftt.service';
 
 @Component({
     selector: 'beping-explore-container',
@@ -65,6 +61,7 @@ export class ExploreContainerComponent implements OnInit {
     connectivityIssue$: Observable<boolean>;
     TABT_DATABASES = TABT_DATABASES;
     lastOpponentsPlayed$: Observable<NumericRankingPerWeekOpponentsV3[]>;
+
     constructor(
         private store: Store,
         private readonly dialogService: DialogService,
@@ -74,14 +71,15 @@ export class ExploreContainerComponent implements OnInit {
         private readonly membersService: MembersService,
         private readonly clubService: ClubsService,
         private readonly loaderCtrl: LoadingController,
-        private readonly ionRouterOutlet: IonRouterOutlet,
+         readonly ionRouterOutlet: IonRouterOutlet,
         private readonly hapticsService: HapticsService,
         private readonly analyticsService: AnalyticsService,
         private readonly platform: Platform,
         private readonly tabNavigator: TabsNavigationService,
         private readonly inAppBrowser: InAppBrowserService,
         private readonly isProService: IsProService,
-        private readonly changeDetectionRef: ChangeDetectorRef
+        private readonly changeDetectionRef: ChangeDetectorRef,
+        private readonly afttData: DataAfttService
     ) {
         this.categoriesAvailable$ = this.store.select(UserState.availablePlayerCategories).pipe(shareReplay(1));
         this.isLoading$ = this.store.select(UserState.isLoading).pipe(

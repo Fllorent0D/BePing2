@@ -15,6 +15,9 @@
 		"Keyboard": {
 			"resize": "body",
 			"style": "dark"
+		},
+		"CapacitorHttp": {
+			"enabled": true
 		}
 	},
 	"cordova": {

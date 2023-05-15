@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {InAppPurchasesState} from '../../../../core/store/in-app-purchases/in-app-purchases.state';
 import {Observable} from 'rxjs';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {InAppPurchasesService} from '../../../../core/services/in-app-purchases.service';
 import {IAPProduct} from '@ionic-native/in-app-purchase-2';
 import {
@@ -11,7 +11,7 @@ import {
 } from '../../../../core/store/in-app-purchases/in-app-purchases.actions';
 import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchases.model';
 import {FormControl, Validators} from '@angular/forms';
-import {filter, shareReplay, startWith, switchMap, takeUntil} from 'rxjs/operators';
+import {filter, shareReplay, startWith, switchMap} from 'rxjs/operators';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {IonNav, ModalController} from '@ionic/angular';
 import {PrivacyComponent} from '../privacy/privacy.component';

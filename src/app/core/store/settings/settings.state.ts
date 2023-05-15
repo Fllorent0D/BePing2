@@ -5,7 +5,6 @@ import {Device} from '@capacitor/device';
 import {SetTheme, ToggleDisplayELO, ToggleDisplayNumericRanking, UpdateCurrentLang, UpdateCurrentLangSuccess} from './settings.actions';
 import {Injectable} from '@angular/core';
 import {AFTT_CLUB_CATEGORIES, TABT_DATABASES, VTTL_CLUB_CATEGORIES} from '../../interceptors/tabt-database-interceptor.service';
-import {AnalyticsService} from '../../services/firebase/analytics.service';
 import {UserState, UserStateModel} from '../user/user.state';
 import {SetUser, UpdateClubEntry} from '../user/user.actions';
 

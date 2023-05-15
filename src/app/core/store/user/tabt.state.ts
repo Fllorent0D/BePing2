@@ -4,7 +4,6 @@ import {map, tap} from 'rxjs/operators';
 import {Login, Logout} from './aftt.actions';
 import {HealthService} from '../../api/services/health.service';
 import {TestOutput} from '../../api/models/test-output';
-import {AnalyticsService} from '../../services/firebase/analytics.service';
 
 export interface TabTStateModel {
     account: string | null;

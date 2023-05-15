@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HapticsService} from '../core/services/haptics.service';
-import {isPlatform} from '@ionic/core';
 import {Router} from '@angular/router';
 import {NavController} from '@ionic/angular';
 

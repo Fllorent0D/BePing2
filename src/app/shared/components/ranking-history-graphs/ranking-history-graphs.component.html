@@ -1,5 +1,5 @@
 <ion-row class="ion-no-padding">
-  <ion-col class="ion-no-padding" [attr.size-md]="graphDisplayed" size-xs="12" *ngIf="displayNumericRanking">
+  <ion-col class="ion-no-padding" [attr.size-md]="graphDisplayed" size-xs="12" *ngIf="displayNumericRanking && numericRankings.points.length">
     <beping-numeric-ranking-chart
             [numericRankings]="numericRankings.points"
             [category]="category"

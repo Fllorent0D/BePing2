@@ -1,10 +1,9 @@
 import {Component, Input} from '@angular/core';
-import {MemberEntry} from '../../../core/api/models/member-entry';
 import {Platform} from '@ionic/angular';
 import {RankingMethodName, RankingService} from '../../../core/services/tabt/ranking.service';
 import {PLAYER_CATEGORY} from '../../../core/models/user';
-import { UserMemberEntry } from 'src/app/core/store/user/user.state';
-import {WeeklyNumericPointsV3, WeeklyNumericRanking} from 'src/app/core/api/models';
+import {UserMemberEntry} from 'src/app/core/store/user/user.state';
+import {WeeklyNumericPointsV3} from 'src/app/core/api/models';
 
 @Component({
     selector: 'beping-member-name-ranking-info',
@@ -18,7 +17,7 @@ export class MemberNameRankingInfoComponent {
     @Input() displayELO = false;
     @Input() displayNumericRanking = false;
     @Input() category: PLAYER_CATEGORY;
-    @Input() numericRanking: WeeklyNumericPointsV3[];
+    @Input() numericRanking: number;
 
     constructor(
         public platform: Platform,
@@ -33,11 +32,14 @@ export class MemberNameRankingInfoComponent {
     get nextRanking(): string {
         const pts = this.bel;
         const position = this.belRanking;
-        return this.rankingService.getEquivalentRanking(pts, position, this.category);
+        if(pts){
+            return this.rankingService.getEquivalentRanking(pts as number, position, this.category);
+        }
+        return '';
     }
 
-    get bel(): number | null {
-        return Math.round(this.numericRanking?.[this.numericRanking.length - 1]?.points) ?? null;
+    get bel(): number | string {
+        return this.numericRanking ?? '?';
     }
 
     get belRanking(): number {

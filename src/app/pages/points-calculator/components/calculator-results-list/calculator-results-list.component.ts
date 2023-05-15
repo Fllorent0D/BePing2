@@ -5,8 +5,7 @@ import {AnalyticsService} from '../../../../core/services/firebase/analytics.ser
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ActionSheetController} from '@ionic/angular';
-import {MemberEntry} from '../../../../core/api/models/member-entry';
-import {RankingMethodName, RankingService} from '../../../../core/services/tabt/ranking.service';
+import {RankingService} from '../../../../core/services/tabt/ranking.service';
 
 @Component({
     selector: 'beping-calculator-results-list',

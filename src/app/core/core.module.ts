@@ -21,6 +21,8 @@ import {DialogService} from './services/dialog-service.service';
 import {ApiConfiguration} from './api/api-configuration';
 import {ApiConfigurationService} from './services/api-configuration.service';
 import {TabtSeasonInterceptorService} from './interceptors/tabt-season-interceptor.service';
+import {remoteConfigDefaultState} from './store/remote-settings';
+import {numericRankingStateDefaults} from './store/user';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -137,6 +139,45 @@ export function HttpLoaderFactory(http: HttpClient) {
                         return {
                             ...state,
                             version: 4
+                        };
+                    }
+                },
+                {
+                    version: 4,
+                    migrate: (state) => {
+                        console.log('Running migration to version 4');
+                        if (!state?.remoteSettings?.scrapper_config) {
+                            state.remoteSettings.scrapper_config = remoteConfigDefaultState.scrapper_config;
+                        }
+                        return {
+                            ...state,
+                            version: 5
+                        };
+                    }
+                },
+                {
+                    version: 5,
+                    migrate: (state) => {
+                        console.log('Running migration to version 4');
+                        if(state?.user){
+                            state.user.numericRanking = numericRankingStateDefaults;
+                        }
+                        return {
+                            ...state,
+                            version: 6
+                        };
+                    }
+                },
+                {
+                    version: 6,
+                    migrate: (state) => {
+                        console.log('Running migration to version 4');
+                        if (state?.remoteSettings?.scrapper_config) {
+                            state.remoteSettings.scrapper_config.goViaClubPage = false;
+                        }
+                        return {
+                            ...state,
+                            version: 7
                         };
                     }
                 }

@@ -38,7 +38,6 @@ export class SidePaneMenuComponent implements OnInit {
 
         this.dialogService.showModal({
             component: ModalBaseComponent,
-            canDismiss: true,
             componentProps: {
                 rootPage: SettingsPage
             },

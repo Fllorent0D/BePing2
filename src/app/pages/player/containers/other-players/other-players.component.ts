@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {combineLatest, Observable, of, ReplaySubject} from 'rxjs';
+import {combineLatest, from, Observable, of, ReplaySubject} from 'rxjs';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {MemberEntry} from '../../../../core/api/models/member-entry';
 import {UserMemberEntries} from '../../../../core/store/user/user.state';
@@ -25,9 +25,8 @@ import {AnalyticsService} from '../../../../core/services/firebase/analytics.ser
 import {Face2FaceService} from '../../../../core/services/face2face/face-2-face.service';
 import {ShareService} from '../../../../core/services/share.service';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
-import {WeeklyNumericPointsV3} from '../../../../core/api/models/weekly-numeric-points-v-3';
-import {NumericRankingState} from '../../../../core/store/user';
 import {WeeklyNumericRankingV3} from '../../../../core/api/models/weekly-numeric-ranking-v-3';
+import {DataAfttService} from '../../../../core/services/data-aftt/data-aftt.service';
 
 @Component({
     selector: 'beping-other-players',
@@ -62,7 +61,8 @@ export class OtherPlayersComponent implements OnInit {
         private readonly ionRouterOutlet: IonRouterOutlet,
         private readonly analyticsService: AnalyticsService,
         private readonly face2FaceService: Face2FaceService,
-        private readonly shareService: ShareService
+        private readonly shareService: ShareService,
+        private readonly afttDataService: DataAfttService
     ) {
     }
 
@@ -110,10 +110,7 @@ export class OtherPlayersComponent implements OnInit {
         ]).pipe(
             switchMap(([category, memberEntry]) => {
                 if ([PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN].includes(category)) {
-                    return this.membersService.findMemberNumericRankingsHistoryV3({
-                        uniqueIndex: memberEntry.UniqueIndex,
-                        category
-                    });
+                    return from(this.afttDataService.getAFTTDataPage(memberEntry.UniqueIndex, category as PLAYER_CATEGORY.MEN | PLAYER_CATEGORY.WOMEN));
                 }
                 return of(null);
             }),

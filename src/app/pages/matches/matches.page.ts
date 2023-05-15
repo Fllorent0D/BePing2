@@ -5,10 +5,11 @@ import {
     FavoritesState,
     ToggleClubFromFavorites,
     ToggleDivisionFromFavorites,
-    ToggleMemberFromFavorites, ToggleTeamsFromFavorites
+    ToggleMemberFromFavorites,
+    ToggleTeamsFromFavorites
 } from '../../core/store/favorites';
 import {combineLatest, Observable} from 'rxjs';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {filter, map, switchMap, take} from 'rxjs/operators';
 import {UserState} from '../../core/store/user/user.state';
 import {ClubEntry} from '../../core/api/models/club-entry';

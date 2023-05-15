@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnDestroy, OnInit, Optional, ViewChild} from '@angular/core';
 import {IonNav, ModalController} from '@ionic/angular';
 import {Observable} from 'rxjs';
-import {Select, Store} from '@ngxs/store';
+import {Store} from '@ngxs/store';
 import {UserState, UserStateModel} from '../../../../core/store/user/user.state';
 import {GetCurrentSeason, SeasonState} from '../../../../core/store/season';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
@@ -40,7 +40,7 @@ import {InAppPurchasesState} from '../../../../core/store/in-app-purchases/in-ap
 import {PremiumSubscriptionsComponent} from '../premium-subscriptions/premium-subscriptions.component';
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {ContributorsComponent} from '../contributors/contributors.component';
-import {AnimationController} from '@ionic/angular/';
+import {AnimationController} from '@ionic/angular';
 
 @Component({
     selector: 'beping-settings',

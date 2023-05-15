@@ -12,7 +12,7 @@ import {
     IndividualHeadToHeadComponent
 } from './containers/face-to-face/per-season/individual-head-to-head/individual-head-to-head.component';
 import {FaceToFaceSummaryComponent} from './containers/face-to-face/face-to-face-summary/face-to-face-summary.component';
-import { NumericRankingOverviewComponent } from './containers/numeric-ranking-overview/numeric-ranking-overview.component';
+import {NumericRankingOverviewComponent} from './containers/numeric-ranking-overview/numeric-ranking-overview.component';
 
 @NgModule({
     imports: [

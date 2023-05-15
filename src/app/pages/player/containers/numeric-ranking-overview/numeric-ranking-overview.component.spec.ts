@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NumericRankingOverviewComponent } from './numeric-ranking-overview.component';
+import {NumericRankingOverviewComponent} from './numeric-ranking-overview.component';
 
 describe('NumericRankingOverviewComponent', () => {
   let component: NumericRankingOverviewComponent;

@@ -14,7 +14,8 @@
 
 <ion-content [scrollEvents]="true" [fullscreen]="true" bepingFadeHeader [toolbar]="toolbar" >
     <ng-container *ngIf="isPro$|async; else notPro">
-        <ion-list>
+        <h2 class="ion-text-center">{{'SETTINGS.THANKS_FOR_SUPPORT' | translate}}</h2>
+        <ion-list [inset]="true" [lines]="'inset'">
             <ion-item>
                 <ion-label>
                     {{'SETTINGS.NEXT_RENEW' | translate}}
@@ -22,18 +23,13 @@
                 <ion-label slot="end">{{expiryDate$|async|date}}</ion-label>
             </ion-item>
             {{expiryDate$|async}}
-            <ion-item>
+            <ion-item (click)="manageSubscription()" detail="">
                 <ion-label class="ion-text-wrap">
-                    <h2>{{'SETTINGS.THANKS_FOR_SUPPORT' | translate}}</h2>
+                    {{'SETTINGS.MANAGE_SUBSCRIPTION' | translate}}
                 </ion-label>
             </ion-item>
         </ion-list>
 
-        <hr>
-        <ion-button color="primary" fill="outline" expand="block" (click)="manageSubscription()"
-                    class="ion-padding-start ion-padding-end">
-            {{'SETTINGS.MANAGE_SUBSCRIPTION' | translate}}
-        </ion-button>
     </ng-container>
     <ng-template #notPro>
         <div class="ion-padding">
@@ -99,10 +95,16 @@
         </div>
     </ng-template>
 
-    <div class="ion-padding">
-        <h1>{{'BEPING_PRO.WHY_SUBSCRIPTION'|translate}}</h1>
-        <p style="white-space: pre-line">{{'BEPING_PRO.WHY_SUBSCRIPTION_TEXT'|translate}}</p>
+    <ion-list [inset]="true" [lines]="'inset'">
+        <ion-item>
+            <ion-label>
+                <h1>{{'BEPING_PRO.WHY_SUBSCRIPTION'|translate}}</h1>
+                <p class="ion-text-wrap" style="white-space: pre-line">{{'BEPING_PRO.WHY_SUBSCRIPTION_TEXT'|translate}}</p>
 
-    </div>
+            </ion-label>
+
+        </ion-item>
+    </ion-list>
+
 
 </ion-content>

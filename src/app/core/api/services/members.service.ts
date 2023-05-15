@@ -1,18 +1,18 @@
 /* tslint:disable */
 /* eslint-disable */
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpContext } from '@angular/common/http';
-import { BaseService } from '../base-service';
-import { ApiConfiguration } from '../api-configuration';
-import { StrictHttpResponse } from '../strict-http-response';
-import { RequestBuilder } from '../request-builder';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpContext, HttpResponse} from '@angular/common/http';
+import {BaseService} from '../base-service';
+import {ApiConfiguration} from '../api-configuration';
+import {StrictHttpResponse} from '../strict-http-response';
+import {RequestBuilder} from '../request-builder';
+import {Observable} from 'rxjs';
+import {filter, map} from 'rxjs/operators';
 
-import { MemberEntry } from '../models/member-entry';
-import { WeeklyNumericRanking } from '../models/weekly-numeric-ranking';
-import { WeeklyNumericRankingV2 } from '../models/weekly-numeric-ranking-v-2';
-import { WeeklyNumericRankingV3 } from '../models/weekly-numeric-ranking-v-3';
+import {MemberEntry} from '../models/member-entry';
+import {WeeklyNumericRanking} from '../models/weekly-numeric-ranking';
+import {WeeklyNumericRankingV2} from '../models/weekly-numeric-ranking-v-2';
+import {WeeklyNumericRankingV3} from '../models/weekly-numeric-ranking-v-3';
 
 @Injectable({
   providedIn: 'root',

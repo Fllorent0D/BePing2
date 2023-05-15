@@ -19,7 +19,7 @@ import {PermissionState} from '@capacitor/core';
 import {CurrentSeasonChanged} from '../season';
 import {UpdateCurrentLang} from '../settings';
 import {TranslateService} from '@ngx-translate/core';
-import {asyncScheduler, of, scheduled} from 'rxjs';
+import {asyncScheduler, scheduled} from 'rxjs';
 
 export interface NotificationsStateModel {
     permission: PermissionState | null;

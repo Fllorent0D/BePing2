@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {of} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {NotificationsState} from '../../../../core/store/notification-topics/notifications.state';
-import {catchError, finalize, map, take, takeUntil} from 'rxjs/operators';
+import {catchError, finalize, map, take} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {SubscribeToTopic, UnsubscribeToTopic} from '../../../../core/store/notification-topics/notifications.actions';
 import {DialogService} from '../../../../core/services/dialog-service.service';
