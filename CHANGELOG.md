@@ -1,5 +1,13 @@
 
 
+## [2.9.0](https://github.com/Fllorent0D/BePing2/compare/v2.8.82...v2.9.0) (2023-05-15)
+
+
+### Features
+
+* lots of changes ([d403c36](https://github.com/Fllorent0D/BePing2/commit/d403c36b04f6b25927157a699fe3a317abb68366))
+* pkg-lock ([cbb1341](https://github.com/Fllorent0D/BePing2/commit/cbb13416069efcba79da6b30e03eae7cc18b8f78))
+
 ### [2.8.82](https://github.com/Fllorent0D/BePing2/compare/v2.8.81...v2.8.82) (2023-05-12)
 
 
