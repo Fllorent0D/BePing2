@@ -1,5 +1,12 @@
 
 
+### [2.9.13](https://github.com/Fllorent0D/BePing2/compare/v2.9.12...v2.9.13) (2023-05-19)
+
+
+### Chores
+
+* Update dependency leaflet to v1.9.4 ([6594ac4](https://github.com/Fllorent0D/BePing2/commit/6594ac4498286f685c68662f6f8a5e6065e5e48d))
+
 ### [2.9.12](https://github.com/Fllorent0D/BePing2/compare/v2.9.11...v2.9.12) (2023-05-19)
 
 
