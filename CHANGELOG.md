@@ -1,5 +1,12 @@
 
 
+### [2.9.23](https://github.com/Fllorent0D/BePing2/compare/v2.9.22...v2.9.23) (2023-09-04)
+
+
+### Chores
+
+* Update dependency @types/jasmine to v4.3.5 ([5a5dea2](https://github.com/Fllorent0D/BePing2/commit/5a5dea280a3edf76ad8897674cf47655c8638fba))
+
 ### [2.9.22](https://github.com/Fllorent0D/BePing2/compare/v2.9.21...v2.9.22) (2023-09-04)
 
 
