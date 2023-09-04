@@ -1,5 +1,12 @@
 
 
+### [2.9.22](https://github.com/Fllorent0D/BePing2/compare/v2.9.21...v2.9.22) (2023-09-04)
+
+
+### Chores
+
+* Update capacitor monorepo to v4.8.1 ([c159800](https://github.com/Fllorent0D/BePing2/commit/c159800765d4f0303a021467495260ef47c9a2e5))
+
 ### [2.9.21](https://github.com/Fllorent0D/BePing2/compare/v2.9.20...v2.9.21) (2023-05-21)
 
 
