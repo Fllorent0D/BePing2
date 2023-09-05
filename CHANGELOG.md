@@ -1,5 +1,12 @@
 
 
+### [2.9.25](https://github.com/Fllorent0D/BePing2/compare/v2.9.24...v2.9.25) (2023-09-05)
+
+
+### Chores
+
+* Update dependency com.google.firebase:firebase-crashlytics-gradle to v2.9.9 ([1505e7c](https://github.com/Fllorent0D/BePing2/commit/1505e7ccb5a7417dae85123fcbe6125d484d567c))
+
 ### [2.9.24](https://github.com/Fllorent0D/BePing2/compare/v2.9.23...v2.9.24) (2023-09-05)
 
 
