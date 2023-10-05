@@ -1,5 +1,12 @@
 
 
+### [2.9.27](https://github.com/Fllorent0D/BePing2/compare/v2.9.26...v2.9.27) (2023-10-05)
+
+
+### Chores
+
+* Update angular monorepo ([ff8f565](https://github.com/Fllorent0D/BePing2/commit/ff8f565d04b17f1c9bf4a1c324ac940724ee0398))
+
 ### [2.9.26](https://github.com/Fllorent0D/BePing2/compare/v2.9.25...v2.9.26) (2023-10-05)
 
 
