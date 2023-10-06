@@ -1,5 +1,13 @@
 
 
+### [2.9.36](https://github.com/Fllorent0D/BePing2/compare/v2.9.35...v2.9.36) (2023-10-06)
+
+
+### Chores
+
+* Update dependency @ionic/angular to v7.4.3 ([de2fe55](https://github.com/Fllorent0D/BePing2/commit/de2fe555fd0b496f5bec20c846ba6782ed0b5337))
+* Update dependency @ionic/core to v7.4.3 ([96229b6](https://github.com/Fllorent0D/BePing2/commit/96229b696e2315dbd269c52c94d880d584d055d3))
+
 ### [2.9.35](https://github.com/Fllorent0D/BePing2/compare/v2.9.34...v2.9.35) (2023-10-06)
 
 
