@@ -1,5 +1,12 @@
 
 
+### [2.9.34](https://github.com/Fllorent0D/BePing2/compare/v2.9.33...v2.9.34) (2023-10-06)
+
+
+### Chores
+
+* Update dependency @awesome-cordova-plugins/core to v6.4.0 ([367da58](https://github.com/Fllorent0D/BePing2/commit/367da58205ee8e0b2b30c9506e4b6164269fd2b0))
+
 ### [2.9.33](https://github.com/Fllorent0D/BePing2/compare/v2.9.32...v2.9.33) (2023-10-06)
 
 
