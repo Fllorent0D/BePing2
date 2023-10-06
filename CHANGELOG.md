@@ -1,5 +1,12 @@
 
 
+### [2.9.38](https://github.com/Fllorent0D/BePing2/compare/v2.9.37...v2.9.38) (2023-10-06)
+
+
+### Chores
+
+* Update dependency @types/node to v18.18.3 ([83fc9a2](https://github.com/Fllorent0D/BePing2/commit/83fc9a20115273b63b2bd87c5faf6598132f2a7c))
+
 ### [2.9.37](https://github.com/Fllorent0D/BePing2/compare/v2.9.36...v2.9.37) (2023-10-06)
 
 
