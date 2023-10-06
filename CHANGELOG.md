@@ -1,5 +1,12 @@
 
 
+### [2.9.33](https://github.com/Fllorent0D/BePing2/compare/v2.9.32...v2.9.33) (2023-10-06)
+
+
+### Chores
+
+* Update angular-eslint monorepo to v16.2.0 ([6077f1e](https://github.com/Fllorent0D/BePing2/commit/6077f1ed0a98a69969ffe053b9463f838a2d10d6))
+
 ### [2.9.32](https://github.com/Fllorent0D/BePing2/compare/v2.9.31...v2.9.32) (2023-10-05)
 
 
