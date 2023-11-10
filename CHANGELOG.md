@@ -1,5 +1,12 @@
 
 
+### [2.9.39](https://github.com/Fllorent0D/BePing2/compare/v2.9.38...v2.9.39) (2023-11-10)
+
+
+### Chores
+
+* Update dependency chromedriver to v119 [SECURITY] ([5ec3fc3](https://github.com/Fllorent0D/BePing2/commit/5ec3fc3a15e55ce19eba2856d78088ee8f8c511d))
+
 ### [2.9.38](https://github.com/Fllorent0D/BePing2/compare/v2.9.37...v2.9.38) (2023-10-06)
 
 
