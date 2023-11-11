@@ -1,5 +1,12 @@
 
 
+### [2.9.42](https://github.com/Fllorent0D/BePing2/compare/v2.9.41...v2.9.42) (2023-11-11)
+
+
+### Chores
+
+* Update dependency @types/jasminewd2 to v2.0.13 ([4e6fad8](https://github.com/Fllorent0D/BePing2/commit/4e6fad867e52042eb641a50169b17070bc415821))
+
 ### [2.9.41](https://github.com/Fllorent0D/BePing2/compare/v2.9.40...v2.9.41) (2023-11-11)
 
 
