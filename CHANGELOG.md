@@ -1,5 +1,12 @@
 
 
+### [2.9.58](https://github.com/Fllorent0D/BePing2/compare/v2.9.57...v2.9.58) (2023-11-13)
+
+
+### Chores
+
+* Update dependency tslib to v2.6.2 ([c8baa4e](https://github.com/Fllorent0D/BePing2/commit/c8baa4e9380e9bade529cb12fe9e2df17f7826ee))
+
 ### [2.9.57](https://github.com/Fllorent0D/BePing2/compare/v2.9.56...v2.9.57) (2023-11-13)
 
 
