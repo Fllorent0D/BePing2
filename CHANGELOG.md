@@ -1,5 +1,12 @@
 
 
+### [2.9.55](https://github.com/Fllorent0D/BePing2/compare/v2.9.54...v2.9.55) (2023-11-13)
+
+
+### Chores
+
+* Update dependency karma-jasmine-html-reporter to v2.1.0 ([4076384](https://github.com/Fllorent0D/BePing2/commit/4076384a1abc5d09c6425e916f4e02c8443ba812))
+
 ### [2.9.54](https://github.com/Fllorent0D/BePing2/compare/v2.9.53...v2.9.54) (2023-11-13)
 
 
