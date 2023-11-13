@@ -1,5 +1,12 @@
 
 
+### [2.9.61](https://github.com/Fllorent0D/BePing2/compare/v2.9.60...v2.9.61) (2023-11-13)
+
+
+### Chores
+
+* Update webdriverio monorepo ([59755d6](https://github.com/Fllorent0D/BePing2/commit/59755d6f55dd33c5186a6e8e8b26385ea2633fca))
+
 ### [2.9.60](https://github.com/Fllorent0D/BePing2/compare/v2.9.59...v2.9.60) (2023-11-13)
 
 
