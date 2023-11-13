@@ -1,5 +1,12 @@
 
 
+### [2.9.57](https://github.com/Fllorent0D/BePing2/compare/v2.9.56...v2.9.57) (2023-11-13)
+
+
+### Chores
+
+* Update dependency release-it to v15.11.0 ([85f0351](https://github.com/Fllorent0D/BePing2/commit/85f035128bde631f6438ea49e2d1daf05ea1df92))
+
 ### [2.9.56](https://github.com/Fllorent0D/BePing2/compare/v2.9.55...v2.9.56) (2023-11-13)
 
 
