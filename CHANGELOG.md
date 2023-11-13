@@ -1,5 +1,12 @@
 
 
+### [2.9.60](https://github.com/Fllorent0D/BePing2/compare/v2.9.59...v2.9.60) (2023-11-13)
+
+
+### Chores
+
+* Update typescript-eslint monorepo to v5.62.0 ([e8bd9f0](https://github.com/Fllorent0D/BePing2/commit/e8bd9f017ed3f380636f34fa47bde2d34ac0d0a6))
+
 ### [2.9.59](https://github.com/Fllorent0D/BePing2/compare/v2.9.58...v2.9.59) (2023-11-13)
 
 
