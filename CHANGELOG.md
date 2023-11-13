@@ -1,5 +1,12 @@
 
 
+### [2.9.54](https://github.com/Fllorent0D/BePing2/compare/v2.9.53...v2.9.54) (2023-11-13)
+
+
+### Chores
+
+* Update dependency firebase to v9.23.0 ([5721a08](https://github.com/Fllorent0D/BePing2/commit/5721a082070a8929f648da9d120d137e1385038c))
+
 ### [2.9.53](https://github.com/Fllorent0D/BePing2/compare/v2.9.52...v2.9.53) (2023-11-12)
 
 
