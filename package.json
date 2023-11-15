@@ -56,7 +56,7 @@
     "@capacitor/text-zoom": "4.1.0",
     "@capawesome/capacitor-screen-orientation": "2.0.2",
     "@ionic/angular": "7.5.5",
-    "@ionic/core": "7.5.4",
+    "@ionic/core": "7.5.5",
     "@joinflux/firebase-remote-config": "0.6.0",
     "@ngneat/until-destroy": "9.2.3",
     "@ngx-translate/core": "14.0.0",
