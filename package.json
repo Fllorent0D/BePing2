@@ -110,7 +110,7 @@
     "@ionic/cli": "^6.20.8",
     "@ngxs/devtools-plugin": "3.8.1",
     "@ngxs/hmr-plugin": "3.8.1",
-    "@types/jasmine": "4.6.2",
+    "@types/jasmine": "4.6.4",
     "@types/jasminewd2": "2.0.13",
     "@types/leaflet": "1.9.8",
     "@types/node": "18.18.9",
