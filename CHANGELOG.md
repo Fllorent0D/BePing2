@@ -1,5 +1,12 @@
 
 
+### [2.9.70](https://github.com/Fllorent0D/BePing2/compare/v2.9.69...v2.9.70) (2024-01-03)
+
+
+### Chores
+
+* Update dependency ts-node to v10.9.2 ([2a31270](https://github.com/Fllorent0D/BePing2/commit/2a31270d800e06c6070b618b4f3f51290d51c6ff))
+
 ### [2.9.69](https://github.com/Fllorent0D/BePing2/compare/v2.9.68...v2.9.69) (2024-01-03)
 
 
