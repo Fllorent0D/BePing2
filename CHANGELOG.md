@@ -1,5 +1,12 @@
 
 
+### [2.9.80](https://github.com/Fllorent0D/BePing2/compare/v2.9.79...v2.9.80) (2024-01-04)
+
+
+### Chores
+
+* Update dependency eslint to v8.56.0 ([71d838a](https://github.com/Fllorent0D/BePing2/commit/71d838a0d258fd46b6fee4cab5bd48338d3d29cb))
+
 ### [2.9.79](https://github.com/Fllorent0D/BePing2/compare/v2.9.78...v2.9.79) (2024-01-04)
 
 
