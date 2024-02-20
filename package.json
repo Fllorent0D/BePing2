@@ -36,7 +36,7 @@
     "@asymmetrik/ngx-leaflet": "14.0.1",
     "@awesome-cordova-plugins/core": "6.6.0",
     "@awesome-cordova-plugins/in-app-purchase-2": "6.6.0",
-    "@capacitor-community/fcm": "2.0.2",
+    "@capacitor-community/fcm": "5.0.3",
     "@capacitor-firebase/analytics": "1.4.0",
     "@capacitor-firebase/crashlytics": "1.4.0",
     "@capacitor/android": "4.8.1",
