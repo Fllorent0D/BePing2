@@ -1,5 +1,12 @@
 
 
+### [2.9.86](https://github.com/Fllorent0D/BePing2/compare/v2.9.85...v2.9.86) (2024-05-24)
+
+
+### Chores
+
+* Update dependency @types/leaflet to v1.9.12 ([3f33fe9](https://github.com/Fllorent0D/BePing2/commit/3f33fe9400bf086c33784a77d7b9c66d11bbc63f))
+
 ### [2.9.85](https://github.com/Fllorent0D/BePing2/compare/v2.9.84...v2.9.85) (2024-05-23)
 
 
