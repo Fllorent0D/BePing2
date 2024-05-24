@@ -1,5 +1,12 @@
 
 
+### [2.9.89](https://github.com/Fllorent0D/BePing2/compare/v2.9.88...v2.9.89) (2024-05-24)
+
+
+### Chores
+
+* Update dependency gradle to v7.6.4 ([17e31ef](https://github.com/Fllorent0D/BePing2/commit/17e31eff5baf95e1b0c82261493338153620c60b))
+
 ### [2.9.88](https://github.com/Fllorent0D/BePing2/compare/v2.9.87...v2.9.88) (2024-05-24)
 
 
