@@ -79,7 +79,7 @@
     "chartjs-plugin-annotation": "2.2.1",
     "cordova-plugin-ionic": "5.5.3",
     "cordova-plugin-purchase": "11.0.0",
-    "core-js": "3.35.0",
+    "core-js": "3.37.1",
     "date-fns": "2.30.0",
     "firebase": "9.23.0",
     "leaflet": "1.9.4",
