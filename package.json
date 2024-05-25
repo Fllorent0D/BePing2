@@ -124,7 +124,7 @@
     "chromedriver": "119.0.1",
     "cypress": "12.17.4",
     "eslint": "8.57.0",
-    "jasmine-core": "4.6.0",
+    "jasmine-core": "4.6.1",
     "jasmine-spec-reporter": "7.0.0",
     "karma": "6.4.3",
     "karma-chrome-launcher": "3.2.0",
