@@ -1,5 +1,12 @@
 
 
+### [2.9.108](https://github.com/Fllorent0D/BePing2/compare/v2.9.107...v2.9.108) (2024-06-02)
+
+
+### Chores
+
+* Update dependency @wdio/cli to v8.38.1 ([58849af](https://github.com/Fllorent0D/BePing2/commit/58849af1132fa1084ca336595de829625cf0de68))
+
 ### [2.9.107](https://github.com/Fllorent0D/BePing2/compare/v2.9.106...v2.9.107) (2024-06-02)
 
 
