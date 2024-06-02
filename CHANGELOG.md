@@ -1,5 +1,12 @@
 
 
+### [2.9.111](https://github.com/Fllorent0D/BePing2/compare/v2.9.110...v2.9.111) (2024-06-02)
+
+
+### Chores
+
+* Update dependency androidx.appcompat:appcompat to v1.7.0 ([54fdc01](https://github.com/Fllorent0D/BePing2/commit/54fdc01483d13311a26dd713b6aa3e6561f3aebd))
+
 ### [2.9.110](https://github.com/Fllorent0D/BePing2/compare/v2.9.109...v2.9.110) (2024-06-02)
 
 
