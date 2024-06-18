@@ -1,5 +1,12 @@
 
 
+### [2.9.114](https://github.com/Fllorent0D/BePing2/compare/v2.9.113...v2.9.114) (2024-06-18)
+
+
+### Chores
+
+* Update dependency @cypress/schematic to v2.5.2 ([7d0d119](https://github.com/Fllorent0D/BePing2/commit/7d0d1193efa720c9a2903cbb33fc8377884a6212))
+
 ### [2.9.113](https://github.com/Fllorent0D/BePing2/compare/v2.9.112...v2.9.113) (2024-06-18)
 
 
