@@ -1,5 +1,12 @@
 
 
+### [2.9.121](https://github.com/Fllorent0D/BePing2/compare/v2.9.120...v2.9.121) (2024-06-20)
+
+
+### Chores
+
+* Update dependency user-agents to v1.1.241 ([08f0d3a](https://github.com/Fllorent0D/BePing2/commit/08f0d3a70efc60a0d4b89729429d2676fccadf4b))
+
 ### [2.9.120](https://github.com/Fllorent0D/BePing2/compare/v2.9.119...v2.9.120) (2024-06-20)
 
 
