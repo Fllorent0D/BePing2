@@ -1,5 +1,12 @@
 
 
+### [2.9.125](https://github.com/Fllorent0D/BePing2/compare/v2.9.124...v2.9.125) (2024-07-21)
+
+
+### Chores
+
+* Update dependency @types/node to v18.19.41 ([040bff6](https://github.com/Fllorent0D/BePing2/commit/040bff64b86b0e7bd776b3f396417ce6217c0783))
+
 ### [2.9.124](https://github.com/Fllorent0D/BePing2/compare/v2.9.123...v2.9.124) (2024-06-20)
 
 
