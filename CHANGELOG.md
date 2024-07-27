@@ -1,5 +1,12 @@
 
 
+### [2.9.126](https://github.com/Fllorent0D/BePing2/compare/v2.9.125...v2.9.126) (2024-07-27)
+
+
+### Chores
+
+* Update dependency fastlane to v2.222.0 ([10c2cec](https://github.com/Fllorent0D/BePing2/commit/10c2cece0515bc25e58fede388dafae8c7d54bc3))
+
 ### [2.9.125](https://github.com/Fllorent0D/BePing2/compare/v2.9.124...v2.9.125) (2024-07-21)
 
 
