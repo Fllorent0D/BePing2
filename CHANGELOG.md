@@ -1,5 +1,12 @@
 
 
+### [2.9.129](https://github.com/Fllorent0D/BePing2/compare/v2.9.128...v2.9.129) (2024-07-28)
+
+
+### Chores
+
+* Update dependency zone.js to v0.14.8 ([a5112d2](https://github.com/Fllorent0D/BePing2/commit/a5112d20a300ae69f6f85ee0352998526a144092))
+
 ### [2.9.128](https://github.com/Fllorent0D/BePing2/compare/v2.9.127...v2.9.128) (2024-07-27)
 
 
