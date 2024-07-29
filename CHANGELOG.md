@@ -1,5 +1,12 @@
 
 
+### [2.9.135](https://github.com/Fllorent0D/BePing2/compare/v2.9.134...v2.9.135) (2024-07-29)
+
+
+### Chores
+
+* Update dependency @awesome-cordova-plugins/in-app-purchase-2 to v6.8.0 ([5350327](https://github.com/Fllorent0D/BePing2/commit/535032769673aa73ea879f4e1c2a0eb061614c53))
+
 ### [2.9.134](https://github.com/Fllorent0D/BePing2/compare/v2.9.133...v2.9.134) (2024-07-28)
 
 
