@@ -1,5 +1,12 @@
 
 
+### [2.9.137](https://github.com/Fllorent0D/BePing2/compare/v2.9.136...v2.9.137) (2024-07-29)
+
+
+### Chores
+
+* Update dependency androidx.test.ext:junit to v1.2.1 ([5acaaf3](https://github.com/Fllorent0D/BePing2/commit/5acaaf36116d1213bf0462e72fccf9bab13feca3))
+
 ### [2.9.136](https://github.com/Fllorent0D/BePing2/compare/v2.9.135...v2.9.136) (2024-07-29)
 
 
