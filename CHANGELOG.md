@@ -1,5 +1,12 @@
 
 
+### [2.9.136](https://github.com/Fllorent0D/BePing2/compare/v2.9.135...v2.9.136) (2024-07-29)
+
+
+### Chores
+
+* Update dependency androidx.test.espresso:espresso-core to v3.6.1 ([07c4f5e](https://github.com/Fllorent0D/BePing2/commit/07c4f5e7a148f2e4805a730009761f010ecefa48))
+
 ### [2.9.135](https://github.com/Fllorent0D/BePing2/compare/v2.9.134...v2.9.135) (2024-07-29)
 
 
