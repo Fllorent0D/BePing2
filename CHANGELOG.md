@@ -1,5 +1,12 @@
 
 
+## [2.10.0](https://github.com/Fllorent0D/BePing2/compare/v2.9.138...v2.10.0) (2024-10-12)
+
+
+### Features
+
+* lots updates ([bd001f2](https://github.com/Fllorent0D/BePing2/commit/bd001f22f8fb89bd0511baf6242dc524f6d730ef))
+
 ### [2.9.138](https://github.com/Fllorent0D/BePing2/compare/v2.9.137...v2.9.138) (2024-07-29)
 
 
