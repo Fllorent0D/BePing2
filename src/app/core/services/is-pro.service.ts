@@ -51,7 +51,7 @@ export class IsProService {
             }),
             switchMap((modal: HTMLIonModalElement) => from(modal.onWillDismiss<{ isPro: boolean }>())),
             map((modalResult: OverlayEventDetail<{ isPro: boolean }>) => {
-                return modalResult.data.isPro;
+                return modalResult.data?.isPro ?? false;
             })
         );
     }

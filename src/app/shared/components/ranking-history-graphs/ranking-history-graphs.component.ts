@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {WeeklyNumericRanking} from '../../../core/api/models/weekly-numeric-ranking';
 import {Platform} from '@ionic/angular';
 import {PLAYER_CATEGORY} from '../../../core/models/user';

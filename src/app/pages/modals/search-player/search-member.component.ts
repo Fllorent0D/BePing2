@@ -49,7 +49,7 @@ export class SearchMemberComponent implements OnInit, AfterViewInit {
                     return of([]);
                 }
                 this.analyticsService.logEvent('search_member', {searchTerms});
-                const useLookup = this.store.selectSnapshot(RemoteSettingsState.useMemberLookup);
+                const useLookup = false;
                 if (useLookup) {
                     return this.membersService.findAllMembersLookup({
                         query: searchTerms,

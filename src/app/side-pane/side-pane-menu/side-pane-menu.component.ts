@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {NavigationEnd, Router, RouterEvent} from '@angular/router';
+import {NavigationEnd, Router, Event} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {IonMenu, IonRouterOutlet} from '@ionic/angular';
 import {ModalBaseComponent} from '../../pages/modals/modal-base/modal-base.component';
@@ -27,7 +27,7 @@ export class SidePaneMenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.router.events.pipe(
-            filter((e: RouterEvent) => e instanceof NavigationEnd),
+            filter((e: Event): e is NavigationEnd => e instanceof NavigationEnd),
         ).subscribe(() => {
             this.menu.close(true);
         });

@@ -29,9 +29,9 @@ export class RankingSummaryComponent implements OnInit {
             results = [];
         }
         this.completeResults = results;
-        this.victories = results.filter((result) => result.Result.startsWith('V')).length;
-        this.defeats = results.filter((result) => result.Result.startsWith('D')).length;
+        this.victories = results.filter((result) => result.SetFor > result.SetAgainst).length;
         this.total = results.length;
+        this.defeats = this.total - this.victories;
         this.defeatsPct = Math.floor((this.defeats / this.total) * 100);
         this.victoriesPct = Math.floor((this.victories / this.total) * 100);
     }

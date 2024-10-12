@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {NavigationEnd, Router, RouterEvent} from '@angular/router';
+import {NavigationEnd, Router, Event, RouterEvent} from '@angular/router';
 import {distinctUntilChanged, filter, switchMap, tap} from 'rxjs/operators';
 
 import {FirebaseAnalytics} from '@capacitor-firebase/analytics';
@@ -27,8 +27,8 @@ export class AnalyticsService {
     async init(): Promise<void> {
 
         const screenNameEvent$ = this.router.events.pipe(
-            filter((e: RouterEvent) => e instanceof NavigationEnd),
-            switchMap((event: RouterEvent) => this.setScreenName(event.url))
+            filter((e: Event): e is NavigationEnd => e instanceof NavigationEnd),
+            switchMap((event: NavigationEnd) => this.setScreenName(event.url))
         ).subscribe();
 
         const isProEvent$ = this.store.select(InAppPurchasesState.isPro).pipe(

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import {Observable} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {UserState} from '../../core/store/user/user.state';
@@ -8,7 +8,7 @@ import {NavController} from '@ionic/angular';
 @Injectable({
     providedIn: 'root'
 })
-export class HasSeenOnboardingGuard implements CanActivate {
+export class HasSeenOnboardingGuard  {
 
     constructor(
         private readonly store: Store,

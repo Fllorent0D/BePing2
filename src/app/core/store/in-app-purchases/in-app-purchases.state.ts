@@ -1,20 +1,25 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
-import {InAppPurchase2} from '@ionic-native/in-app-purchase-2/ngx';
 import {
     DismissDashboardProPopup,
     InAppPurchaseManageSubscriptions,
     InAppPurchaseOrder,
     InAppPurchaseRestore,
-    IsPro
+    IsPro,
+    MigratedToRevenueCat,
+    UpdateExpiryDate
 } from './in-app-purchases.actions';
 import {sub} from 'date-fns';
-import {environment} from '../../../../environments/environment';
+import {Platform} from '@ionic/angular';
+import {from} from 'rxjs';
+import {Purchases} from '@revenuecat/purchases-capacitor';
+import {AppLauncher} from '@capacitor/app-launcher';
 
 export interface InAppPurchaseStateModel {
     isPro: boolean;
     expiryDate: Date | undefined;
     dashboardPopupDismissedDate: number | undefined;
+    migratedToRevenueCat: boolean;
 }
 
 @State<InAppPurchaseStateModel>({
@@ -23,19 +28,26 @@ export interface InAppPurchaseStateModel {
         isPro: false,
         expiryDate: null,
         dashboardPopupDismissedDate: null,
+        migratedToRevenueCat: false
     }
 })
 @Injectable()
 export class InAppPurchasesState {
 
+
     @Selector([InAppPurchasesState])
     static isPro(state: InAppPurchaseStateModel): boolean {
-        return !environment.production || state.isPro;
+        return state.isPro;
     }
 
     @Selector([InAppPurchasesState])
     static expiryDate(state: InAppPurchaseStateModel): Date | undefined {
         return state.expiryDate;
+    }
+
+    @Selector([InAppPurchasesState])
+    static migratedToRevenueCat(state: InAppPurchaseStateModel): boolean {
+        return state.migratedToRevenueCat;
     }
 
     @Selector([InAppPurchasesState])
@@ -46,13 +58,8 @@ export class InAppPurchasesState {
     }
 
     constructor(
-        private inAppPurchaseStore: InAppPurchase2
+        private readonly platform: Platform,
     ) {
-    }
-
-    @Action([InAppPurchaseOrder])
-    order(_, action: InAppPurchaseOrder) {
-        this.inAppPurchaseStore.order(action.productId);
     }
 
     @Action([DismissDashboardProPopup])
@@ -64,17 +71,33 @@ export class InAppPurchasesState {
 
     @Action([IsPro])
     isPro(ctx: StateContext<InAppPurchaseStateModel>, action: IsPro) {
-        ctx.patchState({isPro: action.isPro, expiryDate: action.expiryDate});
+        console.log('STORE setting isPro to ' + action.isPro);
+        ctx.patchState({isPro: action.isPro});
+    }
+
+    @Action([UpdateExpiryDate])
+    updateExpiryDate(ctx: StateContext<InAppPurchaseStateModel>, action: UpdateExpiryDate) {
+        ctx.patchState({expiryDate: action.expiryDate});
     }
 
     @Action([InAppPurchaseManageSubscriptions])
-    manageSubscription() {
-        this.inAppPurchaseStore.manageSubscriptions();
+    async manageSubscription() {
+        if (this.platform.is('ios')) {
+            await AppLauncher.openUrl({url: 'https://apps.apple.com/account/subscriptions'});
+        } else if (this.platform.is('android')) {
+            await AppLauncher.openUrl({url: 'https://play.google.com/store/account/subscriptions'});
+        }
+
     }
 
     @Action([InAppPurchaseRestore])
     restore() {
-        this.inAppPurchaseStore.refresh();
+        return from(Purchases.restorePurchases());
+    }
+
+    @Action([MigratedToRevenueCat])
+    migrateToRevenueCat(ctx: StateContext<InAppPurchaseStateModel>) {
+        ctx.patchState({migratedToRevenueCat: true});
     }
 
 

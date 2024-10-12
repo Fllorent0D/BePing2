@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Action, createSelector, NgxsOnInit, State, StateContext, Store} from '@ngxs/store';
 import {WeeklyNumericRankingV3} from '../../../api/models/weekly-numeric-ranking-v-3';
-import {UpdateMemberEntries} from '../user.actions';
+import {UpdateMemberEntries, UpdateMemberEntriesSuccess} from '../user.actions';
 import {catchError, switchMap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {UserMemberEntries, UserState, UserStateModel} from '../user.state';
@@ -61,7 +61,7 @@ export class NumericRankingState implements NgxsOnInit {
         });
     }
 
-    @Action([UpdateMemberEntries, UpdateNumericRanking])
+    @Action([UpdateMemberEntriesSuccess, UpdateNumericRanking])
     updateNumericRankings({
                               patchState,
                               getState,
@@ -69,9 +69,10 @@ export class NumericRankingState implements NgxsOnInit {
                           }: StateContext<NumericRankingStateModel>, {forceUpdate}: UpdateMemberEntries | UpdateNumericRanking) {
         const timeThreshold = sub(Date.now(), {days: 1});
         const state: NumericRankingStateModel = getState();
-        //if (state.lastUpdate > timeThreshold.getTime()) {
-          //  return of([]);
-        //}
+        // threshold to avoid spamming the API
+        if (state.lastUpdate > timeThreshold.getTime() && !forceUpdate) {
+            return of([]);
+        }
 
         const membersEntries: UserMemberEntries = this.store.selectSnapshot(UserState.getMemberEntries);
         if (membersEntries) {
@@ -95,18 +96,12 @@ export class NumericRankingState implements NgxsOnInit {
         const rankings: [string, WeeklyNumericRankingV3][] = Object.entries(fetchedPoints);
         for (const [category, points] of rankings) {
             const currentState = state.category[category];
-            // check if count of new points is higher than current state
-            if (!currentState || forceUpdate || (currentState.points.length <= points.points.length && currentState.perDateHistory.length <= points.perDateHistory.length)) {
-                patchState({
-                    category: fetchedPoints,
-                    lastUpdate: lastUpdate.getTime(),
-                    faultyWebsite: false,
-                });
-            } else {
-                patchState({
-                    faultyWebsite: true
-                });
-            }
+            patchState({
+                category: fetchedPoints,
+                lastUpdate: lastUpdate.getTime(),
+                faultyWebsite: false,
+            });
+
         }
     }
 }

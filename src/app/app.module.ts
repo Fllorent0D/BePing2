@@ -9,13 +9,11 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CoreModule} from './core/core.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ScrollingModule} from '@angular/cdk/scrolling';
 import {registerLocaleData} from '@angular/common';
 import localFR from '@angular/common/locales/fr';
 import localNL from '@angular/common/locales/nl';
 import {AnalyticsService} from './core/services/firebase/analytics.service';
 import {CrashlyticsService} from './core/services/crashlytics.service';
-import {InAppPurchase2} from '@ionic-native/in-app-purchase-2/ngx';
 import {InAppPurchasesService} from './core/services/in-app-purchases.service';
 import {Device} from '@capacitor/device';
 import {AppStateService} from './core/services/app-state.service';
@@ -24,6 +22,9 @@ import {SplashScreen} from '@capacitor/splash-screen';
 import {Store} from '@ngxs/store';
 import {DeepLinkService} from './core/services/deep-link.service';
 import {isPlatform} from '@ionic/core';
+import {FCM} from '@capacitor-community/fcm';
+import {PushNotifications} from '@capacitor/push-notifications';
+import {NotificationsService} from './core/services/firebase/notifications.service';
 
 registerLocaleData(localFR);
 registerLocaleData(localNL);
@@ -39,7 +40,6 @@ registerLocaleData(localNL);
         IonicModule.forRoot(),
         AppRoutingModule,
         CoreModule,
-        ScrollingModule,
     ],
     providers: [
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
@@ -54,19 +54,19 @@ registerLocaleData(localNL);
                 deeplink: DeepLinkService,
                 remoteConfig: RemoteConfigService,
                 crashlytics: CrashlyticsService,
-                navCtrl: NavController
+                navCtrl: NavController,
+                notificationsService: NotificationsService
             ) => async () => {
                 try {
                     const deviceInfo = await Device.getInfo();
                     const initTasks = [
-                        analyticsService.init(),
                         appState.init(),
                         deeplink.init(),
-                        remoteConfig.init()
                     ];
-                    if (deviceInfo.platform !== 'web') {
-                        initTasks.push(iAPService.init());
-                    }
+                    remoteConfig.init();
+                    analyticsService.init();
+                    iAPService.init();
+                    notificationsService.init();
 
                     await Promise.all(initTasks);
                     console.log('init tasks done');
@@ -91,11 +91,11 @@ registerLocaleData(localNL);
                 DeepLinkService,
                 RemoteConfigService,
                 CrashlyticsService,
-                NavController
+                NavController,
+                NotificationsService
             ],
             multi: true
         },
-        InAppPurchase2,
     ],
     bootstrap: [AppComponent]
 })

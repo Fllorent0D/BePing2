@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Action, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
+import {Action, createSelector, NgxsOnInit, Selector, State, StateContext} from '@ngxs/store';
 import {NotificationsService} from '../../services/firebase/notifications.service';
 import {
     CheckPermissions,
@@ -20,6 +20,9 @@ import {CurrentSeasonChanged} from '../season';
 import {UpdateCurrentLang} from '../settings';
 import {TranslateService} from '@ngx-translate/core';
 import {asyncScheduler, scheduled} from 'rxjs';
+import {PLAYER_CATEGORY} from '../../models/user';
+import {UserStateModel} from '../user/user.state';
+import {AnalyticsService} from '../../services/firebase/analytics.service';
 
 export interface NotificationsStateModel {
     permission: PermissionState | null;
@@ -45,10 +48,15 @@ export class NotificationsState implements NgxsOnInit {
     static currentPermission(state: NotificationsStateModel): PermissionState | null {
         return state.permission;
     }
+    static isSubscribedToTopic(topic: string) {
+        return createSelector([NotificationsState], (notification: NotificationsStateModel) => {
+            return notification.topics.indexOf(topic) !== -1;
+        });
+    }
 
     constructor(
         private readonly notificationsService: NotificationsService,
-        private readonly translateService: TranslateService
+        private readonly translateService: TranslateService,
     ) {
     }
 
@@ -59,6 +67,7 @@ export class NotificationsState implements NgxsOnInit {
     @Action([CheckPermissions])
     async checkPermission(ctx: StateContext<NotificationsStateModel>) {
         const state = ctx.getState();
+
         console.log('checking perms');
         const currentStatus = await this.notificationsService.checkPermissionStatus();
 

@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {OrientationType, ScreenOrientation, ScreenOrientationChange} from '@capawesome/capacitor-screen-orientation';
 import {IonMenu, IonRouterOutlet, NavController} from '@ionic/angular';
-import {NavigationEnd, Router, RouterEvent} from '@angular/router';
+import {NavigationEnd, Router, Event} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {ModalBaseComponent} from '../../pages/modals/modal-base/modal-base.component';
 import {SettingsPage} from '../../pages/settings/containers/settings-page/settings.page';
@@ -38,7 +38,7 @@ export class SidePaneLayoutComponent implements OnInit {
         });
 
         this.router.events.pipe(
-            filter((e: RouterEvent) => e instanceof NavigationEnd),
+            filter((e: Event): e is NavigationEnd => e instanceof NavigationEnd),
         ).subscribe(() => this.menu.close(true));
 
     }

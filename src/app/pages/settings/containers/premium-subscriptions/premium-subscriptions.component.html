@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
-    <ion-toolbar style="--background: transparent" #toolbar>
-        <ion-buttons slot="start" *ngIf="!isModal">
+    <ion-toolbar #toolbar style="--background: transparent">
+        <ion-buttons *ngIf="!isModal" slot="start">
             <beping-localized-back-btn></beping-localized-back-btn>
         </ion-buttons>
-        <ion-buttons slot="end" *ngIf="isModal">
+        <ion-buttons *ngIf="isModal" slot="end">
             <ion-button (click)="closeModal()">
                 <ion-icon icon="close-outline"></ion-icon>
             </ion-button>
@@ -12,7 +12,7 @@
 
 </ion-header>
 
-<ion-content [scrollEvents]="true" [fullscreen]="true" bepingFadeHeader [toolbar]="toolbar" >
+<ion-content [fullscreen]="true" [scrollEvents]="true" [toolbar]="toolbar" bepingFadeHeader>
     <ng-container *ngIf="isPro$|async; else notPro">
         <h2 class="ion-text-center">{{'SETTINGS.THANKS_FOR_SUPPORT' | translate}}</h2>
         <ion-list [inset]="true" [lines]="'inset'">
@@ -22,7 +22,6 @@
                 </ion-label>
                 <ion-label slot="end">{{expiryDate$|async|date}}</ion-label>
             </ion-item>
-            {{expiryDate$|async}}
             <ion-item (click)="manageSubscription()" detail="">
                 <ion-label class="ion-text-wrap">
                     {{'SETTINGS.MANAGE_SUBSCRIPTION' | translate}}
@@ -36,34 +35,42 @@
             <h1 class="ion-no-margin ion-margin-bottom">{{'BEPING_PRO.BECOME_PRO_AND_SUPPORT'|translate}}</h1>
             <ion-grid>
                 <ion-row>
-                    <ion-col size="2" class="ion-text-center">
-                        <ion-icon name="calendar-number-outline" size="large" color="grey" class="ion-padding-top"></ion-icon>
+                    <ion-col class="ion-text-center" size="2">
+                        <ion-icon class="ion-padding-top" color="grey" name="calendar-number-outline"
+                                  size="large"></ion-icon>
                     </ion-col>
                     <ion-col size="10">
                         <h5>{{'BEPING_PRO.FEATURES.CONNECT_TO_CALENDAR'|translate}}</h5>
-                        <p><ion-text color="grey">{{'BEPING_PRO.FEATURES.CONNECT_TO_CALENDAR_TEXT'|translate}}</ion-text></p>
+                        <p>
+                            <ion-text
+                                    color="grey">{{'BEPING_PRO.FEATURES.CONNECT_TO_CALENDAR_TEXT'|translate}}</ion-text>
+                        </p>
                     </ion-col>
                 </ion-row>
 
                 <ion-row>
-                    <ion-col size="2" class="ion-text-center">
-                        <ion-icon name="notifications-outline" size="large" color="grey"
-                                  class="ion-padding-top"></ion-icon>
+                    <ion-col class="ion-text-center" size="2">
+                        <ion-icon class="ion-padding-top" color="grey" name="notifications-outline"
+                                  size="large"></ion-icon>
                     </ion-col>
                     <ion-col size="10">
-                        <h5>{{'BEPING_PRO.FEATURES.NOTIFICATIONS'|translate}} <ion-badge>{{'COMMON.SOON'|translate}}</ion-badge></h5>
-                        <p><ion-text color="grey">{{'BEPING_PRO.FEATURES.NOTIFICATIONS_TEXT'|translate}}</ion-text></p>
+                        <h5>{{'BEPING_PRO.FEATURES.NOTIFICATIONS'|translate}}</h5>
+                        <p>
+                            <ion-text color="grey">{{'BEPING_PRO.FEATURES.NOTIFICATIONS_TEXT'|translate}}</ion-text>
+                        </p>
                     </ion-col>
                 </ion-row>
 
                 <ion-row>
-                    <ion-col size="2" class="ion-text-center">
-                        <ion-icon name="people-outline" size="large" color="grey"
-                                  class="ion-padding-top"></ion-icon>
+                    <ion-col class="ion-text-center" size="2">
+                        <ion-icon class="ion-padding-top" color="grey" name="people-outline"
+                                  size="large"></ion-icon>
                     </ion-col>
                     <ion-col size="10">
                         <h5>{{'BEPING_PRO.FEATURES.FACE_TO_FACE'|translate}}</h5>
-                        <p><ion-text color="grey">{{'BEPING_PRO.FEATURES.FACE_TO_FACE_TEXT'|translate}}</ion-text></p>
+                        <p>
+                            <ion-text color="grey">{{'BEPING_PRO.FEATURES.FACE_TO_FACE_TEXT'|translate}}</ion-text>
+                        </p>
                     </ion-col>
                 </ion-row>
 
@@ -71,25 +78,33 @@
 
             <h1 class="ion-no-margin-vertical">{{'BEPING_PRO.PRICE_FREE'|translate}}</h1>
             <ion-text color="grey"><h5 class="ion-no-margin">{{'BEPING_PRO.NO_ENGAGEMENT'|translate}}</h5></ion-text>
+            <ng-container *ngIf="currentPackage$|async as currentPackage">
+                <div style="padding: 0 20% 0 20%; text-align: center; display: flex; flex-direction: column;">
+                    <img alt="" src="assets/imgs/avatar{{priceSlider.value}}.png"
+                         style="max-width: 140px; align-self: center">
+                    <ion-text color="primary">
+                        <ng-container>{{currentPackage.product.priceString}}/an</ng-container>
+                    </ion-text>
+                    <ion-text class="ion-padding-top"
+                              color="grey">{{'BEPING_PRO.YOUR_CONTRIBUTION_HELP'|translate}}</ion-text>
+                    <ion-range [formControl]="priceSlider" [snaps]="true" [ticks]="false" color="primary" max="3"
+                               min="1"></ion-range>
+                </div>
+                <ion-button (click)="order(currentPackage)" expand="block">
+                    {{'BEPING_PRO.BECOME_PRO'|translate}}
+                </ion-button>
+            </ng-container>
 
-            <div style="padding: 0 20% 0 20%; text-align: center; display: flex; flex-direction: column;">
-                <img src="assets/imgs/avatar{{priceSlider.value}}.png" alt=""
-                     style="max-width: 140px; align-self: center">
-                <ion-text color="primary">
-                    <ng-container *ngIf="currentProduct$|async as iap">{{iap.price}}/{{iap.billingPeriodUnit|lowercase}}</ng-container>
-                </ion-text>
-                <ion-text color="grey" class="ion-padding-top">{{'BEPING_PRO.YOUR_CONTRIBUTION_HELP'|translate}}</ion-text>
-                <ion-range min="1" max="3" color="primary" [snaps]="true" [formControl]="priceSlider"
-                           [ticks]="false"></ion-range>
-            </div>
-            <ion-button expand="block" [disabled]="!(currentProduct$|async)?.canPurchase" (click)="order()">
-                {{'BEPING_PRO.BECOME_PRO'|translate}}
-            </ion-button>
             <div class="ion-text-center">
-                <ion-button class="ion-margin-top" size="small" fill="outline" shape="round" (click)="restore()">
+                <ion-button (click)="restore()" class="ion-margin-top" fill="outline" shape="round" size="small">
                     {{'BEPING_PRO.RESTORE'|translate}}
                 </ion-button>
-                <div class="ion-margin-top"><ion-text color="primary" (click)="goToTermsOfUse()">{{'SETTINGS.TERMS_AND_CONDITIONS'|translate}}</ion-text> {{'COMMON.AND'|translate}} <ion-text color="primary" (click)="goToPrivacy()">{{'SETTINGS.PRIVACY_POLICY'|translate}}</ion-text></div>
+                <div class="ion-margin-top">
+                    <ion-text (click)="goToTermsOfUse()"
+                              color="primary">{{'SETTINGS.TERMS_AND_CONDITIONS'|translate}}</ion-text>
+                    {{'COMMON.AND'|translate}}
+                    <ion-text (click)="goToPrivacy()" color="primary">{{'SETTINGS.PRIVACY_POLICY'|translate}}</ion-text>
+                </div>
             </div>
 
         </div>
@@ -99,7 +114,8 @@
         <ion-item>
             <ion-label>
                 <h1>{{'BEPING_PRO.WHY_SUBSCRIPTION'|translate}}</h1>
-                <p class="ion-text-wrap" style="white-space: pre-line">{{'BEPING_PRO.WHY_SUBSCRIPTION_TEXT'|translate}}</p>
+                <p class="ion-text-wrap"
+                   style="white-space: pre-line">{{'BEPING_PRO.WHY_SUBSCRIPTION_TEXT'|translate}}</p>
 
             </ion-label>
 

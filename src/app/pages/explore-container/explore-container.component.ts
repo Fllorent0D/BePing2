@@ -3,7 +3,7 @@ import {Store} from '@ngxs/store';
 import {PLAYER_CATEGORY} from '../../core/models/user';
 import {iif, Observable, of, ReplaySubject} from 'rxjs';
 import {UserMemberEntry, UserState} from '../../core/store/user/user.state';
-import {delay, map, shareReplay, switchMap, tap} from 'rxjs/operators';
+import {delay, filter, map, shareReplay, switchMap, tap} from 'rxjs/operators';
 import {IonRouterOutlet, LoadingController, ModalController, Platform} from '@ionic/angular';
 import {TeamMatchesEntry} from '../../core/api/models/team-matches-entry';
 import {SettingsPage} from '../settings/containers/settings-page/settings.page';
@@ -71,7 +71,7 @@ export class ExploreContainerComponent implements OnInit {
         private readonly membersService: MembersService,
         private readonly clubService: ClubsService,
         private readonly loaderCtrl: LoadingController,
-         readonly ionRouterOutlet: IonRouterOutlet,
+        readonly ionRouterOutlet: IonRouterOutlet,
         private readonly hapticsService: HapticsService,
         private readonly analyticsService: AnalyticsService,
         private readonly platform: Platform,
@@ -97,8 +97,10 @@ export class ExploreContainerComponent implements OnInit {
         );
 
         this.numericRankingPoints$ = this.currentCategory$.pipe(
+            filter((category) => !!category),
             switchMap((category: PLAYER_CATEGORY) => this.store.select(NumericRankingState.getNumericRankingyForCategory(category))),
-            shareReplay(1)
+            shareReplay(1),
+            tap((a) => console.log('numericRankingPoints$', a))
         );
 
         this.lastOpponentsPlayed$ = this.numericRankingPoints$.pipe(
@@ -128,6 +130,14 @@ export class ExploreContainerComponent implements OnInit {
         this.showProBanner$ = this.store.select(InAppPurchasesState.showBePingProBanner);
         this.partnershipRotatio$ = this.store.select(RemoteSettingsState.partnershipRotatio);
         this.connectivityIssue$ = this.store.select(RemoteSettingsState.connectivityIssue);
+        this.currentCategory$.next(this.store.selectSnapshot(UserState.getMainPlayerCategory));
+
+
+        this.currentCategory$.subscribe((c) => console.log('CATEGORY:::', c));
+
+        setTimeout(() => {
+            this.refresh();
+        }, 1000);
     }
 
     changeOrientation(orientation: OrientationType) {
@@ -143,7 +153,9 @@ export class ExploreContainerComponent implements OnInit {
     async categoryClicked(category: PLAYER_CATEGORY) {
         this.analyticsService.logEvent('member_category_changed');
         this.hapticsService.hapticsImpact(ImpactStyle.Medium);
+
         this.currentCategory$.next(category);
+
         const catTranslation = this.translateService.instant('PLAYER_CATEGORY.' + category);
         const catChangedTranslation = this.translateService.instant('DASHBOARD.PLAYER_CATEGORY_CHANGED', {category: catTranslation});
         this.dialogService.showToast({
@@ -216,9 +228,11 @@ export class ExploreContainerComponent implements OnInit {
         });
     }
 
-    refresh(event: CustomEvent) {
+    refresh(event?: CustomEvent) {
         this.analyticsService.logEvent('refresh_dashboard');
-        event.detail.complete();
+        if (event) {
+            event.detail.complete();
+        }
         const memberUniqueIndex = this.store.selectSnapshot(UserState).memberUniqueIndex;
         this.store.dispatch(new UpdateMemberEntries(memberUniqueIndex, false));
     }

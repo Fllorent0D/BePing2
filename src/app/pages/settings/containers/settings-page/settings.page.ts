@@ -7,7 +7,7 @@ import {GetCurrentSeason, SeasonState} from '../../../../core/store/season';
 import {PLAYER_CATEGORY} from '../../../../core/models/user';
 import {TabTState, TabTStateModel} from '../../../../core/store/user/tabt.state';
 import {Logout} from '../../../../core/store/user/aftt.actions';
-import {finalize, map, switchMap} from 'rxjs/operators';
+import {filter, finalize, map, switchMap, take} from 'rxjs/operators';
 import {AfttLoginPage} from '../../../modals/aftt-login/aftt-login-page.component';
 import {UpdateMainCategory, UpdateMemberEntries} from '../../../../core/store/user/user.actions';
 import {TranslateService} from '@ngx-translate/core';
@@ -41,6 +41,11 @@ import {PremiumSubscriptionsComponent} from '../premium-subscriptions/premium-su
 import {RemoteSettingsState} from '../../../../core/store/remote-settings';
 import {ContributorsComponent} from '../contributors/contributors.component';
 import {AnimationController} from '@ionic/angular';
+import {IsProService} from '../../../../core/services/is-pro.service';
+import {SubscribeToTopic, UnsubscribeToTopic} from '../../../../core/store/notification-topics/notifications.actions';
+import {NotificationsState} from '../../../../core/store/notification-topics/notifications.state';
+import {Components} from '@ionic/core';
+import IonToggle = Components.IonToggle;
 
 @Component({
     selector: 'beping-settings',
@@ -61,14 +66,17 @@ export class SettingsPage implements OnInit, OnDestroy {
     userState$: Observable<UserStateModel>;
 
     isPro$: Observable<boolean>;
+    notificationWhenRankingUpdated$: Observable<boolean>;
     displayELO$: Observable<boolean>;
     displayNumeric$: Observable<boolean>;
     bepingProEnabled$: Observable<boolean>;
+    notificationEnabled$: Observable<boolean>;
 
     version: string;
     build: string;
     isOnline: boolean;
     @ViewChild('refreshIcon') refreshIconElement: ElementRef;
+    @ViewChild('notificationWhenRankingUpdated') notificationWhenRankingUpdatedElement: IonToggle;
     isRefreshing: boolean;
 
     constructor(
@@ -81,11 +89,13 @@ export class SettingsPage implements OnInit, OnDestroy {
         private readonly analyticsService: AnalyticsService,
         private readonly dialogService: DialogService,
         private readonly animationCtrl: AnimationController,
+        private readonly isProService: IsProService
     ) {
     }
 
     ngOnInit() {
         this.bepingProEnabled$ = this.store.select(RemoteSettingsState.bepingProEnabled);
+        this.notificationEnabled$ = this.store.select(RemoteSettingsState.notificationsEnabled);
         this.displayNumeric$ = this.store.select(SettingsState.displayNumericRanking);
         this.displayELO$ = this.store.select(SettingsState.displayELO);
         this.isPro$ = this.store.select(InAppPurchasesState.isPro);
@@ -99,6 +109,7 @@ export class SettingsPage implements OnInit, OnDestroy {
         this.account$ = this.store.select(TabTState).pipe(map((aftt: TabTStateModel) => aftt.account));
         this.currentLang$ = this.store.select(SettingsState.getCurrentLang);
         this.currentTheme$ = this.store.select(SettingsState.getCurrentTheme);
+        this.notificationWhenRankingUpdated$ = this.store.select(NotificationsState.isSubscribedToTopic(`ranking_updated_${this.store.selectSnapshot(UserState.getPlayerUniqueIndex)}`));
         this.getAppInfo();
         this.listenNetwork();
     }
@@ -261,5 +272,27 @@ export class SettingsPage implements OnInit, OnDestroy {
 
     openTTManager() {
         this.browser.openTTManager();
+    }
+
+    toggleNotificationWhenRankingUpdated(event: CustomEvent) {
+        event.stopPropagation();
+        this.isProService.isPro$().pipe(
+            take(1),
+            filter((isPro) => {
+                if(!isPro) {
+                    // cancel the event
+                    this.notificationWhenRankingUpdatedElement.checked = false;
+                    this.store.dispatch(new UnsubscribeToTopic(`ranking_updated_${this.store.selectSnapshot(UserState.getPlayerUniqueIndex)}`));
+                }
+                return isPro;
+            }),
+            switchMap(() => this.userState$)
+        ).subscribe((userStateModel: UserStateModel) => {
+            if (event.detail.checked) {
+                this.store.dispatch(new SubscribeToTopic(`ranking_updated_${this.store.selectSnapshot(UserState.getPlayerUniqueIndex)}`));
+            } else {
+                this.store.dispatch(new UnsubscribeToTopic(`ranking_updated_${this.store.selectSnapshot(UserState.getPlayerUniqueIndex)}`));
+            }
+        })
     }
 }

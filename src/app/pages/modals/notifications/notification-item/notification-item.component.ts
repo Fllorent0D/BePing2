@@ -2,12 +2,14 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {of} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {NotificationsState} from '../../../../core/store/notification-topics/notifications.state';
-import {catchError, finalize, map, take} from 'rxjs/operators';
+import {catchError, filter, finalize, map, switchMap, take} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {SubscribeToTopic, UnsubscribeToTopic} from '../../../../core/store/notification-topics/notifications.actions';
 import {DialogService} from '../../../../core/services/dialog-service.service';
 import {TranslateService} from '@ngx-translate/core';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {IsProService} from '../../../../core/services/is-pro.service';
+import {IonRouterOutlet} from '@ionic/angular';
 
 class Translate {
 }
@@ -32,7 +34,8 @@ export class NotificationItemComponent implements OnInit {
     constructor(
         private readonly store: Store,
         private readonly translate: TranslateService,
-        private readonly dialogService: DialogService
+        private readonly dialogService: DialogService,
+        private readonly isProService: IsProService,
     ) {
     }
 
@@ -54,7 +57,18 @@ export class NotificationItemComponent implements OnInit {
     toggleClicked(value: boolean) {
         this.loading = true;
         if (value) {
-            this.store.dispatch(new SubscribeToTopic(this.topic)).pipe(
+            this.isProService.isPro$().pipe(
+                take(1),
+                filter((isPro) => {
+                    if(!isPro) {
+                        this.isSubscribe.setValue(false, {emitEvent: false});
+                    }
+
+                    return isPro;
+                }),
+                switchMap(() => {
+                    return this.store.dispatch(new SubscribeToTopic(this.topic));
+                }),
                 catchError((e) => {
                     console.log('error', e);
                     this.dialogService.showToast({
@@ -68,7 +82,8 @@ export class NotificationItemComponent implements OnInit {
                 finalize(() => {
                     this.loading = false;
                 })
-            ).subscribe();
+            ).subscribe(isPro => {});
+
         } else {
             this.store.dispatch(new UnsubscribeToTopic(this.topic)).pipe(
                 catchError((e) => {

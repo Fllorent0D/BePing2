@@ -118,6 +118,7 @@
     "PICK_DIVISION": "Choose a division"
   },
   "FAVORITES": {
+    "NOTIFICATIONS": "Manage notifications",
     "NO_PLAYERS": "No favorite players",
     "NO_CLUBS": "No favorite clubs",
     "NO_TEAMS": "No favorite teams",
@@ -284,7 +285,8 @@
     "CHANGE_LANGUAGE": "Language",
     "DUTCH": "Nederlands",
     "DISPLAY_ELO": "ELO ranking",
-    "DISPLAY_BEL": "AFTT numbered ranking",
+    "NUMERIC_RANKING": "Numeric ranking",
+    "DISPLAY_BEL": "Show numeric ranking",
     "FRENCH": "Français",
     "ENGLISH": "English",
     "WHICH_CLUB": "In which club are you playing ?",
@@ -335,7 +337,8 @@
       "ROTATIO_SUBTITLE": "A foolproof equipment",
       "TTMANAGER": "TT Manager",
       "TTMANAGER_SUBTITLE": "Club, team and interclub match sheet manager"
-    }
+    },
+    "RECEIVE_NOTIFICATION_WHEN_RANKING_UPDATED": "Receive a notification when your ranking is updated"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "BePing comment"
@@ -396,7 +399,7 @@
     "TURN_ON_NOTIFICATION": "Turn on notifications",
     "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Notifications are disabled for BePing. Please turn notifications on in settings to be able to receive notifications from BePing.",
     "NOT_NOW": "Not now",
-    "INTRO_TEXT": "Receive notifications with the results of your favorite clubs, teams or divisions.",
+    "INTRO_TEXT": "Receive notifications with the results of your favorite clubs, teams or divisions.\nWarning, only matches encoded on the personal space AFTT website will be notified.",
     "OPEN_SETTINGS": "Open settings",
     "ALLOW": "Allow",
     "TURN_ON": "Turn notification on for BePing",
@@ -506,6 +509,8 @@
     "RESULT_ADDED": "Result added",
     "RESET": "Are you sure you want to delete the encoded results?",
     "OPEN_CALC": "Open points calculator",
+    "NO_ENCODING": "No results encoded",
+    "YOU_CAN_TRACK_YOUR_SCORE": "You can track your numeric ranking by using the points calculator",
     "NO_POINTS_AVAILABLE_TITLE": "No numeric ranking available",
     "NO_POINTS_AVAILABLE_MSG": "Impossible to use the calculator without numeric ranking.\nPlease try again later",
     "POINTS_OVER_PIVOT": "Why \"> = C0\"? BePing is not able to calculate an equivalent ranking when the number of points is greater than {{pivot}}. The rankings A, B0, B2, B4, B6 are assigned in relation to the player's position in the ranking.",
@@ -579,7 +584,7 @@
       "CONNECT_TO_CALENDAR": "Connecting to your calendar",
       "CONNECT_TO_CALENDAR_TEXT": "Import matches directly into your calendar",
       "NOTIFICATIONS": "Match results notifications",
-      "NOTIFICATIONS_TEXT": "Receive notifications with the results of your favorite team's matches",
+      "NOTIFICATIONS_TEXT": "Receive a notification as soon as the results of your favorite clubs, teams or divisions are available",
       "FACE_TO_FACE": "Face to face",
       "FACE_TO_FACE_TEXT": "Find all the encounters between you and another player in previous seasons"
     },

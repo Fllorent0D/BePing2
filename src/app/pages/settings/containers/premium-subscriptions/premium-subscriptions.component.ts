@@ -1,22 +1,17 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {InAppPurchasesState} from '../../../../core/store/in-app-purchases/in-app-purchases.state';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {InAppPurchasesService} from '../../../../core/services/in-app-purchases.service';
-import {IAPProduct} from '@ionic-native/in-app-purchase-2';
-import {
-    InAppPurchaseManageSubscriptions,
-    InAppPurchaseOrder,
-    InAppPurchaseRestore
-} from '../../../../core/store/in-app-purchases/in-app-purchases.actions';
-import {BePingIAP} from '../../../../core/store/in-app-purchases/in-app-purchases.model';
+import {InAppPurchaseManageSubscriptions, InAppPurchaseRestore} from '../../../../core/store/in-app-purchases/in-app-purchases.actions';
 import {FormControl, Validators} from '@angular/forms';
-import {filter, shareReplay, startWith, switchMap} from 'rxjs/operators';
+import {filter, map, startWith} from 'rxjs/operators';
 import {DialogService} from '../../../../core/services/dialog-service.service';
-import {IonNav, ModalController} from '@ionic/angular';
+import {IonNav, LoadingController, ModalController} from '@ionic/angular';
 import {PrivacyComponent} from '../privacy/privacy.component';
 import {ConditionsUsageComponent} from '../conditions-usage/conditions-usage.component';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {PurchasesPackage} from '@revenuecat/purchases-typescript-internal-esm/dist/offerings';
 
 @UntilDestroy()
 @Component({
@@ -31,11 +26,10 @@ export class PremiumSubscriptionsComponent implements OnInit {
     isPro$: Observable<boolean>;
     expiryDate$: Observable<Date | undefined>;
     initProduct = 2;
-    bepingProLowPrice$: Observable<IAPProduct>;
-    bepingProMidPrice$: Observable<IAPProduct>;
-    bepingProHighPrice$: Observable<IAPProduct>;
-    currentProduct$: Observable<IAPProduct>;
     priceSlider: FormControl<number>;
+
+    availablePackages$: Observable<PurchasesPackage[]>;
+    currentPackage$: Observable<PurchasesPackage>;
 
     constructor(
         private readonly inAppPurchasesService: InAppPurchasesService,
@@ -43,6 +37,7 @@ export class PremiumSubscriptionsComponent implements OnInit {
         private readonly dialogService: DialogService,
         private readonly modalCtrl: ModalController,
         private readonly ionNav: IonNav,
+        private readonly loadingCtrl: LoadingController,
     ) {
     }
 
@@ -50,22 +45,20 @@ export class PremiumSubscriptionsComponent implements OnInit {
         this.isPro$ = this.store.select(InAppPurchasesState.isPro);
         this.expiryDate$ = this.store.select(InAppPurchasesState.expiryDate);
         this.priceSlider = new FormControl(this.initProduct, [Validators.required]);
-        this.bepingProLowPrice$ = this.inAppPurchasesService.iapPurchase(BePingIAP.BEPING_PRO_LOW_PRICE);
-        this.bepingProMidPrice$ = this.inAppPurchasesService.iapPurchase(BePingIAP.BEPING_PRO_MID_PRICE);
-        this.bepingProHighPrice$ = this.inAppPurchasesService.iapPurchase(BePingIAP.BEPING_PRO_HIGH_PRICE);
-        this.currentProduct$ = this.priceSlider.valueChanges.pipe(
-            startWith(this.initProduct),
-            switchMap((priceNumber) => {
-                if (priceNumber === 1) {
-                    return this.bepingProLowPrice$;
-                } else if (priceNumber === 2) {
-                    return this.bepingProMidPrice$;
-                } else {
-                    return this.bepingProHighPrice$;
-                }
-            }),
-            shareReplay(1)
+
+
+        this.currentPackage$ = combineLatest([
+            this.priceSlider.valueChanges.pipe(
+                startWith(2)
+            ),
+            this.inAppPurchasesService.availablePackages$
+        ]).pipe(
+            untilDestroyed(this),
+            map(([priceNumber, packages]) => {
+                return packages[priceNumber - 1];
+            })
         );
+
         if (this.isModal) {
             this.store.select(InAppPurchasesState.isPro).pipe(
                 untilDestroyed(this),
@@ -80,23 +73,28 @@ export class PremiumSubscriptionsComponent implements OnInit {
         this.store.dispatch(new InAppPurchaseManageSubscriptions());
     }
 
-    order() {
-        switch (this.priceSlider.value) {
-            case 1:
-            default:
-                this.store.dispatch(new InAppPurchaseOrder(BePingIAP.BEPING_PRO_LOW_PRICE));
-                break;
-            case 2:
-                this.store.dispatch(new InAppPurchaseOrder(BePingIAP.BEPING_PRO_MID_PRICE));
-                break;
-            case 3:
-                this.store.dispatch(new InAppPurchaseOrder(BePingIAP.BEPING_PRO_HIGH_PRICE));
-                break;
+    async order(aPackage: PurchasesPackage) {
+        const loader = await this.loadingCtrl.create({
+            message: 'Achat en cours...',
+        });
+        await loader.present();
+        try {
+            await this.inAppPurchasesService.order(aPackage);
+        } catch (e) {
+            console.error('error order', e);
         }
+
+        await loader.dismiss();
     }
 
-    restore() {
-        this.store.dispatch(new InAppPurchaseRestore());
+    async restore() {
+        const loader = await this.dialogService.showToast({
+            message: 'Restauration en cours...',
+        });
+        await loader.present();
+        this.store.dispatch(new InAppPurchaseRestore()).subscribe(() => {
+            loader.dismiss();
+        });
     }
 
     closeModal(isPro = false) {

@@ -104,13 +104,19 @@ export class OtherPlayersComponent implements OnInit {
             map(([category, userMemberEntries]) => userMemberEntries[category]),
             shareReplay(1)
         );
+
+        // console
+
         this.numericRankings$ = combineLatest([
             this.currentCategory$,
             this.currentMemberEntry$
         ]).pipe(
             switchMap(([category, memberEntry]) => {
                 if ([PLAYER_CATEGORY.MEN, PLAYER_CATEGORY.WOMEN].includes(category)) {
-                    return from(this.afttDataService.getAFTTDataPage(memberEntry.UniqueIndex, category as PLAYER_CATEGORY.MEN | PLAYER_CATEGORY.WOMEN));
+                    return this.membersService.findMemberNumericRankingsHistoryV3({
+                        uniqueIndex: memberEntry.UniqueIndex,
+                        category
+                    });
                 }
                 return of(null);
             }),

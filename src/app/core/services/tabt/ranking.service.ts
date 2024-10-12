@@ -11,6 +11,7 @@ import {
     RankingEquivalence
 } from '../../models/bel-ranking';
 import {PLAYER_CATEGORY} from '../../models/user';
+import {ca} from 'date-fns/locale';
 
 export enum RankingMethodName {
     ELO = 'ELO',
@@ -64,7 +65,6 @@ export class RankingService {
     }
 
     getEquivalenceTableForCategory(category: PLAYER_CATEGORY): EquivalenceTables {
-
         switch (category) {
             case PLAYER_CATEGORY.MEN:
             case PLAYER_CATEGORY.VETERANS:

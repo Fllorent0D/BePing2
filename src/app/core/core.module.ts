@@ -6,7 +6,6 @@ import {NgxsModule} from '@ngxs/store';
 import {NgxsLoggerPluginModule} from '@ngxs/logger-plugin';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {states} from './store';
-import {NgxsAsyncStoragePluginModule} from '@ngxs-labs/async-storage-plugin';
 import {NgxsStorageService} from './services/store/ngxs-storage.service';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -23,6 +22,8 @@ import {ApiConfigurationService} from './services/api-configuration.service';
 import {TabtSeasonInterceptorService} from './interceptors/tabt-season-interceptor.service';
 import {remoteConfigDefaultState} from './store/remote-settings';
 import {numericRankingStateDefaults} from './store/user';
+import {NgxsAsyncStoragePluginModule} from 'async-storage-plugin-venraij';
+import {InAppPurchasesService} from './services/in-app-purchases.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -171,7 +172,7 @@ export function HttpLoaderFactory(http: HttpClient) {
                 {
                     version: 6,
                     migrate: (state) => {
-                        console.log('Running migration to version 4');
+                        console.log('Running migration to version 7');
                         if (state?.remoteSettings?.scrapper_config) {
                             state.remoteSettings.scrapper_config.goViaClubPage = false;
                         }
@@ -179,6 +180,19 @@ export function HttpLoaderFactory(http: HttpClient) {
                             ...state,
                             version: 7
                         };
+                    }
+                },
+                {
+                    version: 7,
+                    migrate: (state) => {
+                        console.log('Running migration to version 8');
+                        if(state.inapppurchase.migratedToRevenueCat === null || state.inapppurchase.migratedToRevenueCat === undefined){
+                            state.inapppurchase.migratedToRevenueCat = false;
+                        }
+                        return {
+                            ...state,
+                            version: 8
+                        }
                     }
                 }
             ]
@@ -235,7 +249,7 @@ export function HttpLoaderFactory(http: HttpClient) {
             useClass: TabtSeasonInterceptorService,
             multi: true
         },
-        DialogService
+        DialogService,
     ]
 })
 export class CoreModule {

@@ -24,7 +24,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
     @Input() label: string;
     @Input() color: string;
     @Input() marginVertical = true;
-    @Input() category: PLAYER_CATEGORY;
+    private _category: PLAYER_CATEGORY;
 
     @ViewChild('canvasElement') canvas: ElementRef<HTMLCanvasElement>;
 
@@ -32,6 +32,13 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
         this.dataset = numericRankings;
         this.computeData();
     }
+
+
+    @Input() set category(category: PLAYER_CATEGORY) {
+        this._category = category;
+        this.computeData();
+    }
+
 
 
     constructor(
@@ -49,7 +56,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
     }
 
     computeData() {
-        if (!this.viewInit || !this.category) {
+        if (!this.viewInit || !this._category) {
             return;
         }
         const ctx = this.canvas?.nativeElement.getContext('2d');
@@ -61,12 +68,12 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
         const points = this.dataset.map((pts) => pts.points);
         const lowerPoints = Math.min(...points);
         const higherPoints = Math.max(...points);
-        const lowerBoundPts = findBoundPts(lowerPoints, this.category);
-        const higherBoundPts = findBoundPts(higherPoints, this.category);
+        const lowerBoundPts = findBoundPts(lowerPoints, this._category);
+        const higherBoundPts = findBoundPts(higherPoints, this._category);
         const {
             equivalenceRankingBelPts,
             pivotRankingEquivalence
-        } = this.rankingService.getEquivalenceTableForCategory(this.category);
+        } = this.rankingService.getEquivalenceTableForCategory(this._category);
         const lowerIndex = Math.max(equivalenceRankingBelPts.indexOf(lowerBoundPts), 1);
         const higherIndex = Math.min(equivalenceRankingBelPts.indexOf(higherBoundPts) + 2, equivalenceRankingBelPts.length);
         const boundsToShow = (lowerPoints >= pivotRankingEquivalence) ? [] : equivalenceRankingBelPts.slice(lowerIndex, higherIndex);
@@ -137,7 +144,7 @@ export class NumericRankingChartComponent implements OnInit, AfterViewInit {
                         }
                     },
                     time: {
-                        minUnit: 'week',
+                        minUnit: 'month',
                         displayFormats: {
                             day: 'dd/MM',
                             week: 'dd/MM',

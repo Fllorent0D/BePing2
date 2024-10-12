@@ -25,7 +25,15 @@ export class IsPro {
 
     constructor(
         public isPro: boolean,
-        public expiryDate: Date | undefined
+    ) {
+    }
+
+}
+export class UpdateExpiryDate {
+    static readonly type = '[IAP] Update expiry date';
+
+    constructor(
+        public expiryDate: Date,
     ) {
     }
 
@@ -40,6 +48,13 @@ export class SetStoreReady {
 
 export class DismissDashboardProPopup {
     static readonly type = '[IAP] dismiss the popup';
+
+    constructor() {
+    }
+}
+
+export class MigratedToRevenueCat {
+    static readonly type = '[IAP] Migrate to RevenueCat';
 
     constructor() {
     }

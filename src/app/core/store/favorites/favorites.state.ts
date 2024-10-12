@@ -87,9 +87,10 @@ export class FavoritesState {
     }
 
     @Action([CurrentSeasonChanged])
-    cleanDivisionsOnSeasonChanged({patchState}: StateContext<FavoritesStateModel>) {
+    cleanFavoritesOnSeasonChanged({patchState}: StateContext<FavoritesStateModel>) {
         return patchState({
-            divisions: []
+            divisions: [],
+            teams: []
         });
     }
 

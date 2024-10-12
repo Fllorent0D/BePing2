@@ -87,7 +87,7 @@ export class PlayerCategoryService {
 
     getMemberNumericRankings(memberEntries: UserMemberEntries): Observable<{ [key: string]: WeeklyNumericRankingV3 }> {
         const getRankings = (uniqueIndex: number, category: PLAYER_CATEGORY.MEN | PLAYER_CATEGORY.WOMEN): Observable<WeeklyNumericRankingV3> =>
-            from(this.dataAfttService.getAFTTDataPage(uniqueIndex, category));
+            this.membersService.findMemberNumericRankingsHistoryV3({uniqueIndex, category});
         const memberEntriesArray = Object.entries(memberEntries).filter(([cat]) => ['MEN', 'WOMEN'].includes(cat));
 
         return combineLatest(

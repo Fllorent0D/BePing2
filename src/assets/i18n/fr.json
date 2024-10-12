@@ -118,6 +118,7 @@
     "PICK_DIVISION": "Choisissez une division"
   },
   "FAVORITES": {
+    "NOTIFICATIONS": "Gérer les notifications",
     "NO_PLAYERS": "Aucun joueur en favoris",
     "NO_CLUBS": "Aucun club en favoris",
     "NO_TEAMS": "Aucune équipe en favoris",
@@ -284,7 +285,8 @@
     "CHANGE_LANGUAGE": "Langue",
     "DUTCH": "Nederlands",
     "DISPLAY_ELO": "Classement ELO",
-    "DISPLAY_BEL": "Classement numérique de l'AFTT",
+    "NUMERIC_RANKING": "Classement numérique",
+    "DISPLAY_BEL": "Afficher classement numérique",
     "FRENCH": "Français",
     "ENGLISH": "English",
     "WHICH_CLUB": "Dans quel club jouez-vous?",
@@ -335,7 +337,8 @@
       "ROTATIO_SUBTITLE": "Un équipement à toute épreuve",
       "TTMANAGER": "TT Manager",
       "TTMANAGER_SUBTITLE": "Gestionnaire de clubs, équipes et feuilles de matchs interclubs"
-    }
+    },
+    "RECEIVE_NOTIFICATION_WHEN_RANKING_UPDATED": "Recevoir une notification lors de la mise à jour du classement numérique"
   },
   "EMAIL": {
     "COMMENTS_ON_BEPING": "Commentaire BePing"
@@ -395,7 +398,7 @@
     "TURN_ON_NOTIFICATION": "Activer les notifications",
     "NOTIFICATION_ARE_OFF_PLEASE_TURN_ON": "Les notifications sont désactivées pour BePing. Veuillez activer les notifications dans les paramètres pour pouvoir recevoir des notifications de BePing.",
     "NOT_NOW": "Pas maintenant",
-    "INTRO_TEXT": "Recevez des notifications sur les résultats de vos clubs, équipes ou divisions préférés.",
+    "INTRO_TEXT": "Recevez des notifications sur les résultats de vos clubs, équipes ou divisions préférés.\nAttention, seuls les matchs encodés sur l'espace personnel de l'AFTT seront notifiés.",
     "OPEN_SETTINGS": "Ouvrir Réglages",
     "ALLOW": "Autoriser",
     "TURN_ON": "Activer les notifications pour BePing",
@@ -505,6 +508,8 @@
     "RESULT_ADDED": "Résultat ajouté",
     "RESET": "Êtes-vous certains de vouloir d'effacer les résultats encodés?",
     "OPEN_CALC": "Ouvrir calculateur de points",
+    "NO_ENCODING": "Aucun résultat encodé",
+    "YOU_CAN_TRACK_YOUR_SCORE": "Vous pouvez suivre votre classement numérique en encodant vos résultats",
     "NO_POINTS_AVAILABLE_TITLE": "Pas classement numérique disponible",
     "NO_POINTS_AVAILABLE_MSG": "Impossible d'utiliser la calculette sans classement numérique.\nVeuillez réessayer plus tard.",
     "POINTS_OVER_PIVOT": "Il est impossible de calculer un classement équivalent lorsque le nombre de points est supérieur à {{pivot}}.\nPour les classements supérieurs à C0, ils sont attribués par rapport à la position du joueur dans le classement et non par rapport au nombre de points.",
@@ -578,7 +583,7 @@
       "CONNECT_TO_CALENDAR": "Connexion à votre calendrier",
       "CONNECT_TO_CALENDAR_TEXT": "Importez les matchs directement dans votre calendrier",
       "NOTIFICATIONS": "Notifications des résultats des matchs",
-      "NOTIFICATIONS_TEXT": "Recevez des notifications avec les résultats des matchs de votre équipe préférée",
+      "NOTIFICATIONS_TEXT": "Recevez une notification dès qu'un résultat de match est encodé",
       "FACE_TO_FACE": "En face à face",
       "FACE_TO_FACE_TEXT": "Retrouvez toutes les rencontres entre vous et un autre joueur lors des saisons précédentes"
     },
@@ -586,7 +591,7 @@
     "BECOME_PRO": "Devenir BePing Pro",
     "RESTORE": "Restaurer l'achat",
     "WHY_SUBSCRIPTION": "Pourquoi un abonnement?",
-    "WHY_SUBSCRIPTION_TEXT": "Depuis plus de 4 ans, j'ai mis à jour BePing plus de 20 fois et je souhaite vraiment continuer à améliorer l'application de plus en plus.\n\nBePing n'est pas qu'une application. Elle nécessite des serveurs de traitement de l'information pour le traitement des statistiques, l'envoi notifications push et celles-ci doivent être maintenues en permanence.\n\nAu lieu de vous faire payer pour les futures mises à jour comme d'autres développeurs, ce qui désavantagerait nos clients existants. L'abonnement annuel vous donnera accès aux dernières fonctionnalités, améliorations et meilleures performances tout au long de l'année." ,
+    "WHY_SUBSCRIPTION_TEXT": "BePing est une application gratuite et le restera. Cependant, maintenir une application en vie coûte un peu d'argent. Les abonnements permettent de couvrir les frais de serveur et de développement. Les abonnements sont également un moyen de soutenir le projet." ,
     "SUBSCRIPTION_CONDITION": "Conditions d'abonnement",
     "SUBSCRIPTION_CONDITION_1": "L'inscription ne peut pas être transférée vers un autre compte. Cet achat intégré supplémentaire est valable pour un seul compte.",
     "SUBSCRIPTION_CONDITION_2": "L'abonnement se renouvelle automatiquement chaque année sauf annulation.",

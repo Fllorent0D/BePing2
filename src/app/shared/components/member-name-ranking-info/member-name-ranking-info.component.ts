@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {RankingMethodName, RankingService} from '../../../core/services/tabt/ranking.service';
 import {PLAYER_CATEGORY} from '../../../core/models/user';
@@ -10,7 +10,7 @@ import {WeeklyNumericPointsV3} from 'src/app/core/api/models';
     templateUrl: './member-name-ranking-info.component.html',
     styleUrls: ['./member-name-ranking-info.component.scss']
 })
-export class MemberNameRankingInfoComponent {
+export class MemberNameRankingInfoComponent{
 
     @Input() member: UserMemberEntry;
     @Input() displayName = true;

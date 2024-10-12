@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {NumericRankingPerWeekOpponentsV3} from '../../../core/api/models/numeric-ranking-per-week-opponents-v-3';
 import {TabsNavigationService} from '../../../core/services/navigation/tabs-navigation.service';
 import {NumericRankingDetailsV3} from '../../../core/api/models/numeric-ranking-details-v-3';
 import {SwiperOptions} from 'swiper';
+import {SwiperComponent} from 'swiper/angular';
 
 @Component({
     selector: 'beping-last-opponents',
@@ -10,8 +11,16 @@ import {SwiperOptions} from 'swiper';
     styleUrls: ['./last-opponents.component.scss']
 })
 export class LastOpponentsComponent implements OnInit {
-    @Input() numericRankingDetails: NumericRankingDetailsV3[];
+    _numericRankingDetails: NumericRankingDetailsV3[] = [];
+    @Input() set numericRankingDetails(numericRankingDetails: NumericRankingDetailsV3[]) {
+        this._numericRankingDetails = numericRankingDetails ?? [];
+        this.changeDetectorRef.detectChanges();
+        this.swiper?.swiperRef.updateSize();
 
+        console.log('numericRankingDetails', numericRankingDetails);
+    }
+
+    @ViewChild('swiper') swiper: SwiperComponent;
     swiperConfig: SwiperOptions = {
         slidesPerView: 1.1,
         spaceBetween: 0,
@@ -29,19 +38,27 @@ export class LastOpponentsComponent implements OnInit {
     };
 
     constructor(
-        private readonly tabsNavigationService: TabsNavigationService
+        private readonly tabsNavigationService: TabsNavigationService,
+        private readonly changeDetectorRef: ChangeDetectorRef
     ) {
     }
 
     ngOnInit(): void {
+        setTimeout(() => {
+            this.swiper?.swiperRef.updateSize();
+        }, 2000);
+
     }
 
     get lastOpponents(): NumericRankingPerWeekOpponentsV3[] {
-        return this.numericRankingDetails?.[this.numericRankingDetails.length - 1]?.opponents ?? [];
+        return this._numericRankingDetails?.[this._numericRankingDetails.length - 1]?.opponents ?? [];
     }
 
     openRankingOverview() {
-        console.log(this.numericRankingDetails);
         this.tabsNavigationService.navigateTo('player/numeric-ranking-overview', {state: {weeklyRanking: this.numericRankingDetails}});
+    }
+
+    navigateToPlayer(opponentUniqueIndex: number) {
+        this.tabsNavigationService.navigateTo('player/' + opponentUniqueIndex);
     }
 }

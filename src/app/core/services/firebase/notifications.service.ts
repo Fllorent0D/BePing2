@@ -5,6 +5,7 @@ import {PermissionState} from '@capacitor/core';
 import {DialogService} from '../dialog-service.service';
 import {NativeSettingsService} from '../native-settings.service';
 import {TranslateService} from '@ngx-translate/core';
+import {AnalyticsService} from './analytics.service';
 
 @Injectable({
     providedIn: 'root'
@@ -37,11 +38,13 @@ export class NotificationsService {
     constructor(
         private readonly dialogService: DialogService,
         private readonly translate: TranslateService,
-        private readonly nativeSettingsService: NativeSettingsService
+        private readonly nativeSettingsService: NativeSettingsService,
+        private readonly analyticsService: AnalyticsService
     ) {
     }
 
     async subscribeToTopic(topic: string): Promise<string> {
+        this.analyticsService.logEvent('subscribe_to_topic', {topic});
         const response = await FCM.subscribeTo({topic});
         return response.message;
     }
@@ -118,4 +121,14 @@ export class NotificationsService {
         return response.receive;
     }
 
+    async init(): Promise<void> {
+        try {
+            const currentStatus = await this.checkPermissionStatus();
+            if (currentStatus === 'granted') {
+                await PushNotifications.register();
+            }
+        } catch (e) {
+            console.error('Error during notifications init', e);
+        }
+    }
 }

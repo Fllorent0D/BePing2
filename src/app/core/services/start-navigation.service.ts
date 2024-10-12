@@ -28,6 +28,23 @@ export class StartNavigationService {
         });
     }
 
+    startNavigationToAddress(
+        street: string,
+        city: string,
+        postalCode: string
+    ): Promise<void> {
+        return StartNavigation.launchMapsApp({
+            address: {
+                street,
+                city,
+                postalCode,
+                state: '',
+                country: 'Belgium',
+            },
+            travelMode: 'driving'
+        })
+    }
+
     navigateToOSMAddress(address: OSMAddress): Promise<void> {
         return this.startNavigation(address.lat, address.lon, address.display_name);
     }
@@ -37,8 +54,11 @@ export class StartNavigationService {
         const postalCodal = venue.Town.substring(0, 4);
         const street = venue.Street.replace(/ *\([^)]*\) */g, '');
         try {
-            const osmAddress = await firstValueFrom(this.geocoderService.search(street, town, postalCodal));
-            return this.navigateToOSMAddress(osmAddress);
+            return this.startNavigationToAddress(
+                street,
+                town,
+                postalCodal
+            );
         } catch (e) {
             this.dialogService.showErrorAlert({message: 'Impossible to find location'});
         }

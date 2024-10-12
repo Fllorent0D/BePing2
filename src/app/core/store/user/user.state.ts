@@ -14,7 +14,7 @@ import {
     UpdateMemberEntriesSuccess
 } from './user.actions';
 import {PlayerCategoryService} from '../../services/tabt/player-category.service';
-import {catchError, finalize, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, filter, finalize, map, switchMap, tap} from 'rxjs/operators';
 import {sub} from 'date-fns';
 import {PLAYER_CATEGORY} from '../../models/user';
 import {TeamMatchesEntry} from '../../api/models/team-matches-entry';
@@ -26,6 +26,7 @@ import {CrashlyticsService} from '../../services/crashlytics.service';
 import {RankingService} from '../../services/tabt/ranking.service';
 import {WeeklyNumericRankingV3} from '../../api/models/weekly-numeric-ranking-v-3';
 import {NumericRankingState} from './numeric-ranking/numeric-ranking.state';
+import {of} from 'rxjs';
 
 export interface UserMemberEntry extends MemberEntry {
     numericRankingsHistory?: WeeklyNumericRankingV3;
@@ -141,7 +142,7 @@ export class UserState implements NgxsOnInit {
 
 
         // App initialize and need to refresh
-        if (state.lastUpdated < timeThreshold.getTime() && state.memberUniqueIndex) {
+        if (state.memberUniqueIndex && (state.lastUpdated < timeThreshold.getTime() && state.memberUniqueIndex)) {
             dispatch(new UpdateMemberEntries(state.memberUniqueIndex, false));
         } else {
             console.log('no refreshing:::', state.lastUpdated, '>', timeThreshold.getTime());
@@ -193,8 +194,12 @@ export class UserState implements NgxsOnInit {
 
     @Action([UpdateMemberEntries])
     updateMemberEntries({dispatch, getState}: StateContext<UserStateModel>, action: UpdateMemberEntries) {
+        if(!action.memberUniqueIndex) {
+            return of();
+        }
         return this.memberPlayerCategoryService.getMemberPlayerCategories(action.memberUniqueIndex).pipe(
             tap(() => dispatch(new SetLoading(true))),
+            filter((memberEntries: UserMemberEntries) => Object.keys(memberEntries).length > 0),
             switchMap((memberEntries: UserMemberEntries) => {
                 const state = getState();
                 const forceUpdate = action.forceUpdate;
@@ -208,7 +213,7 @@ export class UserState implements NgxsOnInit {
                 });
 
                 if (shouldUpdateMemberEntries) {
-                    actions.push(new UpdateMemberEntriesSuccess(memberEntries));
+                    actions.push(new UpdateMemberEntriesSuccess(memberEntries, forceUpdate));
                 } else {
                     this.crashlytics.recordException(`Avoided wrong member update for ${action.memberUniqueIndex}. Received too less matches in one of the playing category`);
                 }

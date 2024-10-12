@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {IonRouterOutlet, ModalController} from '@ionic/angular';
 import {AnalyticsService} from '../../../core/services/firebase/analytics.service';
 import {Store} from '@ngxs/store';
 import {FavoriteItem, FavoritesState} from '../../../core/store/favorites';
@@ -36,7 +36,7 @@ export class NotificationsComponent implements OnInit {
         private readonly notificationsService: NotificationsService,
         private readonly translateService: TranslateService,
         private readonly store: Store,
-        private readonly nativeSettingsService: NativeSettingsService
+        private readonly nativeSettingsService: NativeSettingsService,
     ) {
     }
 

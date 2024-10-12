@@ -7,7 +7,7 @@ import {DialogService} from '../../../../core/services/dialog-service.service';
 import {IonRouterOutlet, ModalController, NavController} from '@ionic/angular';
 import {SearchMemberComponent} from '../../../modals/search-player/search-member.component';
 import {MemberEntry} from '../../../../core/api/models/member-entry';
-import {RankingMethodName, RankingService} from '../../../../core/services/tabt/ranking.service';
+import {RankingService} from '../../../../core/services/tabt/ranking.service';
 import {PointsCalculatorEntry, PointsCalculatorState} from '../../../../core/store/points/points-calculator-state.service';
 import {Store} from '@ngxs/store';
 import {Add, Update} from '@ngxs-labs/entity-state';
@@ -16,6 +16,8 @@ import {UserState} from '../../../../core/store/user/user.state';
 import {AnalyticsService} from '../../../../core/services/firebase/analytics.service';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
 import {TranslateService} from '@ngx-translate/core';
+import {MembersService} from '../../../../core/api/services/members.service';
+import {WeeklyNumericRankingV3} from '../../../../core/api/models/weekly-numeric-ranking-v-3';
 
 interface IndividualMatchPointsEditorFormGroup {
     category: FormControl<PLAYER_CATEGORY>;
@@ -53,6 +55,7 @@ export class IndividualMatchPointsEditorComponent implements OnInit {
         private readonly store: Store,
         private readonly analyticsService: AnalyticsService,
         @Optional() public readonly ionRouterOutlet: IonRouterOutlet,
+        private readonly membersService: MembersService,
     ) {
     }
 
@@ -119,22 +122,33 @@ export class IndividualMatchPointsEditorComponent implements OnInit {
     }
 
     setMemberInForm(memberEntry: MemberEntry, disableCategory: boolean) {
-        const points = Number(this.rankingService.getPoints(memberEntry.RankingPointsEntries, RankingMethodName.BEL_POINTS));
-        if (!points) {
-            this.dialogService.showErrorAlert({
-                message: this.translate.instant('CALCULATOR.PLAYER_NO_BEL_POINTS')
-            });
-            return;
-        }
-        if (disableCategory) {
+        if(memberEntry.Category){
             this.formGroup.get('category').setValue(memberEntry.Category as PLAYER_CATEGORY, {emitEvent: false});
-            this.formGroup.get('category').disable({emitEvent: false});
-            this.formGroup.get('opponentName').disable();
-
-            this.coefficientPerEvent = this.pointsCalculator.getCoefficentEventForCategory(memberEntry.Category as PLAYER_CATEGORY);
         }
-        this.formGroup.get('opponentName').patchValue(`${memberEntry.FirstName} ${memberEntry.LastName}`);
-        this.formGroup.get('opponentRanking').patchValue(points);
+        const points = this.membersService.findMemberNumericRankingsHistoryV3({
+            uniqueIndex: memberEntry.UniqueIndex,
+            category: this.formGroup.get('category').value as PLAYER_CATEGORY,
+        }).pipe(
+            take(1),
+        ).subscribe((ranking: WeeklyNumericRankingV3) => {
+            const points = ranking.actualPoints;
+            if (!points) {
+                this.dialogService.showErrorAlert({
+                    message: this.translate.instant('CALCULATOR.PLAYER_NO_BEL_POINTS')
+                });
+                return;
+            }
+            if (disableCategory) {
+                this.formGroup.get('category').setValue(memberEntry.Category as PLAYER_CATEGORY, {emitEvent: false});
+                this.formGroup.get('category').disable({emitEvent: false});
+                this.formGroup.get('opponentName').disable();
+
+                this.coefficientPerEvent = this.pointsCalculator.getCoefficentEventForCategory(memberEntry.Category as PLAYER_CATEGORY);
+            }
+            this.formGroup.get('opponentName').patchValue(`${memberEntry.FirstName} ${memberEntry.LastName}`);
+            this.formGroup.get('opponentRanking').patchValue(points);
+        });
+
     }
 
     save() {

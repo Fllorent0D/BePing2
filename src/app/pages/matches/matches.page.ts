@@ -74,18 +74,13 @@ export class MatchesPage implements OnInit {
     }
 
     async openNotificationsModal() {
-        this.isPro.isPro$(this.routerOutlet.nativeEl).pipe(
-            take(1),
-            filter((isPro) => isPro)
-        ).subscribe(isPro => {
-            this.dialogService.showModal({
-                component: ModalBaseComponent,
-                componentProps: {
-                    rootPage: NotificationsComponent
-                },
-                presentingElement: this.routerOutlet.nativeEl,
-                canDismiss: true
-            });
+        this.dialogService.showModal({
+            component: ModalBaseComponent,
+            componentProps: {
+                rootPage: NotificationsComponent
+            },
+            presentingElement: this.routerOutlet.nativeEl,
+            canDismiss: true
         });
     }
 

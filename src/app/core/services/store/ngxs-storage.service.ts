@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {from, Observable} from 'rxjs';
 import {StorageService} from './storage.service';
-import {AsyncStorageEngine} from '@ngxs-labs/async-storage-plugin';
+import {AsyncStorageEngine} from 'async-storage-plugin-venraij';
 
 @Injectable({
     providedIn: 'root'

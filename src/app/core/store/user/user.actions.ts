@@ -48,7 +48,8 @@ export class UpdateMemberEntriesSuccess {
     static readonly type = '[user] Update member entries success';
 
     constructor(
-        public memberEntries: UserMemberEntries
+        public memberEntries: UserMemberEntries,
+        public forceUpdate: boolean = false
     ) {
     }
 }

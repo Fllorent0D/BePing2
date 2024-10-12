@@ -33,6 +33,11 @@ export class TabTState {
         return !!state.account;
     }
 
+    @Selector([TabTState])
+    static account(state: TabTStateModel): string {
+        return state.account;
+    }
+
     @Action(Login)
     login({dispatch, patchState}: StateContext<TabTStateModel>, action: Login) {
         return this.testService.testRequest({
