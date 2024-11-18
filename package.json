@@ -83,7 +83,7 @@
     "cordova-plugin-purchase": "11.0.0",
     "core-js": "3.37.1",
     "date-fns": "2.30.0",
-    "firebase": "9.23.0",
+    "firebase": "10.9.0",
     "leaflet": "1.9.4",
     "ng2-charts": "4.1.1",
     "ngx-pipes": "3.2.2",
